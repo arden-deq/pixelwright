@@ -1,0 +1,64 @@
+{
+  "status": "pass",
+  "method": "Direct decoded native-repeat, color, alpha and hash comparisons, separate from the checker verdict; structural checks do not independently prove artistic quality.",
+  "source_path": "docs/images/pixelwright-header.png",
+  "native_path": "docs/examples/header/native.png",
+  "profile_path": "docs/examples/header/profile.json",
+  "logical_size": [
+    512,
+    256
+  ],
+  "rendered_size": [
+    2048,
+    1024
+  ],
+  "cell_size": [
+    4,
+    4
+  ],
+  "uniform_cells": 131072,
+  "nonuniform_cells": 0,
+  "total_rgba_colors": 32,
+  "visible_rgb_colors": 32,
+  "alpha_values": [
+    255
+  ],
+  "partial_alpha_samples": 0,
+  "exact_native_repeat": true,
+  "source_sha256": "8cd7994629f7f658cd4eb7ef65f6151591c2bb10e6f6c2222c7e6e640a1e736f",
+  "native_sha256": "2418fc9a8301ab95db047b24d8060cb3c2b90cd2328a1460c551fc620ae3fd35",
+  "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
+  "decoded_rgba_sha256": "b18d7db8ecd4e0bc59250c2a252f6394862349c7ee269be02c9a8d0b90bae19a",
+  "generated_source_path": "docs/examples/header/generated-source.png",
+  "generated_source_sha256": "793688222b71b604fe61579de460895ff084d8365fa0c23262599eab8bb77dcf",
+  "generated_source_size": [
+    1774,
+    887
+  ],
+  "generated_source_audit": "fail",
+  "source_preserved": true,
+  "preparation": "A new aspect-preserving 2048x1024 canvas was prepared by nearest-neighbor scaling; Pixelwright then projected 4px cells. The editable 32-color palette reserves 3 teal colors for potion and diagnostic accents. The preserved generative source was not altered.",
+  "grid_preview": {
+    "file": "grid_overlay.png",
+    "actual_cell_size": [
+      4,
+      4
+    ],
+    "reference_line_spacing": [
+      8,
+      4
+    ],
+    "sampled_vertical_reference_lines": true,
+    "all_cells_audited": true
+  },
+  "artistic_review": {
+    "status": "accepted",
+    "reviewer": "Codex visual inspection",
+    "observations": [
+      "PIXELWRIGHT and CREATE. GRID. VERIFY. remain readable.",
+      "Knight, mace, shield, potion, icon and diagnostic window are fully framed.",
+      "Reserved teal palette entries preserve the potion and grid motif accents.",
+      "Fine detail is coarser after 4px projection; structural PASS covers the final export."
+    ]
+  }
+}

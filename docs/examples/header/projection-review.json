@@ -1,0 +1,9 @@
+{
+  "prepared_source_sha256": "04b59cd7c54e168d5263f627f937d65e7d9444dbacfe73547f3936394207e207",
+  "final_source_sha256": "8cd7994629f7f658cd4eb7ef65f6151591c2bb10e6f6c2222c7e6e640a1e736f",
+  "changed_prepared_pixels": 2094244,
+  "palette_strategy": "29 dominant colors plus 3 reserved teal colors for potion and diagnostic detail; nearest RGB palette assignment on the Pixelwright-projected logical cells.",
+  "technical_status": "pass",
+  "colors": 32,
+  "disclaimer": "Projection and palette reduction are lossy. Structural PASS is expected by construction and does not independently prove artistic quality."
+}

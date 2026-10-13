@@ -1,0 +1,120 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.3.0",
+  "schema_version": 1,
+  "status": "fail",
+  "scope": "geometry_check_only",
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "793688222b71b604fe61579de460895ff084d8365fa0c23262599eab8bb77dcf",
+    "decoded_rgba_sha256": "bbbb844d6f1eea463ec81acc431429e4dc8c9b13b7981b177b19bd87d94d401c",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
+    "source_path": "docs/examples/header/generated-source.png",
+    "profile_path": "docs/examples/header/profile.json"
+  },
+  "geometry": {
+    "status": "fail",
+    "rendered_size": {
+      "width": 1774,
+      "height": 887
+    },
+    "logical_size": {
+      "width": 512,
+      "height": 256
+    },
+    "expected_render_size": {
+      "width": 2048,
+      "height": 1024
+    },
+    "scale_x": 3.46484375,
+    "scale_y": 3.46484375,
+    "exact_integer_division": false,
+    "square_logical_pixel": false,
+    "integer_scale": null,
+    "issues": [
+      {
+        "code": "RENDER_SIZE_MISMATCH",
+        "severity": "fail",
+        "detail": "Expected 2048x1024 px, got 1774x887 px."
+      },
+      {
+        "code": "NON_INTEGER_PIXEL_SCALE",
+        "severity": "fail",
+        "detail": "Logical 512x256 requires integer-sized pixel cells, but the displayed scale is 3.46484x3.46484. There can be no exact square-pixel grid on these dimensions."
+      }
+    ]
+  },
+  "input_size": {
+    "width": 1774,
+    "height": 887
+  },
+  "logical_size": {
+    "width": 512,
+    "height": 256
+  },
+  "metrics": {
+    "grid_measurable": false,
+    "grid_score": null,
+    "uniform_rgba_cells": null,
+    "nonuniform_rgba_cells": null
+  },
+  "issues": [
+    {
+      "code": "RENDER_SIZE_MISMATCH",
+      "severity": "fail",
+      "detail": "Expected 2048x1024 px, got 1774x887 px."
+    },
+    {
+      "code": "NON_INTEGER_PIXEL_SCALE",
+      "severity": "fail",
+      "detail": "Logical 512x256 requires integer-sized pixel cells, but the displayed scale is 3.46484x3.46484. There can be no exact square-pixel grid on these dimensions."
+    }
+  ],
+  "note": "No resampling performed; grid lines show proposed boundaries only.",
+  "contract": {
+    "schema_version": 1,
+    "name": "Pixelwright README header: 2048x1024, 4px cells, 32 opaque colors",
+    "logical_size": "512x256",
+    "scale": 4,
+    "max_colors": 32,
+    "alpha": "opaque",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#010103FF",
+      "#020407FF",
+      "#070607FF",
+      "#0C0D12FF",
+      "#11141AFF",
+      "#131C2AFF",
+      "#1E1513FF",
+      "#1E1D1FFF",
+      "#1F575FFF",
+      "#202228FF",
+      "#212837FF",
+      "#2C211DFF",
+      "#2E2E33FF",
+      "#3A2B25FF",
+      "#3B3739FF",
+      "#3B424AFF",
+      "#4C484CFF",
+      "#5ABDBDFF",
+      "#5B4131FF",
+      "#5D5658FF",
+      "#6B271CFF",
+      "#6F523FFF",
+      "#756A63FF",
+      "#8A5433FF",
+      "#8FF5F2FF",
+      "#96755DFF",
+      "#AF7B53FF",
+      "#BBAD8EFF",
+      "#BF8D66FF",
+      "#EABB85FF",
+      "#F9E6B8FF",
+      "#FACA79FF"
+    ]
+  },
+  "artistic_status": "not_reviewed",
+  "acceptance_mode": "strict_profile"
+}

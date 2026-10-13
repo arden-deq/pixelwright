@@ -1,5 +1,9 @@
 # Pixelwright
 
+![Pixelwright banner with a knight, potion, shield icon, and a magnified pixel grid](docs/images/pixelwright-header.png)
+
+Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit report](docs/examples/header/report.json) · [Grid preview](docs/examples/header/grid_overlay.png) · [Build records](docs/examples/header/)
+
 [English](README.md) · [한국어](README.ko.md) · Version 0.3.0 · [Apache License 2.0](LICENSE)
 
 **Create static PNG pixel art on a declared grid, then verify every cell.**

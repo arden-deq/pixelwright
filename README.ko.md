@@ -1,5 +1,9 @@
 # Pixelwright
 
+![기사·물약·방패 아이콘과 격자 확대창으로 소개하는 Pixelwright 배너](docs/images/pixelwright-header.png)
+
+헤더: 2048×1024 · 4×4 px 셀 · 32색 · 131,072셀 PASS · [검사 보고서](docs/examples/header/report.json) · [격자 미리보기](docs/examples/header/grid_overlay.png) · [제작 기록](docs/examples/header/)
+
 [English](README.md) · [한국어](README.ko.md) · 버전 0.3.0 · [Apache License 2.0](LICENSE)
 
 **선언한 격자 위에서 정적 PNG 픽셀아트를 만들고, 모든 셀을 검사합니다.**
