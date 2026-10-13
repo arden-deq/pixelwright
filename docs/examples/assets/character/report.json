@@ -23,7 +23,7 @@
     "decoded_rgba_sha256": "85122816f51eae4a3c0422524b5efca035d48bbd9a06df193a0a1af4dffad2b1",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "0423efcf9ba55618bbd9c4e143d0b31b6c174f71ba753e73f0f45a2c8ce34d6f",
+    "profile_sha256": "bd8ad604567d9b1779b0852f085cd593eb0a72e1dd5bc8b424e2f8efade0b0f7",
     "source_path": "docs/examples/assets/character/rendered.png",
     "profile_path": "docs/examples/assets/character/profile.json"
   },

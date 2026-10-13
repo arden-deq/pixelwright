@@ -19,7 +19,7 @@ SCRIPTS = ROOT / "pixelwright" / "scripts"
 
 def write_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_bytes((json.dumps(data, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
 
 
 def execute(script, args, expected=0):
@@ -115,6 +115,9 @@ def main():
         for name in ("artwork.json", "profile.json"):
             if not (target / name).exists():
                 shutil.copyfile(ROOT / "demos" / "2026-10-14" / key / name, target / name)
+            # Public JSON has canonical LF bytes on every host; profile hashes remain portable.
+            source = target / name
+            source.write_bytes(source.read_bytes().replace(b"\r\n", b"\n"))
         build = work / key / "build"
         audit = work / key / "audit"
         execute("pixel_build.py", ["--spec", target / "artwork.json", "--out-dir", build])
