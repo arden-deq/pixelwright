@@ -40,7 +40,7 @@ python pixelwright/scripts/pixelwright.py inspect runs/knight-8px-build-v1/rende
 
 ## Quick start
 
-Requires **Python 3.10+**, Pillow, and NumPy. Run these commands from the repository root:
+Requires **Python 3.12+**, Pillow, and NumPy. Run these commands from the repository root:
 
 ```sh
 git clone https://github.com/jungducknam/pixelwright.git

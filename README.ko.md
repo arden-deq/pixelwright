@@ -40,7 +40,7 @@ python pixelwright/scripts/pixelwright.py inspect runs/knight-8px-build-v1/rende
 
 ## 바로 시작하기
 
-**Python 3.10 이상**, Pillow, NumPy가 필요합니다. 저장소 루트에서 실행합니다.
+**Python 3.12 이상**, Pillow, NumPy가 필요합니다. 저장소 루트에서 실행합니다.
 
 ```sh
 git clone https://github.com/jungducknam/pixelwright.git

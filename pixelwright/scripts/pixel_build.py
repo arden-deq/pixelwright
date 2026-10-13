@@ -4,7 +4,7 @@
 Only construction properties are guaranteed: every logical cell has one RGBA
 value and expands to a complete scale-by-scale square using nearest neighbor.
 This tool does not assess composition, silhouette, animation, or artistic merit.
-Requires Python 3.10+ and Pillow. Run with --spec artwork.json --out-dir build.
+Requires Python 3.12+ and Pillow. Run with --spec artwork.json --out-dir build.
 """
 from __future__ import annotations
 
