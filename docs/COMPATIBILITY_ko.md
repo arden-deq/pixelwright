@@ -1,6 +1,6 @@
 # Pixelwright 플랫폼 호환성
 
-대상 버전: **0.3.0** · 공식 문서 확인일: **2026-10-14**
+대상 버전: **0.4.0** · 공식 문서 확인일: **2026-10-14**
 
 Pixelwright는 동일한 `SKILL.md`와 Python 검사기를 OpenAI 계열과 Claude 계열에서 사용한다. 지원 여부는 모델 이름보다 **파일 접근과 Python 실행이 가능한 호스트**에 달려 있다. 생성 프롬프트는 제작 방향을 안내하고, 최종 PNG의 격자 규격은 검사기의 실제 실행 결과로 판정한다.
 
@@ -11,7 +11,7 @@ Pixelwright는 동일한 `SKILL.md`와 Python 검사기를 OpenAI 계열과 Clau
 | Codex 로컬 환경 | `pixelwright/` 폴더를 로컬 스킬 경로에 배치 | Python 3.12 이상, Pillow, NumPy, PNG·출력 폴더 접근 |
 | ChatGPT의 스킬 지원 환경 | 호스트가 제공하는 스킬 기능으로 로드 | 같은 파일과 Python 실행 조건을 확인한 뒤 검사 |
 | Claude Code 로컬 환경 | `pixelwright/` 폴더를 개인 또는 프로젝트 스킬 경로에 배치 | 같은 로컬 실행 조건 |
-| Claude의 사용자 스킬 기능 | `pixelwright-v0.3.0.zip` 업로드 후 활성화 | Code execution and file creation 활성화, 실행 환경의 의존성 확인 |
+| Claude의 사용자 스킬 기능 | `pixelwright-v0.4.0.zip` 업로드 후 활성화 | Code execution and file creation 활성화, 실행 환경의 의존성 확인 |
 | OpenAI·Claude API 기반 에이전트 | 애플리케이션에서 스킬과 실행 도구를 별도로 연결 | 호출자가 컨테이너·파일·Python 환경을 구성하고 실제 검사 실행 |
 | 일반 모델 호출, 참고 문서 첨부만 한 대화 | 제작 가이드로 참고 | 검사기를 실행하지 않은 파일에는 `PASS` 판정 금지 |
 
@@ -36,10 +36,10 @@ Codex CLI·IDE에서는 `$pixelwright`, Claude Code에서는 `/pixelwright`로 �
 
 ## Claude 업로드 ZIP 구조
 
-`pixelwright-v0.3.0.zip` 안에는 **하나의 최상위 `pixelwright/` 폴더**가 있어야 한다. 그 안에 `SKILL.md`와 실행 파일이 함께 들어간다.
+`pixelwright-v0.4.0.zip` 안에는 **하나의 최상위 `pixelwright/` 폴더**가 있어야 한다. 그 안에 `SKILL.md`와 실행 파일이 함께 들어간다.
 
 ```text
-pixelwright-v0.3.0.zip
+pixelwright-v0.4.0.zip
 └── pixelwright/
     ├── SKILL.md
     ├── requirements.txt
@@ -72,7 +72,7 @@ Pixelwright의 실행 계약은 다음과 같다.
 
 실행 도구가 없거나 의존성을 불러오지 못하면 **미검증**으로 표시하고 실행 가능한 명령을 제공한다. 화면 미리보기나 모델의 육안 평가만으로 격자 적합성을 보장하지 않는다. 품질 보장은 검사한 파일의 규격 준수에 한정되며 캐릭터의 매력, 구도, 스타일 같은 미술적 품질은 별도로 평가한다.
 
-0.3.0의 대상은 캐릭터·아이템·UI 등 **정적 PNG**다. APNG와 애니메이션 프레임은 지원 대상에서 제외한다. 이미지 생성 모델이나 외부 편집 도구는 호스트가 이미 제공하는 기능을 필요에 따라 사용하며, Pixelwright가 별도의 생성 API 어댑터나 자동 외부 호출을 제공하지는 않는다.
+0.4.0의 대상은 캐릭터·아이템·UI 등 **정적 PNG**다. APNG와 애니메이션 프레임은 지원 대상에서 제외한다. 이미지 생성 모델이나 외부 편집 도구는 호스트가 이미 제공하는 기능을 필요에 따라 사용하며, Pixelwright가 별도의 생성 API 어댑터나 자동 외부 호출을 제공하지는 않는다.
 
 ## 이 버전에서 확인한 것
 

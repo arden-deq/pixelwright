@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "name": "Knight courtyard: independent background, grouped knight and gear, lantern item, and text",
+  "profile": "profile.json",
+  "layers": [
+    {
+      "id": "background",
+      "image": "layers/background.png",
+      "logical_size": "320x224",
+      "position": [
+        0,
+        0
+      ],
+      "sha256": "7e4e42198cb84e70ffc03e4352fc64a471b18ed1ffc35e35267bb7ac858fdd18"
+    },
+    {
+      "id": "character",
+      "image": "layers/character.png",
+      "logical_size": "128x192",
+      "position": [
+        176,
+        16
+      ],
+      "sha256": "7bd083f329a85b2600a73c86d89343eee728db057c3a92052ef783226251e083"
+    },
+    {
+      "id": "item",
+      "image": "layers/item.png",
+      "logical_size": "32x32",
+      "position": [
+        56,
+        156
+      ],
+      "sha256": "34cfca03ade68ceb2628f40d26ed00bacfbbbb1a69f5c8794f3c453bcbcb6aaf"
+    },
+    {
+      "id": "title",
+      "image": "layers/title.png",
+      "logical_size": "128x24",
+      "position": [
+        16,
+        24
+      ],
+      "sha256": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632"
+    }
+  ]
+}

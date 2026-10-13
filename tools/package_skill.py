@@ -9,7 +9,7 @@ import sys
 import zipfile
 from pathlib import Path, PurePosixPath
 
-VERSION = "0.3.0"
+VERSION = "0.4.0"
 ROOT = Path(__file__).resolve().parents[1]
 
 

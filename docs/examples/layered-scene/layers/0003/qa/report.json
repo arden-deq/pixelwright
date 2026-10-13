@@ -1,0 +1,148 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.4.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 512,
+    "height": 96
+  },
+  "logical_size": {
+    "width": 128,
+    "height": 24
+  },
+  "cell_size": {
+    "width": 4,
+    "height": 4
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632",
+    "decoded_rgba_sha256": "d40ace4684b700e01192d2a8a5d618910a0dcf87488d396379490657e69609e6",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "pixelwright/examples/layered-scene/layers/title.png",
+    "source_path_base": "repository_root",
+    "source_sha256_after_audit": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632",
+    "profile_path": "docs/examples/layered-scene/layers/0003/profile.json",
+    "profile_path_base": "repository_root",
+    "profile_sha256": "bc579f893856217245c873f8c31770e8279383682ea4cd16f1ac1fc62d1e4498",
+    "pinned_sha256": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 31,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 3072,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 3072,
+    "visible_rgb_colors_source": 3,
+    "visible_rgb_colors_logical_preview": 3,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 0,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 128,
+    "height": 24
+  },
+  "possible_isolated_pixels_sample": [],
+  "issues": [
+    {
+      "code": "OPAQUE_BACKGROUND",
+      "severity": "info",
+      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 512,
+      "height": 96
+    },
+    "logical_size": {
+      "width": 128,
+      "height": 24
+    },
+    "expected_render_size": {
+      "width": 512,
+      "height": 96
+    },
+    "scale_x": 4.0,
+    "scale_y": 4.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 4,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Layered knight scene, shared 31 visible colors plus transparency",
+    "logical_size": "128x24",
+    "scale": 4,
+    "max_colors": 31,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#020202FF",
+      "#060606FF",
+      "#0B0A09FF",
+      "#191716FF",
+      "#1B0D0EFF",
+      "#1E1F21FF",
+      "#24272AFF",
+      "#2B2C2EFF",
+      "#303438FF",
+      "#321216FF",
+      "#35211FFF",
+      "#383837FF",
+      "#3D4147FF",
+      "#474541FF",
+      "#491A1FFF",
+      "#4A4D51FF",
+      "#50555CFF",
+      "#53342AFF",
+      "#58544FFF",
+      "#592025FF",
+      "#5E646DFF",
+      "#69533AFF",
+      "#6B7077FF",
+      "#716759FF",
+      "#727983FF",
+      "#867B66FF",
+      "#8A8987FF",
+      "#969AA1FF",
+      "#B5A88EFF",
+      "#CCC6BAFF",
+      "#EEEBE3FF"
+    ]
+  },
+  "acceptance_mode": "strict_layer_contract"
+}

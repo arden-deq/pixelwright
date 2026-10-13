@@ -1,0 +1,243 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.4.0",
+  "schema_version": 1,
+  "status": "pass",
+  "scope": "technical_checks_only_not_artistic_quality",
+  "manifest": {
+    "path": "scene.json",
+    "path_base": "manifest_directory",
+    "sha256": "62a3bc9fd4587fe15bad36f746b718668ae770aa4fe2a4036247340dd09b611f"
+  },
+  "profile": {
+    "path": "profile.json",
+    "path_base": "manifest_directory",
+    "sha256": "a3ad88edc154fbf69ec3107dee1a2d17486c60ca979798d832450bb05b7ba1eb"
+  },
+  "contract": {
+    "schema_version": 1,
+    "name": "Layered knight scene, shared 31 visible colors plus transparency",
+    "logical_size": "320x224",
+    "scale": 4,
+    "max_colors": 31,
+    "alpha": "opaque",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#020202FF",
+      "#060606FF",
+      "#0B0A09FF",
+      "#191716FF",
+      "#1B0D0EFF",
+      "#1E1F21FF",
+      "#24272AFF",
+      "#2B2C2EFF",
+      "#303438FF",
+      "#321216FF",
+      "#35211FFF",
+      "#383837FF",
+      "#3D4147FF",
+      "#474541FF",
+      "#491A1FFF",
+      "#4A4D51FF",
+      "#50555CFF",
+      "#53342AFF",
+      "#58544FFF",
+      "#592025FF",
+      "#5E646DFF",
+      "#69533AFF",
+      "#6B7077FF",
+      "#716759FF",
+      "#727983FF",
+      "#867B66FF",
+      "#8A8987FF",
+      "#969AA1FF",
+      "#B5A88EFF",
+      "#CCC6BAFF",
+      "#EEEBE3FF"
+    ]
+  },
+  "composition": {
+    "order": "bottom_to_top",
+    "coordinates": "integer_logical_cells",
+    "alpha": "binary_overwrite",
+    "resize_filter": "nearest_neighbor",
+    "hidden_layers_audited": true,
+    "declared_input_pixels": 1605632
+  },
+  "results": [
+    {
+      "id": "background",
+      "index": 0,
+      "image": "layers/background.png",
+      "visible": true,
+      "position": [
+        0,
+        0
+      ],
+      "logical_size": [
+        320,
+        224
+      ],
+      "status": "pass",
+      "report": "layers/0000/qa/report.json",
+      "outputs": {
+        "report": "layers/0000/qa/report.json",
+        "overlay": "layers/0000/qa/grid_overlay.png",
+        "grid_lines": "layers/0000/qa/grid_lines.png",
+        "logical_preview": "layers/0000/qa/logical_preview.png",
+        "violation_mask": "layers/0000/qa/violation_mask.png",
+        "correction_prompt": "layers/0000/qa/correction_prompt.txt"
+      },
+      "source_sha256": "7e4e42198cb84e70ffc03e4352fc64a471b18ed1ffc35e35267bb7ac858fdd18",
+      "report_sha256": "d11c2badd699dda97b9f1961c0335f6f40aed49b33c0a058f60ea879006bc663"
+    },
+    {
+      "id": "character",
+      "index": 1,
+      "image": "layers/character.png",
+      "visible": true,
+      "position": [
+        176,
+        16
+      ],
+      "logical_size": [
+        128,
+        192
+      ],
+      "status": "pass",
+      "report": "layers/0001/qa/report.json",
+      "outputs": {
+        "report": "layers/0001/qa/report.json",
+        "overlay": "layers/0001/qa/grid_overlay.png",
+        "grid_lines": "layers/0001/qa/grid_lines.png",
+        "logical_preview": "layers/0001/qa/logical_preview.png",
+        "violation_mask": "layers/0001/qa/violation_mask.png",
+        "correction_prompt": "layers/0001/qa/correction_prompt.txt"
+      },
+      "source_sha256": "7bd083f329a85b2600a73c86d89343eee728db057c3a92052ef783226251e083",
+      "report_sha256": "3c3081e7c0de205b6430b6d260069c4869a3829f95ca6f8ed6aec603427395d1"
+    },
+    {
+      "id": "item",
+      "index": 2,
+      "image": "layers/item.png",
+      "visible": true,
+      "position": [
+        56,
+        156
+      ],
+      "logical_size": [
+        32,
+        32
+      ],
+      "status": "pass",
+      "report": "layers/0002/qa/report.json",
+      "outputs": {
+        "report": "layers/0002/qa/report.json",
+        "overlay": "layers/0002/qa/grid_overlay.png",
+        "grid_lines": "layers/0002/qa/grid_lines.png",
+        "logical_preview": "layers/0002/qa/logical_preview.png",
+        "violation_mask": "layers/0002/qa/violation_mask.png",
+        "correction_prompt": "layers/0002/qa/correction_prompt.txt"
+      },
+      "source_sha256": "34cfca03ade68ceb2628f40d26ed00bacfbbbb1a69f5c8794f3c453bcbcb6aaf",
+      "report_sha256": "4f9184ee8fe08b66b0ae78c79dfb6cb51171e5a71088dc0f6035d97e318a14b0"
+    },
+    {
+      "id": "title",
+      "index": 3,
+      "image": "layers/title.png",
+      "visible": true,
+      "position": [
+        16,
+        24
+      ],
+      "logical_size": [
+        128,
+        24
+      ],
+      "status": "pass",
+      "report": "layers/0003/qa/report.json",
+      "outputs": {
+        "report": "layers/0003/qa/report.json",
+        "overlay": "layers/0003/qa/grid_overlay.png",
+        "grid_lines": "layers/0003/qa/grid_lines.png",
+        "logical_preview": "layers/0003/qa/logical_preview.png",
+        "violation_mask": "layers/0003/qa/violation_mask.png",
+        "correction_prompt": "layers/0003/qa/correction_prompt.txt"
+      },
+      "source_sha256": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632",
+      "report_sha256": "11d836c34526a4246beb9a16c4c200722d0776d1d1dcca4f280dda77d4fe18ca"
+    }
+  ],
+  "final": {
+    "status": "pass",
+    "report": "final/report.json",
+    "outputs": {
+      "report": "final/report.json",
+      "overlay": "final/grid_overlay.png",
+      "grid_lines": "final/grid_lines.png",
+      "logical_preview": "final/logical_preview.png",
+      "violation_mask": "final/violation_mask.png",
+      "correction_prompt": "final/correction_prompt.txt"
+    },
+    "source_sha256": "34ab97c0040fbae925bb8cb5b992fae0ce57eb567a00a76e42ec52fb1cee0aa7",
+    "report_sha256": "16da9c7e9f9bd7ef1b518445450c17e6cf6fd9352ecaafbb42244e656225a635",
+    "acceptance_mode": "strict_final_contract",
+    "accepted": true,
+    "artifacts": {
+      "native": {
+        "path": "native.png",
+        "width": 320,
+        "height": 224,
+        "sha256": "f73255f68310b994b47c4f2ab0e2523fd30e6deacbe5a9e4e3f41d99d5712bf1",
+        "decoded_rgba_sha256": "d8be49b00a5ecdb1de9a62b31f5c39f280e604e430cfd6a9392ec5e06f3a4784"
+      },
+      "rendered": {
+        "path": "rendered.png",
+        "width": 1280,
+        "height": 896,
+        "sha256": "34ab97c0040fbae925bb8cb5b992fae0ce57eb567a00a76e42ec52fb1cee0aa7",
+        "decoded_rgba_sha256": "d32c903eafb0a6289334dd210c2dd60803aa36f42dff5b5c13397d04afe212e2"
+      }
+    }
+  },
+  "outputs": {
+    "native": "native.png",
+    "rendered": "rendered.png"
+  },
+  "input_integrity": {
+    "manifest": {
+      "source_path": "scene.json",
+      "source_path_base": "manifest_directory",
+      "sha256_before": "62a3bc9fd4587fe15bad36f746b718668ae770aa4fe2a4036247340dd09b611f",
+      "sha256_after": "62a3bc9fd4587fe15bad36f746b718668ae770aa4fe2a4036247340dd09b611f",
+      "unchanged_during_checks": true,
+      "check_count": 3
+    },
+    "profile": {
+      "source_path": "profile.json",
+      "source_path_base": "manifest_directory",
+      "sha256_before": "a3ad88edc154fbf69ec3107dee1a2d17486c60ca979798d832450bb05b7ba1eb",
+      "sha256_after": "a3ad88edc154fbf69ec3107dee1a2d17486c60ca979798d832450bb05b7ba1eb",
+      "unchanged_during_checks": true,
+      "check_count": 3
+    }
+  },
+  "issues": [],
+  "path_bases": {
+    "manifest_directory": "pixelwright/examples/layered-scene",
+    "output_directory": "docs/examples/layered-scene",
+    "base": "repository_root"
+  },
+  "artistic_review": {
+    "status": "accepted",
+    "scope": "workflow demonstration",
+    "observations": [
+      "Knight and held gear remain one coherent layer.",
+      "Independent lantern and title are readable.",
+      "Background is a deliberately simple, native-authored stage; this fixture demonstrates compositing rather than a new artistic quality claim."
+    ]
+  }
+}

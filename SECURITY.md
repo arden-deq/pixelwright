@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes target the newest `0.3.x` release and the `main` branch. Earlier
+Security fixes target the newest `0.4.x` release and the `main` branch. Earlier
 releases are not maintained; update before reporting an issue that has already
 been fixed. There is no guaranteed response or remediation deadline.
 
@@ -29,8 +29,9 @@ the report does not disclose a security vulnerability.
 
 Pixelwright is a local Python command-line toolkit and an AI skill for building
 and checking static PNG pixel art. The repository contains the logical-canvas
-builder, PNG auditor, reusable profile and batch checker, release packaging and
-verification tools, tests, documentation, and CI configuration. Pillow and NumPy
+builder, layer manifest manager and compositor, PNG auditor, reusable profile and
+batch checker, release packaging and verification tools, tests, documentation,
+and CI configuration. Pillow and NumPy
 are runtime dependencies. The toolkit does not provide a network service,
 authentication system, tenant isolation, or an execution sandbox.
 

@@ -1,0 +1,9 @@
+Rework the attached pixel-art sprite rather than merely applying a pixelation filter.
+Design the art on an intentional 128x192 logical-pixel canvas.
+Use clear discrete pixel clusters, readable silhouette and clean stepped contours.
+Avoid anti-aliased edge blending, floating micro-detail, random isolated noise and soft painterly shading.
+Preserve the subject's identity, pose and important design elements.
+Render the final logical sprite with nearest-neighbor enlargement only.
+Avoid gradients and unplanned color variations within an intended logical pixel.
+Do not assume a visually pixelated picture meets this constraint: inspect the output again programmatically.
+NOTE: A generative image model cannot be guaranteed to produce mathematically exact grid-aligned pixels on request.

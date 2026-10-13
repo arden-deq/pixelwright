@@ -1,4 +1,4 @@
 interface:
   display_name: "Pixelwright"
-  short_description: "Create pixel art and verify exact square-cell grids"
-  default_prompt: "Use $pixelwright to create or audit a PNG sprite against a declared pixel grid."
+  short_description: "Create, compose and audit exact square-cell pixel art"
+  default_prompt: "Use $pixelwright to create and audit pixel art, using layers when the requested scene benefits from independent edits."

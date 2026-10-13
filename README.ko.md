@@ -4,7 +4,7 @@
 
 헤더: 2048×1024 · 4×4 px 셀 · 32색 · 131,072셀 PASS · [검사 보고서](docs/examples/header/report.json) · [격자 미리보기](docs/examples/header/grid_overlay.png) · [제작 기록](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · 버전 0.3.0 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · 버전 0.4.0 · [Apache License 2.0](LICENSE)
 
 **선언한 격자 위에서 정적 PNG 픽셀아트를 만들고, 모든 셀을 검사합니다.**
 
@@ -69,6 +69,34 @@ python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered
 ```
 
 예제는 16×16 논리 캔버스를 8배 확대해 128×128 PNG를 만듭니다. `rendered.png`, `report.json`, `grid_overlay.png`를 함께 확인합니다. 출력 폴더는 비어 있거나 존재하지 않아야 합니다. 명령을 반복할 때는 새로운 실행 폴더 이름을 사용합니다.
+
+## 복잡한 요청: 필요할 때 레이어로 작업
+
+![배경·기사·아이템·제목을 별도 레이어로 제작하고 합성한 Pixelwright 장면](docs/examples/layered-scene/rendered.png)
+
+복잡한 요청에서는 독립적으로 수정할 수 있는 배경·아이템·UI·문구를 레이어로 나눌 수 있습니다. 캐릭터의 손과 장비처럼 접점이나 포즈가 중요한 요소는 보통 함께 제작합니다. 단순한 아이콘은 하나의 작화로 만들면 됩니다.
+
+먼저 전체 구도, 공통 배율과 RGBA 팔레트, 광원, 앞뒤 순서를 정합니다. `pixel_layers.py`는 JSON 레이어 목록을 관리하고, 모든 입력 PNG를 검사한 뒤 논리 해상도에서 합성하고 한 번 확대해 최종 PNG를 다시 검사합니다. 팔레트는 작품 전체에서 공유합니다. 각 레이어에 별도의 색상 예산을 주면 합성본의 색상 수를 제한할 수 없습니다.
+
+[동봉한 장면 예제](pixelwright/examples/layered-scene/)는 배경, 방패·둔기를 함께 든 기사, 아이템, 제목의 네 레이어로 구성됩니다. 320×224 논리 캔버스를 4배 확대해 1280×896 PNG를 만들며, 셀은 4×4 px이고 32개 RGBA 값으로 이루어진 공통 팔레트를 사용합니다. 실제 [레이어별 결과](docs/examples/layered-scene/layers.json), [최종 보고서](docs/examples/layered-scene/final-report.json), [최종 격자 미리보기](docs/examples/layered-scene/grid_overlay.png)를 확인할 수 있습니다.
+
+**네 레이어 모두 PASS, 최종 71,680셀 모두 PASS**입니다. 불균일 셀·반투명 픽셀·공통 팔레트 밖의 샘플은 각각 0개이며, 불투명 최종 PNG에는 가시 RGB 31색을 사용했습니다. 합성 작업을 보여 주는 이 예제는 기존에 검증한 기사와 논리 격자에서 직접 만든 간단한 배경·아이템·문구로 구성했습니다.
+
+```sh
+# 레이아웃을 확인한 뒤 모든 레이어와 합성 결과를 검사합니다.
+python pixelwright/scripts/pixel_layers.py list --manifest pixelwright/examples/layered-scene/scene.json
+python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/examples/layered-scene/scene.json --out-dir runs/layers-scene-v1
+
+# 제목을 옮기고 원본 옆에 새 레이어 목록을 저장합니다.
+python pixelwright/scripts/pixel_layers.py edit --manifest pixelwright/examples/layered-scene/scene.json --layer title --position 16,28 --out pixelwright/examples/layered-scene/scene-title-v2.json
+python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/examples/layered-scene/scene-title-v2.json --out-dir runs/layers-scene-v2
+```
+
+`edit`는 `--visible true|false`로 표시 여부를, `--index`로 아래에서 위로 쌓이는 순서의 0부터 시작하는 위치를 바꿀 수 있습니다. 새 목록 파일을 만들며 원본 PNG를 보존합니다. 배치 좌표는 논리 셀 단위 정수이고 레이어 전체가 캔버스 안에 들어와야 합니다. 숨긴 레이어도 검사합니다. 경로는 목록 파일의 폴더를 기준으로 하며 그 폴더 밖을 참조할 수 없습니다.
+
+합성마다 `layers.json`, `layers/0000/qa/` 아래의 레이어별 보고서·격자 미리보기, `final/` 아래의 최종 검사 결과를 만듭니다. **모든 레이어와 최종 PNG가 PASS일 때만** 출력 루트에 승인된 `native.png`와 `rendered.png`를 내보냅니다. 최종 검사에서 실패한 후보는 진단용 `candidate/`에 남기며, 입력 레이어가 실패하면 합성하지 않습니다. 종료 코드는 모두 PASS이면 `0`, QA FAIL/REVIEW이면 `2`, 목록·입력·실행 오류이면 `1`입니다.
+
+이 모드는 레이어의 이진 투명도, 명시적인 공통 팔레트와 가시 RGB 예산, 투명 픽셀까지 정확한 RGBA를 요구합니다. 불투명 셀을 덮어쓰는 방식으로 합성하며 반투명 혼합·크기 변경·회전·잘라내기를 하지 않습니다. 불투명 최종 캔버스 위에 투명 배경의 전경 레이어를 올릴 수 있습니다. 기술 검사 후에는 각 레이어와 완성 장면의 접점·가림·광원·가독성을 눈으로 검수합니다. QA 격자는 작화와 별도 산출물로 유지합니다. 자세한 형식은 [레이어 작업·목록 문서](pixelwright/references/layers.md)에 있습니다.
 
 ## AI 스킬로 사용하기
 
@@ -136,17 +164,19 @@ python pixelwright/scripts/pixelwright.py inspect runs/repair-v1/fixed_upscaled.
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.3.0.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.3.0.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.4.0.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.4.0.zip --out-dir runs/release-check-v1
 ```
 
 패키징은 최상위 `pixelwright/` 폴더 하나를 포함하는 설치 ZIP과 테스트·문서를 포함하는 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사하고, 릴리스 검증기는 설치 패키지를 풀어 실제로 실행합니다. 빌드 결과는 로컬 `dist/`에 생성합니다.
 
 `verify_release.py`는 패키지 안의 Python 코드를 실행하므로 검토한 Pixelwright 소스에서 만든 신뢰할 수 있는 ZIP에만 사용합니다. 해시 목록이 일치한다는 것은 내부 무결성을 확인할 뿐 배포자의 신원을 증명하지 않습니다.
 
+[v0.4.0 검증 기록](docs/VALIDATION_v040_ko.md)에서 102개 테스트, 독립적인 Skill 사용, 4개 레이어 예제, 숨긴 불량 레이어를 포함한 설치 패키지 실행 결과를 확인할 수 있습니다.
+
 ## 지원 범위·라이선스·보안
 
-버전 0.3.0은 **정적 PNG 캐릭터·아이템·UI 아이콘**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 애니메이션과 아틀라스 검증은 이 버전의 지원 범위에서 제외합니다.
+버전 0.4.0은 **정적 PNG 캐릭터·아이템·UI 아이콘과 선택적 레이어 장면**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 애니메이션과 아틀라스 검증은 이 버전의 지원 범위에서 제외합니다.
 
 Pixelwright에는 **Apache License 2.0**을 적용합니다. [LICENSE](LICENSE)와 [NOTICE](NOTICE)를 확인합니다.
 

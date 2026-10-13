@@ -1,6 +1,6 @@
 ---
 name: pixelwright
-description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, and pixel-grid repairs.
+description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, pixel-grid repairs, and optional layer composition for complex artwork.
 ---
 
 # Pixelwright
@@ -31,6 +31,12 @@ python scripts/pixelwright.py inspect build-v1/rendered.png --profile profile.js
 Design on the logical grid, iterate the matrix, and use nearest-neighbor integer enlargement. Display the actual exported image and inspect its native-size readability and intended detail. A built-in example is `examples/lantern.json`; `examples/item-profile.json` defines its project contract.
 
 If a generative image tool is available and better fits the requested artwork, use it according to the host's tool rules. Treat its result as an unverified design candidate. Audit the original exported PNG and preserve it. A prompt saying “pixel art” cannot enforce this contract. A candidate needing projection becomes a new derived asset; generation-tool edits and deterministic repairs follow their respective host permissions.
+
+### Compose complex artwork in layers when useful
+
+Use layers when independent changes to a background, item, UI, or text would simplify a complex request. Keep tightly interacting parts, such as a character's hand and held weapon, together unless their contact can be checked reliably. A simple icon does not need layers. Read [layers.md](references/layers.md) for the manifest, management commands, and composition contract.
+
+Decide the layout, common grid and RGBA palette, lighting, and drawing order before creating layers. Author each layer to the shared scale and palette; positions use integer logical cells. The compositor audits every listed layer, including hidden layers, composes opaque cells on the logical canvas, enlarges once, and audits the final saved PNG. It exports accepted `native.png` and `rendered.png` only when every layer and the composite pass. Technical acceptance does not replace visual review of individual layers, contact points, occlusion, and final readability. Keep QA overlays separate from artwork.
 
 ### Inspect or repair existing art
 

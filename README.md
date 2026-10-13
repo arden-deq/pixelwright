@@ -4,7 +4,7 @@
 
 Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit report](docs/examples/header/report.json) · [Grid preview](docs/examples/header/grid_overlay.png) · [Build records](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · Version 0.3.0 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · Version 0.4.0 · [Apache License 2.0](LICENSE)
 
 **Create static PNG pixel art on a declared grid, then verify every cell.**
 
@@ -69,6 +69,34 @@ python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered
 ```
 
 The example builds a 16×16 logical canvas at 8×, producing a 128×128 PNG. Open `rendered.png`, `report.json`, and `grid_overlay.png` together. Each output directory must be empty or nonexistent; choose a new run name when repeating a command.
+
+## Complex requests: optional layers
+
+![Pixelwright scene composed from separate background, knight, item, and title layers](docs/examples/layered-scene/rendered.png)
+
+For complex requests, the skill can separate elements that benefit from independent edits: backgrounds, items, UI, and text. Parts with important contact or pose relationships, such as a character's hands and held equipment, are usually kept together. Simple icons can still use one artwork.
+
+Define the layout, common scale and RGBA palette, lighting, and drawing order first. `pixel_layers.py` manages a JSON layer manifest, audits every input PNG, composes at logical resolution, enlarges once, and audits the saved final PNG. Every layer uses the same palette; giving each layer a separate color budget would not constrain the whole scene.
+
+The [bundled scene](pixelwright/examples/layered-scene/) uses four editable layers: a background, the knight with its shield and mace, an item, and a title. Its 320×224 logical canvas is rendered to 1280×896 with 4×4 px cells and one shared 32-entry RGBA palette. See the actual [layer results](docs/examples/layered-scene/layers.json), [final report](docs/examples/layered-scene/final-report.json), and [final grid preview](docs/examples/layered-scene/grid_overlay.png).
+
+**All four layers PASS, and all 71,680 final cells PASS:** zero nonuniform cells, partially transparent pixels, or samples outside the shared palette. The opaque final PNG uses 31 visible RGB colors. This composition example reuses the previously validated knight with a simple native-authored background, item, and text.
+
+```sh
+# Validate and list the layout, then compose and audit all layers and the result.
+python pixelwright/scripts/pixel_layers.py list --manifest pixelwright/examples/layered-scene/scene.json
+python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/examples/layered-scene/scene.json --out-dir runs/layers-scene-v1
+
+# Move the title and write a new manifest beside the original.
+python pixelwright/scripts/pixel_layers.py edit --manifest pixelwright/examples/layered-scene/scene.json --layer title --position 16,28 --out pixelwright/examples/layered-scene/scene-title-v2.json
+python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/examples/layered-scene/scene-title-v2.json --out-dir runs/layers-scene-v2
+```
+
+`edit` can also set `--visible true|false` and a zero-based `--index` in bottom-to-top drawing order. It writes a new manifest and preserves source PNGs. Positions are integer logical cells; full layers must fit inside the canvas. Hidden layers are audited too. Paths are relative to the manifest directory and cannot escape it.
+
+Each composition writes `layers.json`, per-layer reports and grid previews under `layers/0000/qa/`, and the final audit under `final/`. Accepted `native.png` and `rendered.png` appear at the output root only when **all layers and the final PNG PASS**. Failed final candidates remain under `candidate/` for diagnosis; a failing input layer prevents composition. Exit codes are `0` for all PASS, `2` for QA FAIL/REVIEW, and `1` for manifest, input, or execution errors.
+
+This mode requires binary layer transparency, an explicit shared palette and visible RGB budget, and exact transparent RGBA. It uses opaque-cell replacement, with no semitransparent blending, resizing, rotation, or clipping. A final opaque canvas is supported with transparent foreground layers. Technical QA is followed by visual review of the layers and final image, including contacts, occlusion, lighting, and readability. QA overlays remain separate from artwork. See the [layer workflow and manifest reference](pixelwright/references/layers.md).
 
 ## Use as an AI skill
 
@@ -136,17 +164,19 @@ Review `comparison.png`, `fix_review.json`, and both reports before adopting a r
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.3.0.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.3.0.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.4.0.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.4.0.zip --out-dir runs/release-check-v1
 ```
 
 Packaging creates an installation ZIP with one top-level `pixelwright/` folder and a development-kit ZIP with tests and documentation. The package verifier checks the ZIP layout and SHA-256 manifest; the release verifier extracts and exercises the installation package. Build artifacts are generated locally in `dist/`.
 
 Run `verify_release.py` only on trusted packages built from reviewed Pixelwright source: it executes their Python scripts. A matching manifest proves internal integrity, not the identity of the publisher.
 
+The [v0.4.0 validation record](docs/VALIDATION_v040_ko.md) covers 102 tests, independent skill use, the four-layer example, and installed-package checks with a damaged hidden layer.
+
 ## Scope, license, and security
 
-Version 0.3.0 supports **static PNG characters, items, and UI icons**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Animation and atlas validation are outside this release.
+Version 0.4.0 supports **static PNG characters, items, UI icons, and optional layered scenes**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Animation and atlas validation are outside this release.
 
 Pixelwright is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 

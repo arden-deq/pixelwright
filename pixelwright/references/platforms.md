@@ -1,6 +1,6 @@
 # Platform integration
 
-Pixelwright 0.3.0. Official documentation checked on 2026-10-14.
+Pixelwright 0.4.0. Official documentation checked on 2026-10-14.
 
 ## Shared execution contract
 

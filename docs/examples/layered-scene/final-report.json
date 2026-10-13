@@ -1,0 +1,275 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.4.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 1280,
+    "height": 896
+  },
+  "logical_size": {
+    "width": 320,
+    "height": 224
+  },
+  "cell_size": {
+    "width": 4,
+    "height": 4
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "34ab97c0040fbae925bb8cb5b992fae0ce57eb567a00a76e42ec52fb1cee0aa7",
+    "decoded_rgba_sha256": "d32c903eafb0a6289334dd210c2dd60803aa36f42dff5b5c13397d04afe212e2",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "docs/examples/layered-scene/rendered.png",
+    "source_path_base": "repository_root",
+    "source_sha256_after_audit": "34ab97c0040fbae925bb8cb5b992fae0ce57eb567a00a76e42ec52fb1cee0aa7",
+    "profile_path": "docs/examples/layered-scene/profile.json",
+    "profile_path_base": "repository_root",
+    "profile_sha256": "a3ad88edc154fbf69ec3107dee1a2d17486c60ca979798d832450bb05b7ba1eb",
+    "pinned_sha256": null,
+    "accepted_export_sha256_verified": true
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 31,
+    "strict_alpha": false,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 71680,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 71680,
+    "visible_rgb_colors_source": 31,
+    "visible_rgb_colors_logical_preview": 31,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 3477,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 320,
+    "height": 224
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 240,
+      "y": 18
+    },
+    {
+      "x": 241,
+      "y": 18
+    },
+    {
+      "x": 242,
+      "y": 18
+    },
+    {
+      "x": 243,
+      "y": 18
+    },
+    {
+      "x": 239,
+      "y": 19
+    },
+    {
+      "x": 240,
+      "y": 19
+    },
+    {
+      "x": 241,
+      "y": 19
+    },
+    {
+      "x": 238,
+      "y": 20
+    },
+    {
+      "x": 241,
+      "y": 20
+    },
+    {
+      "x": 245,
+      "y": 20
+    },
+    {
+      "x": 237,
+      "y": 21
+    },
+    {
+      "x": 238,
+      "y": 21
+    },
+    {
+      "x": 242,
+      "y": 21
+    },
+    {
+      "x": 246,
+      "y": 21
+    },
+    {
+      "x": 247,
+      "y": 21
+    },
+    {
+      "x": 235,
+      "y": 22
+    },
+    {
+      "x": 237,
+      "y": 22
+    },
+    {
+      "x": 239,
+      "y": 22
+    },
+    {
+      "x": 240,
+      "y": 22
+    },
+    {
+      "x": 241,
+      "y": 22
+    },
+    {
+      "x": 242,
+      "y": 22
+    },
+    {
+      "x": 243,
+      "y": 22
+    },
+    {
+      "x": 246,
+      "y": 22
+    },
+    {
+      "x": 247,
+      "y": 22
+    },
+    {
+      "x": 248,
+      "y": 22
+    },
+    {
+      "x": 234,
+      "y": 23
+    },
+    {
+      "x": 236,
+      "y": 23
+    },
+    {
+      "x": 237,
+      "y": 23
+    },
+    {
+      "x": 238,
+      "y": 23
+    },
+    {
+      "x": 239,
+      "y": 23
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "3477 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    },
+    {
+      "code": "OPAQUE_BACKGROUND",
+      "severity": "info",
+      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 1280,
+      "height": 896
+    },
+    "logical_size": {
+      "width": 320,
+      "height": 224
+    },
+    "expected_render_size": {
+      "width": 1280,
+      "height": 896
+    },
+    "scale_x": 4.0,
+    "scale_y": 4.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 4,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Layered knight scene, shared 31 visible colors plus transparency",
+    "logical_size": "320x224",
+    "scale": 4,
+    "max_colors": 31,
+    "alpha": "opaque",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#020202FF",
+      "#060606FF",
+      "#0B0A09FF",
+      "#191716FF",
+      "#1B0D0EFF",
+      "#1E1F21FF",
+      "#24272AFF",
+      "#2B2C2EFF",
+      "#303438FF",
+      "#321216FF",
+      "#35211FFF",
+      "#383837FF",
+      "#3D4147FF",
+      "#474541FF",
+      "#491A1FFF",
+      "#4A4D51FF",
+      "#50555CFF",
+      "#53342AFF",
+      "#58544FFF",
+      "#592025FF",
+      "#5E646DFF",
+      "#69533AFF",
+      "#6B7077FF",
+      "#716759FF",
+      "#727983FF",
+      "#867B66FF",
+      "#8A8987FF",
+      "#969AA1FF",
+      "#B5A88EFF",
+      "#CCC6BAFF",
+      "#EEEBE3FF"
+    ]
+  },
+  "acceptance_mode": "strict_final_contract"
+}
