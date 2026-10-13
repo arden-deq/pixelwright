@@ -1,0 +1,152 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.3.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 192,
+    "height": 192
+  },
+  "logical_size": {
+    "width": 24,
+    "height": 24
+  },
+  "cell_size": {
+    "width": 8,
+    "height": 8
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "5131695dab9497f899c1f838b4c4df760ff928ce0dad8a3066561722ee8d034a",
+    "decoded_rgba_sha256": "413f25090ed16974210a4d04de6bf846f2939a11186a2ef6fcabaa767a17290e",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "profile_sha256": "49fca8a0a57d56cc6a9b6242cfdc14d394cc19b613b1fb5987e8f722a68a7380",
+    "source_path": "docs/examples/assets/ui/rendered.png",
+    "profile_path": "docs/examples/assets/ui/profile.json"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 10,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 576,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 576,
+    "visible_rgb_colors_source": 9,
+    "visible_rgb_colors_logical_preview": 9,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 6,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 24,
+    "height": 24
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 9,
+      "y": 9
+    },
+    {
+      "x": 14,
+      "y": 9
+    },
+    {
+      "x": 10,
+      "y": 11
+    },
+    {
+      "x": 11,
+      "y": 12
+    },
+    {
+      "x": 9,
+      "y": 14
+    },
+    {
+      "x": 14,
+      "y": 14
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "6 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 192,
+      "height": 192
+    },
+    "logical_size": {
+      "width": 24,
+      "height": 24
+    },
+    "expected_render_size": {
+      "width": 192,
+      "height": 192
+    },
+    "scale_x": 8.0,
+    "scale_y": 8.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 8,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Adventure compass UI",
+    "logical_size": "24x24",
+    "scale": 8,
+    "max_colors": 10,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#18243B",
+      "#2C3B57",
+      "#526C88",
+      "#A6BED0",
+      "#E9F0DB",
+      "#2F5B48",
+      "#588C59",
+      "#A7C57C",
+      "#603F3A",
+      "#A16B48",
+      "#EDB985",
+      "#DBA94E",
+      "#72C7C9",
+      "#B84F62"
+    ]
+  },
+  "acceptance_mode": "strict_profile"
+}

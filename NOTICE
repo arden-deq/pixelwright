@@ -1,0 +1,13 @@
+Pixelwright
+Copyright 2026 Pixelwright contributors
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+The deterministic grid auditor and its initial regression tests were adapted
+from the user-provided pixel-art-qa-development-kit v0.2.0. Pixelwright adds
+indexed logical-canvas generation, strict reusable profiles, batch inspection,
+exact transparent-RGB policy, output preservation, provenance, complete cell
+masks, packaging, documentation, and examples.
+
+Pillow and NumPy are runtime dependencies installed separately. Their own
+licenses apply to those packages; they are not bundled into Pixelwright ZIPs.

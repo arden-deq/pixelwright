@@ -1,0 +1,30 @@
+{
+  "logical_size": "32x48",
+  "rendered_size": "1280x1920",
+  "scale": 40,
+  "changed_logical_cell": [
+    16,
+    25
+  ],
+  "changed_source_sample": [
+    660,
+    1020
+  ],
+  "before_rgba": [
+    88,
+    140,
+    89,
+    255
+  ],
+  "after_rgba": [
+    89,
+    140,
+    89,
+    255
+  ],
+  "clean_status": "pass",
+  "broken_status": "fail",
+  "rounded_grid_score": 100.0,
+  "changed_source_samples": 1,
+  "nonuniform_cells": 1
+}

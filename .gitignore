@@ -1,0 +1,14 @@
+.work/
+__pycache__/
+*.pyc
+.venv/
+dist/
+demos/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.pytest_cache/
+runs/
+pixel-qa-output/

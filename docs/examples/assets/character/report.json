@@ -1,0 +1,208 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.3.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 256,
+    "height": 384
+  },
+  "logical_size": {
+    "width": 32,
+    "height": 48
+  },
+  "cell_size": {
+    "width": 8,
+    "height": 8
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "a17beab489a745c5e9c3c00bbb0809d0d4280216462ee2ff93c72592f78c7808",
+    "decoded_rgba_sha256": "85122816f51eae4a3c0422524b5efca035d48bbd9a06df193a0a1af4dffad2b1",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "profile_sha256": "0423efcf9ba55618bbd9c4e143d0b31b6c174f71ba753e73f0f45a2c8ce34d6f",
+    "source_path": "docs/examples/assets/character/rendered.png",
+    "profile_path": "docs/examples/assets/character/profile.json"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 14,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 1536,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 1536,
+    "visible_rgb_colors_source": 12,
+    "visible_rgb_colors_logical_preview": 12,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 20,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 32,
+    "height": 48
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 14,
+      "y": 8
+    },
+    {
+      "x": 18,
+      "y": 9
+    },
+    {
+      "x": 20,
+      "y": 9
+    },
+    {
+      "x": 18,
+      "y": 11
+    },
+    {
+      "x": 15,
+      "y": 12
+    },
+    {
+      "x": 18,
+      "y": 12
+    },
+    {
+      "x": 20,
+      "y": 12
+    },
+    {
+      "x": 18,
+      "y": 14
+    },
+    {
+      "x": 21,
+      "y": 14
+    },
+    {
+      "x": 16,
+      "y": 15
+    },
+    {
+      "x": 27,
+      "y": 16
+    },
+    {
+      "x": 16,
+      "y": 17
+    },
+    {
+      "x": 21,
+      "y": 19
+    },
+    {
+      "x": 15,
+      "y": 21
+    },
+    {
+      "x": 8,
+      "y": 26
+    },
+    {
+      "x": 16,
+      "y": 29
+    },
+    {
+      "x": 9,
+      "y": 30
+    },
+    {
+      "x": 16,
+      "y": 30
+    },
+    {
+      "x": 26,
+      "y": 33
+    },
+    {
+      "x": 8,
+      "y": 42
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "20 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 256,
+      "height": 384
+    },
+    "logical_size": {
+      "width": 32,
+      "height": 48
+    },
+    "expected_render_size": {
+      "width": 256,
+      "height": 384
+    },
+    "scale_x": 8.0,
+    "scale_y": 8.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 8,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Pixelwright demo / forest ranger / exact 8px cells",
+    "logical_size": "32x48",
+    "scale": 8,
+    "max_colors": 14,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#18243B",
+      "#2C3B57",
+      "#526C88",
+      "#A6BED0",
+      "#E9F0DB",
+      "#2F5B48",
+      "#588C59",
+      "#A7C57C",
+      "#603F3A",
+      "#A16B48",
+      "#EDB985",
+      "#DBA94E",
+      "#72C7C9",
+      "#B84F62"
+    ]
+  },
+  "acceptance_mode": "strict_profile"
+}

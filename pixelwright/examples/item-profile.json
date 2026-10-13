@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "name": "16px game items",
+  "logical_size": "16x16",
+  "scale": 8,
+  "max_colors": 16,
+  "alpha": "binary",
+  "transparent_rgb": "exact"
+}

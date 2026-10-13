@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "scale": 8,
+  "palette": {
+    ".": "transparent",
+    "o": "#27213A",
+    "m": "#69566F",
+    "b": "#BD8E6D",
+    "y": "#ECA95C",
+    "g": "#FFDA83",
+    "w": "#FFF1BE"
+  },
+  "rows": [
+    "................",
+    "......oooo......",
+    ".....ommmmo.....",
+    ".....om..mo.....",
+    ".....om..mo.....",
+    "......oooo......",
+    ".....oobboo.....",
+    "....obbbbbbo....",
+    "....oooyyooo....",
+    "....omggwybo....",
+    "....omggwybo....",
+    "....omggyybo....",
+    "....omgyyybo....",
+    "....oooooooo....",
+    "....obbbbbbo....",
+    ".....oooooo....."
+  ]
+}

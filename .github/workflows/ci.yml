@@ -1,0 +1,48 @@
+name: Pixelwright CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests (${{ matrix.os }}, Python ${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.10'
+          - os: ubuntu-latest
+            python: '3.14'
+          - os: windows-latest
+            python: '3.14'
+    steps:
+      - name: Check out source
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pixelwright/requirements.txt
+      - name: Install runtime dependencies
+        run: python -m pip install -r pixelwright/requirements.txt
+      - name: Compile Python entry points
+        run: python -m py_compile pixelwright/scripts/pixel_build.py pixelwright/scripts/pixel_qa.py pixelwright/scripts/pixelwright.py tools/package_skill.py tools/verify_release.py
+      - name: Run unit tests
+        run: python -m unittest discover -s pixelwright/tests -v
+      - name: Build and verify portable packages
+        run: python tools/package_skill.py --out-dir .work/ci-dist
+      - name: Verify installed release independently
+        run: python tools/verify_release.py --archive .work/ci-dist/pixelwright-v0.3.0.zip --out-dir .work/ci-release-check

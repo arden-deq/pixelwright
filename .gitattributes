@@ -1,0 +1,4 @@
+* text=auto
+*.png binary
+# Input contracts and reports are hashed byte-for-byte; preserve JSON newlines.
+*.json -text
