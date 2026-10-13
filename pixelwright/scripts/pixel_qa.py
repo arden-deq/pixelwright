@@ -6,7 +6,7 @@ This tool checks whether the submitted *rendered image* can be represented as
 uniform nearest-neighbor blocks on an explicitly declared logical pixel grid.
 It does not judge whether the art is good or whether the sprite is on-model.
 
-Requires: Pillow, NumPy. Python 3.10+.
+Requires: Pillow, NumPy. Python 3.12+.
 """
 from __future__ import annotations
 

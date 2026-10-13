@@ -1,0 +1,42 @@
+{
+  "status": "pass",
+  "method": "Direct PNG decoding, NumPy native-repeat equality, palette and hash checks, separate from the checker verdict.",
+  "source_path": "docs/examples/knight/4px/rendered.png",
+  "native_path": "docs/examples/knight/4px/native.png",
+  "profile_path": "docs/examples/knight/4px/profile.json",
+  "logical_size": [
+    256,
+    384
+  ],
+  "rendered_size": [
+    1024,
+    1536
+  ],
+  "cell_size": [
+    4,
+    4
+  ],
+  "uniform_cells": 98304,
+  "nonuniform_cells": 0,
+  "total_rgba_colors": 32,
+  "visible_rgb_colors": 31,
+  "transparent_entries": 1,
+  "exact_native_repeat": true,
+  "alpha_values": [
+    0,
+    255
+  ],
+  "partial_alpha_samples": 0,
+  "source_sha256": "4f648171518d718ff6acb94950bfb321d2feb07cbeb7ff9b5a8f22302e5cb917",
+  "native_sha256": "ce4489890df7a6d223d54a67938cb4bed060c1bd5f758b9fe92403037207e07c",
+  "profile_sha256": "90a02eae6cb271f0c488baea9988f3f9fbab75f97f7ae2767ac3e6e82f10f617",
+  "decoded_rgba_sha256": "1197cea41f29192726639c1c26175c9d266fd4e96ee00a28a0a2eda428824cdc",
+  "grid_preview": {
+    "source_spacing": [
+      4,
+      4
+    ],
+    "sampled": false,
+    "colors_are_diagnostic": true
+  }
+}

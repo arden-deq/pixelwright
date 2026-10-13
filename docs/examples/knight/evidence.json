@@ -1,0 +1,99 @@
+{
+  "scope": "Two observed technical contracts for the same knight",
+  "output_size": [
+    1024,
+    1536
+  ],
+  "total_rgba_colors": 32,
+  "same_palette": true,
+  "uniform_cells_total": 122880,
+  "nonuniform_cells_total": 0,
+  "variants": [
+    {
+      "status": "pass",
+      "method": "Direct PNG decoding, NumPy native-repeat equality, palette and hash checks, separate from the checker verdict.",
+      "source_path": "docs/examples/knight/4px/rendered.png",
+      "native_path": "docs/examples/knight/4px/native.png",
+      "profile_path": "docs/examples/knight/4px/profile.json",
+      "logical_size": [
+        256,
+        384
+      ],
+      "rendered_size": [
+        1024,
+        1536
+      ],
+      "cell_size": [
+        4,
+        4
+      ],
+      "uniform_cells": 98304,
+      "nonuniform_cells": 0,
+      "total_rgba_colors": 32,
+      "visible_rgb_colors": 31,
+      "transparent_entries": 1,
+      "exact_native_repeat": true,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "partial_alpha_samples": 0,
+      "source_sha256": "4f648171518d718ff6acb94950bfb321d2feb07cbeb7ff9b5a8f22302e5cb917",
+      "native_sha256": "ce4489890df7a6d223d54a67938cb4bed060c1bd5f758b9fe92403037207e07c",
+      "profile_sha256": "90a02eae6cb271f0c488baea9988f3f9fbab75f97f7ae2767ac3e6e82f10f617",
+      "decoded_rgba_sha256": "1197cea41f29192726639c1c26175c9d266fd4e96ee00a28a0a2eda428824cdc",
+      "grid_preview": {
+        "source_spacing": [
+          4,
+          4
+        ],
+        "sampled": false,
+        "colors_are_diagnostic": true
+      }
+    },
+    {
+      "status": "pass",
+      "method": "Direct PNG decoding, NumPy native-repeat equality, palette and hash checks, separate from the checker verdict.",
+      "source_path": "docs/examples/knight/8px/rendered.png",
+      "native_path": "docs/examples/knight/8px/native.png",
+      "profile_path": "docs/examples/knight/8px/profile.json",
+      "logical_size": [
+        128,
+        192
+      ],
+      "rendered_size": [
+        1024,
+        1536
+      ],
+      "cell_size": [
+        8,
+        8
+      ],
+      "uniform_cells": 24576,
+      "nonuniform_cells": 0,
+      "total_rgba_colors": 32,
+      "visible_rgb_colors": 31,
+      "transparent_entries": 1,
+      "exact_native_repeat": true,
+      "alpha_values": [
+        0,
+        255
+      ],
+      "partial_alpha_samples": 0,
+      "source_sha256": "035552f10dd13f205f311ec50fe0335e3acd299754e076a93ab87af8a86298f9",
+      "native_sha256": "9d29e6724aee3dc743ac273e2c1b0729bf0b873ebac195c0841fa1d57ad4afa7",
+      "profile_sha256": "020e8e0af35da8424b71202c43d7a5bc95dfbec9e99ebe64a6023533e61f6aa3",
+      "decoded_rgba_sha256": "f6c2cea444dd6ea8566a2afd173f28d5c8dd5602d242bfd0ab006b4e6ebb67a4",
+      "grid_preview": {
+        "source_spacing": [
+          8,
+          8
+        ],
+        "sampled": false,
+        "colors_are_diagnostic": true
+      }
+    }
+  ],
+  "workflow": "Generated design -> explicit grid/palette projection -> indexed logical source -> deterministic export -> strict audit",
+  "visual_review": "User-confirmed examples retain full plate armor, shield and flanged mace. Coarser dots simplify fine details."
+}

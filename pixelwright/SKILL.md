@@ -17,7 +17,7 @@ Default to exact RGBA, including hidden RGB under alpha zero. Use the explicit `
 
 ## Choose the workflow
 
-Resolve script paths relative to this skill directory and run with Python 3.10+ and the dependencies in `requirements.txt`. Read [platforms.md](references/platforms.md) if the host's execution or installation support is uncertain. If code execution or the original PNG is unavailable, produce a plan or prompt and label the result **unverified**; do not claim a PASS from visual inspection.
+Resolve script paths relative to this skill directory and run with Python 3.12+ and the dependencies in `requirements.txt`. Read [platforms.md](references/platforms.md) if the host's execution or installation support is uncertain. If code execution or the original PNG is unavailable, produce a plan or prompt and label the result **unverified**; do not claim a PASS from visual inspection.
 
 ### Create with a guaranteed grid
 

@@ -4,7 +4,7 @@ Pixelwright 0.3.0. Official documentation checked on 2026-10-14.
 
 ## Shared execution contract
 
-Use the same `SKILL.md` and Python CLI on every host. The runtime requires Python >= 3.10, Pillow, NumPy, access to the input PNG/specification, and a writable output directory. Resolve bundled paths relative to the directory containing the loaded `SKILL.md`, rather than the user's working directory.
+Use the same `SKILL.md` and Python CLI on every host. The runtime requires Python >= 3.12, Pillow, NumPy, access to the input PNG/specification, and a writable output directory. Resolve bundled paths relative to the directory containing the loaded `SKILL.md`, rather than the user's working directory.
 
 Read the actual input files, execute the bundled checker, and inspect its report before claiming that a file passed. After repair, run the checker on the repaired output. If execution or dependencies are unavailable, report **unverified** and supply a reproducible command; visual inspection is not a substitute.
 

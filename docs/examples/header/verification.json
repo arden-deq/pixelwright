@@ -1,0 +1,64 @@
+{
+  "status": "pass",
+  "method": "Direct decoded native-repeat, color, alpha and hash comparisons, separate from the checker verdict; structural checks do not independently prove artistic quality.",
+  "source_path": "docs/images/pixelwright-header.png",
+  "native_path": "docs/examples/header/native.png",
+  "profile_path": "docs/examples/header/profile.json",
+  "logical_size": [
+    512,
+    256
+  ],
+  "rendered_size": [
+    2048,
+    1024
+  ],
+  "cell_size": [
+    4,
+    4
+  ],
+  "uniform_cells": 131072,
+  "nonuniform_cells": 0,
+  "total_rgba_colors": 32,
+  "visible_rgb_colors": 32,
+  "alpha_values": [
+    255
+  ],
+  "partial_alpha_samples": 0,
+  "exact_native_repeat": true,
+  "source_sha256": "888929f4637a46b2c15f8d77a0a630c4cb761f5e429022718e2b5f29d30882db",
+  "native_sha256": "2df756f64a08cfb8b5717b51d8575f8ea3e0863970a34d60d04143577eb919a4",
+  "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
+  "decoded_rgba_sha256": "8a2b48d2f64728b254a3b72a81f092b204f11ae248462fb7af74846c65408665",
+  "generated_source_path": "docs/examples/header/generated-source.png",
+  "generated_source_sha256": "ddeebaabafcfd402a923bd7e9d2e8e81beef73142b4e3475b674c451dee2b98c",
+  "generated_source_size": [
+    1774,
+    887
+  ],
+  "generated_source_audit": "fail",
+  "source_preserved": true,
+  "preparation": "The preserved generative edit source was projected into the established 4px/32-color logical matrix. The subtitle was then finalized directly in this editable matrix with one cream foreground color and one dark background color. Pixelwright rebuilt and audited the final PNG.",
+  "grid_preview": {
+    "file": "grid_overlay.png",
+    "actual_cell_size": [
+      4,
+      4
+    ],
+    "reference_line_spacing": [
+      8,
+      4
+    ],
+    "sampled_vertical_reference_lines": true,
+    "all_cells_audited": true
+  },
+  "artistic_review": {
+    "status": "accepted",
+    "reviewer": "Codex visual inspection",
+    "observations": [
+      "The subtitle uses a single cream foreground color without mottled shading.",
+      "Subtitle spelling and character positions are retained.",
+      "All decoded PNG samples outside the subtitle rectangle are identical to the previous published header."
+    ]
+  },
+  "subtitle_style": "subtitle-style.json"
+}

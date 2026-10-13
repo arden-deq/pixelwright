@@ -1,0 +1,265 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.3.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 1024,
+    "height": 1536
+  },
+  "logical_size": {
+    "width": 128,
+    "height": 192
+  },
+  "cell_size": {
+    "width": 8,
+    "height": 8
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "035552f10dd13f205f311ec50fe0335e3acd299754e076a93ab87af8a86298f9",
+    "decoded_rgba_sha256": "f6c2cea444dd6ea8566a2afd173f28d5c8dd5602d242bfd0ab006b4e6ebb67a4",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "profile_sha256": "020e8e0af35da8424b71202c43d7a5bc95dfbec9e99ebe64a6023533e61f6aa3",
+    "source_path": "docs/examples/knight/8px/rendered.png",
+    "profile_path": "docs/examples/knight/8px/profile.json"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 31,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 24576,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 24576,
+    "visible_rgb_colors_source": 31,
+    "visible_rgb_colors_logical_preview": 31,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 3482,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 128,
+    "height": 192
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 64,
+      "y": 2
+    },
+    {
+      "x": 65,
+      "y": 2
+    },
+    {
+      "x": 66,
+      "y": 2
+    },
+    {
+      "x": 67,
+      "y": 2
+    },
+    {
+      "x": 63,
+      "y": 3
+    },
+    {
+      "x": 64,
+      "y": 3
+    },
+    {
+      "x": 65,
+      "y": 3
+    },
+    {
+      "x": 62,
+      "y": 4
+    },
+    {
+      "x": 65,
+      "y": 4
+    },
+    {
+      "x": 69,
+      "y": 4
+    },
+    {
+      "x": 61,
+      "y": 5
+    },
+    {
+      "x": 62,
+      "y": 5
+    },
+    {
+      "x": 66,
+      "y": 5
+    },
+    {
+      "x": 70,
+      "y": 5
+    },
+    {
+      "x": 71,
+      "y": 5
+    },
+    {
+      "x": 59,
+      "y": 6
+    },
+    {
+      "x": 61,
+      "y": 6
+    },
+    {
+      "x": 63,
+      "y": 6
+    },
+    {
+      "x": 64,
+      "y": 6
+    },
+    {
+      "x": 65,
+      "y": 6
+    },
+    {
+      "x": 66,
+      "y": 6
+    },
+    {
+      "x": 67,
+      "y": 6
+    },
+    {
+      "x": 70,
+      "y": 6
+    },
+    {
+      "x": 71,
+      "y": 6
+    },
+    {
+      "x": 72,
+      "y": 6
+    },
+    {
+      "x": 58,
+      "y": 7
+    },
+    {
+      "x": 60,
+      "y": 7
+    },
+    {
+      "x": 61,
+      "y": 7
+    },
+    {
+      "x": 62,
+      "y": 7
+    },
+    {
+      "x": 63,
+      "y": 7
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "3482 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 1024,
+      "height": 1536
+    },
+    "logical_size": {
+      "width": 128,
+      "height": 192
+    },
+    "expected_render_size": {
+      "width": 1024,
+      "height": 1536
+    },
+    "scale_x": 8.0,
+    "scale_y": 8.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 8,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Full plate knight: 8px dots, 32 colors including transparency",
+    "logical_size": "128x192",
+    "scale": 8,
+    "max_colors": 31,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#020202FF",
+      "#060606FF",
+      "#0B0A09FF",
+      "#191716FF",
+      "#1B0D0EFF",
+      "#1E1F21FF",
+      "#24272AFF",
+      "#2B2C2EFF",
+      "#303438FF",
+      "#321216FF",
+      "#35211FFF",
+      "#383837FF",
+      "#3D4147FF",
+      "#474541FF",
+      "#491A1FFF",
+      "#4A4D51FF",
+      "#50555CFF",
+      "#53342AFF",
+      "#58544FFF",
+      "#592025FF",
+      "#5E646DFF",
+      "#69533AFF",
+      "#6B7077FF",
+      "#716759FF",
+      "#727983FF",
+      "#867B66FF",
+      "#8A8987FF",
+      "#969AA1FF",
+      "#B5A88EFF",
+      "#CCC6BAFF",
+      "#EEEBE3FF"
+    ]
+  },
+  "acceptance_mode": "strict_profile"
+}

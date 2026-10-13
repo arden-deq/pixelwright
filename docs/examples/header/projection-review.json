@@ -1,0 +1,11 @@
+{
+  "prepared_source_sha256": "77b99525fb74ef2b7f9712376cc859892b216638601933580d383327a3222fb8",
+  "palette_strategy": "Established 32-color header palette retained, including 3 teal colors for the potion; nearest RGB palette assignment on the Pixelwright-projected logical cells.",
+  "technical_status": "pass",
+  "colors": 32,
+  "disclaimer": "Projection and palette reduction are lossy. Structural PASS is expected by construction and does not independently prove artistic quality.",
+  "projection_output_sha256_before_subtitle_refinement": "7669db96ef73899fdf42521334b432b9b7291b40389d67e5444e79814860df34",
+  "changed_prepared_pixels_at_projection": 2089586,
+  "final_source_sha256": "888929f4637a46b2c15f8d77a0a630c4cb761f5e429022718e2b5f29d30882db",
+  "subtitle_refinement": "subtitle-style.json"
+}

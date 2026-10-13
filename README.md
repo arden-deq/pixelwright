@@ -1,5 +1,9 @@
 # Pixelwright
 
+![Pixelwright banner with a knight, potion, and shield icon](docs/images/pixelwright-header.png)
+
+Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit report](docs/examples/header/report.json) · [Grid preview](docs/examples/header/grid_overlay.png) · [Build records](docs/examples/header/)
+
 [English](README.md) · [한국어](README.ko.md) · Version 0.3.0 · [Apache License 2.0](LICENSE)
 
 **Create static PNG pixel art on a declared grid, then verify every cell.**
@@ -8,37 +12,35 @@ Pixelwright is a shared AI skill for GPT-powered hosts and Claude. It helps crea
 
 Author a palette and a logical pixel matrix, render at an integer scale, and audit the exported PNG. For existing artwork, declare its intended grid before inspection. By default, deliver both the clean artwork and its actual grid QA preview so users can check the cells themselves.
 
-## See how grid QA works
+## One knight, two grid contracts
 
-![Pixelwright grid QA: clean artwork, inspected grid, and magnified passing and failing cells](docs/images/pixelwright-grid-qa.png)
+![The same full plate knight with shield and mace at 4×4 and 8×8 dots: clean artwork, magnified grid cells, the shared 32-color palette, and actual QA results](docs/images/knight-conditions.png)
 
-This high-resolution example has a **32×48 logical grid**, enlarged **40×** to **1280×1920 PNG pixels**. Each logical dot occupies one **40×40 square cell**. High rendered resolution preserves the original 32×48 design; it does not add logical detail.
+These are the actual outputs reviewed during Pixelwright development: a full-body knight wearing full plate armor, carrying a shield and flanged mace. Both PNGs are **1024×1536**, use the same **32-color RGBA palette** (31 visible colors plus transparency), and pass the same strict quality criteria. Changing the dot size changes the logical canvas and the amount of detail; it preserves complete square cells and exact single-color fills.
 
-- **PASS:** every decoded RGBA sample within every cell is identical.
-- **FAIL:** changing even one channel of one image sample inside a cell makes that cell nonuniform. An average diagnostic score can round to 100 while the strict verdict remains FAIL.
-- **Cyan lines** mark intended cell boundaries; **red cells** mark exact color violations. **Orange reference lines** indicate invalid geometry, where cell-color acceptance cannot be determined.
+| Version | Native artwork → output PNG | One dot | Uniform cells | Colors, including transparency | Audit |
+| --- | --- | --- | ---: | ---: | --- |
+| Fine dots | [256×384](docs/examples/knight/4px/native.png) → [1024×1536](docs/examples/knight/4px/rendered.png) | 4×4 px | 98,304 / 98,304 | 32 | [PASS report](docs/examples/knight/4px/report.json) |
+| Larger dots | [128×192](docs/examples/knight/8px/native.png) → [1024×1536](docs/examples/knight/8px/rendered.png) | 8×8 px | 24,576 / 24,576 | 32 | [PASS report](docs/examples/knight/8px/report.json) |
 
-The overlay is a separate diagnostic image. Its tinted colors do not change the clean PNG or supply the exact-color verdict; the checker reads the original file. Dense overlays may sample reference lines for readability while the audit still checks every cell.
+Both inspections found **zero nonuniform cells, zero partially transparent pixels, and zero colors outside the declared palette**. Every cell contains one exact RGBA value, including transparent cells. Independent pixel comparisons also confirm that each output is an exact nearest-neighbor enlargement of its native artwork: [4 px verification](docs/examples/knight/4px/verification.json) · [8 px verification](docs/examples/knight/8px/verification.json).
 
-Inspect the actual example files: [clean PNG](docs/examples/grid-qa/clean.png), [clean report](docs/examples/grid-qa/clean-audit/report.json), [deliberately broken PNG](docs/examples/grid-qa/broken.png), [failure report](docs/examples/grid-qa/broken-audit/report.json), and [shared profile](docs/examples/grid-qa/profile.json).
+The figure pairs clean artwork with enlarged grid crops so you can inspect individual dots. Its labels distinguish the dot size in the actual PNG from the display magnification. Grid lines and checkerboard backgrounds belong to the separate diagnostic preview; the clean PNGs retain their transparent backgrounds and 32-color palette. Open the full [4 px grid preview](docs/examples/knight/4px/grid_overlay.png) or [8 px grid preview](docs/examples/knight/8px/grid_overlay.png) to inspect the whole image.
 
-## Character, item, and UI examples
+The generative source was kept as unverified; Pixelwright's grid projection, palette-constrained logical matrices, and integer-scale rendering produced the inspected outputs. These two tested contracts provide evidence that technical quality stays consistent when dot size and logical resolution change. Artistic quality remains a separate visual review.
 
-![Character, potion item, and compass UI icon, each shown clean and with its audited grid](docs/images/pixelwright-gallery.png)
+The [knight example files](docs/examples/knight/) include editable `artwork.json` matrices, native and rendered PNGs, the declared profiles, actual inspection reports, and independent verification records. After installing the dependencies below, reproduce either version with the bundled tools:
 
-These examples use **8×8 rendered cells** and binary transparency. All 2,688 cells passed exact RGBA inspection.
-
-| Asset | Logical grid → rendered PNG | Uniform cells | Visible colors | Audit |
-| --- | --- | ---: | ---: | --- |
-| Forest adventurer | 32×48 → 256×384 | 1,536 / 1,536 | 12 | [PASS report](docs/examples/assets/character/report.json) |
-| Teal potion | 24×24 → 192×192 | 576 / 576 | 9 | [PASS report](docs/examples/assets/item/report.json) |
-| Compass UI icon | 24×24 → 192×192 | 576 / 576 | 9 | [PASS report](docs/examples/assets/ui/report.json) |
-
-The [example assets](docs/examples/assets/) contain native PNGs, enlarged PNGs, editable cell matrices, profiles, and inspection reports.
+```sh
+python pixelwright/scripts/pixel_build.py --spec docs/examples/knight/4px/artwork.json --out-dir runs/knight-4px-build-v1
+python pixelwright/scripts/pixelwright.py inspect runs/knight-4px-build-v1/rendered.png --profile docs/examples/knight/4px/profile.json --out-dir runs/knight-4px-audit-v1
+python pixelwright/scripts/pixel_build.py --spec docs/examples/knight/8px/artwork.json --out-dir runs/knight-8px-build-v1
+python pixelwright/scripts/pixelwright.py inspect runs/knight-8px-build-v1/rendered.png --profile docs/examples/knight/8px/profile.json --out-dir runs/knight-8px-audit-v1
+```
 
 ## Quick start
 
-Requires **Python 3.10+**, Pillow, and NumPy. Run these commands from the repository root:
+Requires **Python 3.12+**, Pillow, and NumPy. Run these commands from the repository root:
 
 ```sh
 git clone https://github.com/jungducknam/pixelwright.git

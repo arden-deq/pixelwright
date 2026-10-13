@@ -8,7 +8,7 @@ Pixelwright는 동일한 `SKILL.md`와 Python 검사기를 OpenAI 계열과 Clau
 
 | 사용 환경 | 패키지 사용 방식 | 품질 판정 조건 |
 | --- | --- | --- |
-| Codex 로컬 환경 | `pixelwright/` 폴더를 로컬 스킬 경로에 배치 | Python 3.10 이상, Pillow, NumPy, PNG·출력 폴더 접근 |
+| Codex 로컬 환경 | `pixelwright/` 폴더를 로컬 스킬 경로에 배치 | Python 3.12 이상, Pillow, NumPy, PNG·출력 폴더 접근 |
 | ChatGPT의 스킬 지원 환경 | 호스트가 제공하는 스킬 기능으로 로드 | 같은 파일과 Python 실행 조건을 확인한 뒤 검사 |
 | Claude Code 로컬 환경 | `pixelwright/` 폴더를 개인 또는 프로젝트 스킬 경로에 배치 | 같은 로컬 실행 조건 |
 | Claude의 사용자 스킬 기능 | `pixelwright-v0.3.0.zip` 업로드 후 활성화 | Code execution and file creation 활성화, 실행 환경의 의존성 확인 |
