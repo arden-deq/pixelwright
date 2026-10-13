@@ -25,19 +25,19 @@
   ],
   "partial_alpha_samples": 0,
   "exact_native_repeat": true,
-  "source_sha256": "8cd7994629f7f658cd4eb7ef65f6151591c2bb10e6f6c2222c7e6e640a1e736f",
-  "native_sha256": "2418fc9a8301ab95db047b24d8060cb3c2b90cd2328a1460c551fc620ae3fd35",
+  "source_sha256": "7669db96ef73899fdf42521334b432b9b7291b40389d67e5444e79814860df34",
+  "native_sha256": "36c4136d59ba5c30cc4dcbb7c9a26452587350b828f82999c280e50cd3aab7d6",
   "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
-  "decoded_rgba_sha256": "b18d7db8ecd4e0bc59250c2a252f6394862349c7ee269be02c9a8d0b90bae19a",
+  "decoded_rgba_sha256": "8759c0c6ae42056925e60b0c4e7435fe7fe2af1e05674780f8238e0f0b7929bf",
   "generated_source_path": "docs/examples/header/generated-source.png",
-  "generated_source_sha256": "793688222b71b604fe61579de460895ff084d8365fa0c23262599eab8bb77dcf",
+  "generated_source_sha256": "ddeebaabafcfd402a923bd7e9d2e8e81beef73142b4e3475b674c451dee2b98c",
   "generated_source_size": [
     1774,
     887
   ],
   "generated_source_audit": "fail",
   "source_preserved": true,
-  "preparation": "A new aspect-preserving 2048x1024 canvas was prepared by nearest-neighbor scaling; Pixelwright then projected 4px cells. The editable 32-color palette reserves 3 teal colors for potion and diagnostic accents. The preserved generative source was not altered.",
+  "preparation": "The built-in image editor removed the illustrative magnified window and connectors. A new aspect-preserving 2048x1024 canvas was prepared by nearest-neighbor scaling; Pixelwright then projected 4px cells using the established 32-color header palette. The latest generative edit source was preserved unchanged.",
   "grid_preview": {
     "file": "grid_overlay.png",
     "actual_cell_size": [
@@ -55,10 +55,10 @@
     "status": "accepted",
     "reviewer": "Codex visual inspection",
     "observations": [
+      "The magnified diagram, cyan connectors, checkmark and shield selection marker have been removed.",
       "PIXELWRIGHT and CREATE. GRID. VERIFY. remain readable.",
-      "Knight, mace, shield, potion, icon and diagnostic window are fully framed.",
-      "Reserved teal palette entries preserve the potion and grid motif accents.",
-      "Fine detail is coarser after 4px projection; structural PASS covers the final export."
+      "Knight, mace, shield, potion and inventory icon are fully framed; courtyard masonry fills the removed panel area.",
+      "The established 32-color palette and 4px grid are retained."
     ]
   }
 }

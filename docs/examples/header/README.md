@@ -1,6 +1,6 @@
 # Pixelwright README header
 
-The header was designed with the built-in image generation tool, then exported and audited with Pixelwright. The English and Korean READMEs use the same final PNG.
+The header was designed with the built-in image generation tool, then revised with its image editor to remove the magnified window and connecting lines. The revised artwork was exported and audited with Pixelwright. The English and Korean READMEs use the same final PNG.
 
 | Property | Final export |
 | --- | --- |
@@ -18,15 +18,15 @@ The header was designed with the built-in image generation tool, then exported a
 
 The preserved [generative source](generated-source.png) is 1774×887, despite the prompt's requested dimensions. It **fails** the chosen 2048×1024 / 4 px contract: [source report](source-report.json). The source inspector did not resample it or claim measurable grid compliance.
 
-A new canvas at the chosen dimensions was prepared with aspect-preserving nearest-neighbor scaling. Pixelwright projected it onto the 512×256 logical grid. The editable palette uses 29 dominant colors and three reserved teal colors to preserve the potion and diagnostic accents. Palette assignment and cell projection are lossy; the original PNG is retained unchanged.
+A new canvas at the chosen dimensions was prepared with aspect-preserving nearest-neighbor scaling. Pixelwright projected it onto the 512×256 logical grid. The revised artwork retains the existing 32-color palette, originally assembled from 29 dominant colors and three reserved teal colors for the potion accent. Palette assignment and cell projection are lossy; the original PNG is retained unchanged.
 
 The resulting [indexed artwork](artwork.json) was rendered with `pixel_build.py`. The final saved banner was then inspected with the strict [profile](profile.json). Direct PNG comparisons confirm that every native sample repeats exactly into one 4×4 cell, the color and alpha constraints hold, and the report identifies the actual final bytes. These checks establish structural compliance; they do not independently establish artistic quality.
 
-Visual review confirmed the title `PIXELWRIGHT`, the subtitle `CREATE. GRID. VERIFY.`, and the knight, potion, shield icon, and diagnostic window remain readable and fully framed. The window inside the illustration is an introductory motif. The linked grid overlay is the checker's actual diagnostic output.
+Visual review confirmed the title `PIXELWRIGHT`, the subtitle `CREATE. GRID. VERIFY.`, and the knight, potion, and shield icon remain readable and fully framed. The linked grid overlay is the checker's actual diagnostic output.
 
 The overlay uses cyan reference lines every **8 px horizontally** (every second vertical cell boundary) and **4 px vertically**. Dense-grid line sampling only affects the preview: all 131,072 individual 4×4 cells were audited. Grid lines add diagnostic colors to the preview; the clean banner retains its 32-color palette.
 
-[Generation prompt](generation-prompt.txt) · [Projection review](projection-review.json)
+[Initial design prompt](generation-prompt.txt) · [Removal edit prompt](edit-prompt.txt) · [Projection review](projection-review.json)
 
 ## Reproduce the final export
 

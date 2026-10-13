@@ -1,6 +1,6 @@
 # Pixelwright
 
-![Pixelwright banner with a knight, potion, shield icon, and a magnified pixel grid](docs/images/pixelwright-header.png)
+![Pixelwright banner with a knight, potion, and shield icon](docs/images/pixelwright-header.png)
 
 Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit report](docs/examples/header/report.json) · [Grid preview](docs/examples/header/grid_overlay.png) · [Build records](docs/examples/header/)
 

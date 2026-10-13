@@ -6,8 +6,8 @@
   "scope": "geometry_check_only",
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "793688222b71b604fe61579de460895ff084d8365fa0c23262599eab8bb77dcf",
-    "decoded_rgba_sha256": "bbbb844d6f1eea463ec81acc431429e4dc8c9b13b7981b177b19bd87d94d401c",
+    "source_sha256": "ddeebaabafcfd402a923bd7e9d2e8e81beef73142b4e3475b674c451dee2b98c",
+    "decoded_rgba_sha256": "4234e56fec99ea387847231fb2d4f6a6c9373c0934bb70e1dc4cf4d73a9df9ce",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
     "source_path": "docs/examples/header/generated-source.png",
