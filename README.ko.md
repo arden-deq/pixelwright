@@ -8,33 +8,31 @@ Pixelwright는 GPT 계열 호스트와 Claude에서 함께 쓰는 AI 스킬입�
 
 팔레트와 논리 픽셀 행렬을 먼저 만든 뒤 정수 배율로 확대하고, 내보낸 PNG를 검사합니다. 기존 이미지에는 검사 전에 의도한 격자 규격을 선언합니다. 기본 결과에는 원본 이미지와 실제 격자 QA 미리보기를 함께 보여 주어 사용자도 셀을 눈으로 확인할 수 있습니다.
 
-## 격자 QA를 눈으로 확인하기
+## 같은 기사, 두 가지 격자 규격
 
-![Pixelwright 격자 QA: 원본 이미지, 검사 격자, 정상·불량 셀의 확대 비교](docs/images/pixelwright-grid-qa.ko.png)
+![방패와 둔기를 든 풀 플레이트 기사의 4×4·8×8 도트 비교: 원본 이미지, 격자 확대, 공통 32색 팔레트, 실제 QA 결과](docs/images/knight-conditions.ko.png)
 
-이 고해상도 예시는 **32×48 논리 격자**를 **40배** 확대해 만든 **1280×1920 PNG**입니다. 논리 도트 하나가 **40×40 정사각형 셀 하나**를 차지합니다. 출력 해상도를 높여도 원래 32×48 설계가 유지되며 논리 디테일이 추가되는 것은 아닙니다.
+Pixelwright 개발 과정에서 실제로 만들고 눈으로 확인한 결과입니다. 풀 플레이트 아머를 착용하고 방패와 플랜지 메이스를 든 전신 기사를 두 규격으로 제작했습니다. 두 PNG 모두 **1024×1536**이며, 동일한 **32색 RGBA 팔레트**(가시 색상 31개 + 투명색 1개)를 사용하고 같은 엄격한 품질 기준을 통과했습니다. 도트 크기를 바꾸면 논리 캔버스와 표현할 수 있는 디테일이 달라지지만, 온전한 정사각형 셀과 정확한 단색 채움은 유지됩니다.
 
-- **PASS:** 모든 셀 안의 디코딩된 RGBA 값이 정확히 같습니다.
-- **FAIL:** 셀 내부의 이미지 픽셀 하나에서 색상 채널 하나만 달라져도 해당 셀은 불균일합니다. 평균 진단 점수가 반올림되어 100으로 보여도 엄격한 판정은 FAIL입니다.
-- **청록색 선**은 의도한 셀 경계, **빨간 셀**은 정확한 색상 위반을 나타냅니다. **주황색 참고선**은 이미지 기하가 맞지 않아 셀 색상의 적합성을 판정할 수 없는 상태를 나타냅니다.
+| 버전 | 작화 원본 → 출력 PNG | 도트 1칸 | 단색 셀 | 투명색 포함 색상 수 | 검사 |
+| --- | --- | --- | ---: | ---: | --- |
+| 세밀한 도트 | [256×384](docs/examples/knight/4px/native.png) → [1024×1536](docs/examples/knight/4px/rendered.png) | 4×4 px | 98,304 / 98,304 | 32 | [PASS 보고서](docs/examples/knight/4px/report.json) |
+| 큰 도트 | [128×192](docs/examples/knight/8px/native.png) → [1024×1536](docs/examples/knight/8px/rendered.png) | 8×8 px | 24,576 / 24,576 | 32 | [PASS 보고서](docs/examples/knight/8px/report.json) |
 
-격자 미리보기는 별도 진단 이미지입니다. 미리보기의 색상 틴트는 원본 PNG를 바꾸지 않으며, 정확한 색상 판정은 원본 파일을 읽어 수행합니다. 격자가 조밀하면 미리보기의 참고선을 일부만 표시할 수 있지만 검사는 모든 셀을 확인합니다.
+두 검사 모두 **불균일 셀 0개, 반투명 픽셀 0개, 지정 팔레트 밖의 색상 0개**입니다. 투명 셀을 포함해 각 셀 안의 모든 RGBA 값이 정확히 같습니다. 독립적인 픽셀 비교로 출력이 작화 원본을 최근접 이웃 방식으로 정확히 확대한 결과인지도 확인했습니다. [4 px 검증 기록](docs/examples/knight/4px/verification.json) · [8 px 검증 기록](docs/examples/knight/8px/verification.json).
 
-실제 예제 파일: [정상 PNG](docs/examples/grid-qa/clean.png), [정상 검사 보고서](docs/examples/grid-qa/clean-audit/report.json), [의도적으로 손상한 PNG](docs/examples/grid-qa/broken.png), [실패 검사 보고서](docs/examples/grid-qa/broken-audit/report.json), [공통 프로필](docs/examples/grid-qa/profile.json).
+자료 화면에는 원본 이미지와 격자 부분 확대를 함께 배치해 도트 하나하나를 확인할 수 있게 했습니다. 실제 PNG의 도트 크기와 화면 표시용 확대 배율을 각각 표기했습니다. 격자선과 바둑판 배경은 별도 진단 미리보기에만 적용하며, 원본 PNG는 투명 배경과 32색 팔레트를 유지합니다. 이미지 전체를 확인하려면 [4 px 전체 격자](docs/examples/knight/4px/grid_overlay.png) 또는 [8 px 전체 격자](docs/examples/knight/8px/grid_overlay.png)를 열어 봅니다.
 
-## 캐릭터·아이템·UI 예시
+생성형 모델의 초기 이미지는 미검증 원본으로 보존하고, Pixelwright의 격자 투영·팔레트 제한 논리 행렬·정수 배율 렌더링으로 검사 대상 결과를 만들었습니다. 이 두 규격의 실제 통과 결과는 도트 크기와 논리 해상도가 달라져도 기술적 품질 기준을 일관되게 충족한다는 근거입니다. 미적 품질은 별도로 눈으로 검수합니다.
 
-![캐릭터, 물약 아이템, 나침반 UI 아이콘의 원본과 실제 검사 격자](docs/images/pixelwright-gallery.png)
+[기사 예제 폴더](docs/examples/knight/)에는 편집 가능한 `artwork.json` 행렬, 작화 원본·출력 PNG, 선언한 프로필, 실제 검사 보고서, 독립 검증 기록이 있습니다. 아래 안내에 따라 의존성을 설치한 뒤 동봉한 도구로 두 버전을 재현할 수 있습니다.
 
-이 예시들은 **8×8 출력 셀**과 이진 투명도를 사용합니다. 전체 2,688개 셀이 정확한 RGBA 검사를 통과했습니다.
-
-| 에셋 | 논리 격자 → 출력 PNG | 단색 셀 | 사용한 가시 색상 | 검사 |
-| --- | --- | ---: | ---: | --- |
-| 숲의 모험가 | 32×48 → 256×384 | 1,536 / 1,536 | 12 | [PASS 보고서](docs/examples/assets/character/report.json) |
-| 청록색 물약 | 24×24 → 192×192 | 576 / 576 | 9 | [PASS 보고서](docs/examples/assets/item/report.json) |
-| 나침반 UI 아이콘 | 24×24 → 192×192 | 576 / 576 | 9 | [PASS 보고서](docs/examples/assets/ui/report.json) |
-
-[에셋 예제 폴더](docs/examples/assets/)에는 논리 크기 PNG, 확대 PNG, 편집 가능한 셀 행렬, 프로필, 검사 보고서가 있습니다.
+```sh
+python pixelwright/scripts/pixel_build.py --spec docs/examples/knight/4px/artwork.json --out-dir runs/knight-4px-build-v1
+python pixelwright/scripts/pixelwright.py inspect runs/knight-4px-build-v1/rendered.png --profile docs/examples/knight/4px/profile.json --out-dir runs/knight-4px-audit-v1
+python pixelwright/scripts/pixel_build.py --spec docs/examples/knight/8px/artwork.json --out-dir runs/knight-8px-build-v1
+python pixelwright/scripts/pixelwright.py inspect runs/knight-8px-build-v1/rendered.png --profile docs/examples/knight/8px/profile.json --out-dir runs/knight-8px-audit-v1
+```
 
 ## 바로 시작하기
 
