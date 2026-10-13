@@ -1,6 +1,6 @@
 # Pixelwright README header
 
-The header was designed with the built-in image generation tool, then revised with its image editor to remove the magnified window and connecting lines. The revised artwork was exported and audited with Pixelwright. The English and Korean READMEs use the same final PNG.
+The header was designed with the built-in image generation tool, then revised with its image editor to remove the magnified window and connecting lines. The subtitle was finalized directly in the editable logical matrix with a single cream color. The revised artwork was exported and audited with Pixelwright. The English and Korean READMEs use the same final PNG.
 
 | Property | Final export |
 | --- | --- |
@@ -23,6 +23,8 @@ A new canvas at the chosen dimensions was prepared with aspect-preserving neares
 The resulting [indexed artwork](artwork.json) was rendered with `pixel_build.py`. The final saved banner was then inspected with the strict [profile](profile.json). Direct PNG comparisons confirm that every native sample repeats exactly into one 4×4 cell, the color and alpha constraints hold, and the report identifies the actual final bytes. These checks establish structural compliance; they do not independently establish artistic quality.
 
 Visual review confirmed the title `PIXELWRIGHT`, the subtitle `CREATE. GRID. VERIFY.`, and the knight, potion, and shield icon remain readable and fully framed. The linked grid overlay is the checker's actual diagnostic output.
+
+The small subtitle uses exactly one foreground RGBA color, **`#F9E6B8FF`**, against a flat **`#11141AFF`** background. Its glyphs were authored directly on the native grid to remove mottled color and shading. Every decoded PNG sample outside the subtitle rectangle remains identical to the previous published header; the established 32-color palette and strict profile are unchanged. [Subtitle color and region verification](subtitle-style.json) records the glyph masks, coordinates, exact foreground color count, and parent image identity.
 
 The overlay uses cyan reference lines every **8 px horizontally** (every second vertical cell boundary) and **4 px vertically**. Dense-grid line sampling only affects the preview: all 131,072 individual 4×4 cells were audited. Grid lines add diagnostic colors to the preview; the clean banner retains its 32-color palette.
 

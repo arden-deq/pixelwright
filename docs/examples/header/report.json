@@ -19,8 +19,8 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "7669db96ef73899fdf42521334b432b9b7291b40389d67e5444e79814860df34",
-    "decoded_rgba_sha256": "8759c0c6ae42056925e60b0c4e7435fe7fe2af1e05674780f8238e0f0b7929bf",
+    "source_sha256": "888929f4637a46b2c15f8d77a0a630c4cb761f5e429022718e2b5f29d30882db",
+    "decoded_rgba_sha256": "8a2b48d2f64728b254a3b72a81f092b204f11ae248462fb7af74846c65408665",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
     "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
@@ -47,7 +47,7 @@
     "visible_rgb_colors_source": 32,
     "visible_rgb_colors_logical_preview": 32,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 15361,
+    "possible_color_isolated_logical_pixels": 15172,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -186,7 +186,7 @@
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "15361 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "15172 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     },
     {
       "code": "OPAQUE_BACKGROUND",

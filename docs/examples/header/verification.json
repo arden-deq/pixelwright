@@ -25,10 +25,10 @@
   ],
   "partial_alpha_samples": 0,
   "exact_native_repeat": true,
-  "source_sha256": "7669db96ef73899fdf42521334b432b9b7291b40389d67e5444e79814860df34",
-  "native_sha256": "36c4136d59ba5c30cc4dcbb7c9a26452587350b828f82999c280e50cd3aab7d6",
+  "source_sha256": "888929f4637a46b2c15f8d77a0a630c4cb761f5e429022718e2b5f29d30882db",
+  "native_sha256": "2df756f64a08cfb8b5717b51d8575f8ea3e0863970a34d60d04143577eb919a4",
   "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
-  "decoded_rgba_sha256": "8759c0c6ae42056925e60b0c4e7435fe7fe2af1e05674780f8238e0f0b7929bf",
+  "decoded_rgba_sha256": "8a2b48d2f64728b254a3b72a81f092b204f11ae248462fb7af74846c65408665",
   "generated_source_path": "docs/examples/header/generated-source.png",
   "generated_source_sha256": "ddeebaabafcfd402a923bd7e9d2e8e81beef73142b4e3475b674c451dee2b98c",
   "generated_source_size": [
@@ -37,7 +37,7 @@
   ],
   "generated_source_audit": "fail",
   "source_preserved": true,
-  "preparation": "The built-in image editor removed the illustrative magnified window and connectors. A new aspect-preserving 2048x1024 canvas was prepared by nearest-neighbor scaling; Pixelwright then projected 4px cells using the established 32-color header palette. The latest generative edit source was preserved unchanged.",
+  "preparation": "The preserved generative edit source was projected into the established 4px/32-color logical matrix. The subtitle was then finalized directly in this editable matrix with one cream foreground color and one dark background color. Pixelwright rebuilt and audited the final PNG.",
   "grid_preview": {
     "file": "grid_overlay.png",
     "actual_cell_size": [
@@ -55,10 +55,10 @@
     "status": "accepted",
     "reviewer": "Codex visual inspection",
     "observations": [
-      "The magnified diagram, cyan connectors, checkmark and shield selection marker have been removed.",
-      "PIXELWRIGHT and CREATE. GRID. VERIFY. remain readable.",
-      "Knight, mace, shield, potion and inventory icon are fully framed; courtyard masonry fills the removed panel area.",
-      "The established 32-color palette and 4px grid are retained."
+      "The subtitle uses a single cream foreground color without mottled shading.",
+      "Subtitle spelling and character positions are retained.",
+      "All decoded PNG samples outside the subtitle rectangle are identical to the previous published header."
     ]
-  }
+  },
+  "subtitle_style": "subtitle-style.json"
 }
