@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "name": "Reusable metal ramp",
+  "colors": {
+    "transparent": "#00000000",
+    "metal_0": "#202030FF",
+    "metal_1": "#55535FFF",
+    "metal_2": "#89878FFF",
+    "metal_3": "#BEBABEFF",
+    "metal_4": "#F2EDEDFF"
+  },
+  "ramps": {
+    "metal": ["metal_0", "metal_1", "metal_2", "metal_3", "metal_4"]
+  }
+}

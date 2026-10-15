@@ -4,13 +4,13 @@
 
 헤더: 2048×1024 · 4×4 px 셀 · 32색 · 131,072셀 PASS · [검사 보고서](docs/examples/header/report.json) · [격자 미리보기](docs/examples/header/grid_overlay.png) · [제작 기록](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · 버전 0.4.0 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · 버전 0.5.1 · [Apache License 2.0](LICENSE)
 
 **선언한 격자 위에서 정적 PNG 픽셀아트를 만들고, 모든 셀을 검사합니다.**
 
 Pixelwright는 GPT 계열 호스트와 Claude에서 함께 쓰는 AI 스킬입니다. 캐릭터·아이템·UI 아이콘의 일정한 도트 크기, 격자 안에 온전히 들어가는 정사각형 셀, 셀 내부의 정확한 단일 RGBA 색상을 생성하고 검사합니다. 두 생태계에서 동일한 `SKILL.md`와 Python 도구를 사용하며, 실행 호스트에는 파일 접근과 Python 실행 기능이 필요합니다.
 
-팔레트와 논리 픽셀 행렬을 먼저 만든 뒤 정수 배율로 확대하고, 내보낸 PNG를 검사합니다. 기존 이미지에는 검사 전에 의도한 격자 규격을 선언합니다. 기본 결과에는 원본 이미지와 실제 격자 QA 미리보기를 함께 보여 주어 사용자도 셀을 눈으로 확인할 수 있습니다.
+팔레트와 논리 픽셀 행렬을 먼저 만든 뒤 정수 배율로 확대하고, 내보낸 PNG를 검사합니다. 이름 있는 색상과 명암 램프를 여러 에셋에서 재사용하거나, 이미 유효한 격자에서 색상을 팔레트에 맞춰 변환할 수 있습니다. 기존 이미지에는 검사 전에 의도한 격자 규격을 선언합니다. 기본 결과에는 원본 이미지와 실제 격자 QA 미리보기를 함께 보여 주어 사용자도 셀을 눈으로 확인할 수 있습니다.
 
 ## 같은 기사, 두 가지 격자 규격
 
@@ -69,6 +69,24 @@ python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered
 ```
 
 예제는 16×16 논리 캔버스를 8배 확대해 128×128 PNG를 만듭니다. `rendered.png`, `report.json`, `grid_overlay.png`를 함께 확인합니다. 출력 폴더는 비어 있거나 존재하지 않아야 합니다. 명령을 반복할 때는 새로운 실행 폴더 이름을 사용합니다.
+
+## 팔레트 재사용·추출·색상 변환
+
+버전 0.5.0은 이름 있는 색상과 명암 램프를 담는 재사용 JSON 팔레트 라이브러리를 추가합니다. 작화 명세의 인라인 `palette` 대신 `palette_file`을 지정하면 여러 논리 행렬에서 같은 색상 토큰을 쓸 수 있습니다. [팔레트 예제](pixelwright/examples/palette-demo/)에는 라이브러리를 참조하는 작화와 16×16·8배 프로필이 있습니다.
+
+위의 랜턴 시작 예제를 만든 뒤, 저장소 루트에서 실행합니다.
+
+```sh
+python pixelwright/scripts/pixel_palette.py extract runs/lantern-build-v1/rendered.png --max-colors 16 --name lantern-observed --out-dir runs/palette-extract-v1
+python pixelwright/scripts/pixel_palette.py ramp --start '#283040' --end '#C8D8E8' --steps 5 --name metal5 --palette pixelwright/examples/palette-demo/palette.json --out-dir runs/palette-ramp-v1
+python pixelwright/scripts/pixel_palette.py remap runs/lantern-build-v1/rendered.png --palette pixelwright/examples/palette-demo/palette.json --profile pixelwright/examples/palette-demo/profile.json --out-dir runs/palette-remap-v1
+python pixelwright/scripts/pixel_build.py --spec pixelwright/examples/palette-demo/artwork.json --out-dir runs/palette-demo-build-v1
+python pixelwright/scripts/pixelwright.py inspect runs/palette-demo-build-v1/rendered.png --profile pixelwright/examples/palette-demo/profile.json --out-dir runs/palette-demo-audit-v1
+```
+
+추출은 실제로 관측한 RGBA 색상을 빈도순으로 선택하고 잘린 색상 목록을 알리며, 원본 격자의 PASS를 판정하지 않습니다. 램프 생성은 알파가 같은 양 끝 색상을 서로 다른 명암 단계로 보간합니다. 색상 변환은 선언한 격자와 알파를 유지하고 같은 알파를 가진 가장 가까운 목표 색상을 고릅니다. 기하나 셀 내부 단색 규칙이 잘못된 원본은 변환하지 않습니다. 변환 PNG가 원래 프로필과 선택한 팔레트를 모두 통과할 때만 승인된 `native.png`와 `rendered.png`를 내보냅니다.
+
+`palette_report.json`, 원본·최종 QA, `comparison.png`, 논리 셀 단위 변경 마스크 `changed_cells.png`를 확인합니다. 기술 검사를 통과해도 색상 차이가 합쳐지면서 중요한 디테일을 잃을 수 있습니다. 각 명령은 새 출력 폴더를 사용하고 원본 파일을 보존합니다. 스키마, 선택적 램프 변환, 알파 조건과 출처 해시는 [팔레트 안내](pixelwright/references/palettes.md)에 있습니다.
 
 ## 복잡한 요청: 필요할 때 레이어로 작업
 
@@ -164,19 +182,19 @@ python pixelwright/scripts/pixelwright.py inspect runs/repair-v1/fixed_upscaled.
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.4.0.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.4.0.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.5.1.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.5.1.zip --out-dir runs/release-check-v1
 ```
 
 패키징은 최상위 `pixelwright/` 폴더 하나를 포함하는 설치 ZIP과 테스트·문서를 포함하는 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사하고, 릴리스 검증기는 설치 패키지를 풀어 실제로 실행합니다. 빌드 결과는 로컬 `dist/`에 생성합니다.
 
 `verify_release.py`는 패키지 안의 Python 코드를 실행하므로 검토한 Pixelwright 소스에서 만든 신뢰할 수 있는 ZIP에만 사용합니다. 해시 목록이 일치한다는 것은 내부 무결성을 확인할 뿐 배포자의 신원을 증명하지 않습니다.
 
-[v0.4.0 검증 기록](docs/VALIDATION_v040_ko.md)에서 102개 테스트, 독립적인 Skill 사용, 4개 레이어 예제, 숨긴 불량 레이어를 포함한 설치 패키지 실행 결과를 확인할 수 있습니다.
+[v0.5.1 검증 기록](docs/VALIDATION_v051_ko.md)은 촘촘한 격자에서도 양 축의 모든 셀 경계를 표시하도록 고친 내용을 설명합니다. Python 3.12·3.14에서 각각 140개 테스트 중 138개 통과·Windows 심볼릭 링크 2개 건너뜀을 확인했고, 설치 패키지에서도 실제 격자 간격을 측정합니다. [v0.5.0 기록](docs/VALIDATION_v050_ko.md)은 팔레트·램프 재사용, 재매핑, 정확한 추출과 원본 보존을, [v0.4.0 기록](docs/VALIDATION_v040_ko.md)은 레이어 합성을 다룹니다.
 
 ## 지원 범위·라이선스·보안
 
-버전 0.4.0은 **정적 PNG 캐릭터·아이템·UI 아이콘과 선택적 레이어 장면**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 애니메이션과 아틀라스 검증은 이 버전의 지원 범위에서 제외합니다.
+버전 0.5.1은 **정적 PNG 캐릭터·아이템·UI 아이콘, 재사용 팔레트와 선택적 레이어 장면**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 색상 변환은 선택한 목표 색상도 확인하며, 팔레트 추출과 램프 생성은 작화의 PASS를 판정하지 않습니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 애니메이션과 아틀라스 검증은 이 버전의 지원 범위에서 제외합니다.
 
 Pixelwright에는 **Apache License 2.0**을 적용합니다. [LICENSE](LICENSE)와 [NOTICE](NOTICE)를 확인합니다.
 

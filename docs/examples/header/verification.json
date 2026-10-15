@@ -45,11 +45,21 @@
       4
     ],
     "reference_line_spacing": [
-      8,
+      4,
       4
     ],
-    "sampled_vertical_reference_lines": true,
-    "all_cells_audited": true
+    "sampled_vertical_reference_lines": false,
+    "all_cells_audited": true,
+    "correction": {
+      "pixelwright_version": "0.5.1",
+      "reason": "Show every cell boundary on both axes without clamping the outer edge.",
+      "previous_reference_line_spacing": [
+        8,
+        4
+      ],
+      "previous_sampled_vertical_reference_lines": true,
+      "source_artwork_and_qa_reports_unchanged": true
+    }
   },
   "artistic_review": {
     "status": "accepted",

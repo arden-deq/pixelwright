@@ -4,13 +4,13 @@
 
 Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit report](docs/examples/header/report.json) · [Grid preview](docs/examples/header/grid_overlay.png) · [Build records](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · Version 0.4.0 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · Version 0.5.1 · [Apache License 2.0](LICENSE)
 
 **Create static PNG pixel art on a declared grid, then verify every cell.**
 
 Pixelwright is a shared AI skill for GPT-powered hosts and Claude. It helps create and audit characters, items, and UI icons with a consistent dot size, complete square grid cells, and exactly one RGBA color per cell. The same `SKILL.md` and Python tools serve both ecosystems; the host must provide file access and Python execution.
 
-Author a palette and a logical pixel matrix, render at an integer scale, and audit the exported PNG. For existing artwork, declare its intended grid before inspection. By default, deliver both the clean artwork and its actual grid QA preview so users can check the cells themselves.
+Author a palette and a logical pixel matrix, render at an integer scale, and audit the exported PNG. Reuse named palette libraries and shading ramps across assets, or remap colors on an already valid grid. For existing artwork, declare its intended grid before inspection. By default, deliver both the clean artwork and its actual grid QA preview so users can check the cells themselves.
 
 ## One knight, two grid contracts
 
@@ -69,6 +69,24 @@ python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered
 ```
 
 The example builds a 16×16 logical canvas at 8×, producing a 128×128 PNG. Open `rendered.png`, `report.json`, and `grid_overlay.png` together. Each output directory must be empty or nonexistent; choose a new run name when repeating a command.
+
+## Reuse, extract, and remap palettes
+
+Version 0.5.0 adds a reusable JSON palette library with named colors and ramps. An artwork can use `palette_file` instead of an inline palette; the same library can serve several logical matrices. The [palette demo](pixelwright/examples/palette-demo/) includes a library-backed artwork and a 16×16, 8× profile.
+
+After the lantern quick start above, run from the repository root:
+
+```sh
+python pixelwright/scripts/pixel_palette.py extract runs/lantern-build-v1/rendered.png --max-colors 16 --name lantern-observed --out-dir runs/palette-extract-v1
+python pixelwright/scripts/pixel_palette.py ramp --start '#283040' --end '#C8D8E8' --steps 5 --name metal5 --palette pixelwright/examples/palette-demo/palette.json --out-dir runs/palette-ramp-v1
+python pixelwright/scripts/pixel_palette.py remap runs/lantern-build-v1/rendered.png --palette pixelwright/examples/palette-demo/palette.json --profile pixelwright/examples/palette-demo/profile.json --out-dir runs/palette-remap-v1
+python pixelwright/scripts/pixel_build.py --spec pixelwright/examples/palette-demo/artwork.json --out-dir runs/palette-demo-build-v1
+python pixelwright/scripts/pixelwright.py inspect runs/palette-demo-build-v1/rendered.png --profile pixelwright/examples/palette-demo/profile.json --out-dir runs/palette-demo-audit-v1
+```
+
+Extraction selects frequent observed RGBA colors and reports truncation; it does not certify the source grid. Ramp creation interpolates same-alpha endpoints into distinct shades. Remapping preserves the declared grid and alpha, chooses nearest same-alpha target colors, and rejects invalid geometry or nonuniform cells. It audits the converted PNG against the original profile and selected palette before exporting accepted `native.png` and `rendered.png`.
+
+Review `palette_report.json`, the source and final QA, `comparison.png`, and the logical `changed_cells.png` mask. Color conversion can merge important details even when technical QA passes. Each command writes into a fresh directory and keeps original files intact. See [palette guidance](pixelwright/references/palettes.md) for the schema, optional ramp targets, alpha requirements, and source hashes.
 
 ## Complex requests: optional layers
 
@@ -164,19 +182,19 @@ Review `comparison.png`, `fix_review.json`, and both reports before adopting a r
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.4.0.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.4.0.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.5.1.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.5.1.zip --out-dir runs/release-check-v1
 ```
 
 Packaging creates an installation ZIP with one top-level `pixelwright/` folder and a development-kit ZIP with tests and documentation. The package verifier checks the ZIP layout and SHA-256 manifest; the release verifier extracts and exercises the installation package. Build artifacts are generated locally in `dist/`.
 
 Run `verify_release.py` only on trusted packages built from reviewed Pixelwright source: it executes their Python scripts. A matching manifest proves internal integrity, not the identity of the publisher.
 
-The [v0.4.0 validation record](docs/VALIDATION_v040_ko.md) covers 102 tests, independent skill use, the four-layer example, and installed-package checks with a damaged hidden layer.
+The [v0.5.1 validation record](docs/VALIDATION_v051_ko.md) documents the grid-preview correction: every cell boundary is now drawn on both axes, including dense grids. Both Python 3.12 and 3.14 run 140 tests (138 pass, two Windows symlink skips), and the installed-package check measures actual grid intervals. The [v0.5.0 record](docs/VALIDATION_v050_ko.md) covers palette reuse, remapping, exact extraction, and original preservation; the [v0.4.0 record](docs/VALIDATION_v040_ko.md) covers layer composition.
 
 ## Scope, license, and security
 
-Version 0.4.0 supports **static PNG characters, items, UI icons, and optional layered scenes**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Animation and atlas validation are outside this release.
+Version 0.5.1 supports **static PNG characters, items, UI icons, reusable palettes, and optional layered scenes**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Palette remapping also checks the selected target colors; extraction and ramp generation do not certify artwork. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Animation and atlas validation are outside this release.
 
 Pixelwright is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 

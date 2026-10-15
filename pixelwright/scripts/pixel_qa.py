@@ -23,7 +23,7 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw
 
-VERSION = "0.4.0"
+VERSION = "0.5.1"
 MAX_PIXELS = 12_000_000
 MAX_PREVIEW_DIMENSION = 2048
 
@@ -486,15 +486,15 @@ def create_grid_lines(
     out = Image.new("RGBA", rendered_size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(out)
     color = (245, 155, 40, 120) if approximate else (0, 215, 245, 130)
-    # Draw at most 256 grid lines per axis in high-density images. The JSON
-    # report still audits every logical cell, regardless of overlay sampling.
-    x_step = max(1, (lw + 255) // 256)
-    y_step = max(1, (lh + 255) // 256)
-    for x in range(0, lw + 1, x_step):
-        boundary = min(w - 1, round(x * w / lw))
+    # Show every declared cell boundary. Sampling axes independently can make
+    # a valid square-cell image appear to have rectangular cells (e.g.320x224).
+    # The right/bottom boundaries lie at w/h, outside the half-open canvas;
+    # clamping them to w-1/h-1 would create a misleading shorter final cell.
+    for x in range(lw):
+        boundary = round(x * w / lw)
         draw.line((boundary, 0, boundary, h - 1), fill=color, width=1)
-    for y in range(0, lh + 1, y_step):
-        boundary = min(h - 1, round(y * h / lh))
+    for y in range(lh):
+        boundary = round(y * h / lh)
         draw.line((0, boundary, w - 1, boundary), fill=color, width=1)
     return out
 
@@ -637,7 +637,8 @@ def quantize_logical_rgba(logical: np.ndarray, colors: int) -> np.ndarray:
     return out
 
 
-def save_side_by_side(source: Image.Image, fixed: Image.Image, dest: Path) -> None:
+def save_side_by_side(source: Image.Image, fixed: Image.Image, dest: Path,
+                     *, right_title: str = "Grid projection (review before use)") -> None:
     w, h = source.size
     gap, margin, title_h = 20, 12, 30
     canvas = Image.new("RGB", (w*2 + gap + margin*2, h + title_h + margin*2), (32, 36, 44))
@@ -647,7 +648,7 @@ def save_side_by_side(source: Image.Image, fixed: Image.Image, dest: Path) -> No
     canvas.paste(right, (margin + w + gap, margin + title_h))
     draw = ImageDraw.Draw(canvas)
     draw.text((margin, margin+6), "Original", fill="white")
-    draw.text((margin+w+gap, margin+6), "Grid projection (review before use)", fill="white")
+    draw.text((margin+w+gap, margin+6), right_title, fill="white")
     canvas.save(dest)
 
 
@@ -656,6 +657,11 @@ def write_audit(audit: Audit, out_dir: Path) -> dict[str, str]:
         "report.json", "grid_overlay.png", "grid_lines.png", "logical_preview.png",
         "violation_mask.png", "correction_prompt.txt")])
     out_dir.mkdir(parents=True, exist_ok=True)
+    audit.result["grid_preview"] = {
+        "sampled": False, "logical_cell_step": {"x": 1, "y": 1},
+        "spacing_px": {"x": audit.cell_size[0], "y": audit.cell_size[1]},
+        "outer_boundary": "right/bottom lie outside the half-open source canvas",
+    }
     report = out_dir / "report.json"
     overlay = out_dir / "grid_overlay.png"
     grid_lines = out_dir / "grid_lines.png"

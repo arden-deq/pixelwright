@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes target the newest `0.4.x` release and the `main` branch. Earlier
+Security fixes target the newest `0.5.x` release and the `main` branch. Earlier
 releases are not maintained; update before reporting an issue that has already
 been fixed. There is no guaranteed response or remediation deadline.
 
@@ -29,7 +29,8 @@ the report does not disclose a security vulnerability.
 
 Pixelwright is a local Python command-line toolkit and an AI skill for building
 and checking static PNG pixel art. The repository contains the logical-canvas
-builder, layer manifest manager and compositor, PNG auditor, reusable profile and
+builder, palette extractor and remapper with reusable color ramps, layer manifest
+manager and compositor, PNG auditor, reusable profile and
 batch checker, release packaging and verification tools, tests, documentation,
 and CI configuration. Pillow and NumPy
 are runtime dependencies. The toolkit does not provide a network service,
@@ -42,7 +43,7 @@ process permissions; they do not reduce those permissions.
 
 ## Threat model and trust boundaries
 
-- PNG files, JSON canvas specifications, JSON profiles, filenames, and supplied
+- PNG files, JSON canvas specifications, JSON palettes and profiles, filenames, and supplied
   archives can come from untrusted sources. Parsing these inputs crosses a trust
   boundary even when a user intentionally invokes the CLI.
 - The caller chooses input paths, output paths, and commands. Image contents and
@@ -67,8 +68,8 @@ process permissions; they do not reduce those permissions.
    Outputs belong in the caller-selected fresh directory. Existing files and
    symlink destinations must not be silently overwritten; rejected operations
    must not delete files they did not create.
-2. Canvas and profile input is parsed as JSON and validated as data. Tokens,
-   colors, rows, and dimensions must not execute code or select arbitrary output
+2. Canvas, palette, and profile input is parsed as JSON and validated as data. Tokens,
+   colors, ramps, rows, and dimensions must not execute code or select arbitrary output
    filenames. A malformed input must not produce a misleading strict PASS.
 3. PNG loading and rendering must validate supported formats, dimensions, and
    resource bounds before allocating work proportional to declared dimensions.

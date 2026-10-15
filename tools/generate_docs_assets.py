@@ -70,7 +70,7 @@ def audit_variant(tag, scale, logical, cells, work):
     palette = np.unique(native.reshape(-1, 4), axis=0)
     assert len(palette) == 32 and set(palette[:, 3].tolist()) == {0, 255}
     assert np.all(palette[palette[:, 3] == 0, :3] == 0)
-    # A full boundary layer is required here; the stock dense-grid preview samples lines.
+    # This illustration uses a full boundary layer, matching the QA preview.
     lines = Image.new("RGBA", rendered.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(lines)
     for x in range(0, rendered.width, scale):

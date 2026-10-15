@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Execute a trusted Pixelwright ZIP's builder and strict gate.
+"""Execute a trusted Pixelwright ZIP's builder, palettes, and strict gate.
 
 Only use archives built from reviewed source. Manifest hashes check consistency,
 not authenticity; this tool executes the extracted Python scripts.
@@ -22,6 +22,157 @@ def run(script, args, expected):
     result = subprocess.run([sys.executable, str(script), *map(str, args)], capture_output=True, text=True)
     if result.returncode != expected:
         raise ValueError(f"{script.name}: expected {expected}, got {result.returncode}: {result.stderr}")
+
+
+def file_hash(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def read_json(path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def rgba_pixels(image):
+    data = image.convert("RGBA").tobytes()
+    return (tuple(data[offset:offset + 4]) for offset in range(0, len(data), 4))
+
+
+def verify_grid_intervals(path, logical_size, scale):
+    """Check every guide boundary on both axes in original image coordinates."""
+    expected_size = (logical_size[0] * scale, logical_size[1] * scale)
+    with Image.open(path) as grid:
+        if grid.size != expected_size:
+            raise ValueError("Installed grid guide must retain the original rendered dimensions")
+        alpha = grid.convert("RGBA").getchannel("A")
+    width, height = expected_size
+    # Row/column 1 lie inside a cell, so perpendicular guide lines cannot hide
+    # missing boundaries. Right/bottom boundaries lie outside the half-open canvas.
+    x_alpha = alpha.crop((0, 1, width, 2)).tobytes()
+    y_alpha = alpha.crop((1, 0, 2, height)).tobytes()
+    actual_x = {index for index, opacity in enumerate(x_alpha) if opacity}
+    actual_y = {index for index, opacity in enumerate(y_alpha) if opacity}
+    expected_x = set(range(0, width, scale))
+    expected_y = set(range(0, height, scale))
+    if actual_x != expected_x or actual_y != expected_y:
+        raise ValueError(f"Installed grid guide must show every {scale}px cell boundary on both axes")
+    return {"layered_grid_x_interval": scale, "layered_grid_y_interval": scale,
+            "layered_grid_all_boundaries": True}
+
+
+def verify_palette_workflow(skill, out, source, damaged):
+    """Exercise installed palette tools and independently inspect their PNGs."""
+    palette_tool = skill / "scripts" / "pixel_palette.py"
+    checker = skill / "scripts" / "pixelwright.py"
+    builder = skill / "scripts" / "pixel_build.py"
+    demo = skill / "examples" / "palette-demo"
+    demo_spec, demo_palette, demo_profile = (demo / name for name in
+                                             ("artwork.json", "palette.json", "profile.json"))
+    demo_hashes = {path: file_hash(path) for path in (demo_spec, demo_palette, demo_profile)}
+    demo_build, demo_audit = out / "palette-demo-build", out / "palette-demo-audit"
+    run(builder, ["--spec", demo_spec, "--out-dir", demo_build], 0)
+    demo_manifest = read_json(demo_build / "build.json")
+    if (demo_manifest["grid"]["logical_width"], demo_manifest["grid"]["logical_height"],
+            demo_manifest["grid"]["scale"]) != (16, 16, 8):
+        raise ValueError("Bundled palette demonstration must retain its declared 16x16 scale-8 grid")
+    if (demo_manifest["palette_source"]["sha256"] != demo_hashes[demo_palette]
+            or Path(demo_manifest["palette_source"]["path"]).resolve() != demo_palette.resolve()):
+        raise ValueError("Bundled palette demonstration must record the packaged palette's identity")
+    run(checker, ["inspect", demo_build / "rendered.png", "--profile", demo_profile,
+                  "--out-dir", demo_audit], 0)
+    demo_report = read_json(demo_audit / "report.json")
+    if demo_report["status"] != "pass" or demo_report["metrics"]["uniform_rgba_cells"] != 256:
+        raise ValueError("Bundled palette demonstration must pass all 256 cells under its packaged profile")
+    base_palette = out / "palette-base.json"
+    base_palette.write_text(json.dumps({"schema_version": 1,
+                                        "colors": {"transparent": "#00000000"},
+                                        "ramps": {}}, indent=2) + "\n", encoding="utf-8")
+    base_hash = file_hash(base_palette)
+    palette_out = out / "palette-ramp"
+    run(palette_tool, ["ramp", "--start", "#202030", "--end", "#F4BD52", "--steps", 5,
+                       "--name", "metal", "--palette", base_palette, "--out-dir", palette_out], 0)
+    palette_path = palette_out / "palette.json"
+    palette_document = read_json(palette_path)
+    ramp_tokens = palette_document["ramps"]["metal"]
+    if len(ramp_tokens) != 5 or len(set(ramp_tokens)) != 5:
+        raise ValueError("Installed ramp generator must emit five ordered reusable tokens")
+    if (bytes.fromhex(palette_document["colors"][ramp_tokens[0]].lstrip("#")) != bytes.fromhex("202030FF")
+            or bytes.fromhex(palette_document["colors"][ramp_tokens[-1]].lstrip("#")) != bytes.fromhex("F4BD52FF")):
+        raise ValueError("Installed ramp generator must retain exact RGBA endpoints")
+    ramp_colors = {tuple(bytes.fromhex(palette_document["colors"][token].lstrip("#")))
+                   for token in ramp_tokens}
+    # The same profile audits both source and result. Target palette membership
+    # is checked separately so a palette transformation cannot relax source QA.
+    profile = out / "palette-profile.json"
+    profile.write_text(json.dumps({"schema_version": 1, "name": "release palette smoke",
+                                   "logical_size": "16x16", "scale": 8, "max_colors": 16,
+                                   "alpha": "binary", "transparent_rgb": "exact"}, indent=2) + "\n",
+                       encoding="utf-8")
+    input_hashes = {path: file_hash(path) for path in (source, damaged, profile, palette_path)}
+    remap_out = out / "palette-remap"
+    run(palette_tool, ["remap", source, "--palette", palette_path, "--profile", profile,
+                       "--ramp", "metal", "--out-dir", remap_out], 0)
+    remap_report = read_json(remap_out / "palette_report.json")
+    if (remap_report["status"] != "pass" or remap_report["source"]["status"] != "pass"
+            or remap_report["final"]["status"] != "pass"):
+        raise ValueError("Installed remap must preserve source QA and pass final QA")
+    remapped = remap_out / "rendered.png"
+    independent_audit = out / "palette-remap-audit"
+    run(checker, ["inspect", remapped, "--profile", profile, "--out-dir", independent_audit], 0)
+    audited = read_json(independent_audit / "report.json")
+    if audited["status"] != "pass":
+        raise ValueError("Installed remap result must pass the original profile")
+    with Image.open(source) as original, Image.open(remapped) as result:
+        original_rgba = original.convert("RGBA")
+        result_rgba = result.convert("RGBA")
+        if original_rgba.size != result_rgba.size:
+            raise ValueError("Remapping changed the source dimensions")
+        if original_rgba.getchannel("A").tobytes() != result_rgba.getchannel("A").tobytes():
+            raise ValueError("Remapping changed the source alpha plane")
+        visible = {rgba for rgba in rgba_pixels(result_rgba) if rgba[3] != 0}
+    if not visible or not visible <= ramp_colors:
+        raise ValueError("Installed remap result contains colors outside the selected ramp")
+    extraction_out = out / "palette-extract"
+    run(palette_tool, ["extract", remapped, "--max-colors", 16, "--out-dir", extraction_out], 0)
+    extracted = read_json(extraction_out / "palette.json")
+    extracted_visible = {tuple(bytes.fromhex(color.lstrip("#")))
+                         for color in extracted["colors"].values()
+                         if bytes.fromhex(color.lstrip("#"))[-1] != 0}
+    if extracted_visible != visible:
+        raise ValueError("Exact extraction must preserve all remapped visible colors")
+    reuse_spec = out / "palette-reuse.json"
+    reuse_spec.write_text(json.dumps({"schema_version": 1, "scale": 8,
+                                     "palette_file": "palette-ramp/palette.json",
+                                     "rows": [[ramp_tokens[0], ramp_tokens[2], ramp_tokens[4]]]},
+                                    indent=2) + "\n", encoding="utf-8")
+    reuse_hash = file_hash(reuse_spec)
+    reuse_out = out / "palette-reuse"
+    run(builder, ["--spec", reuse_spec, "--out-dir", reuse_out], 0)
+    with Image.open(reuse_out / "native.png") as reuse:
+        actual = list(rgba_pixels(reuse))
+    expected = [tuple(bytes.fromhex(palette_document["colors"][token].lstrip("#")))
+                for token in (ramp_tokens[0], ramp_tokens[2], ramp_tokens[4])]
+    if actual != expected:
+        raise ValueError("Builder palette_file reuse did not preserve exact token colors")
+    rejected_out = out / "palette-rejected"
+    run(palette_tool, ["remap", damaged, "--palette", palette_path, "--profile", profile,
+                       "--out-dir", rejected_out], 2)
+    if any((rejected_out / name).exists() for name in ("native.png", "rendered.png")):
+        raise ValueError("An invalid source grid must not produce an accepted remapped PNG")
+    if read_json(rejected_out / "palette_report.json")["status"] != "fail":
+        raise ValueError("An invalid source grid must retain a failed palette report")
+    if any(file_hash(path) != expected_hash for path, expected_hash in input_hashes.items()):
+        raise ValueError("A palette operation changed an original input")
+    if any(file_hash(path) != expected_hash for path, expected_hash in demo_hashes.items()):
+        raise ValueError("Building the bundled palette demonstration changed a packaged input")
+    if file_hash(reuse_spec) != reuse_hash or file_hash(base_palette) != base_hash:
+        raise ValueError("Builder palette reuse changed the source specification")
+    return {"palette_demo_status": demo_report["status"],
+            "palette_demo_cells": demo_report["metrics"]["uniform_rgba_cells"],
+            "palette_demo_source_verified": True,
+            "palette_ramp_steps": len(ramp_tokens), "palette_remap_status": audited["status"],
+            "palette_remap_visible_colors": len(visible), "palette_target_verified": True,
+            "palette_extraction_exact": True, "palette_builder_reuse": True,
+            "palette_invalid_source_rejected": True, "palette_inputs_unchanged": True}
 
 
 def main():
@@ -63,6 +214,7 @@ def main():
             raise ValueError("One damaged source sample must produce exactly one invalid cell")
         if source_hash != hashlib.sha256((build / "rendered.png").read_bytes()).hexdigest():
             raise ValueError("Original generated PNG changed")
+        palette_summary = verify_palette_workflow(skill, out, build / "rendered.png", damaged)
         layers_tool = skill / "scripts" / "pixel_layers.py"
         scene = skill / "examples" / "layered-scene" / "scene.json"
         layer_output = out / "layered-scene"
@@ -72,6 +224,7 @@ def main():
             raise ValueError("Installed layered scene must pass every layer and the final audit")
         if any(item["status"] != "pass" for item in layer_summary["results"]):
             raise ValueError("Installed scene contains a rejected layer")
+        grid_summary = verify_grid_intervals(layer_output / "final" / "grid_lines.png", (320, 224), 4)
         original_layer = scene.parent / "layers" / "title.png"
         original_layer_hash = hashlib.sha256(original_layer.read_bytes()).hexdigest()
         broken_input = out / "broken-layer-input"
@@ -103,7 +256,7 @@ def main():
                    "layered_status": layer_summary["status"], "layer_count": len(layer_summary["results"]),
                    "layered_uniform_cells": json.loads((layer_output / "final/report.json").read_text(encoding="utf-8"))["metrics"]["uniform_rgba_cells"],
                    "hidden_damaged_layer_status": rejected["status"], "rejected_final_status": rejected["final"]["status"],
-                   "original_layer_unchanged": True}
+                   "original_layer_unchanged": True, **palette_summary, **grid_summary}
         (out / "release-check.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(summary, indent=2))
         return 0

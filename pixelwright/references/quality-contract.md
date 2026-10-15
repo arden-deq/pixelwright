@@ -31,7 +31,7 @@ Every exact nonuniform cell fails regardless of mean grid score or diagnostic to
 
 - `report.json`: status, settings or contract, geometry, exact violation count, bounded coordinate samples, and source/profile hashes when the corresponding entrypoint supplies them.
 - `grid_overlay.png`: original-size diagnostic, exact invalid cells highlighted in red. Invalid geometry uses orange approximate boundaries and no cell-color verdict.
-- `grid_lines.png`: transparent reference layer. Dense overlays may sample lines for legibility; every cell is still audited.
+- `grid_lines.png`: transparent reference layer showing every declared cell boundary on both axes, without sampling. For a valid square grid the visible line spacing equals the physical cell size in both directions. Right/bottom outer boundaries lie outside the half-open canvas; they are not moved inward to shorten edge cells.
 - `violation_mask.png`: logical-size binary mask; white marks every exact invalid cell. Produced for valid geometry, including a black mask for 1× inputs.
 - `logical_preview.png`: representative-cell preview for visual review. It is a derived diagnostic, not evidence that the original passed.
 - `correction_prompt.txt`: targeted redesign guidance.
@@ -39,7 +39,7 @@ Every exact nonuniform cell fails regardless of mean grid score or diagnostic to
 
 Coordinates are zero-based from the top-left. Existing `source_box` arrays use inclusive end coordinates: `[x0,y0,x1,y1]`. Cell `(x,y)` spans `[x*S,(x+1)*S)` and `[y*S,(y+1)*S)` in half-open notation. Masks supply all invalid cells even when JSON samples are capped.
 
-Show the clean PNG alongside `grid_overlay.png` by default. Include a short caption with logical size, cell size, and technical status so the user can judge cell alignment visually. The cyan grid shows intended boundaries; exact invalid cells are red; geometry failures use orange approximate lines. A diagnostic overlay changes displayed colors, so use the underlying PNG's report for exact RGBA equality. Dense sampled grid lines should be identified as a reference, not a complete visual map.
+Show the clean PNG alongside `grid_overlay.png` by default. Include a short caption with logical size, cell size, and technical status so the user can judge cell alignment visually. The cyan grid shows every intended cell boundary; exact invalid cells are red; geometry failures use orange approximate lines. A diagnostic overlay changes displayed colors, so use the underlying PNG's report for exact RGBA equality. `grid_preview` records the unsampled per-axis spacing. For dense grids, add a nearest-neighbor crop with the same enlargement on both axes. Historical overlays that sampled axes independently can look rectangular even when the audited artwork's cells are square; regenerate those previews with the current checker.
 
 Explicit `pixel_qa.py fix` additionally writes native/enlarged corrected PNGs, a comparison, an impact report and a post-repair report. It chooses a representative observed color in each cell, then enlarges it. Optional palette quantization and alpha thresholding can remove design details. Record both original and corrected statuses and visually review before adoption. Hashes and changed-pixel fractions establish provenance, not artistic safety.
 

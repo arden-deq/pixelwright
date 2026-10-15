@@ -15,12 +15,12 @@ import json
 import re
 import sys
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from PIL import Image
 
-VERSION = "0.4.0"
+VERSION = "0.5.1"
 MAX_RENDERED_PIXELS = 12_000_000
 MAX_SPEC_BYTES = 32 * 1024 * 1024
 _HEX_COLOR = re.compile(r"^#[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?$")
@@ -37,6 +37,7 @@ class PixelSpec:
     palette: dict[str, tuple[int, int, int, int]]
     rows: tuple[tuple[str, ...], ...]
     scale: int
+    palette_source: dict[str, str] | None = None
 
     @property
     def width(self) -> int:
@@ -72,7 +73,7 @@ def _color(value: Any, token: str) -> tuple[int, int, int, int]:
     return rgba
 
 
-def parse_spec(document: Any) -> PixelSpec:
+def parse_spec(document: Any, *, base_dir: Path | None = None) -> PixelSpec:
     """Validate a schema-version-1 document without resampling or guessing.
 
     Rows are arrays of palette tokens. Strings are also accepted when every
@@ -81,11 +82,11 @@ def parse_spec(document: Any) -> PixelSpec:
     """
     if not isinstance(document, dict):
         raise SpecError("The specification must be a JSON object.")
-    required = {"schema_version", "palette", "rows", "scale"}
+    required = {"schema_version", "rows", "scale"}
     missing = required - document.keys()
     if missing:
         raise SpecError(f"Missing required fields: {', '.join(sorted(missing))}.")
-    unexpected = document.keys() - required
+    unexpected = document.keys() - (required | {"palette", "palette_file"})
     if unexpected:
         raise SpecError(f"Unknown specification fields: {', '.join(sorted(unexpected))}.")
     if type(document["schema_version"]) is not int or document["schema_version"] != 1:
@@ -93,7 +94,29 @@ def parse_spec(document: Any) -> PixelSpec:
     scale = document["scale"]
     if type(scale) is not int or scale < 2:
         raise SpecError("scale must be an integer >= 2 (booleans and floats are invalid).")
-    raw_palette = document["palette"]
+    if ("palette" in document) == ("palette_file" in document):
+        raise SpecError("Specify exactly one of palette or palette_file.")
+    palette_source = None
+    if "palette_file" in document:
+        reference = document["palette_file"]
+        if (not isinstance(reference, str) or not reference or "\\" in reference or ":" in reference
+                or PurePosixPath(reference).is_absolute() or ".." in PurePosixPath(reference).parts):
+            raise SpecError("palette_file must be a confined relative POSIX path.")
+        if base_dir is None:
+            raise SpecError("palette_file needs the specification directory; use build_from_spec.")
+        base = Path(base_dir).resolve()
+        try:
+            library_path = (base / reference).resolve(strict=True)
+            if not library_path.is_relative_to(base):
+                raise SpecError("palette_file resolves outside the specification directory.")
+            import pixel_palette
+            library, library_bytes, library_path = pixel_palette._palette_snapshot(library_path)
+        except (OSError, ValueError, UnicodeError) as exc:
+            raise SpecError(f"Invalid palette_file: {exc}") from exc
+        raw_palette = library["colors"]
+        palette_source = {"path": str(library_path), "sha256": _sha256(library_bytes)}
+    else:
+        raw_palette = document["palette"]
     if not isinstance(raw_palette, dict) or not raw_palette:
         raise SpecError("palette must be a nonempty object mapping tokens to colors.")
     palette: dict[str, tuple[int, int, int, int]] = {}
@@ -136,7 +159,7 @@ def parse_spec(document: Any) -> PixelSpec:
             f"Rendered image would contain {rendered_pixels:,} pixels; "
             f"the limit is {MAX_RENDERED_PIXELS:,}. Reduce rows or scale."
         )
-    return PixelSpec(palette=palette, rows=tuple(rows), scale=scale)
+    return PixelSpec(palette=palette, rows=tuple(rows), scale=scale, palette_source=palette_source)
 
 
 def _sha256(data: bytes) -> str:
@@ -160,7 +183,7 @@ def _load_spec(spec_path: Path) -> tuple[PixelSpec, bytes]:
         document = json.loads(data.decode("utf-8-sig"), object_pairs_hook=_unique_object)
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise SpecError(f"Invalid UTF-8 JSON specification: {exc}.") from exc
-    return parse_spec(document), data
+    return parse_spec(document, base_dir=spec_path.parent), data
 
 
 def build_from_spec(spec_path: str | Path, out_dir: str | Path) -> dict[str, Any]:
@@ -243,6 +266,8 @@ def build_from_spec(spec_path: str | Path, out_dir: str | Path) -> dict[str, Any
             },
         },
     }
+    if spec.palette_source is not None:
+        manifest["palette_source"] = spec.palette_source
     manifest_bytes = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
 
     created_directory = False
@@ -261,6 +286,10 @@ def build_from_spec(spec_path: str | Path, out_dir: str | Path) -> dict[str, Any
         raise SpecError("Another build is using the output directory.") from exc
     created_files: list[Path] = []
     try:
+        if spec.palette_source is not None:
+            library_path = Path(spec.palette_source["path"])
+            if _sha256(library_path.read_bytes()) != spec.palette_source["sha256"]:
+                raise SpecError("Palette library changed during build.")
         # Exclusive create prevents clobbering if a competing process writes an
         # artifact after the emptiness check. Never delete a file we did not create.
         if any(path.name != _LOCK_NAME for path in output.iterdir()):
@@ -270,6 +299,9 @@ def build_from_spec(spec_path: str | Path, out_dir: str | Path) -> dict[str, Any
             with path.open("xb") as stream:
                 created_files.append(path)
                 stream.write(data)
+        if spec.palette_source is not None:
+            if _sha256(Path(spec.palette_source["path"]).read_bytes()) != spec.palette_source["sha256"]:
+                raise SpecError("Palette library changed during build.")
     except BaseException:
         for path in created_files:
             path.unlink(missing_ok=True)

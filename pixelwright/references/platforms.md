@@ -1,12 +1,14 @@
 # Platform integration
 
-Pixelwright 0.4.0. Official documentation checked on 2026-10-14.
+Pixelwright 0.5.1. Official documentation checked on 2026-10-14.
 
 ## Shared execution contract
 
 Use the same `SKILL.md` and Python CLI on every host. The runtime requires Python >= 3.12, Pillow, NumPy, access to the input PNG/specification, and a writable output directory. Resolve bundled paths relative to the directory containing the loaded `SKILL.md`, rather than the user's working directory.
 
 Read the actual input files, execute the bundled checker, and inspect its report before claiming that a file passed. After repair, run the checker on the repaired output. If execution or dependencies are unavailable, report **unverified** and supply a reproducible command; visual inspection is not a substitute.
+
+Palette extraction, reusable named color ramps, and remapping use the bundled `scripts/pixel_palette.py` CLI. Keep generated palette JSON together with the specifications that reference it through `palette_file`; relative palette paths are resolved from the specification file. Remapping requires a declared QA profile, preserves the source, and checks the result against that same profile and the selected palette or ramp. A successful extraction or ramp generation alone does not certify an artwork's grid.
 
 Static PNG only. Reject APNG/animation. Host image-generation tools may produce drafts, but generation alone cannot certify the grid. Pixelwright includes no provider API adapter or automatic external service calls.
 

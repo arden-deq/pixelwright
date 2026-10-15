@@ -113,6 +113,54 @@ class GridAuditTests(unittest.TestCase):
         self.assertGreater(layer.getpixel((3, 8))[3], 0)  # horizontal grid boundary y=8
         self.assertEqual(layer.getpixel((3, 2))[3], 0)  # cell interior stays transparent
 
+    def assert_every_actual_grid_boundary(self, layer, logical_size, scale):
+        self.assertEqual(layer.mode, "RGBA")
+        width, height = layer.size
+        self.assertEqual((width, height), tuple(n * scale for n in logical_size))
+        alpha = np.array(layer)[:, :, 3]
+        # These scanlines cross cell interiors, so horizontal lines cannot hide
+        # missing vertical boundaries, or vice versa.
+        vertical = np.flatnonzero(alpha[1, :] > 0)
+        horizontal = np.flatnonzero(alpha[:, 1] > 0)
+        self.assertEqual(len(vertical), logical_size[0])
+        self.assertEqual(len(horizontal), logical_size[1])
+        np.testing.assert_array_equal(vertical, np.arange(0, width, scale))
+        np.testing.assert_array_equal(horizontal, np.arange(0, height, scale))
+        np.testing.assert_array_equal(np.diff(vertical), np.full(len(vertical) - 1, scale))
+        np.testing.assert_array_equal(np.diff(horizontal), np.full(len(horizontal) - 1, scale))
+        self.assertEqual(vertical[-1], width - scale)
+        self.assertEqual(horizontal[-1], height - scale)
+        self.assertTrue(np.all(alpha[:, vertical] > 0))
+        self.assertTrue(np.all(alpha[horizontal, :] > 0))
+        self.assertTrue(np.all(alpha[1::scale, 1::scale] == 0))
+        # The outer boundary is at width/height, outside the image. It must not
+        # be clamped onto the final interior pixel and create a narrower cell.
+        self.assertEqual(alpha[-1, -1], 0)
+
+    def test_dense_grid_draws_every_cell_in_both_axes_without_sampling(self):
+        for logical, scale in (((320, 224), 4), ((224, 320), 4), ((512, 300), 2)):
+            with self.subTest(logical_size=logical, scale=scale):
+                rendered = tuple(n * scale for n in logical)
+                layer = pqa.create_grid_lines(rendered, logical)
+                self.assert_every_actual_grid_boundary(layer, logical, scale)
+
+    def test_saved_dense_audit_grid_matches_actual_square_cells(self):
+        logical, scale = (320, 224), 4
+        native = Image.new("RGBA", logical, (20, 30, 40, 255))
+        source = native.resize(tuple(n * scale for n in logical), Image.Resampling.NEAREST)
+        audit = pqa.inspect_image(source, logical, max_colors=1)
+        self.assertEqual(audit.result["status"], "pass")
+        with tempfile.TemporaryDirectory() as td:
+            paths = pqa.write_audit(audit, Path(td) / "audit")
+            with Image.open(paths["grid_lines"]) as layer:
+                self.assert_every_actual_grid_boundary(layer, logical, scale)
+            with Image.open(paths["overlay"]) as overlay:
+                displayed = np.array(overlay.convert("RGB"))
+            plain = np.array(source.convert("RGB"))
+            changed = np.any(displayed != plain, axis=2)
+            np.testing.assert_array_equal(np.flatnonzero(changed[1, :]), np.arange(0, source.width, scale))
+            np.testing.assert_array_equal(np.flatnonzero(changed[:, 1]), np.arange(0, source.height, scale))
+
     def test_geometry_mismatch_creates_overlay_and_error_report(self):
         with tempfile.TemporaryDirectory() as td:
             td = Path(td)

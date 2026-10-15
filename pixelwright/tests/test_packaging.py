@@ -3,6 +3,7 @@
 import sys
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
@@ -24,6 +25,21 @@ class PackagingTests(unittest.TestCase):
     def test_manifest_covers_legal_and_runtime_files(self):
         package.write_zip(self.archive, self.entries, "pixelwright")
         self.assertTrue(package.verify(self.archive)["verified"])
+
+    def test_installation_includes_palette_workflow_resources(self):
+        entries = package.collect(package.ROOT / "pixelwright", "pixelwright", include_tests=False)
+        for name in ("LICENSE", "NOTICE", "SECURITY.md"):
+            entries[f"pixelwright/{name}"] = (package.ROOT / name).read_bytes()
+        package.write_zip(self.archive, entries, "pixelwright")
+        self.assertTrue(package.verify(self.archive)["verified"])
+        with zipfile.ZipFile(self.archive) as archive:
+            members = set(archive.namelist())
+        for relative in ("scripts/pixel_palette.py", "references/palettes.md",
+                         "examples/palette-demo/palette.json", "examples/palette-demo/profile.json",
+                         "examples/palette-demo/artwork.json"):
+            with self.subTest(relative=relative):
+                self.assertIn(f"pixelwright/{relative}", members)
+        self.assertFalse(any(name.startswith("pixelwright/tests/") for name in members))
 
     def test_unsafe_paths_and_unexpected_roots_are_rejected(self):
         for member in ("pixelwright/C:/payload.py", "pixelwright/../payload.py"):

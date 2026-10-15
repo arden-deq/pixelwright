@@ -26,7 +26,7 @@ Visual review confirmed the title `PIXELWRIGHT`, the subtitle `CREATE. GRID. VER
 
 The small subtitle uses exactly one foreground RGBA color, **`#F9E6B8FF`**, against a flat **`#11141AFF`** background. Its glyphs were authored directly on the native grid to remove mottled color and shading. Every decoded PNG sample outside the subtitle rectangle remains identical to the previous published header; the established 32-color palette and strict profile are unchanged. [Subtitle color and region verification](subtitle-style.json) records the glyph masks, coordinates, exact foreground color count, and parent image identity.
 
-The overlay uses cyan reference lines every **8 px horizontally** (every second vertical cell boundary) and **4 px vertically**. Dense-grid line sampling only affects the preview: all 131,072 individual 4×4 cells were audited. Grid lines add diagnostic colors to the preview; the clean banner retains its 32-color palette.
+The overlay uses cyan lines at every **4 px cell boundary on both axes**. Version 0.5.1 corrects the earlier preview's 8×4 px line spacing; all 131,072 individual 4×4 cells were already audited. Grid lines add diagnostic colors to the preview; the clean banner retains its 32-color palette.
 
 [Initial design prompt](generation-prompt.txt) · [Removal edit prompt](edit-prompt.txt) · [Projection review](projection-review.json)
 

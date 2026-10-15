@@ -1,6 +1,6 @@
 ---
 name: pixelwright
-description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, pixel-grid repairs, and optional layer composition for complex artwork.
+description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, palette extraction and remapping, pixel-grid repairs, and optional layer composition for complex artwork.
 ---
 
 # Pixelwright
@@ -30,7 +30,13 @@ python scripts/pixelwright.py inspect build-v1/rendered.png --profile profile.js
 
 Design on the logical grid, iterate the matrix, and use nearest-neighbor integer enlargement. Display the actual exported image and inspect its native-size readability and intended detail. A built-in example is `examples/lantern.json`; `examples/item-profile.json` defines its project contract.
 
+When several assets share named colors or shading ramps, read [palettes.md](references/palettes.md). The builder can reference a reusable palette library with `palette_file` instead of an inline palette.
+
 If a generative image tool is available and better fits the requested artwork, use it according to the host's tool rules. Treat its result as an unverified design candidate. Audit the original exported PNG and preserve it. A prompt saying “pixel art” cannot enforce this contract. A candidate needing projection becomes a new derived asset; generation-tool edits and deterministic repairs follow their respective host permissions.
+
+### Extract or apply a palette
+
+Read [palettes.md](references/palettes.md) when extracting observed colors, building a named ramp, or converting an asset to a declared palette. Extraction records colors without certifying the source's grid. Remapping changes colors on an already valid grid, preserves alpha, and audits the result against the original project profile and the selected target palette. Keep the source and compare changed cells at native size; a technical PASS does not show that the new colors preserve readability or material detail.
 
 ### Compose complex artwork in layers when useful
 
@@ -62,6 +68,6 @@ Use projection when the user's request authorizes repair and its losses are acce
 
 By default, show both the clean exported PNG and the checker's actual `grid_overlay.png` inline so the user can inspect the intended cells themselves. Label each preview with logical dimensions, physical cell size and technical status; for multiple assets, pair each clean view with its corresponding grid view. If the host cannot display images, provide direct links to both files. Respect a request for clean artwork only.
 
-Explain the overlay briefly: cyan lines mark cell boundaries, red-filled cells mark exact color violations, and orange lines indicate approximate boundaries when geometry fails. The overlay is a separate diagnostic preview; keep the deliverable artwork unchanged. Use the checker-generated overlay, not a generative redraw. Dense grids may have sampled reference lines, so disclose sampling when applicable; visual inspection complements the full sample-level audit.
+Explain the overlay briefly: cyan lines mark every declared cell boundary, red-filled cells mark exact color violations, and orange lines indicate approximate boundaries when geometry fails. The overlay is a separate diagnostic preview; keep the deliverable artwork unchanged. Use the checker-generated overlay, not a generative redraw. Never sample the axes differently: square cells must also appear square in the preview. For dense grids, include a nearest-neighbor crop enlarged equally on both axes so individual cells remain inspectable; visual inspection complements the full sample-level audit.
 
 Provide native and enlarged PNGs when creating, the declared contract, technical status with the report path, and any unresolved visual findings. Record artistic review separately as accepted, changes needed, or not reviewed, with actual observations (silhouette, palette, stepped contours, important details). Hashes identify the audited bytes; subsequent edits or interpolated scaling require a new audit. A technically compliant image can still be poor art.

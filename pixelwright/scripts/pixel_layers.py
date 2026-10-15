@@ -26,7 +26,7 @@ from PIL import Image
 import pixel_qa as qa
 import pixelwright as project
 
-VERSION = "0.4.0"
+VERSION = "0.5.1"
 MAX_LAYERS = 64
 MAX_INPUT_PIXELS = 48_000_000
 MAX_JSON_BYTES = 1024 * 1024
