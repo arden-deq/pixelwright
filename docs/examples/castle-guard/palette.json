@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "name": "Castle guard: steel, lantern stone and burgundy",
+  "colors": {
+    "0": "#12151FFF",
+    "1": "#1C2332FF",
+    "2": "#293246FF",
+    "3": "#3B485FFF",
+    "4": "#53647CFF",
+    "5": "#71829AFF",
+    "6": "#9FAEC0FF",
+    "7": "#CED8DBFF",
+    "8": "#F3E9D2FF",
+    "9": "#302B32FF",
+    "A": "#483B3AFF",
+    "B": "#61504AFF",
+    "C": "#7A6857FF",
+    "D": "#9A8566FF",
+    "E": "#B69C76FF",
+    "F": "#D1B58BFF",
+    "G": "#775B42FF",
+    "H": "#4F3C32FF",
+    "I": "#A07442FF",
+    "J": "#C08F4CFF",
+    "K": "#E3B86BFF",
+    "L": "#F6D998FF",
+    "M": "#321F2DFF",
+    "N": "#512737FF",
+    "O": "#743846FF",
+    "P": "#985057FF",
+    "Q": "#BA7670FF",
+    "R": "#3C4B42FF",
+    "S": "#5E6B50FF",
+    "T": "#263A47FF",
+    "U": "#3F626AFF",
+    "V": "#6E8B8FFF"
+  },
+  "ramps": {
+    "steel": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "stone": [
+      "9",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F"
+    ],
+    "lantern": [
+      "H",
+      "I",
+      "J",
+      "K",
+      "L"
+    ],
+    "burgundy": [
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q"
+    ],
+    "moss": [
+      "R",
+      "S"
+    ],
+    "distant_teal": [
+      "T",
+      "U",
+      "V"
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "status": "pass",
+  "artistic_status": "accepted",
+  "method": "Direct decoded native-repeat, RGBA palette, alpha, grid-boundary and file-hash comparisons, separate from the checker verdict.",
+  "source_path": "docs/examples/castle-guard/rendered.png",
+  "native_path": "docs/examples/castle-guard/native.png",
+  "profile_path": "docs/examples/castle-guard/profile.json",
+  "logical_size": [
+    320,
+    224
+  ],
+  "rendered_size": [
+    1280,
+    896
+  ],
+  "cell_size": [
+    4,
+    4
+  ],
+  "uniform_cells": 71680,
+  "nonuniform_cells": 0,
+  "total_rgba_colors": 32,
+  "visible_rgb_colors": 32,
+  "alpha_values": [
+    255
+  ],
+  "partial_alpha_samples": 0,
+  "exact_native_repeat": true,
+  "source_sha256": "7afa6fd5dfcc2073bba98539bdc04f288a759084f016e438ef0ddcbc8f7d4bdd",
+  "native_sha256": "e390914a3e9d643951b390bf981fc6ed2e7e9fd741862d38355b7b353fc0d83b",
+  "profile_sha256": "603f47e66f4916fac6eb5d093d3bfed3d262280654295c2c737f25553f73a770",
+  "palette_sha256": "68dab8b7f66541fabbe424dc633a57db4c673dfda3eb2cc08ccb050e7a7673cc",
+  "decoded_rgba_sha256": "b4ed1fe6dee8cb4d5bcf77a4a9586eead17d1e7c0e1b5b148515feed9087191c",
+  "grid_preview": {
+    "file": "grid_overlay.png",
+    "source_spacing": [
+      4,
+      4
+    ],
+    "sampled": false,
+    "vertical_lines": 320,
+    "horizontal_lines": 224,
+    "outer_boundary": "right/bottom lie outside the half-open source canvas",
+    "detail_file": "grid-detail.png",
+    "detail_source_box_half_open": [
+      928,
+      104,
+      992,
+      168
+    ],
+    "detail_equal_scale_xy": 8,
+    "detail_displayed_cell_size": [
+      32,
+      32
+    ]
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "source": "generated-source.png",
+    "source_sha256": "214fb165a2448440b37ca73b4800788fd175a39d6f26f9838a49ff02bc7d9638",
+    "size": [
+      1499,
+      1049
+    ],
+    "original_audit": "fail",
+    "original_audit_file": "source-report.json",
+    "prompt": "generation-prompt.txt",
+    "source_preserved": true
+  },
+  "preparation": {
+    "derived_asset": true,
+    "lossy": true,
+    "method": "New 1280x896 canvas, explicit cell projection, remapping to a predeclared 32-color palette, then logical 5x7 wordmark refinement.",
+    "editable_source": "artwork.json",
+    "palette_file": "palette.json",
+    "authored_layers": 1
+  },
+  "artistic_observations": [
+    "The gate stonework, distant castle and knight share pixel density and a blue-grey, amber and burgundy palette.",
+    "Helmet, shield, mace and both boots remain fully framed; the mace connects to the gauntlet and boots meet the ground.",
+    "The wall-mounted lantern lights nearby stone and the small PIXELWRIGHT wordmark remains readable."
+  ]
+}

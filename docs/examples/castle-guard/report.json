@@ -1,0 +1,282 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.5.1",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 1280,
+    "height": 896
+  },
+  "logical_size": {
+    "width": 320,
+    "height": 224
+  },
+  "cell_size": {
+    "width": 4,
+    "height": 4
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "7afa6fd5dfcc2073bba98539bdc04f288a759084f016e438ef0ddcbc8f7d4bdd",
+    "decoded_rgba_sha256": "b4ed1fe6dee8cb4d5bcf77a4a9586eead17d1e7c0e1b5b148515feed9087191c",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "profile_sha256": "603f47e66f4916fac6eb5d093d3bfed3d262280654295c2c737f25553f73a770",
+    "source_path": "docs/examples/castle-guard/rendered.png",
+    "profile_path": "docs/examples/castle-guard/profile.json"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 32,
+    "strict_alpha": false,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 71680,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 71680,
+    "visible_rgb_colors_source": 32,
+    "visible_rgb_colors_logical_preview": 32,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 8064,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 320,
+    "height": 224
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 0,
+      "y": 0
+    },
+    {
+      "x": 1,
+      "y": 0
+    },
+    {
+      "x": 50,
+      "y": 0
+    },
+    {
+      "x": 61,
+      "y": 0
+    },
+    {
+      "x": 71,
+      "y": 0
+    },
+    {
+      "x": 77,
+      "y": 0
+    },
+    {
+      "x": 91,
+      "y": 0
+    },
+    {
+      "x": 94,
+      "y": 0
+    },
+    {
+      "x": 103,
+      "y": 0
+    },
+    {
+      "x": 105,
+      "y": 0
+    },
+    {
+      "x": 111,
+      "y": 0
+    },
+    {
+      "x": 112,
+      "y": 0
+    },
+    {
+      "x": 115,
+      "y": 0
+    },
+    {
+      "x": 116,
+      "y": 0
+    },
+    {
+      "x": 134,
+      "y": 0
+    },
+    {
+      "x": 136,
+      "y": 0
+    },
+    {
+      "x": 193,
+      "y": 0
+    },
+    {
+      "x": 266,
+      "y": 0
+    },
+    {
+      "x": 290,
+      "y": 0
+    },
+    {
+      "x": 292,
+      "y": 0
+    },
+    {
+      "x": 302,
+      "y": 0
+    },
+    {
+      "x": 307,
+      "y": 0
+    },
+    {
+      "x": 312,
+      "y": 0
+    },
+    {
+      "x": 317,
+      "y": 0
+    },
+    {
+      "x": 68,
+      "y": 1
+    },
+    {
+      "x": 69,
+      "y": 1
+    },
+    {
+      "x": 78,
+      "y": 1
+    },
+    {
+      "x": 89,
+      "y": 1
+    },
+    {
+      "x": 99,
+      "y": 1
+    },
+    {
+      "x": 100,
+      "y": 1
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "8064 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    },
+    {
+      "code": "OPAQUE_BACKGROUND",
+      "severity": "info",
+      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 1280,
+      "height": 896
+    },
+    "logical_size": {
+      "width": 320,
+      "height": 224
+    },
+    "expected_render_size": {
+      "width": 1280,
+      "height": 896
+    },
+    "scale_x": 4.0,
+    "scale_y": 4.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 4,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Castle guard remake: 320x224 logical, 4px cells, 32 fixed colors",
+    "logical_size": "320x224",
+    "scale": 4,
+    "max_colors": 32,
+    "alpha": "opaque",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#12151FFF",
+      "#1C2332FF",
+      "#293246FF",
+      "#3B485FFF",
+      "#53647CFF",
+      "#71829AFF",
+      "#9FAEC0FF",
+      "#CED8DBFF",
+      "#F3E9D2FF",
+      "#302B32FF",
+      "#483B3AFF",
+      "#61504AFF",
+      "#7A6857FF",
+      "#9A8566FF",
+      "#B69C76FF",
+      "#D1B58BFF",
+      "#775B42FF",
+      "#4F3C32FF",
+      "#A07442FF",
+      "#C08F4CFF",
+      "#E3B86BFF",
+      "#F6D998FF",
+      "#321F2DFF",
+      "#512737FF",
+      "#743846FF",
+      "#985057FF",
+      "#BA7670FF",
+      "#3C4B42FF",
+      "#5E6B50FF",
+      "#263A47FF",
+      "#3F626AFF",
+      "#6E8B8FFF"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 4,
+      "y": 4
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_profile"
+}

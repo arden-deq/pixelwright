@@ -1,0 +1,120 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.5.1",
+  "schema_version": 1,
+  "status": "fail",
+  "scope": "geometry_check_only",
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "214fb165a2448440b37ca73b4800788fd175a39d6f26f9838a49ff02bc7d9638",
+    "decoded_rgba_sha256": "b9f9e788f06d7638ec34c85474e72ddb6e847c0e8a1e8930c86b986fe7beb2d1",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "profile_sha256": "603f47e66f4916fac6eb5d093d3bfed3d262280654295c2c737f25553f73a770",
+    "source_path": "docs/examples/castle-guard/generated-source.png",
+    "profile_path": "docs/examples/castle-guard/profile.json"
+  },
+  "geometry": {
+    "status": "fail",
+    "rendered_size": {
+      "width": 1499,
+      "height": 1049
+    },
+    "logical_size": {
+      "width": 320,
+      "height": 224
+    },
+    "expected_render_size": {
+      "width": 1280,
+      "height": 896
+    },
+    "scale_x": 4.684375,
+    "scale_y": 4.68303571,
+    "exact_integer_division": false,
+    "square_logical_pixel": false,
+    "integer_scale": null,
+    "issues": [
+      {
+        "code": "RENDER_SIZE_MISMATCH",
+        "severity": "fail",
+        "detail": "Expected 1280x896 px, got 1499x1049 px."
+      },
+      {
+        "code": "NON_INTEGER_PIXEL_SCALE",
+        "severity": "fail",
+        "detail": "Logical 320x224 requires integer-sized pixel cells, but the displayed scale is 4.68438x4.68304. There can be no exact square-pixel grid on these dimensions."
+      }
+    ]
+  },
+  "input_size": {
+    "width": 1499,
+    "height": 1049
+  },
+  "logical_size": {
+    "width": 320,
+    "height": 224
+  },
+  "metrics": {
+    "grid_measurable": false,
+    "grid_score": null,
+    "uniform_rgba_cells": null,
+    "nonuniform_rgba_cells": null
+  },
+  "issues": [
+    {
+      "code": "RENDER_SIZE_MISMATCH",
+      "severity": "fail",
+      "detail": "Expected 1280x896 px, got 1499x1049 px."
+    },
+    {
+      "code": "NON_INTEGER_PIXEL_SCALE",
+      "severity": "fail",
+      "detail": "Logical 320x224 requires integer-sized pixel cells, but the displayed scale is 4.68438x4.68304. There can be no exact square-pixel grid on these dimensions."
+    }
+  ],
+  "note": "No resampling performed; grid lines show proposed boundaries only.",
+  "contract": {
+    "schema_version": 1,
+    "name": "Castle guard remake: 320x224 logical, 4px cells, 32 fixed colors",
+    "logical_size": "320x224",
+    "scale": 4,
+    "max_colors": 32,
+    "alpha": "opaque",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#12151FFF",
+      "#1C2332FF",
+      "#293246FF",
+      "#3B485FFF",
+      "#53647CFF",
+      "#71829AFF",
+      "#9FAEC0FF",
+      "#CED8DBFF",
+      "#F3E9D2FF",
+      "#302B32FF",
+      "#483B3AFF",
+      "#61504AFF",
+      "#7A6857FF",
+      "#9A8566FF",
+      "#B69C76FF",
+      "#D1B58BFF",
+      "#775B42FF",
+      "#4F3C32FF",
+      "#A07442FF",
+      "#C08F4CFF",
+      "#E3B86BFF",
+      "#F6D998FF",
+      "#321F2DFF",
+      "#512737FF",
+      "#743846FF",
+      "#985057FF",
+      "#BA7670FF",
+      "#3C4B42FF",
+      "#5E6B50FF",
+      "#263A47FF",
+      "#3F626AFF",
+      "#6E8B8FFF"
+    ]
+  },
+  "artistic_status": "not_reviewed",
+  "acceptance_mode": "strict_profile"
+}

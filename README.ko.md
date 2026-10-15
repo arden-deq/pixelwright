@@ -88,15 +88,21 @@ python pixelwright/scripts/pixelwright.py inspect runs/palette-demo-build-v1/ren
 
 `palette_report.json`, 원본·최종 QA, `comparison.png`, 논리 셀 단위 변경 마스크 `changed_cells.png`를 확인합니다. 기술 검사를 통과해도 색상 차이가 합쳐지면서 중요한 디테일을 잃을 수 있습니다. 각 명령은 새 출력 폴더를 사용하고 원본 파일을 보존합니다. 스키마, 선택적 램프 변환, 알파 조건과 출처 해시는 [팔레트 안내](pixelwright/references/palettes.md)에 있습니다.
 
-## 복잡한 요청: 필요할 때 레이어로 작업
+## 성문을 지키는 기사
 
-![배경·기사·아이템·제목을 별도 레이어로 제작하고 합성한 Pixelwright 장면](docs/examples/layered-scene/rendered.png)
+![성문과 벽걸이 랜턴, 붉은 방패를 든 갑옷 기사, 멀리 보이는 성탑을 함께 표현한 장면](docs/examples/castle-guard/rendered.png)
+
+**1280×896 PNG · 320×224 논리 셀 · 4×4 px 정사각형 셀 · 32색 · 71,680셀 모두 PASS.** [QA 보고서](docs/examples/castle-guard/report.json) · [전체 정사각형 격자](docs/examples/castle-guard/grid_overlay.png) · [셀 확대](docs/examples/castle-guard/grid-detail.png).
+
+성문·랜턴·멀리 보이는 성·기사를 같은 팔레트와 광원으로 표현했습니다. [편집 가능한 장면 예제](docs/examples/castle-guard/)는 재사용 팔레트 라이브러리를 참조하는 하나의 논리 행렬로 렌더링합니다. 논리 해상도 PNG, 선언한 프로필, 보존한 생성 원본과 독립 검증 자료를 포함합니다. 격자 투영·팔레트 재매핑·논리 셀 단위 워드마크 편집으로 최종 검사본을 만들었으며, 미적 검수는 별도로 기록했습니다.
+
+## 복잡한 요청: 필요할 때 레이어로 작업
 
 복잡한 요청에서는 독립적으로 수정할 수 있는 배경·아이템·UI·문구를 레이어로 나눌 수 있습니다. 캐릭터의 손과 장비처럼 접점이나 포즈가 중요한 요소는 보통 함께 제작합니다. 단순한 아이콘은 하나의 작화로 만들면 됩니다.
 
 먼저 전체 구도, 공통 배율과 RGBA 팔레트, 광원, 앞뒤 순서를 정합니다. `pixel_layers.py`는 JSON 레이어 목록을 관리하고, 모든 입력 PNG를 검사한 뒤 논리 해상도에서 합성하고 한 번 확대해 최종 PNG를 다시 검사합니다. 팔레트는 작품 전체에서 공유합니다. 각 레이어에 별도의 색상 예산을 주면 합성본의 색상 수를 제한할 수 없습니다.
 
-[동봉한 장면 예제](pixelwright/examples/layered-scene/)는 배경, 방패·둔기를 함께 든 기사, 아이템, 제목의 네 레이어로 구성됩니다. 320×224 논리 캔버스를 4배 확대해 1280×896 PNG를 만들며, 셀은 4×4 px이고 32개 RGBA 값으로 이루어진 공통 팔레트를 사용합니다. 실제 [레이어별 결과](docs/examples/layered-scene/layers.json), [최종 보고서](docs/examples/layered-scene/final-report.json), [최종 격자 미리보기](docs/examples/layered-scene/grid_overlay.png)를 확인할 수 있습니다.
+[네 레이어 합성 튜토리얼](pixelwright/examples/layered-scene/)은 배경, 방패·둔기를 함께 든 기사, 아이템, 제목으로 구성됩니다. 320×224 논리 캔버스를 4배 확대해 1280×896 PNG를 만들며, 셀은 4×4 px이고 32개 RGBA 값으로 이루어진 공통 팔레트를 사용합니다. 실제 [레이어별 결과](docs/examples/layered-scene/layers.json), [최종 보고서](docs/examples/layered-scene/final-report.json), [최종 격자 미리보기](docs/examples/layered-scene/grid_overlay.png)를 확인할 수 있습니다.
 
 **네 레이어 모두 PASS, 최종 71,680셀 모두 PASS**입니다. 불균일 셀·반투명 픽셀·공통 팔레트 밖의 샘플은 각각 0개이며, 불투명 최종 PNG에는 가시 RGB 31색을 사용했습니다. 합성 작업을 보여 주는 이 예제는 기존에 검증한 기사와 논리 격자에서 직접 만든 간단한 배경·아이템·문구로 구성했습니다.
 

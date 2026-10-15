@@ -1,0 +1,13 @@
+Use case: style-transfer / complete artistic remake of the attached Pixelwright scene. Asset type: one finished landscape professional pixel-art illustration. Input image is the edit target and subject reference, the crude previous version to replace visually.
+
+Rebuild it as a beautiful cohesive hand-pixelled medieval castle-gate scene. Keep the armored knight in full closed steel plate, burgundy heater shield with metal boss, flanged mace held in the other hand, a castle, burgundy banner, a lantern, and PIXELWRIGHT identity. Preserve recognizable equipment and confident full-body guard pose. Entire figure, helmet, shield and both feet must fit comfortably inside the image.
+
+Composition: EXACT 1280x896 landscape, equivalent to a 320x224 native pixel canvas enlarged exactly 4x. Knight on the right standing naturally on a perspective cobbled stone path, with believable contact shadow and a clear silhouette. On the left a richly drawn near castle gate arch and wall, one hanging burgundy pennant, and one real brass lantern fixed to the gate wall. Distant towers and cloudy blue-grey sky recede into atmospheric depth through the opening. Balance the detailed architecture and the knight. No horizontal fence or bars crossing the knight's legs. Lantern must belong in the environment, not an inventory tile.
+
+Style: premium 1990s/modern indie fantasy pixel-art illustration, purposeful CRISP PIXEL CLUSTERS, consistently detailed character AND environment, clean stepped contours, no painted blur, no noisy photorealistic armor, no simplistic flat triangle-and-rectangle background. Readable at native resolution. Main cool dusk light from upper left catches steel edges; local amber lantern glow warms nearby masonry. Controlled material ramps and restrained texture; distant background lower contrast than foreground. Do not add characters or extra weapons.
+
+Typography: keep ONLY the EXACT word PIXELWRIGHT in clean restrained pixel lettering in the top-left architectural negative space, off-white and easily readable, small enough that the art is primary. Remove 4 LAYERS, the huge black rectangle, and all development/HUD/UI labels. No other text, watermarks, borders, inset images, callouts or grids.
+
+Fixed color direction, 32 colors: #12151F #1C2332 #293246 #3B485F #53647C #71829A #9FAEC0 #CED8DB #F3E9D2 #302B32 #483B3A #61504A #7A6857 #9A8566 #B69C76 #D1B58B #775B42 #4F3C32 #A07442 #C08F4C #E3B86B #F6D998 #321F2D #512737 #743846 #985057 #BA7670 #3C4B42 #5E6B50 #263A47 #3F626A #6E8B8F.
+
+Deliver one polished cohesive artwork, not a contact sheet or comparison. Maintain square logical pixels with four-by-four solid physical samples per dot. Any intermediate design remains unverified until final file QA.

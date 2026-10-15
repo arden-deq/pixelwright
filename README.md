@@ -88,15 +88,21 @@ Extraction selects frequent observed RGBA colors and reports truncation; it does
 
 Review `palette_report.json`, the source and final QA, `comparison.png`, and the logical `changed_cells.png` mask. Color conversion can merge important details even when technical QA passes. Each command writes into a fresh directory and keeps original files intact. See [palette guidance](pixelwright/references/palettes.md) for the schema, optional ramp targets, alpha requirements, and source hashes.
 
-## Complex requests: optional layers
+## Castle guard scene
 
-![Pixelwright scene composed from separate background, knight, item, and title layers](docs/examples/layered-scene/rendered.png)
+![Armored knight at a castle gate, with a wall-mounted lantern, burgundy shield, and distant towers](docs/examples/castle-guard/rendered.png)
+
+**1280×896 PNG · 320×224 logical cells · 4×4 px cells · 32 colors · all 71,680 cells PASS.** [QA report](docs/examples/castle-guard/report.json) · [Complete square grid](docs/examples/castle-guard/grid_overlay.png) · [Enlarged cells](docs/examples/castle-guard/grid-detail.png).
+
+The gate, lantern, distant castle, and knight share one palette and lighting treatment. The [editable scene](docs/examples/castle-guard/) renders a single indexed logical matrix using a reusable palette library. It includes the native PNG, declared profile, preserved generation source, and independent verification. Grid projection, palette remapping, and a logical wordmark edit produced the audited output; artistic review is recorded separately.
+
+## Complex requests: optional layers
 
 For complex requests, the skill can separate elements that benefit from independent edits: backgrounds, items, UI, and text. Parts with important contact or pose relationships, such as a character's hands and held equipment, are usually kept together. Simple icons can still use one artwork.
 
 Define the layout, common scale and RGBA palette, lighting, and drawing order first. `pixel_layers.py` manages a JSON layer manifest, audits every input PNG, composes at logical resolution, enlarges once, and audits the saved final PNG. Every layer uses the same palette; giving each layer a separate color budget would not constrain the whole scene.
 
-The [bundled scene](pixelwright/examples/layered-scene/) uses four editable layers: a background, the knight with its shield and mace, an item, and a title. Its 320×224 logical canvas is rendered to 1280×896 with 4×4 px cells and one shared 32-entry RGBA palette. See the actual [layer results](docs/examples/layered-scene/layers.json), [final report](docs/examples/layered-scene/final-report.json), and [final grid preview](docs/examples/layered-scene/grid_overlay.png).
+The [four-layer composition tutorial](pixelwright/examples/layered-scene/) uses a background, the knight with its shield and mace, an item, and a title. Its 320×224 logical canvas is rendered to 1280×896 with 4×4 px cells and one shared 32-entry RGBA palette. See the actual [layer results](docs/examples/layered-scene/layers.json), [final report](docs/examples/layered-scene/final-report.json), and [final grid preview](docs/examples/layered-scene/grid_overlay.png).
 
 **All four layers PASS, and all 71,680 final cells PASS:** zero nonuniform cells, partially transparent pixels, or samples outside the shared palette. The opaque final PNG uses 31 visible RGB colors. This composition example reuses the previously validated knight with a simple native-authored background, item, and text.
 

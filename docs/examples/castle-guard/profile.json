@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "Castle guard remake: 320x224 logical, 4px cells, 32 fixed colors",
+  "logical_size": "320x224",
+  "scale": 4,
+  "max_colors": 32,
+  "alpha": "opaque",
+  "transparent_rgb": "exact",
+  "allowed_palette": [
+    "#12151FFF", "#1C2332FF", "#293246FF", "#3B485FFF",
+    "#53647CFF", "#71829AFF", "#9FAEC0FF", "#CED8DBFF",
+    "#F3E9D2FF", "#302B32FF", "#483B3AFF", "#61504AFF",
+    "#7A6857FF", "#9A8566FF", "#B69C76FF", "#D1B58BFF",
+    "#775B42FF", "#4F3C32FF", "#A07442FF", "#C08F4CFF",
+    "#E3B86BFF", "#F6D998FF", "#321F2DFF", "#512737FF",
+    "#743846FF", "#985057FF", "#BA7670FF", "#3C4B42FF",
+    "#5E6B50FF", "#263A47FF", "#3F626AFF", "#6E8B8FFF"
+  ]
+}
