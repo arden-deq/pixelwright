@@ -30,7 +30,8 @@ class PaletteTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
-        self.root = Path(self.tmp.name)
+        # Match production's canonical paths, including Windows 8.3 temp aliases.
+        self.root = Path(self.tmp.name).resolve()
         self.palette_path = self.root / "colors.json"
         self.profile_path = self.root / "profile.json"
 

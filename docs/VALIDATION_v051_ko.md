@@ -28,3 +28,11 @@ python tools/verify_release.py --archive dist/pixelwright-v0.5.1.zip --out-dir r
 ```
 
 실행마다 새 출력 폴더를 사용합니다. v0.5.0 팔레트 기능의 상세 검증은 [기존 기록](VALIDATION_v050_ko.md)에 남겨 둡니다. 이전 버전에서 만든 격자 미리보기는 현재 검사기로 다시 생성해야 합니다.
+
+## 2026-10-16 Windows CI 경로 별칭 수정
+
+README 이미지를 교체한 `87f391e`의 [CI 실행](https://github.com/jungducknam/pixelwright/actions/runs/38823145025)에서 Ubuntu의 Python 3.12·3.14는 통과했지만 Windows의 두 Python 작업에서 팔레트 테스트 4개가 실패했습니다. CodeQL은 통과했습니다.
+
+Windows runner의 임시 경로는 `RUNNER~1` 같은 8.3 별칭을 사용할 수 있습니다. 런타임은 입력·출력 경로를 `resolve()`로 정규화하지만, 테스트는 별칭을 그대로 비교했습니다. 이 때문에 provenance의 긴 경로와 비교가 어긋났고, 출력 경로를 비교하는 장애 주입 세 건도 실행되지 않았습니다. 테스트 fixture의 임시 루트에 `resolve()`를 적용했습니다. 런타임, 검증 조건, 장애 주입과 skip 조건은 그대로 유지합니다.
+
+실제 Windows 8.3 별칭을 임시 루트로 사용하여 동일한 네 테스트가 수정 전에는 모두 실패하고 수정 후에는 모두 통과하는 것을 재현했습니다. Python 3.12 전체 실행과 8.3 별칭을 사용한 Python 3.14 전체 실행은 각각 140개 중 138개 통과·기존 심볼릭 링크 권한 사례 2개 건너뜀으로 완료됐습니다.
