@@ -122,7 +122,17 @@ Each composition writes `layers.json`, per-layer reports and grid previews under
 
 This mode requires binary layer transparency, an explicit shared palette and visible RGB budget, and exact transparent RGBA. It uses opaque-cell replacement, with no semitransparent blending, resizing, rotation, or clipping. A final opaque canvas is supported with transparent foreground layers. Technical QA is followed by visual review of the layers and final image, including contacts, occlusion, lighting, and readability. QA overlays remain separate from artwork. See the [layer workflow and manifest reference](pixelwright/references/layers.md).
 
-## Sprite sheets and rigged animation
+## Image generation from a 3D rig
+
+The optional [3D workflow](docs/SPRITE_3D_ko.md) builds a real Blender armature and 38 armor/equipment meshes, then supplies their fixed orthographic composition to image generation. One identity anchor is shared by six-pose action sheets. Frames are audited without individual resizing or recentering. These development tools require a source checkout.
+
+| Walk | Attack | Block |
+| --- | --- | --- |
+| ![Walk generated from the 3D guide](docs/examples/knight-3d/walk.gif) | ![Attack generated from the 3D guide](docs/examples/knight-3d/attack.gif) | ![Block generated from the 3D guide](docs/examples/knight-3d/block.gif) |
+
+The real generation sample uses **128×128 logical frames and 19 shared colors; all 18 frames pass pixel and registered 3D projection checks**. The [example](docs/examples/knight-3d/) includes the Blender file, sheet, actual grid preview, generation provenance and separate visual review. Projected region coverage does not prove generated semantic limb lengths; visual review remains necessary.
+
+## 2D sprite sheets and rig auditing
 
 The README knight, animated with this skill. Frame 0 of each animation is the header knight itself; every frame keeps its 32 colors, and all three sheets pass the strict audit and the rig check. See [how the knight was rigged](docs/examples/knight-animation/).
 

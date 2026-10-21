@@ -1,0 +1,25 @@
+{
+  "status": "accepted",
+  "reviewer": "Codex visual inspection",
+  "human_approval": false,
+  "scope": "this knight sample at 128x128 native cells",
+  "observations": [
+    "The closed greathelm, visor and brass ridge remain readable in all 18 poses.",
+    "Cool steel, warm brass and red shield share 19 colors across all actions; similar dark shades were merged to reduce color singletons.",
+    "The hands meet the mace and shield; the foreground leg and raised weapon follow the projected 3D ordering.",
+    "Outlined stepped contours and broad highlight clusters remain legible at native size and integer enlargement.",
+    "The six-pose walk changes the contacting foot; attack has overhead anticipation, swing and recovery; block raises and holds the shield."
+  ],
+  "limitations": [
+    "Projected region coverage does not establish generated semantic limb lengths.",
+    "Six-frame timing is a preview; attack and block repeat in GIFs but are one-shot in the runtime manifest."
+  ],
+  "artifacts": {
+    "sprite-sheet-native.png": "714960c0e345c8f817f9433ebfbb02834e0f97281a8a8268b754485576f9c2c5",
+    "sprite-sheet.png": "e16feb124bee7f11d13033e6c508a3e5a4f50b42e7b34da8135bc07c31bcaba6",
+    "walk.gif": "ad1e5a6f580aa82e9857c9848edfff91b8b949ac27202dc5c2f627daf73e3775",
+    "attack.gif": "0b94fedeab22edda4187bf27faac85be2722e94898ab92e8b33eaefd532e47d1",
+    "block.gif": "3b2dd5d527114f6b3081bf264132174ca0849c57e38ee9f39172812f4dc0aa21",
+    "rig-overlay.png": "273497b4518b8236732f2864f2363b0d80d6b9cb17bb5646d7bad6decec9b25a"
+  }
+}

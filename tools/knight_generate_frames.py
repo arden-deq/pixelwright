@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 """Generate the knight frames listed in a pose kit's prompts.json.
 
-Each entry is sent to the OpenAI Images API edits endpoint, the API behind
-Codex's imagegen, with its input images in order and its prompt; the result is
+Each entry is sent to the OpenAI Images API edits endpoint with its input images
+in order and its prompt; the result is
 saved at the entry's output path inside the kit. An input that is another
 entry's output (the anchor frame) is generated first. Existing frames are kept
 unless --force is given, so a failed frame can be deleted and regenerated alone.
@@ -49,8 +49,8 @@ def multipart(fields, files):
 
 def request_image(entry, kit: Path, args, key: str):
     inputs = [(name, (kit / name).read_bytes()) for name in entry["images"]]
-    fields = [("model", args.model), ("prompt", entry["prompt"]), ("size", args.size), ("quality", args.quality),
-              ("background", "transparent"), ("output_format", "png"), ("n", "1")]
+    fields = [("model", args.model), ("prompt", entry["prompt"]), ("size", entry.get("size", args.size)), ("quality", args.quality),
+              ("background", entry.get("background", "transparent")), ("output_format", "png"), ("n", "1")]
     if args.input_fidelity != "none":
         fields.append(("input_fidelity", args.input_fidelity))
     files = [("image[]", f"{index}-{Path(name).name}", data) for index, (name, data) in enumerate(inputs)]
@@ -111,6 +111,7 @@ def main() -> int:
         print("OPENAI_API_KEY is not set.", file=sys.stderr)
         return 1
     manifest_path = kit / "generated" / "manifest.json"
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else {}
     for key in todo:
         entry = prompts[key]
@@ -124,7 +125,8 @@ def main() -> int:
         out.write_bytes(image)
         with Image.open(out) as candidate:
             size = candidate.size
-        manifest[key] = {"model": args.model, "size": args.size, "quality": args.quality,
+        manifest[key] = {"model": args.model, "size": entry.get("size", args.size), "quality": args.quality,
+                         "background": entry.get("background", "transparent"),
                          "input_fidelity": args.input_fidelity, "inputs": inputs,
                          "prompt_sha256": sha256(entry["prompt"].encode()), "output": entry["output"],
                          "output_sha256": sha256(image), "output_size": list(size)}

@@ -1,0 +1,266 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 3072,
+    "height": 1536
+  },
+  "logical_size": {
+    "width": 768,
+    "height": 384
+  },
+  "cell_size": {
+    "width": 4,
+    "height": 4
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "e16feb124bee7f11d13033e6c508a3e5a4f50b42e7b34da8135bc07c31bcaba6",
+    "decoded_rgba_sha256": "fd41dd0790c5a91a76894b7fe5e1ce0af6f945f61ecea465a0fd5db65d842a60",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "sprite-sheet.png",
+    "source_sha256_after_audit": "e16feb124bee7f11d13033e6c508a3e5a4f50b42e7b34da8135bc07c31bcaba6",
+    "profile_path": "profile.json",
+    "profile_sha256": "15b14f8f1b1925aec0767b3f80ad790a19cb21ab26d9a18e05c31f6f93ea8da3"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 31,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 294912,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 294912,
+    "visible_rgb_colors_source": 19,
+    "visible_rgb_colors_logical_preview": 19,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 3425,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 768,
+    "height": 384
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 448,
+      "y": 36
+    },
+    {
+      "x": 576,
+      "y": 36
+    },
+    {
+      "x": 704,
+      "y": 36
+    },
+    {
+      "x": 453,
+      "y": 37
+    },
+    {
+      "x": 581,
+      "y": 37
+    },
+    {
+      "x": 709,
+      "y": 37
+    },
+    {
+      "x": 57,
+      "y": 38
+    },
+    {
+      "x": 68,
+      "y": 38
+    },
+    {
+      "x": 69,
+      "y": 38
+    },
+    {
+      "x": 196,
+      "y": 38
+    },
+    {
+      "x": 442,
+      "y": 38
+    },
+    {
+      "x": 580,
+      "y": 38
+    },
+    {
+      "x": 697,
+      "y": 38
+    },
+    {
+      "x": 698,
+      "y": 38
+    },
+    {
+      "x": 708,
+      "y": 38
+    },
+    {
+      "x": 60,
+      "y": 39
+    },
+    {
+      "x": 66,
+      "y": 39
+    },
+    {
+      "x": 67,
+      "y": 39
+    },
+    {
+      "x": 189,
+      "y": 39
+    },
+    {
+      "x": 450,
+      "y": 39
+    },
+    {
+      "x": 578,
+      "y": 39
+    },
+    {
+      "x": 706,
+      "y": 39
+    },
+    {
+      "x": 59,
+      "y": 42
+    },
+    {
+      "x": 60,
+      "y": 42
+    },
+    {
+      "x": 62,
+      "y": 42
+    },
+    {
+      "x": 64,
+      "y": 42
+    },
+    {
+      "x": 188,
+      "y": 42
+    },
+    {
+      "x": 190,
+      "y": 42
+    },
+    {
+      "x": 315,
+      "y": 42
+    },
+    {
+      "x": 316,
+      "y": 42
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "3425 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 3072,
+      "height": 1536
+    },
+    "logical_size": {
+      "width": 768,
+      "height": 384
+    },
+    "expected_render_size": {
+      "width": 3072,
+      "height": 1536
+    },
+    "scale_x": 4.0,
+    "scale_y": 4.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 4,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "3D knight sheet pixel contract",
+    "logical_size": "768x384",
+    "scale": 4,
+    "max_colors": 31,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#090B12FF",
+      "#22323FFF",
+      "#3B4D59FF",
+      "#566D7AFF",
+      "#7896A4FF",
+      "#A4BDC6FF",
+      "#D3E2DCFF",
+      "#FBFCF0FF",
+      "#5F171CFF",
+      "#8E2023FF",
+      "#C32F29FF",
+      "#E35033FF",
+      "#66411EFF",
+      "#9D6B2CFF",
+      "#D8AB52FF",
+      "#F3D68AFF",
+      "#442719FF",
+      "#78482BFF",
+      "#AA7850FF"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 4,
+      "y": 4
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_sprite_sheet"
+}
