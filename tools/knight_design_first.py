@@ -10,8 +10,10 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import shutil
 import sys
+from numbers import Real
 from pathlib import Path
 
 import numpy as np
@@ -23,6 +25,20 @@ import knight_sheet_3d as sheets
 SIZE = (128, 128)
 REQUIRED_JOINTS = {joint for pair in rig.BONES.values() for joint in pair}
 REVIEW_JOINTS = ("neck", "pelvis", "hand_r", "mace_head", "ankle_r", "ankle_l", "shield_top")
+
+
+def measurement(value, sizes, label, *, positive=False):
+    """Accept JSON numeric vectors without coercing strings or booleans."""
+    valid = isinstance(value, (list, tuple)) and len(value) in sizes
+    if valid:
+        try:
+            valid = all(isinstance(n, Real) and not isinstance(n, bool) and math.isfinite(n)
+                        and (not positive or n > 0) for n in value)
+        except (OverflowError, TypeError, ValueError):
+            valid = False
+    if not valid:
+        raise ValueError(f"{label} must contain {sizes} finite {'positive ' if positive else ''}numbers")
+    return np.asarray(value, dtype=float)
 
 
 def initialize(out, prompt, reference=None):
@@ -56,7 +72,7 @@ def select_design(run, source):
     """Register the chosen 2D design once against its own canvas, before a rig exists."""
     if (run / "identity.json").exists() or (run / "contract.json").exists():
         raise ValueError("Identity is already selected; use a new run to change the character")
-    brief = json.loads((run / "design-brief.json").read_text())
+    brief = json.loads((run / "design-brief.json").read_text(encoding="utf-8"))
     raw = run / "raw" / "design.png"
     if raw.resolve() != source.resolve():
         if raw.exists():
@@ -137,10 +153,8 @@ def retarget(landmarks):
     dimensions = landmarks.get("part_dimensions", {})
     if not dimensions:
         raise ValueError("Measure at least one stable part on the selected 2D design")
-    for value in dimensions.values():
-        a = np.asarray(value, dtype=float)
-        if a.ndim != 1 or not 1 <= a.size <= 2 or not np.isfinite(a).all() or np.any(a <= 0):
-            raise ValueError("Design part dimensions must be one or two finite positive measurements")
+    for name, value in dimensions.items():
+        measurement(value, (1, 2), f"Design part dimension {name}", positive=True)
     camera = copy.deepcopy(landmarks.get("camera", rig.CAMERA))
     right, up, forward = rig.camera_basis(camera)
     unit = camera["ortho_scale"] / SIZE[1]
@@ -247,7 +261,7 @@ def bare_guide(frame, contract, scale=4):
 
 
 def verify_identity(run):
-    identity = json.loads((run / "identity.json").read_text())
+    identity = json.loads((run / "identity.json").read_text(encoding="utf-8"))
     checks = {"design-brief.json": identity["brief_sha256"], "raw/design.png": identity["source_sha256"],
               "references/design.png": identity["reference_sha256"],
               "references/design-native.png": identity["native_sha256"],
@@ -262,10 +276,11 @@ def prepare_poses(run, landmark_path):
     if (run / "contract.json").exists():
         raise ValueError("Poses are already frozen; use a new run to change them")
     identity = verify_identity(run)
-    landmarks = json.loads(landmark_path.read_text())
+    landmarks = json.loads(landmark_path.read_text(encoding="utf-8"))
     if landmarks.get("design_sha256") != identity["native_sha256"]:
         raise ValueError("Landmarks must identify the exact selected 2D design")
     data = retarget(landmarks)
+    brief = json.loads((run / "design-brief.json").read_text(encoding="utf-8"))
     data["design_sha256"] = identity["native_sha256"]
     sheets.write_json(run / "design-landmarks.json", landmarks)
     # Repeat the selected 2D identity at the final sheet's actual scale. This
@@ -276,7 +291,7 @@ def prepare_poses(run, landmark_path):
     for index in range(6):
         identity_sheet.alpha_composite(anchor, (index % 3 * 128, index // 3 * 128))
     identity_sheet.convert("RGB").resize((1536, 1024), Image.Resampling.NEAREST).save(run / "references" / "design-sheet.png")
-    prompts = json.loads((run / "prompts.json").read_text())
+    prompts = json.loads((run / "prompts.json").read_text(encoding="utf-8"))
     for state, animation in data["animations"].items():
         sheet = Image.new("RGB", (1536, 1024), sheets.BACKGROUND[:3])
         previews = []
@@ -295,14 +310,15 @@ def prepare_poses(run, landmark_path):
                          "prompt": (
             "Animate the six repeated 2D character sprites in image 1 into a NEW hand-pixeled animation sheet. "
             "Image 1 is the sole CHARACTER DESIGN authority, already at the exact final slot scale and position. "
-            "Preserve its tall body proportions, head dimensions and placement, helmet shape and red plume, "
-            "armor curves, red tabard, gold emblem, palette, shield shape and emblem, leather boots and mace. "
+            "Preserve its body proportions, head dimensions and placement, costume, materials, palette, "
+            "equipment, emblems and decorative details exactly as shown in the selected 2D design. "
+            f"Original character brief: {brief['prompt']}. "
             "Image 2 contains ONLY projected 3D BONES: use joint positions, camera and depth ordering as "
             "motion guidance. It contains no character appearance, costume, material or silhouette to copy. "
             "Blue limbs are the mace arm/right leg, pink limbs the shield arm/left leg; yellow is the torso/head. "
-            "Redraw image 1 as appealing original 2D animation in those poses. Cloth and plume move naturally; "
+            "Redraw image 1 as appealing original 2D animation in those poses. Animate any cloth and decorations naturally; "
             "preserve consistent head/body/equipment dimensions and the same shared pixel grid. "
-            "Keep the anchor's small head and long torso/legs; do not redesign it with a bigger head or shorter body. "
+            "Keep the selected design's head-to-body and limb ratios, allowing pose foreshortening. "
             f"State {state}, six poses in row-major order: {descriptions}. "
             "Exact 1536x1024 canvas: 3 columns x 2 rows, every slot 512x512, representing 128x128 logical "
             "pixels enlarged 4x. Keep each figure at its guide joint positions and scale, with all empty "
@@ -325,13 +341,13 @@ def prepare_poses(run, landmark_path):
         "limitations": ["Artwork joints and part dimensions require independent manual annotations.",
                         "A valid 3D skeleton does not certify that the generated artwork follows it.",
                         "Cloth, contour quality, identity and occlusion require a separate artistic review."],
-        "guide_sha256": {str(p.relative_to(run)): sheets.digest(p) for p in
+        "guide_sha256": {p.relative_to(run).as_posix(): sheets.digest(p) for p in
                          [*sorted((run / "guides").glob("*.png")), run / "references" / "design-sheet.png"]}})
     return {"status": "poses_frozen", "rig_check": rig.validate_contract(data), "jobs": list(data["animations"])}
 
 
 def load_run(run):
-    settings = json.loads((run / "run.json").read_text())
+    settings = json.loads((run / "run.json").read_text(encoding="utf-8"))
     identity = verify_identity(run)
     checks = {"contract.json": settings["contract_sha256"], "identity.json": settings["identity_sha256"],
               "design-brief.json": identity["brief_sha256"], "raw/design.png": identity["source_sha256"],
@@ -341,7 +357,7 @@ def load_run(run):
     for relative, expected in checks.items():
         if sheets.digest(run / relative) != expected:
             raise ValueError(f"Frozen design/pose input changed: {relative}")
-    data = json.loads((run / "contract.json").read_text())
+    data = json.loads((run / "contract.json").read_text(encoding="utf-8"))
     sheets.validate_layout(data)
     if rig.validate_contract(data)["status"] != "pass":
         raise ValueError("Retargeted skeleton failed world/projection checks")
@@ -353,18 +369,25 @@ def check_artwork(frame, contract, annotation, pixels=None):
     if annotation is None:
         return {"status": "review", "issues": [{"code": "ARTWORK_ANNOTATIONS_REQUIRED", "severity": "review"}],
                 "scope": "unverified_artwork_pose_not_inferred_from_valid_rig"}
+    if not isinstance(annotation, dict) or any(not isinstance(annotation.get(field, {}), dict)
+                                             for field in ("joints", "part_dimensions")):
+        raise ValueError("Artwork annotation, joints and part_dimensions must be objects")
     issues, errors, dimensions = [], {}, {}
     for name in REVIEW_JOINTS:
         value = annotation.get("joints", {}).get(name)
-        if value is None or np.asarray(value).shape != (2,) or not np.isfinite(value).all():
+        if value is None:
             issues.append({"code": "MISSING_ARTWORK_JOINT", "severity": "review", "joint": name})
             continue
-        error = float(np.linalg.norm(np.asarray(value) - frame["joints_image"][name]))
+        point = measurement(value, (2,), f"Artwork joint {name}")
+        error = math.dist(point, frame["joints_image"][name])
         errors[name] = error
         if pixels is not None:
-            x, y = np.rint(value).astype(int)
             mask = pixels[:, :, 3] > 0
-            if not (0 <= x < mask.shape[1] and 0 <= y < mask.shape[0]) or not sheets.dilate(mask, 2)[y, x]:
+            # Check bounds before converting to integer; huge finite input must
+            # fail cleanly instead of overflowing a NumPy integer conversion.
+            rounded = np.rint(point)
+            inside = 0 <= rounded[0] < mask.shape[1] and 0 <= rounded[1] < mask.shape[0]
+            if not inside or not sheets.dilate(mask, 2)[int(rounded[1]), int(rounded[0])]:
                 issues.append({"code": "ARTWORK_JOINT_OUTSIDE_DRAWING", "severity": "fail", "joint": name})
         if error > contract["acceptance"]["artwork_joint_error_max_cells"]:
             issues.append({"code": "ARTWORK_POSE_DRIFT", "severity": "fail", "joint": name, "error_cells": error})
@@ -373,9 +396,8 @@ def check_artwork(frame, contract, annotation, pixels=None):
         if observed is None:
             issues.append({"code": "MISSING_ARTWORK_DIMENSION", "severity": "review", "part": name})
             continue
-        a, b = np.asarray(observed, dtype=float), np.asarray(reference, dtype=float)
-        if a.shape != b.shape or not np.isfinite(a).all() or np.any(a <= 0):
-            raise ValueError("Observed part dimensions must be finite positive measurements")
+        b = np.asarray(reference, dtype=float)
+        a = measurement(observed, (len(b),), f"Observed part dimension {name}", positive=True)
         error = float(np.max(np.abs(a / b - 1)))
         dimensions[name] = {"observed": observed, "reference": reference, "relative_error": error}
         if error > contract["acceptance"]["part_dimension_relative_error_max"]:
@@ -389,14 +411,22 @@ def export(run, out, annotations=None):
     _, contract, _ = load_run(run)
     observed = None
     if annotations:
-        observed = json.loads(annotations.read_text())
+        observed = json.loads(annotations.read_text(encoding="utf-8"))
+        if not isinstance(observed, dict):
+            raise ValueError("Artwork annotations must be an object")
         if observed.get("contract_sha256") != sheets.digest(run / "contract.json"):
             raise ValueError("Artwork annotations belong to a different pose contract")
+        if any(not isinstance(observed.get(field), str) or not observed[field].strip()
+               for field in ("method", "reviewer")):
+            raise ValueError("Identify how and by whom artwork annotations were made")
+        if any(not isinstance(observed.get(field), dict) for field in ("source_sha256", "animations")):
+            raise ValueError("Artwork source_sha256 and animations must be objects")
         for state in contract["animations"]:
             if observed["source_sha256"].get(state) != sheets.digest(run / "raw" / f"{state}.png"):
                 raise ValueError(f"Artwork annotations are stale: {state}")
-        if not observed.get("method") or not observed.get("reviewer"):
-            raise ValueError("Identify how and by whom artwork annotations were made")
+            records = observed["animations"].get(state, [])
+            if not isinstance(records, list) or len(records) > len(contract["animations"][state]["frames"]):
+                raise ValueError(f"Artwork annotations for {state} must be a list with at most six frames")
     def inspect(state, index, pixels, frame, data):
         records = observed["animations"].get(state, []) if observed else []
         annotation = records[index] if index < len(records) else None

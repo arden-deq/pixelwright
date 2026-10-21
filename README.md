@@ -134,6 +134,8 @@ The optional [animation workflow](docs/SPRITE_3D_ko.md) starts with a 2D pixel c
 
 This real generation draft uses **128×128 logical frames and 24 shared colors**. Exact pixel storage and 3D geometry PASS; independent artwork observations find pose and equipment-size failures, so the sample is **not production accepted**. [The example](docs/examples/knight-design-first/) preserves raw inputs, GIFs, the actual grid overlay, annotations and failed checks. Frames are never individually fitted or recentered. A valid skeleton cannot certify the generated artwork. The older [mesh-transfer experiment](docs/examples/knight-3d/) is retained as history.
 
+The [integration validation record](docs/VALIDATION_design_first_ko.md) covers Pillow 13, selected-design protection, archived regeneration history, independent measurement inputs and the rechecked real example.
+
 ## 2D sprite sheets and rig auditing
 
 The README knight, animated with this skill. Frame 0 of each animation is the header knight itself; every frame keeps its 32 colors, and all three sheets pass the strict audit and the rig check. See [how the knight was rigged](docs/examples/knight-animation/).

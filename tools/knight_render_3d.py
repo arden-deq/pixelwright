@@ -303,7 +303,7 @@ def main():
     if root.exists() and any(root.iterdir()):
         raise ValueError("Use an empty output directory; existing guides must not be overwritten")
     root.mkdir(parents=True, exist_ok=True)
-    contract = json.loads(args.skeleton_contract.read_text()) if args.skeleton_contract else rig.contract()
+    contract = json.loads(args.skeleton_contract.read_text(encoding="utf-8")) if args.skeleton_contract else rig.contract()
     check = rig.validate_contract(contract)
     if check["status"] != "pass":
         raise ValueError(check)

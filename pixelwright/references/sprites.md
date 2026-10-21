@@ -8,6 +8,8 @@ Select or create the 2D character design **before** creating motion guides. Pres
 
 Inspect the generated 2D frames independently. Compare observed artwork joints and stable part dimensions with the selected design and intended poses, accounting for genuine foreshortening. Do not derive observations by copying the guide joints or assigning visible pixels to their nearest bone. A world-length PASS is evidence about the skeleton only. Without independent artwork observations, pose status stays REVIEW. Record visual identity, overlap, contour quality and timing separately. Keep failed attempts and redraw the reported defect; do not fit each output frame or relax its gates after generation.
 
+The source checkout's `tools/knight_design_first.py` recipe freezes the selected 2D identity before posing. Its HTTP generator validates identity and guide hashes before a request; image references must remain the selected design sheet followed by the bare skeleton. `--force` archives replaced motion PNGs and provenance under `generated/history/`, and cannot overwrite the selected design. Keep the chosen design's actual proportions and costume in prompts. Independent measurements must be finite numeric arrays; use missing values or `null` for occluded, unmeasurable parts and remeasure after regeneration.
+
 ## Freeze the sheet contract
 
 Agree on the frame size in logical cells, the integer scale, the palette, the grid of frame slots, and the animations before drawing. Frames are equal rectangles numbered row-major from the top-left slot. The sheet's logical size follows from the layout:

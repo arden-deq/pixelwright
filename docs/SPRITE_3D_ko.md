@@ -39,6 +39,8 @@ blender --background --factory-startup --python tools/knight_render_3d.py -- --s
 
 각 상태의 생성 입력은 같은 슬롯 크기로 반복한 **2D 시안 시트가 첫 번째**, 색 선과 관절만 있는 **골격 시트가 두 번째**입니다. 볼륨 렌더, 갑옷 메시, 재질, 실루엣 마스크는 생성 입력이나 작화 합격 기준에 사용하지 않습니다. 천과 장식, 윤곽과 명암은 2D 애니메이션으로 새로 그립니다.
 
+상태 프롬프트는 선택한 시안과 원래 요청을 따릅니다. 특정 체형이나 붉은 의상·장식 등을 일괄 강제하지 않습니다. JSON은 한글 프롬프트와 관찰 메모를 포함할 수 있는 UTF-8 파일입니다.
+
 ## 3. 상태 시트 생성과 독립 검사
 
 ```sh
@@ -48,7 +50,17 @@ python tools/knight_design_first.py check --run-dir runs/design-first --out-dir 
 
 걷기·공격·막기를 각각 3×2 슬롯의 6프레임 시트로 생성합니다. 슬롯당 128×128 논리 셀, 4배 PNG입니다. 상태 시트 전체를 같은 격자와 시안 팔레트에 투영합니다. **생성된 동작 프레임을 개별 확대·축소·재배치하지 않습니다.** 잘못 그린 부위는 수정 생성하고 실패 원본을 보존합니다.
 
+생성 요청을 보내기 전에 선택한 시안, 계약, 골격 PNG와 반복 시안 시트의 해시를 검사하고 입력 순서를 확인합니다. 변경된 입력은 종료 코드 `1`로 거부합니다. `select` 이후에는 `--force`도 시안을 덮어쓰지 않습니다. 전체 재생성은 동작 시트만 대상으로 삼으며, `--animation design --force`로 선택한 시안을 바꾸려 하면 새 실행 폴더를 사용하도록 안내합니다.
+
+특정 상태를 수정하려면 프롬프트의 수정 지시를 보완한 뒤 다음처럼 재생성합니다. 교체되는 PNG는 `generated/history/`에 정확한 바이트와 이전 생성 기록을 보관하고, `generated/manifest.json`의 `history`에서 찾을 수 있습니다. 서비스 오류가 나면 현재 PNG와 생성 기록을 그대로 유지합니다. 시안이나 포즈 자체를 바꾸려면 새 실행 폴더를 만듭니다.
+
+```sh
+python tools/knight_generate_frames.py --poses runs/design-first --animation attack --force
+```
+
 관찰 파일 없이 실행하면 픽셀이 정상이고 골격이 정상이더라도 그림의 포즈는 `REVIEW`입니다. 골격 좌표를 그대로 그림의 관찰 좌표로 복사해 합격시키지 않습니다. 실제 그림에서 관절과 부위 크기를 따로 측정한 [관찰 파일](examples/knight-design-first/generation/artwork-annotations.json)을 전달합니다. 관찰 방법·검토자·정확한 원본 이미지와 계약 해시가 필요합니다. 가려져 판단할 수 없는 값은 `null` 또는 생략하며 검토 상태를 유지합니다.
+
+관절은 유한한 숫자 두 개, 치수는 시안과 같은 개수의 유한한 양수 배열로 기록합니다. 숫자처럼 보이는 문자열, 불리언, NaN·무한대와 잘못된 컨테이너는 입력 오류로 거부합니다. 상태 시트를 재생성하면 이전 관찰 파일의 원본 해시가 일치하지 않으므로 새 그림을 다시 측정해야 합니다.
 
 ```sh
 python tools/knight_design_first.py check --run-dir runs/design-first --annotations path/to/artwork-annotations.json --out-dir runs/design-first-observed

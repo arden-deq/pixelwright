@@ -134,6 +134,8 @@ python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/exampl
 
 실제 생성 초안은 **128×128 논리 프레임, 공통 24색**입니다. 픽셀 저장 규격과 3D 골격 검사는 PASS지만, 그림을 별도로 관찰한 검사에서는 포즈·장비 크기 실패가 있어 **완성 에셋으로 승인하지 않았습니다**. [예제](docs/examples/knight-design-first/)에 원본 입력, GIF, 실제 격자, 관찰 좌표와 실패 보고서를 보존했습니다. 동작 프레임마다 크기나 중심을 보정하지 않으며, 정상 골격만으로 그림을 통과시키지 않습니다. 이전 [메시 외형 전사 실험](docs/examples/knight-3d/)은 이력으로 남깁니다.
 
+[최신 통합 검증](docs/VALIDATION_design_first_ko.md)에는 Pillow 13 대응, 시안 보호·재생성 원본 보존, 독립 관찰 입력 검사와 실제 예제의 재검사 결과를 기록했습니다.
+
 ## 2D 스프라이트 시트와 골격 검사
 
 README의 기사를 이 스킬로 움직였습니다. 각 애니메이션의 0번 프레임은 헤더의 기사 그림과 같고, 모든 프레임이 원래 32색만 사용하며, 세 시트 모두 엄격한 격자 검사와 리그 검사를 통과했습니다. [기사 리그 제작 기록](docs/examples/knight-animation/)을 참고합니다.

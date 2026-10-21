@@ -6,7 +6,8 @@ Entries with references use the OpenAI Images API edits endpoint, preserving
 input order. Prompt-only entries use the generations endpoint. The result is
 saved at the entry's output path inside the kit. An input that is another
 entry's output (the anchor frame) is generated first. Existing frames are kept
-unless --force is given, so a failed frame can be deleted and regenerated alone.
+unless --force is given. Replaced images and provenance are archived first.
+Selected 2D designs are frozen; --force regenerates only their motion sheets.
 generated/manifest.json records the model, settings and SHA-256 of every input,
 prompt and output. Needs OPENAI_API_KEY; OPENAI_BASE_URL overrides the endpoint.
 Exit codes: 0 success, 1 error.
@@ -19,6 +20,7 @@ import hashlib
 import io
 import json
 import os
+import shutil
 import sys
 import urllib.error
 import urllib.request
@@ -76,6 +78,45 @@ def request_image(entry, kit: Path, args, key: str):
     return image, {name: sha256(data) for name, data in inputs}
 
 
+def validate_design_first(kit, prompts, todo):
+    """Check the selected identity and bare pose inputs before spending a request."""
+    if not (kit / "design-brief.json").is_file():
+        return
+    import knight_design_first as design
+
+    if (kit / "identity.json").exists():
+        if "design" in todo:
+            raise ValueError("Selected 2D design is frozen; use a new run to change it")
+        design.verify_identity(kit)
+    states = [key for key in todo if key != "design"]
+    if not states:
+        return
+    if not (kit / "run.json").is_file():
+        raise ValueError("Select the 2D design and freeze its poses before generating motion sheets")
+    _, contract, _ = design.load_run(kit)
+    for state in states:
+        entry = prompts[state]
+        expected = ["references/design-sheet.png", f"guides/{state}-skeleton.png"]
+        if state not in contract["animations"] or entry["images"] != expected or entry["output"] != f"raw/{state}.png":
+            raise ValueError(f"{state}: use the selected 2D design first and its frozen bare skeleton second")
+
+
+def archive_output(kit, key, output, previous):
+    """Retain an exact replaced PNG even if it was generated outside this wrapper."""
+    directory = kit / "generated" / "history" / uuid.uuid4().hex
+    directory.mkdir(parents=True)
+    archived = directory / "image.png"
+    shutil.copy2(output, archived)
+    digest = sha256(archived.read_bytes())
+    record = {"job": key, "output": output.relative_to(kit).as_posix(), "output_sha256": digest,
+              "generation": previous,
+              "generation_matches_image": previous.get("output_sha256") == digest if previous else None}
+    metadata = directory / "generation.json"
+    metadata.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+    return {"image": archived.relative_to(kit).as_posix(), "metadata": metadata.relative_to(kit).as_posix(),
+            "output_sha256": digest}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--poses", type=Path, default=POSES, help="Pose kit directory with prompts.json")
@@ -86,15 +127,22 @@ def main() -> int:
                         help="'none' leaves the field out for models without it")
     parser.add_argument("--base-url", default=os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"))
     parser.add_argument("--timeout", type=float, default=600)
-    parser.add_argument("--force", action="store_true", help="Regenerate frames that already exist")
+    parser.add_argument("--force", action="store_true", help="Archive and regenerate existing frames; selected 2D designs stay frozen")
     parser.add_argument("--dry-run", action="store_true", help="List what would be generated and stop")
     args = parser.parse_args()
     kit = args.poses
     prompts = json.loads((kit / "prompts.json").read_text(encoding="utf-8"))
     canvas = json.loads((kit / "poses.json").read_text(encoding="utf-8"))["canvas"]
     args.size = f"{canvas[0]}x{canvas[1]}"
+    unknown = set(args.animation or ()) - {name.split("/")[0] for name in prompts}
+    if unknown:
+        print("Unknown animation: " + ", ".join(sorted(unknown)) + ". Prepare the poses before generating motion sheets.",
+              file=sys.stderr)
+        return 1
     producer = {entry["output"]: key for key, entry in prompts.items()}
     wanted = [key for key in prompts if not args.animation or key.split("/")[0] in args.animation]
+    if not args.animation and (kit / "design-brief.json").is_file() and (kit / "identity.json").exists():
+        wanted = [key for key in wanted if key != "design"]
     order, seen = [], set()
 
     def visit(key):
@@ -109,6 +157,11 @@ def main() -> int:
     for key in wanted:
         visit(key)
     todo = [key for key in order if args.force or not (kit / prompts[key]["output"]).is_file()]
+    try:
+        validate_design_first(kit, prompts, todo)
+    except (OSError, RuntimeError, ValueError, KeyError) as error:
+        print(str(error), file=sys.stderr)
+        return 1
     if args.dry_run:
         for key in todo:
             print(json.dumps({"frame": key, "images": prompts[key]["images"], "output": prompts[key]["output"]}))
@@ -122,14 +175,17 @@ def main() -> int:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.is_file() else {}
     for key in todo:
         entry = prompts[key]
+        out = kit / entry["output"]
+        history = list(manifest.get(key, {}).get("history", []))
         try:
             image, inputs = request_image(entry, kit, args, key_value)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            if out.is_file():
+                history.append(archive_output(kit, key, out, manifest.get(key)))
+            out.write_bytes(image)
         except (OSError, RuntimeError, ValueError, KeyError) as error:
             print(f"{key}: {error}", file=sys.stderr)
             return 1
-        out = kit / entry["output"]
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_bytes(image)
         with Image.open(out) as candidate:
             size = candidate.size
         manifest[key] = {"model": args.model, "size": entry.get("size", args.size), "quality": args.quality,
@@ -138,6 +194,8 @@ def main() -> int:
                          "endpoint": "/images/edits" if inputs else "/images/generations", "inputs": inputs,
                          "prompt_sha256": sha256(entry["prompt"].encode()), "output": entry["output"],
                          "output_sha256": sha256(image), "output_size": list(size)}
+        if history:
+            manifest[key]["history"] = history
         manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n",
                                  encoding="utf-8", newline="\n")
         print(json.dumps({"frame": key, "output": entry["output"], "size": list(size)}))

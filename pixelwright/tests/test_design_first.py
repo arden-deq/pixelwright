@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import copy
+import contextlib
+import io
 import json
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 from PIL import Image, ImageDraw
@@ -15,6 +18,7 @@ from PIL import Image, ImageDraw
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
 import knight_design_first as design
+import knight_generate_frames as generation
 import knight_rig_3d as rig
 import knight_sheet_3d as sheets
 
@@ -97,7 +101,109 @@ class DesignFirstTests(unittest.TestCase):
         for state in ("walk", "attack", "block"):
             self.assertEqual(prompts[state]["images"], ["references/design-sheet.png", f"guides/{state}-skeleton.png"])
             self.assertFalse(any("volume" in name or "parts" in name for name in prompts[state]["images"]))
+            self.assertIn("An original rounded-helmet knight", prompts[state]["prompt"])
+            self.assertNotIn("red plume", prompts[state]["prompt"])
+            self.assertNotIn("small head and long torso", prompts[state]["prompt"])
         design.load_run(self.run)
+
+    def generate(self, *arguments, response=None, error=None):
+        output = io.StringIO()
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "test-key"}), \
+                patch.object(generation, "request_image", return_value=response or (self.source.read_bytes(), {}),
+                             side_effect=error) as request, \
+                patch.object(sys, "argv", ["knight_generate_frames.py", "--poses", str(self.run), *arguments]), \
+                contextlib.redirect_stdout(output), contextlib.redirect_stderr(output):
+            status = generation.main()
+        return status, request, output.getvalue()
+
+    def test_selected_design_cannot_be_force_regenerated(self):
+        self.select()
+        original = (self.run / "raw/design.png").read_bytes()
+        status, request, message = self.generate("--animation", "design", "--force")
+        self.assertEqual(status, 1)
+        self.assertIn("design is frozen", message)
+        request.assert_not_called()
+        self.assertEqual((self.run / "raw/design.png").read_bytes(), original)
+
+    def test_unprepared_or_unknown_animation_is_an_error_without_a_request(self):
+        for state in ("walk", "wakl"):
+            with self.subTest(state=state):
+                status, request, message = self.generate("--animation", state)
+                self.assertEqual(status, 1)
+                self.assertIn("Unknown animation", message)
+                request.assert_not_called()
+
+    def test_default_force_generates_only_motion_after_selection(self):
+        self.prepare()
+        original = (self.run / "raw/design.png").read_bytes()
+        status, request, _ = self.generate("--force")
+        self.assertEqual(status, 0)
+        self.assertEqual({call.args[0]["output"] for call in request.call_args_list},
+                         {"raw/walk.png", "raw/attack.png", "raw/block.png"})
+        self.assertEqual((self.run / "raw/design.png").read_bytes(), original)
+        design.load_run(self.run)
+
+    def test_changed_identity_or_guide_is_rejected_before_generation(self):
+        self.prepare()
+        for relative in ("raw/design.png", "guides/walk-skeleton.png", "contract.json"):
+            with self.subTest(relative=relative):
+                path = self.run / relative; original = path.read_bytes()
+                path.write_bytes(original + b" ")
+                status, request, message = self.generate("--animation", "walk")
+                self.assertEqual(status, 1)
+                self.assertIn("changed", message)
+                request.assert_not_called()
+                path.write_bytes(original)
+
+    def test_state_generation_requires_frozen_poses_and_ordered_design_inputs(self):
+        self.prepare()
+        path = self.run / "prompts.json"; prompts = json.loads(path.read_text())
+        prompts["walk"]["images"].reverse(); sheets.write_json(path, prompts)
+        status, request, message = self.generate("--animation", "walk")
+        self.assertEqual(status, 1)
+        self.assertIn("2D design first", message)
+        request.assert_not_called()
+        (self.run / "run.json").unlink()
+        status, request, message = self.generate("--animation", "walk")
+        self.assertEqual(status, 1)
+        self.assertIn("freeze its poses", message)
+        request.assert_not_called()
+
+    def test_force_keeps_replaced_raw_images_and_provenance(self):
+        self.prepare()
+        raw = self.run / "raw/walk.png"
+        original = self.source.read_bytes(); raw.write_bytes(original)
+        replacements = []
+        for color in ("blue", "green"):
+            stream = io.BytesIO(); Image.new("RGB", (1536, 1024), color).save(stream, "PNG")
+            replacements.append(stream.getvalue())
+        for replacement in replacements:
+            status, _, _ = self.generate("--animation", "walk", "--force", response=(replacement, {}))
+            self.assertEqual(status, 0)
+        record = json.loads((self.run / "generated/manifest.json").read_text())["walk"]
+        self.assertEqual(raw.read_bytes(), replacements[-1])
+        self.assertEqual(len(record["history"]), 2)
+        for index, expected in enumerate((original, replacements[0])):
+            archive = record["history"][index]
+            self.assertEqual((self.run / archive["image"]).read_bytes(), expected)
+            metadata = json.loads((self.run / archive["metadata"]).read_text())
+            self.assertEqual(metadata["output_sha256"], generation.sha256(expected))
+            if index == 0:
+                self.assertIsNone(metadata["generation"])
+            else:
+                self.assertTrue(metadata["generation_matches_image"])
+                self.assertEqual(metadata["generation"]["output_sha256"], generation.sha256(expected))
+
+    def test_failed_generation_keeps_current_raw_and_manifest(self):
+        self.prepare()
+        self.generate("--animation", "walk")
+        raw = self.run / "raw/walk.png"; before = raw.read_bytes()
+        manifest = self.run / "generated/manifest.json"; previous = manifest.read_bytes()
+        status, _, _ = self.generate("--animation", "walk", "--force", error=RuntimeError("service unavailable"))
+        self.assertEqual(status, 1)
+        self.assertEqual(raw.read_bytes(), before)
+        self.assertEqual(manifest.read_bytes(), previous)
+        self.assertFalse((self.run / "generated/history").exists())
 
     def test_sheet_export_requires_artwork_review_even_with_valid_rig_and_pixels(self):
         self.prepare()
@@ -138,6 +244,40 @@ class DesignFirstTests(unittest.TestCase):
             data = landmarks(); data[field] = value
             with self.assertRaises(ValueError): design.retarget(data)
 
+    def test_korean_brief_round_trips_without_platform_default_encoding(self):
+        brief_path = self.run / "design-brief.json"
+        brief = json.loads(brief_path.read_text(encoding="utf-8"))
+        brief["prompt"] = "푸른 갑옷과 흰 망토를 입은 기사"
+        sheets.write_json(brief_path, brief)
+        read_text = Path.read_text
+
+        def legacy_windows_read(path, encoding=None, errors=None):
+            return read_text(path, encoding=encoding or "cp1252", errors=errors)
+
+        with patch.object(Path, "read_text", legacy_windows_read):
+            self.prepare()
+            design.load_run(self.run)
+            prompts = json.loads((self.run / "prompts.json").read_text(encoding="utf-8"))
+        self.assertIn(brief["prompt"], prompts["walk"]["prompt"])
+
+    def test_annotation_metadata_and_frame_containers_are_validated_before_export(self):
+        self.prepare()
+        for state in ("walk", "attack", "block"):
+            (self.run / "raw" / f"{state}.png").write_bytes(self.source.read_bytes())
+        valid = {"contract_sha256": sheets.digest(self.run / "contract.json"), "method": "visual measurements",
+                 "reviewer": "test reviewer", "animations": {},
+                 "source_sha256": {state: sheets.digest(self.run / "raw" / f"{state}.png")
+                                   for state in ("walk", "attack", "block")}}
+        invalid = ([], {**valid, "reviewer": True}, {**valid, "method": []},
+                   {**valid, "source_sha256": []}, {**valid, "animations": []},
+                   {**valid, "animations": {"walk": {}}}, {**valid, "animations": {"walk": [None] * 7}})
+        for index, document in enumerate(invalid):
+            path = self.root / "annotations.json"; sheets.write_json(path, document)
+            out = self.root / f"bad-audit-{index}"
+            with self.subTest(document=document), self.assertRaises(ValueError):
+                design.export(self.run, out, path)
+            self.assertFalse(out.exists())
+
 
 class IndependentArtworkTests(unittest.TestCase):
     def setUp(self):
@@ -174,6 +314,25 @@ class IndependentArtworkTests(unittest.TestCase):
     def test_missing_measurements_require_review(self):
         del self.annotation["part_dimensions"]["helmet"]
         self.assertEqual(design.check_artwork(self.frame, self.data, self.annotation)["status"], "review")
+
+    def test_invalid_joint_values_are_input_errors(self):
+        for value in (["1", 2], [True, 2], [float("nan"), 2], [float("inf"), 2], [1], {}):
+            with self.subTest(value=value):
+                bad = copy.deepcopy(self.annotation); bad["joints"]["neck"] = value
+                with self.assertRaisesRegex(ValueError, "Artwork joint neck"):
+                    design.check_artwork(self.frame, self.data, bad)
+
+    def test_invalid_dimension_values_cannot_be_coerced_into_acceptance(self):
+        for value in ([True, 15], ["11", "15"], [float("inf"), 15], [11], {"width": 11}):
+            with self.subTest(value=value):
+                bad = copy.deepcopy(self.annotation); bad["part_dimensions"]["helmet"] = value
+                with self.assertRaisesRegex(ValueError, "Observed part dimension helmet"):
+                    design.check_artwork(self.frame, self.data, bad)
+
+    def test_malformed_annotation_containers_are_input_errors(self):
+        for value in ([], {"joints": None}, {"part_dimensions": []}):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "must be objects"):
+                design.check_artwork(self.frame, self.data, value)
 
 
 if __name__ == "__main__":
