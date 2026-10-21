@@ -9,6 +9,7 @@ Projected limbs may foreshorten. Their world lengths must never change.
 from __future__ import annotations
 
 import math
+from numbers import Real
 
 import numpy as np
 
@@ -189,6 +190,27 @@ def contract():
 def validate_contract(data):
     """Check world-space invariants and independent projection, not 2D bone lengths."""
     issues, max_error, max_projection_error = [], 0.0, 0.0
+    def finite_number(value, *, positive):
+        if isinstance(value, bool) or not isinstance(value, Real):
+            return False
+        try:
+            return math.isfinite(value) and (value > 0 if positive else value >= 0)
+        except (OverflowError, TypeError, ValueError):
+            return False
+
+    acceptance = data.get("acceptance")
+    tolerance = acceptance.get("world_length_tolerance_m") if isinstance(acceptance, dict) else None
+    if not finite_number(tolerance, positive=False):
+        issues.append({"code": "INVALID_WORLD_LENGTH_TOLERANCE", "expected": "finite nonnegative number"})
+    references = data.get("bone_lengths_m")
+    for name in data["bones"]:
+        reference = references.get(name) if isinstance(references, dict) else None
+        if not finite_number(reference, positive=True):
+            issues.append({"code": "INVALID_BONE_LENGTH_REFERENCE", "bone": name,
+                           "expected": "finite positive number"})
+    if issues:
+        return {"status": "fail", "max_bone_length_error_m": max_error,
+                "max_projection_error_cells": max_projection_error, "issues": issues}
     for state, animation in data["animations"].items():
         for frame in animation["frames"]:
             joints = frame["joints_world"]
@@ -199,7 +221,7 @@ def validate_contract(data):
                 length = float(np.linalg.norm(np.asarray(joints[b]) - joints[a]))
                 error = abs(length - data["bone_lengths_m"][name])
                 max_error = max(max_error, error)
-                if error > data["acceptance"]["world_length_tolerance_m"]:
+                if error > tolerance:
                     issues.append({"code": "WORLD_BONE_LENGTH_CHANGED", "state": state,
                                    "frame": frame["index"], "bone": name, "error_m": error})
             for name, world in joints.items():

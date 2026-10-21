@@ -2,7 +2,7 @@
 
 이 경로는 실제 Blender 골격과 갑옷·장비 메시를 먼저 만들고, 고정 직교 카메라로 렌더한 구도를 이미지 생성의 입력으로 사용합니다. 기준 캐릭터 한 장을 공유하고, 걷기·공격·막기를 각각 6프레임 시트 한 장으로 생성합니다. [실제 결과와 검증 기록](examples/knight-3d/)을 포함했습니다.
 
-현재는 소스 체크아웃의 개발 도구입니다. 설치용 v0.6.0 ZIP에는 이 선택적 Blender 도구가 들어 있지 않습니다. Blender는 가이드 제작에만 필요하며, 나머지는 저장된 JSON/PNG와 기존 Pillow·NumPy 의존성으로 실행합니다.
+현재는 소스 체크아웃의 개발 도구입니다. 설치용 v0.6.1 ZIP에는 이 선택적 Blender 도구가 들어 있지 않습니다. Blender는 가이드 제작에만 필요하며, 나머지는 저장된 JSON/PNG와 기존 Pillow·NumPy 의존성으로 실행합니다.
 
 ## 생성 순서
 
@@ -24,6 +24,8 @@ python tools/knight_sheet_3d.py anchor --run-dir runs/knight-3d/generation
 ```
 
 기준 이미지도 도트와 구도를 눈으로 확인합니다. `anchor` 명령은 원본을 보존하고 128×128 격자로 투영한 뒤 **기준 캐릭터 한 장만** 균일 배율로 등록합니다. `anchor-calibration.json`에 배율·이동·원본 해시와 투영 검사 결과를 기록합니다. 구도가 실패하면 종료 코드 `2`를 반환합니다. 기술적 통과가 작화 승인을 대신하지는 않습니다.
+
+v0.6.1에서는 이미 고정된 투영 검사를 통과하는 기준 이미지를 배율 1과 원래 위치로 보존합니다. 미정렬 후보에 균일 배율 보정을 적용하며, 보정 후에도 같은 투영 기준으로 검사합니다. 3D 기준 뼈 길이는 유한한 양수, 길이 허용치는 유한한 0 이상의 수여야 합니다. NaN·무한대·잘못된 타입은 구체적인 FAIL 보고서로 거부합니다.
 
 ```sh
 python tools/knight_generate_frames.py --poses runs/knight-3d/generation --animation walk --animation attack --animation block

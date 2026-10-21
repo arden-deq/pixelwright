@@ -245,9 +245,14 @@ def calibrate_anchor(run):
     image = Image.fromarray(rgba, "RGBA"); source_box = image.getbbox()
     if not source_box or not target_box:
         raise ValueError("Anchor or 3D guide is empty")
+    source_pose_check = inspect_pose(mask, ids, contract)
     source_width, source_height = source_box[2] - source_box[0], source_box[3] - source_box[1]
     target_width, target_height = target_box[2] - target_box[0], target_box[3] - target_box[1]
-    ratio = min(target_width / source_width, target_height / source_height)
+    already_registered = source_pose_check["status"] == "pass"
+    # Rasterization and outlined pixel art need not have identical bounding boxes.
+    # A candidate that already passes the frozen registration gates must retain
+    # its positions; even a one-cell enlargement can distort its head region.
+    ratio = 1.0 if already_registered else min(target_width / source_width, target_height / source_height)
     size = (round(source_width * ratio), round(source_height * ratio))
     cropped = image.crop(source_box).resize(size, Image.Resampling.NEAREST)
     strip = Image.fromarray(np.asarray(cropped)[:, :, :3][np.asarray(cropped)[:, :, 3] > 0][None], "RGB")
@@ -255,7 +260,8 @@ def calibrate_anchor(run):
                              dither=Image.Dither.NONE)
     rgb = cropped.convert("RGB").quantize(palette=palette, dither=Image.Dither.NONE).convert("RGBA")
     rgb.putalpha(cropped.getchannel("A"))
-    origin = (round((target_box[0] + target_box[2] - size[0]) / 2), target_box[3] - size[1])
+    origin = source_box[:2] if already_registered else (
+        round((target_box[0] + target_box[2] - size[0]) / 2), target_box[3] - size[1])
     canvas = Image.new("RGBA", tuple(contract["frame_size"]), (0, 0, 0, 0)); canvas.alpha_composite(rgb, origin)
     # Canonicalize hidden RGB for the exact RGBA contract.
     pixels = np.asarray(canvas).copy(); pixels[pixels[:, :, 3] == 0] = 0; canvas = Image.fromarray(pixels)
@@ -266,6 +272,8 @@ def calibrate_anchor(run):
               "identity_sha256": digest(run / "references" / "anchor-x8.png"),
               "source_size": source_size, "logical_size": contract["frame_size"], "uniform_base_scale": ratio,
               "source_box": source_box, "target_box": target_box, "placed_origin": origin,
+              "registration": "already_registered" if already_registered else "uniform_bbox_fit",
+              "source_pose_check": source_pose_check,
               "pose_check": inspect_pose(pixels[:, :, 3] > 0, ids, contract),
               "disclosure": "One-time identity calibration before state generation; raw preserved. No motion frame fitting."}
     write_json(run / "references" / "anchor-calibration.json", report)

@@ -31,7 +31,7 @@ import pixel_build as builder
 import pixel_qa as qa
 import pixelwright as project
 
-VERSION = "0.6.0"
+VERSION = "0.6.1"
 MAX_SPEC_BYTES = 8 * 1024 * 1024
 MAX_FRAMES = 1024
 MAX_PARTS = 64
@@ -492,8 +492,15 @@ def _json_bytes(value: Any) -> bytes:
 
 def _write_new(path: Path, data: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("xb") as stream:
-        stream.write(data)
+    created = False
+    try:
+        with path.open("xb") as stream:
+            created = True
+            stream.write(data)
+    except BaseException:
+        if created:
+            path.unlink(missing_ok=True)
+        raise
 
 
 def _prepare_output(out_dir: str | Path, inputs: list[Path]) -> Path:
@@ -563,8 +570,8 @@ def build_sheet(spec_path: str | Path, out_dir: str | Path) -> dict[str, Any]:
             raise ValueError("Palette library changed during build")
         for name, payload in (("native.png", native_bytes), ("rendered.png", rendered_bytes),
                               ("build.json", _json_bytes(manifest))):
-            created.append(root / name)
             _write_new(root / name, payload)
+            created.append(root / name)
     except BaseException:
         for path in created:
             path.unlink(missing_ok=True)
@@ -736,6 +743,14 @@ def _check_animations(animations: tuple[dict[str, Any], ...], frames: list[np.nd
     for animation in animations:
         sequence = animation["frames"]
         used.update(sequence)
+        gif_durations = _gif_durations(animation)
+        if gif_durations != list(animation["durations_ms"]):
+            issues.append(_issue("GIF_TIMING_QUANTIZED", "review",
+                                 "GIF previews round to the nearest 10 ms (half up, minimum 10 ms); "
+                                 "the requested game animation timing is retained separately.",
+                                 animation=animation["id"],
+                                 requested_durations_ms=list(animation["durations_ms"]),
+                                 preview_durations_ms=gif_durations))
         boxes = [records[index]["bbox"] for index in sequence]
         baselines = sorted({box[3] for box in boxes if box})
         if len(baselines) > 1:
@@ -794,9 +809,24 @@ def _inside(xs: np.ndarray, ys: np.ndarray, shape: tuple[int, ...]) -> np.ndarra
     return (xs >= 0) & (xs < shape[1]) & (ys >= 0) & (ys < shape[0])
 
 
-def _bridged(mask: np.ndarray, cover: np.ndarray) -> np.ndarray:
-    # Cells drawn in front may split a part visually; let them reconnect it.
-    return mask | (cover & _dilate(mask))
+def _bridged(mask: np.ndarray, cover: np.ndarray, expected: np.ndarray | None = None) -> np.ndarray:
+    # Keep the existing one-cell allowance. Additional propagation needs a
+    # stable transform and stays on covered reference dots, never unrelated
+    # foreground paths outside the part's predicted footprint.
+    joined = mask | (cover & _dilate(mask))
+    if expected is None:
+        return joined
+    eligible = cover & expected
+    queue = deque(map(tuple, np.argwhere(joined & eligible & ~mask)))
+    h, w = mask.shape
+    while queue:
+        cy, cx = queue.popleft()
+        for y in range(max(0, cy - 1), min(h, cy + 2)):
+            for x in range(max(0, cx - 1), min(w, cx + 2)):
+                if eligible[y, x] and not joined[y, x]:
+                    joined[y, x] = True
+                    queue.append((y, x))
+    return joined
 
 
 class _RigCheck:
@@ -962,7 +992,7 @@ class _RigCheck:
                 flag("PART_COLOR_ADDED", "review",
                      f"{int(np.count_nonzero(added))} cells use colors absent from the reference part: {colors}.")
             before = _components(_bridged(reference, self.cover(ref, part.id)))
-            if _components(_bridged(mask, self.cover(index, part.id))) > before:
+            if _components(_bridged(mask, self.cover(index, part.id), self._reference_mask_at(part, index))) > before:
                 flag("PART_FRAGMENTED", "review",
                      f"Part {part.id} splits into more separate pieces than in reference frame {ref}.")
         if cells:
@@ -1125,12 +1155,42 @@ class _RigCheck:
         self._area(part, ratio, flag)
         return beside
 
+    def _reference_mask_at(self, part: Part, index: int) -> np.ndarray | None:
+        """Place known reference dots using the declared motion, when defined."""
+        if part.motion == "free":
+            return None
+        ref = part.reference_frame
+        reference = self.masks[ref][part.id]
+        if part.motion == "fixed" or index == ref:
+            return reference
+        if part.motion == "rigid":
+            offset = np.subtract(self.rig.poses[index][part.pivot], self.rig.poses[ref][part.pivot])
+            if np.any(np.abs(offset - np.round(offset)) > _EPSILON):
+                return None  # The part's own motion check reports this invalid transform.
+            return _shift(reference, self.keys[ref], int(round(offset[0])), int(round(offset[1])))[0]
+        start, end = part.bone
+        a0, b0 = self.rig.poses[ref][start], self.rig.poses[ref][end]
+        a1, b1 = self.rig.poses[index][start], self.rig.poses[index][end]
+        if _distance(a1, b1) < _EPSILON:
+            return None  # The part's own motion check reports a degenerate bone.
+        ys, xs = np.nonzero(reference)
+        px, py = _bone_map(xs, ys, a0, b0, a1, b1)
+        inside = _inside(px, py, reference.shape)
+        predicted = np.zeros_like(reference)
+        predicted[py[inside], px[inside]] = True
+        return predicted
+
     def _attachment(self, part: Part, index: int, mask: np.ndarray, flag) -> None:
         rig = self.rig
         depth = rig.depths[index]
         if part.parent is not None:
             parent = self.masks[index][part.parent]
-            if parent.any():
+            if not parent.any():
+                parent_part = next(p for p in rig.parts if p.id == part.parent)
+                expected_parent = self._reference_mask_at(parent_part, index)
+                parent = (expected_parent & self.cover(index, part.parent)
+                          if expected_parent is not None else None)
+            if parent is not None:
                 # The joint between child and parent may sit behind a part drawn in front of both.
                 bridge = self.cover(index, part.id, above=max(depth[part.id], depth[part.parent]))
                 reach, previous = parent.copy(), None
@@ -1297,28 +1357,84 @@ def preview_scale(layout: Layout, requested: int | None = None) -> int:
     return max(1, min(8, 512 // max(layout.frame_size)))
 
 
-def _write_gif(path: Path, images: list[Image.Image], animation: dict[str, Any]) -> None:
+def _gif_durations(animation: dict[str, Any]) -> list[int]:
+    """Schedule GIF ticks without changing the requested game timing."""
+    return [max(10, ((duration + 5) // 10) * 10) for duration in animation["durations_ms"]]
+
+
+def _gif_frame_positions(scheduled: list[int], actual: list[int]) -> list[list[int]] | None:
+    """Map saved holds to contiguous source positions after identical frames merge."""
+    positions, offset = [], 0
+    for duration in actual:
+        if duration <= 0 or duration % 10:
+            return None
+        first, accumulated = offset, 0
+        while offset < len(scheduled) and accumulated < duration:
+            accumulated += scheduled[offset]
+            offset += 1
+        if accumulated != duration:
+            return None
+        positions.append(list(range(first, offset)))
+    return positions if offset == len(scheduled) else None
+
+
+def _write_gif(path: Path, images: list[Image.Image], animation: dict[str, Any]) -> dict[str, Any]:
+    requested = list(animation["durations_ms"])
+    scheduled = _gif_durations(animation)
     options: dict[str, Any] = {"save_all": True, "append_images": images[1:],
-                               "duration": list(animation["durations_ms"]), "disposal": 2}
+                               "duration": scheduled, "disposal": 2}
     if animation["loop"]:
         options["loop"] = 0
     stream = io.BytesIO()
     images[0].save(stream, format="GIF", **options)
     _write_new(path, stream.getvalue())
+    timing: dict[str, Any] = {
+        "format": "GIF", "timing_resolution_ms": 10,
+        "rounding": "nearest_10ms_half_up_minimum_10ms",
+        "requested_frame_count": len(images), "requested_durations_ms": requested,
+        "requested_total_ms": sum(requested), "requested_loop": animation["loop"],
+        "scheduled_durations_ms": scheduled, "quantized": scheduled != requested,
+        "actual_frame_count": None, "actual_durations_ms": [], "actual_total_ms": None,
+        "actual_loop": None, "actual_loop_extension": None, "coalesced_frames": False,
+        "source_frame_positions": None, "metadata_verified": False,
+    }
+    # Read the saved artifact, rather than claiming that encoder arguments prove
+    # its playback. Pillow may merge identical adjacent frames into longer holds.
+    try:
+        with Image.open(path) as preview:
+            if preview.format != "GIF":
+                raise ValueError("Saved preview is not a GIF")
+            loop = preview.info.get("loop")
+            count = preview.n_frames
+            actual = []
+            for index in range(count):
+                preview.seek(index)
+                actual.append(preview.info.get("duration", 0))
+    except (OSError, ValueError, EOFError) as exc:
+        timing["metadata_error"] = str(exc)
+        return timing
+    positions = _gif_frame_positions(scheduled, actual)
+    timing.update(actual_frame_count=count, actual_durations_ms=actual, actual_total_ms=sum(actual),
+                  actual_loop=loop == 0, actual_loop_extension=loop,
+                  coalesced_frames=count < len(images), source_frame_positions=positions)
+    loop_matches = loop == 0 if animation["loop"] else loop is None
+    timing["metadata_verified"] = (len(images) == len(requested) and 1 <= count <= len(images)
+                                   and positions is not None and loop_matches)
+    return timing
 
 
-def _save_animation(path: Path, frames: list[np.ndarray], animation: dict[str, Any], layout: Layout, k: int) -> None:
+def _save_animation(path: Path, frames: list[np.ndarray], animation: dict[str, Any], layout: Layout, k: int) -> dict[str, Any]:
     """Write a playback preview on a flat background; the sheet remains the audited artwork."""
     fw, fh = layout.frame_size
     images = []
     for index in animation["frames"]:
         art = Image.fromarray(frames[index], "RGBA").resize((fw * k, fh * k), Image.Resampling.NEAREST)
         images.append(Image.alpha_composite(Image.new("RGBA", art.size, (48, 52, 62, 255)), art).convert("RGB"))
-    _write_gif(path, images, animation)
+    return _write_gif(path, images, animation)
 
 
 def _save_rig_animation(path: Path, frames: list[np.ndarray], animation: dict[str, Any], layout: Layout,
-                        rig: Rig, check: _RigCheck, frame_status: list[str], k: int) -> None:
+                        rig: Rig, check: _RigCheck, frame_status: list[str], k: int) -> dict[str, Any]:
     """Play the art under its skeleton beside the part colors, frame by frame."""
     fw, fh = layout.frame_size
     pad, title = 8, 16
@@ -1337,7 +1453,7 @@ def _save_rig_animation(path: Path, frames: list[np.ndarray], animation: dict[st
         canvas.paste(part_panel.convert("RGB"), (2 * pad + fw * k, title))
         _draw_legend(draw, rig, pad, title + fh * k + pad // 2, per_row)
         images.append(canvas)
-    _write_gif(path, images, animation)
+    return _write_gif(path, images, animation)
 
 
 def check_sheet(spec_path: str | Path, sheet_path: str | Path, profile_path: str | Path,
@@ -1417,17 +1533,23 @@ def check_sheet(spec_path: str | Path, sheet_path: str | Path, profile_path: str
             if rig_check is not None:
                 _save_rig_overlay(root / "rig_overlay.png", frames, layout, plan.rig, rig_check, frame_status)
                 summary["outputs"]["rig_overlay"] = "rig_overlay.png"
-            for animation in plan.animations:
+            for animation, animation_result in zip(plan.animations, animation_results):
+                timing = animation_result["preview_timing"] = {}
                 relative = f"animations/{animation['id']}.gif"
-                _save_animation(root / relative, frames, animation, layout, k)
+                timing["art"] = _save_animation(root / relative, frames, animation, layout, k)
                 summary["outputs"].setdefault("animation_previews", {})[animation["id"]] = relative
                 if rig_check is not None:
                     # IDs cannot contain '.', so an art preview can never
                     # collide with this diagnostic, even for ids like walk-rig.
                     relative = f"animations/{animation['id']}.rig.gif"
-                    _save_rig_animation(root / relative, frames, animation, layout, plan.rig, rig_check,
-                                        frame_status, k)
+                    timing["rig"] = _save_rig_animation(root / relative, frames, animation, layout, plan.rig, rig_check,
+                                                        frame_status, k)
                     summary["outputs"].setdefault("rig_previews", {})[animation["id"]] = relative
+                for kind, metadata in timing.items():
+                    if not metadata["metadata_verified"]:
+                        issues.append(_issue("GIF_PREVIEW_METADATA_MISMATCH", "fail",
+                                             "Saved GIF frame delays or loop metadata do not match the scheduled preview.",
+                                             animation=animation["id"], preview=kind))
         if qa.sha256_file(spec_source) != _sha256(spec_data) or qa.sha256_file(profile_file) != profile_digest:
             issues.append(_issue("INPUT_CHANGED", "fail", "The sprite spec or profile changed during the check."))
         counts = {level: sum(1 for issue in issues if issue["severity"] == level) for level in ("fail", "review", "info")}

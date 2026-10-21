@@ -47,4 +47,4 @@ jobs:
       - name: Build and verify portable packages
         run: python tools/package_skill.py --out-dir .work/ci-dist
       - name: Verify installed release independently
-        run: python tools/verify_release.py --archive .work/ci-dist/pixelwright-v0.6.0.zip --out-dir .work/ci-release-check
+        run: python tools/verify_release.py --archive .work/ci-dist/pixelwright-v0.6.1.zip --out-dir .work/ci-release-check
