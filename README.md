@@ -4,7 +4,7 @@
 
 Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit report](docs/examples/header/report.json) · [Grid preview](docs/examples/header/grid_overlay.png) · [Build records](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · Version 0.6.0 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · Version 0.6.2 · [Apache License 2.0](LICENSE)
 
 **Create static PNG pixel art on a declared grid, then verify every cell.**
 
@@ -240,19 +240,19 @@ Review `comparison.png`, `fix_review.json`, and both reports before adopting a r
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.6.0.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.6.0.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.6.2.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.6.2.zip --out-dir runs/release-check-v1
 ```
 
 Packaging creates an installation ZIP with one top-level `pixelwright/` folder and a development-kit ZIP with tests and documentation. The package verifier checks the ZIP layout and SHA-256 manifest; the release verifier extracts and exercises the installation package. Build artifacts are generated locally in `dist/`.
 
 Run `verify_release.py` only on trusted packages built from reviewed Pixelwright source: it executes their Python scripts. A matching manifest proves internal integrity, not the identity of the publisher.
 
-The [v0.6.0 validation record](docs/VALIDATION_v060_ko.md) covers sprite sheets, animations and part rigs, including the injected-error results and the release check of the installed examples. The [v0.5.1 record](docs/VALIDATION_v051_ko.md) documents the grid-preview correction: every cell boundary is now drawn on both axes, including dense grids. Both Python 3.12 and 3.14 run 140 tests (138 pass, two Windows symlink skips), and the installed-package check measures actual grid intervals. The [v0.5.0 record](docs/VALIDATION_v050_ko.md) covers palette reuse, remapping, exact extraction, and original preservation; the [v0.4.0 record](docs/VALIDATION_v040_ko.md) covers layer composition.
+The [v0.6.2 validation record](docs/VALIDATION_v062_ko.md) covers GIF holds longer than 655.35 seconds, preserved frame boundaries and saved timing metadata. The [v0.6.1 record](docs/VALIDATION_v061_ko.md) covers sprite rollback ownership, attachment and occlusion regressions, explicit GIF timing, finite 3D rig contracts, and anchor registration. The [v0.6.0 record](docs/VALIDATION_v060_ko.md) covers the original sprite sheets, animations, part rigs and installed examples. Earlier records cover [square-grid previews](docs/VALIDATION_v051_ko.md), [palettes](docs/VALIDATION_v050_ko.md) and [layer composition](docs/VALIDATION_v040_ko.md).
 
 ## Scope, license, and security
 
-Version 0.6.0 supports **static PNG characters, items, UI icons, reusable palettes, optional layered scenes, and sprite sheets with declared animation rigs**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Palette remapping also checks the selected target colors; extraction and ramp generation do not certify artwork. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Rig checks verify that declared parts keep their dots consistent with the declared skeleton; they do not infer anatomy or judge timing, weight, or appeal. Animated PNG input remains unsupported.
+Version 0.6.2 supports **static PNG characters, items, UI icons, reusable palettes, optional layered scenes, and sprite sheets with declared animation rigs**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Palette remapping also checks the selected target colors; extraction and ramp generation do not certify artwork. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Rig checks verify that declared parts keep their dots consistent with the declared skeleton; they do not infer anatomy or judge timing, weight, or appeal. Animated PNG input remains unsupported.
 
 Pixelwright is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 

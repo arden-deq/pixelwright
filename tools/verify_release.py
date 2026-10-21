@@ -215,6 +215,84 @@ def verify_sprite_workflow(skill, out):
         if any(file_hash(path) != digest for path, digest in hashes.items()):
             raise ValueError(f"Checking {name} changed a packaged input")
         results[name] = report["layout"]["frame_count"]
+    # Exercise the installed encoder's timing boundary, keeping the game spec's
+    # requested milliseconds distinct from GIF's representable 10 ms ticks.
+    timing_spec = out / "short-gif-timing.json"
+    timing_document = read_json(skill / "examples" / "sprite-walk" / "spec.json")
+    for animation in timing_document["animations"].values():
+        animation.pop("durations_ms", None)
+        animation["frame_ms"] = 9
+    timing_spec.write_bytes((json.dumps(timing_document, indent=2) + "\n").encode("utf-8"))
+    timing_check = out / "short-gif-timing-check"
+    run(tool, ["check", "--spec", timing_spec, "--sheet", out / "sprite-walk-build" / "rendered.png",
+               "--profile", skill / "examples" / "sprite-walk" / "profile.json", "--out-dir", timing_check], 2)
+    timing_report = read_json(timing_check / "sprite_report.json")
+    if (timing_report["status"] != "review"
+            or "GIF_TIMING_QUANTIZED" not in {issue["code"] for issue in timing_report["issues"]}):
+        raise ValueError("Unrepresentable GIF timing must be disclosed as REVIEW")
+    for animation in timing_report["animations"]:
+        if animation["durations_ms"] != [9] * len(animation["frames"]):
+            raise ValueError("GIF preview quantization must preserve requested game timings")
+        for kind, timing_name in (("animation_previews", "art"), ("rig_previews", "rig")):
+            metadata = animation["preview_timing"][timing_name]
+            path = timing_check / timing_report["outputs"][kind][animation["id"]]
+            with Image.open(path) as preview:
+                durations = []
+                for index in range(preview.n_frames):
+                    preview.seek(index)
+                    durations.append(preview.info.get("duration", 0))
+            if (not metadata["metadata_verified"] or not metadata["quantized"]
+                    or metadata["actual_durations_ms"] != durations
+                    or any(value < 10 for value in durations)
+                    or metadata["actual_total_ms"] != sum(durations)):
+                raise ValueError("Installed GIF preview must retain its actual nonzero timing metadata")
+    # Long identical holds must not overflow GIF's unsigned 16-bit delay when
+    # an encoder coalesces frames. Check both loop policies in the installed CLI.
+    long_spec = out / "long-gif-hold.json"
+    long_document = read_json(skill / "examples" / "sprite-walk" / "spec.json")
+    long_document["animations"] = {
+        name: {"frames": [0] * 11, "frame_ms": 60000, "loop": loop}
+        for name, loop in (("long-loop", True), ("long-once", False))
+    }
+    long_spec.write_bytes((json.dumps(long_document, indent=2) + "\n").encode("utf-8"))
+    long_inputs = [long_spec, skill / "examples" / "sprite-walk" / "spec.json",
+                   skill / "examples" / "sprite-walk" / "profile.json",
+                   out / "sprite-walk-build" / "rendered.png"]
+    long_hashes = {path: file_hash(path) for path in long_inputs}
+    long_check = out / "long-gif-hold-check"
+    run(tool, ["check", "--spec", long_spec, "--sheet", long_inputs[-1],
+               "--profile", long_inputs[-2], "--out-dir", long_check, "--preview-scale", 1], 0)
+    long_report = read_json(long_check / "sprite_report.json")
+    if long_report["status"] != "pass":
+        raise ValueError("Long identical holds must retain PASS")
+    for animation in long_report["animations"]:
+        if animation["durations_ms"] != [60000] * 11 or animation["total_ms"] != 660000:
+            raise ValueError("Long GIF encoding must preserve requested game timing")
+        for kind, timing_name in (("animation_previews", "art"), ("rig_previews", "rig")):
+            metadata = animation["preview_timing"][timing_name]
+            path = long_check / long_report["outputs"][kind][animation["id"]]
+            with Image.open(path) as preview:
+                loop_matches = (preview.info.get("loop") == 0 if animation["loop"]
+                                else "loop" not in preview.info)
+                durations = []
+                first = preview.convert("RGB").tobytes()
+                for index in range(preview.n_frames):
+                    preview.seek(index)
+                    durations.append(preview.info.get("duration", 0))
+                    if preview.convert("RGB").tobytes() != first:
+                        raise ValueError("Long identical holds must preserve decoded pixels")
+            if (not loop_matches or not metadata["metadata_verified"] or metadata["quantized"]
+                    or metadata["actual_durations_ms"] != durations
+                    or not all(10 <= value <= 655350 for value in durations)
+                    or sum(durations) != 660000 or metadata["actual_total_ms"] != 660000):
+                raise ValueError("Long GIF holds must preserve bounded delays, total time and loop policy")
+            positions = metadata["source_frame_positions"]
+            if ([position for group in positions for position in group] != list(range(11))
+                    or [sum(animation["durations_ms"][position] for position in group)
+                        for group in positions] != durations):
+                raise ValueError("Long GIF source positions must match the saved timing")
+    if any(file_hash(path) != digest for path, digest in long_hashes.items()):
+        raise ValueError("Long GIF checking changed an input")
     broken = out / "broken-lever-spec.json"
     document = read_json(skill / "examples" / "sprite-lever" / "spec.json")
     document["frames"][1]["joints"]["grip"][0] += 1
@@ -228,6 +306,8 @@ def verify_sprite_workflow(skill, out):
         raise ValueError("A rigid knob that no longer follows its pivot must fail the rig check")
     return {"sprite_walk_frames": results["sprite-walk"], "sprite_lever_frames": results["sprite-lever"],
             "sprite_examples_status": "pass", "sprite_gif_playback_verified": True,
+            "sprite_gif_quantization_status": timing_report["status"], "sprite_gif_minimum_delay_verified": True,
+            "sprite_gif_long_hold_verified": True,
             "sprite_broken_joint_status": report["status"]}
 
 

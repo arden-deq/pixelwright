@@ -4,7 +4,7 @@
 
 [실제 생성 초안과 실패 보고서](examples/knight-design-first/)를 함께 제공합니다. 픽셀 규격과 골격 기하 검사는 통과했지만, 일부 그림의 포즈와 장비 크기는 기준을 벗어났습니다. 완성 에셋으로 승인하지 않았습니다.
 
-현재 소스 체크아웃에서 사용하는 개발 도구이며 설치용 v0.6.0 ZIP에는 들어 있지 않습니다. Pillow·NumPy는 기존 의존성입니다. Blender는 골격 파일 제작과 독립 검증에 사용합니다.
+현재 소스 체크아웃에서 사용하는 개발 도구이며 설치용 v0.6.2 ZIP에는 들어 있지 않습니다. Pillow·NumPy는 기존 의존성입니다. Blender는 골격 파일 제작과 독립 검증에 사용합니다.
 
 ## 1. 골격 없이 2D 시안 만들기
 
@@ -27,6 +27,8 @@ python tools/knight_design_first.py select --run-dir runs/design-first --source 
 ## 2. 시안에 골격 맞추기
 
 선택한 `references/design-native.png`에서 관절과 안정적으로 측정할 부위를 직접 확인합니다. [실제 관찰 파일](examples/knight-design-first/generation/design-landmarks.json)은 `design_sha256`, 각 관절의 `xy`, `depth_offset_m`, `part_dimensions`를 기록합니다. 관절 이름은 예제와 동일합니다. 2D 한 장에서 알 수 없는 깊이는 작성한 가정이며, 자동 3D 복원을 했다는 의미가 아닙니다.
+
+3D 기준 뼈 길이는 유한한 양수, 길이 허용치는 유한한 0 이상의 수여야 합니다. NaN·무한대·잘못된 타입은 구체적인 FAIL 보고서로 거부합니다.
 
 ```sh
 python tools/knight_design_first.py poses --run-dir runs/design-first --landmarks path/to/design-landmarks.json

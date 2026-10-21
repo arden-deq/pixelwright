@@ -14,7 +14,7 @@ from PIL import Image
 
 import pixel_qa as qa
 
-VERSION = "0.6.0"
+VERSION = "0.6.2"
 PROFILE_KEYS = {"schema_version", "name", "logical_size", "scale", "max_colors",
                 "alpha", "transparent_rgb", "allowed_palette"}
 

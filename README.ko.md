@@ -4,7 +4,7 @@
 
 헤더: 2048×1024 · 4×4 px 셀 · 32색 · 131,072셀 PASS · [검사 보고서](docs/examples/header/report.json) · [격자 미리보기](docs/examples/header/grid_overlay.png) · [제작 기록](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · 버전 0.6.0 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · 버전 0.6.2 · [Apache License 2.0](LICENSE)
 
 **선언한 격자 위에서 정적 PNG 픽셀아트를 만들고, 모든 셀을 검사합니다.**
 
@@ -240,19 +240,19 @@ python pixelwright/scripts/pixelwright.py inspect runs/repair-v1/fixed_upscaled.
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.6.0.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.6.0.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.6.2.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.6.2.zip --out-dir runs/release-check-v1
 ```
 
 패키징은 최상위 `pixelwright/` 폴더 하나를 포함하는 설치 ZIP과 테스트·문서를 포함하는 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사하고, 릴리스 검증기는 설치 패키지를 풀어 실제로 실행합니다. 빌드 결과는 로컬 `dist/`에 생성합니다.
 
 `verify_release.py`는 패키지 안의 Python 코드를 실행하므로 검토한 Pixelwright 소스에서 만든 신뢰할 수 있는 ZIP에만 사용합니다. 해시 목록이 일치한다는 것은 내부 무결성을 확인할 뿐 배포자의 신원을 증명하지 않습니다.
 
-[v0.6.0 검증 기록](docs/VALIDATION_v060_ko.md)은 스프라이트 시트·애니메이션·부위 리그와 오류 주입 시험, 설치 패키지의 예제 검사를 다룹니다. [v0.5.1 기록](docs/VALIDATION_v051_ko.md)은 촘촘한 격자에서도 양 축의 모든 셀 경계를 표시하도록 고친 내용을 설명합니다. Python 3.12·3.14에서 각각 140개 테스트 중 138개 통과·Windows 심볼릭 링크 2개 건너뜀을 확인했고, 설치 패키지에서도 실제 격자 간격을 측정합니다. [v0.5.0 기록](docs/VALIDATION_v050_ko.md)은 팔레트·램프 재사용, 재매핑, 정확한 추출과 원본 보존을, [v0.4.0 기록](docs/VALIDATION_v040_ko.md)은 레이어 합성을 다룹니다.
+[v0.6.2 검증 기록](docs/VALIDATION_v062_ko.md)은 655.35초를 넘는 GIF hold와 프레임 경계·실제 저장 시간 보존을 다룹니다. [v0.6.1 기록](docs/VALIDATION_v061_ko.md)은 스프라이트 출력 롤백·부위 연결·가림 회귀, 명시적인 GIF 시간, 유한한 3D 리그 계약과 anchor 정렬을 다룹니다. [v0.6.0 기록](docs/VALIDATION_v060_ko.md)은 최초 스프라이트·애니메이션·부위 리그와 설치 예제를 검증합니다. 이전 기록에는 [정사각형 격자 미리보기](docs/VALIDATION_v051_ko.md), [팔레트](docs/VALIDATION_v050_ko.md), [레이어 합성](docs/VALIDATION_v040_ko.md)을 남겨 둡니다.
 
 ## 지원 범위·라이선스·보안
 
-버전 0.6.0은 **정적 PNG 캐릭터·아이템·UI 아이콘, 재사용 팔레트, 선택적 레이어 장면, 골격을 선언한 스프라이트 시트 애니메이션**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 색상 변환은 선택한 목표 색상도 확인하며, 팔레트 추출과 램프 생성은 작화의 PASS를 판정하지 않습니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 리그 검사는 선언한 부위의 도트가 선언한 골격과 일관되는지 확인하며, 해부 구조를 추정하거나 타이밍·무게감·매력을 판정하지 않습니다. 애니메이션 PNG 입력은 계속 지원하지 않습니다.
+버전 0.6.2는 **정적 PNG 캐릭터·아이템·UI 아이콘, 재사용 팔레트, 선택적 레이어 장면, 골격을 선언한 스프라이트 시트 애니메이션**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 색상 변환은 선택한 목표 색상도 확인하며, 팔레트 추출과 램프 생성은 작화의 PASS를 판정하지 않습니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 리그 검사는 선언한 부위의 도트가 선언한 골격과 일관되는지 확인하며, 해부 구조를 추정하거나 타이밍·무게감·매력을 판정하지 않습니다. 애니메이션 PNG 입력은 계속 지원하지 않습니다.
 
 Pixelwright에는 **Apache License 2.0**을 적용합니다. [LICENSE](LICENSE)와 [NOTICE](NOTICE)를 확인합니다.
 
