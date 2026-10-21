@@ -136,6 +136,8 @@ python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/exampl
 
 [최신 통합 검증](docs/VALIDATION_design_first_ko.md)에는 Pillow 13 대응, 시안 보호·재생성 원본 보존, 독립 관찰 입력 검사와 실제 예제의 재검사 결과를 기록했습니다.
 
+[요구사항과 진행 상황](docs/SPRITE_REQUIREMENTS_AND_STATUS_ko.md)에 사용자 요구, 구현 상태, 걷기의 접지·체중 이동·반복 연결 결함과 후속 작업을 정리했습니다. 현재 걷기는 자연스러운 보행 품질을 충족하지 못합니다.
+
 ## 2D 스프라이트 시트와 골격 검사
 
 README의 기사를 이 스킬로 움직였습니다. 각 애니메이션의 0번 프레임은 헤더의 기사 그림과 같고, 모든 프레임이 원래 32색만 사용하며, 세 시트 모두 엄격한 격자 검사와 리그 검사를 통과했습니다. [기사 리그 제작 기록](docs/examples/knight-animation/)을 참고합니다.

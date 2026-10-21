@@ -136,6 +136,8 @@ This real generation draft uses **128×128 logical frames and 24 shared colors**
 
 The [integration validation record](docs/VALIDATION_design_first_ko.md) covers Pillow 13, selected-design protection, archived regeneration history, independent measurement inputs and the rechecked real example.
 
+The [requirements and progress record](docs/SPRITE_REQUIREMENTS_AND_STATUS_ko.md) tracks the requested workflow, implemented checks and remaining work. The current walk still needs convincing foot contact, weight transfer and continuity across frames and the loop boundary.
+
 ## 2D sprite sheets and rig auditing
 
 The README knight, animated with this skill. Frame 0 of each animation is the header knight itself; every frame keeps its 32 colors, and all three sheets pass the strict audit and the rig check. See [how the knight was rigged](docs/examples/knight-animation/).
