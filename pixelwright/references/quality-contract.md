@@ -15,7 +15,7 @@ Use UTF-8 JSON. Unknown fields fail validation to catch misspelled constraints.
 | `transparent_rgb` | `exact` (default): compare every decoded RGBA channel; `visible`: normalize alpha-zero RGB to zero before comparison |
 | `allowed_palette` | Optional array of 1..256 `#RRGGBB` or `#RRGGBBAA` colors. Every decoded sample must belong, including transparency; include `#00000000` if needed |
 
-`render_size` is computed from `logical_size × scale`; it cannot conflict with a separately declared size. Audit does not infer a new grid, crop borders, rotate from EXIF, or resize input. The image origin is `(0,0)`. For a padded atlas, explicitly create and record separate frame crops first; atlas and animation validation are outside this release.
+`render_size` is computed from `logical_size × scale`; it cannot conflict with a separately declared size. Audit does not infer a new grid, crop borders, rotate from EXIF, or resize input. The image origin is `(0,0)`. For sprite sheets, atlases and animations, declare the frame layout in a sprite spec and use `pixel_sprite.py check`; see [sprites.md](sprites.md).
 
 Input is a static PNG decodable losslessly into RGBA8, including low-bit indexed/grayscale PNG. Animated PNG, non-PNG, and 16-bit channel PNG are rejected instead of silently inspecting a frame or dropping precision. The contract concerns decoded channel values, not gamma-corrected appearance or encoded PNG compression bytes. The source SHA-256 identifies the encoded bytes.
 
@@ -53,5 +53,7 @@ All CLIs require an empty or nonexistent output directory. Choose a new run dire
 | `pixel_qa.py inspect` | Pass; review unless `--fail-on-violation` | Execution error | Fail; review with `--fail-on-violation` |
 | `pixel_qa.py fix` | Corrected technical pass; review unless strict exit requested | Execution error | Corrected fail, or review with strict exit requested |
 | `pixel_build.py` | Export succeeded | — | Validation, execution, or argument parsing error |
+| `pixel_sprite.py check` | Sheet, frames, animations and rig all pass | Invalid spec, profile, input, or execution error | At least one fail/review |
+| `pixel_sprite.py list/build` | Valid plan or export written | Invalid spec, input, or execution error | Argument parsing error |
 
 For CI use the profile interface. A `fix` exit code concerns the corrected candidate, and must not be cited as the original's status. CLI argument misuse may also return argparse's conventional code 2.

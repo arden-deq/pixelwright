@@ -1,0 +1,185 @@
+{
+  "swing/00": {
+    "images": [
+      "swing/pose_00.png"
+    ],
+    "prompt": "Image 1 is a pose skeleton on a 1024x1536 canvas. Draw a new pixel-art game sprite of a knight in full steel plate armor with a closed great helm and a narrow visor slit, brass-trimmed plate edges, a brown leather belt and straps, a dark red kite shield with a steel rim and boss strapped to his left forearm, and a flanged steel mace in his right hand, in exactly the pose of the skeleton: ready stance, mace hanging at his right side pointing down. Detailed pixel art with crisp square pixels about 5 canvas pixels wide (the knight is about 190 sprite pixels tall), at most 32 colors, dark outlines and lighting from the upper left; 3/4 front view facing left. The figure matches the skeleton's scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_00.png"
+  },
+  "swing/01": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_01.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: lifting the mace forward and up, mace pointing up. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_01.png"
+  },
+  "swing/02": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_02.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: mace raised overhead, mace head above and slightly behind the helmet. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_02.png"
+  },
+  "swing/03": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_03.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: wind-up: mace cocked behind the head pointing back, body leaning back. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_03.png"
+  },
+  "swing/04": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_04.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: downswing: arm swinging over the top toward the front, mace pointing up and forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_04.png"
+  },
+  "swing/05": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_05.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: mace falling in front at shoulder height, arm extended forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_05.png"
+  },
+  "swing/06": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_06.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: impact: knees bent in a crouch, mace smashed straight down in front of him. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_06.png"
+  },
+  "swing/07": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_07.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: settling after the impact, still crouched, mace low. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_07.png"
+  },
+  "swing/08": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "swing/pose_08.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: recovering toward the ready stance. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/swing/frame_08.png"
+  },
+  "block/00": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "block/pose_00.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: ready stance. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/block/frame_00.png"
+  },
+  "block/01": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "block/pose_01.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: starting to raise the shield, mace drawn forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/block/frame_01.png"
+  },
+  "block/02": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "block/pose_02.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: full guard: shield raised across the chest and face, knees slightly bent, mace held forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/block/frame_02.png"
+  },
+  "block/03": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "block/pose_03.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: a blow lands on the shield, shield pushed back slightly. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/block/frame_03.png"
+  },
+  "block/04": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "block/pose_04.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: holding the guard. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/block/frame_04.png"
+  },
+  "block/05": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "block/pose_05.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: lowering the shield. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/block/frame_05.png"
+  },
+  "walk/00": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_00.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: walking: right foot forward and planted, left foot behind. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_00.png"
+  },
+  "walk/01": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_01.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: weight settling onto the right foot. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_01.png"
+  },
+  "walk/02": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_02.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: passing pose: left leg lifting and swinging forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_02.png"
+  },
+  "walk/03": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_03.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: left leg reaching forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_03.png"
+  },
+  "walk/04": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_04.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: left foot forward and planted, right foot behind. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_04.png"
+  },
+  "walk/05": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_05.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: weight settling onto the left foot. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_05.png"
+  },
+  "walk/06": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_06.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: passing pose: right leg lifting and swinging forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_06.png"
+  },
+  "walk/07": {
+    "images": [
+      "generated/swing/frame_00.png",
+      "walk/pose_07.png"
+    ],
+    "prompt": "Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in exactly the pose of the skeleton: right leg reaching forward. Keep the 3/4 front view facing left and the same body proportions and scale. Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, no extra objects.",
+    "output": "generated/walk/frame_07.png"
+  }
+}

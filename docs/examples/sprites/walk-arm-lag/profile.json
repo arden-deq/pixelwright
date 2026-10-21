@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "name": "Walk cycle sheet",
+  "logical_size": "199x32",
+  "scale": 4,
+  "max_colors": 13,
+  "alpha": "binary",
+  "transparent_rgb": "exact",
+  "allowed_palette": [
+    "#00000000",
+    "#1E1A2B",
+    "#24477A",
+    "#2A2230",
+    "#2C5A92",
+    "#363A45",
+    "#3F7CC4",
+    "#454B57",
+    "#59606E",
+    "#5A3420",
+    "#6B3F22",
+    "#7A4A2C",
+    "#C88A60",
+    "#F0C090"
+  ]
+}

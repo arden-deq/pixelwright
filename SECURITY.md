@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes target the newest `0.5.x` release and the `main` branch. Earlier
+Security fixes target the newest `0.6.x` release and the `main` branch. Earlier
 releases are not maintained; update before reporting an issue that has already
 been fixed. There is no guaranteed response or remediation deadline.
 

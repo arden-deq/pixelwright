@@ -1,0 +1,216 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 796,
+    "height": 128
+  },
+  "logical_size": {
+    "width": 199,
+    "height": 32
+  },
+  "cell_size": {
+    "width": 4,
+    "height": 4
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "86068f03b8f2c5e5cfd65f3a69f4a272c04b7485eaee41a9cad52edfa2fe9f7b",
+    "decoded_rgba_sha256": "74c5af51ac09bba06c15f7330401bb94b37431a16dfe11c0193d285e581408bf",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "rendered.png",
+    "source_sha256_after_audit": "86068f03b8f2c5e5cfd65f3a69f4a272c04b7485eaee41a9cad52edfa2fe9f7b",
+    "profile_path": "profile.json",
+    "profile_sha256": "2388ee22df1557676fd0082d3adc1a381e42cebf882f56be2200ce1fa0ded6f4"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 13,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 6368,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 6368,
+    "visible_rgb_colors_source": 11,
+    "visible_rgb_colors_logical_preview": 11,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 19,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 199,
+    "height": 32
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 13,
+      "y": 6
+    },
+    {
+      "x": 63,
+      "y": 6
+    },
+    {
+      "x": 88,
+      "y": 6
+    },
+    {
+      "x": 113,
+      "y": 6
+    },
+    {
+      "x": 163,
+      "y": 6
+    },
+    {
+      "x": 188,
+      "y": 6
+    },
+    {
+      "x": 38,
+      "y": 7
+    },
+    {
+      "x": 138,
+      "y": 7
+    },
+    {
+      "x": 10,
+      "y": 11
+    },
+    {
+      "x": 185,
+      "y": 11
+    },
+    {
+      "x": 35,
+      "y": 12
+    },
+    {
+      "x": 11,
+      "y": 13
+    },
+    {
+      "x": 134,
+      "y": 17
+    },
+    {
+      "x": 60,
+      "y": 20
+    },
+    {
+      "x": 84,
+      "y": 20
+    },
+    {
+      "x": 109,
+      "y": 20
+    },
+    {
+      "x": 36,
+      "y": 21
+    },
+    {
+      "x": 134,
+      "y": 21
+    },
+    {
+      "x": 160,
+      "y": 21
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "19 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 796,
+      "height": 128
+    },
+    "logical_size": {
+      "width": 199,
+      "height": 32
+    },
+    "expected_render_size": {
+      "width": 796,
+      "height": 128
+    },
+    "scale_x": 4.0,
+    "scale_y": 4.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 4,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Walk cycle sheet",
+    "logical_size": "199x32",
+    "scale": 4,
+    "max_colors": 13,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#1E1A2B",
+      "#24477A",
+      "#2A2230",
+      "#2C5A92",
+      "#363A45",
+      "#3F7CC4",
+      "#454B57",
+      "#59606E",
+      "#5A3420",
+      "#6B3F22",
+      "#7A4A2C",
+      "#C88A60",
+      "#F0C090"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 4,
+      "y": 4
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_sprite_sheet"
+}

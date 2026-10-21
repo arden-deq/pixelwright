@@ -26,7 +26,7 @@ class PackagingTests(unittest.TestCase):
         package.write_zip(self.archive, self.entries, "pixelwright")
         self.assertTrue(package.verify(self.archive)["verified"])
 
-    def test_installation_includes_palette_workflow_resources(self):
+    def test_installation_includes_palette_and_sprite_resources(self):
         entries = package.collect(package.ROOT / "pixelwright", "pixelwright", include_tests=False)
         for name in ("LICENSE", "NOTICE", "SECURITY.md"):
             entries[f"pixelwright/{name}"] = (package.ROOT / name).read_bytes()
@@ -36,7 +36,10 @@ class PackagingTests(unittest.TestCase):
             members = set(archive.namelist())
         for relative in ("scripts/pixel_palette.py", "references/palettes.md",
                          "examples/palette-demo/palette.json", "examples/palette-demo/profile.json",
-                         "examples/palette-demo/artwork.json"):
+                         "examples/palette-demo/artwork.json", "scripts/pixel_sprite.py",
+                         "references/sprites.md", "examples/sprite-walk/spec.json",
+                         "examples/sprite-walk/profile.json", "examples/sprite-lever/spec.json",
+                         "examples/sprite-lever/profile.json"):
             with self.subTest(relative=relative):
                 self.assertIn(f"pixelwright/{relative}", members)
         self.assertFalse(any(name.startswith("pixelwright/tests/") for name in members))

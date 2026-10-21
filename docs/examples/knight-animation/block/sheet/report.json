@@ -1,0 +1,278 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 2324,
+    "height": 480
+  },
+  "logical_size": {
+    "width": 1162,
+    "height": 240
+  },
+  "cell_size": {
+    "width": 2,
+    "height": 2
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "85f574fe3b22c90513c2f765162d25a72aa075141a82375fd628078ec80e00de",
+    "decoded_rgba_sha256": "bfb323b87c6ec98c1e7e3fc8cdb65e021c20ca901ddcc3eae5691880c8745226",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "rendered.png",
+    "source_sha256_after_audit": "85f574fe3b22c90513c2f765162d25a72aa075141a82375fd628078ec80e00de",
+    "profile_path": "profile.json",
+    "profile_sha256": "4e1149e975b671664beac96974de0058a59318aa9da96b3f1a6b2d600da0d55c"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 31,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 278880,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 278880,
+    "visible_rgb_colors_source": 31,
+    "visible_rgb_colors_logical_preview": 31,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 19563,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 1162,
+    "height": 240
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 112,
+      "y": 42
+    },
+    {
+      "x": 113,
+      "y": 42
+    },
+    {
+      "x": 114,
+      "y": 42
+    },
+    {
+      "x": 115,
+      "y": 42
+    },
+    {
+      "x": 111,
+      "y": 43
+    },
+    {
+      "x": 112,
+      "y": 43
+    },
+    {
+      "x": 113,
+      "y": 43
+    },
+    {
+      "x": 306,
+      "y": 43
+    },
+    {
+      "x": 307,
+      "y": 43
+    },
+    {
+      "x": 308,
+      "y": 43
+    },
+    {
+      "x": 309,
+      "y": 43
+    },
+    {
+      "x": 1082,
+      "y": 43
+    },
+    {
+      "x": 1083,
+      "y": 43
+    },
+    {
+      "x": 1084,
+      "y": 43
+    },
+    {
+      "x": 1085,
+      "y": 43
+    },
+    {
+      "x": 110,
+      "y": 44
+    },
+    {
+      "x": 113,
+      "y": 44
+    },
+    {
+      "x": 117,
+      "y": 44
+    },
+    {
+      "x": 305,
+      "y": 44
+    },
+    {
+      "x": 306,
+      "y": 44
+    },
+    {
+      "x": 307,
+      "y": 44
+    },
+    {
+      "x": 500,
+      "y": 44
+    },
+    {
+      "x": 501,
+      "y": 44
+    },
+    {
+      "x": 502,
+      "y": 44
+    },
+    {
+      "x": 503,
+      "y": 44
+    },
+    {
+      "x": 694,
+      "y": 44
+    },
+    {
+      "x": 695,
+      "y": 44
+    },
+    {
+      "x": 696,
+      "y": 44
+    },
+    {
+      "x": 697,
+      "y": 44
+    },
+    {
+      "x": 888,
+      "y": 44
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "19563 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 2324,
+      "height": 480
+    },
+    "logical_size": {
+      "width": 1162,
+      "height": 240
+    },
+    "expected_render_size": {
+      "width": 2324,
+      "height": 480
+    },
+    "scale_x": 2.0,
+    "scale_y": 2.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 2,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Knight shield block sheet",
+    "logical_size": "1162x240",
+    "scale": 2,
+    "max_colors": 31,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#020202FF",
+      "#060606FF",
+      "#0B0A09FF",
+      "#191716FF",
+      "#1B0D0EFF",
+      "#1E1F21FF",
+      "#24272AFF",
+      "#2B2C2EFF",
+      "#303438FF",
+      "#321216FF",
+      "#35211FFF",
+      "#383837FF",
+      "#3D4147FF",
+      "#474541FF",
+      "#491A1FFF",
+      "#4A4D51FF",
+      "#50555CFF",
+      "#53342AFF",
+      "#58544FFF",
+      "#592025FF",
+      "#5E646DFF",
+      "#69533AFF",
+      "#6B7077FF",
+      "#716759FF",
+      "#727983FF",
+      "#867B66FF",
+      "#8A8987FF",
+      "#969AA1FF",
+      "#B5A88EFF",
+      "#CCC6BAFF",
+      "#EEEBE3FF"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 2,
+      "y": 2
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_sprite_sheet"
+}

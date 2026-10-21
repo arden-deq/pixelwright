@@ -1,4 +1,4 @@
 interface:
   display_name: "Pixelwright"
-  short_description: "Create, recolor and audit exact square-cell pixel art"
+  short_description: "Create, recolor, animate and audit exact square-cell pixel art"
   default_prompt: "Use $pixelwright to create or recolor pixel art under a declared grid and palette, then audit the exported PNG."
