@@ -47,4 +47,6 @@ python tools/verify_release.py --archive dist/pixelwright-v0.6.1.zip --out-dir .
 
 동일한 프레임을 `frame_ms=60000`으로 11회 반복하면 Pillow가 660초의 단일 hold로 합치며 GIF의 단일 지연 상한 655.35초를 넘겨 저장 오류가 발생합니다. 이 장시간 동일 프레임 병합은 이번 수정 전에도 존재한 한계이며, 위 여섯 수정의 해결 범위에 포함하지 않았습니다.
 
+이 경계는 이후 [v0.6.2 수정과 검증](VALIDATION_v062_ko.md)에서 다룹니다.
+
 이전 릴리스의 검증 기록은 [v0.6.0](VALIDATION_v060_ko.md)에 남겨 두었습니다.

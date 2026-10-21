@@ -105,6 +105,8 @@ python scripts/pixel_sprite.py check --spec examples/sprite-walk/spec.json --she
 
 GIF stores time in 10 ms ticks. Requested `durations_ms` and `total_ms` remain the game animation's original timings. For GIF previews, each delay is rounded half-up to the nearest 10 ms, with a 10 ms minimum. Any changed delay produces `GIF_TIMING_QUANTIZED` (REVIEW, exit `2`). Each animation's `preview_timing.art` and `.rig` records requested, scheduled and actual saved GIF times, frame count and loop policy. Identical adjacent frames may be combined into one hold; the saved metadata reports that combination. A readback that fails to preserve the scheduled playback produces `GIF_PREVIEW_METADATA_MISMATCH` (FAIL).
 
+GIF permits at most 655,350 ms per saved frame. When the scheduled total exceeds that limit, the preview preserves source frame boundaries to prevent an overflowing merged hold. Each spec delay is at most 60 seconds and remains within the GIF limit. Total playback time and loop policy remain unchanged, and `preview_timing` records the actual saved frames and their source positions. Shorter previews retain the existing encoding path.
+
 ## Issue codes
 
 | Code | Severity | Meaning |

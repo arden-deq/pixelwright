@@ -20,7 +20,7 @@ from typing import Any
 
 from PIL import Image
 
-VERSION = "0.6.1"
+VERSION = "0.6.2"
 MAX_RENDERED_PIXELS = 12_000_000
 MAX_SPEC_BYTES = 32 * 1024 * 1024
 _HEX_COLOR = re.compile(r"^#[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?$")

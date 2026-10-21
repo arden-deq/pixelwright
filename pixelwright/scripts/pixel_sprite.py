@@ -25,19 +25,20 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import GifImagePlugin, Image, ImageDraw
 
 import pixel_build as builder
 import pixel_qa as qa
 import pixelwright as project
 
-VERSION = "0.6.1"
+VERSION = "0.6.2"
 MAX_SPEC_BYTES = 8 * 1024 * 1024
 MAX_FRAMES = 1024
 MAX_PARTS = 64
 MAX_JOINTS = 128
 MAX_ANIMATIONS = 256
 MAX_DURATION_MS = 60_000
+GIF_MAX_DELAY_MS = 65_535 * 10
 NO_PART = "."
 MOTIONS = ("fixed", "rigid", "bone", "free")
 DEFAULTS = {"area_tolerance": 0.25, "length_tolerance": 1.0, "min_shape_match": 0.8, "max_drift": 1.0}
@@ -1386,7 +1387,25 @@ def _write_gif(path: Path, images: list[Image.Image], animation: dict[str, Any])
     if animation["loop"]:
         options["loop"] = 0
     stream = io.BytesIO()
-    images[0].save(stream, format="GIF", **options)
+    if sum(scheduled) <= GIF_MAX_DELAY_MS:
+        images[0].save(stream, format="GIF", **options)
+    else:
+        # Pillow may merge identical frames into one hold, overflowing GIF's
+        # 16-bit delay. Preserve the original boundaries for long animations;
+        # each spec duration is at most 60 s, safely below that format limit.
+        # Public frame encoders bypass merging with a palette for each frame.
+        header_info = {"duration": scheduled[0], "optimize": False}
+        if animation["loop"]:
+            header_info["loop"] = 0
+        for index, (image, duration) in enumerate(zip(images, scheduled)):
+            frame = image.convert("P", palette=Image.Palette.ADAPTIVE)
+            if index == 0:
+                for block in GifImagePlugin.getheader(frame, info=header_info)[0]:
+                    stream.write(block)
+            for block in GifImagePlugin.getdata(frame, duration=duration, disposal=2,
+                                               include_color_table=index > 0):
+                stream.write(block)
+        stream.write(b";")
     _write_new(path, stream.getvalue())
     timing: dict[str, Any] = {
         "format": "GIF", "timing_resolution_ms": 10,

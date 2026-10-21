@@ -23,7 +23,7 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw
 
-VERSION = "0.6.1"
+VERSION = "0.6.2"
 MAX_PIXELS = 12_000_000
 MAX_PREVIEW_DIMENSION = 2048
 
