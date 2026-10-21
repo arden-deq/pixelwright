@@ -1,0 +1,159 @@
+{
+  "transport": "codex_image_gen",
+  "real_service": true,
+  "model": "host-managed, not exposed",
+  "calls_in_this_3d_experiment": 8,
+  "http_wrapper_live_tested": false,
+  "final_jobs": {
+    "walk": {
+      "transport": "codex_image_gen",
+      "model": "host-managed (not exposed)",
+      "mock": false,
+      "prompt": "Perform a surgical PIXEL-ART CORRECTION to image 1, a six-pose animation sprite sheet. Keep the exact 1536x1024 canvas and exactly the same six figure positions, body parts, poses, armor, equipment, lighting, colors, empty magenta background and blank margins. Change ONLY the closed steel HELMETS in the six cells. Their current outer silhouettes are about ONE NATIVE PIXEL TOO WIDE ON EACH SIDE and slightly too tall compared to the original 3D guide in image 2. One native pixel is 4x4 canvas pixels. Redraw each helmet with its left and right outer edges 4 canvas pixels further inward, and the top edge 4 pixels lower. Preserve each helmet center, bottom neck connection and orientation. This is NOT a global shrink or a move of the figure. Image 3 is the approved base character; match that helmet's size and design. Image 4 shows joints for orientation. Target each helmet about 14-15 native pixels wide and 15-16 native pixels high including its ONE-native-pixel dark contour; match the 3D guide's exact head location. Keep the black horizontal visor and narrow brass vertical nose ridge, with clean broad pixel clusters. Do not shrink, erase or move the raised mace arm where it passes near the helmet in attack poses. Do not modify the shield, legs, hands or weapon. Preserve the excellent rest of this sprite sheet identically. Keep exactly 3 columns x 2 rows with fixed 512x512 cells, true 128x128 logical pixels per cell, exact #FF00FF background, no text, grid, shadow, blur, antialiasing or new details.",
+      "prompt_sha256": "1537c5fa42f13d459fe8b1b525a0deae17ebe5d21d6218333e29e3d787834598",
+      "inputs": {
+        "references/walk-candidate-v1.png": "2a349ac56ea86a8449a249ff43d891cbd803afc8f9ad28f39288af879cb1563b",
+        "guides/walk-volume.png": "5dfb8054b556ee20bacfc1ea186c0bb7ebcfe69ef3acda845eaffc13a279c394",
+        "references/anchor-x8.png": "2ffba189768ac47fc868f10e4913705166c53c79959903b527c71c83954c8918",
+        "guides/walk-skeleton.png": "e2f6dccc72bc061ad3c77deaab5816572398d16a098529455b2f596fa5205309"
+      },
+      "output": "raw/walk.png",
+      "output_size": [
+        1536,
+        1024
+      ],
+      "output_sha256": "de0b1b0d3eba9c161f7df5f1e5f1392cbff3c08d6dd19132d49de38a3ee23c27",
+      "source": "/Users/namjungduck/.codex/generated_images/01a15cf8-8d52-71b3-8a8d-2cc435109d80/exec-a9fce681-a6e6-43ad-b9bd-cb2378303e5e.png",
+      "frozen_contract_sha256": "5f700a0529236fc86ea62edce1fa3c48bd8fd1f9786bbd834bb4af6d48d32646"
+    },
+    "attack": {
+      "transport": "codex_image_gen",
+      "model": "host-managed (not exposed)",
+      "mock": false,
+      "prompt": "Perform a surgical PIXEL-ART CORRECTION to image 1, a six-pose animation sprite sheet. Keep the exact 1536x1024 canvas and exactly the same six figure positions, body parts, poses, armor, equipment, lighting, colors, empty magenta background and blank margins. Change ONLY the closed steel HELMETS in the six cells. Their current outer silhouettes are about ONE NATIVE PIXEL TOO WIDE ON EACH SIDE and slightly too tall compared to the original 3D guide in image 2. One native pixel is 4x4 canvas pixels. Redraw each helmet with its left and right outer edges 4 canvas pixels further inward, and the top edge 4 pixels lower. Preserve each helmet center, bottom neck connection and orientation. This is NOT a global shrink or a move of the figure. Image 3 is the approved base character; match that helmet's size and design. Image 4 shows joints for orientation. Target each helmet about 14-15 native pixels wide and 15-16 native pixels high including its ONE-native-pixel dark contour; match the 3D guide's exact head location. Keep the black horizontal visor and narrow brass vertical nose ridge, with clean broad pixel clusters. Do not shrink, erase or move the raised mace arm where it passes near the helmet in attack poses. Do not modify the shield, legs, hands or weapon. Preserve the excellent rest of this sprite sheet identically. Keep exactly 3 columns x 2 rows with fixed 512x512 cells, true 128x128 logical pixels per cell, exact #FF00FF background, no text, grid, shadow, blur, antialiasing or new details.",
+      "prompt_sha256": "1537c5fa42f13d459fe8b1b525a0deae17ebe5d21d6218333e29e3d787834598",
+      "inputs": {
+        "references/attack-candidate-v1.png": "b38ea8411bce777df228a0ffd60e5d54042fe2d549c155cf1aa64a91d03e3b26",
+        "guides/attack-volume.png": "de678389c38cff25f24ffcaea67ef7e084c86783919c29c210be638e6f072576",
+        "references/anchor-x8.png": "2ffba189768ac47fc868f10e4913705166c53c79959903b527c71c83954c8918",
+        "guides/attack-skeleton.png": "e6da74467c9d5deac2790af78713992f5d06a94137335873999419009e2f9619"
+      },
+      "output": "raw/attack.png",
+      "output_size": [
+        1536,
+        1024
+      ],
+      "output_sha256": "ce7a3759ff7d7efa9af1fce2a8bb737a348a372ff37611f165f1d15209e69f0c",
+      "source": "/Users/namjungduck/.codex/generated_images/01a15cf8-8d52-71b3-8a8d-2cc435109d80/exec-a8d6f234-bb0a-48d8-9ff3-f7fa9ce8d0bf.png",
+      "frozen_contract_sha256": "5f700a0529236fc86ea62edce1fa3c48bd8fd1f9786bbd834bb4af6d48d32646"
+    },
+    "block": {
+      "transport": "codex_image_gen",
+      "model": "host-managed (not exposed)",
+      "mock": false,
+      "prompt": "Perform a surgical PIXEL-ART CORRECTION to image 1, a six-pose animation sprite sheet. Keep the exact 1536x1024 canvas and exactly the same six figure positions, body parts, poses, armor, equipment, lighting, colors, empty magenta background and blank margins. Change ONLY the closed steel HELMETS in the six cells. Their current outer silhouettes are about ONE NATIVE PIXEL TOO WIDE ON EACH SIDE and slightly too tall compared to the original 3D guide in image 2. One native pixel is 4x4 canvas pixels. Redraw each helmet with its left and right outer edges 4 canvas pixels further inward, and the top edge 4 pixels lower. Preserve each helmet center, bottom neck connection and orientation. This is NOT a global shrink or a move of the figure. Image 3 is the approved base character; match that helmet's size and design. Image 4 shows joints for orientation. Target each helmet about 14-15 native pixels wide and 15-16 native pixels high including its ONE-native-pixel dark contour; match the 3D guide's exact head location. Keep the black horizontal visor and narrow brass vertical nose ridge, with clean broad pixel clusters. Do not shrink, erase or move the raised mace arm where it passes near the helmet in attack poses. Do not modify the shield, legs, hands or weapon. Preserve the excellent rest of this sprite sheet identically. Keep exactly 3 columns x 2 rows with fixed 512x512 cells, true 128x128 logical pixels per cell, exact #FF00FF background, no text, grid, shadow, blur, antialiasing or new details.",
+      "prompt_sha256": "1537c5fa42f13d459fe8b1b525a0deae17ebe5d21d6218333e29e3d787834598",
+      "inputs": {
+        "references/block-candidate-v1.png": "53c24cf8c2c8ddf7e23908768ddbfa676dc273fec7470134056e956f02681c6e",
+        "guides/block-volume.png": "26772a45b90a831ed6ef131f88b632a82ff10b14625549d9d48014407c38e6a8",
+        "references/anchor-x8.png": "2ffba189768ac47fc868f10e4913705166c53c79959903b527c71c83954c8918",
+        "guides/block-skeleton.png": "6ca09b79497a5897fb13ce3e1de7822d79749d265b87aa9ef438dd5a12d41b22"
+      },
+      "output": "raw/block.png",
+      "output_size": [
+        1536,
+        1024
+      ],
+      "output_sha256": "3a04969b3a192f5c93498b358db38c87a146331fe7c28d6fffe5fc6251b68473",
+      "source": "/Users/namjungduck/.codex/generated_images/01a15cf8-8d52-71b3-8a8d-2cc435109d80/exec-a7074e40-9386-4e7c-b135-afdf9c1e98d7.png",
+      "frozen_contract_sha256": "5f700a0529236fc86ea62edce1fa3c48bd8fd1f9786bbd834bb4af6d48d32646"
+    },
+    "anchor": {
+      "transport": "codex_image_gen",
+      "model": "host-managed (not exposed)",
+      "mock": false,
+      "prompt": "Edit image 1 into a finished, hand-drawn 2D pixel-art game sprite. Preserve image 1's WHOLE CANVAS composition exactly. The source is a real 3D rig seen through a fixed orthographic camera; keep the same pose, perspective, occlusion, armor volumes and every landmark. Do not zoom or auto-crop. Image 2 is ONLY a reference for crisp low-resolution pixel clusters, NOT for anatomy, pose or equipment placement. Keep the closed rectangular greathelm with black horizontal visor and narrow vertical brass nose ridge, broad round pauldrons, breastplate, segmented limbs, brown belt, red pointed kite shield at image right, flanged mace lowered at image left. On the final square canvas the character must occupy ONLY x=31.25%-67.19%, y=27.34%-88.28%. Helmet top at y=27.34%, feet bottom y=88.28%. Retain the surrounding empty margins. The helmet, upper arms, legs, shield and mace must match image 1's sizes and positions. Convert rendering into beautiful TRUE 128x128 pixel art, enlarged with nearest-neighbor squares. About 78 native pixels tall, not a huge close-up. Strong one-native-pixel dark outline, deliberate connected clusters of 2-6 pixels, 24-31 solid colors, restrained cool steel blue-gray shades, warm brass accents, rich red shield, clean specular bands drawn as pixel clusters. Readable armor panels with crisp light/shadow shapes, no scattered noise, no gradients, no tiny realistic texture, no anti-aliasing. Do NOT leave the faceted 3D polygon rendering. Empty background must be solid exact #FF00FF magenta. No cast shadow, floor, text, grid, guide lines or extra figures. The final result is a single game sprite on the exact same square full-canvas composition as image 1.",
+      "prompt_sha256": "1ced2d67536031b3153389639cf6711b1bdc0848ee85d73dfc93b27013eb574e",
+      "inputs": {
+        "guides/anchor-volume.png": "966f1d120a54cbfdf964df17542f294e81c53639cc88ff6cf418bdb4f14bb97f",
+        "references/pixel-style.png": "ffad8cdf561777507d0359f53e1ac2aeac3c84d3231b9e37b812e44888258958"
+      },
+      "output": "raw/anchor.png",
+      "output_size": [
+        1254,
+        1254
+      ],
+      "output_sha256": "f0d9a9d70464300f41635edba6323bef135a26e55b1f75817cc39039080e6a99",
+      "source": "/Users/namjungduck/.codex/generated_images/01a15cf8-8d52-71b3-8a8d-2cc435109d80/exec-366c7cbd-f327-419f-ac1d-e368c11c91a9.png",
+      "frozen_contract_sha256": "5f700a0529236fc86ea62edce1fa3c48bd8fd1f9786bbd834bb4af6d48d32646"
+    }
+  },
+  "earlier_candidate_results": {
+    "initial_anchor": "failed projected-part and head drift checks",
+    "first_three_state_sheets": "pixel PASS; head ROI size FAIL",
+    "targeted_helmet_redraw": "all 18 pose checks PASS"
+  },
+  "conversion": "Whole-canvas registered lattice, one shared 19-color palette, canonical binary alpha; no per-frame fit.",
+  "base_calibration": {
+    "status": "calibrated_not_art_approval",
+    "source": "raw/anchor.png",
+    "source_sha256": "f0d9a9d70464300f41635edba6323bef135a26e55b1f75817cc39039080e6a99",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "logical_size": [
+      128,
+      128
+    ],
+    "uniform_base_scale": 0.9583333333333334,
+    "source_box": [
+      39,
+      28,
+      87,
+      108
+    ],
+    "target_box": [
+      40,
+      35,
+      86,
+      113
+    ],
+    "placed_origin": [
+      40,
+      36
+    ],
+    "pose_check": {
+      "status": "pass",
+      "metrics": {
+        "iou": 0.8702702702702703,
+        "coverage": 1.0,
+        "precision": 1.0,
+        "actual_cells": 1928,
+        "guide_cells": 1878,
+        "head_roi_area_ratio": 1.0576131687242798,
+        "head_roi_center_error_cells": 1.1742361778775785,
+        "part_region_coverage": {
+          "torso": 1.0,
+          "head": 1.0,
+          "upper_arm_r": 0.9479166666666666,
+          "forearm_r": 1.0,
+          "mace": 1.0,
+          "upper_arm_l": 1.0,
+          "forearm_l": 1.0,
+          "shield": 1.0,
+          "thigh_r": 1.0,
+          "shin_r": 1.0,
+          "foot_r": 0.9390243902439024,
+          "thigh_l": 1.0,
+          "shin_l": 1.0,
+          "foot_l": 1.0
+        }
+      },
+      "issues": [],
+      "scope": "registered_silhouette_and_projected_regions_not_generated_semantic_segmentation"
+    },
+    "disclosure": "One-time identity calibration before state generation; raw preserved. No motion frame fitting."
+  },
+  "reference_repository": "https://github.com/aldegad/sprite-gen/tree/59b2738a2e76ed7043d9691a230396ed6374a336"
+}

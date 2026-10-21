@@ -1,0 +1,11 @@
+{
+  "status": "pass",
+  "max_bone_length_error_m": 3.3306690738754696e-16,
+  "max_projection_error_cells": 0.0,
+  "issues": [],
+  "blender_version": "5.2.2 LTS",
+  "max_blender_projection_error_cells": 1.2829501048579094e-05,
+  "max_armature_joint_error_m": 4.917383193969727e-07,
+  "max_mesh_edge_error_m": 3.7137425358546583e-07,
+  "mesh_object_count": 38
+}
