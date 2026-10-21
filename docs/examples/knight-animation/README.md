@@ -2,6 +2,8 @@
 
 The full plate knight from the README header, animated with `pixel_sprite.py`: a mace swing, a shield block and a walk cycle. Every animation passes the strict sheet audit and the declared rig check with the default tolerances.
 
+These frames turn cut-out parts of the published knight. For frames drawn new on each skeleton instead, see the [skeleton-first generation kit](poses/).
+
 | Mace swing | Shield block | Walk |
 | --- | --- | --- |
 | ![Mace swing](swing/animations/swing.gif) | ![Shield block](block/animations/block.gif) | ![Walk cycle](walk/animations/walk.gif) |

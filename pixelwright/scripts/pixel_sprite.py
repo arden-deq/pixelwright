@@ -1196,9 +1196,11 @@ def _rig_panels(index: int, frame: np.ndarray, rig: Rig, check: _RigCheck, k: in
 
     for panel in (art_panel, part_panel):
         draw = ImageDraw.Draw(panel, "RGBA")
+        inset = 1 if k >= 3 else 0  # below 3 px a cell has no room for an inset outline
         for expected in check.expected[index].values():
             for y, x in np.argwhere(expected):
-                draw.rectangle((x * k + 1, y * k + 1, (x + 1) * k - 2, (y + 1) * k - 2), outline=(255, 255, 255, 230))
+                draw.rectangle((x * k + inset, y * k + inset, (x + 1) * k - 1 - inset, (y + 1) * k - 1 - inset),
+                               outline=(255, 255, 255, 230))
         for y, x in np.argwhere(check.marks[index]):
             draw.rectangle((x * k, y * k, (x + 1) * k - 1, (y + 1) * k - 1), outline=(255, 40, 40, 255),
                            width=max(1, k // 6))

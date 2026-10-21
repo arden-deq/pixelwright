@@ -5,6 +5,7 @@ Fixture sheets are composed here from explicit RGBA cells and repeated with
 NumPy, not by the sprite builder. Each rig test changes one property of a
 consistent two-frame motion and expects the corresponding issue code.
 """
+import base64
 import contextlib
 import copy
 import hashlib
@@ -17,18 +18,22 @@ import unittest.mock
 from pathlib import Path
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 import generate_knight_animations as knight
 import generate_sprite_examples as examples
+import knight_from_generated as generated
+import knight_generate_frames as generation
+import knight_pose_guides as guides
 import pixel_sprite as sprite
 
 COLORS = {"A": (160, 32, 48, 255), "B": (32, 80, 176, 255), "C": (240, 192, 64, 255), "D": (40, 160, 90, 255)}
 HEX = {key: "#%02X%02X%02X" % value[:3] for key, value in COLORS.items()}
 EXAMPLES = Path(__file__).resolve().parents[1] / "examples"
 KNIGHT_ANIMATIONS = Path(__file__).resolve().parents[2] / "docs" / "examples" / "knight-animation"
+POSE_KIT = KNIGHT_ANIMATIONS / "poses"
 
 
 def digest(path):
@@ -380,6 +385,13 @@ class RigTests(SpriteCase):
         codes = self.codes(self.run_motion(wrong_pose))
         self.assertIn(("PART_OFF_SKELETON", 1, "arm"), codes)
         self.assertIn(("JOINT_OFF_PART", 1, "arm"), codes)
+        # Large frames preview at 1-2 px per cell; expected-dot outlines must still draw there.
+        for scale in (1, 2):
+            summary = sprite.check_sheet(self.root / "spec.json", self.root / "sheet.png", self.root / "profile.json",
+                                         self.root / f"small-{scale}", scale=scale)
+            self.assertIn(("PART_OFF_SKELETON", 1, "arm"), self.codes(summary))
+            with Image.open(self.root / f"small-{scale}" / "animations" / "move-rig.gif") as preview:
+                self.assertEqual(preview.n_frames, 2)
 
     def test_bone_length_must_stay_within_tolerance(self):
         def stretch(frames, joints, rig):
@@ -643,6 +655,134 @@ class KnightAnimationTests(unittest.TestCase):
         self.assertEqual(summary["status"], "pass", summary["issues"])
         self.assertEqual(len(summary["rig"]["parts"]), 10)
         self.assertEqual(summary["rig"]["parts"]["shield"]["frames"][2]["offset"], [-10, -1])
+
+
+def draw_on_skeleton(joints, canvas, frame_size, mace_shift=0):
+    """Stand in for a generated frame: plain shapes drawn exactly on the skeleton, at canvas size."""
+    k = canvas[0] / frame_size[0]
+    j = {name: (x * k, y * k) for name, (x, y) in joints.items()}
+    for name in ("hand_r", "mace_head"):
+        j[name] = (j[name][0] + mace_shift * k, j[name][1])
+    image = Image.new("RGBA", tuple(canvas), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(image)
+
+    def capsule(a, b, radius, color):
+        draw.line([j[a], j[b]], fill=color, width=round(2 * radius * k))
+        for x, y in (j[a], j[b]):
+            draw.ellipse((x - radius * k, y - radius * k, x + radius * k, y + radius * k), fill=color)
+
+    capsule("hand_r", "mace_head", 1.6, (90, 92, 98))
+    capsule("mace_head", "mace_head", 7, (60, 62, 70))
+    for a, b, radius, color in [("shoulder_r", "elbow_r", 5, (150, 155, 165)), ("elbow_r", "hand_r", 4.5, (170, 175, 185)),
+                                ("knee_l", "ankle_l", 5, (120, 124, 132)), ("ankle_l", "toe_l", 3.5, (60, 50, 40)),
+                                ("hip_l", "knee_l", 6, (130, 134, 142)), ("knee_r", "ankle_r", 5, (150, 155, 165)),
+                                ("ankle_r", "toe_r", 3.5, (70, 58, 46)), ("hip_r", "knee_r", 6, (160, 165, 175))]:
+        capsule(a, b, radius, color)
+    draw.polygon([j[n] for n in ("shoulder_r", "neck", "shoulder_l", "hip_l", "pelvis", "hip_r")], fill=(185, 190, 198))
+    capsule("neck", "pelvis", 9, (175, 180, 190))
+    capsule("shoulder_l", "elbow_l", 4.5, (140, 145, 155))
+    capsule("elbow_l", "hand_l", 4, (140, 145, 155))
+    capsule("crown", "neck", 10, (200, 205, 212))
+    hx, hy = j["hand_l"]
+    kite = [(hx + dx * k, hy + dy * k) for dx, dy in [(-20, -28), (14, -32), (16, 8), (-4, 46), (-20, 18)]]
+    draw.polygon(kite, fill=(120, 30, 40), outline=(200, 200, 205), width=round(2 * k))
+    return image
+
+
+class GeneratedKnightPipelineTests(unittest.TestCase):
+    def test_pose_kit_is_reproducible_and_uses_no_readme_pixels(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with unittest.mock.patch.object(sys, "argv", ["knight_pose_guides.py", "--out-dir", tmp]):
+                guides.main()
+            for file in ("poses.json", "prompts.json"):
+                self.assertEqual((Path(tmp) / file).read_bytes(), (POSE_KIT / file).read_bytes(), file)
+        prompts = json.loads((POSE_KIT / "prompts.json").read_text(encoding="utf-8"))
+        anchor = json.loads((POSE_KIT / "poses.json").read_text(encoding="utf-8"))["anchor"]
+        self.assertEqual(next(iter(prompts)), "swing/00")
+        self.assertEqual(prompts["swing/00"]["images"], ["swing/pose_00.png"])
+        for key, entry in list(prompts.items())[1:]:
+            self.assertEqual(entry["images"], [anchor, key.replace("/", "/pose_") + ".png"])
+        self.assertFalse((POSE_KIT / "reference.png").exists())
+
+    def test_pose_kit_never_stretches_a_bone(self):
+        kit = json.loads((POSE_KIT / "poses.json").read_text(encoding="utf-8"))
+        for name, animation in kit["animations"].items():
+            for a, b in kit["bones"]:
+                lengths = [np.hypot(*np.subtract(joints[b], joints[a])) for joints in animation["joints"]]
+                with self.subTest(animation=name, bone=(a, b)):
+                    self.assertLess(max(lengths) - min(lengths), 0.05)
+
+    def test_generation_requests_anchor_first_and_keeps_existing_frames(self):
+        calls = []
+
+        def answer(request, timeout):
+            calls.append(request)
+            png = io.BytesIO()
+            Image.new("RGBA", (1024, 1536), (0, 0, 0, 0)).save(png, "PNG")
+            body = json.dumps({"data": [{"b64_json": base64.b64encode(png.getvalue()).decode()}]})
+            return contextlib.closing(io.BytesIO(body.encode()))
+
+        with tempfile.TemporaryDirectory() as tmp:
+            kit = Path(tmp) / "kit"
+            kit.mkdir()
+            for file in ("poses.json", "prompts.json"):
+                (kit / file).write_bytes((POSE_KIT / file).read_bytes())
+            (kit / "swing").mkdir()
+            (kit / "block").mkdir()
+            for path in [*POSE_KIT.glob("swing/pose_*.png"), *POSE_KIT.glob("block/pose_*.png")]:
+                (kit / path.parent.name / path.name).write_bytes(path.read_bytes())
+            argv = ["knight_generate_frames.py", "--poses", str(kit), "--animation", "block"]
+            with unittest.mock.patch.dict("os.environ", {"OPENAI_API_KEY": "test-key"}), \
+                    unittest.mock.patch.object(generation.urllib.request, "urlopen", answer), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                for _ in range(2):
+                    with unittest.mock.patch.object(sys, "argv", argv):
+                        self.assertEqual(generation.main(), 0)
+            manifest = json.loads((kit / "generated" / "manifest.json").read_text(encoding="utf-8"))
+            anchor = (kit / "generated" / "swing" / "frame_00.png").read_bytes()
+        # The anchor comes first and alone; every block frame sends it before its own guide; a rerun sends nothing.
+        self.assertEqual(len(calls), 7)
+        self.assertEqual(sorted(manifest), ["block/0%d" % i for i in range(6)] + ["swing/00"])
+        first, second = calls[0], calls[1]
+        self.assertEqual(first.full_url, "https://api.openai.com/v1/images/edits")
+        self.assertEqual(first.get_header("Authorization"), "Bearer test-key")
+        self.assertEqual(first.data.count(b'name="image[]"'), 1)
+        self.assertEqual(second.data.count(b'name="image[]"'), 2)
+        self.assertIn(b'name="size"\r\n\r\n1024x1536', first.data)
+        self.assertLess(second.data.index(anchor), second.data.index(b"1-pose_00.png"))
+        self.assertEqual(manifest["block/01"]["inputs"]["generated/swing/frame_00.png"], hashlib.sha256(anchor).hexdigest())
+
+    def run_projection(self, mace_shift_frame=None):
+        kit_record = json.loads((POSE_KIT / "poses.json").read_text(encoding="utf-8"))
+        chosen = [0, 4, 6]  # ready, downswing and smash keep the test quick
+        swing = kit_record["animations"]["swing"]
+        kit_record["animations"] = {"swing": {"durations_ms": [swing["durations_ms"][i] for i in chosen],
+                                              "joints": [swing["joints"][i] for i in chosen]}}
+        holder = tempfile.TemporaryDirectory()
+        self.addCleanup(holder.cleanup)
+        tmp = Path(holder.name)
+        kit = tmp / "kit"
+        (kit / "generated" / "swing").mkdir(parents=True)
+        (kit / "poses.json").write_text(json.dumps(kit_record), encoding="utf-8")
+        for index, joints in enumerate(kit_record["animations"]["swing"]["joints"]):
+            shift = 40 if index == mace_shift_frame else 0
+            draw_on_skeleton(joints, kit_record["canvas"], kit_record["frame_size"], shift).save(
+                kit / "generated" / "swing" / f"frame_{index:02d}.png")
+        argv = ["knight_from_generated.py", "--poses", str(kit), "--out-dir", str(tmp / "out")]
+        with unittest.mock.patch.object(sys, "argv", argv), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(generated.main(), 0)
+        spec = json.loads((tmp / "out" / "swing" / "spec.json").read_text(encoding="utf-8"))
+        report = json.loads((tmp / "out" / "swing" / "check" / "sprite_report.json").read_text(encoding="utf-8"))
+        return spec, report
+
+    def test_frames_drawn_on_the_skeleton_pass_and_a_misplaced_mace_fails(self):
+        spec, report = self.run_projection()
+        self.assertLessEqual(len(spec["palette"]), 32)
+        self.assertEqual(report["issue_counts"]["fail"], 0, [i for i in report["issues"] if i["severity"] == "fail"])
+        _, report = self.run_projection(mace_shift_frame=1)
+        codes = {(i["code"], i.get("frame"), i.get("part")) for i in report["issues"]}
+        self.assertIn(("PART_OFF_SKELETON", 1, "mace"), codes)
+        self.assertNotIn(("PART_OFF_SKELETON", 2, "mace"), codes)
 
 
 if __name__ == "__main__":

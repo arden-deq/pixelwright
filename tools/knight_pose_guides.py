@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Compose skeleton keyframes for the README knight and write an image-generation kit.
+"""Compose skeleton keyframes for a knight and write an image-generation kit.
 
 The skeleton comes first: arm angles use forward kinematics, legs use
 two-bone IK with planted feet, and hips follow the pelvis so crouches bend the
-knees. For every frame the kit holds an OpenPose-style guide on the same
-1024x1536 canvas as a reference image of the knight at rest, plus a prompt that
-asks an image model to redraw that same knight in the pose. Generated frames
-are unverified candidates until they are projected onto the grid and pass
+knees. Proportions are measured from the README knight so the sprite keeps its
+128x192-cell size, but no pixels of that image are reused: the first swing frame
+is drawn new from its guide and a text design, and every other frame is
+redrawn from that first frame and its own guide. Generated frames are
+unverified candidates until they are projected onto the grid and pass
 `pixel_sprite.py check`.
 """
 import argparse
@@ -18,7 +19,6 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[1]
-KNIGHT = ROOT / "docs" / "examples" / "knight" / "8px" / "native.png"
 OUT = ROOT / "docs" / "examples" / "knight-animation" / "poses"
 FRAME = (192, 288)   # logical cells; 2:3 like the 1024x1536 generation canvas
 OFFSET = (48, 56)    # the knight's 128x192 cells sit here at the rest pose
@@ -91,6 +91,10 @@ def pose(spec):
     for side in ("r", "l"):
         fx, fy = spec.get("feet", {}).get(side, (0, 0))
         ankle = (REST[f"ankle_{side}"][0] + fx, REST[f"ankle_{side}"][1] + fy)
+        hip, reach = j[f"hip_{side}"], L[f"thigh_{side}"] + L[f"shin_{side}"] - 0.05
+        if dist(hip, ankle) > reach:  # legs never stretch: a straight leg lifts the foot instead
+            scale = reach / dist(hip, ankle)
+            ankle = (hip[0] + (ankle[0] - hip[0]) * scale, hip[1] + (ankle[1] - hip[1]) * scale)
         prefer = (REST[f"knee_{side}"][0] + bx + (-6 if side == "r" else 2), REST[f"knee_{side}"][1] + by)
         j[f"ankle_{side}"] = ankle
         j[f"knee_{side}"] = knee(j[f"hip_{side}"], ankle, L[f"thigh_{side}"], L[f"shin_{side}"], prefer)
@@ -133,11 +137,9 @@ ANIMATIONS = {
 }
 
 
-def draw(joints, k, ghost=None, shield=True):
+def draw(joints, k, shield=True):
     w, h = round(FRAME[0] * k), round(FRAME[1] * k)
     img = Image.new("RGB", (w, h), (0, 0, 0))
-    if ghost is not None:
-        img.paste(ghost, (0, 0))
     d = ImageDraw.Draw(img)
     P = lambda n: (joints[n][0] * k, joints[n][1] * k)
     if shield:  # kite shield outline held at the left hand
@@ -184,14 +186,23 @@ DESCRIPTIONS = {
              "passing pose: right leg lifting and swinging forward",
              "right leg reaching forward"],
 }
-PROMPT = ("Image 1 is the reference knight; image 2 is a pose skeleton on the same canvas. Redraw the SAME knight "
-          "with identical full plate armor, helmet visor, gold-trimmed plates, brown leather straps, dark red kite "
-          "shield with a steel boss and flanged mace, the same 32-color pixel-art palette, size and upper-left "
-          "lighting, in exactly the pose of the skeleton: {pose}. Keep the 3/4 front view facing left, the same body "
-          "proportions and scale, and line every joint up with the skeleton (head, shoulders, elbows, hands, hips, "
-          "knees, ankles, mace head; the dark red outline marks the shield). The whole knight stays inside the canvas. "
-          "Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, "
+DESIGN = ("a knight in full steel plate armor with a closed great helm and a narrow visor slit, brass-trimmed plate "
+          "edges, a brown leather belt and straps, a dark red kite shield with a steel rim and boss strapped to his left "
+          "forearm, and a flanged steel mace in his right hand")
+STYLE = ("Detailed pixel art with crisp square pixels about 5 canvas pixels wide (the knight is about 190 sprite pixels "
+         "tall), at most 32 colors, dark outlines and lighting from the upper left; 3/4 front view facing left.")
+JOINTS = ("Line every joint up with the skeleton (head, shoulders, elbows, hands, hips, knees, ankles, mace head); the "
+          "dark red outline marks the shield, the gray line and circle mark the mace. The whole knight stays inside the "
+          "canvas. Transparent background (flat #FF00FF if transparency is unavailable), no shadow, no ground, no text, "
           "no extra objects.")
+ANCHOR = ("swing", 0)  # drawn first; every other frame is redrawn from it
+ANCHOR_PROMPT = ("Image 1 is a pose skeleton on a 1024x1536 canvas. Draw a new pixel-art game sprite of " + DESIGN +
+                 ", in exactly the pose of the skeleton: {pose}. " + STYLE + " The figure matches the skeleton's scale. "
+                 + JOINTS)
+FRAME_PROMPT = ("Image 1 is a pixel-art knight sprite; image 2 is a pose skeleton on the same canvas. Redraw the SAME "
+                "knight, with identical armor, helmet, trim, straps, shield, mace, colors, palette and pixel size, in "
+                "exactly the pose of the skeleton: {pose}. Keep the 3/4 front view facing left and the same body "
+                "proportions and scale. " + JOINTS)
 
 
 def main():
@@ -201,13 +212,9 @@ def main():
     out = args.out_dir
     out.mkdir(parents=True, exist_ok=True)
     k = CANVAS[0] / FRAME[0]
-    knight = Image.open(KNIGHT).convert("RGBA")
-    reference = Image.new("RGBA", CANVAS, (0, 0, 0, 0))
-    scaled = knight.resize((round(knight.width * k), round(knight.height * k)), Image.Resampling.NEAREST)
-    reference.alpha_composite(scaled, (round(OFFSET[0] * k), round(OFFSET[1] * k)))
-    reference.save(out / "reference.png")
+    anchor_output = f"generated/{ANCHOR[0]}/frame_{ANCHOR[1]:02d}.png"
     record = {"frame_size": list(FRAME), "canvas": list(CANVAS), "offset": list(OFFSET), "rest": REST,
-              "bones": [[a, b] for a, b, _ in BONES], "animations": {}}
+              "bones": [[a, b] for a, b, _ in BONES], "anchor": anchor_output, "animations": {}}
     prompts = {}
     for name, animation in ANIMATIONS.items():
         poses = [pose(spec) for spec in animation["frames"]]
@@ -215,17 +222,17 @@ def main():
         (out / name).mkdir(exist_ok=True)
         previews = []
         for index, joints in enumerate(poses):
-            draw(joints, k).save(out / name / f"pose_{index:02d}.png")
-            ghost = Image.new("RGBA", FRAME, (0, 0, 0, 255))
-            faint = knight.copy()
-            faint.putalpha(Image.eval(knight.getchannel("A"), lambda a: 55 if a else 0))
-            ghost.alpha_composite(faint, OFFSET)
-            previews.append(draw(joints, 2, ghost.convert("RGB").resize((FRAME[0] * 2, FRAME[1] * 2), Image.Resampling.NEAREST)))
-            prompts[f"{name}/{index:02d}"] = {"images": ["reference.png", f"{name}/pose_{index:02d}.png"],
-                                               "output": f"generated/{name}/frame_{index:02d}.png",
-                                               "prompt": PROMPT.format(pose=DESCRIPTIONS[name][index])}
+            guide = f"{name}/pose_{index:02d}.png"
+            draw(joints, k).save(out / guide)
+            previews.append(draw(joints, 2))
+            entry = ({"images": [guide], "prompt": ANCHOR_PROMPT.format(pose=DESCRIPTIONS[name][index])}
+                     if (name, index) == ANCHOR else
+                     {"images": [anchor_output, guide], "prompt": FRAME_PROMPT.format(pose=DESCRIPTIONS[name][index])})
+            prompts[f"{name}/{index:02d}"] = {**entry, "output": f"generated/{name}/frame_{index:02d}.png"}
         previews[0].save(out / f"{name}-skeleton.gif", save_all=True, append_images=previews[1:],
                          duration=animation["durations_ms"], loop=0)
+    # The anchor is generated first because every other prompt reads it.
+    prompts = {f"{ANCHOR[0]}/{ANCHOR[1]:02d}": prompts.pop(f"{ANCHOR[0]}/{ANCHOR[1]:02d}"), **prompts}
     (out / "poses.json").write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8")
     (out / "prompts.json").write_text(json.dumps(prompts, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return 0
