@@ -1,0 +1,133 @@
+{
+  "role": "Second input: declared 2D motion placement only. Orange near leg, cyan far leg. Ignore guide colors, lines and text in final artwork. First input is selected knight appearance.",
+  "frames": [
+    {
+      "frame": 0,
+      "pelvis": [
+        65,
+        65
+      ],
+      "near_ankle": [
+        78,
+        106
+      ],
+      "far_ankle": [
+        62,
+        103
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    },
+    {
+      "frame": 1,
+      "pelvis": [
+        66,
+        67
+      ],
+      "near_ankle": [
+        74,
+        106
+      ],
+      "far_ankle": [
+        58,
+        99
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    },
+    {
+      "frame": 2,
+      "pelvis": [
+        66,
+        65
+      ],
+      "near_ankle": [
+        70,
+        106
+      ],
+      "far_ankle": [
+        64,
+        97
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    },
+    {
+      "frame": 3,
+      "pelvis": [
+        65,
+        63
+      ],
+      "near_ankle": [
+        66,
+        104
+      ],
+      "far_ankle": [
+        74,
+        99
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    },
+    {
+      "frame": 4,
+      "pelvis": [
+        65,
+        65
+      ],
+      "near_ankle": [
+        62,
+        106
+      ],
+      "far_ankle": [
+        78,
+        103
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    },
+    {
+      "frame": 5,
+      "pelvis": [
+        64,
+        67
+      ],
+      "near_ankle": [
+        58,
+        102
+      ],
+      "far_ankle": [
+        74,
+        103
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    },
+    {
+      "frame": 6,
+      "pelvis": [
+        64,
+        65
+      ],
+      "near_ankle": [
+        64,
+        100
+      ],
+      "far_ankle": [
+        70,
+        103
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    },
+    {
+      "frame": 7,
+      "pelvis": [
+        65,
+        63
+      ],
+      "near_ankle": [
+        74,
+        102
+      ],
+      "far_ankle": [
+        66,
+        101
+      ],
+      "note": "Authored intended layout only; not measured artwork."
+    }
+  ]
+}

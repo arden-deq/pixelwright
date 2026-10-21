@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "0e761eecc59de2082743c33f9d0279bfc646a3a9ed8255d5c4b1d0d333214255",
+  "method": "",
+  "reference_sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+  "reference": {
+    "parts": {
+      "helmet": null,
+      "shield": null,
+      "mace_head": null,
+      "character": null
+    },
+    "landmarks": {
+      "pelvis": null,
+      "chest": null,
+      "head": null,
+      "near_ball": null,
+      "far_ball": null,
+      "near_heel": null,
+      "far_heel": null,
+      "shield_top": null,
+      "mace_center": null,
+      "mace_grip": null
+    }
+  },
+  "states": {
+    "walk": {
+      "source_sha256": "8e34d8bfec95facfda38a70bd028350509ac9fba002ad0196e57f5abbc1d5d59",
+      "frames": [
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        },
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        },
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        },
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        },
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        },
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        },
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        },
+        {
+          "parts": {
+            "helmet": null,
+            "shield": null,
+            "mace_head": null,
+            "character": null
+          },
+          "landmarks": {
+            "pelvis": null,
+            "chest": null,
+            "head": null,
+            "near_ball": null,
+            "far_ball": null,
+            "near_heel": null,
+            "far_heel": null,
+            "shield_top": null,
+            "mace_center": null,
+            "mace_grip": null
+          }
+        }
+      ],
+      "review": {
+        "status": "not_reviewed",
+        "reviewer": "",
+        "observations": []
+      }
+    }
+  }
+}

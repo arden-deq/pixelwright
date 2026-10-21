@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.6.2",
+  "spec": {
+    "schema_version": 1,
+    "name": "Crimson knight grounded walk",
+    "description": "Use-case: stylized-concept. INPUT 1 is a simple pose-placement diagram ONLY. INPUT 2 is the selected 2D knight: sole authority for appearance, camera, armor, greathelm/plume, red-gold tabard and shield, flanged mace. Redraw fresh pixel art using input 2, following input 1 only for leg motion and canvas placement. Walk toward screen-LEFT, matching the knight facing. Keep equipment on the SAME sides; never mirror the character. Crucial: character is only 88 native cells tall, from y=24 to y=112 in a 128-cell slot, with LARGE empty margins. Do not fill the slot. Use crisp low-resolution pixel clusters, not smooth painting.",
+    "frame_size": "128x128",
+    "scale": 4,
+    "max_colors": 24,
+    "derivation": {
+      "mode": "project",
+      "alpha_threshold": 128
+    },
+    "limits": {
+      "edge_margin": 4,
+      "area_ratio": [
+        0.72,
+        1.3
+      ],
+      "color_distance": 45,
+      "max_bad_color_fraction": 0.12
+    },
+    "parts": {
+      "helmet": {
+        "description": "Rigid steel helmet excluding plume, same 11-cell width and 15-cell height; preserve visor and trim.",
+        "area_tolerance": 0.25,
+        "min_shape_match": 0.6,
+        "min_color_overlap": 0.7,
+        "min_design_match": 0.42,
+        "measurements": {
+          "height": 0.15,
+          "width": 0.15
+        }
+      },
+      "shield": {
+        "description": "Rigid red shield and gold emblem/rim; same 30-cell long axis. Subtle weighted shoulder follow-through.",
+        "area_tolerance": 0.25,
+        "min_shape_match": 0.6,
+        "min_color_overlap": 0.72,
+        "min_design_match": 0.42,
+        "measurements": {
+          "height": 0.12
+        }
+      },
+      "mace_head": {
+        "description": "Small flanged mace head, same 10-cell width, always attached to its shaft. No weapon redesign.",
+        "area_tolerance": 0.3,
+        "min_shape_match": 0.5,
+        "min_color_overlap": 0.68,
+        "min_design_match": 0.35,
+        "measurements": {
+          "span": 0.15
+        }
+      },
+      "character": {
+        "description": "Remaining pixels: plume, torso, arms, belt, tabard, legs, boots, mace shaft. Preserve armor proportions; articulate knees/ankles with weight and overlap.",
+        "area_tolerance": 0.3,
+        "min_shape_match": 0.5,
+        "min_color_overlap": 0.7,
+        "min_design_match": 0.32,
+        "measurements": {
+          "near_shin": 0.16,
+          "far_shin": 0.16
+        }
+      }
+    },
+    "landmarks": {
+      "pelvis": {
+        "description": "Central belt buckle; show load absorption and alternating support shift.",
+        "part": "character"
+      },
+      "chest": {
+        "description": "Center of chest heraldry.",
+        "part": "character"
+      },
+      "head": {
+        "description": "Center of steel helmet.",
+        "part": "helmet"
+      },
+      "near_ball": {
+        "description": "Underside of near boot ball, not heel.",
+        "part": "character"
+      },
+      "far_ball": {
+        "description": "Underside of far boot ball, not heel.",
+        "part": "character"
+      },
+      "near_heel": {
+        "description": "Bottom back corner of near boot.",
+        "part": "character"
+      },
+      "far_heel": {
+        "description": "Bottom back corner of far boot.",
+        "part": "character"
+      },
+      "shield_top": {
+        "description": "Center of shield top rim.",
+        "part": "shield"
+      },
+      "mace_center": {
+        "description": "Center of flanged mace head.",
+        "part": "mace_head"
+      },
+      "mace_grip": {
+        "description": "Visible gauntlet center gripping mace shaft.",
+        "part": "character"
+      }
+    },
+    "ratios": {
+      "shield_to_helmet": {
+        "numerator": [
+          "shield",
+          "height"
+        ],
+        "denominator": [
+          "helmet",
+          "height"
+        ],
+        "tolerance": 0.15
+      },
+      "mace_to_helmet": {
+        "numerator": [
+          "mace_head",
+          "span"
+        ],
+        "denominator": [
+          "helmet",
+          "width"
+        ],
+        "tolerance": 0.18
+      },
+      "shin_balance": {
+        "numerator": [
+          "character",
+          "near_shin"
+        ],
+        "denominator": [
+          "character",
+          "far_shin"
+        ],
+        "tolerance": 0.18
+      }
+    },
+    "states": {
+      "walk": {
+        "intent": "EXACTLY 8 genuinely sequential walk poses, 4 columns x 2 rows, row-major, transparent 2:1 PNG (2048x1024). Eight 128-square logical slots in a 512x256 logical sheet. In-place leftward armored walk, 110 ms each. IMPORTANT: alternate support: NEAR leg leads in 0, FAR leg leads in 4. Frames 2/6 are single-support passing with opposite boot visibly lifted. Same frame scale; retain large margins from input 1. Stance boots move RIGHT by four native cells each frame, restoring leftward travel; no skating. Ground near=111, far=108. Pelvis absorbs load then rises 2-4 cells, subtle support sway, arms and equipment counterbalance. No duplicated endpoint, no frozen torso, no eight similar standing poses. Do not reproduce guide lines, orange/cyan colors, or text.",
+        "poses": [
+          "NEAR CONTACT: near leg forward/LEFT ankle x=50 y=106, sole at111; far trails x=66 y=103. Load transfers to near foot. Pelvis y=65.",
+          "NEAR LOAD: near boot planted ankle x=54 y=106, knee flexes, pelvis drops y=67; far heel lifts at x=70, recovery begins.",
+          "NEAR PASS: near boot planted x=58 y=106. Pelvis y=65 over near support. Far knee bends, far boot x=64 y=97 visibly airborne.",
+          "NEAR PUSH: near ankle x=62 y=104, heel lifts. Pelvis y=63. Far leg reaches LEFT ankle x=54 y=99, ready to land. Continuous into4.",
+          "FAR CONTACT: FAR leg now forward/LEFT x=50 y=103, sole108; near leg trails/RIGHT x=66 y=106. Opposite support from0. Pelvis y=65.",
+          "FAR LOAD: far boot planted x=54 y=103, knee flexed; pelvis y=67. Near heel lifts atx=70. Equipment settles a little after body.",
+          "FAR PASS: far stance x=58 y=103. Pelvis y=65 over far support. Near leg swings bent through x=64 y=100, boot off floor.",
+          "FAR PUSH: far heel lifts ankle x=62 y=101, pelvis y=63. Near leg reaches LEFT x=54 y=102 to land in0. No resting/reset pose."
+        ],
+        "columns": 4,
+        "loop": true,
+        "durations_ms": [
+          110,
+          110,
+          110,
+          110,
+          110,
+          110,
+          110,
+          110
+        ],
+        "motion": {
+          "pelvis": {
+            "min_travel": 2,
+            "max_speed": 45,
+            "max_acceleration": 650
+          },
+          "chest": {
+            "relative_to": "pelvis",
+            "min_travel": 1,
+            "max_speed": 40,
+            "max_acceleration": 650
+          },
+          "head": {
+            "relative_to": "pelvis",
+            "min_travel": 1,
+            "max_speed": 40,
+            "max_acceleration": 650
+          },
+          "near_ball": {
+            "relative_to": "pelvis",
+            "min_travel": 18,
+            "max_speed": 160,
+            "max_acceleration": 2600
+          },
+          "far_ball": {
+            "relative_to": "pelvis",
+            "min_travel": 18,
+            "max_speed": 160,
+            "max_acceleration": 2600
+          },
+          "near_heel": {
+            "relative_to": "pelvis",
+            "min_travel": 18,
+            "max_speed": 160,
+            "max_acceleration": 2600
+          },
+          "far_heel": {
+            "relative_to": "pelvis",
+            "min_travel": 18,
+            "max_speed": 160,
+            "max_acceleration": 2600
+          },
+          "shield_top": {
+            "relative_to": "pelvis",
+            "min_travel": 2,
+            "max_speed": 65,
+            "max_acceleration": 900
+          },
+          "mace_center": {
+            "relative_to": "pelvis",
+            "min_travel": 4,
+            "max_speed": 90,
+            "max_acceleration": 1300
+          },
+          "mace_grip": {
+            "relative_to": "pelvis",
+            "min_travel": 2,
+            "max_speed": 65,
+            "max_acceleration": 900
+          }
+        },
+        "distances": [
+          {
+            "a": "mace_center",
+            "b": "mace_grip",
+            "minimum": 14,
+            "maximum": 25
+          }
+        ],
+        "root_offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            -4,
+            0
+          ],
+          [
+            -8,
+            0
+          ],
+          [
+            -12,
+            0
+          ],
+          [
+            -16,
+            0
+          ],
+          [
+            -20,
+            0
+          ],
+          [
+            -24,
+            0
+          ],
+          [
+            -28,
+            0
+          ]
+        ],
+        "contacts": [
+          {
+            "landmark": "near_ball",
+            "frames": [
+              0,
+              1,
+              2
+            ],
+            "max_drift": 2,
+            "ground_y": 111,
+            "max_ground_error": 2
+          },
+          {
+            "landmark": "far_ball",
+            "frames": [
+              4,
+              5,
+              6
+            ],
+            "max_drift": 2,
+            "ground_y": 108,
+            "max_ground_error": 2
+          }
+        ],
+        "attachments": []
+      }
+    }
+  },
+  "palette": [
+    [
+      5,
+      2,
+      2,
+      255
+    ],
+    [
+      7,
+      5,
+      3,
+      255
+    ],
+    [
+      13,
+      2,
+      7,
+      255
+    ],
+    [
+      17,
+      5,
+      7,
+      255
+    ],
+    [
+      18,
+      9,
+      6,
+      255
+    ],
+    [
+      35,
+      21,
+      14,
+      255
+    ],
+    [
+      57,
+      39,
+      28,
+      255
+    ],
+    [
+      68,
+      55,
+      48,
+      255
+    ],
+    [
+      76,
+      13,
+      13,
+      255
+    ],
+    [
+      86,
+      82,
+      79,
+      255
+    ],
+    [
+      111,
+      9,
+      17,
+      255
+    ],
+    [
+      111,
+      101,
+      89,
+      255
+    ],
+    [
+      124,
+      10,
+      20,
+      255
+    ],
+    [
+      138,
+      57,
+      37,
+      255
+    ],
+    [
+      140,
+      137,
+      129,
+      255
+    ],
+    [
+      148,
+      15,
+      24,
+      255
+    ],
+    [
+      157,
+      101,
+      48,
+      255
+    ],
+    [
+      168,
+      24,
+      29,
+      255
+    ],
+    [
+      177,
+      27,
+      33,
+      255
+    ],
+    [
+      187,
+      127,
+      60,
+      255
+    ],
+    [
+      207,
+      148,
+      73,
+      255
+    ],
+    [
+      211,
+      170,
+      106,
+      255
+    ],
+    [
+      227,
+      180,
+      100,
+      255
+    ],
+    [
+      237,
+      220,
+      175,
+      255
+    ]
+  ],
+  "reference_source_sha256": "73f57324d8f20e7ea831139097d4d716d6a068d52f9d157009b02f2b2c7f5a41",
+  "spec_source_sha256": "a5b04fc3e033090d83f25bfe65e5f23cfb013d35a9da5f3d5cc4336c3e0cee93",
+  "reference_derivation": {
+    "source_size": [
+      384,
+      384
+    ],
+    "logical_size": [
+      128,
+      128
+    ],
+    "mode": "project",
+    "original_grid_status": "not_certified_projection_source",
+    "sampling": "nearest_whole_canvas",
+    "native_input_has_no_measurable_within_cell_fidelity": false
+  },
+  "skeleton_required": false
+}

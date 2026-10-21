@@ -1,0 +1,271 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.2",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 2048,
+    "height": 1024
+  },
+  "logical_size": {
+    "width": 512,
+    "height": 256
+  },
+  "cell_size": {
+    "width": 4,
+    "height": 4
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "32baa1474dea34b77d0c455e949356ff14db77fd16f6fa90b88671b38c68db82",
+    "decoded_rgba_sha256": "c7a2e52860e24f47eccd423ac05ad633c88f2a89a455cab755e4123ac2f669e1",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "rendered.png",
+    "source_sha256_after_audit": "32baa1474dea34b77d0c455e949356ff14db77fd16f6fa90b88671b38c68db82",
+    "profile_path": "profile.json",
+    "profile_sha256": "80925518789b29478d9ba5b7edcc03ec3bce785a0f85912edd4d64445a9e0832"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 24,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 131072,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 131072,
+    "visible_rgb_colors_source": 24,
+    "visible_rgb_colors_logical_preview": 24,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 7684,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 512,
+    "height": 256
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 448,
+      "y": 9
+    },
+    {
+      "x": 446,
+      "y": 10
+    },
+    {
+      "x": 447,
+      "y": 10
+    },
+    {
+      "x": 453,
+      "y": 10
+    },
+    {
+      "x": 326,
+      "y": 11
+    },
+    {
+      "x": 447,
+      "y": 11
+    },
+    {
+      "x": 448,
+      "y": 11
+    },
+    {
+      "x": 319,
+      "y": 12
+    },
+    {
+      "x": 320,
+      "y": 12
+    },
+    {
+      "x": 321,
+      "y": 12
+    },
+    {
+      "x": 326,
+      "y": 12
+    },
+    {
+      "x": 443,
+      "y": 12
+    },
+    {
+      "x": 453,
+      "y": 12
+    },
+    {
+      "x": 191,
+      "y": 13
+    },
+    {
+      "x": 192,
+      "y": 13
+    },
+    {
+      "x": 194,
+      "y": 13
+    },
+    {
+      "x": 198,
+      "y": 13
+    },
+    {
+      "x": 199,
+      "y": 13
+    },
+    {
+      "x": 318,
+      "y": 13
+    },
+    {
+      "x": 326,
+      "y": 13
+    },
+    {
+      "x": 441,
+      "y": 13
+    },
+    {
+      "x": 455,
+      "y": 13
+    },
+    {
+      "x": 456,
+      "y": 13
+    },
+    {
+      "x": 67,
+      "y": 14
+    },
+    {
+      "x": 68,
+      "y": 14
+    },
+    {
+      "x": 69,
+      "y": 14
+    },
+    {
+      "x": 188,
+      "y": 14
+    },
+    {
+      "x": 197,
+      "y": 14
+    },
+    {
+      "x": 199,
+      "y": 14
+    },
+    {
+      "x": 200,
+      "y": 14
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "7684 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 2048,
+      "height": 1024
+    },
+    "logical_size": {
+      "width": 512,
+      "height": 256
+    },
+    "expected_render_size": {
+      "width": 2048,
+      "height": 1024
+    },
+    "scale_x": 4.0,
+    "scale_y": 4.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 4,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Crimson heraldic knight — planted eight-frame walk",
+    "logical_size": "512x256",
+    "scale": 4,
+    "max_colors": 24,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#050202FF",
+      "#070503FF",
+      "#0D0207FF",
+      "#110507FF",
+      "#120906FF",
+      "#23150EFF",
+      "#39271CFF",
+      "#443730FF",
+      "#4C0D0DFF",
+      "#56524FFF",
+      "#6F0911FF",
+      "#6F6559FF",
+      "#7C0A14FF",
+      "#8A3925FF",
+      "#8C8981FF",
+      "#940F18FF",
+      "#9D6530FF",
+      "#A8181DFF",
+      "#B11B21FF",
+      "#BB7F3CFF",
+      "#CF9449FF",
+      "#D3AA6AFF",
+      "#E3B464FF",
+      "#EDDCAFFF"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 4,
+      "y": 4
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_sprite_sheet"
+}

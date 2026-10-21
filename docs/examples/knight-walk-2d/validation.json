@@ -1,0 +1,28 @@
+{
+  "environment": {
+    "python": "3.12.7",
+    "Pillow": "13.0.0",
+    "NumPy": "2.5.4"
+  },
+  "generation_calls": 3,
+  "selected_run": "run-v3",
+  "installed_runtime_sha256": "9a1801e780011e2f338bb6e3a84cba3e299c42be993260de16f8412eefa21798",
+  "independent_installed_tool_working_directory": "/tmp",
+  "independent_recheck_exit_code": 2,
+  "independent_report_identical": true,
+  "artwork_status": "fail",
+  "issue_counts": {
+    "fail": 88,
+    "review": 17,
+    "info": 1
+  },
+  "gif_readback_and_native_frame_comparison": "pass; verify_example.py",
+  "markdown_local_link_check": {
+    "documents": 3,
+    "targets": 65,
+    "missing": 0
+  },
+  "runtime_modified": false,
+  "full_unit_suite_rerun": false,
+  "scope": "New generated artifact/observations/documentation only; successful artifact verification does not accept animation quality."
+}

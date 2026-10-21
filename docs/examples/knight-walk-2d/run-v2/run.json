@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "frozen": {
+    "contract.json": "0e761eecc59de2082743c33f9d0279bfc646a3a9ed8255d5c4b1d0d333214255",
+    "reference-source.png": "73f57324d8f20e7ea831139097d4d716d6a068d52f9d157009b02f2b2c7f5a41",
+    "reference-native.png": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+    "source-spec.json": "9a0131493b5eeb53da31888322d02a3f1cd9989b64d15996287a5863550f167c",
+    "prompts/walk.txt": "d3772cd6c90b5d39c27c78e99d71afbc594d4a946ea126ccc31a3fd88457a6a8"
+  },
+  "states": {
+    "walk": {
+      "sha256": "8e34d8bfec95facfda38a70bd028350509ac9fba002ad0196e57f5abbc1d5d59",
+      "contract_sha256": "0e761eecc59de2082743c33f9d0279bfc646a3a9ed8255d5c4b1d0d333214255",
+      "reference_sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+      "prompt_sha256": "d3772cd6c90b5d39c27c78e99d71afbc594d4a946ea126ccc31a3fd88457a6a8",
+      "producer": {
+        "method": "Codex built-in image_gen; exact run-v2 frozen prompt; selected 2D design plus pose-constraints.png; model undisclosed"
+      },
+      "history": []
+    }
+  }
+}

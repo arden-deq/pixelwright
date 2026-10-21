@@ -1,0 +1,78 @@
+{
+  "tool": "Codex built-in image_gen",
+  "mode": "built-in; no CLI/HTTP adapter used",
+  "model": null,
+  "model_disclosure": "Host did not expose a model identifier.",
+  "transparent_background_requested": true,
+  "calls": 3,
+  "skeleton_3d_inputs": 0,
+  "artwork_method": "Fresh generated 2D knight artwork; optional authored 2D stick-motion constraints, not rendered armor, cutout tweening, or copied observations.",
+  "final_artwork_status": "changes_needed",
+  "human_approved": false,
+  "candidates": [
+    {
+      "run": "run",
+      "contract_sha256": "3bf9e32a83537cc8f6cb9e8b9118b8ef730de5ec5a28408730a7613e80dae00e",
+      "prompt": "run/prompts/walk.txt",
+      "prompt_sha256": "3d9be9df5b8f683b06635072c6267048904c82b7e07acd2db900cecd5747371d",
+      "prompt_sent_verbatim": true,
+      "inputs": [
+        {
+          "path": "run/reference-native.png",
+          "role": "selected identity",
+          "sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4"
+        }
+      ],
+      "raw": "run/raw/walk.png",
+      "raw_sha256": "b36725905f4c74f97502dfd397431cdffe22233307aaa34fba59aba8dc5a4ce0",
+      "audit": "candidate-1-unobserved/report.json",
+      "chosen": false
+    },
+    {
+      "run": "run-v2",
+      "contract_sha256": "0e761eecc59de2082743c33f9d0279bfc646a3a9ed8255d5c4b1d0d333214255",
+      "prompt": "run-v2/prompts/walk.txt",
+      "prompt_sha256": "d3772cd6c90b5d39c27c78e99d71afbc594d4a946ea126ccc31a3fd88457a6a8",
+      "prompt_sent_verbatim": true,
+      "inputs": [
+        {
+          "path": "run-v2/reference-source.png",
+          "role": "selected identity",
+          "sha256": "73f57324d8f20e7ea831139097d4d716d6a068d52f9d157009b02f2b2c7f5a41"
+        },
+        {
+          "path": "pose-constraints.png",
+          "role": "authored 2D motion layout only",
+          "sha256": "0dc1501b1ef35ae786dcde2d39637a95e04de6223b90a7771ff024733eeccdd8"
+        }
+      ],
+      "raw": "run-v2/raw/walk.png",
+      "raw_sha256": "8e34d8bfec95facfda38a70bd028350509ac9fba002ad0196e57f5abbc1d5d59",
+      "audit": "candidate-2-unobserved/report.json",
+      "chosen": false
+    },
+    {
+      "run": "run-v3",
+      "contract_sha256": "3ccb59a911eb510350434fa145a5a8d09d3ba2ff0c3698957649112ca8458401",
+      "prompt": "run-v3/prompts/walk.txt",
+      "prompt_sha256": "60fd3d34fd1037191e3a3e166fcfaeb6e8903890108bdb715cfc54c4a56471fd",
+      "prompt_sent_verbatim": true,
+      "inputs": [
+        {
+          "path": "pose-constraints-v3.png",
+          "role": "authored 2D motion layout only",
+          "sha256": "d0f625b7827e3723f1acb0206bc5fb32c5e801702c7e7cced2fcfb2be4acbe77"
+        },
+        {
+          "path": "run-v3/reference-source.png",
+          "role": "selected identity",
+          "sha256": "73f57324d8f20e7ea831139097d4d716d6a068d52f9d157009b02f2b2c7f5a41"
+        }
+      ],
+      "raw": "run-v3/raw/walk.png",
+      "raw_sha256": "dc0fe8307bfc78651c3903cca656b4156553eae7b4f8e69b1f021dfc6b57888c",
+      "audit": "audit/report.json",
+      "chosen": true
+    }
+  ]
+}

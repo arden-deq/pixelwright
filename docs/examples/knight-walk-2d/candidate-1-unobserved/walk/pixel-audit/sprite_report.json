@@ -1,0 +1,416 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.2",
+  "schema_version": 1,
+  "status": "pass",
+  "scope": "technical_checks_only_not_artistic_quality",
+  "artistic_status": "not_reviewed",
+  "preview_scale": 4,
+  "inputs": {
+    "spec": {
+      "path": "sprite-spec.json",
+      "sha256": "e6b15ba97ab9150f13d5c1e95d57f3f2bfe21c3124e4eb5348fb1b19a1ae593f"
+    },
+    "sheet": {
+      "path": "rendered.png",
+      "sha256": "32baa1474dea34b77d0c455e949356ff14db77fd16f6fa90b88671b38c68db82"
+    },
+    "profile": {
+      "path": "profile.json",
+      "sha256": "80925518789b29478d9ba5b7edcc03ec3bce785a0f85912edd4d64445a9e0832"
+    }
+  },
+  "name": "Crimson heraldic knight — planted eight-frame walk",
+  "contract": {
+    "schema_version": 1,
+    "name": "Crimson heraldic knight — planted eight-frame walk",
+    "logical_size": "512x256",
+    "scale": 4,
+    "max_colors": 24,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#050202FF",
+      "#070503FF",
+      "#0D0207FF",
+      "#110507FF",
+      "#120906FF",
+      "#23150EFF",
+      "#39271CFF",
+      "#443730FF",
+      "#4C0D0DFF",
+      "#56524FFF",
+      "#6F0911FF",
+      "#6F6559FF",
+      "#7C0A14FF",
+      "#8A3925FF",
+      "#8C8981FF",
+      "#940F18FF",
+      "#9D6530FF",
+      "#A8181DFF",
+      "#B11B21FF",
+      "#BB7F3CFF",
+      "#CF9449FF",
+      "#D3AA6AFF",
+      "#E3B464FF",
+      "#EDDCAFFF"
+    ]
+  },
+  "layout": {
+    "frame_size": [
+      128,
+      128
+    ],
+    "columns": 4,
+    "rows": 2,
+    "margin": 0,
+    "spacing": 0,
+    "frame_count": 8,
+    "edge_margin": 4,
+    "sheet_logical_size": [
+      512,
+      256
+    ],
+    "order": "row_major",
+    "gutter": "alpha_zero",
+    "frame_origins": [
+      [
+        0,
+        0
+      ],
+      [
+        128,
+        0
+      ],
+      [
+        256,
+        0
+      ],
+      [
+        384,
+        0
+      ],
+      [
+        0,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        256,
+        128
+      ],
+      [
+        384,
+        128
+      ]
+    ]
+  },
+  "sheet_audit": {
+    "status": "pass",
+    "report": "sheet/report.json",
+    "outputs": {
+      "report": "sheet/report.json",
+      "overlay": "sheet/grid_overlay.png",
+      "grid_lines": "sheet/grid_lines.png",
+      "logical_preview": "sheet/logical_preview.png",
+      "violation_mask": "sheet/violation_mask.png",
+      "correction_prompt": "sheet/correction_prompt.txt"
+    }
+  },
+  "checks": {
+    "frames": "checked",
+    "animations": "checked",
+    "rig": "not_declared"
+  },
+  "frames": [
+    {
+      "index": 0,
+      "slot": [
+        0,
+        0
+      ],
+      "origin": [
+        0,
+        0
+      ],
+      "visible_cells": 4354,
+      "bbox": [
+        22,
+        12,
+        107,
+        120
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 1,
+      "slot": [
+        1,
+        0
+      ],
+      "origin": [
+        128,
+        0
+      ],
+      "visible_cells": 4499,
+      "bbox": [
+        16,
+        12,
+        100,
+        121
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 2,
+      "slot": [
+        2,
+        0
+      ],
+      "origin": [
+        256,
+        0
+      ],
+      "visible_cells": 4460,
+      "bbox": [
+        10,
+        11,
+        101,
+        120
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 3,
+      "slot": [
+        3,
+        0
+      ],
+      "origin": [
+        384,
+        0
+      ],
+      "visible_cells": 4523,
+      "bbox": [
+        9,
+        9,
+        99,
+        120
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 4,
+      "slot": [
+        0,
+        1
+      ],
+      "origin": [
+        0,
+        128
+      ],
+      "visible_cells": 4377,
+      "bbox": [
+        21,
+        9,
+        107,
+        115
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 5,
+      "slot": [
+        1,
+        1
+      ],
+      "origin": [
+        128,
+        128
+      ],
+      "visible_cells": 4512,
+      "bbox": [
+        14,
+        9,
+        103,
+        116
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 6,
+      "slot": [
+        2,
+        1
+      ],
+      "origin": [
+        256,
+        128
+      ],
+      "visible_cells": 4463,
+      "bbox": [
+        14,
+        6,
+        101,
+        116
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 7,
+      "slot": [
+        3,
+        1
+      ],
+      "origin": [
+        384,
+        128
+      ],
+      "visible_cells": 4541,
+      "bbox": [
+        7,
+        6,
+        101,
+        116
+      ],
+      "status": "pass"
+    }
+  ],
+  "animations": [
+    {
+      "id": "walk",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "loop": true,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "total_ms": 880,
+      "baseline_rows": [
+        115,
+        116,
+        120,
+        121
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 8,
+          "requested_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "requested_total_ms": 880,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "quantized": false,
+          "actual_frame_count": 8,
+          "actual_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "actual_total_ms": 880,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
+    }
+  ],
+  "rig": null,
+  "issues": [
+    {
+      "code": "BASELINE_SHIFT",
+      "severity": "info",
+      "detail": "Lowest visible row varies across the sequence: [115, 116, 120, 121]. Intentional for jumps or bobbing; otherwise the sprite may jitter.",
+      "animation": "walk"
+    }
+  ],
+  "outputs": {
+    "sprite_report": "sprite_report.json",
+    "layout_overlay": "layout_overlay.png",
+    "animation_previews": {
+      "walk": "animations/walk.gif"
+    }
+  },
+  "issue_counts": {
+    "fail": 0,
+    "review": 0,
+    "info": 1
+  },
+  "visual_review_required": [
+    "Watch each animation preview at native and enlarged size",
+    "Check silhouette, timing, weight and contact with the ground",
+    "Confirm the declared skeleton matches the intended anatomy or mechanism",
+    "Review parts listed as hidden, draw order and any colors a part gains while moving"
+  ]
+}

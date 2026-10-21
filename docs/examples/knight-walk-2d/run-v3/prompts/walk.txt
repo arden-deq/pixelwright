@@ -1,0 +1,38 @@
+Create new 2D pixel artwork for Crimson knight grounded walk: Use-case: stylized-concept. INPUT 1 is a simple pose-placement diagram ONLY. INPUT 2 is the selected 2D knight: sole authority for appearance, camera, armor, greathelm/plume, red-gold tabard and shield, flanged mace. Redraw fresh pixel art using input 2, following input 1 only for leg motion and canvas placement. Walk toward screen-LEFT, matching the knight facing. Keep equipment on the SAME sides; never mirror the character. Crucial: character is only 88 native cells tall, from y=24 to y=112 in a 128-cell slot, with LARGE empty margins. Do not fill the slot. Use crisp low-resolution pixel clusters, not smooth painting.
+The attached selected 2D design is the authority for identity, proportions, colors and details. No 3D model, skeleton, mesh or real-world anatomy is required. Use the object's own visible parts.
+State: walk. EXACTLY 8 genuinely sequential walk poses, 4 columns x 2 rows, row-major, transparent 2:1 PNG (2048x1024). Eight 128-square logical slots in a 512x256 logical sheet. In-place leftward armored walk, 110 ms each. IMPORTANT: alternate support: NEAR leg leads in 0, FAR leg leads in 4. Frames 2/6 are single-support passing with opposite boot visibly lifted. Same frame scale; retain large margins from input 1. Stance boots move RIGHT by four native cells each frame, restoring leftward travel; no skating. Ground near=111, far=108. Pelvis absorbs load then rises 2-4 cells, subtle support sway, arms and equipment counterbalance. No duplicated endpoint, no frozen torso, no eight similar standing poses. Do not reproduce guide lines, orange/cyan colors, or text.
+One transparent PNG sheet, 4 columns by 2 rows, row-major. Every slot is the same 128x128 logical canvas and the SAME camera and pixel scale. Do not fit, zoom or recenter individual poses. No labels, grid lines, shadows on a backdrop or extra objects. Keep unused final slots transparent. Make stepped pixel contours and deliberate color clusters.
+Shared visible RGBA palette: #050202FF, #070503FF, #0D0207FF, #110507FF, #120906FF, #23150EFF, #39271CFF, #443730FF, #4C0D0DFF, #56524FFF, #6F0911FF, #6F6559FF, #7C0A14FF, #8A3925FF, #8C8981FF, #940F18FF, #9D6530FF, #A8181DFF, #B11B21FF, #BB7F3CFF, #CF9449FF, #D3AA6AFF, #E3B464FF, #EDDCAFFF.
+Preserve each part's size, characteristic shape, markings and attachment; redraw convincing motion, including weight, contact, anticipation and recovery where relevant.
+Part helmet: Rigid steel helmet excluding plume, same 11-cell width and 15-cell height; preserve visor and trim.
+Part shield: Rigid red shield and gold emblem/rim; same 30-cell long axis. Subtle weighted shoulder follow-through.
+Part mace_head: Small flanged mace head, same 10-cell width, always attached to its shaft. No weapon redesign.
+Part character: Remaining pixels: plume, torso, arms, belt, tabard, legs, boots, mace shaft. Preserve armor proportions; articulate knees/ankles with weight and overlap.
+Visible feature pelvis: Central belt buckle; show load absorption and alternating support shift.
+Visible feature chest: Center of chest heraldry.
+Visible feature head: Center of steel helmet.
+Visible feature near_ball: Underside of near boot ball, not heel.
+Visible feature far_ball: Underside of far boot ball, not heel.
+Visible feature near_heel: Bottom back corner of near boot.
+Visible feature far_heel: Bottom back corner of far boot.
+Visible feature shield_top: Center of shield top rim.
+Visible feature mace_center: Center of flanged mace head.
+Visible feature mace_grip: Visible gauntlet center gripping mace shaft.
+Move feature chest relative to pelvis; whole-object translation alone is insufficient.
+Move feature head relative to pelvis; whole-object translation alone is insufficient.
+Move feature near_ball relative to pelvis; whole-object translation alone is insufficient.
+Move feature far_ball relative to pelvis; whole-object translation alone is insufficient.
+Move feature near_heel relative to pelvis; whole-object translation alone is insufficient.
+Move feature far_heel relative to pelvis; whole-object translation alone is insufficient.
+Move feature shield_top relative to pelvis; whole-object translation alone is insufficient.
+Move feature mace_center relative to pelvis; whole-object translation alone is insufficient.
+Move feature mace_grip relative to pelvis; whole-object translation alone is insufficient.
+Frame 0 (110 ms): NEAR CONTACT: near leg forward/LEFT ankle x=50 y=106, sole at111; far trails x=66 y=103. Load transfers to near foot. Pelvis y=65.
+Frame 1 (110 ms): NEAR LOAD: near boot planted ankle x=54 y=106, knee flexes, pelvis drops y=67; far heel lifts at x=70, recovery begins.
+Frame 2 (110 ms): NEAR PASS: near boot planted x=58 y=106. Pelvis y=65 over near support. Far knee bends, far boot x=64 y=97 visibly airborne.
+Frame 3 (110 ms): NEAR PUSH: near ankle x=62 y=104, heel lifts. Pelvis y=63. Far leg reaches LEFT ankle x=54 y=99, ready to land. Continuous into4.
+Frame 4 (110 ms): FAR CONTACT: FAR leg now forward/LEFT x=50 y=103, sole108; near leg trails/RIGHT x=66 y=106. Opposite support from0. Pelvis y=65.
+Frame 5 (110 ms): FAR LOAD: far boot planted x=54 y=103, knee flexed; pelvis y=67. Near heel lifts atx=70. Equipment settles a little after body.
+Frame 6 (110 ms): FAR PASS: far stance x=58 y=103. Pelvis y=65 over far support. Near leg swings bent through x=64 y=100, boot off floor.
+Frame 7 (110 ms): FAR PUSH: far heel lifts ankle x=62 y=101, pelvis y=63. Near leg reaches LEFT x=54 y=102 to land in0. No resting/reset pose.
+The last frame must continue naturally into the first, without a duplicated endpoint.
