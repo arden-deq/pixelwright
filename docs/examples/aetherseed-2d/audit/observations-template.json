@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "2c4facee8d5ea7f2c04575e4856b5843dc2612e725d5da74a5144b68fdec6e8e",
+  "method": "",
+  "reference_sha256": "d3b1ae6c6617c09f07a5d8a6837c5aa76114741df3641d0b351c4e65c646b8e1",
+  "reference": {
+    "parts": {
+      "core": null,
+      "left_vane": null,
+      "right_vane": null,
+      "tail": null
+    },
+    "landmarks": {
+      "eye": null,
+      "left_tip": null,
+      "right_tip": null,
+      "tail_tip": null,
+      "left_root": null,
+      "core_left": null,
+      "right_root": null,
+      "core_right": null
+    }
+  },
+  "states": {
+    "hover": {
+      "source_sha256": "effd1f4fb2e43cce76c4735c853f40535c6a194cb042af8456d3931787cd94d4",
+      "frames": [
+        {
+          "parts": {
+            "core": null,
+            "left_vane": null,
+            "right_vane": null,
+            "tail": null
+          },
+          "landmarks": {
+            "eye": null,
+            "left_tip": null,
+            "right_tip": null,
+            "tail_tip": null,
+            "left_root": null,
+            "core_left": null,
+            "right_root": null,
+            "core_right": null
+          }
+        },
+        {
+          "parts": {
+            "core": null,
+            "left_vane": null,
+            "right_vane": null,
+            "tail": null
+          },
+          "landmarks": {
+            "eye": null,
+            "left_tip": null,
+            "right_tip": null,
+            "tail_tip": null,
+            "left_root": null,
+            "core_left": null,
+            "right_root": null,
+            "core_right": null
+          }
+        },
+        {
+          "parts": {
+            "core": null,
+            "left_vane": null,
+            "right_vane": null,
+            "tail": null
+          },
+          "landmarks": {
+            "eye": null,
+            "left_tip": null,
+            "right_tip": null,
+            "tail_tip": null,
+            "left_root": null,
+            "core_left": null,
+            "right_root": null,
+            "core_right": null
+          }
+        },
+        {
+          "parts": {
+            "core": null,
+            "left_vane": null,
+            "right_vane": null,
+            "tail": null
+          },
+          "landmarks": {
+            "eye": null,
+            "left_tip": null,
+            "right_tip": null,
+            "tail_tip": null,
+            "left_root": null,
+            "core_left": null,
+            "right_root": null,
+            "core_right": null
+          }
+        },
+        {
+          "parts": {
+            "core": null,
+            "left_vane": null,
+            "right_vane": null,
+            "tail": null
+          },
+          "landmarks": {
+            "eye": null,
+            "left_tip": null,
+            "right_tip": null,
+            "tail_tip": null,
+            "left_root": null,
+            "core_left": null,
+            "right_root": null,
+            "core_right": null
+          }
+        },
+        {
+          "parts": {
+            "core": null,
+            "left_vane": null,
+            "right_vane": null,
+            "tail": null
+          },
+          "landmarks": {
+            "eye": null,
+            "left_tip": null,
+            "right_tip": null,
+            "tail_tip": null,
+            "left_root": null,
+            "core_left": null,
+            "right_root": null,
+            "core_right": null
+          }
+        }
+      ],
+      "review": {
+        "status": "not_reviewed",
+        "reviewer": "",
+        "observations": []
+      }
+    }
+  }
+}

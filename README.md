@@ -10,7 +10,7 @@ Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit
 
 Pixelwright is a shared AI skill for GPT-powered hosts and Claude. It helps create and audit characters, items, and UI icons with a consistent dot size, complete square grid cells, and exactly one RGBA color per cell. The same `SKILL.md` and Python tools serve both ecosystems; the host must provide file access and Python execution.
 
-Author a palette and a logical pixel matrix, render at an integer scale, and audit the exported PNG. Reuse named palette libraries and shading ramps across assets, or remap colors on an already valid grid. For animation, place frames on one sprite sheet and declare a skeleton so every body or object part can be checked as it moves. For existing artwork, declare its intended grid before inspection. By default, deliver both the clean artwork and its actual grid QA preview so users can check the cells themselves.
+Author a palette and a logical pixel matrix, render at an integer scale, and audit the exported PNG. Reuse named palette libraries and shading ramps across assets, or remap colors on an already valid grid. For generated animation, select a 2D design and check arbitrary observed parts, colors, proportions and timed motion without requiring a skeleton. Declared rigs remain optional. For existing artwork, declare its intended grid before inspection. By default, deliver both the clean artwork and its actual grid QA preview so users can check the cells themselves.
 
 ## One knight, two grid contracts
 
@@ -122,7 +122,26 @@ Each composition writes `layers.json`, per-layer reports and grid previews under
 
 This mode requires binary layer transparency, an explicit shared palette and visible RGB budget, and exact transparent RGBA. It uses opaque-cell replacement, with no semitransparent blending, resizing, rotation, or clipping. A final opaque canvas is supported with transparent foreground layers. Technical QA is followed by visual review of the layers and final image, including contacts, occlusion, lighting, and readability. QA overlays remain separate from artwork. See the [layer workflow and manifest reference](pixelwright/references/layers.md).
 
-## 2D design first, 3D bones for motion
+## Consistent 2D animation without a skeleton
+
+The new [`pixel_sequence.py`](pixelwright/scripts/pixel_sequence.py) workflow uses a selected 2D design, named parts and visible features. It supports imaginary objects without Blender or anatomical joint names. Freeze appearance, frame size, palette, poses and timing; generate a sheet with the selected design; independently observe the actual artwork; then check part size, color, pattern, proportions, attachment and timed motion. Relative feature motion distinguishes articulation from translating a frozen object.
+
+This feature is on `codex/design-first-sprites` / [PR #10](https://github.com/jungducknam/pixelwright/pull/10). Build its installation ZIP from this source; the published v0.6.2 release is unchanged. The ZIP includes the tool, reference and executable nonhuman tutorial:
+
+```sh
+python pixelwright/scripts/pixel_sequence.py prepare --spec pixelwright/examples/sequence-orbit/spec.json --reference pixelwright/examples/sequence-orbit/reference.png --out-dir runs/orbit-v1
+python pixelwright/scripts/pixel_sequence.py import --run runs/orbit-v1 --state orbit --image pixelwright/examples/sequence-orbit/sheet.png --producer authored-tutorial
+python pixelwright/examples/sequence-orbit/observe_fixture.py --run runs/orbit-v1 --out runs/orbit-observed.json
+python pixelwright/scripts/pixel_sequence.py check --run runs/orbit-v1 --observations runs/orbit-observed.json --out-dir runs/orbit-audit
+```
+
+The tutorial is independently authored test art. A separate [real-generation example](docs/examples/aetherseed-2d/) uses a selected 2D design and six hover poses with no 3D input:
+
+![Aetherseed hover draft — pixel PASS, overall FAIL](docs/examples/aetherseed-2d/audit/hover/pixel-audit/animations/hover.gif)
+
+Its exported pixel grid passes, but observed appearance and motion violate the frozen contract: **overall FAIL, art changes needed**. Unobserved parts or missing art review remain REVIEW. Masks and features are supplied observations, not automatic semantic recognition; numeric checks do not prove naturalness. Read the [workflow](docs/SPRITE_2D_ko.md), [format reference](pixelwright/references/sequences.md), [validation record](docs/VALIDATION_sequences_ko.md) and [requirements/status](docs/SPRITE_REQUIREMENTS_AND_STATUS_ko.md). Implementation is tracked in [#13](https://github.com/jungducknam/pixelwright/issues/13).
+
+## Optional 3D motion guidance after the 2D design
 
 The optional [animation workflow](docs/SPRITE_3D_ko.md) starts with a 2D pixel character designed from a prompt or user reference. Its proportions define a bare 3D skeleton. Image generation then redraws that same 2D design in the projected poses; the skeleton supplies camera, joints and depth, while the 2D design supplies appearance. The Blender scene contains zero armor or equipment meshes. These development tools require a source checkout.
 
@@ -189,7 +208,7 @@ Place the **entire `pixelwright/` folder** in a skill directory, including its s
 
 Local installation paths and invocation follow the official [OpenAI skill documentation](https://learn.chatgpt.com/docs/build-skills) and [Claude Code skill documentation](https://code.claude.com/docs/en/skills). `~` means your home directory, including on Windows.
 
-For a Claude environment with custom skill upload, build the install ZIP below and upload it through the host's skill interface. Enable code execution and file creation, and check that the Python dependencies are available. Other ChatGPT or API-based hosts need their own supported skill loader and execution environment. Pixelwright includes no provider-specific generation API adapters. See the [platform compatibility guide](docs/COMPATIBILITY_ko.md) and [Claude custom skill documentation](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+For a Claude environment with custom skill upload, build the install ZIP below and upload it through the host's skill interface. Enable code execution and file creation, and check that the Python dependencies are available. Other ChatGPT or API-based hosts need their own supported skill loader and execution environment. Sequence generation can use a host image tool or the explicit optional Images-compatible HTTP adapter; auditing and the bundled tutorial need no API account. See the [platform compatibility guide](docs/COMPATIBILITY_ko.md) and [Claude custom skill documentation](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
 Example request, after invoking the skill:
 
@@ -257,6 +276,8 @@ The [v0.6.2 validation record](docs/VALIDATION_v062_ko.md) covers GIF holds long
 ## Scope, license, and security
 
 Version 0.6.2 supports **static PNG characters, items, UI icons, reusable palettes, optional layered scenes, and sprite sheets with declared animation rigs**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Palette remapping also checks the selected target colors; extraction and ramp generation do not certify artwork. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Rig checks verify that declared parts keep their dots consistent with the declared skeleton; they do not infer anatomy or judge timing, weight, or appeal. Animated PNG input remains unsupported.
+
+The current development branch additionally supports selected-design 2D generation and independent part/motion observations through `pixel_sequence.py`, with no required skeleton. It retains those artistic limits and distinguishes raw generator images from fixed projected derivatives.
 
 Pixelwright is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 

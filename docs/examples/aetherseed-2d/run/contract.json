@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.6.2",
+  "spec": {
+    "schema_version": 1,
+    "name": "Aetherseed",
+    "description": "An invented floating crystal seed with two articulated crescent vanes and a violet tuft. No real-world anatomy.",
+    "frame_size": "64x64",
+    "scale": 4,
+    "max_colors": 24,
+    "derivation": {
+      "mode": "project",
+      "alpha_threshold": 128
+    },
+    "limits": {
+      "edge_margin": 2,
+      "area_ratio": [
+        0.8,
+        1.25
+      ],
+      "color_distance": 60,
+      "max_bad_color_fraction": 0.1
+    },
+    "parts": {
+      "core": {
+        "description": "Teal faceted teardrop core with the same single cream square eye and dark outline.",
+        "area_tolerance": 0.2,
+        "min_shape_match": 0.6,
+        "min_color_overlap": 0.7,
+        "min_design_match": 0.4,
+        "measurements": {
+          "width": 0.15
+        }
+      },
+      "left_vane": {
+        "description": "The copper-gold crescent on screen left, with its small round attachment hub.",
+        "area_tolerance": 0.25,
+        "min_shape_match": 0.45,
+        "min_color_overlap": 0.7,
+        "min_design_match": 0.3,
+        "measurements": {
+          "span": 0.2
+        }
+      },
+      "right_vane": {
+        "description": "The copper-gold crescent on screen right, with its attachment.",
+        "area_tolerance": 0.25,
+        "min_shape_match": 0.45,
+        "min_color_overlap": 0.7,
+        "min_design_match": 0.3,
+        "measurements": {
+          "span": 0.2
+        }
+      },
+      "tail": {
+        "description": "The short violet two-lobed tuft and its small copper collar below the core.",
+        "area_tolerance": 0.35,
+        "min_shape_match": 0.25,
+        "min_color_overlap": 0.65,
+        "min_design_match": 0.2,
+        "measurements": {}
+      }
+    },
+    "landmarks": {
+      "eye": "Center of the cream square eye",
+      "left_tip": "Topmost visible tip of the left copper crescent",
+      "right_tip": "Topmost visible tip of the right copper crescent",
+      "tail_tip": "Tip of the longer violet tail lobe",
+      "left_root": "Center of the left copper circular hub",
+      "core_left": "Visible teal core just adjacent to the left hub",
+      "right_root": "Copper vane root beside the right side of the core",
+      "core_right": "Teal core beside the right vane root"
+    },
+    "ratios": {
+      "left_to_core": {
+        "numerator": [
+          "left_vane",
+          "span"
+        ],
+        "denominator": [
+          "core",
+          "width"
+        ],
+        "tolerance": 0.2
+      },
+      "right_to_core": {
+        "numerator": [
+          "right_vane",
+          "span"
+        ],
+        "denominator": [
+          "core",
+          "width"
+        ],
+        "tolerance": 0.2
+      }
+    },
+    "states": {
+      "hover": {
+        "intent": "A smooth six-frame floating idle cycle with individually articulated copper vanes and a lagging tail. Preserve all part sizes and the selected design.",
+        "poses": [
+          "Neutral middle height; left crescent slightly lowered, right crescent slightly raised, tuft hangs left.",
+          "Rise one logical cell; both crescents rotate gently upward at their hubs; tuft lags below.",
+          "Highest point two logical cells up; crescents at their upper sweep; tuft curls gently right.",
+          "Return to middle height; crescents begin a downward sweep; tuft follows with a short delay.",
+          "Lowest point two logical cells down; crescents at their lower sweep; tuft bends gently left.",
+          "Rise toward middle height; crescents recover toward frame zero and tuft trails, ready for seamless wrap."
+        ],
+        "columns": 3,
+        "loop": true,
+        "durations_ms": [
+          120,
+          120,
+          120,
+          120,
+          120,
+          120
+        ],
+        "motion": {
+          "eye": {
+            "min_travel": 1,
+            "max_speed": 30,
+            "max_acceleration": 1200
+          },
+          "left_tip": {
+            "min_travel": 4,
+            "max_speed": 70,
+            "max_acceleration": 1200
+          },
+          "right_tip": {
+            "min_travel": 4,
+            "max_speed": 70,
+            "max_acceleration": 1200
+          },
+          "tail_tip": {
+            "min_travel": 3,
+            "max_speed": 70,
+            "max_acceleration": 1200
+          },
+          "left_root": {
+            "min_travel": 0,
+            "max_speed": 70,
+            "max_acceleration": 1200
+          },
+          "core_left": {
+            "min_travel": 0,
+            "max_speed": 70,
+            "max_acceleration": 1200
+          },
+          "right_root": {
+            "min_travel": 0,
+            "max_speed": 70,
+            "max_acceleration": 1200
+          },
+          "core_right": {
+            "min_travel": 0,
+            "max_speed": 70,
+            "max_acceleration": 1200
+          }
+        },
+        "attachments": [
+          {
+            "a": "left_root",
+            "b": "core_left",
+            "max_distance": 4
+          },
+          {
+            "a": "right_root",
+            "b": "core_right",
+            "max_distance": 4
+          }
+        ],
+        "contacts": [],
+        "distances": [],
+        "root_offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "palette": [
+    [
+      0,
+      17,
+      73,
+      255
+    ],
+    [
+      0,
+      21,
+      77,
+      255
+    ],
+    [
+      0,
+      24,
+      80,
+      255
+    ],
+    [
+      1,
+      88,
+      135,
+      255
+    ],
+    [
+      1,
+      96,
+      142,
+      255
+    ],
+    [
+      1,
+      109,
+      153,
+      255
+    ],
+    [
+      2,
+      124,
+      167,
+      255
+    ],
+    [
+      3,
+      22,
+      76,
+      255
+    ],
+    [
+      5,
+      145,
+      182,
+      255
+    ],
+    [
+      8,
+      65,
+      108,
+      255
+    ],
+    [
+      15,
+      185,
+      206,
+      255
+    ],
+    [
+      16,
+      24,
+      76,
+      255
+    ],
+    [
+      32,
+      223,
+      226,
+      255
+    ],
+    [
+      70,
+      29,
+      134,
+      255
+    ],
+    [
+      72,
+      239,
+      225,
+      255
+    ],
+    [
+      86,
+      149,
+      181,
+      255
+    ],
+    [
+      114,
+      57,
+      99,
+      255
+    ],
+    [
+      130,
+      249,
+      224,
+      255
+    ],
+    [
+      156,
+      86,
+      130,
+      255
+    ],
+    [
+      166,
+      87,
+      47,
+      255
+    ],
+    [
+      217,
+      129,
+      60,
+      255
+    ],
+    [
+      226,
+      249,
+      211,
+      255
+    ],
+    [
+      231,
+      157,
+      99,
+      255
+    ],
+    [
+      239,
+      225,
+      157,
+      255
+    ]
+  ],
+  "reference_source_sha256": "04166aab14b68788b2eac4f6650679d9d3b60baf93aba4df5af4cc8ca59107bc",
+  "spec_source_sha256": "404d434941538d4e7b6c3761edccb3af7ca3043bd83e5981f1ee0b4bb923ded3",
+  "reference_derivation": {
+    "source_size": [
+      1254,
+      1254
+    ],
+    "logical_size": [
+      64,
+      64
+    ],
+    "mode": "project",
+    "original_grid_status": "not_certified_projection_source",
+    "sampling": "nearest_whole_canvas",
+    "native_input_has_no_measurable_within_cell_fidelity": false
+  },
+  "skeleton_required": false
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "producer": "built-in image_gen host tool",
+  "model": null,
+  "model_note": "Model identifier is not exposed by the host tool; not inferred.",
+  "generation_calls": 2,
+  "skeleton_required": false,
+  "three_dimensional_inputs": [],
+  "design": {
+    "source": "design-source.png",
+    "source_sha256": "04166aab14b68788b2eac4f6650679d9d3b60baf93aba4df5af4cc8ca59107bc",
+    "selected": "run/reference-native.png",
+    "selected_sha256": "d3b1ae6c6617c09f07a5d8a6837c5aa76114741df3641d0b351c4e65c646b8e1",
+    "input_images": [],
+    "prompt_record": "Brief summary only; the exact serialized initial design prompt is not archived here.",
+    "brief": "One imaginary Aetherseed: teal faceted floating seed core, a cream square eye, copper-gold articulated crescent vanes at both sides and a violet tail tuft. Front three-quarter view facing right; deliberate 64-cell pixel-art design with stepped contours, limited colors, dark outline, transparent background and no 3D render.",
+    "human_approved": false
+  },
+  "hover": {
+    "raw": "run/raw/hover.png",
+    "raw_sha256": "effd1f4fb2e43cce76c4735c853f40535c6a194cb042af8456d3931787cd94d4",
+    "prompt": "run/prompts/hover.txt",
+    "prompt_sha256": "be46642038c8e276fba5cf5c66cc40f20eec1968fca4725383ca665ef9fd7847",
+    "prompt_sent_exactly": true,
+    "referenced_images": ["run/reference-native.png"],
+    "transparent_background_requested": true,
+    "contract_sha256": "2c4facee8d5ea7f2c04575e4856b5843dc2612e725d5da74a5144b68fdec6e8e"
+  },
+  "validation": {
+    "unobserved_report": "first-audit/report.json",
+    "observations": "observations.json",
+    "observed_report": "audit/report.json",
+    "pixel_status": "pass",
+    "overall_status": "fail",
+    "art_review": "changes_needed",
+    "production_accepted": false,
+    "human_approved": false,
+    "http_adapter_paid_endpoint_tested": false
+  }
+}

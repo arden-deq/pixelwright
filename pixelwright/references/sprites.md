@@ -2,7 +2,12 @@
 
 Read this when an asset has several frames: a sprite sheet or atlas, an animation cycle, or a character or object whose parts move between frames.
 
-## Generative animation with a 3D skeleton
+For the default **selected-design generation and independent 2D observation**
+workflow, use [sequences.md](sequences.md). It checks appearance and timed motion
+of arbitrary named parts, including imaginary objects, without a skeleton.
+This document covers the lower-level authored atlas and optional declared rig.
+
+## Optional generative animation with a 3D skeleton
 
 Select or create the 2D character design **before** creating motion guides. Preserve that design as the shared identity reference. Annotate its joints, equipment attachment points and stable part measurements; record the annotation method. Fit a bare 3D skeleton to those proportions and freeze one camera, world scale and motion set. Bone projections and depth describe pose and overlap; they do not define the character's drawn contours, costume, materials or shading. Supply no appearance mesh unless the user requested 3D-to-2D style transfer.
 

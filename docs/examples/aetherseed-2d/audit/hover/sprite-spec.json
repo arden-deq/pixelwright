@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "name": "Aetherseed",
+  "frame_size": "64x64",
+  "frame_count": 6,
+  "layout": {
+    "columns": 3,
+    "rows": 2
+  },
+  "edge_margin": 2,
+  "scale": 4,
+  "animations": {
+    "hover": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "loop": true,
+      "durations_ms": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ]
+    }
+  }
+}

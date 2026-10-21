@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "name": "Orbit seed",
+  "description": "A fictional blue rune capsule with a gold magnetic floating fin.",
+  "frame_size": "24x24",
+  "scale": 4,
+  "max_colors": 3,
+  "derivation": {
+    "mode": "strict"
+  },
+  "limits": {
+    "edge_margin": 1,
+    "area_ratio": [
+      0.8,
+      1.2
+    ],
+    "color_distance": 20,
+    "max_bad_color_fraction": 0.05
+  },
+  "parts": {
+    "shell": {
+      "description": "Blue capsule and dark inset; never changes size.",
+      "measurements": {
+        "span": 0.1
+      }
+    },
+    "floating_fin": {
+      "description": "Gold fin with one dark central marking.",
+      "measurements": {
+        "span": 0.1
+      }
+    }
+  },
+  "landmarks": {
+    "latch": {
+      "description": "Capsule magnetic latch",
+      "part": "shell"
+    },
+    "fin_latch": {
+      "description": "Fin's near end",
+      "part": "floating_fin"
+    },
+    "fin_tip": {
+      "description": "Fin's far end",
+      "part": "floating_fin"
+    }
+  },
+  "ratios": {
+    "fin_to_shell": {
+      "numerator": [
+        "floating_fin",
+        "span"
+      ],
+      "denominator": [
+        "shell",
+        "span"
+      ],
+      "tolerance": 0.1
+    }
+  },
+  "states": {
+    "orbit": {
+      "intent": "Fin makes a small closed floating orbit while the capsule stays still.",
+      "poses": [
+        "Fin rises left",
+        "Fin crosses center",
+        "Fin moves right",
+        "Fin dips",
+        "Fin moves left",
+        "Fin returns upward"
+      ],
+      "columns": 3,
+      "loop": true,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "motion": {
+        "latch": {
+          "min_travel": 0,
+          "max_speed": 0
+        },
+        "fin_latch": {
+          "relative_to": "latch",
+          "min_travel": 3,
+          "max_speed": 30,
+          "max_acceleration": 400
+        },
+        "fin_tip": {
+          "relative_to": "latch",
+          "min_travel": 3,
+          "max_speed": 30,
+          "max_acceleration": 400
+        }
+      },
+      "attachments": [
+        {
+          "a": "latch",
+          "b": "fin_latch",
+          "max_distance": 5
+        }
+      ],
+      "distances": [
+        {
+          "a": "fin_latch",
+          "b": "fin_tip",
+          "minimum": 2,
+          "maximum": 2
+        }
+      ]
+    }
+  }
+}

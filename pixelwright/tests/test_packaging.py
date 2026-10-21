@@ -39,7 +39,10 @@ class PackagingTests(unittest.TestCase):
                          "examples/palette-demo/artwork.json", "scripts/pixel_sprite.py",
                          "references/sprites.md", "examples/sprite-walk/spec.json",
                          "examples/sprite-walk/profile.json", "examples/sprite-lever/spec.json",
-                         "examples/sprite-lever/profile.json"):
+                         "examples/sprite-lever/profile.json", "scripts/pixel_sequence.py",
+                         "references/sequences.md", "examples/sequence-orbit/spec.json",
+                         "examples/sequence-orbit/reference.png", "examples/sequence-orbit/sheet.png",
+                         "examples/sequence-orbit/observed-pixels.json", "examples/sequence-orbit/observe_fixture.py"):
             with self.subTest(relative=relative):
                 self.assertIn(f"pixelwright/{relative}", members)
         self.assertFalse(any(name.startswith("pixelwright/tests/") for name in members))

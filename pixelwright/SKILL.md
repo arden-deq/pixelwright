@@ -1,6 +1,6 @@
 ---
 name: pixelwright
-description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, palette extraction and remapping, pixel-grid repairs, optional layer composition, and sprite sheets or animations whose body and object parts must move consistently with a declared skeleton.
+description: Create and audit PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, palettes, pixel-grid repairs, layers, and consistent sprite animations of characters or imaginary objects. Generate from a selected 2D design and check independently observed parts, proportions, colors, features and timed motion without requiring a skeleton; declared rigs remain optional.
 ---
 
 # Pixelwright
@@ -46,11 +46,26 @@ Decide the layout, common grid and RGBA palette, lighting, and drawing order bef
 
 ### Animate frames and check moving parts
 
-For sprite sheets, atlases and animation cycles, read [sprites.md](references/sprites.md). Freeze the frame size, scale, slot layout, palette and animations first; gutters and unused slots stay transparent, and the profile's logical size is the computed sheet size.
+For generated sprite animations, start with [sequences.md](references/sequences.md). Select a 2D design from the user's reference or prompt first. Name visible parts and features in the object's own terms, including imaginary objects. Freeze the frame size, scale, palette, pose descriptions, timing and consistency tolerances before generation. A 3D model, skeleton or human joint vocabulary is not required.
+
+```sh
+python scripts/pixel_sequence.py prepare --spec sequence.json --reference selected-design.png --out-dir creature-run
+python scripts/pixel_sequence.py import --run creature-run --state hover --image generated-sheet.png --producer "host image generation"
+python scripts/pixel_sequence.py observations --run creature-run --out observed.json
+python scripts/pixel_sequence.py check --run creature-run --observations observed.json --out-dir creature-audit
+```
+
+Use the frozen state prompt and selected design with the host's image tool, then import its untouched PNG. An optional HTTP `generate` command accepts an explicit provider-supported model. Fill observations from the actual exported pixels: part masks, visible measurement endpoints and 2D landmarks. `check` without observations first exports coordinate aids and remains REVIEW. The template supplies no inferred anatomy or expected coordinates. Missing or occluded observations stay REVIEW; raw-image replacement invalidates their hashes.
+
+Check part area, shape, colored patterns, measurements, relative proportions, attachment, required travel, timed adjacent/loop transitions and optional acceleration/contact. Use `relative_to` for articulation relative to an observed anchor, so whole-object motion cannot satisfy a moving-part requirement. Inspect masks and features beside the actual artwork. The bundled `examples/sequence-orbit/` uses independently authored fixture cells; its example observer must reject changed artwork.
+
+Preserve raw images and clearly distinguish their grid from a projected derivative. `strict` rejects invalid raw cells; an explicitly frozen `project` mode samples the whole canvas once, never fits individual frames. Pixel PASS alone does not certify identity or natural animation. Record artistic review separately, with actual notes and reviewer identity; assistant review cannot claim user approval. Regenerate failed states using the original contract and fresh observations, preserving replacement history.
+
+For an already authored atlas or an explicitly requested rig workflow, read [sprites.md](references/sprites.md). The optional paths below retain their own contracts. Freeze the frame size, scale, slot layout, palette and animations first; gutters and unused slots stay transparent, and the profile's logical size is the computed sheet size.
 
 For generative animation guided by a 3D skeleton, establish the **2D character design first** from the user's reference or prompt. That selected design controls anatomy, costume, silhouette, equipment and pixel treatment. Identify its joints and proportions, then fit a bare 3D skeleton and camera to it. Supply the selected 2D design for appearance and projected bones/depth for motion. Do not treat a 3D armor render, mesh silhouette, material or shading as the character design unless the user explicitly requests that transfer. A valid 3D rig proves its own geometry, not the generated artwork's anatomy. Missing independent artwork observations keep pose acceptance at REVIEW; pixel-grid PASS never promotes it to PASS. The source-checkout recipe is `tools/knight_design_first.py`.
 
-When parts move, declare a rig instead of hoping the frames agree: list parts back to front, give each a motion (`fixed`, `rigid` with a pivot, `bone` between two joints, or `free`), and write each frame's color rows together with its part map and joint coordinates. Then build and check:
+When a declared 2D rig is appropriate, list parts back to front, give each a motion (`fixed`, `rigid` with a pivot, `bone` between two joints, or `free`), and write each frame's color rows together with its part map and joint coordinates. Then build and check:
 
 ```sh
 python scripts/pixel_sprite.py build --spec sprite.json --out-dir sheet-v1
@@ -85,6 +100,6 @@ By default, show both the clean exported PNG and the checker's actual `grid_over
 
 Explain the overlay briefly: cyan lines mark every declared cell boundary, red-filled cells mark exact color violations, and orange lines indicate approximate boundaries when geometry fails. The overlay is a separate diagnostic preview; keep the deliverable artwork unchanged. Use the checker-generated overlay, not a generative redraw. Never sample the axes differently: square cells must also appear square in the preview. For dense grids, include a nearest-neighbor crop enlarged equally on both axes so individual cells remain inspectable; visual inspection complements the full sample-level audit.
 
-For a sprite sheet, also show each animation preview and, when a rig exists, its `.rig.gif` (art under the skeleton beside the part colors) or `rig_overlay.png`, and name the frames that failed. Overlays and GIF previews are diagnostics, not deliverable artwork.
+For a sprite sheet, also show each animation preview, name failed frames and distinguish pixel, appearance, motion and artistic status. In the sequence workflow, include `observation-overlay.png` and disclose observation uncertainty. When a rig exists, show its `.rig.gif` (art under the skeleton beside the part colors) or `rig_overlay.png`. Overlays and GIF previews are diagnostics, not deliverable artwork.
 
 Provide native and enlarged PNGs when creating, the declared contract, technical status with the report path, and any unresolved visual findings. Record artistic review separately as accepted, changes needed, or not reviewed, with actual observations (silhouette, palette, stepped contours, important details). Hashes identify the audited bytes; subsequent edits or interpolated scaling require a new audit. A technically compliant image can still be poor art.
