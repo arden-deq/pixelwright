@@ -78,6 +78,8 @@ A part's dot may be missing only where a part drawn in front of it (higher `z`) 
 
 List a part in a frame's `hidden` only when it has no visible cells there. Its expected dots must then be covered by parts drawn in front; a part hidden over empty space fails. The part map of that frame must not show the part.
 
+A hidden `free` part has no stable transform locating its missing dots. Without any foreground part it fails; with one it receives `FREE_PART_OCCLUSION_UNVERIFIED` (REVIEW), since the checker cannot prove that the foreground covers it. It cannot earn an automatic PASS by adding `hidden`.
+
 ## Build and check
 
 Run from the skill directory, or resolve these script paths from it:
@@ -97,7 +99,7 @@ python scripts/pixel_sprite.py check --spec examples/sprite-walk/spec.json --she
 | `layout_overlay.png` | Frame slots outlined; failing frames in red, review frames in amber, gutter dots filled red |
 | `rig_overlay.png` | Each frame twice: art under the declared skeleton, then the part map. Thin gray links join each bone chain to its parent's nearest joint. Red outlines mark failing dots; white outlines mark where the moved reference expects a failing part |
 | `animations/<id>.gif` | Playback preview on a flat background; the sheet remains the audited artwork |
-| `animations/<id>-rig.gif` | With a rig: the same frames with the art under its skeleton beside every dot colored by part, plus a legend |
+| `animations/<id>.rig.gif` | With a rig: the same frames with the art under its skeleton beside every dot colored by part, plus a legend |
 
 `--preview-scale` sets the whole-number enlargement of both GIFs (1..16); by default they are about 512 px tall. Exit codes: `0` when everything passes, `2` for any fail or review, `1` for invalid specs, inputs or execution errors. Use a new or empty output directory for every run; inputs are never modified.
 
@@ -121,6 +123,7 @@ python scripts/pixel_sprite.py check --spec examples/sprite-walk/spec.json --she
 | `PART_DETACHED` | fail | A part does not touch its parent, even through parts drawn in front of both |
 | `JOINT_OFF_PART` | fail | A joint is not drawn on its part's dots or under a part in front |
 | `OCCLUSION_WITHOUT_OCCLUDER` | fail | A hidden part's expected dots lie on empty space |
+| `FREE_PART_OCCLUSION_UNVERIFIED` | review | A hidden free part has no stable motion contract to verify its occlusion |
 | `FIXED_JOINT_MOVED`, `JOINT_STEP_EXCEEDED` | fail | A fixed joint moved, or a joint jumped too far between frames |
 | `PART_COLOR_ADDED` | review | A part shows colors absent from its reference |
 | `PART_FRAGMENTED` | review | A part splits into more pieces than in its reference |

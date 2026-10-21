@@ -943,6 +943,14 @@ class _RigCheck:
             ratio = cells / np.count_nonzero(reference)
             entry["area_ratio"] = round(float(ratio), 4)
             self._area(part, ratio, flag)
+        elif not self.cover(index, part.id).any():
+            flag("OCCLUSION_WITHOUT_OCCLUDER", "fail",
+                 f"Hidden free part {part.id} has no part drawn in front that could cover it.")
+        else:
+            # Free motion has no transform that locates the missing dots. A
+            # foreground part alone is not proof that it covers this part.
+            flag("FREE_PART_OCCLUSION_UNVERIFIED", "review",
+                 f"Hidden free part {part.id} has no stable motion contract; its occlusion needs visual review.")
         if cells and part.motion in ("bone", "free"):
             reference_colors = np.unique(self.keys[ref][reference])
             added = mask & ~np.isin(self.keys[index], reference_colors)
@@ -1414,7 +1422,9 @@ def check_sheet(spec_path: str | Path, sheet_path: str | Path, profile_path: str
                 _save_animation(root / relative, frames, animation, layout, k)
                 summary["outputs"].setdefault("animation_previews", {})[animation["id"]] = relative
                 if rig_check is not None:
-                    relative = f"animations/{animation['id']}-rig.gif"
+                    # IDs cannot contain '.', so an art preview can never
+                    # collide with this diagnostic, even for ids like walk-rig.
+                    relative = f"animations/{animation['id']}.rig.gif"
                     _save_rig_animation(root / relative, frames, animation, layout, plan.rig, rig_check,
                                         frame_status, k)
                     summary["outputs"].setdefault("rig_previews", {})[animation["id"]] = relative

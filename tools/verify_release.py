@@ -198,6 +198,20 @@ def verify_sprite_workflow(skill, out):
         for output in ["rig_overlay.png", "layout_overlay.png", *previews]:
             if not (check / output).is_file():
                 raise ValueError(f"Installed {name} check must write {output}")
+        for animation in report["animations"]:
+            for kind in ("animation_previews", "rig_previews"):
+                path = check / report["outputs"][kind][animation["id"]]
+                with Image.open(path) as preview:
+                    if preview.format != "GIF" or preview.n_frames != len(animation["frames"]):
+                        raise ValueError(f"Installed {name} {kind} must retain every animation frame")
+                    if (preview.info.get("loop") == 0) != animation["loop"]:
+                        raise ValueError(f"Installed {name} {kind} must retain its loop policy")
+                    duration = 0
+                    for index in range(preview.n_frames):
+                        preview.seek(index)
+                        duration += preview.info.get("duration", 0)
+                    if duration != animation["total_ms"]:
+                        raise ValueError(f"Installed {name} {kind} must retain its playback duration")
         if any(file_hash(path) != digest for path, digest in hashes.items()):
             raise ValueError(f"Checking {name} changed a packaged input")
         results[name] = report["layout"]["frame_count"]
@@ -213,7 +227,8 @@ def verify_sprite_workflow(skill, out):
     if report["status"] != "fail" or ("PART_JOINT_MISMATCH", 1, "knob") not in found:
         raise ValueError("A rigid knob that no longer follows its pivot must fail the rig check")
     return {"sprite_walk_frames": results["sprite-walk"], "sprite_lever_frames": results["sprite-lever"],
-            "sprite_examples_status": "pass", "sprite_broken_joint_status": report["status"]}
+            "sprite_examples_status": "pass", "sprite_gif_playback_verified": True,
+            "sprite_broken_joint_status": report["status"]}
 
 
 def main():

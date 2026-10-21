@@ -522,8 +522,8 @@
       "switch_off": "animations/switch_off.gif"
     },
     "rig_previews": {
-      "switch_on": "animations/switch_on-rig.gif",
-      "switch_off": "animations/switch_off-rig.gif"
+      "switch_on": "animations/switch_on.rig.gif",
+      "switch_off": "animations/switch_off.rig.gif"
     }
   },
   "issue_counts": {

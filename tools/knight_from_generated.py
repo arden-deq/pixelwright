@@ -14,6 +14,7 @@ capsule to the nearest one. The skeleton in poses.json stays the
 contract: `pixel_sprite.py check` decides whether the generated dots follow it.
 Projection is lossy; generated frames remain candidates until that check passes
 and the frames are reviewed.
+Exit codes: 0 all PASS, 2 any FAIL/REVIEW, 1 invalid input or execution error.
 """
 from __future__ import annotations
 
@@ -233,8 +234,11 @@ def write_animation(name, kit, poses_dir, out_root, tokens, visible_tokens, pale
         counts = seen[token]
         parts[part]["reference_frame"] = 0 if counts[0] * 2 >= max(counts) else int(np.argmax(counts))
         parts[part].update(TOLERANCES.get(part, {}))
-        if part in PARENTS and PARENTS[part] in parts:
-            parts[part]["parent"] = PARENTS[part]
+    # Drawing order is back to front, not parent before child. Resolve links
+    # after collecting every visible part so arms, legs and the mace keep them.
+    for part, parent in PARENTS.items():
+        if part in parts and parent in parts:
+            parts[part]["parent"] = parent
     for frame in frames:
         hidden = [part for part in parts if part in frame.get("hidden", [])]
         frame.pop("hidden", None)
@@ -256,24 +260,35 @@ def write_animation(name, kit, poses_dir, out_root, tokens, visible_tokens, pale
     return out
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--poses", type=Path, default=POSES, help="Pose kit with generated/<animation>/frame_NN.png")
     parser.add_argument("--out-dir", type=Path, default=OUT, help="Fresh output directory; one subdirectory per animation")
     parser.add_argument("--animation", action="append", help="Limit to these animations (default: all)")
-    args = parser.parse_args()
-    kit = json.loads((args.poses / "poses.json").read_text(encoding="utf-8"))
-    tokens, visible_tokens, palette_rgb = anchor_palette(args.poses / kit["anchor"], kit["frame_size"], kit["canvas"])
-    for name in args.animation or kit["animations"]:
-        if (args.out_dir / name).exists():
-            raise SystemExit(f"Output already exists, use a fresh --out-dir: {args.out_dir / name}")
-        out = write_animation(name, kit, args.poses, args.out_dir, tokens, visible_tokens, palette_rgb)
-        spec, profile = out / "spec.json", out / "profile.json"
-        build = out / "build"
-        sprite.build_sheet(spec, build)
-        summary = sprite.check_sheet(spec, build / "rendered.png", profile, out / "check", scale=2)
-        print(json.dumps({"animation": name, "status": summary["status"], "issue_counts": summary["issue_counts"]}))
-    return 0
+    args = parser.parse_args(argv)
+    try:
+        kit = json.loads((args.poses / "poses.json").read_text(encoding="utf-8"))
+        names = list(dict.fromkeys(args.animation or kit["animations"]))
+        if not names or any(name not in kit["animations"] for name in names):
+            raise ValueError("Select at least one animation declared in poses.json")
+        for name in names:
+            if (args.out_dir / name).exists():
+                raise ValueError(f"Output already exists, use a fresh --out-dir: {args.out_dir / name}")
+        tokens, visible_tokens, palette_rgb = anchor_palette(args.poses / kit["anchor"], kit["frame_size"], kit["canvas"])
+        result = 0
+        for name in names:
+            out = write_animation(name, kit, args.poses, args.out_dir, tokens, visible_tokens, palette_rgb)
+            spec, profile = out / "spec.json", out / "profile.json"
+            build = out / "build"
+            sprite.build_sheet(spec, build)
+            summary = sprite.check_sheet(spec, build / "rendered.png", profile, out / "check", scale=2)
+            print(json.dumps({"animation": name, "status": summary["status"], "issue_counts": summary["issue_counts"]}))
+            if summary["status"] != "pass":
+                result = 2
+        return result
+    except (OSError, ValueError, KeyError) as error:
+        print(f"Knight projection error: {error}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":

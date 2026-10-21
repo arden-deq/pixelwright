@@ -1724,7 +1724,7 @@
       "block": "animations/block.gif"
     },
     "rig_previews": {
-      "block": "animations/block-rig.gif"
+      "block": "animations/block.rig.gif"
     }
   },
   "issue_counts": {

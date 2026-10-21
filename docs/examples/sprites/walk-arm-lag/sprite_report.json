@@ -1631,7 +1631,7 @@
       "walk": "animations/walk.gif"
     },
     "rig_previews": {
-      "walk": "animations/walk-rig.gif"
+      "walk": "animations/walk.rig.gif"
     }
   },
   "issue_counts": {

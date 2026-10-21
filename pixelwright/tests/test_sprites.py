@@ -312,10 +312,10 @@ class RigTests(SpriteCase):
         summary = sprite.check_sheet(self.root / "spec.json", self.root / "sheet.png", self.root / "profile.json",
                                      self.root / "scaled", scale=3)
         self.assertEqual(summary["preview_scale"], 3)
-        self.assertEqual(summary["outputs"]["rig_previews"], {"move": "animations/move-rig.gif"})
+        self.assertEqual(summary["outputs"]["rig_previews"], {"move": "animations/move.rig.gif"})
         with Image.open(self.root / "scaled" / "animations" / "move.gif") as clean:
             self.assertEqual((clean.size, clean.n_frames, clean.info["duration"]), ((30, 30), 2, 150))
-        with Image.open(self.root / "scaled" / "animations" / "move-rig.gif") as rig_preview:
+        with Image.open(self.root / "scaled" / "animations" / "move.rig.gif") as rig_preview:
             self.assertEqual(rig_preview.n_frames, 2)
             # Two 30 px panels side by side, separated and framed by 8 px gaps.
             self.assertEqual(rig_preview.width, 2 * 30 + 3 * 8)
@@ -329,6 +329,20 @@ class RigTests(SpriteCase):
             sprite.check_sheet(self.root / "spec.json", self.root / "sheet.png", self.root / "profile.json",
                                self.root / "bad-scale", scale=17)
         self.assertFalse((self.root / "bad-scale").exists())
+
+    def test_animation_ids_cannot_collide_with_rig_preview_names(self):
+        frames, joints, rig = standard_motion()
+        self.write_case(frames, joints=joints, rig=rig,
+                        animations={"walk": {"frames": [0, 1]}, "walk-rig": {"frames": [1, 0]}})
+        summary = self.check()
+        self.assertEqual(summary["status"], "pass", summary["issues"])
+        paths = [*summary["outputs"]["animation_previews"].values(),
+                 *summary["outputs"]["rig_previews"].values()]
+        self.assertEqual(len(set(paths)), 4)
+        self.assertTrue((self.root / "run-1" / "sprite_report.json").is_file())
+        for path in paths:
+            with self.subTest(path=path), Image.open(self.root / "run-1" / path) as image:
+                self.assertEqual(image.n_frames, 2)
 
     def test_part_map_must_match_the_art(self):
         def clear_arm_cell(sheet):
@@ -390,7 +404,7 @@ class RigTests(SpriteCase):
             summary = sprite.check_sheet(self.root / "spec.json", self.root / "sheet.png", self.root / "profile.json",
                                          self.root / f"small-{scale}", scale=scale)
             self.assertIn(("PART_OFF_SKELETON", 1, "arm"), self.codes(summary))
-            with Image.open(self.root / f"small-{scale}" / "animations" / "move-rig.gif") as preview:
+            with Image.open(self.root / f"small-{scale}" / "animations" / "move.rig.gif") as preview:
                 self.assertEqual(preview.n_frames, 2)
 
     def test_bone_length_must_stay_within_tolerance(self):
@@ -450,6 +464,21 @@ class RigTests(SpriteCase):
         self.assertIn(("OCCLUSION_WITHOUT_OCCLUDER", 1, "arm"), self.codes(summary))
         summary = self.covered_case(True, hidden={1: ["arm"]})
         self.assertIn(("OCCLUSION_WITHOUT_OCCLUDER", 1, "arm"), self.codes(summary))
+
+    def test_hidden_free_part_cannot_pass_without_evidence_of_occlusion(self):
+        for foreground in (False, True):
+            with self.subTest(foreground=foreground):
+                frames = [{(1, 1): ("c", "A"), (8, 8): ("b", "B")}, {(8, 8): ("b", "B")}]
+                parts = {"cape": {"token": "c", "motion": "free"},
+                         "body": {"token": "b", "motion": "fixed"}}
+                if not foreground:
+                    parts = {"body": parts["body"], "cape": parts["cape"]}
+                self.write_case(frames, joints=[{}, {}], rig={"joints": {}, "parts": parts},
+                                hidden={1: ["cape"]})
+                summary = self.check()
+                code = "FREE_PART_OCCLUSION_UNVERIFIED" if foreground else "OCCLUSION_WITHOUT_OCCLUDER"
+                self.assertEqual(summary["status"], "review" if foreground else "fail")
+                self.assertEqual(self.codes(summary), {(code, 1, "cape")})
 
     def test_partial_cover_depends_on_drawing_order(self):
         # The shield covers the arm's outer three columns in frame 1.
@@ -752,9 +781,9 @@ class GeneratedKnightPipelineTests(unittest.TestCase):
         self.assertLess(second.data.index(anchor), second.data.index(b"1-pose_00.png"))
         self.assertEqual(manifest["block/01"]["inputs"]["generated/swing/frame_00.png"], hashlib.sha256(anchor).hexdigest())
 
-    def run_projection(self, mace_shift_frame=None):
+    def run_projection(self, mace_shift_frame=None, chosen=(0, 4)):
         kit_record = json.loads((POSE_KIT / "poses.json").read_text(encoding="utf-8"))
-        chosen = [0, 4, 6]  # ready, downswing and smash keep the test quick
+        # Use the ready stance and downswing for an unambiguous passing pair.
         swing = kit_record["animations"]["swing"]
         kit_record["animations"] = {"swing": {"durations_ms": [swing["durations_ms"][i] for i in chosen],
                                               "joints": [swing["joints"][i] for i in chosen]}}
@@ -770,19 +799,63 @@ class GeneratedKnightPipelineTests(unittest.TestCase):
                 kit / "generated" / "swing" / f"frame_{index:02d}.png")
         argv = ["knight_from_generated.py", "--poses", str(kit), "--out-dir", str(tmp / "out")]
         with unittest.mock.patch.object(sys, "argv", argv), contextlib.redirect_stdout(io.StringIO()):
-            self.assertEqual(generated.main(), 0)
+            exit_code = generated.main()
         spec = json.loads((tmp / "out" / "swing" / "spec.json").read_text(encoding="utf-8"))
         report = json.loads((tmp / "out" / "swing" / "check" / "sprite_report.json").read_text(encoding="utf-8"))
+        self.assertEqual(exit_code, 0 if report["status"] == "pass" else 2)
         return spec, report
 
     def test_frames_drawn_on_the_skeleton_pass_and_a_misplaced_mace_fails(self):
         spec, report = self.run_projection()
         self.assertLessEqual(len(spec["palette"]), 32)
-        self.assertEqual(report["issue_counts"]["fail"], 0, [i for i in report["issues"] if i["severity"] == "fail"])
+        self.assertEqual(report["status"], "pass", report["issues"])
+        parts = spec["rig"]["parts"]
+        expected_parents = {part: parent for part, parent in generated.PARENTS.items()
+                            if part in parts and parent in parts}
+        self.assertEqual({part: options["parent"] for part, options in parts.items() if "parent" in options},
+                         expected_parents)
         _, report = self.run_projection(mace_shift_frame=1)
         codes = {(i["code"], i.get("frame"), i.get("part")) for i in report["issues"]}
         self.assertIn(("PART_OFF_SKELETON", 1, "mace"), codes)
-        self.assertNotIn(("PART_OFF_SKELETON", 2, "mace"), codes)
+        self.assertNotIn(("PART_OFF_SKELETON", 0, "mace"), codes)
+
+    def test_approximate_part_labels_keep_review_findings(self):
+        # In the smash pose, the geometric shield label also catches leg dots.
+        # That candidate needs annotation review, not an automatic acceptance.
+        _, report = self.run_projection(chosen=(0, 4, 6))
+        self.assertEqual(report["status"], "review", report["issues"])
+        self.assertEqual(report["issue_counts"]["fail"], 0)
+        codes = {(i["code"], i.get("frame"), i.get("part")) for i in report["issues"]}
+        self.assertIn(("PART_COLOR_ADDED", 2, "shield"), codes)
+
+    def test_projection_exit_code_keeps_fail_or_review_when_a_later_animation_passes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "poses.json").write_text(json.dumps({"anchor": "anchor.png", "frame_size": [1, 1],
+                                                        "canvas": [1, 1], "animations": {"swing": {}, "walk": {}}}),
+                                             encoding="utf-8")
+            for status in ("fail", "review", "pass"):
+                with self.subTest(status=status), \
+                        unittest.mock.patch.object(generated, "anchor_palette", return_value=({}, [], [])), \
+                        unittest.mock.patch.object(generated, "write_animation", return_value=root / "candidate"), \
+                        unittest.mock.patch.object(sprite, "build_sheet"), \
+                        unittest.mock.patch.object(sprite, "check_sheet", side_effect=[
+                            {"status": status, "issue_counts": {}}, {"status": "pass", "issue_counts": {}}]) as check, \
+                        contextlib.redirect_stdout(io.StringIO()):
+                    code = generated.main(["--poses", tmp, "--out-dir", str(root / "out")])
+                    self.assertEqual(code, 0 if status == "pass" else 2)
+                    self.assertEqual(check.call_count, 2)
+
+    def test_projection_reports_invalid_input_without_starting_a_build(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "poses.json").write_text(json.dumps({"animations": {"swing": {}}}), encoding="utf-8")
+            with contextlib.redirect_stderr(io.StringIO()), unittest.mock.patch.object(generated, "anchor_palette") as anchor:
+                self.assertEqual(generated.main(["--poses", tmp, "--animation", "unknown"]), 1)
+                self.assertEqual(generated.main(["--poses", str(root / "missing")]), 1)
+                (root / "out" / "swing").mkdir(parents=True)
+                self.assertEqual(generated.main(["--poses", tmp, "--out-dir", str(root / "out")]), 1)
+                anchor.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -9,13 +9,13 @@ These frames turn cut-out parts of the published knight. For frames drawn new on
 | ![Mace swing](swing/animations/swing.gif) | ![Shield block](block/animations/block.gif) | ![Walk cycle](walk/animations/walk.gif) |
 | 8 frames · 1.0 s | 6 frames · 0.94 s | 8 frames · 0.96 s |
 
-Each `-rig.gif` plays the same frames with the declared skeleton over the art (left) and every dot colored by its part (right):
+Each `.rig.gif` plays the same frames with the declared skeleton over the art (left) and every dot colored by its part (right):
 
-![Mace swing with skeleton and part colors](swing/animations/swing-rig.gif)
+![Mace swing with skeleton and part colors](swing/animations/swing.rig.gif)
 
-![Shield block with skeleton and part colors](block/animations/block-rig.gif)
+![Shield block with skeleton and part colors](block/animations/block.rig.gif)
 
-![Walk cycle with skeleton and part colors](walk/animations/walk-rig.gif)
+![Walk cycle with skeleton and part colors](walk/animations/walk.rig.gif)
 
 ## How it was made
 

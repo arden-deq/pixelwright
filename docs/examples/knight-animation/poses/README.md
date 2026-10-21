@@ -41,6 +41,8 @@ A generated frame is an unverified candidate. [`tools/knight_from_generated.py`]
 python tools/knight_from_generated.py --animation swing --out-dir runs/knight-generated-v1
 ```
 
+Exit codes are `0` only when every selected animation passes, `2` if any animation fails or needs review, and `1` for invalid inputs or execution errors. Reports and candidate sheets remain available for diagnosis after a failed check. Parent links are resolved independently of drawing order, so the mace, arms and legs are checked for attachment to their declared parents.
+
 - The palette comes from the anchor alone: its cells are reduced to 31 colors plus transparent, the size of the README knight's palette, and every frame is held to it.
 - Each frame is projected onto the 192×288 grid: a cell takes its most common palette color, or turns transparent when background (transparency or flat #FF00FF) covers most of it. Isolated specks under 4 cells are dropped.
 - Every dot is given to a part, back to front: mace, upper arm, forearm, each leg's shin, foot and thigh, torso, shield upper arm, head and shield. A part owns the dots inside a capsule around its bone, front parts first; the shield owns the kite around the shield hand. Each part is compared against the anchor frame unless the anchor shows less than half of it.

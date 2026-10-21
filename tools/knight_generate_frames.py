@@ -64,7 +64,8 @@ def request_image(entry, kit: Path, args, key: str):
         detail = error.read(4096).decode("utf-8", "replace")
         raise RuntimeError(f"Images API returned HTTP {error.code}: {detail}") from None
     image = base64.b64decode(payload["data"][0]["b64_json"])
-    Image.open(io.BytesIO(image)).verify()
+    with Image.open(io.BytesIO(image)) as candidate:
+        candidate.verify()
     return image, {name: sha256(data) for name, data in inputs}
 
 
@@ -121,7 +122,8 @@ def main() -> int:
         out = kit / entry["output"]
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_bytes(image)
-        size = Image.open(out).size
+        with Image.open(out) as candidate:
+            size = candidate.size
         manifest[key] = {"model": args.model, "size": args.size, "quality": args.quality,
                          "input_fidelity": args.input_fidelity, "inputs": inputs,
                          "prompt_sha256": sha256(entry["prompt"].encode()), "output": entry["output"],
