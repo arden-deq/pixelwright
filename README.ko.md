@@ -122,15 +122,17 @@ python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/exampl
 
 이 모드는 레이어의 이진 투명도, 명시적인 공통 팔레트와 가시 RGB 예산, 투명 픽셀까지 정확한 RGBA를 요구합니다. 불투명 셀을 덮어쓰는 방식으로 합성하며 반투명 혼합·크기 변경·회전·잘라내기를 하지 않습니다. 불투명 최종 캔버스 위에 투명 배경의 전경 레이어를 올릴 수 있습니다. 기술 검사 후에는 각 레이어와 완성 장면의 접점·가림·광원·가독성을 눈으로 검수합니다. QA 격자는 작화와 별도 산출물로 유지합니다. 자세한 형식은 [레이어 작업·목록 문서](pixelwright/references/layers.md)에 있습니다.
 
-## 3D 골격을 이용한 이미지 생성
+## 2D 시안 먼저, 3D 골격은 동작에 사용
 
-실제 Blender 골격과 38개 갑옷·장비 메시를 먼저 만들고, 고정 직교 카메라의 구도를 이미지 생성에 전달하는 [3D 제작 경로](docs/SPRITE_3D_ko.md)를 추가했습니다. 공통 기준 캐릭터를 사용해 동작별 6프레임 시트를 생성하고, 프레임별 크기 보정 없이 검사합니다. 소스 체크아웃에서 사용하는 선택적 개발 도구입니다.
+[애니메이션 제작 경로](docs/SPRITE_3D_ko.md)는 프롬프트나 사용자 참고 이미지로 2D 도트 캐릭터를 먼저 만듭니다. 그 시안의 비율에 맞춰 맨 골격을 3D로 구성한 뒤, 투영된 포즈로 같은 2D 캐릭터를 새로 그립니다. 골격은 카메라·관절·깊이를, 2D 시안은 외형을 결정합니다. Blender 장면에는 갑옷·장비 메시가 없습니다. 소스 체크아웃에서 사용하는 선택적 개발 도구입니다.
+
+![골격을 만들기 전에 생성한 2D 시안](docs/examples/knight-design-first/design.png)
 
 | 걷기 | 공격 | 막기 |
 | --- | --- | --- |
-| ![3D 가이드로 생성한 걷기](docs/examples/knight-3d/walk.gif) | ![3D 가이드로 생성한 공격](docs/examples/knight-3d/attack.gif) | ![3D 가이드로 생성한 막기](docs/examples/knight-3d/block.gif) |
+| ![걷기 초안](docs/examples/knight-design-first/audit/walk.gif) | ![공격 초안](docs/examples/knight-design-first/audit/attack.gif) | ![막기 초안](docs/examples/knight-design-first/audit/block.gif) |
 
-실제 생성 결과는 **128×128 논리 프레임, 공통 19색, 18프레임의 픽셀·3D 투영 검사 PASS**입니다. [Blender 파일·시트·격자 미리보기·생성 출처·별도 시각 검토](docs/examples/knight-3d/)를 함께 제공합니다. 투영 영역 검사는 생성된 그림의 의미론적 부위 길이를 증명하는 검사가 아니므로 시각 검토를 별도로 수행합니다.
+실제 생성 초안은 **128×128 논리 프레임, 공통 24색**입니다. 픽셀 저장 규격과 3D 골격 검사는 PASS지만, 그림을 별도로 관찰한 검사에서는 포즈·장비 크기 실패가 있어 **완성 에셋으로 승인하지 않았습니다**. [예제](docs/examples/knight-design-first/)에 원본 입력, GIF, 실제 격자, 관찰 좌표와 실패 보고서를 보존했습니다. 동작 프레임마다 크기나 중심을 보정하지 않으며, 정상 골격만으로 그림을 통과시키지 않습니다. 이전 [메시 외형 전사 실험](docs/examples/knight-3d/)은 이력으로 남깁니다.
 
 ## 2D 스프라이트 시트와 골격 검사
 

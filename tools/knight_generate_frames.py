@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: Apache-2.0
 """Generate the knight frames listed in a pose kit's prompts.json.
 
-Each entry is sent to the OpenAI Images API edits endpoint with its input images
-in order and its prompt; the result is
+Entries with references use the OpenAI Images API edits endpoint, preserving
+input order. Prompt-only entries use the generations endpoint. The result is
 saved at the entry's output path inside the kit. An input that is another
 entry's output (the anchor frame) is generated first. Existing frames are kept
 unless --force is given, so a failed frame can be deleted and regenerated alone.
@@ -49,13 +49,20 @@ def multipart(fields, files):
 
 def request_image(entry, kit: Path, args, key: str):
     inputs = [(name, (kit / name).read_bytes()) for name in entry["images"]]
-    fields = [("model", args.model), ("prompt", entry["prompt"]), ("size", entry.get("size", args.size)), ("quality", args.quality),
-              ("background", entry.get("background", "transparent")), ("output_format", "png"), ("n", "1")]
-    if args.input_fidelity != "none":
-        fields.append(("input_fidelity", args.input_fidelity))
-    files = [("image[]", f"{index}-{Path(name).name}", data) for index, (name, data) in enumerate(inputs)]
-    body, content_type = multipart(fields, files)
-    request = urllib.request.Request(args.base_url.rstrip("/") + "/images/edits", data=body, method="POST",
+    fields = {"model": args.model, "prompt": entry["prompt"], "size": entry.get("size", args.size),
+              "quality": args.quality, "background": entry.get("background", "transparent"),
+              "output_format": "png", "n": 1}
+    if inputs:
+        if args.input_fidelity != "none":
+            fields["input_fidelity"] = args.input_fidelity
+        files = [("image[]", f"{index}-{Path(name).name}", data) for index, (name, data) in enumerate(inputs)]
+        body, content_type = multipart(fields.items(), files)
+        endpoint = "/images/edits"
+    else:
+        # input_fidelity belongs to image edits, never prompt-only generation.
+        body, content_type = json.dumps(fields).encode(), "application/json"
+        endpoint = "/images/generations"
+    request = urllib.request.Request(args.base_url.rstrip("/") + endpoint, data=body, method="POST",
                                      headers={"Authorization": f"Bearer {key}", "Content-Type": content_type})
     try:
         with urllib.request.urlopen(request, timeout=args.timeout) as response:
@@ -127,7 +134,8 @@ def main() -> int:
             size = candidate.size
         manifest[key] = {"model": args.model, "size": entry.get("size", args.size), "quality": args.quality,
                          "background": entry.get("background", "transparent"),
-                         "input_fidelity": args.input_fidelity, "inputs": inputs,
+                         "input_fidelity": args.input_fidelity if inputs and args.input_fidelity != "none" else None,
+                         "endpoint": "/images/edits" if inputs else "/images/generations", "inputs": inputs,
                          "prompt_sha256": sha256(entry["prompt"].encode()), "output": entry["output"],
                          "output_sha256": sha256(image), "output_size": list(size)}
         manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n",

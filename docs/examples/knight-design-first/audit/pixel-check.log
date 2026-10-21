@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "issue_counts": {
+    "fail": 0,
+    "review": 0,
+    "info": 2
+  },
+  "checks": {
+    "frames": "checked",
+    "animations": "checked",
+    "rig": "not_declared"
+  },
+  "outputs": {
+    "sprite_report": "sprite_report.json",
+    "layout_overlay": "layout_overlay.png",
+    "animation_previews": {
+      "walk": "animations/walk.gif",
+      "attack": "animations/attack.gif",
+      "block": "animations/block.gif"
+    }
+  }
+}

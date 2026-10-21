@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "workflow": "2d-design-first",
+  "prompt": "A medieval steel knight with a rounded helm and red plume, red tabard and gold heraldry, a mace in the right hand and a red kite shield on the left arm. Finished appealing 2D pixel art, consistent anatomy and readable armor.",
+  "frame_size": [
+    128,
+    128
+  ],
+  "scale": 4,
+  "palette_budget": 24,
+  "registration": {
+    "full_character_height": 88,
+    "floor_y": 112,
+    "center_x": 64
+  },
+  "identity_inputs": [],
+  "stage": "design"
+}

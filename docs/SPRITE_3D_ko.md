@@ -1,67 +1,80 @@
-# 3D 골격에서 2D 도트 스프라이트 생성하기
+# 2D 시안에 3D 골격 동작 적용하기
 
-이 경로는 실제 Blender 골격과 갑옷·장비 메시를 먼저 만들고, 고정 직교 카메라로 렌더한 구도를 이미지 생성의 입력으로 사용합니다. 기준 캐릭터 한 장을 공유하고, 걷기·공격·막기를 각각 6프레임 시트 한 장으로 생성합니다. [실제 결과와 검증 기록](examples/knight-3d/)을 포함했습니다.
+**참고 이미지 또는 프롬프트 → 2D 도트 시안 → 시안 비율의 3D 맨 골격 → 같은 캐릭터의 새로운 2D 애니메이션** 순서입니다. 외형은 2D 시안에서 결정합니다. 3D는 카메라, 관절 위치, 깊이와 가림 관계를 전달합니다. 갑옷 메시나 3D 실루엣을 만들고 이를 도트로 전사하는 경로가 아닙니다.
 
-현재는 소스 체크아웃의 개발 도구입니다. 설치용 v0.6.0 ZIP에는 이 선택적 Blender 도구가 들어 있지 않습니다. Blender는 가이드 제작에만 필요하며, 나머지는 저장된 JSON/PNG와 기존 Pillow·NumPy 의존성으로 실행합니다.
+[실제 생성 초안과 실패 보고서](examples/knight-design-first/)를 함께 제공합니다. 픽셀 규격과 골격 기하 검사는 통과했지만, 일부 그림의 포즈와 장비 크기는 기준을 벗어났습니다. 완성 에셋으로 승인하지 않았습니다.
 
-## 생성 순서
+현재 소스 체크아웃에서 사용하는 개발 도구이며 설치용 v0.6.0 ZIP에는 들어 있지 않습니다. Pillow·NumPy는 기존 의존성입니다. Blender는 골격 파일 제작과 독립 검증에 사용합니다.
 
-먼저 저장소의 Python 의존성을 설치하고 Blender를 준비합니다. 아래 `blender`는 실행 파일의 경로로 바꿀 수 있습니다. 새 실행마다 빈 출력 폴더를 사용합니다.
+## 1. 골격 없이 2D 시안 만들기
 
 ```sh
 python -m pip install -r pixelwright/requirements.txt
-blender --background --factory-startup --python tools/knight_render_3d.py -- --out-dir runs/knight-3d/rig
-python tools/knight_sheet_3d.py prepare --rig-dir runs/knight-3d/rig --out-dir runs/knight-3d/generation
+python tools/knight_design_first.py init --out-dir runs/design-first --prompt "강철 갑옷과 붉은 타바드, 사자 문장 방패와 메이스를 든 기사"
 ```
 
-렌더러는 18개 뼈, 38개 메시 부품과 시간 키프레임이 있는 `knight-rig.blend`를 저장합니다. 각 포즈에 대해 볼륨 렌더, 실제 메시 ID, 고정 범위의 깊이·카메라 법선 이미지를 내보냅니다. 메시 ID는 평가된 Blender 삼각형의 Z-buffer에서 얻습니다. 준비 단계는 카메라·월드 좌표·프레임 크기·통과 기준을 복사하고 가이드 해시를 고정합니다.
+사용자 참고 이미지가 있으면 `init`에 `--reference path/to/reference.png`를 추가합니다. 초기 `prompts.json`에는 `design` 작업 하나만 있습니다. 3D 자료나 포즈 입력은 없습니다. 참고 이미지를 그대로 시안으로 채택해도 됩니다.
 
-`prompts.json`의 `anchor`를 먼저 생성합니다. 기준 이미지를 승인하기 전에는 상태 시트를 생성하지 않습니다. HTTP 경로에서는 `OPENAI_API_KEY`를 환경 변수에 설정합니다.
+`prompts.json`을 실제 이미지 생성 서비스에 전달해 `raw/design.png`로 보존합니다. HTTP 도구는 참고 이미지가 없으면 `/images/generations`, 있으면 `/images/edits`를 사용합니다. `OPENAI_API_KEY`는 환경 변수로 설정합니다. [공식 생성 API 형식](https://developers.openai.com/api/reference/resources/images/methods/generate)을 따르며, 첫 시안 요청에는 `input_fidelity`를 보내지 않습니다.
 
 ```sh
-python tools/knight_generate_frames.py --poses runs/knight-3d/generation --animation anchor
-python tools/knight_sheet_3d.py anchor --run-dir runs/knight-3d/generation
+python tools/knight_generate_frames.py --poses runs/design-first --animation design
+python tools/knight_design_first.py select --run-dir runs/design-first --source runs/design-first/raw/design.png
 ```
 
-기준 이미지도 도트와 구도를 눈으로 확인합니다. `anchor` 명령은 원본을 보존하고 128×128 격자로 투영한 뒤 **기준 캐릭터 한 장만** 균일 배율로 등록합니다. `anchor-calibration.json`에 배율·이동·원본 해시와 투영 검사 결과를 기록합니다. 구도가 실패하면 종료 코드 `2`를 반환합니다. 기술적 통과가 작화 승인을 대신하지는 않습니다.
+`select`는 원본을 보존하고 128×128 논리 격자와 공통 24색으로 투영합니다. 시안 한 장만 전체 높이 88셀·발밑 y=112에 균일 배율로 배치하고, 변환 내역과 해시를 `identity.json`에 기록합니다. 이때 골격은 아직 없습니다. 이 손실 변환을 거친 **선택된 2D 시안**이 이후 외형의 기준이며, 원본 API 이미지가 정확한 픽셀 격자를 가졌다고 주장하지 않습니다. `select`가 사람의 작화 승인을 의미하지는 않습니다.
+
+## 2. 시안에 골격 맞추기
+
+선택한 `references/design-native.png`에서 관절과 안정적으로 측정할 부위를 직접 확인합니다. [실제 관찰 파일](examples/knight-design-first/generation/design-landmarks.json)은 `design_sha256`, 각 관절의 `xy`, `depth_offset_m`, `part_dimensions`를 기록합니다. 관절 이름은 예제와 동일합니다. 2D 한 장에서 알 수 없는 깊이는 작성한 가정이며, 자동 3D 복원을 했다는 의미가 아닙니다.
 
 ```sh
-python tools/knight_generate_frames.py --poses runs/knight-3d/generation --animation walk --animation attack --animation block
-python tools/knight_sheet_3d.py check --run-dir runs/knight-3d/generation --palette docs/examples/knight-3d/palette.json --out-dir runs/knight-3d/audit
+python tools/knight_design_first.py poses --run-dir runs/design-first --landmarks path/to/design-landmarks.json
+blender --background --factory-startup --python tools/knight_render_3d.py -- --skeleton-contract runs/design-first/contract.json --out-dir runs/design-first-armature
 ```
 
-생성 서비스는 고정된 3×2 배치의 볼륨·골격 가이드와 기준 캐릭터를 함께 받습니다. 각 셀은 512×512이며 논리 프레임은 128×128입니다. 상태 시트의 전체 캔버스만 같은 격자에 투영합니다. **프레임마다 크기·중심·발 위치를 맞추는 보정은 수행하지 않습니다.** 잘못 그린 부위는 수정 생성하고, 원본과 실패 보고서를 남깁니다.
+뼈 길이는 선택한 시안의 관절과 깊이에서 계산합니다. 기존 모션의 방향과 도달 비율을 전달하고, 다른 신체 비율에서도 길이가 유지되도록 3D IK를 풉니다. 카메라, 모든 포즈와 허용치를 `contract.json`에 고정합니다. Blender 파일에는 18개 뼈, 카메라와 동작 키프레임이 있으며 **외형 메시 수는 0개**입니다. Blender 투영과 독립 계산도 비교합니다.
 
-`--palette`를 생략하면 모든 동작의 색상을 모아 공통 팔레트를 만듭니다. 지정하면 같은 불투명 RGB 팔레트를 모든 동작에 적용하며, 준비 시 지정한 색상 예산을 초과할 수 없습니다. 이번 결과는 가까운 검정·회색을 합치고 강철·적색·가죽·황동 명암 램프를 공유하는 19색을 사용했습니다. 색상 변환에도 디더링을 사용하지 않습니다.
+각 상태의 생성 입력은 같은 슬롯 크기로 반복한 **2D 시안 시트가 첫 번째**, 색 선과 관절만 있는 **골격 시트가 두 번째**입니다. 볼륨 렌더, 갑옷 메시, 재질, 실루엣 마스크는 생성 입력이나 작화 합격 기준에 사용하지 않습니다. 천과 장식, 윤곽과 명암은 2D 애니메이션으로 새로 그립니다.
 
-## 서로 다른 검증을 구분하기
+## 3. 상태 시트 생성과 독립 검사
 
-| 검사 | 확인하는 것 |
+```sh
+python tools/knight_generate_frames.py --poses runs/design-first --animation walk --animation attack --animation block
+python tools/knight_design_first.py check --run-dir runs/design-first --out-dir runs/design-first-audit
+```
+
+걷기·공격·막기를 각각 3×2 슬롯의 6프레임 시트로 생성합니다. 슬롯당 128×128 논리 셀, 4배 PNG입니다. 상태 시트 전체를 같은 격자와 시안 팔레트에 투영합니다. **생성된 동작 프레임을 개별 확대·축소·재배치하지 않습니다.** 잘못 그린 부위는 수정 생성하고 실패 원본을 보존합니다.
+
+관찰 파일 없이 실행하면 픽셀이 정상이고 골격이 정상이더라도 그림의 포즈는 `REVIEW`입니다. 골격 좌표를 그대로 그림의 관찰 좌표로 복사해 합격시키지 않습니다. 실제 그림에서 관절과 부위 크기를 따로 측정한 [관찰 파일](examples/knight-design-first/generation/artwork-annotations.json)을 전달합니다. 관찰 방법·검토자·정확한 원본 이미지와 계약 해시가 필요합니다. 가려져 판단할 수 없는 값은 `null` 또는 생략하며 검토 상태를 유지합니다.
+
+```sh
+python tools/knight_design_first.py check --run-dir runs/design-first --annotations path/to/artwork-annotations.json --out-dir runs/design-first-observed
+```
+
+| 검사 | 확인하는 것과 한계 |
 | --- | --- |
-| 3D 골격 | 모든 포즈의 월드 공간 뼈 길이, 독립 계산과 Blender 카메라 투영의 일치 |
-| Blender 메시 | 포즈마다 평가된 메시 모서리의 실제 길이가 유지되는지 |
-| 2D 구도 | 같은 슬롯에서 실제 렌더 실루엣·보이는 부위 영역·머리 영역과 겹치는지 |
-| 도트 규격 | 4×4 셀의 정확한 RGBA 균일성, 정수 배율, 공통 팔레트, 이진 알파 |
-| 시각 검토 | 실루엣, 윤곽 계단, 명암 뭉침, 부위 접합, 앞뒤 가림, 타이밍·크기 흔들림 |
+| 3D 골격 | 포즈마다 월드 공간 뼈 길이, 독립 계산과 Blender 카메라 투영의 일치 |
+| 그림 포즈 | 실제 그림에서 관찰한 관절과 투영 목표의 거리. 이번 계약은 최대 5셀 |
+| 부위 크기 | 시안에서 측정한 투구·메이스 머리·방패와 그림 관찰값 비교. 이번 계약은 최대 15% 차이 |
+| 도트 규격 | 정확한 4×4 RGBA 셀, 공통 팔레트, 정수 배율, 이진 알파 |
+| 시각 검토 | 캐릭터 동일성, 자연스러운 가림, 윤곽 계단, 명암 뭉침, 접합, 움직임과 접지 |
 
-3D 부위가 회전하면 2D 길이는 원근 단축으로 달라질 수 있습니다. 따라서 2D 뼈 길이를 일정하게 강제하지 않습니다. 기존 `pixel_sprite.py`의 2D 부위 맵 검사와 이 실험의 3D 투영 검사는 서로 다른 검사입니다.
+수동 좌표와 치수는 자동 의미론적 부위 분할이 아닙니다. 원근 단축과 가림을 구분하고, 측정할 수 없는 부위는 `REVIEW`로 남깁니다. 골격 길이가 일정하다는 사실은 생성된 팔·다리의 길이가 일정하다는 증명이 아닙니다. 실패 이후 허용치나 깊이를 바꿔 통과시키지 않습니다. 종료 코드는 `0` 통과, `2` 실패 또는 검토 필요, `1` 입력·실행 오류입니다. 작화 판단은 `art-review.json`에 별도로 남깁니다.
 
-생성된 그림에는 정답 의미론적 부위 라벨이 없습니다. 투영 영역의 채움 정도만으로 생성된 팔·다리의 고유 길이가 일정하다고 증명할 수 없습니다. 리포트는 이를 명시하며, 최종 시트와 모든 포즈의 시각 검토를 별도로 기록합니다. 깊이·숨김 상태·허용치를 바꾸어 실패를 통과시키지 않습니다.
+출력에는 네이티브 시트, 4배 PNG, 검사기의 실제 격자, 골격 오버레이, GIF와 실행 명세가 포함됩니다. GIF는 반복 미리보기이며 공격·막기의 실행 명세는 일회 동작입니다.
 
-원본 API 이미지 자체의 정확한 격자를 보증하지 않습니다. 고정 논리 격자 투영과 팔레트 변환을 거친 **파생 PNG**를 다시 검사합니다. 출력은 네이티브 시트, 4배 PNG, 검사기의 실제 격자 미리보기, 3D 투영 오버레이, GIF와 실행용 `manifest.json`입니다. GIF는 보기 편하도록 반복되며, 실행 명세의 공격·막기는 일회 동작입니다.
+## 실제 실행 기록
 
-## 실제 실행 결과
+2026-10-21 / macOS / Python 3.12 / Blender 5.2.2 LTS에서 실제 호스트 `imagegen` 서비스로 생성했습니다. 선택된 시안·세 상태는 4회 호출이며, 폐기한 시도를 포함하면 11회입니다. 모델 이름은 호스트에서 공개하지 않았습니다. HTTP 래퍼는 모의 전송으로 검증했으며 유료 HTTP 실호출로 검증했다고 주장하지 않습니다.
 
-2026-10-21 macOS / Python 3.12 / Blender 5.2.2 LTS에서 확인했습니다.
+- 18포즈의 3D 뼈 길이와 카메라 투영 PASS. 외형 메시 0개. Blender와 독립 투영 차이는 최대 `1.310e-5` 논리 셀입니다.
+- 파생 시트 768×384 → 3072×1536, 공통 가시 24색, 정확한 4×4 셀 PASS. 반투명·잘못된 투명 RGBA는 0개입니다.
+- 독립 수동 관찰: 4프레임 PASS, 13프레임 FAIL, 1프레임 REVIEW. 좌표는 약 1셀의 관찰 오차가 있으므로 경계에 걸린 수치는 정밀 검토가 필요합니다. 명확한 결함은 공격 3번의 메이스 머리 확대, 공격 4번의 과한 웅크림, 막기 1·3·5번의 방패 높이입니다. 프레임 번호는 0부터 셉니다.
+- 모든 관찰이 있더라도 피부·의복의 의미론적 크기를 자동 보장하지 않습니다. 현재 샘플의 작화 검토는 `changes_needed`이며 완성 에셋으로 승인하지 않았습니다.
 
-- 이미지 생성은 Codex의 실제 `imagegen` 서비스로 8회 실행했습니다. 첫 기준 이미지와 상태 시트의 머리 크기 실패를 남기고, 기준 이미지 수정과 투구 수정 생성을 거쳤습니다. 모델 이름은 호스트에서 공개하지 않아 기록하지 않았습니다.
-- 최종 18프레임의 픽셀 검사와 등록된 3D 투영 검사 모두 PASS입니다. 실루엣 IoU는 0.790–0.903이며, 머리 영역 중심 차이는 최대 1.690 논리 셀입니다.
-- 메시 모서리 길이 차이는 최대 `3.714e-7 m`, Blender와 독립 카메라 투영 차이는 최대 `1.283e-5` 논리 셀입니다.
-- 네이티브 시트는 768×384, 확대 PNG는 3072×1536이며 294,912개 논리 셀 모두 정확합니다. 실제 가시 색상은 19개, 반투명 픽셀·팔레트 밖 픽셀·불균일 셀은 모두 0개입니다.
-- 골격 손상·누락 무기·잘못된 위치·변경된 계약/가이드·잘못된 알파/팔레트 및 HTTP 요청 형식을 포함한 전체 209개 테스트가 통과했습니다. 설치 ZIP 제작·독립 설치 검증도 통과했습니다.
-
-HTTP 생성 도구는 요청 형식을 모의 전송으로 테스트했습니다. 이 환경의 실제 생성은 호스트 `imagegen` 경로였으며, HTTP 래퍼 자체의 유료 실호출을 검증했다고 주장하지 않습니다. [생성 출처](examples/knight-3d/generation.json), [자동 검사](examples/knight-3d/report.json), [별도 시각 검토](examples/knight-3d/art-review.json)를 참고합니다.
+[생성 출처](examples/knight-design-first/generation.json), [실패 포함 검사](examples/knight-design-first/audit/report.json), [별도 시각 검토](examples/knight-design-first/art-review.json)를 확인할 수 있습니다. 이전 [3D 메시 외형 전사 예제](examples/knight-3d/)는 과거 방식의 기록으로 유지합니다.
 
 ## sprite-gen에서 참고한 점
 
-[aldegad/sprite-gen](https://github.com/aldegad/sprite-gen/tree/59b2738a2e76ed7043d9691a230396ed6374a336)의 기준 캐릭터 공유, 상태별 시트 생성, 픽셀 격자 복원, 고정된 프레임 배치와 공통 팔레트 접근을 참고했습니다. 특히 [pixel-unfake](https://github.com/aldegad/sprite-gen/blob/59b2738a2e76ed7043d9691a230396ed6374a336/docs/pixel-unfake.md)와 [run-contract](https://github.com/aldegad/sprite-gen/blob/59b2738a2e76ed7043d9691a230396ed6374a336/docs/run-contract.md)를 읽었습니다. 해당 프로젝트가 3D 골격을 제공하는 것은 아니며, 이 저장소의 3D 골격·렌더러·투영 검사는 별도로 작성했습니다.
+[aldegad/sprite-gen](https://github.com/aldegad/sprite-gen/tree/59b2738a2e76ed7043d9691a230396ed6374a336)의 기준 캐릭터 공유, 상태별 시트, 고정 프레임 배치와 공통 픽셀 격자·팔레트 접근을 참고했습니다. [pixel-unfake](https://github.com/aldegad/sprite-gen/blob/59b2738a2e76ed7043d9691a230396ed6374a336/docs/pixel-unfake.md)와 [run-contract](https://github.com/aldegad/sprite-gen/blob/59b2738a2e76ed7043d9691a230396ed6374a336/docs/run-contract.md)가 해당 자료입니다. 이 저장소의 3D 골격과 검증 도구는 별도로 작성했습니다.

@@ -288,6 +288,38 @@ class SheetPipelineTests(unittest.TestCase):
         self.assertIn(b'name="size"\r\n\r\n1536x1024', requests[0].data)
         self.assertIn(b'name="background"\r\n\r\nopaque', requests[0].data)
 
+    def test_prompt_only_design_uses_json_generation_without_input_fidelity(self):
+        requests = []
+        png = io.BytesIO(); Image.new("RGB", (4, 4), "red").save(png, "PNG")
+
+        def answer(request, timeout):
+            requests.append(request)
+            payload = {"data": [{"b64_json": base64.b64encode(png.getvalue()).decode()}]}
+            return contextlib.closing(io.BytesIO(json.dumps(payload).encode()))
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            sheets.write_json(root / "poses.json", {"canvas": [1024, 1024]})
+            sheets.write_json(root / "prompts.json", {"design": {"images": [], "prompt": "original 2D knight",
+                              "output": "raw/design.png", "background": "opaque"}})
+            with patch.dict("os.environ", {"OPENAI_API_KEY": "test-key"}), \
+                    patch.object(generation.urllib.request, "urlopen", answer), \
+                    patch.object(sys, "argv", ["knight_generate_frames.py", "--poses", str(root)]), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(generation.main(), 0)
+            manifest = json.loads((root / "generated/manifest.json").read_text())["design"]
+            self.assertEqual(manifest["inputs"], {})
+            self.assertIsNone(manifest["input_fidelity"])
+            self.assertEqual(manifest["endpoint"], "/images/generations")
+        self.assertEqual(requests[0].full_url, "https://api.openai.com/v1/images/generations")
+        self.assertEqual(requests[0].get_header("Content-type"), "application/json")
+        payload = json.loads(requests[0].data)
+        self.assertEqual(payload["n"], 1)
+        self.assertEqual(payload["size"], "1024x1024")
+        self.assertEqual(payload["prompt"], "original 2D knight")
+        self.assertNotIn("input_fidelity", payload)
+        self.assertNotIn("image", payload)
+
 
 if __name__ == "__main__":
     unittest.main()

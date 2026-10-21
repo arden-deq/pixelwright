@@ -48,6 +48,8 @@ Decide the layout, common grid and RGBA palette, lighting, and drawing order bef
 
 For sprite sheets, atlases and animation cycles, read [sprites.md](references/sprites.md). Freeze the frame size, scale, slot layout, palette and animations first; gutters and unused slots stay transparent, and the profile's logical size is the computed sheet size.
 
+For generative animation guided by a 3D skeleton, establish the **2D character design first** from the user's reference or prompt. That selected design controls anatomy, costume, silhouette, equipment and pixel treatment. Identify its joints and proportions, then fit a bare 3D skeleton and camera to it. Supply the selected 2D design for appearance and projected bones/depth for motion. Do not treat a 3D armor render, mesh silhouette, material or shading as the character design unless the user explicitly requests that transfer. A valid 3D rig proves its own geometry, not the generated artwork's anatomy. Missing independent artwork observations keep pose acceptance at REVIEW; pixel-grid PASS never promotes it to PASS. The source-checkout recipe is `tools/knight_design_first.py`.
+
 When parts move, declare a rig instead of hoping the frames agree: list parts back to front, give each a motion (`fixed`, `rigid` with a pivot, `bone` between two joints, or `free`), and write each frame's color rows together with its part map and joint coordinates. Then build and check:
 
 ```sh

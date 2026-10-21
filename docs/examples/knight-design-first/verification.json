@@ -1,0 +1,63 @@
+{
+  "status": "pass",
+  "scope": "pixel_storage_and_preview_timing_only_not_artwork_pose",
+  "exact_4x_nearest_neighbor": true,
+  "logical_size": [
+    768,
+    384
+  ],
+  "render_size": [
+    3072,
+    1536
+  ],
+  "visible_rgb_colors": 24,
+  "partial_alpha_pixels": 0,
+  "noncanonical_transparent_pixels": 0,
+  "animations": {
+    "walk": {
+      "frames": 6,
+      "size": [
+        384,
+        384
+      ],
+      "durations_ms": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ]
+    },
+    "attack": {
+      "frames": 6,
+      "size": [
+        384,
+        384
+      ],
+      "durations_ms": [
+        180,
+        110,
+        150,
+        70,
+        140,
+        170
+      ]
+    },
+    "block": {
+      "frames": 6,
+      "size": [
+        384,
+        384
+      ],
+      "durations_ms": [
+        180,
+        90,
+        100,
+        100,
+        230,
+        130
+      ]
+    }
+  }
+}

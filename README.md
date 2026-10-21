@@ -122,15 +122,17 @@ Each composition writes `layers.json`, per-layer reports and grid previews under
 
 This mode requires binary layer transparency, an explicit shared palette and visible RGB budget, and exact transparent RGBA. It uses opaque-cell replacement, with no semitransparent blending, resizing, rotation, or clipping. A final opaque canvas is supported with transparent foreground layers. Technical QA is followed by visual review of the layers and final image, including contacts, occlusion, lighting, and readability. QA overlays remain separate from artwork. See the [layer workflow and manifest reference](pixelwright/references/layers.md).
 
-## Image generation from a 3D rig
+## 2D design first, 3D bones for motion
 
-The optional [3D workflow](docs/SPRITE_3D_ko.md) builds a real Blender armature and 38 armor/equipment meshes, then supplies their fixed orthographic composition to image generation. One identity anchor is shared by six-pose action sheets. Frames are audited without individual resizing or recentering. These development tools require a source checkout.
+The optional [animation workflow](docs/SPRITE_3D_ko.md) starts with a 2D pixel character designed from a prompt or user reference. Its proportions define a bare 3D skeleton. Image generation then redraws that same 2D design in the projected poses; the skeleton supplies camera, joints and depth, while the 2D design supplies appearance. The Blender scene contains zero armor or equipment meshes. These development tools require a source checkout.
+
+![Selected 2D design, made before the skeleton](docs/examples/knight-design-first/design.png)
 
 | Walk | Attack | Block |
 | --- | --- | --- |
-| ![Walk generated from the 3D guide](docs/examples/knight-3d/walk.gif) | ![Attack generated from the 3D guide](docs/examples/knight-3d/attack.gif) | ![Block generated from the 3D guide](docs/examples/knight-3d/block.gif) |
+| ![Walk draft](docs/examples/knight-design-first/audit/walk.gif) | ![Attack draft](docs/examples/knight-design-first/audit/attack.gif) | ![Block draft](docs/examples/knight-design-first/audit/block.gif) |
 
-The real generation sample uses **128×128 logical frames and 19 shared colors; all 18 frames pass pixel and registered 3D projection checks**. The [example](docs/examples/knight-3d/) includes the Blender file, sheet, actual grid preview, generation provenance and separate visual review. Projected region coverage does not prove generated semantic limb lengths; visual review remains necessary.
+This real generation draft uses **128×128 logical frames and 24 shared colors**. Exact pixel storage and 3D geometry PASS; independent artwork observations find pose and equipment-size failures, so the sample is **not production accepted**. [The example](docs/examples/knight-design-first/) preserves raw inputs, GIFs, the actual grid overlay, annotations and failed checks. Frames are never individually fitted or recentered. A valid skeleton cannot certify the generated artwork. The older [mesh-transfer experiment](docs/examples/knight-3d/) is retained as history.
 
 ## 2D sprite sheets and rig auditing
 

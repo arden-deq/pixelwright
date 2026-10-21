@@ -1,0 +1,27 @@
+{
+  "workflow": "2d-design-first",
+  "source_sha256": "60da4b03549dd0d7218f380bcd47df75a1d155d700f34ff05f3c17a8eeb3668f",
+  "brief_sha256": "041200ae716b278c9c4aa9ba4f096262e7e18bb9a7cd72501cd9ae3eb676488a",
+  "native_sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+  "reference_sha256": "32132fea419e907154659ca756f019aa2c864bb4b3b3657173000c61554e4545",
+  "palette_sha256": "6f72173815fa54ae3273bfcacea25217fc6e5a7feddc50e8baefacec695798e9",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "source_box": [
+    21,
+    9,
+    99,
+    120
+  ],
+  "uniform_design_scale": 0.7927927927927928,
+  "origin": [
+    33,
+    24
+  ],
+  "identity_authority": "selected_2d_design",
+  "rig_used_for_design": false,
+  "artistic_status": "not_reviewed",
+  "disclosure": "Lossy global grid projection and one uniform design registration; original preserved. No mesh fitting."
+}
