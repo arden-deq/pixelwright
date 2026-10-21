@@ -128,7 +128,8 @@ def main() -> int:
                          "input_fidelity": args.input_fidelity, "inputs": inputs,
                          "prompt_sha256": sha256(entry["prompt"].encode()), "output": entry["output"],
                          "output_sha256": sha256(image), "output_size": list(size)}
-        manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+                                 encoding="utf-8", newline="\n")
         print(json.dumps({"frame": key, "output": entry["output"], "size": list(size)}))
     return 0
 

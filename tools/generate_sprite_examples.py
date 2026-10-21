@@ -186,7 +186,7 @@ def write(path: Path, document) -> None:
     # Keep frame lists and joint coordinates on one line for readable specs.
     text = re.sub(r"\[\s+([-0-9.,\s]+?)\s+\]",
                   lambda match: "[" + ", ".join(part.strip() for part in match.group(1).split(",")) + "]", text)
-    path.write_text(text + "\n", encoding="utf-8")
+    path.write_text(text + "\n", encoding="utf-8", newline="\n")
 
 
 def walk_example(out: Path) -> None:

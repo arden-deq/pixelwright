@@ -233,8 +233,9 @@ def main():
                          duration=animation["durations_ms"], loop=0)
     # The anchor is generated first because every other prompt reads it.
     prompts = {f"{ANCHOR[0]}/{ANCHOR[1]:02d}": prompts.pop(f"{ANCHOR[0]}/{ANCHOR[1]:02d}"), **prompts}
-    (out / "poses.json").write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8")
-    (out / "prompts.json").write_text(json.dumps(prompts, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (out / "poses.json").write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8", newline="\n")
+    (out / "prompts.json").write_text(json.dumps(prompts, indent=2, ensure_ascii=False) + "\n",
+                                      encoding="utf-8", newline="\n")
     return 0
 
 

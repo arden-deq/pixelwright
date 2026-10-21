@@ -413,13 +413,13 @@ def write_animation(animation_id, out_root, tokens, palette_rgba, samplers):
             "frames": frames}
     out = out_root / animation_id
     out.mkdir(parents=True, exist_ok=True)
-    (out / "spec.json").write_text(compact(spec), encoding="utf-8")
+    (out / "spec.json").write_text(compact(spec), encoding="utf-8", newline="\n")
     width = count * FRAME[0] + (count - 1) * 2
     colors = [value for value in tokens.values()]
     profile = {"schema_version": 1, "name": f"{config['name']} sheet", "logical_size": f"{width}x{FRAME[1]}",
                "scale": 2, "max_colors": sum(1 for value in colors if not value.endswith("00")),
                "alpha": "binary", "transparent_rgb": "exact", "allowed_palette": colors}
-    (out / "profile.json").write_text(compact(profile), encoding="utf-8")
+    (out / "profile.json").write_text(compact(profile), encoding="utf-8", newline="\n")
 
 
 def main() -> int:
