@@ -4,13 +4,13 @@
 
 헤더: 2048×1024 · 4×4 px 셀 · 32색 · 131,072셀 PASS · [검사 보고서](docs/examples/header/report.json) · [격자 미리보기](docs/examples/header/grid_overlay.png) · [제작 기록](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · 버전 0.5.1 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · 버전 0.6.0 · [Apache License 2.0](LICENSE)
 
 **선언한 격자 위에서 정적 PNG 픽셀아트를 만들고, 모든 셀을 검사합니다.**
 
 Pixelwright는 GPT 계열 호스트와 Claude에서 함께 쓰는 AI 스킬입니다. 캐릭터·아이템·UI 아이콘의 일정한 도트 크기, 격자 안에 온전히 들어가는 정사각형 셀, 셀 내부의 정확한 단일 RGBA 색상을 생성하고 검사합니다. 두 생태계에서 동일한 `SKILL.md`와 Python 도구를 사용하며, 실행 호스트에는 파일 접근과 Python 실행 기능이 필요합니다.
 
-팔레트와 논리 픽셀 행렬을 먼저 만든 뒤 정수 배율로 확대하고, 내보낸 PNG를 검사합니다. 이름 있는 색상과 명암 램프를 여러 에셋에서 재사용하거나, 이미 유효한 격자에서 색상을 팔레트에 맞춰 변환할 수 있습니다. 기존 이미지에는 검사 전에 의도한 격자 규격을 선언합니다. 기본 결과에는 원본 이미지와 실제 격자 QA 미리보기를 함께 보여 주어 사용자도 셀을 눈으로 확인할 수 있습니다.
+팔레트와 논리 픽셀 행렬을 먼저 만든 뒤 정수 배율로 확대하고, 내보낸 PNG를 검사합니다. 이름 있는 색상과 명암 램프를 여러 에셋에서 재사용하거나, 이미 유효한 격자에서 색상을 팔레트에 맞춰 변환할 수 있습니다. 애니메이션은 프레임을 하나의 스프라이트 시트에 배치하고 골격을 선언해, 몸과 사물의 각 부위가 움직이는 동안 일관되게 유지되는지 검사합니다. 기존 이미지에는 검사 전에 의도한 격자 규격을 선언합니다. 기본 결과에는 원본 이미지와 실제 격자 QA 미리보기를 함께 보여 주어 사용자도 셀을 눈으로 확인할 수 있습니다.
 
 ## 같은 기사, 두 가지 격자 규격
 
@@ -122,6 +122,34 @@ python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/exampl
 
 이 모드는 레이어의 이진 투명도, 명시적인 공통 팔레트와 가시 RGB 예산, 투명 픽셀까지 정확한 RGBA를 요구합니다. 불투명 셀을 덮어쓰는 방식으로 합성하며 반투명 혼합·크기 변경·회전·잘라내기를 하지 않습니다. 불투명 최종 캔버스 위에 투명 배경의 전경 레이어를 올릴 수 있습니다. 기술 검사 후에는 각 레이어와 완성 장면의 접점·가림·광원·가독성을 눈으로 검수합니다. QA 격자는 작화와 별도 산출물로 유지합니다. 자세한 형식은 [레이어 작업·목록 문서](pixelwright/references/layers.md)에 있습니다.
 
+## 스프라이트 시트와 골격 기반 애니메이션
+
+![선언한 골격으로 만든 8프레임 걷기 동작](docs/examples/sprites/walk/animations/walk.gif)
+
+버전 0.6.0은 여러 프레임 에셋을 위한 `pixel_sprite.py`를 추가합니다. 스프라이트 명세에는 프레임 크기, 여백·간격을 포함한 슬롯 격자, 이름 있는 애니메이션을 선언하며, 프로필의 논리 크기는 이 배치에서 계산한 시트 크기와 같아야 합니다. 검사기는 먼저 시트 전체에 엄격한 격자 검사를 수행한 뒤, 프레임 사이 여백과 빈 슬롯이 투명한지, 선택적 가장자리 여백을 지키는지 확인하고 프레임별 내용 범위를 기록합니다.
+
+움직임을 검사하려면 **리그**를 선언합니다. 이름 있는 관절의 프레임별 좌표와, 보이는 모든 도트를 부위에 배정하는 부위 맵을 함께 기록하며, 부위는 뒤에서 앞 순서로 나열합니다. Pixelwright는 해부 구조를 추정하지 않습니다. 선언한 골격을 모든 프레임 위에 그리고, 각 부위를 그 부위가 가장 잘 보이는 기준 프레임과 비교합니다.
+
+| 움직임 | 대표 부위 | 일관되게 유지해야 하는 것 |
+| --- | --- | --- |
+| `fixed` | 레버 받침, 상자 본체 | 모든 프레임에서 같은 도트 |
+| `rigid` | 머리, 손잡이공, 서랍 | 회전축 관절의 이동량만큼 옮긴 정확한 복사본, 선택적으로 한 축 방향만 이동 |
+| `bone` | 팔다리, 몸통, 레버 손잡이 | 뼈대를 따라 옮긴 기준 도트의 위치, 이탈 거리, 도트 수, 뼈 길이 |
+| `free` | 망토, 머리카락, 효과 | 존재 여부, 크기, 색상 |
+
+모든 부위는 부모 부위와 맞닿아야 하고, 관절은 해당 부위의 도트 위에 있어야 하며, 고정 관절은 움직이지 않아야 합니다. 프레임 사이 관절 이동 거리에 상한을 둘 수도 있습니다. 도트는 앞에 그려지는 부위가 덮은 칸에서만 사라질 수 있으므로, 팔이 뒤에 그려진 몸통 속으로 사라지는 오류를 잡아냅니다.
+
+![각 프레임의 도트(위)와 부위 맵(아래)에 선언한 골격을 겹친 리그 미리보기](docs/examples/sprites/walk/rig_overlay.png)
+
+[걷기 예제](docs/examples/sprites/)는 8프레임·8부위·관절 9개로 구성되며, 부위·프레임 비교 64건이 모두 PASS입니다. [같은 시트 픽셀을 4번 프레임에서 앞팔이 앞으로 흔들리는 골격으로 검사](docs/examples/sprites/walk-arm-lag/)하면 이 기능이 겨냥하는 실패가 드러납니다. 팔 도트가 뒤에 남아 있어 `PART_OFF_SKELETON`, `PART_DRIFT`, `JOINT_OFF_PART`가 실패합니다. [레버 예제](docs/examples/sprites/)는 고정 받침, 고정 축에 걸린 손잡이, 단단한 손잡이공으로 사물의 움직이는 부분을 다룹니다.
+
+```sh
+python pixelwright/scripts/pixel_sprite.py build --spec pixelwright/examples/sprite-walk/spec.json --out-dir runs/walk-build-v1
+python pixelwright/scripts/pixel_sprite.py check --spec pixelwright/examples/sprite-walk/spec.json --sheet runs/walk-build-v1/rendered.png --profile pixelwright/examples/sprite-walk/profile.json --out-dir runs/walk-check-v1
+```
+
+검사마다 `sprite_report.json`, `sheet/` 아래의 시트 검사 결과, `layout_overlay.png`, `rig_overlay.png`, 애니메이션별 GIF 미리보기를 만듭니다. 종료 코드는 모두 PASS이면 `0`, FAIL/REVIEW이면 `2`, 명세 오류·실행 오류이면 `1`입니다. 실제로 흔한 실수 11가지를 주입한 시험에서 9가지를 검출했습니다. 한 칸 두꺼워진 팔다리와, 대부분 가려진 얇은 손잡이의 두 칸 이동은 기본 허용치 안에 들었습니다. [스프라이트 참조 문서](pixelwright/references/sprites.md)와 [v0.6.0 검증 기록](docs/VALIDATION_v060_ko.md)을 참고합니다.
+
 ## AI 스킬로 사용하기
 
 스크립트·참조 문서·예제를 포함한 **`pixelwright/` 폴더 전체**를 스킬 경로에 넣습니다.
@@ -188,19 +216,19 @@ python pixelwright/scripts/pixelwright.py inspect runs/repair-v1/fixed_upscaled.
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.5.1.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.5.1.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.6.0.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.6.0.zip --out-dir runs/release-check-v1
 ```
 
 패키징은 최상위 `pixelwright/` 폴더 하나를 포함하는 설치 ZIP과 테스트·문서를 포함하는 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사하고, 릴리스 검증기는 설치 패키지를 풀어 실제로 실행합니다. 빌드 결과는 로컬 `dist/`에 생성합니다.
 
 `verify_release.py`는 패키지 안의 Python 코드를 실행하므로 검토한 Pixelwright 소스에서 만든 신뢰할 수 있는 ZIP에만 사용합니다. 해시 목록이 일치한다는 것은 내부 무결성을 확인할 뿐 배포자의 신원을 증명하지 않습니다.
 
-[v0.5.1 검증 기록](docs/VALIDATION_v051_ko.md)은 촘촘한 격자에서도 양 축의 모든 셀 경계를 표시하도록 고친 내용을 설명합니다. Python 3.12·3.14에서 각각 140개 테스트 중 138개 통과·Windows 심볼릭 링크 2개 건너뜀을 확인했고, 설치 패키지에서도 실제 격자 간격을 측정합니다. [v0.5.0 기록](docs/VALIDATION_v050_ko.md)은 팔레트·램프 재사용, 재매핑, 정확한 추출과 원본 보존을, [v0.4.0 기록](docs/VALIDATION_v040_ko.md)은 레이어 합성을 다룹니다.
+[v0.6.0 검증 기록](docs/VALIDATION_v060_ko.md)은 스프라이트 시트·애니메이션·부위 리그와 오류 주입 시험, 설치 패키지의 예제 검사를 다룹니다. [v0.5.1 기록](docs/VALIDATION_v051_ko.md)은 촘촘한 격자에서도 양 축의 모든 셀 경계를 표시하도록 고친 내용을 설명합니다. Python 3.12·3.14에서 각각 140개 테스트 중 138개 통과·Windows 심볼릭 링크 2개 건너뜀을 확인했고, 설치 패키지에서도 실제 격자 간격을 측정합니다. [v0.5.0 기록](docs/VALIDATION_v050_ko.md)은 팔레트·램프 재사용, 재매핑, 정확한 추출과 원본 보존을, [v0.4.0 기록](docs/VALIDATION_v040_ko.md)은 레이어 합성을 다룹니다.
 
 ## 지원 범위·라이선스·보안
 
-버전 0.5.1은 **정적 PNG 캐릭터·아이템·UI 아이콘, 재사용 팔레트와 선택적 레이어 장면**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 색상 변환은 선택한 목표 색상도 확인하며, 팔레트 추출과 램프 생성은 작화의 PASS를 판정하지 않습니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 애니메이션과 아틀라스 검증은 이 버전의 지원 범위에서 제외합니다.
+버전 0.6.0은 **정적 PNG 캐릭터·아이템·UI 아이콘, 재사용 팔레트, 선택적 레이어 장면, 골격을 선언한 스프라이트 시트 애니메이션**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 색상 변환은 선택한 목표 색상도 확인하며, 팔레트 추출과 램프 생성은 작화의 PASS를 판정하지 않습니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 리그 검사는 선언한 부위의 도트가 선언한 골격과 일관되는지 확인하며, 해부 구조를 추정하거나 타이밍·무게감·매력을 판정하지 않습니다. 애니메이션 PNG 입력은 계속 지원하지 않습니다.
 
 Pixelwright에는 **Apache License 2.0**을 적용합니다. [LICENSE](LICENSE)와 [NOTICE](NOTICE)를 확인합니다.
 

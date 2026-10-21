@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Execute a trusted Pixelwright ZIP's builder, palettes, and strict gate.
+"""Execute a trusted Pixelwright ZIP's builder, palettes, sprites, and strict gate.
 
 Only use archives built from reviewed source. Manifest hashes check consistency,
 not authenticity; this tool executes the extracted Python scripts.
@@ -175,6 +175,46 @@ def verify_palette_workflow(skill, out, source, damaged):
             "palette_invalid_source_rejected": True, "palette_inputs_unchanged": True}
 
 
+def verify_sprite_workflow(skill, out):
+    """Build and check the installed rigged examples, then break one joint."""
+    tool = skill / "scripts" / "pixel_sprite.py"
+    results = {}
+    for name, parts in (("sprite-walk", 8), ("sprite-lever", 3)):
+        example = skill / "examples" / name
+        spec, profile = example / "spec.json", example / "profile.json"
+        hashes = {path: file_hash(path) for path in (spec, profile)}
+        build, check = out / f"{name}-build", out / f"{name}-check"
+        run(tool, ["build", "--spec", spec, "--out-dir", build], 0)
+        manifest = read_json(build / "build.json")
+        if manifest["outputs"]["rendered.png"]["sha256"] != file_hash(build / "rendered.png"):
+            raise ValueError(f"Installed {name} build record must identify its rendered sheet")
+        run(tool, ["check", "--spec", spec, "--sheet", build / "rendered.png", "--profile", profile,
+                   "--out-dir", check], 0)
+        report = read_json(check / "sprite_report.json")
+        if (report["status"] != "pass" or report["sheet_audit"]["status"] != "pass"
+                or report["checks"]["rig"] != "checked" or len(report["rig"]["parts"]) != parts):
+            raise ValueError(f"Installed {name} must pass its sheet, frame and rig checks")
+        for output in ["rig_overlay.png", "layout_overlay.png", *report["outputs"]["animation_previews"].values()]:
+            if not (check / output).is_file():
+                raise ValueError(f"Installed {name} check must write {output}")
+        if any(file_hash(path) != digest for path, digest in hashes.items()):
+            raise ValueError(f"Checking {name} changed a packaged input")
+        results[name] = report["layout"]["frame_count"]
+    broken = out / "broken-lever-spec.json"
+    document = read_json(skill / "examples" / "sprite-lever" / "spec.json")
+    document["frames"][1]["joints"]["grip"][0] += 1
+    broken.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
+    rejected = out / "broken-lever-check"
+    run(tool, ["check", "--spec", broken, "--sheet", out / "sprite-lever-build" / "rendered.png",
+               "--profile", skill / "examples" / "sprite-lever" / "profile.json", "--out-dir", rejected], 2)
+    report = read_json(rejected / "sprite_report.json")
+    found = {(issue["code"], issue.get("frame"), issue.get("part")) for issue in report["issues"]}
+    if report["status"] != "fail" or ("PART_JOINT_MISMATCH", 1, "knob") not in found:
+        raise ValueError("A rigid knob that no longer follows its pivot must fail the rig check")
+    return {"sprite_walk_frames": results["sprite-walk"], "sprite_lever_frames": results["sprite-lever"],
+            "sprite_examples_status": "pass", "sprite_broken_joint_status": report["status"]}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, required=True)
@@ -225,6 +265,7 @@ def main():
         if any(item["status"] != "pass" for item in layer_summary["results"]):
             raise ValueError("Installed scene contains a rejected layer")
         grid_summary = verify_grid_intervals(layer_output / "final" / "grid_lines.png", (320, 224), 4)
+        sprite_summary = verify_sprite_workflow(skill, out)
         original_layer = scene.parent / "layers" / "title.png"
         original_layer_hash = hashlib.sha256(original_layer.read_bytes()).hexdigest()
         broken_input = out / "broken-layer-input"
@@ -256,7 +297,7 @@ def main():
                    "layered_status": layer_summary["status"], "layer_count": len(layer_summary["results"]),
                    "layered_uniform_cells": json.loads((layer_output / "final/report.json").read_text(encoding="utf-8"))["metrics"]["uniform_rgba_cells"],
                    "hidden_damaged_layer_status": rejected["status"], "rejected_final_status": rejected["final"]["status"],
-                   "original_layer_unchanged": True, **palette_summary, **grid_summary}
+                   "original_layer_unchanged": True, **palette_summary, **grid_summary, **sprite_summary}
         (out / "release-check.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(summary, indent=2))
         return 0

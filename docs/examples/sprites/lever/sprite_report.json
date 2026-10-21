@@ -1,0 +1,535 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.0",
+  "schema_version": 1,
+  "status": "pass",
+  "scope": "technical_checks_only_not_artistic_quality",
+  "artistic_status": "not_reviewed",
+  "inputs": {
+    "spec": {
+      "path": "spec.json",
+      "sha256": "35d281cb0ee4ca30f785c7093ad977a0c390423ad94f0727e4c136412e136c96"
+    },
+    "sheet": {
+      "path": "rendered.png",
+      "sha256": "99c5da9440526a3cbfd2e5c7d70da05ac7f268edbe123b6596d033290ac2abf8"
+    },
+    "profile": {
+      "path": "profile.json",
+      "sha256": "39cf86706144681c1863e48958e84d1816a774cba6c90a369be62aad5558f668"
+    }
+  },
+  "name": "Rigged lever switch",
+  "contract": {
+    "schema_version": 1,
+    "name": "Lever sheet",
+    "logical_size": "94x16",
+    "scale": 6,
+    "max_colors": 6,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#1E1A2B",
+      "#5A4C3E",
+      "#7A6A58",
+      "#A02A34",
+      "#C8CDD6",
+      "#D8404A"
+    ]
+  },
+  "layout": {
+    "frame_size": [
+      18,
+      16
+    ],
+    "columns": 5,
+    "rows": 1,
+    "margin": 0,
+    "spacing": 1,
+    "frame_count": 5,
+    "edge_margin": 1,
+    "sheet_logical_size": [
+      94,
+      16
+    ],
+    "order": "row_major",
+    "gutter": "alpha_zero",
+    "frame_origins": [
+      [
+        0,
+        0
+      ],
+      [
+        19,
+        0
+      ],
+      [
+        38,
+        0
+      ],
+      [
+        57,
+        0
+      ],
+      [
+        76,
+        0
+      ]
+    ]
+  },
+  "sheet_audit": {
+    "status": "pass",
+    "report": "sheet/report.json",
+    "outputs": {
+      "report": "sheet/report.json",
+      "overlay": "sheet/grid_overlay.png",
+      "grid_lines": "sheet/grid_lines.png",
+      "logical_preview": "sheet/logical_preview.png",
+      "violation_mask": "sheet/violation_mask.png",
+      "correction_prompt": "sheet/correction_prompt.txt"
+    }
+  },
+  "checks": {
+    "frames": "checked",
+    "animations": "checked",
+    "rig": "checked"
+  },
+  "frames": [
+    {
+      "index": 0,
+      "slot": [
+        0,
+        0
+      ],
+      "origin": [
+        0,
+        0
+      ],
+      "visible_cells": 106,
+      "bbox": [
+        1,
+        4,
+        14,
+        14
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 1,
+      "slot": [
+        1,
+        0
+      ],
+      "origin": [
+        19,
+        0
+      ],
+      "visible_cells": 109,
+      "bbox": [
+        2,
+        2,
+        14,
+        14
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 2,
+      "slot": [
+        2,
+        0
+      ],
+      "origin": [
+        38,
+        0
+      ],
+      "visible_cells": 110,
+      "bbox": [
+        2,
+        1,
+        14,
+        14
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 3,
+      "slot": [
+        3,
+        0
+      ],
+      "origin": [
+        57,
+        0
+      ],
+      "visible_cells": 109,
+      "bbox": [
+        2,
+        2,
+        14,
+        14
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 4,
+      "slot": [
+        4,
+        0
+      ],
+      "origin": [
+        76,
+        0
+      ],
+      "visible_cells": 106,
+      "bbox": [
+        2,
+        4,
+        15,
+        14
+      ],
+      "status": "pass"
+    }
+  ],
+  "animations": [
+    {
+      "id": "switch_on",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "loop": false,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "total_ms": 450,
+      "baseline_rows": [
+        14
+      ]
+    },
+    {
+      "id": "switch_off",
+      "frames": [
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "loop": false,
+      "durations_ms": [
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "total_ms": 450,
+      "baseline_rows": [
+        14
+      ]
+    }
+  ],
+  "rig": {
+    "reference_frame": 0,
+    "coverage": "complete",
+    "max_joint_step": 4.0,
+    "joints": {
+      "pivot": {
+        "fixed": true,
+        "positions": [
+          [
+            8,
+            10
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            8,
+            10
+          ]
+        ],
+        "max_step": 0.0
+      },
+      "grip": {
+        "fixed": false,
+        "positions": [
+          [
+            3,
+            6
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            8,
+            3
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            13,
+            6
+          ]
+        ],
+        "max_step": 3.1623
+      }
+    },
+    "parts": {
+      "handle": {
+        "token": "l",
+        "motion": "bone",
+        "z": 0,
+        "reference_frame": 2,
+        "reference_cells": 20,
+        "frames": [
+          {
+            "frame": 0,
+            "cells": 16,
+            "hidden": false,
+            "z": 0,
+            "bone_length": 6.4031,
+            "shape_match": 1.0,
+            "drift": {
+              "along": -0.1005,
+              "across": -0.036
+            },
+            "area_ratio": 0.9862,
+            "status": "pass"
+          },
+          {
+            "frame": 1,
+            "cells": 19,
+            "hidden": false,
+            "z": 0,
+            "bone_length": 6.7082,
+            "shape_match": 1.0,
+            "drift": {
+              "along": -0.2087,
+              "across": 0.1193
+            },
+            "area_ratio": 0.9497,
+            "status": "pass"
+          },
+          {
+            "frame": 2,
+            "cells": 20,
+            "hidden": false,
+            "z": 0,
+            "bone_length": 7.0,
+            "shape_match": 1.0,
+            "drift": {
+              "along": 0.0,
+              "across": 0.0
+            },
+            "area_ratio": 1.0,
+            "status": "pass"
+          },
+          {
+            "frame": 3,
+            "cells": 19,
+            "hidden": false,
+            "z": 0,
+            "bone_length": 6.7082,
+            "shape_match": 1.0,
+            "drift": {
+              "along": -0.2087,
+              "across": -0.1193
+            },
+            "area_ratio": 0.9497,
+            "status": "pass"
+          },
+          {
+            "frame": 4,
+            "cells": 16,
+            "hidden": false,
+            "z": 0,
+            "bone_length": 6.4031,
+            "shape_match": 1.0,
+            "drift": {
+              "along": -0.1005,
+              "across": 0.036
+            },
+            "area_ratio": 0.9862,
+            "status": "pass"
+          }
+        ],
+        "bone": [
+          "pivot",
+          "grip"
+        ],
+        "parent": "base",
+        "reference_length": 7.0,
+        "length_tolerance": 1.0,
+        "min_shape_match": 0.8,
+        "max_drift": 1.0,
+        "area_tolerance": 0.25,
+        "status": "pass"
+      },
+      "base": {
+        "token": "b",
+        "motion": "fixed",
+        "z": 1,
+        "reference_frame": 0,
+        "reference_cells": 65,
+        "frames": [
+          {
+            "frame": 0,
+            "cells": 65,
+            "hidden": false,
+            "z": 1,
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 1,
+            "cells": 65,
+            "hidden": false,
+            "z": 1,
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 2,
+            "cells": 65,
+            "hidden": false,
+            "z": 1,
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 3,
+            "cells": 65,
+            "hidden": false,
+            "z": 1,
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 4,
+            "cells": 65,
+            "hidden": false,
+            "z": 1,
+            "mismatched_cells": 0,
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      },
+      "knob": {
+        "token": "k",
+        "motion": "rigid",
+        "z": 2,
+        "reference_frame": 0,
+        "reference_cells": 25,
+        "frames": [
+          {
+            "frame": 0,
+            "cells": 25,
+            "hidden": false,
+            "z": 2,
+            "offset": [
+              0,
+              0
+            ],
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 1,
+            "cells": 25,
+            "hidden": false,
+            "z": 2,
+            "offset": [
+              2,
+              -2
+            ],
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 2,
+            "cells": 25,
+            "hidden": false,
+            "z": 2,
+            "offset": [
+              5,
+              -3
+            ],
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 3,
+            "cells": 25,
+            "hidden": false,
+            "z": 2,
+            "offset": [
+              8,
+              -2
+            ],
+            "mismatched_cells": 0,
+            "status": "pass"
+          },
+          {
+            "frame": 4,
+            "cells": 25,
+            "hidden": false,
+            "z": 2,
+            "offset": [
+              10,
+              0
+            ],
+            "mismatched_cells": 0,
+            "status": "pass"
+          }
+        ],
+        "pivot": "grip",
+        "parent": "handle",
+        "status": "pass"
+      }
+    }
+  },
+  "issues": [],
+  "outputs": {
+    "sprite_report": "sprite_report.json",
+    "layout_overlay": "layout_overlay.png",
+    "rig_overlay": "rig_overlay.png",
+    "animation_previews": {
+      "switch_on": "animations/switch_on.gif",
+      "switch_off": "animations/switch_off.gif"
+    }
+  },
+  "issue_counts": {
+    "fail": 0,
+    "review": 0,
+    "info": 0
+  },
+  "visual_review_required": [
+    "Watch each animation preview at native and enlarged size",
+    "Check silhouette, timing, weight and contact with the ground",
+    "Confirm the declared skeleton matches the intended anatomy or mechanism",
+    "Review parts listed as hidden, draw order and any colors a part gains while moving"
+  ]
+}

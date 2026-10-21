@@ -1,6 +1,6 @@
 # Platform integration
 
-Pixelwright 0.5.1. Official documentation checked on 2026-10-14.
+Pixelwright 0.6.0. Official documentation checked on 2026-10-14.
 
 ## Shared execution contract
 
@@ -10,7 +10,7 @@ Read the actual input files, execute the bundled checker, and inspect its report
 
 Palette extraction, reusable named color ramps, and remapping use the bundled `scripts/pixel_palette.py` CLI. Keep generated palette JSON together with the specifications that reference it through `palette_file`; relative palette paths are resolved from the specification file. Remapping requires a declared QA profile, preserves the source, and checks the result against that same profile and the selected palette or ramp. A successful extraction or ramp generation alone does not certify an artwork's grid.
 
-Static PNG only. Reject APNG/animation. Host image-generation tools may produce drafts, but generation alone cannot certify the grid. Pixelwright includes no provider API adapter or automatic external service calls.
+Sprite sheets, animations and part rigs use `scripts/pixel_sprite.py`; frames live on one static PNG sheet and animation previews are diagnostics only. Static PNG input only. Reject APNG/animation containers. Host image-generation tools may produce drafts, but generation alone cannot certify the grid. Pixelwright includes no provider API adapter or automatic external service calls.
 
 ## OpenAI hosts
 

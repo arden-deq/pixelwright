@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "name": "Rigged lever switch",
+  "frame_size": "18x16",
+  "layout": {
+    "columns": 5,
+    "rows": 1,
+    "spacing": 1
+  },
+  "edge_margin": 1,
+  "scale": 6,
+  "palette": {
+    ".": "transparent",
+    "o": "#1E1A2B",
+    "m": "#C8CDD6",
+    "r": "#D8404A",
+    "R": "#A02A34",
+    "g": "#7A6A58",
+    "G": "#5A4C3E"
+  },
+  "animations": {
+    "switch_on": {
+      "frames": [0, 1, 2, 3, 4],
+      "loop": false,
+      "frame_ms": 90
+    },
+    "switch_off": {
+      "frames": [4, 3, 2, 1, 0],
+      "loop": false,
+      "frame_ms": 90
+    }
+  },
+  "rig": {
+    "max_joint_step": 4,
+    "joints": {
+      "pivot": {
+        "fixed": true
+      },
+      "grip": {}
+    },
+    "parts": {
+      "handle": {
+        "token": "l",
+        "motion": "bone",
+        "bone": [
+          "pivot",
+          "grip"
+        ],
+        "parent": "base",
+        "reference_frame": 2
+      },
+      "base": {
+        "token": "b",
+        "motion": "fixed"
+      },
+      "knob": {
+        "token": "k",
+        "motion": "rigid",
+        "pivot": "grip",
+        "parent": "handle"
+      }
+    }
+  },
+  "frames": [
+    {
+      "rows": [
+        "..................",
+        "..................",
+        "..................",
+        "..................",
+        ".ooooo............",
+        ".orRro............",
+        ".oRRRoo...........",
+        ".orRroooo.........",
+        ".ooooommoo........",
+        "...ooommmoo.......",
+        "..ooooooooooooo...",
+        "..ogggggggggggo...",
+        "..oGGGGGGGGGGGo...",
+        "..oGGGGGGGGGGGo...",
+        "..ooooooooooooo...",
+        ".................."
+      ],
+      "parts": [
+        "..................",
+        "..................",
+        "..................",
+        "..................",
+        ".kkkkk............",
+        ".kkkkk............",
+        ".kkkkkl...........",
+        ".kkkkklll.........",
+        ".kkkkkllll........",
+        "...llllllll.......",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        ".................."
+      ],
+      "joints": {
+        "pivot": [8, 10],
+        "grip": [3, 6]
+      }
+    },
+    {
+      "rows": [
+        "..................",
+        "..................",
+        "...ooooo..........",
+        "...orRro..........",
+        "...oRRRo..........",
+        "...orRroo.........",
+        "...oooooo.........",
+        "....oommoo........",
+        ".....ommmo........",
+        ".....oommoo.......",
+        "..ooooooooooooo...",
+        "..ogggggggggggo...",
+        "..oGGGGGGGGGGGo...",
+        "..oGGGGGGGGGGGo...",
+        "..ooooooooooooo...",
+        ".................."
+      ],
+      "parts": [
+        "..................",
+        "..................",
+        "...kkkkk..........",
+        "...kkkkk..........",
+        "...kkkkk..........",
+        "...kkkkkl.........",
+        "...kkkkkl.........",
+        "....llllll........",
+        ".....lllll........",
+        ".....llllll.......",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        ".................."
+      ],
+      "joints": {
+        "pivot": [8, 10],
+        "grip": [5, 4]
+      }
+    },
+    {
+      "rows": [
+        "..................",
+        "......ooooo.......",
+        "......orRro.......",
+        "......oRRRo.......",
+        "......orRro.......",
+        "......ooooo.......",
+        "......ommmo.......",
+        "......ommmo.......",
+        "......ommmo.......",
+        "......ommmo.......",
+        "..ooooooooooooo...",
+        "..ogggggggggggo...",
+        "..oGGGGGGGGGGGo...",
+        "..oGGGGGGGGGGGo...",
+        "..ooooooooooooo...",
+        ".................."
+      ],
+      "parts": [
+        "..................",
+        "......kkkkk.......",
+        "......kkkkk.......",
+        "......kkkkk.......",
+        "......kkkkk.......",
+        "......kkkkk.......",
+        "......lllll.......",
+        "......lllll.......",
+        "......lllll.......",
+        "......lllll.......",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        ".................."
+      ],
+      "joints": {
+        "pivot": [8, 10],
+        "grip": [8, 3]
+      }
+    },
+    {
+      "rows": [
+        "..................",
+        "..................",
+        ".........ooooo....",
+        ".........orRro....",
+        ".........oRRRo....",
+        "........oorRro....",
+        "........oooooo....",
+        ".......oommoo.....",
+        ".......ommmo......",
+        "......oommoo......",
+        "..ooooooooooooo...",
+        "..ogggggggggggo...",
+        "..oGGGGGGGGGGGo...",
+        "..oGGGGGGGGGGGo...",
+        "..ooooooooooooo...",
+        ".................."
+      ],
+      "parts": [
+        "..................",
+        "..................",
+        ".........kkkkk....",
+        ".........kkkkk....",
+        ".........kkkkk....",
+        "........lkkkkk....",
+        "........lkkkkk....",
+        ".......llllll.....",
+        ".......lllll......",
+        "......llllll......",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        ".................."
+      ],
+      "joints": {
+        "pivot": [8, 10],
+        "grip": [11, 4]
+      }
+    },
+    {
+      "rows": [
+        "..................",
+        "..................",
+        "..................",
+        "..................",
+        "...........ooooo..",
+        "...........orRro..",
+        "..........ooRRRo..",
+        "........oooorRro..",
+        ".......oommooooo..",
+        "......oommmooo....",
+        "..ooooooooooooo...",
+        "..ogggggggggggo...",
+        "..oGGGGGGGGGGGo...",
+        "..oGGGGGGGGGGGo...",
+        "..ooooooooooooo...",
+        ".................."
+      ],
+      "parts": [
+        "..................",
+        "..................",
+        "..................",
+        "..................",
+        "...........kkkkk..",
+        "...........kkkkk..",
+        "..........lkkkkk..",
+        "........lllkkkkk..",
+        ".......llllkkkkk..",
+        "......llllllll....",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        "..bbbbbbbbbbbbb...",
+        ".................."
+      ],
+      "joints": {
+        "pivot": [8, 10],
+        "grip": [13, 6]
+      }
+    }
+  ]
+}

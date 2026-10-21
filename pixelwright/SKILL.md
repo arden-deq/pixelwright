@@ -1,6 +1,6 @@
 ---
 name: pixelwright
-description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, palette extraction and remapping, pixel-grid repairs, and optional layer composition for complex artwork.
+description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, palette extraction and remapping, pixel-grid repairs, optional layer composition, and sprite sheets or animations whose body and object parts must move consistently with a declared skeleton.
 ---
 
 # Pixelwright
@@ -44,6 +44,19 @@ Use layers when independent changes to a background, item, UI, or text would sim
 
 Decide the layout, common grid and RGBA palette, lighting, and drawing order before creating layers. Author each layer to the shared scale and palette; positions use integer logical cells. The compositor audits every listed layer, including hidden layers, composes opaque cells on the logical canvas, enlarges once, and audits the final saved PNG. It exports accepted `native.png` and `rendered.png` only when every layer and the composite pass. Technical acceptance does not replace visual review of individual layers, contact points, occlusion, and final readability. Keep QA overlays separate from artwork.
 
+### Animate frames and check moving parts
+
+For sprite sheets, atlases and animation cycles, read [sprites.md](references/sprites.md). Freeze the frame size, scale, slot layout, palette and animations first; gutters and unused slots stay transparent, and the profile's logical size is the computed sheet size.
+
+When parts move, declare a rig instead of hoping the frames agree: list parts back to front, give each a motion (`fixed`, `rigid` with a pivot, `bone` between two joints, or `free`), and write each frame's color rows together with its part map and joint coordinates. Then build and check:
+
+```sh
+python scripts/pixel_sprite.py build --spec sprite.json --out-dir sheet-v1
+python scripts/pixel_sprite.py check --spec sprite.json --sheet sheet-v1/rendered.png --profile profile.json --out-dir sheet-check-v1
+```
+
+The checker audits the whole sheet, draws the declared skeleton over every frame, and fails parts whose dots leave their bone, change shape or size, detach from their parent, or vanish where nothing is drawn in front. Repair the reported part or joint; never loosen tolerances, mark parts hidden, reorder depth or accept partial coverage to obtain a PASS without the user's agreement. Bundled examples are `examples/sprite-walk/` (humanoid walk) and `examples/sprite-lever/` (fixed base, hinged handle, rigid knob).
+
 ### Inspect or repair existing art
 
 Read [quality-contract.md](references/quality-contract.md) for profile fields, artifacts, and exit codes. Prefer a reusable profile for final acceptance:
@@ -69,5 +82,7 @@ Use projection when the user's request authorizes repair and its losses are acce
 By default, show both the clean exported PNG and the checker's actual `grid_overlay.png` inline so the user can inspect the intended cells themselves. Label each preview with logical dimensions, physical cell size and technical status; for multiple assets, pair each clean view with its corresponding grid view. If the host cannot display images, provide direct links to both files. Respect a request for clean artwork only.
 
 Explain the overlay briefly: cyan lines mark every declared cell boundary, red-filled cells mark exact color violations, and orange lines indicate approximate boundaries when geometry fails. The overlay is a separate diagnostic preview; keep the deliverable artwork unchanged. Use the checker-generated overlay, not a generative redraw. Never sample the axes differently: square cells must also appear square in the preview. For dense grids, include a nearest-neighbor crop enlarged equally on both axes so individual cells remain inspectable; visual inspection complements the full sample-level audit.
+
+For a sprite sheet, also show `rig_overlay.png` when a rig exists and each animation preview, and name the frames that failed. The rig overlay and GIF previews are diagnostics, not deliverable artwork.
 
 Provide native and enlarged PNGs when creating, the declared contract, technical status with the report path, and any unresolved visual findings. Record artistic review separately as accepted, changes needed, or not reviewed, with actual observations (silhouette, palette, stepped contours, important details). Hashes identify the audited bytes; subsequent edits or interpolated scaling require a new audit. A technically compliant image can still be poor art.

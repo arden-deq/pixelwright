@@ -4,13 +4,13 @@
 
 Header: 2048×1024 · 4×4 px cells · 32 colors · 131,072 cells PASS · [Audit report](docs/examples/header/report.json) · [Grid preview](docs/examples/header/grid_overlay.png) · [Build records](docs/examples/header/)
 
-[English](README.md) · [한국어](README.ko.md) · Version 0.5.1 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · Version 0.6.0 · [Apache License 2.0](LICENSE)
 
 **Create static PNG pixel art on a declared grid, then verify every cell.**
 
 Pixelwright is a shared AI skill for GPT-powered hosts and Claude. It helps create and audit characters, items, and UI icons with a consistent dot size, complete square grid cells, and exactly one RGBA color per cell. The same `SKILL.md` and Python tools serve both ecosystems; the host must provide file access and Python execution.
 
-Author a palette and a logical pixel matrix, render at an integer scale, and audit the exported PNG. Reuse named palette libraries and shading ramps across assets, or remap colors on an already valid grid. For existing artwork, declare its intended grid before inspection. By default, deliver both the clean artwork and its actual grid QA preview so users can check the cells themselves.
+Author a palette and a logical pixel matrix, render at an integer scale, and audit the exported PNG. Reuse named palette libraries and shading ramps across assets, or remap colors on an already valid grid. For animation, place frames on one sprite sheet and declare a skeleton so every body or object part can be checked as it moves. For existing artwork, declare its intended grid before inspection. By default, deliver both the clean artwork and its actual grid QA preview so users can check the cells themselves.
 
 ## One knight, two grid contracts
 
@@ -122,6 +122,34 @@ Each composition writes `layers.json`, per-layer reports and grid previews under
 
 This mode requires binary layer transparency, an explicit shared palette and visible RGB budget, and exact transparent RGBA. It uses opaque-cell replacement, with no semitransparent blending, resizing, rotation, or clipping. A final opaque canvas is supported with transparent foreground layers. Technical QA is followed by visual review of the layers and final image, including contacts, occlusion, lighting, and readability. QA overlays remain separate from artwork. See the [layer workflow and manifest reference](pixelwright/references/layers.md).
 
+## Sprite sheets and rigged animation
+
+![Eight-frame walk cycle built from a declared skeleton](docs/examples/sprites/walk/animations/walk.gif)
+
+Version 0.6.0 adds `pixel_sprite.py` for multi-frame assets. A sprite spec declares the frame size, the grid of slots with margins and spacing, and named animations; the profile's logical size is the computed sheet size. The checker first runs the strict audit on the whole sheet, then requires transparent gutters and unused slots, enforces an optional edge margin inside every frame, and records each frame's bounds.
+
+For motion, declare a **rig**: named joints with coordinates in every frame, and a part map that assigns each visible dot to a part, with parts listed back to front. Pixelwright does not guess anatomy. It draws the declared skeleton over every frame and compares each part with the frame where that part is best visible:
+
+| Motion | Typical parts | What must stay consistent |
+| --- | --- | --- |
+| `fixed` | lever base, chest body | identical dots in every frame |
+| `rigid` | head, knob, drawer | an exact copy moved by its pivot joint, optionally along one axis |
+| `bone` | limbs, torso, lever handle | reference dots carried along the bone: where they land, how far they drift, their count and the bone length |
+| `free` | cape, hair, effects | presence, size and colors |
+
+Every part must also touch its parent, joints must sit on their parts, fixed joints must stay put, and joint steps between frames can be capped. A dot may disappear only where a part drawn in front covers it, so a forearm cannot vanish into a torso drawn behind it.
+
+![Walk frames above their part maps, each with the declared skeleton](docs/examples/sprites/walk/rig_overlay.png)
+
+The [walk cycle](docs/examples/sprites/) has 8 frames, 8 parts and 9 joints; all 64 part-frame comparisons pass. Checking [the same sheet pixels with a skeleton whose front arm swings forward in frame 4](docs/examples/sprites/walk-arm-lag/) shows the failure this feature targets: the arm's dots stay behind, so `PART_OFF_SKELETON`, `PART_DRIFT` and `JOINT_OFF_PART` fail. The [lever example](docs/examples/sprites/) covers objects with a fixed base, a handle hinged on a fixed pivot, and a rigid knob.
+
+```sh
+python pixelwright/scripts/pixel_sprite.py build --spec pixelwright/examples/sprite-walk/spec.json --out-dir runs/walk-build-v1
+python pixelwright/scripts/pixel_sprite.py check --spec pixelwright/examples/sprite-walk/spec.json --sheet runs/walk-build-v1/rendered.png --profile pixelwright/examples/sprite-walk/profile.json --out-dir runs/walk-check-v1
+```
+
+Each check writes `sprite_report.json`, the sheet audit under `sheet/`, `layout_overlay.png`, `rig_overlay.png` and a GIF preview per animation. Exit codes are `0` for all PASS, `2` for FAIL/REVIEW, and `1` for invalid specs or errors. In an injected-error test, 9 of 11 realistic mistakes were detected; a limb drawn one cell thicker and a two-cell slide of a mostly covered thin handle stayed within the default tolerances. See the [sprite reference](pixelwright/references/sprites.md) and the [v0.6.0 validation record](docs/VALIDATION_v060_ko.md).
+
 ## Use as an AI skill
 
 Place the **entire `pixelwright/` folder** in a skill directory, including its scripts, references, and examples.
@@ -188,19 +216,19 @@ Review `comparison.png`, `fix_review.json`, and both reports before adopting a r
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.5.1.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.5.1.zip --out-dir runs/release-check-v1
+python tools/package_skill.py --verify dist/pixelwright-v0.6.0.zip
+python tools/verify_release.py --archive dist/pixelwright-v0.6.0.zip --out-dir runs/release-check-v1
 ```
 
 Packaging creates an installation ZIP with one top-level `pixelwright/` folder and a development-kit ZIP with tests and documentation. The package verifier checks the ZIP layout and SHA-256 manifest; the release verifier extracts and exercises the installation package. Build artifacts are generated locally in `dist/`.
 
 Run `verify_release.py` only on trusted packages built from reviewed Pixelwright source: it executes their Python scripts. A matching manifest proves internal integrity, not the identity of the publisher.
 
-The [v0.5.1 validation record](docs/VALIDATION_v051_ko.md) documents the grid-preview correction: every cell boundary is now drawn on both axes, including dense grids. Both Python 3.12 and 3.14 run 140 tests (138 pass, two Windows symlink skips), and the installed-package check measures actual grid intervals. The [v0.5.0 record](docs/VALIDATION_v050_ko.md) covers palette reuse, remapping, exact extraction, and original preservation; the [v0.4.0 record](docs/VALIDATION_v040_ko.md) covers layer composition.
+The [v0.6.0 validation record](docs/VALIDATION_v060_ko.md) covers sprite sheets, animations and part rigs, including the injected-error results and the release check of the installed examples. The [v0.5.1 record](docs/VALIDATION_v051_ko.md) documents the grid-preview correction: every cell boundary is now drawn on both axes, including dense grids. Both Python 3.12 and 3.14 run 140 tests (138 pass, two Windows symlink skips), and the installed-package check measures actual grid intervals. The [v0.5.0 record](docs/VALIDATION_v050_ko.md) covers palette reuse, remapping, exact extraction, and original preservation; the [v0.4.0 record](docs/VALIDATION_v040_ko.md) covers layer composition.
 
 ## Scope, license, and security
 
-Version 0.5.1 supports **static PNG characters, items, UI icons, reusable palettes, and optional layered scenes**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Palette remapping also checks the selected target colors; extraction and ramp generation do not certify artwork. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Animation and atlas validation are outside this release.
+Version 0.6.0 supports **static PNG characters, items, UI icons, reusable palettes, optional layered scenes, and sprite sheets with declared animation rigs**. Technical PASS covers the inspected file's grid, exact per-cell color, and declared profile constraints. Palette remapping also checks the selected target colors; extraction and ramp generation do not certify artwork. Layer composition requires per-layer and final acceptance. It does not judge artistic quality or guarantee how a downstream app scales the image. Review silhouette, readability, palette, and material detail separately. Rig checks verify that declared parts keep their dots consistent with the declared skeleton; they do not infer anatomy or judge timing, weight, or appeal. Animated PNG input remains unsupported.
 
 Pixelwright is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 

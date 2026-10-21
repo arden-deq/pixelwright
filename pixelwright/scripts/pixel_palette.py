@@ -17,7 +17,7 @@ from PIL import Image, ImageDraw
 import pixel_qa as qa
 import pixelwright as pw
 
-VERSION = "0.5.1"
+VERSION = "0.6.0"
 MAX_PALETTE_BYTES = 1024 * 1024
 _TOKEN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}\Z")
 

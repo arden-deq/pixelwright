@@ -1,0 +1,213 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 564,
+    "height": 96
+  },
+  "logical_size": {
+    "width": 94,
+    "height": 16
+  },
+  "cell_size": {
+    "width": 6,
+    "height": 6
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "99c5da9440526a3cbfd2e5c7d70da05ac7f268edbe123b6596d033290ac2abf8",
+    "decoded_rgba_sha256": "ce16b7e0b558a1b187fc64dfcee7993dd57f4efcf5e4fc12c50a6820db7b6211",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "rendered.png",
+    "source_sha256_after_audit": "99c5da9440526a3cbfd2e5c7d70da05ac7f268edbe123b6596d033290ac2abf8",
+    "profile_path": "profile.json",
+    "profile_sha256": "39cf86706144681c1863e48958e84d1816a774cba6c90a369be62aad5558f668"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 6,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 1504,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 1504,
+    "visible_rgb_colors_source": 6,
+    "visible_rgb_colors_logical_preview": 6,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 20,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 94,
+    "height": 16
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 45,
+      "y": 2
+    },
+    {
+      "x": 47,
+      "y": 2
+    },
+    {
+      "x": 23,
+      "y": 3
+    },
+    {
+      "x": 25,
+      "y": 3
+    },
+    {
+      "x": 67,
+      "y": 3
+    },
+    {
+      "x": 69,
+      "y": 3
+    },
+    {
+      "x": 45,
+      "y": 4
+    },
+    {
+      "x": 47,
+      "y": 4
+    },
+    {
+      "x": 2,
+      "y": 5
+    },
+    {
+      "x": 4,
+      "y": 5
+    },
+    {
+      "x": 23,
+      "y": 5
+    },
+    {
+      "x": 25,
+      "y": 5
+    },
+    {
+      "x": 67,
+      "y": 5
+    },
+    {
+      "x": 69,
+      "y": 5
+    },
+    {
+      "x": 88,
+      "y": 5
+    },
+    {
+      "x": 90,
+      "y": 5
+    },
+    {
+      "x": 2,
+      "y": 7
+    },
+    {
+      "x": 4,
+      "y": 7
+    },
+    {
+      "x": 88,
+      "y": 7
+    },
+    {
+      "x": 90,
+      "y": 7
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "20 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 564,
+      "height": 96
+    },
+    "logical_size": {
+      "width": 94,
+      "height": 16
+    },
+    "expected_render_size": {
+      "width": 564,
+      "height": 96
+    },
+    "scale_x": 6.0,
+    "scale_y": 6.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 6,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Lever sheet",
+    "logical_size": "94x16",
+    "scale": 6,
+    "max_colors": 6,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#1E1A2B",
+      "#5A4C3E",
+      "#7A6A58",
+      "#A02A34",
+      "#C8CDD6",
+      "#D8404A"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 6,
+      "y": 6
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_sprite_sheet"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "name": "Lever sheet",
+  "logical_size": "94x16",
+  "scale": 6,
+  "max_colors": 6,
+  "alpha": "binary",
+  "transparent_rgb": "exact",
+  "allowed_palette": [
+    "#00000000",
+    "#1E1A2B",
+    "#5A4C3E",
+    "#7A6A58",
+    "#A02A34",
+    "#C8CDD6",
+    "#D8404A"
+  ]
+}
