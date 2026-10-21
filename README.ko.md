@@ -124,7 +124,19 @@ python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/exampl
 
 ## 스프라이트 시트와 골격 기반 애니메이션
 
-![선언한 골격으로 만든 8프레임 걷기 동작](docs/examples/sprites/walk/animations/walk.gif)
+README의 기사를 이 스킬로 움직였습니다. 각 애니메이션의 0번 프레임은 헤더의 기사 그림과 같고, 모든 프레임이 원래 32색만 사용하며, 세 시트 모두 엄격한 격자 검사와 리그 검사를 통과했습니다. [기사 리그 제작 기록](docs/examples/knight-animation/)을 참고합니다.
+
+| 메이스 휘두르기 | 방패로 막기 | 걷기 |
+| --- | --- | --- |
+| ![메이스를 머리 위로 들어 내려치는 기사](docs/examples/knight-animation/swing/animations/swing.gif) | ![방패를 몸 앞으로 들어 막는 기사](docs/examples/knight-animation/block/animations/block.gif) | ![메이스를 흔들며 제자리에서 걷는 기사](docs/examples/knight-animation/walk/animations/walk.gif) |
+
+같은 애니메이션에 선언한 골격을 겹치고(왼쪽) 모든 도트를 부위별 색상으로 칠한 모습(오른쪽)입니다.
+
+![골격과 부위 색상을 적용한 메이스 휘두르기](docs/examples/knight-animation/swing/animations/swing-rig.gif)
+
+![골격과 부위 색상을 적용한 방패 막기](docs/examples/knight-animation/block/animations/block-rig.gif)
+
+![골격과 부위 색상을 적용한 걷기](docs/examples/knight-animation/walk/animations/walk-rig.gif)
 
 버전 0.6.0은 여러 프레임 에셋을 위한 `pixel_sprite.py`를 추가합니다. 스프라이트 명세에는 프레임 크기, 여백·간격을 포함한 슬롯 격자, 이름 있는 애니메이션을 선언하며, 프로필의 논리 크기는 이 배치에서 계산한 시트 크기와 같아야 합니다. 검사기는 먼저 시트 전체에 엄격한 격자 검사를 수행한 뒤, 프레임 사이 여백과 빈 슬롯이 투명한지, 선택적 가장자리 여백을 지키는지 확인하고 프레임별 내용 범위를 기록합니다.
 
@@ -148,7 +160,7 @@ python pixelwright/scripts/pixel_sprite.py build --spec pixelwright/examples/spr
 python pixelwright/scripts/pixel_sprite.py check --spec pixelwright/examples/sprite-walk/spec.json --sheet runs/walk-build-v1/rendered.png --profile pixelwright/examples/sprite-walk/profile.json --out-dir runs/walk-check-v1
 ```
 
-검사마다 `sprite_report.json`, `sheet/` 아래의 시트 검사 결과, `layout_overlay.png`, `rig_overlay.png`, 애니메이션별 GIF 미리보기를 만듭니다. 종료 코드는 모두 PASS이면 `0`, FAIL/REVIEW이면 `2`, 명세 오류·실행 오류이면 `1`입니다. 실제로 흔한 실수 11가지를 주입한 시험에서 9가지를 검출했습니다. 한 칸 두꺼워진 팔다리와, 대부분 가려진 얇은 손잡이의 두 칸 이동은 기본 허용치 안에 들었습니다. [스프라이트 참조 문서](pixelwright/references/sprites.md)와 [v0.6.0 검증 기록](docs/VALIDATION_v060_ko.md)을 참고합니다.
+검사마다 `sprite_report.json`, `sheet/` 아래의 시트 검사 결과, `layout_overlay.png`, `rig_overlay.png`, 그리고 애니메이션별 GIF 미리보기와 골격·부위 색상을 함께 보여 주는 `-rig.gif`를 만듭니다(`--preview-scale`로 크기 지정). 종료 코드는 모두 PASS이면 `0`, FAIL/REVIEW이면 `2`, 명세 오류·실행 오류이면 `1`입니다. 실제로 흔한 실수 11가지를 주입한 시험에서 9가지를 검출했습니다. 한 칸 두꺼워진 팔다리와, 대부분 가려진 얇은 손잡이의 두 칸 이동은 기본 허용치 안에 들었습니다. [스프라이트 참조 문서](pixelwright/references/sprites.md)와 [v0.6.0 검증 기록](docs/VALIDATION_v060_ko.md)을 참고합니다.
 
 ## AI 스킬로 사용하기
 

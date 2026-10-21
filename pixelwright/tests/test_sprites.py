@@ -13,6 +13,7 @@ import json
 import sys
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 import numpy as np
@@ -20,12 +21,14 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
+import generate_knight_animations as knight
 import generate_sprite_examples as examples
 import pixel_sprite as sprite
 
 COLORS = {"A": (160, 32, 48, 255), "B": (32, 80, 176, 255), "C": (240, 192, 64, 255), "D": (40, 160, 90, 255)}
 HEX = {key: "#%02X%02X%02X" % value[:3] for key, value in COLORS.items()}
 EXAMPLES = Path(__file__).resolve().parents[1] / "examples"
+KNIGHT_ANIMATIONS = Path(__file__).resolve().parents[2] / "docs" / "examples" / "knight-animation"
 
 
 def digest(path):
@@ -297,6 +300,30 @@ class RigTests(SpriteCase):
         self.assertEqual(summary["rig"]["parts"]["box"]["frames"][1]["offset"], [1, 0])
         with Image.open(self.root / "run-1" / "rig_overlay.png") as overlay:
             self.assertGreater(overlay.width, 2 * 10)
+
+    def test_rig_gif_pairs_art_and_part_colors_at_the_requested_scale(self):
+        frames, joints, rig = standard_motion()
+        self.write_case(frames, joints=joints, rig=rig, animations={"move": {"frames": [0, 1], "frame_ms": 150}})
+        summary = sprite.check_sheet(self.root / "spec.json", self.root / "sheet.png", self.root / "profile.json",
+                                     self.root / "scaled", scale=3)
+        self.assertEqual(summary["preview_scale"], 3)
+        self.assertEqual(summary["outputs"]["rig_previews"], {"move": "animations/move-rig.gif"})
+        with Image.open(self.root / "scaled" / "animations" / "move.gif") as clean:
+            self.assertEqual((clean.size, clean.n_frames, clean.info["duration"]), ((30, 30), 2, 150))
+        with Image.open(self.root / "scaled" / "animations" / "move-rig.gif") as rig_preview:
+            self.assertEqual(rig_preview.n_frames, 2)
+            # Two 30 px panels side by side, separated and framed by 8 px gaps.
+            self.assertEqual(rig_preview.width, 2 * 30 + 3 * 8)
+            rig_preview.seek(1)
+            pixels = np.asarray(rig_preview.convert("RGB"))
+        part_panel = pixels[16:46, 2 * 8 + 30:2 * 8 + 60]
+        # The arm cell (4, 2) in frame 1 shows the arm's part color under the skeleton lines.
+        arm_color = sprite.PART_COLORS[2]
+        self.assertTrue(np.any(np.all(part_panel == arm_color, axis=2)))
+        with self.assertRaisesRegex(ValueError, "preview scale"):
+            sprite.check_sheet(self.root / "spec.json", self.root / "sheet.png", self.root / "profile.json",
+                               self.root / "bad-scale", scale=17)
+        self.assertFalse((self.root / "bad-scale").exists())
 
     def test_part_map_must_match_the_art(self):
         def clear_arm_cell(sheet):
@@ -588,6 +615,34 @@ class BundledExampleTests(unittest.TestCase):
                 self.assertEqual(summary["status"], "pass", summary["issues"])
                 self.assertEqual(len(summary["rig"]["parts"]), parts)
                 self.assertEqual((digest(spec), digest(profile)), before)
+
+
+class KnightAnimationTests(unittest.TestCase):
+    def test_generator_reproduces_specs_and_keeps_the_readme_knight_at_rest(self):
+        artwork = json.loads(knight.ARTWORK.read_text(encoding="utf-8"))
+        x0, y0 = knight.OFFSET
+        with tempfile.TemporaryDirectory() as tmp:
+            subprocess_args = ["--out-dir", tmp]
+            with unittest.mock.patch.object(sys, "argv", ["generate_knight_animations.py", *subprocess_args]):
+                knight.main()
+            for name in ("swing", "block", "walk"):
+                for file in ("spec.json", "profile.json"):
+                    with self.subTest(animation=name, file=file):
+                        self.assertEqual((Path(tmp) / name / file).read_bytes(),
+                                         (KNIGHT_ANIMATIONS / name / file).read_bytes())
+                rows = json.loads((Path(tmp) / name / "spec.json").read_text(encoding="utf-8"))["frames"][0]["rows"]
+                rest = [row[x0:x0 + len(artwork["rows"][0])] for row in rows[y0:y0 + len(artwork["rows"])]]
+                self.assertEqual(rest, artwork["rows"])
+
+    def test_knight_block_passes_its_rig(self):
+        spec, profile = KNIGHT_ANIMATIONS / "block" / "spec.json", KNIGHT_ANIMATIONS / "block" / "profile.json"
+        with tempfile.TemporaryDirectory() as tmp:
+            sprite.build_sheet(spec, Path(tmp) / "build")
+            summary = sprite.check_sheet(spec, Path(tmp) / "build" / "rendered.png", profile, Path(tmp) / "check",
+                                         scale=1)
+        self.assertEqual(summary["status"], "pass", summary["issues"])
+        self.assertEqual(len(summary["rig"]["parts"]), 10)
+        self.assertEqual(summary["rig"]["parts"]["shield"]["frames"][2]["offset"], [-10, -1])
 
 
 if __name__ == "__main__":

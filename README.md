@@ -124,7 +124,19 @@ This mode requires binary layer transparency, an explicit shared palette and vis
 
 ## Sprite sheets and rigged animation
 
-![Eight-frame walk cycle built from a declared skeleton](docs/examples/sprites/walk/animations/walk.gif)
+The README knight, animated with this skill. Frame 0 of each animation is the header knight itself; every frame keeps its 32 colors, and all three sheets pass the strict audit and the rig check. See [how the knight was rigged](docs/examples/knight-animation/).
+
+| Mace swing | Shield block | Walk |
+| --- | --- | --- |
+| ![The knight raises the mace overhead and smashes it down](docs/examples/knight-animation/swing/animations/swing.gif) | ![The knight raises the shield across the body](docs/examples/knight-animation/block/animations/block.gif) | ![The knight marches in place, swinging the mace](docs/examples/knight-animation/walk/animations/walk.gif) |
+
+The same animations with the declared skeleton over the art (left) and every dot colored by its part (right):
+
+![Mace swing with skeleton and part colors](docs/examples/knight-animation/swing/animations/swing-rig.gif)
+
+![Shield block with skeleton and part colors](docs/examples/knight-animation/block/animations/block-rig.gif)
+
+![Walk with skeleton and part colors](docs/examples/knight-animation/walk/animations/walk-rig.gif)
 
 Version 0.6.0 adds `pixel_sprite.py` for multi-frame assets. A sprite spec declares the frame size, the grid of slots with margins and spacing, and named animations; the profile's logical size is the computed sheet size. The checker first runs the strict audit on the whole sheet, then requires transparent gutters and unused slots, enforces an optional edge margin inside every frame, and records each frame's bounds.
 
@@ -148,7 +160,7 @@ python pixelwright/scripts/pixel_sprite.py build --spec pixelwright/examples/spr
 python pixelwright/scripts/pixel_sprite.py check --spec pixelwright/examples/sprite-walk/spec.json --sheet runs/walk-build-v1/rendered.png --profile pixelwright/examples/sprite-walk/profile.json --out-dir runs/walk-check-v1
 ```
 
-Each check writes `sprite_report.json`, the sheet audit under `sheet/`, `layout_overlay.png`, `rig_overlay.png` and a GIF preview per animation. Exit codes are `0` for all PASS, `2` for FAIL/REVIEW, and `1` for invalid specs or errors. In an injected-error test, 9 of 11 realistic mistakes were detected; a limb drawn one cell thicker and a two-cell slide of a mostly covered thin handle stayed within the default tolerances. See the [sprite reference](pixelwright/references/sprites.md) and the [v0.6.0 validation record](docs/VALIDATION_v060_ko.md).
+Each check writes `sprite_report.json`, the sheet audit under `sheet/`, `layout_overlay.png`, `rig_overlay.png`, and per animation a GIF preview plus a `-rig.gif` with the skeleton and part colors (`--preview-scale` sets their size). Exit codes are `0` for all PASS, `2` for FAIL/REVIEW, and `1` for invalid specs or errors. In an injected-error test, 9 of 11 realistic mistakes were detected; a limb drawn one cell thicker and a two-cell slide of a mostly covered thin handle stayed within the default tolerances. See the [sprite reference](pixelwright/references/sprites.md) and the [v0.6.0 validation record](docs/VALIDATION_v060_ko.md).
 
 ## Use as an AI skill
 

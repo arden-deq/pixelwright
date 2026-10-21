@@ -85,7 +85,7 @@ Run from the skill directory, or resolve these script paths from it:
 ```sh
 python scripts/pixel_sprite.py list --spec examples/sprite-walk/spec.json
 python scripts/pixel_sprite.py build --spec examples/sprite-walk/spec.json --out-dir walk-build-v1
-python scripts/pixel_sprite.py check --spec examples/sprite-walk/spec.json --sheet walk-build-v1/rendered.png --profile examples/sprite-walk/profile.json --out-dir walk-check-v1
+python scripts/pixel_sprite.py check --spec examples/sprite-walk/spec.json --sheet walk-build-v1/rendered.png --profile examples/sprite-walk/profile.json --out-dir walk-check-v1 --preview-scale 4
 ```
 
 `list` validates the spec without reading a PNG. `build` writes `native.png`, `rendered.png` and `build.json`; it does not accept the art. `check` first runs the strict profile audit on the whole sheet. Frame, animation and rig checks run only when every sheet cell has one exact color; palette or alpha failures still allow them as diagnostics but keep the result failed.
@@ -95,10 +95,11 @@ python scripts/pixel_sprite.py check --spec examples/sprite-walk/spec.json --she
 | `sprite_report.json` | Overall status, input hashes, layout, per-frame bounds, animations, every joint and part per frame, and all issues with frame and part context |
 | `sheet/report.json`, `sheet/grid_overlay.png` | Strict audit of the whole sheet |
 | `layout_overlay.png` | Frame slots outlined; failing frames in red, review frames in amber, gutter dots filled red |
-| `rig_overlay.png` | Each frame twice: art under the declared skeleton, then the part map. Red outlines mark failing dots; white outlines mark where the moved reference expects a failing part |
-| `animations/<id>.gif` | Diagnostic playback preview on a flat background; the sheet remains the audited artwork |
+| `rig_overlay.png` | Each frame twice: art under the declared skeleton, then the part map. Thin gray links join each bone chain to its parent's nearest joint. Red outlines mark failing dots; white outlines mark where the moved reference expects a failing part |
+| `animations/<id>.gif` | Playback preview on a flat background; the sheet remains the audited artwork |
+| `animations/<id>-rig.gif` | With a rig: the same frames with the art under its skeleton beside every dot colored by part, plus a legend |
 
-Exit codes: `0` when everything passes, `2` for any fail or review, `1` for invalid specs, inputs or execution errors. Use a new or empty output directory for every run; inputs are never modified.
+`--preview-scale` sets the whole-number enlargement of both GIFs (1..16); by default they are about 512 px tall. Exit codes: `0` when everything passes, `2` for any fail or review, `1` for invalid specs, inputs or execution errors. Use a new or empty output directory for every run; inputs are never modified.
 
 ## Issue codes
 
@@ -129,6 +130,6 @@ Exit codes: `0` when everything passes, `2` for any fail or review, `1` for inva
 
 When creating an animation, write each frame's color rows, part map and joints together; the map is easiest to keep correct while the dots are fresh. Choose a reference frame where each part is fully visible. Keep tightly linked pieces such as a hand and its weapon in one part, or give the weapon a pivot at the hand.
 
-Fix a failure by redrawing the reported part or correcting a mistaken joint. Do not loosen a tolerance, mark a part hidden, reorder `z` or switch coverage to `partial` just to pass; those change the contract and need the user's agreement. `tools/generate_sprite_examples.py` in the development kit rasterizes the bundled examples from their skeletons; hand-drawn frames use the same spec format.
+Fix a failure by redrawing the reported part or correcting a mistaken joint. Do not loosen a tolerance, mark a part hidden, reorder `z` or switch coverage to `partial` just to pass; those change the contract and need the user's agreement. `tools/generate_sprite_examples.py` in the development kit rasterizes the bundled examples from their skeletons, and `tools/generate_knight_animations.py` rigs an existing painting by cutting it into parts and turning them with a pixel-art resampler; hand-drawn frames use the same spec format.
 
 The checks are deliberately tolerant to the one-cell steps of rotated pixel art, which sets their limits. A thin diagonal part can shift about 1.4 cells and still match within one cell, so `PART_DRIFT` compares where the dots sit; drift is measured only with at least six comparable dots. A limb drawn one cell thicker can stay within the default area tolerance; lower `area_tolerance` for parts whose thickness must stay exact. Free parts have no shape check. Technical PASS does not judge timing, weight, silhouette or appeal: watch the previews and record art review separately.

@@ -6,7 +6,7 @@ Actual `pixel_sprite.py` outputs for the bundled examples. Every sheet passed th
 
 ![Eight-frame walk cycle](walk/animations/walk.gif)
 
-[Sheet PNG](walk/rendered.png) (796×128, 199×32 logical cells at 4×, 24×32 cells per frame) · [Rig overlay](walk/rig_overlay.png) · [Layout overlay](walk/layout_overlay.png) · [Sprite report](walk/sprite_report.json) · [Sheet audit](walk/sheet/report.json)
+[Sheet PNG](walk/rendered.png) (796×128, 199×32 logical cells at 4×, 24×32 cells per frame) · [Rig overlay](walk/rig_overlay.png) · [Rig GIF](walk/animations/walk-rig.gif) · [Layout overlay](walk/layout_overlay.png) · [Sprite report](walk/sprite_report.json) · [Sheet audit](walk/sheet/report.json)
 
 The spec is [`pixelwright/examples/sprite-walk/spec.json`](../../../pixelwright/examples/sprite-walk/spec.json). Parts are listed back to front: back arm, back thigh, back shin, torso, front thigh, front shin, head and front arm. The head is `rigid` around the neck joint, so it must stay an exact copy as the body bobs; every limb and the torso are `bone` parts. The back arm is listed as `hidden` in the frames where the torso covers it completely. All 64 part-frame comparisons pass: bone parts match their moved reference at 97–100%, sizes stay within 0.85–1.12×, and no part's dots drift more than 0.67 cells from the skeleton.
 
@@ -16,7 +16,7 @@ The spec is [`pixelwright/examples/sprite-walk/spec.json`](../../../pixelwright/
 
 ![Lever switching on](lever/animations/switch_on.gif)
 
-[Sheet PNG](lever/rendered.png) · [Rig overlay](lever/rig_overlay.png) · [Sprite report](lever/sprite_report.json)
+[Sheet PNG](lever/rendered.png) · [Rig overlay](lever/rig_overlay.png) · [Rig GIF](lever/animations/switch_on-rig.gif) · [Sprite report](lever/sprite_report.json)
 
 The base is `fixed`, the `pivot` joint is declared fixed, the handle is a `bone` from pivot to grip, and the knob is `rigid` around the grip. The handle is drawn behind the base and the knob, so its lower and upper ends are covered in every frame; z-order lets the checker accept exactly those missing dots. A 1-cell edge margin keeps the knob from touching frame borders.
 

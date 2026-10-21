@@ -5,6 +5,7 @@
   "status": "pass",
   "scope": "technical_checks_only_not_artistic_quality",
   "artistic_status": "not_reviewed",
+  "preview_scale": 8,
   "inputs": {
     "spec": {
       "path": "spec.json",
@@ -519,6 +520,10 @@
     "animation_previews": {
       "switch_on": "animations/switch_on.gif",
       "switch_off": "animations/switch_off.gif"
+    },
+    "rig_previews": {
+      "switch_on": "animations/switch_on-rig.gif",
+      "switch_off": "animations/switch_off-rig.gif"
     }
   },
   "issue_counts": {

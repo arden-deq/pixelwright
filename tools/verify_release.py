@@ -194,7 +194,8 @@ def verify_sprite_workflow(skill, out):
         if (report["status"] != "pass" or report["sheet_audit"]["status"] != "pass"
                 or report["checks"]["rig"] != "checked" or len(report["rig"]["parts"]) != parts):
             raise ValueError(f"Installed {name} must pass its sheet, frame and rig checks")
-        for output in ["rig_overlay.png", "layout_overlay.png", *report["outputs"]["animation_previews"].values()]:
+        previews = [*report["outputs"]["animation_previews"].values(), *report["outputs"]["rig_previews"].values()]
+        for output in ["rig_overlay.png", "layout_overlay.png", *previews]:
             if not (check / output).is_file():
                 raise ValueError(f"Installed {name} check must write {output}")
         if any(file_hash(path) != digest for path, digest in hashes.items()):

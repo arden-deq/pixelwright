@@ -5,6 +5,7 @@
   "status": "fail",
   "scope": "technical_checks_only_not_artistic_quality",
   "artistic_status": "not_reviewed",
+  "preview_scale": 8,
   "inputs": {
     "spec": {
       "path": "spec.json",
@@ -1628,6 +1629,9 @@
     "rig_overlay": "rig_overlay.png",
     "animation_previews": {
       "walk": "animations/walk.gif"
+    },
+    "rig_previews": {
+      "walk": "animations/walk-rig.gif"
     }
   },
   "issue_counts": {

@@ -1153,13 +1153,74 @@ def _panel_scale(layout: Layout, columns: int, target: int, limit: int) -> int:
     return scale
 
 
-def _save_rig_overlay(path: Path, frames: list[np.ndarray], layout: Layout, rig: Rig, check: _RigCheck,
-                      frame_status: list[str]) -> None:
-    """Show each frame twice: art under its declared skeleton, then the part map.
+STATUS_COLORS = {"pass": (120, 220, 140), "review": (250, 200, 80), "fail": (255, 90, 90)}
+
+
+def _part_colors(rig: Rig) -> dict[str, tuple[int, int, int]]:
+    return {part.id: PART_COLORS[i % len(PART_COLORS)] for i, part in enumerate(rig.parts)}
+
+
+def _rig_panels(index: int, frame: np.ndarray, rig: Rig, check: _RigCheck, k: int,
+                art_background: Image.Image | None = None) -> tuple[Image.Image, Image.Image]:
+    """Return one frame twice at scale k: art under the skeleton, and the part map.
 
     White outlines mark where the reference places a failing part's dots; red
-    outlines mark failing cells. The overlay is a diagnostic, never artwork.
+    outlines mark failing cells. Both panels are diagnostics, never artwork.
     """
+    fh, fw = frame.shape[:2]
+    colors = _part_colors(rig)
+    art = Image.fromarray(frame, "RGBA").resize((fw * k, fh * k), Image.Resampling.NEAREST)
+    art_panel = qa.over_background(art) if art_background is None else Image.alpha_composite(art_background, art)
+    flat = np.zeros((fh, fw, 4), dtype=np.uint8)
+    flat[:, :] = (48, 52, 62, 255)
+    flat[check.visible[index]] = (110, 110, 110, 255)
+    for part in rig.parts:
+        flat[check.masks[index][part.id]] = colors[part.id] + (255,)
+    part_panel = Image.fromarray(flat, "RGBA").resize((fw * k, fh * k), Image.Resampling.NEAREST)
+    line, radius = max(1, k // 4), max(2, k // 3)
+    pose = rig.poses[index]
+
+    def point(joint: str) -> tuple[float, float]:
+        return (pose[joint][0] + 0.5) * k, (pose[joint][1] + 0.5) * k
+
+    parts = {part.id: part for part in rig.parts}
+    # Thin links join each bone chain to its parent's nearest joint (clavicle, pelvis).
+    links = []
+    for part in rig.parts:
+        parent = parts.get(part.parent) if part.bone else None
+        if parent is not None and parent.joints:
+            anchor = part.bone[0]
+            nearest = min(parent.joints, key=lambda joint: _distance(pose[joint], pose[anchor]))
+            if _distance(pose[nearest], pose[anchor]) > 0.5:
+                links.append((point(nearest), point(anchor)))
+
+    for panel in (art_panel, part_panel):
+        draw = ImageDraw.Draw(panel, "RGBA")
+        for expected in check.expected[index].values():
+            for y, x in np.argwhere(expected):
+                draw.rectangle((x * k + 1, y * k + 1, (x + 1) * k - 2, (y + 1) * k - 2), outline=(255, 255, 255, 230))
+        for y, x in np.argwhere(check.marks[index]):
+            draw.rectangle((x * k, y * k, (x + 1) * k - 1, (y + 1) * k - 1), outline=(255, 40, 40, 255),
+                           width=max(1, k // 6))
+        for ends in links:
+            draw.line(ends, fill=(20, 20, 24, 255), width=line + 1)
+            draw.line(ends, fill=(205, 205, 215, 255), width=max(1, line - 1))
+        for part in rig.parts:
+            if part.bone:
+                ends = [point(joint) for joint in part.bone]
+                draw.line(ends, fill=(20, 20, 24, 255), width=line + 2)
+                draw.line(ends, fill=colors[part.id] + (255,), width=line)
+        for joint in rig.joints:
+            x, y = point(joint)
+            shape = draw.rectangle if joint in rig.fixed_joints else draw.ellipse
+            shape((x - radius, y - radius, x + radius, y + radius), fill=(255, 255, 255, 255),
+                  outline=(20, 20, 24, 255))
+    return art_panel, part_panel
+
+
+def _save_rig_overlay(path: Path, frames: list[np.ndarray], layout: Layout, rig: Rig, check: _RigCheck,
+                      frame_status: list[str]) -> None:
+    """Show each frame twice: art under its declared skeleton, then the part map."""
     fw, fh = layout.frame_size
     count = len(frames)
     columns = max(1, min(count, layout.columns, 8))
@@ -1177,60 +1238,25 @@ def _save_rig_overlay(path: Path, frames: list[np.ndarray], layout: Layout, rig:
     draw_canvas = ImageDraw.Draw(canvas)
     draw_canvas.text((pad, 4), "Top: art + declared skeleton   Bottom: part map   "
                      "White: expected dots   Red: failing cells", fill=(200, 205, 215))
-    colors = {part.id: PART_COLORS[i % len(PART_COLORS)] for i, part in enumerate(rig.parts)}
-    status_colors = {"pass": (120, 220, 140), "review": (250, 200, 80), "fail": (255, 90, 90)}
-    line = max(1, k // 4)
-    radius = max(2, k // 3)
-
-    def skeleton(draw: ImageDraw.ImageDraw, pose: dict[str, tuple[float, float]]) -> None:
-        def point(joint: str) -> tuple[float, float]:
-            return (pose[joint][0] + 0.5) * k, (pose[joint][1] + 0.5) * k
-
-        for part in rig.parts:
-            if part.bone:
-                ends = [point(joint) for joint in part.bone]
-                draw.line(ends, fill=(20, 20, 24, 255), width=line + 2)
-                draw.line(ends, fill=colors[part.id] + (255,), width=line)
-        for joint in rig.joints:
-            x, y = point(joint)
-            shape = draw.rectangle if joint in rig.fixed_joints else draw.ellipse
-            shape((x - radius, y - radius, x + radius, y + radius), fill=(255, 255, 255, 255),
-                  outline=(20, 20, 24, 255))
-
-    def outlines(draw: ImageDraw.ImageDraw, index: int) -> None:
-        for expected in check.expected[index].values():
-            for y, x in np.argwhere(expected):
-                draw.rectangle((x * k + 1, y * k + 1, (x + 1) * k - 2, (y + 1) * k - 2), outline=(255, 255, 255, 230))
-        for y, x in np.argwhere(check.marks[index]):
-            draw.rectangle((x * k, y * k, (x + 1) * k - 1, (y + 1) * k - 1), outline=(255, 40, 40, 255),
-                           width=max(1, k // 6))
-
     for index, frame in enumerate(frames):
-        art = Image.fromarray(frame, "RGBA").resize((panel_w, panel_h), Image.Resampling.NEAREST)
-        art_panel = qa.over_background(art)
-        flat = np.zeros((fh, fw, 4), dtype=np.uint8)
-        flat[:, :] = (48, 52, 62, 255)
-        flat[check.visible[index]] = (110, 110, 110, 255)
-        for part in rig.parts:
-            flat[check.masks[index][part.id]] = colors[part.id] + (255,)
-        part_panel = Image.fromarray(flat, "RGBA").resize((panel_w, panel_h), Image.Resampling.NEAREST)
-        for panel in (art_panel, part_panel):
-            draw = ImageDraw.Draw(panel, "RGBA")
-            outlines(draw, index)
-            skeleton(draw, rig.poses[index])
+        art_panel, part_panel = _rig_panels(index, frame, rig, check, k)
         column, row = index % columns, index // columns
         left = pad + column * (panel_w + pad)
         top = header_h + row * block_h
-        draw_canvas.text((left, top), f"#{index} {frame_status[index].upper()}", fill=status_colors[frame_status[index]])
+        draw_canvas.text((left, top), f"#{index} {frame_status[index].upper()}", fill=STATUS_COLORS[frame_status[index]])
         canvas.paste(art_panel.convert("RGB"), (left, top + title))
         canvas.paste(part_panel.convert("RGB"), (left, top + title + panel_h + gap))
-    top = height - legend_h
-    for i, part in enumerate(rig.parts):
-        left = pad + (i % per_row) * 170
-        y = top + (i // per_row) * 16
-        draw_canvas.rectangle((left, y + 2, left + 10, y + 12), fill=colors[part.id])
-        draw_canvas.text((left + 15, y + 1), f"{part.id} ({part.motion}, z{part.z})", fill=(230, 230, 230))
+    _draw_legend(draw_canvas, rig, pad, height - legend_h, per_row)
     canvas.save(path)
+
+
+def _draw_legend(draw: ImageDraw.ImageDraw, rig: Rig, left: int, top: int, per_row: int) -> None:
+    colors = _part_colors(rig)
+    for i, part in enumerate(rig.parts):
+        x = left + (i % per_row) * 170
+        y = top + (i // per_row) * 16
+        draw.rectangle((x, y + 2, x + 10, y + 12), fill=colors[part.id])
+        draw.text((x + 15, y + 1), f"{part.id} ({part.motion}, z{part.z})", fill=(230, 230, 230))
 
 
 def _save_layout_overlay(path: Path, image: Image.Image, layout: Layout, scale: int,
@@ -1254,14 +1280,14 @@ def _save_layout_overlay(path: Path, image: Image.Image, layout: Layout, scale: 
     Image.alpha_composite(base, overlay).convert("RGB").save(path)
 
 
-def _save_animation(path: Path, frames: list[np.ndarray], animation: dict[str, Any], layout: Layout) -> None:
-    """Write a looping diagnostic preview; the sheet remains the audited artwork."""
-    fw, fh = layout.frame_size
-    k = max(1, min(8, 256 // max(fw, fh)))
-    images = []
-    for index in animation["frames"]:
-        art = Image.fromarray(frames[index], "RGBA").resize((fw * k, fh * k), Image.Resampling.NEAREST)
-        images.append(Image.alpha_composite(Image.new("RGBA", art.size, (48, 52, 62, 255)), art).convert("RGB"))
+def preview_scale(layout: Layout, requested: int | None = None) -> int:
+    """Whole-number enlargement for animation previews, about 512 px tall by default."""
+    if requested is not None:
+        return _int(requested, "preview scale", 1, 16)
+    return max(1, min(8, 512 // max(layout.frame_size)))
+
+
+def _write_gif(path: Path, images: list[Image.Image], animation: dict[str, Any]) -> None:
     options: dict[str, Any] = {"save_all": True, "append_images": images[1:],
                                "duration": list(animation["durations_ms"]), "disposal": 2}
     if animation["loop"]:
@@ -1271,14 +1297,49 @@ def _save_animation(path: Path, frames: list[np.ndarray], animation: dict[str, A
     _write_new(path, stream.getvalue())
 
 
+def _save_animation(path: Path, frames: list[np.ndarray], animation: dict[str, Any], layout: Layout, k: int) -> None:
+    """Write a playback preview on a flat background; the sheet remains the audited artwork."""
+    fw, fh = layout.frame_size
+    images = []
+    for index in animation["frames"]:
+        art = Image.fromarray(frames[index], "RGBA").resize((fw * k, fh * k), Image.Resampling.NEAREST)
+        images.append(Image.alpha_composite(Image.new("RGBA", art.size, (48, 52, 62, 255)), art).convert("RGB"))
+    _write_gif(path, images, animation)
+
+
+def _save_rig_animation(path: Path, frames: list[np.ndarray], animation: dict[str, Any], layout: Layout,
+                        rig: Rig, check: _RigCheck, frame_status: list[str], k: int) -> None:
+    """Play the art under its skeleton beside the part colors, frame by frame."""
+    fw, fh = layout.frame_size
+    pad, title = 8, 16
+    per_row = max(1, (2 * fw * k + pad) // 170)
+    legend_h = math.ceil(len(rig.parts) / per_row) * 16 + 4
+    width, height = 2 * fw * k + 3 * pad, title + fh * k + pad + legend_h
+    background = Image.new("RGBA", (fw * k, fh * k), (48, 52, 62, 255))
+    images = []
+    for index in animation["frames"]:
+        art_panel, part_panel = _rig_panels(index, frames[index], rig, check, k, background)
+        canvas = Image.new("RGB", (width, height), (34, 38, 46))
+        draw = ImageDraw.Draw(canvas)
+        draw.text((pad, 3), f"{animation['id']}  frame {index}  {frame_status[index].upper()}",
+                  fill=STATUS_COLORS[frame_status[index]])
+        canvas.paste(art_panel.convert("RGB"), (pad, title))
+        canvas.paste(part_panel.convert("RGB"), (2 * pad + fw * k, title))
+        _draw_legend(draw, rig, pad, title + fh * k + pad // 2, per_row)
+        images.append(canvas)
+    _write_gif(path, images, animation)
+
+
 def check_sheet(spec_path: str | Path, sheet_path: str | Path, profile_path: str | Path,
-                out_dir: str | Path) -> dict[str, Any]:
+                out_dir: str | Path, *, scale: int | None = None) -> dict[str, Any]:
     """Audit a sheet PNG against its profile, layout, animations and rig.
 
     Writes sprite_report.json, the strict sheet audit under sheet/, a layout
-    overlay, a rig overlay and animation previews. Inputs are never modified.
+    overlay, a rig overlay and animation previews, each enlarged by `scale`
+    (default about 512 px tall). Inputs are never modified.
     """
     plan, spec_source, spec_data = load_spec(spec_path)
+    k = preview_scale(plan.layout, scale)
     profile_file = Path(profile_path).expanduser().resolve(strict=True)
     profile_digest = qa.sha256_file(profile_file)
     profile = project.load_profile(profile_file)
@@ -1305,6 +1366,7 @@ def check_sheet(spec_path: str | Path, sheet_path: str | Path, profile_path: str
         summary: dict[str, Any] = {
             "tool": "Pixelwright", "version": VERSION, "schema_version": 1, "status": "fail",
             "scope": "technical_checks_only_not_artistic_quality", "artistic_status": "not_reviewed",
+            "preview_scale": k,
             "inputs": {"spec": {"path": spec_source.name, "sha256": _sha256(spec_data)},
                        "sheet": {"path": sheet.name, "sha256": report["provenance"]["source_sha256"]},
                        "profile": {"path": profile_file.name, "sha256": profile_digest}},
@@ -1347,8 +1409,13 @@ def check_sheet(spec_path: str | Path, sheet_path: str | Path, profile_path: str
                 summary["outputs"]["rig_overlay"] = "rig_overlay.png"
             for animation in plan.animations:
                 relative = f"animations/{animation['id']}.gif"
-                _save_animation(root / relative, frames, animation, layout)
+                _save_animation(root / relative, frames, animation, layout, k)
                 summary["outputs"].setdefault("animation_previews", {})[animation["id"]] = relative
+                if rig_check is not None:
+                    relative = f"animations/{animation['id']}-rig.gif"
+                    _save_rig_animation(root / relative, frames, animation, layout, plan.rig, rig_check,
+                                        frame_status, k)
+                    summary["outputs"].setdefault("rig_previews", {})[animation["id"]] = relative
         if qa.sha256_file(spec_source) != _sha256(spec_data) or qa.sha256_file(profile_file) != profile_digest:
             issues.append(_issue("INPUT_CHANGED", "fail", "The sprite spec or profile changed during the check."))
         counts = {level: sum(1 for issue in issues if issue["severity"] == level) for level in ("fail", "review", "info")}
@@ -1398,6 +1465,8 @@ def run_cli(argv: list[str] | None = None) -> int:
     checking.add_argument("--sheet", required=True, type=Path)
     checking.add_argument("--profile", required=True, type=Path)
     checking.add_argument("--out-dir", required=True, type=Path)
+    checking.add_argument("--preview-scale", type=int,
+                          help="Whole-number enlargement of GIF previews, 1..16; default about 512 px tall")
     args = parser.parse_args(argv)
     try:
         if args.action == "list":
@@ -1409,7 +1478,7 @@ def run_cli(argv: list[str] | None = None) -> int:
             print(json.dumps({"status": "built", "out_dir": str(args.out_dir.resolve()),
                               "grid": manifest["grid"], "frame_count": manifest["layout"]["frame_count"]}))
             return 0
-        summary = check_sheet(args.spec, args.sheet, args.profile, args.out_dir)
+        summary = check_sheet(args.spec, args.sheet, args.profile, args.out_dir, scale=args.preview_scale)
         print(json.dumps({"status": summary["status"], "issue_counts": summary["issue_counts"],
                           "checks": summary["checks"], "outputs": summary["outputs"]},
                          ensure_ascii=False, indent=2))
