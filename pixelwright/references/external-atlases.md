@@ -20,6 +20,24 @@ Run with Python 3.12+, Pillow and NumPy, as with the other Pixelwright tools.
 These are development-source additions; rebuild the installable package from
 this checkout. Previously published version 0.6.2 archives are unchanged.
 
+## Upstream dependency declaration
+
+[upstream-integrations.json](../upstream-integrations.json) is the packaged,
+machine-readable declaration of this adapter's relationship to
+[sprite-gen](https://github.com/aldegad/sprite-gen). It identifies the upstream
+repository, Apache-2.0 license, `relationship: "data_format"`, input contract,
+and `runtime_required: false` / `bundled: false`. Validation reads an exported
+PNG and manifest; it does not install or execute sprite-gen.
+
+The tested baseline is **sprite-gen 2.45.3**, revision
+`59b2738a2e76ed7043d9691a230396ed6374a336`, with a pinned contract URL in the
+metadata. The CLI summary and every new `report.json` include this declaration
+under `upstream`. `tested_against` describes the adapter's compatibility evidence;
+it does not identify the tool version that created an arbitrary input file.
+That origin remains `producer_version: null` and
+`producer_version_verified: false`, even if an input claims an exporter version.
+The packaged NOTICE also credits sprite-gen.
+
 ## Inputs and declarations
 
 - `manifest.frame_layout` supplies `sheetWidth`, `sheetHeight`, `cellWidth`,
@@ -75,7 +93,7 @@ logical dot grid; use a separate [strict profile](quality-contract.md) for that.
 ## Outputs and exit status
 
 - `report.json`: overall and per-check status, declarations and their sources,
-  exact input hashes, global/per-frame palette counts, local bounds and margins,
+  upstream attribution, exact input hashes, global/per-frame palette counts, local bounds and margins,
   per-state medians, per-frame ratios, issue locations and limitations.
 - `layout_overlay.png`: the actual sheet with status-colored frame boundaries,
   cyan safe-area guides, and white visible bounds.
@@ -94,4 +112,5 @@ The mounted-knight charge example in the source checkout retains the unchanged
 sprite-gen output. The adapter finds 62 colors against a 32-color budget,
 seven frames violating 12-pixel margins, and two silhouette-size review
 candidates. Its complete run is under
-`docs/examples/mounted-knight-charge-v1/manifest-audit-v1/`.
+`docs/examples/mounted-knight-charge-v1/manifest-audit-v2/`, including upstream
+attribution. The earlier `manifest-audit-v1/` report is preserved unchanged.

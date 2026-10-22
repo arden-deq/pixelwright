@@ -79,6 +79,12 @@ python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered
 python pixelwright/scripts/pixelwright.py sprite-gen --sheet sprite-sheet-alpha.png --manifest manifest.json --max-colors 32 --out-dir runs/atlas-audit-v1
 ```
 
+[sprite-gen](https://github.com/aldegad/sprite-gen)의 출력 규격에 의존하는
+연동입니다. [패키지 메타데이터](pixelwright/upstream-integrations.json)에
+원본 저장소·라이선스·확인한 버전/커밋, `data_format` 관계와
+`runtime_required: false`를 기록합니다. CLI와 보고서의 `upstream`에도
+표시하며, 호환성 확인 버전을 입력 파일을 생성한 버전으로 단정하지 않습니다.
+
 원래 요청 파일이 있으면 `--max-colors` 대신 `--request sprite-request.json`으로
 팔레트 제한을 읽습니다. manifest에 기록된 실제 프레임 좌표를 사용해 공유 팔레트,
 안전 여백, 동작별 외곽 크기·보이는 면적의 일관성을 검사합니다. 크기 이상은 자세나
@@ -87,8 +93,8 @@ python pixelwright/scripts/pixelwright.py sprite-gen --sheet sprite-sheet-alpha.
 
 [기사 돌격 예시](docs/examples/mounted-knight-charge-v1/)에서는 실제 62색으로
 32색 제한을 넘었고, 8개 중 7프레임이 여백을 위반했으며, 2프레임이 크기 검토
-대상으로 잡혔습니다. [실제 보고서](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/report.json)
-· [프레임 비교](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/frames.png)
+대상으로 잡혔습니다. [실제 보고서](docs/examples/mounted-knight-charge-v1/manifest-audit-v2/report.json)
+· [프레임 비교](docs/examples/mounted-knight-charge-v1/manifest-audit-v2/frames.png)
 · [입력 형식과 판정 범위](pixelwright/references/external-atlases.md)
 · [검증 기록](docs/VALIDATION_external_atlases_ko.md).
 도트 격자와 자연스러운 움직임은 각각 별도 검사 대상입니다. 이 소스에서 설치

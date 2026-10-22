@@ -11,3 +11,11 @@ masks, packaging, documentation, and examples.
 
 Pillow and NumPy are runtime dependencies installed separately. Their own
 licenses apply to those packages; they are not bundled into Pixelwright ZIPs.
+
+The sprite-gen atlas adapter follows the runtime manifest format published by
+sprite-gen (https://github.com/aldegad/sprite-gen), licensed under Apache-2.0.
+This is a data-format integration. Atlas validation does not install, import,
+or execute sprite-gen, and sprite-gen code is not bundled into Pixelwright.
+The tested contract baseline is sprite-gen 2.45.3, revision
+59b2738a2e76ed7043d9691a230396ed6374a336. Machine-readable attribution and
+compatibility details are in the skill's upstream-integrations.json.

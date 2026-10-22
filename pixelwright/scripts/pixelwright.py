@@ -175,6 +175,7 @@ def run_cli(argv: list[str] | None = None) -> int:
         if args.action == "sprite-gen":
             report = pixel_atlas.check_arguments(args)
             print(json.dumps({"status": report["status"], "checks": report["checks"],
+                              "upstream": report["upstream"],
                               "frames": len(report["frames"]), "issue_counts": report["issue_counts"],
                               "report": str(args.out_dir / "report.json")}, ensure_ascii=False, indent=2))
             return 0 if report["status"] == "pass" else 2

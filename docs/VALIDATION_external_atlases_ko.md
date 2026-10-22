@@ -46,3 +46,22 @@ python tools/verify_release.py --archive .work/atlas-commit-dist-v1/pixelwright-
 - 관련 Markdown 6개 파일의 로컬 링크·이미지 대상 185개가 모두 존재한다.
 
 이는 현재 개발 소스에서 다시 만든 ZIP의 검증이다. 기존 공개 v0.6.2 배포 파일은 변경하지 않았다.
+
+## 패키지와 보고서의 upstream 선언
+
+[upstream-integrations.json](../pixelwright/upstream-integrations.json)은 sprite-gen 출력 규격과의 의존 관계를 기계가 읽는 형식으로 선언한다. 설치 ZIP과 개발 ZIP에 포함되며, 검사기는 같은 파일을 읽어 CLI 요약과 `report.upstream`에 넣는다. NOTICE와 사용 문서에서도 출처를 안내한다.
+
+- 원본: `https://github.com/aldegad/sprite-gen`, 라이선스 `Apache-2.0`.
+- 관계: `data_format`, 대상 계약 `runtime_manifest.frame_layout`.
+- 설치 필요 여부: `runtime_required: false`, 코드 포함 여부 `bundled: false`.
+- 호환성 확인 기준: `tested_against.version: 2.45.3`, revision `59b2738a2e76ed7043d9691a230396ed6374a336`.
+- 입력 생성기 버전: `producer_version: null`, `producer_version_verified: false`. 입력이 버전을 주장해도 출처 검증 없이 확정하지 않는다.
+
+[출처 선언을 포함한 기사 돌격 보고서](examples/mounted-knight-charge-v1/manifest-audit-v2/report.json)는 같은 시트를 재검사한 결과다. 초기 보고서와 측정값·판정·입력 해시가 같고, upstream 필드가 추가됐다. 기존 보고서는 보존했다.
+
+추가 검증은 새 출처 검사 2개를 포함해 atlas 테스트 25개, 커밋 대상 전체 테스트 317개를 통과했다. 설치 ZIP에서 선언 파일과 보고서의 upstream 값이 일치하고, 임의의 입력 버전을 검증된 출처로 표시하지 않는지 확인했다. 검사 환경에는 `sprite_gen` Python 패키지가 설치되어 있지 않다. 관련 Markdown 로컬 대상 192개가 모두 존재한다.
+
+```sh
+python tools/package_skill.py --out-dir .work/atlas-upstream-dist-v1
+python tools/verify_release.py --archive .work/atlas-upstream-dist-v1/pixelwright-v0.6.2.zip --out-dir .work/atlas-upstream-release-check-v1
+```

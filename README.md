@@ -79,6 +79,12 @@ The development source accepts an unchanged sprite-gen atlas and its runtime
 python pixelwright/scripts/pixelwright.py sprite-gen --sheet sprite-sheet-alpha.png --manifest manifest.json --max-colors 32 --out-dir runs/atlas-audit-v1
 ```
 
+The adapter depends on [sprite-gen](https://github.com/aldegad/sprite-gen)'s
+output contract. Its [packaged upstream metadata](pixelwright/upstream-integrations.json)
+records the repository, license and tested version/commit as a `data_format`
+integration with `runtime_required: false`. The CLI and report expose it under
+`upstream`; the tested baseline does not assert the input's producer version.
+
 Use `--request sprite-request.json` instead of `--max-colors` to read the original
 palette budget. The checker reads exact manifest rectangles, counts the shared
 visible palette, checks declared safety margins, and screens within-state width,
@@ -88,8 +94,8 @@ metrics, a layout overlay and an annotated contact sheet.
 
 The [mounted-knight charge sample](docs/examples/mounted-knight-charge-v1/) fails
 the 32-color budget (62 colors) and margins (7 of 8 frames), with 2 size-review
-candidates. [Actual report](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/report.json)
-· [Annotated frames](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/frames.png)
+candidates. [Actual report](docs/examples/mounted-knight-charge-v1/manifest-audit-v2/report.json)
+· [Annotated frames](docs/examples/mounted-knight-charge-v1/manifest-audit-v2/frames.png)
 · [Input contract and limits](pixelwright/references/external-atlases.md)
 · [Validation record (Korean)](docs/VALIDATION_external_atlases_ko.md).
 This checks atlas constraints; pixel-grid fidelity and natural motion have

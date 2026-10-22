@@ -41,6 +41,7 @@ class PackagingTests(unittest.TestCase):
                          "examples/sprite-walk/profile.json", "examples/sprite-lever/spec.json",
                          "examples/sprite-lever/profile.json", "scripts/pixel_sequence.py",
                          "references/sequences.md", "scripts/pixel_atlas.py", "references/external-atlases.md",
+                         "upstream-integrations.json",
                          "examples/sequence-orbit/spec.json",
                          "examples/sequence-orbit/reference.png", "examples/sequence-orbit/sheet.png",
                          "examples/sequence-orbit/observed-pixels.json", "examples/sequence-orbit/observe_fixture.py"):

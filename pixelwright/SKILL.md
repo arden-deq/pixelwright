@@ -54,6 +54,11 @@ is needed. Read the manifest's explicit rectangles and inspect actual pixels:
 python scripts/pixelwright.py sprite-gen --sheet sprite-sheet-alpha.png --manifest manifest.json --max-colors 32 --out-dir atlas-audit-v1
 ```
 
+The packaged [upstream declaration](upstream-integrations.json) records
+sprite-gen as a data-format dependency. Preserve `report.upstream` when reporting
+the source and tested baseline. Atlas validation does not require sprite-gen
+installation; the input's producer version remains unverified.
+
 Use `--request sprite-request.json` to obtain `fit.palette_size` instead of
 `--max-colors`. Margins come from manifest/request source-pixel declarations;
 missing declarations remain REVIEW. Palette and margin violations FAIL.

@@ -17,6 +17,19 @@ import pixel_sprite as sprite
 import pixelwright as project
 
 
+def upstream_metadata() -> dict:
+    """Describe the format dependency, without inferring the input's producer."""
+    path = Path(__file__).resolve().parents[1] / "upstream-integrations.json"
+    metadata, _ = sprite._read_json(path)
+    if not isinstance(metadata, dict) or metadata.get("schema_version") != 1:
+        raise ValueError("Unsupported upstream integration metadata")
+    try:
+        upstream = dict(metadata["integrations"]["sprite-gen"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("Missing sprite-gen upstream integration metadata") from exc
+    return upstream | {"producer_version": None, "producer_version_verified": False}
+
+
 def _object(value: Any, name: str) -> dict:
     if not isinstance(value, dict):
         raise ValueError(f"{name} must be an object")
@@ -305,6 +318,7 @@ def check_sprite_gen(sheet_path: str | Path, manifest_path: str | Path, out_dir:
     report = {
         "tool": "Pixelwright", "version": project.VERSION, "schema_version": 1,
         "acceptance_mode": "sprite_gen_atlas", "status": _status(issues),
+        "upstream": upstream_metadata(),
         "scope": "decoded PNG palette, declared frame rectangles, safety margins and visible silhouette size",
         "contract": contract,
         "provenance": {"sheet": {"path": str(sheet), "sha256": hashes[sheet]},

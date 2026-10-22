@@ -31,7 +31,7 @@ python pixelwright/scripts/pixelwright.py sprite-gen \
   --manifest docs/examples/mounted-knight-charge-v1/run/manifest.json \
   --request docs/examples/mounted-knight-charge-v1/run/sprite-request.json \
   --size-tolerance 0.10 --area-tolerance 0.25 \
-  --out-dir docs/examples/mounted-knight-charge-v1/manifest-audit-v1
+  --out-dir docs/examples/mounted-knight-charge-v1/manifest-audit-v2
 ```
 
 | 검사 | 결과 | 측정 |
@@ -43,6 +43,8 @@ python pixelwright/scripts/pixelwright.py sprite-gen \
 
 크기는 같은 동작의 보이는 외곽 폭·높이와 픽셀 면적 중앙값으로 비교한다. 기본 허용폭은 치수 10%, 면적 25%다. 자세·창·가려짐·잘림도 수치를 바꾸므로 크기 결과는 검토 후보이며 신체 부위 크기 오류를 확정하지 않는다. 도트 격자와 움직임의 자연스러움은 이 명령의 검사 대상이 아니다.
 
-입력 PNG와 JSON은 변경하지 않았다. [전체 보고서](manifest-audit-v1/report.json), [프레임 비교 이미지](manifest-audit-v1/frames.png), [시트 검사 이미지](manifest-audit-v1/layout_overlay.png)에 측정값과 입력 해시가 남아 있다. 재실행 시 새 출력 폴더를 지정한다.
+입력 PNG와 JSON은 변경하지 않았다. [전체 보고서](manifest-audit-v2/report.json), [프레임 비교 이미지](manifest-audit-v2/frames.png), [시트 검사 이미지](manifest-audit-v2/layout_overlay.png)에 측정값과 입력 해시가 남아 있다. 재실행 시 새 출력 폴더를 지정한다.
+
+`manifest-audit-v2`는 패키지의 upstream 선언을 `report.upstream`에 포함한다. sprite-gen 원본 저장소·Apache-2.0·확인한 2.45.3 버전/커밋과 `data_format` 관계를 기록하며, 검증할 때 설치가 필요하지 않음을 표시한다. 호환성 확인 버전은 입력 생성기의 검증된 버전이 아니다. [초기 보고서](manifest-audit-v1/report.json)를 보존했으며 두 실행의 측정값·판정·입력 해시는 같다.
 
 규격 근거: https://github.com/aldegad/sprite-gen/blob/59b2738a2e76ed7043d9691a230396ed6374a336/docs/run-contract.md

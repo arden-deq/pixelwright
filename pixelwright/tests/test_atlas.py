@@ -74,6 +74,33 @@ class AtlasTests(unittest.TestCase):
         self.assertEqual(report["checks"]["palette"], "fail")
         self.assertIn("PALETTE_OVER_BUDGET", self.codes(report))
 
+    def test_report_identifies_format_dependency_without_claiming_producer_version(self):
+        # User-supplied exporter metadata must not become a verified origin.
+        self.data["producer"] = {"name": "sprite-gen", "version": "999.0"}
+        self.save()
+        report = self.check()
+        upstream = report["upstream"]
+        self.assertEqual(upstream["name"], "sprite-gen")
+        self.assertEqual(upstream["repository"], "https://github.com/aldegad/sprite-gen")
+        self.assertEqual(upstream["relationship"], "data_format")
+        self.assertFalse(upstream["runtime_required"])
+        self.assertFalse(upstream["bundled"])
+        self.assertEqual(upstream["tested_against"]["version"], "2.45.3")
+        self.assertIsNone(upstream["producer_version"])
+        self.assertFalse(upstream["producer_version_verified"])
+        self.assertEqual(json.loads((self.out / "report.json").read_text())["upstream"], upstream)
+
+    def test_cli_discloses_upstream_metadata(self):
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            result = pw.run_cli(["sprite-gen", "--sheet", str(self.sheet), "--manifest", str(self.manifest),
+                                 "--max-colors", "2", "--out-dir", str(self.out)])
+        self.assertEqual(result, 0)
+        summary = json.loads(output.getvalue())
+        report = json.loads((self.out / "report.json").read_text())
+        self.assertEqual(summary["upstream"], report["upstream"])
+        self.assertEqual(summary["upstream"]["relationship"], "data_format")
+
     def test_hidden_rgb_is_not_a_visible_palette_color(self):
         self.pixels[0, 0] = (1, 2, 3, 0)
         self.save()

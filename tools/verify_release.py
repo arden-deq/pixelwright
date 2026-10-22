@@ -333,6 +333,14 @@ def verify_external_atlas_workflow(skill, out):
     valid = read_json(root / "valid/report.json")
     if valid["status"] != "pass" or valid["frames"][0]["bbox_size"] != [8, 12]:
         raise ValueError("Installed external atlas adapter must measure its supplied PNG")
+    upstream = read_json(skill / "upstream-integrations.json")["integrations"]["sprite-gen"]
+    reported = valid["upstream"]
+    if any(reported.get(key) != value for key, value in upstream.items()):
+        raise ValueError("Installed atlas report must retain packaged upstream attribution")
+    if reported["relationship"] != "data_format" or reported["runtime_required"] or reported["bundled"]:
+        raise ValueError("Atlas validation must disclose its data-format dependency")
+    if reported["producer_version"] is not None or reported["producer_version_verified"]:
+        raise ValueError("Tested upstream compatibility must not become a claim about the input producer")
     damaged = root / "damaged.png"
     image.paste((0, 180, 40, 255), (0, 0, 1, 1))
     image.paste((0, 0, 0, 0), (48, 0, 72, 24))
@@ -347,7 +355,8 @@ def verify_external_atlas_workflow(skill, out):
     if any(file_hash(p) != digest for p, digest in hashes.items()):
         raise ValueError("External atlas inspection changed an input")
     return {"external_atlas_valid_status": valid["status"],
-            "external_atlas_damaged_checks": rejected["checks"], "external_atlas_inputs_unchanged": True}
+            "external_atlas_damaged_checks": rejected["checks"], "external_atlas_inputs_unchanged": True,
+            "external_atlas_upstream_attribution": True}
 
 
 def verify_sequence_workflow(skill, out):
