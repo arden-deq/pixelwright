@@ -44,6 +44,27 @@ Use layers when independent changes to a background, item, UI, or text would sim
 
 Decide the layout, common grid and RGBA palette, lighting, and drawing order before creating layers. Author each layer to the shared scale and palette; positions use integer logical cells. The compositor audits every listed layer, including hidden layers, composes opaque cells on the logical canvas, enlarges once, and audits the final saved PNG. It exports accepted `native.png` and `rendered.png` only when every layer and the composite pass. Technical acceptance does not replace visual review of individual layers, contact points, occlusion, and final readability. Keep QA overlays separate from artwork.
 
+### Inspect an external sprite-gen sheet
+
+For an existing sprite-gen atlas PNG and runtime `manifest.json`, read
+[external-atlases.md](references/external-atlases.md). No new generation or rig
+is needed. Read the manifest's explicit rectangles and inspect actual pixels:
+
+```sh
+python scripts/pixelwright.py sprite-gen --sheet sprite-sheet-alpha.png --manifest manifest.json --max-colors 32 --out-dir atlas-audit-v1
+```
+
+Use `--request sprite-request.json` to obtain `fit.palette_size` instead of
+`--max-colors`. Margins come from manifest/request source-pixel declarations;
+missing declarations remain REVIEW. Palette and margin violations FAIL.
+Within-state visible width, height and area are compared with the medians;
+default 10% dimension / 25% area outliers require REVIEW because pose and
+occlusion can change them. This is a silhouette screen, not automatic body-part
+recognition. Keep the input untouched and show `frames.png` or
+`layout_overlay.png` with the per-check results from `report.json`. This mode
+does not certify dot fidelity or motion; use the strict profile and observed
+sequence workflows for those claims.
+
 ### Animate frames and check moving parts
 
 For generated sprite animations, start with [sequences.md](references/sequences.md). Select a 2D design from the user's reference or prompt first. Name visible parts and features in the object's own terms, including imaginary objects. Freeze the frame size, scale, palette, pose descriptions, timing and consistency tolerances before generation. A 3D model, skeleton or human joint vocabulary is not required.

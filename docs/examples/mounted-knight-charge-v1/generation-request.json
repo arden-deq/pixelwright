@@ -1,0 +1,14 @@
+{
+  "generator": "host built-in image_gen",
+  "provider_cli_gen_not_used": true,
+  "planned_row_calls": 1,
+  "inputs": {
+    "request-input.json": "0c185fe09172e92938aa26fdff5ff9f3d114038f3dfca818e22f48aeab3fe2fa",
+    "attempt-contract.json": "0f11ae59f6843157ff96bbf2b449e2bad4f044b135929c92ef4a0971719804f2",
+    "base-design.png": "8db27418e7716ee6c8ee52b019f6300525f827e615681a90c2667cecb0a699dd",
+    "run/sprite-request.json": "00a75fd30542604897989f5b306433a4901763e745eeaefc75eff5a97b0d6542",
+    "run/prompts/charge.txt": "121f96374f7e8032f1bb83507778ff4e70feb7f69c40731f80073cfe5b2d6879",
+    "run/references/layout-guides/charge.png": "c0df8e703bf4f494a5f087ad8c3c374220661bf5ac1a8e1d6641b1e8e71dc444",
+    "generation-prompt.txt": "4ea600e70207be819c2262947eea00b94cec2417e5e173f46780810bbe354452"
+  }
+}

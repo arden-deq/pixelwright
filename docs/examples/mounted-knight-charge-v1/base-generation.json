@@ -1,0 +1,12 @@
+{
+  "provider": "host built-in image_gen",
+  "role": "generated horse-and-rider identity reference, chosen by assistant for this preview",
+  "source": "/Users/namjungduck/.codex/generated_images/01a15cf8-8d52-71b3-8a8d-2cc435109d80/exec-1d1b6b36-3a97-49e0-8f75-de1b1e7b42b7.png",
+  "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/mounted-knight-charge-v1/base-design.png",
+  "size": [
+    1448,
+    1086
+  ],
+  "mode": "RGBA",
+  "sha256": "8db27418e7716ee6c8ee52b019f6300525f827e615681a90c2667cecb0a699dd"
+}

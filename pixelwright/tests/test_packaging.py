@@ -40,7 +40,8 @@ class PackagingTests(unittest.TestCase):
                          "references/sprites.md", "examples/sprite-walk/spec.json",
                          "examples/sprite-walk/profile.json", "examples/sprite-lever/spec.json",
                          "examples/sprite-lever/profile.json", "scripts/pixel_sequence.py",
-                         "references/sequences.md", "examples/sequence-orbit/spec.json",
+                         "references/sequences.md", "scripts/pixel_atlas.py", "references/external-atlases.md",
+                         "examples/sequence-orbit/spec.json",
                          "examples/sequence-orbit/reference.png", "examples/sequence-orbit/sheet.png",
                          "examples/sequence-orbit/observed-pixels.json", "examples/sequence-orbit/observe_fixture.py"):
             with self.subTest(relative=relative):

@@ -1,0 +1,8 @@
+Use case: stylized-concept
+Asset type: a single 2D pixel-art identity reference for a game sprite animation.
+Primary request: one armored medieval knight mounted on one horse, ready for a cavalry charge, shown in a clean full side view facing right.
+Subject: a silver greathelm with a modest red plume, red and gold surcoat, a compact shield, and a couched wooden lance with a steel tip. The rider sits securely in a brown saddle with visible reins and stirrups. The chestnut horse has a dark mane and tail, a small light muzzle marking, and four anatomically credible legs. Horse and rider are one coherent connected subject. The horse stands calmly in this reference; the charge poses will be generated separately from this same design.
+Style: excellent hand-pixelled 2D game art at approximately 128 by 96 logical pixels, deliberate square pixel clusters, restrained 32-color palette, crisp stepped contours, readable 1-pixel outlines, simple consistent shading. No smooth gradients or antialiasing. The horse should have believable proportions rather than toy proportions.
+Composition: landscape 4:3 canvas, entire horse, rider, tail and lance visible with transparent safety space on all four sides. The lance extends forward but fits within the picture. Side camera is level and orthographic. One subject only, not multiple views, not a sprite sheet.
+Background: genuinely transparent alpha, no ground plane, no cast shadow, no scenery, no dust or motion effects, no checkerboard painted into the image.
+Constraints: no text, labels, logos, watermarks, grid lines, 3D rendering, or extra limbs. Preserve leg separations and the saddle-rider attachment.

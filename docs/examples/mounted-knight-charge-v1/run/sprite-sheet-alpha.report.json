@@ -1,0 +1,151 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "curation_applied": false,
+  "frame_variant": "pixel",
+  "errors": [],
+  "atlas": "sprite-sheet-alpha.png",
+  "manifest": "manifest.json",
+  "cell": {
+    "shape": "rect",
+    "width": 256,
+    "height": 192,
+    "safe_margin_x": 12,
+    "safe_margin_y": 12
+  },
+  "states": [
+    "charge"
+  ],
+  "cells": [
+    {
+      "state": "charge",
+      "frame": 0,
+      "nontransparent_pixels": 14400,
+      "x": 0,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    },
+    {
+      "state": "charge",
+      "frame": 1,
+      "nontransparent_pixels": 13756,
+      "x": 256,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    },
+    {
+      "state": "charge",
+      "frame": 2,
+      "nontransparent_pixels": 13924,
+      "x": 512,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    },
+    {
+      "state": "charge",
+      "frame": 3,
+      "nontransparent_pixels": 13136,
+      "x": 768,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    },
+    {
+      "state": "charge",
+      "frame": 4,
+      "nontransparent_pixels": 14384,
+      "x": 1024,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    },
+    {
+      "state": "charge",
+      "frame": 5,
+      "nontransparent_pixels": 14216,
+      "x": 1280,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    },
+    {
+      "state": "charge",
+      "frame": 6,
+      "nontransparent_pixels": 13976,
+      "x": 1536,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    },
+    {
+      "state": "charge",
+      "frame": 7,
+      "nontransparent_pixels": 14420,
+      "x": 1792,
+      "y": 0,
+      "w": 256,
+      "h": 192
+    }
+  ],
+  "frame_layout": {
+    "sheetWidth": 2048,
+    "sheetHeight": 192,
+    "cellWidth": 256,
+    "cellHeight": 192,
+    "rows": {
+      "charge": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        },
+        {
+          "x": 1024,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        },
+        {
+          "x": 1280,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        },
+        {
+          "x": 1536,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        },
+        {
+          "x": 1792,
+          "y": 0,
+          "w": 256,
+          "h": 192
+        }
+      ]
+    }
+  }
+}

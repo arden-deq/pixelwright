@@ -1,0 +1,23 @@
+{
+  "purpose": "Show the user an actual sprite-gen-compatible mounted-knight charge sheet for visual assessment.",
+  "image_generator": "host built-in image_gen; no provider CLI fallback",
+  "sprite_gen_commit": "59b2738a2e76ed7043d9691a230396ed6374a336",
+  "sprite_gen_version": "2.45.3",
+  "base_generation_calls_planned": 1,
+  "state_generation_calls_planned": 1,
+  "state": "charge",
+  "frames": 8,
+  "fps": 10,
+  "loop": true,
+  "frame_size_px": [256, 192],
+  "final_atlas_expected_px": [2048, 192],
+  "pixel_profile": {
+    "logical_size": "1024x96",
+    "scale": 2,
+    "max_colors": 32,
+    "alpha": "binary",
+    "transparent_rgb": "exact"
+  },
+  "motion_status_before_review": "unverified",
+  "three_d_guidance": "none; this task previews the sprite-gen row format"
+}

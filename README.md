@@ -70,6 +70,32 @@ python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered
 
 The example builds a 16×16 logical canvas at 8×, producing a 128×128 PNG. Open `rendered.png`, `report.json`, and `grid_overlay.png` together. Each output directory must be empty or nonexistent; choose a new run name when repeating a command.
 
+## Validate a sprite-gen sheet and manifest
+
+The development source accepts an unchanged sprite-gen atlas and its runtime
+`manifest.json`, without requiring a Pixelwright rig or a new generation:
+
+```sh
+python pixelwright/scripts/pixelwright.py sprite-gen --sheet sprite-sheet-alpha.png --manifest manifest.json --max-colors 32 --out-dir runs/atlas-audit-v1
+```
+
+Use `--request sprite-request.json` instead of `--max-colors` to read the original
+palette budget. The checker reads exact manifest rectangles, counts the shared
+visible palette, checks declared safety margins, and screens within-state width,
+height and visible-area consistency. Size outliers require review: pose and
+occlusion can change a silhouette. PNGs remain unchanged; outputs include JSON
+metrics, a layout overlay and an annotated contact sheet.
+
+The [mounted-knight charge sample](docs/examples/mounted-knight-charge-v1/) fails
+the 32-color budget (62 colors) and margins (7 of 8 frames), with 2 size-review
+candidates. [Actual report](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/report.json)
+· [Annotated frames](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/frames.png)
+· [Input contract and limits](pixelwright/references/external-atlases.md)
+· [Validation record (Korean)](docs/VALIDATION_external_atlases_ko.md).
+This checks atlas constraints; pixel-grid fidelity and natural motion have
+separate workflows. Rebuild the package from this source to use the addition;
+previously published v0.6.2 archives are unchanged.
+
 ## Reuse, extract, and remap palettes
 
 Version 0.5.0 adds a reusable JSON palette library with named colors and ramps. An artwork can use `palette_file` instead of an inline palette; the same library can serve several logical matrices. The [palette demo](pixelwright/examples/palette-demo/) includes a library-backed artwork and a 16×16, 8× profile.

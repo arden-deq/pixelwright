@@ -70,6 +70,30 @@ python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered
 
 예제는 16×16 논리 캔버스를 8배 확대해 128×128 PNG를 만듭니다. `rendered.png`, `report.json`, `grid_overlay.png`를 함께 확인합니다. 출력 폴더는 비어 있거나 존재하지 않아야 합니다. 명령을 반복할 때는 새로운 실행 폴더 이름을 사용합니다.
 
+## sprite-gen 시트와 manifest 검증
+
+개발 소스에는 sprite-gen의 완성 PNG와 `manifest.json`을 직접 받는 검사를
+추가했습니다. 골격이나 별도의 Pixelwright 스프라이트 명세가 필요하지 않습니다.
+
+```sh
+python pixelwright/scripts/pixelwright.py sprite-gen --sheet sprite-sheet-alpha.png --manifest manifest.json --max-colors 32 --out-dir runs/atlas-audit-v1
+```
+
+원래 요청 파일이 있으면 `--max-colors` 대신 `--request sprite-request.json`으로
+팔레트 제한을 읽습니다. manifest에 기록된 실제 프레임 좌표를 사용해 공유 팔레트,
+안전 여백, 동작별 외곽 크기·보이는 면적의 일관성을 검사합니다. 크기 이상은 자세나
+가림 때문일 수 있어 REVIEW로 표시합니다. 원본은 보존하며 JSON 보고서와 프레임
+경계·측정값을 표시한 이미지를 출력합니다.
+
+[기사 돌격 예시](docs/examples/mounted-knight-charge-v1/)에서는 실제 62색으로
+32색 제한을 넘었고, 8개 중 7프레임이 여백을 위반했으며, 2프레임이 크기 검토
+대상으로 잡혔습니다. [실제 보고서](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/report.json)
+· [프레임 비교](docs/examples/mounted-knight-charge-v1/manifest-audit-v1/frames.png)
+· [입력 형식과 판정 범위](pixelwright/references/external-atlases.md)
+· [검증 기록](docs/VALIDATION_external_atlases_ko.md).
+도트 격자와 자연스러운 움직임은 각각 별도 검사 대상입니다. 이 소스에서 설치
+패키지를 다시 빌드해야 하며, 기존 v0.6.2 배포 파일은 변경하지 않았습니다.
+
 ## 팔레트 재사용·추출·색상 변환
 
 버전 0.5.0은 이름 있는 색상과 명암 램프를 담는 재사용 JSON 팔레트 라이브러리를 추가합니다. 작화 명세의 인라인 `palette` 대신 `palette_file`을 지정하면 여러 논리 행렬에서 같은 색상 토큰을 쓸 수 있습니다. [팔레트 예제](pixelwright/examples/palette-demo/)에는 라이브러리를 참조하는 작화와 16×16·8배 프로필이 있습니다.
