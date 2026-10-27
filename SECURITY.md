@@ -8,7 +8,7 @@ been fixed. There is no guaranteed response or remediation deadline.
 
 ## Reporting a vulnerability
 
-Use [GitHub private vulnerability reporting](https://github.com/jungducknam/pixelwright/security/advisories/new)
+Use [GitHub private vulnerability reporting](https://github.com/arden-deq/pixelwright/security/advisories/new)
 when it is enabled for this repository. Include the affected version or commit,
 operating system, Python and dependency versions, the command used, expected and
 actual behavior, and a minimal reproduction with its realistic security impact.

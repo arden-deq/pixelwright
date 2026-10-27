@@ -43,7 +43,7 @@ python pixelwright/scripts/pixelwright.py inspect runs/knight-8px-build-v1/rende
 Requires **Python 3.12+**, Pillow, and NumPy. Run these commands from the repository root:
 
 ```sh
-git clone https://github.com/jungducknam/pixelwright.git
+git clone https://github.com/arden-deq/pixelwright.git
 cd pixelwright
 python -m venv .venv
 ```

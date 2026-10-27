@@ -39,6 +39,6 @@ python tools/package_skill.py --verify dist/pixelwright-v0.6.2.zip
 python tools/verify_release.py --archive dist/pixelwright-v0.6.2.zip --out-dir .work/release-v062-check
 ```
 
-[CI](../.github/workflows/ci.yml)는 Ubuntu·Windows 각각 Python 3.12·3.14에서 전체 테스트와 설치 ZIP 검증을 실행합니다. 커밋별 원격 결과는 [Actions](https://github.com/jungducknam/pixelwright/actions)에서 확인합니다.
+[CI](../.github/workflows/ci.yml)는 Ubuntu·Windows 각각 Python 3.12·3.14에서 전체 테스트와 설치 ZIP 검증을 실행합니다. 커밋별 원격 결과는 [Actions](https://github.com/arden-deq/pixelwright/actions)에서 확인합니다.
 
 이전 회귀 수정과 Blender 검증 기록은 [v0.6.1](VALIDATION_v061_ko.md)에 남겨 두었습니다.
