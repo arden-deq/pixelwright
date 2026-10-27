@@ -31,7 +31,7 @@ python tools/verify_release.py --archive dist/pixelwright-v0.5.1.zip --out-dir r
 
 ## 2026-10-16 Windows CI 경로 별칭 수정
 
-README 이미지를 교체한 `87f391e`의 [CI 실행](https://github.com/jungducknam/pixelwright/actions/runs/38823145025)에서 Ubuntu의 Python 3.12·3.14는 통과했지만 Windows의 두 Python 작업에서 팔레트 테스트 4개가 실패했습니다. CodeQL은 통과했습니다.
+README 이미지를 교체한 `87f391e`의 [CI 실행](https://github.com/arden-deq/pixelwright/actions/runs/38823145025)에서 Ubuntu의 Python 3.12·3.14는 통과했지만 Windows의 두 Python 작업에서 팔레트 테스트 4개가 실패했습니다. CodeQL은 통과했습니다.
 
 Windows runner의 임시 경로는 `RUNNER~1` 같은 8.3 별칭을 사용할 수 있습니다. 런타임은 입력·출력 경로를 `resolve()`로 정규화하지만, 테스트는 별칭을 그대로 비교했습니다. 이 때문에 provenance의 긴 경로와 비교가 어긋났고, 출력 경로를 비교하는 장애 주입 세 건도 실행되지 않았습니다. 테스트 fixture의 임시 루트에 `resolve()`를 적용했습니다. 런타임, 검증 조건, 장애 주입과 skip 조건은 그대로 유지합니다.
 
