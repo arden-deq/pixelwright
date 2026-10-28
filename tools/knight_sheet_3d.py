@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Prepare and audit state sheets generated from the metric Blender knight rig.
+"""Legacy mesh-transfer experiment and shared pixel-sheet export helpers.
+
+For a 2D design animated from bare 3D bones, use knight_design_first.py.
 
 One identity image, then one image-generation job per action. Frame slots, world
 scale and camera are immutable: no independent crop, fit, recenter or scale repair.
@@ -377,8 +379,13 @@ def read_shared_palette(path, maximum):
     return colors
 
 
-def process(run, out, palette_path=None):
-    settings, contract, rig_dir = load_run(run)
+def process(run, out, palette_path=None, *, loader=load_run, frame_inspector=None):
+    """Export the shared pixel lattice; recipes supply their own pose evidence.
+
+    The legacy default checks a rendered mesh. Design-first callers instead
+    supply independent artwork annotations and never load mesh silhouettes.
+    """
+    settings, contract, rig_dir = loader(run)
     fresh(out)
     frame_size = tuple(contract["frame_size"]); columns = contract["sheet_columns"]
     sources, sampled = {}, {}
@@ -418,17 +425,22 @@ def process(run, out, palette_path=None):
         for index, frame in enumerate(animation["frames"]):
             x = (index % columns) * frame_size[0]; y = (index // columns) * frame_size[1]
             pixels = rgba[y:y + frame_size[1], x:x + frame_size[0]].copy()
-            ids = read_part_ids(rig_dir / frame["parts"], contract["part_colors"], frame_size)
-            report = inspect_pose(pixels[:, :, 3] > 0, ids, contract)
+            if frame_inspector is None:
+                ids = read_part_ids(rig_dir / frame["parts"], contract["part_colors"], frame_size)
+                report = inspect_pose(pixels[:, :, 3] > 0, ids, contract)
+            else:
+                ids = None
+                report = frame_inspector(state, index, pixels, frame, contract)
             report.update({"frame": index, "description": frame["description"], "pixel_detail": noise_metrics(pixels)})
             state_reports.append(report)
             image = Image.fromarray(pixels, "RGBA"); image.save(directory / f"frame_{index:02d}.png")
             local_frames.append(image)
             contact.paste(image, (index * frame_size[0], state_index * frame_size[1]))
             under = composite_guide(image).convert("RGBA")
-            guide_outline = np.asarray(Image.fromarray((ids > 0).astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(3))) > 0
-            edge = guide_outline & ~(ids > 0)
-            ov = np.asarray(under).copy(); ov[edge] = (80, 220, 255, 255)
+            ov = np.asarray(under).copy()
+            if ids is not None:
+                guide_outline = np.asarray(Image.fromarray((ids > 0).astype(np.uint8) * 255).filter(ImageFilter.MaxFilter(3))) > 0
+                ov[guide_outline & ~(ids > 0)] = (80, 220, 255, 255)
             overlay.paste(skeleton_overlay(Image.fromarray(ov), frame, {**contract, "guide_scale": 1}),
                           (index * frame_size[0], state_index * frame_size[1]))
             token_array = np.asarray(tokens)[nearest[y:y + frame_size[1], x:x + frame_size[0]]]
@@ -436,7 +448,8 @@ def process(run, out, palette_path=None):
             indices.append(len(frames)); frames.append({"rows": ["".join(row) for row in token_array]})
         durations = [f["duration_ms"] for f in animation["frames"]]
         animations[state] = {"frames": indices, "durations_ms": durations, "loop": animation["loop"]}
-        pose_reports[state] = {"status": "fail" if any(r["status"] == "fail" for r in state_reports) else "pass",
+        state_statuses = {r["status"] for r in state_reports}
+        pose_reports[state] = {"status": "fail" if "fail" in state_statuses else "review" if "review" in state_statuses else "pass",
                                "frames": state_reports}
         gif_frames = [composite_guide(im).resize((384, 384), Image.Resampling.NEAREST) for im in local_frames]
         gif_frames[0].save(out / f"{state}.gif", save_all=True, append_images=gif_frames[1:], duration=durations,
@@ -444,7 +457,7 @@ def process(run, out, palette_path=None):
     contact.save(out / "sprite-sheet-native.png")
     contact.resize((contact.width * scale, contact.height * scale), Image.Resampling.NEAREST).save(out / "sprite-sheet.png")
     overlay.resize((overlay.width * 3, overlay.height * 3), Image.Resampling.NEAREST).save(out / "rig-overlay.png")
-    spec = {"schema_version": 1, "name": "Knight from metric 3D rig", "frame_size": f"{frame_size[0]}x{frame_size[1]}",
+    spec = {"schema_version": 1, "name": settings.get("name", "Knight from metric 3D rig"), "frame_size": f"{frame_size[0]}x{frame_size[1]}",
             "layout": {"columns": 6, "rows": len(sampled), "spacing": 0}, "scale": scale,
             "palette": palette_spec, "frames": frames, "animations": animations}
     profile = {"schema_version": 1, "name": "3D knight sheet pixel contract",
@@ -460,7 +473,8 @@ def process(run, out, palette_path=None):
         raise RuntimeError(f"Pixel checker failed to execute: {checked.stderr}")
     pixel_report = json.loads((out / "pixel-check" / "sprite_report.json").read_text())
     technical = "pass" if pixel_report["status"] == "pass" else "fail"
-    pose_status = "fail" if any(r["status"] == "fail" for r in pose_reports.values()) else "pass"
+    pose_statuses = {r["status"] for r in pose_reports.values()}
+    pose_status = "fail" if "fail" in pose_statuses else "review" if "review" in pose_statuses else "pass"
     runtime = {"game_input": "sprite-sheet.png", "frame_layout": {"sheetWidth": contact.width * scale,
                 "sheetHeight": contact.height * scale, "cellWidth": frame_size[0] * scale,
                 "cellHeight": frame_size[1] * scale, "rows": {}}, "animations": animations}
@@ -469,17 +483,18 @@ def process(run, out, palette_path=None):
                                                    "w": frame_size[0] * scale, "h": frame_size[1] * scale}
                                                   for i in range(len(animation["frames"]))]
     write_json(out / "manifest.json", runtime)
-    report = {"schema_version": 1, "status": "pass" if technical == pose_status == "pass" else "fail",
+    overall = "fail" if "fail" in (technical, pose_status) else "review" if pose_status == "review" else "pass"
+    report = {"schema_version": 1, "status": overall,
               "pixel_status": technical, "pose_status": pose_status, "artistic_status": "not_reviewed",
-              "scope": "pixel_contract_and_registered_3d_projection_not_artistic_acceptance",
+              "scope": settings.get("audit_scope", "pixel_contract_and_registered_3d_projection_not_artistic_acceptance"),
               "rig_check": rig.validate_contract(contract), "source_images": sources,
               "originals_unchanged": all(digest(Path(v["path"])) == v["sha256"] for v in sources.values()),
               "frame_size": list(frame_size), "scale": scale, "shared_palette_colors": len(colors),
               "palette_source": {"path": str(palette_path.resolve()), "sha256": digest(palette_path)} if palette_path else "joint_median_cut",
               "resampling": "one_registered_lattice_no_individual_frame_fit", "animations": pose_reports,
-              "limitations": ["Generated semantic part labels are not inferred from nearest bones.",
+              "limitations": settings.get("limitations", ["Generated semantic part labels are not inferred from nearest bones.",
                               "Part-region coverage does not prove intrinsic generated limb dimensions.",
-                              "Silhouette and head ROI gates require visual review of occlusion, foot order and pixel clusters."]}
+                              "Silhouette and head ROI gates require visual review of occlusion, foot order and pixel clusters."])}
     write_json(out / "report.json", report)
     return {"status": report["status"], "pixel_status": technical, "pose_status": pose_status,
             "artistic_status": report["artistic_status"], "run": str(out.resolve())}
@@ -505,7 +520,7 @@ def main():
     except (OSError, ValueError, KeyError, RuntimeError) as error:
         print(str(error), file=sys.stderr); return 1
     print(json.dumps(result, ensure_ascii=False))
-    return 2 if result["status"] == "fail" else 0
+    return 2 if result["status"] in ("fail", "review") else 0
 
 
 if __name__ == "__main__":

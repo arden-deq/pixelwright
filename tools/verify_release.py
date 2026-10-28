@@ -5,6 +5,7 @@ Only use archives built from reviewed source. Manifest hashes check consistency,
 not authenticity; this tool executes the extracted Python scripts.
 """
 import argparse
+import copy
 import hashlib
 import json
 import shutil
@@ -311,6 +312,139 @@ def verify_sprite_workflow(skill, out):
             "sprite_broken_joint_status": report["status"]}
 
 
+def verify_external_atlas_workflow(skill, out):
+    """Exercise the installed manifest adapter with independent pixel fixtures."""
+    root = out / "external-atlas"
+    root.mkdir()
+    source, manifest = root / "sheet.png", root / "manifest.json"
+    image = Image.new("RGBA", (72, 24))
+    for index in range(3):
+        image.paste((180, 40, 20, 255), (index * 24 + 8, 6, index * 24 + 16, 18))
+    image.save(source)
+    manifest.write_text(json.dumps({
+        "cell": {"width": 24, "height": 24, "safe_margin_x": 4, "safe_margin_y": 4},
+        "frame_layout": {"sheetWidth": 72, "sheetHeight": 24, "cellWidth": 24, "cellHeight": 24,
+                         "rows": {"motion": [{"x": i * 24, "y": 0, "w": 24, "h": 24} for i in range(3)]}}
+    }), encoding="utf-8")
+    hashes = {p: file_hash(p) for p in (source, manifest)}
+    checker = skill / "scripts" / "pixelwright.py"
+    run(checker, ["sprite-gen", "--sheet", source, "--manifest", manifest, "--max-colors", "1",
+                  "--out-dir", root / "valid"], 0)
+    valid = read_json(root / "valid/report.json")
+    if valid["status"] != "pass" or valid["frames"][0]["bbox_size"] != [8, 12]:
+        raise ValueError("Installed external atlas adapter must measure its supplied PNG")
+    upstream = read_json(skill / "upstream-integrations.json")["integrations"]["sprite-gen"]
+    reported = valid["upstream"]
+    if any(reported.get(key) != value for key, value in upstream.items()):
+        raise ValueError("Installed atlas report must retain packaged upstream attribution")
+    if reported["relationship"] != "data_format" or reported["runtime_required"] or reported["bundled"]:
+        raise ValueError("Atlas validation must disclose its data-format dependency")
+    if reported["producer_version"] is not None or reported["producer_version_verified"]:
+        raise ValueError("Tested upstream compatibility must not become a claim about the input producer")
+    damaged = root / "damaged.png"
+    image.paste((0, 180, 40, 255), (0, 0, 1, 1))
+    image.paste((0, 0, 0, 0), (48, 0, 72, 24))
+    image.paste((180, 40, 20, 255), (58, 9, 62, 15))
+    image.save(damaged)
+    run(checker, ["sprite-gen", "--sheet", damaged, "--manifest", manifest, "--max-colors", "1",
+                  "--out-dir", root / "invalid"], 2)
+    rejected = read_json(root / "invalid/report.json")
+    expected = {"palette": "fail", "margins": "fail", "size_consistency": "review", "layout": "pass"}
+    if rejected["checks"] != expected:
+        raise ValueError("Installed atlas adapter must distinguish exact failures from size-review candidates")
+    if any(file_hash(p) != digest for p, digest in hashes.items()):
+        raise ValueError("External atlas inspection changed an input")
+    return {"external_atlas_valid_status": valid["status"],
+            "external_atlas_damaged_checks": rejected["checks"], "external_atlas_inputs_unchanged": True,
+            "external_atlas_upstream_attribution": True}
+
+
+def verify_sequence_workflow(skill, out):
+    """Exercise the installed no-skeleton path against independent artwork."""
+    tool = skill / "scripts/pixel_sequence.py"
+    example = skill / "examples/sequence-orbit"
+    reference, sheet, spec = (example / name for name in ("reference.png", "sheet.png", "spec.json"))
+    inputs = [reference, sheet, spec, example / "observed-pixels.json"]
+    hashes = {path: file_hash(path) for path in inputs}
+    session = out / "sequence-run"
+    run(tool, ["prepare", "--spec", spec, "--reference", reference, "--out-dir", session], 0)
+    run(tool, ["import", "--run", session, "--state", "orbit", "--image", sheet,
+               "--producer", "independently authored installed fixture"], 0)
+    unobserved = out / "sequence-unobserved"
+    run(tool, ["check", "--run", session, "--out-dir", unobserved], 2)
+    missing = read_json(unobserved / "report.json")
+    if missing["status"] != "review" or missing["states"]["orbit"]["pixel_status"] != "pass":
+        raise ValueError("Pixel PASS must not conceal missing part/motion observations")
+    observations = out / "sequence-observed.json"
+    observer = example / "observe_fixture.py"
+    run(observer, ["--run", session, "--out", observations], 0)
+    audit = out / "sequence-audit"
+    run(tool, ["check", "--run", session, "--observations", observations, "--out-dir", audit], 0)
+    report = read_json(audit / "report.json")
+    if (report["status"] != "pass" or report["skeleton_required"]
+            or report["human_approval_recorded"] or report["technical_status"] != "pass"):
+        raise ValueError("Installed independently observed 2D fixture must pass without a skeleton")
+    outputs = report["states"]["orbit"]["outputs"]
+    if not all((audit / path).is_file() for path in outputs.values()):
+        raise ValueError("Installed sequence must export art, GIF, grid and observation overlay")
+    with Image.open(sheet) as original, Image.open(audit / outputs["native"]) as native, Image.open(audit / outputs["rendered"]) as enlarged:
+        rgba = original.convert("RGBA")
+        if native.convert("RGBA").tobytes() != rgba.tobytes() or native.size != rgba.size:
+            raise ValueError("Native sequence export changed the independently authored artwork")
+        expected = rgba.resize((rgba.width * 4, rgba.height * 4), Image.Resampling.NEAREST)
+        if enlarged.size != expected.size or enlarged.convert("RGBA").tobytes() != expected.tobytes():
+            raise ValueError("Sequence export must repeat each original cell exactly at 4x")
+    with Image.open(audit / outputs["gif"]) as gif:
+        durations = []
+        if gif.n_frames != 6 or gif.info.get("loop") != 0:
+            raise ValueError("Installed no-skeleton GIF must retain the six-frame loop")
+        for index in range(gif.n_frames):
+            gif.seek(index)
+            durations.append(gif.info.get("duration", 0))
+        if durations != [100] * 6:
+            raise ValueError("Installed no-skeleton GIF changed the declared timing")
+    frozen = out / "sequence-frozen.png"
+    with Image.open(sheet) as original:
+        pose = original.convert("RGBA").crop((0, 0, 24, 24))
+    damaged = Image.new("RGBA", (72, 48))
+    for index in range(6):
+        damaged.paste(pose, ((index % 3) * 24, (index // 3) * 24))
+    damaged.save(frozen)
+    old_raw = (session / "raw/orbit.png").read_bytes()
+    old_record = read_json(session / "run.json")["states"]["orbit"]
+    run(tool, ["import", "--run", session, "--state", "orbit", "--image", frozen,
+               "--producer", "deliberately frozen authored-cell fixture", "--replace"], 0)
+    # The example observer must refuse changed artwork, even with a fresh hash.
+    run(observer, ["--run", session, "--out", out / "bad-observation-reuse.json"], 1)
+    run(tool, ["check", "--run", session, "--observations", observations,
+               "--out-dir", out / "sequence-stale-observations"], 1)
+    new_record = read_json(session / "run.json")["states"]["orbit"]
+    history = session / new_record["history"][-1]["path"]
+    if (history / "image.png").read_bytes() != old_raw or read_json(history / "generation.json") != old_record:
+        raise ValueError("Replacing a 2D state must preserve its exact original and provenance")
+    # Independent known cells: every new frame was explicitly copied from pose 0.
+    observed = read_json(observations)
+    observed["states"]["orbit"]["source_sha256"] = file_hash(frozen)
+    observed["states"]["orbit"]["frames"] = [copy.deepcopy(observed["states"]["orbit"]["frames"][0]) for _ in range(6)]
+    observed["method"] = "Deliberately frozen independent RGBA fixture; all six actual cells are exact copies of pose 0"
+    frozen_observed = out / "sequence-frozen-observed.json"
+    frozen_observed.write_text(json.dumps(observed, indent=2) + "\n", encoding="utf-8")
+    broken_audit = out / "sequence-frozen-audit"
+    run(tool, ["check", "--run", session, "--observations", frozen_observed, "--out-dir", broken_audit], 2)
+    broken = read_json(broken_audit / "report.json")
+    if (broken["status"] != "fail" or broken["states"]["orbit"]["pixel_status"] != "pass"
+            or "REQUIRED_MOTION_MISSING" not in {issue["code"] for issue in broken["issues"]}):
+        raise ValueError("Frozen motion must fail independently of exact grid and palette")
+    if any(file_hash(path) != sha for path, sha in hashes.items()):
+        raise ValueError("Installed sequence operations changed packaged input files")
+    return {"sequence_without_skeleton": True, "sequence_fixture_status": report["status"],
+            "sequence_unobserved_status": missing["status"], "sequence_frozen_motion_status": broken["status"],
+            "sequence_frozen_pixel_status": broken["states"]["orbit"]["pixel_status"],
+            "sequence_gif_durations_ms": durations, "sequence_exact_cell_export": True,
+            "sequence_history_preserved": True, "sequence_stale_observations_rejected": True,
+            "sequence_example_observer_rejects_changed_art": True, "sequence_inputs_unchanged": True}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, required=True)
@@ -362,6 +496,8 @@ def main():
             raise ValueError("Installed scene contains a rejected layer")
         grid_summary = verify_grid_intervals(layer_output / "final" / "grid_lines.png", (320, 224), 4)
         sprite_summary = verify_sprite_workflow(skill, out)
+        atlas_summary = verify_external_atlas_workflow(skill, out)
+        sequence_summary = verify_sequence_workflow(skill, out)
         original_layer = scene.parent / "layers" / "title.png"
         original_layer_hash = hashlib.sha256(original_layer.read_bytes()).hexdigest()
         broken_input = out / "broken-layer-input"
@@ -393,7 +529,8 @@ def main():
                    "layered_status": layer_summary["status"], "layer_count": len(layer_summary["results"]),
                    "layered_uniform_cells": json.loads((layer_output / "final/report.json").read_text(encoding="utf-8"))["metrics"]["uniform_rgba_cells"],
                    "hidden_damaged_layer_status": rejected["status"], "rejected_final_status": rejected["final"]["status"],
-                   "original_layer_unchanged": True, **palette_summary, **grid_summary, **sprite_summary}
+                   "original_layer_unchanged": True, **palette_summary, **grid_summary, **sprite_summary,
+                   **atlas_summary, **sequence_summary}
         (out / "release-check.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(summary, indent=2))
         return 0

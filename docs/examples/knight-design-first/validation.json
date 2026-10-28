@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-21",
+  "unit_tests": {
+    "status": "pass",
+    "count": 224,
+    "command": "python -m unittest discover -s pixelwright/tests -v"
+  },
+  "portable_packages": {
+    "status": "pass",
+    "installed_release_check": "pass"
+  },
+  "real_image_generation": {
+    "transport": "codex_image_gen",
+    "mock": false,
+    "selected_calls": 4,
+    "total_calls": 11
+  },
+  "blender_integration": {
+    "status": "pass",
+    "version": "5.2.2 LTS",
+    "appearance_meshes": 0
+  },
+  "selected_design_pixel_check": "pass",
+  "sheet_pixel_check": "pass",
+  "artwork_pose_check": "fail",
+  "artistic_review": "changes_needed",
+  "not_verified": [
+    "Live paid invocation of the standalone HTTP wrapper",
+    "Human approval",
+    "Automatic semantic limb-length consistency"
+  ]
+}

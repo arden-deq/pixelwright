@@ -1,0 +1,14 @@
+{
+  "generator": "host built-in image_gen",
+  "generation_calls": {
+    "base": 1,
+    "charge": 1
+  },
+  "raw_path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/mounted-knight-charge-v1/run/raw/charge.png",
+  "tool_output_path": "/Users/namjungduck/.codex/generated_images/01a15cf8-8d52-71b3-8a8d-2cc435109d80/exec-106efee0-6f91-4045-a56e-cccbc6c5b123.png",
+  "raw_size": [
+    2172,
+    724
+  ],
+  "raw_sha256": "22c0cce9493df8b1a9ec4a2f3a75cd41079be57d2ec59ebb4ddf2912a3ee46fb"
+}

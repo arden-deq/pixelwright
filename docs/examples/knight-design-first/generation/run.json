@@ -1,0 +1,20 @@
+{
+  "workflow": "2d-design-first",
+  "name": "2D knight design animated with a bare 3D skeleton",
+  "contract_sha256": "1fb1a4be2452e56f906a39be25263cb2a0497cce9fbbcfefaa6437b0a0a1d3b5",
+  "identity_sha256": "73cd7f2ca1940236e2c71695f5e98a92816b5dc513d35a26fed49c1b16b6263b",
+  "pixel_palette_size": 24,
+  "frame_scale": 4,
+  "audit_scope": "exact_pixel_grid_and_independently_annotated_2d_artwork_not_mesh_silhouette",
+  "limitations": [
+    "Artwork joints and part dimensions require independent manual annotations.",
+    "A valid 3D skeleton does not certify that the generated artwork follows it.",
+    "Cloth, contour quality, identity and occlusion require a separate artistic review."
+  ],
+  "guide_sha256": {
+    "guides/attack-skeleton.png": "ce721cd9f93d6d653755ed0949db7469d7fbf48815f74ffcf5e5eddb4e58e04a",
+    "guides/block-skeleton.png": "cae0175c9d5e3dd7eaf27580612e9c22e5041a5c6c3adc992fc4f397a7726648",
+    "guides/walk-skeleton.png": "d15600cf0b79fda857828fbca67a03ce5c211131e99d7a9821dcf28ec92528c6",
+    "references/design-sheet.png": "61eeb47a4acefc120eb63ab89c02f0f50ad791f855c20c3af234ff7029d61e3d"
+  }
+}

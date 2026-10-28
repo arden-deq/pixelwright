@@ -1,0 +1,805 @@
+{
+  "schema_version": 1,
+  "reviewer": "Codex visual inspection (not human approval)",
+  "method": "Independent visual annotation on fixed native output frames using coordinate diagnostics; no guide keypoints copied; size estimates approximate to one logical cell. Covered anatomy explicitly unverified. These are manual observations, not semantic segmentation.",
+  "contract_sha256": "1fb1a4be2452e56f906a39be25263cb2a0497cce9fbbcfefaa6437b0a0a1d3b5",
+  "source_sha256": {
+    "walk": "27f0153600f1ead5458862a6350c5f02560d7e38cab60009237782abcd88bf54",
+    "attack": "7afb6db7dd3aed443077b8e06c7b469564f82eb3a7016b7c4d1a3426b37faa94",
+    "block": "125cfd0399a77d796788b3c39d902961ad96cb1b958af6ffb7851bfe9c28ce1d"
+  },
+  "animations": {
+    "walk": [
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            39,
+            88
+          ],
+          "ankle_r": [
+            56,
+            104
+          ],
+          "ankle_l": [
+            82,
+            103
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            38,
+            88
+          ],
+          "ankle_r": [
+            56,
+            104
+          ],
+          "ankle_l": [
+            79,
+            102
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            71
+          ],
+          "mace_head": [
+            39,
+            87
+          ],
+          "ankle_r": [
+            60,
+            102
+          ],
+          "ankle_l": [
+            82,
+            106
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            48,
+            71
+          ],
+          "mace_head": [
+            38,
+            87
+          ],
+          "ankle_r": [
+            56,
+            101
+          ],
+          "ankle_l": [
+            80,
+            106
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            71
+          ],
+          "mace_head": [
+            38,
+            87
+          ],
+          "ankle_r": [
+            58,
+            99
+          ],
+          "ankle_l": [
+            81,
+            107
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            39,
+            88
+          ],
+          "ankle_r": [
+            54,
+            103
+          ],
+          "ankle_l": [
+            82,
+            105
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      }
+    ],
+    "attack": [
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            39,
+            89
+          ],
+          "ankle_r": [
+            56,
+            103
+          ],
+          "ankle_l": [
+            82,
+            105
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            67,
+            49
+          ],
+          "pelvis": [
+            64,
+            68
+          ],
+          "hand_r": [
+            45,
+            28
+          ],
+          "mace_head": [
+            51,
+            13
+          ],
+          "ankle_r": [
+            56,
+            104
+          ],
+          "ankle_l": [
+            83,
+            107
+          ],
+          "shield_top": [
+            84,
+            55
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            48
+          ],
+          "pelvis": [
+            65,
+            67
+          ],
+          "hand_r": [
+            62,
+            27
+          ],
+          "mace_head": [
+            80,
+            20
+          ],
+          "ankle_r": [
+            56,
+            104
+          ],
+          "ankle_l": [
+            86,
+            107
+          ],
+          "shield_top": [
+            84,
+            56
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            49
+          ],
+          "pelvis": [
+            64,
+            67
+          ],
+          "hand_r": [
+            43,
+            45
+          ],
+          "mace_head": [
+            25,
+            42
+          ],
+          "ankle_r": [
+            55,
+            103
+          ],
+          "ankle_l": [
+            83,
+            107
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            14
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            59
+          ],
+          "pelvis": [
+            64,
+            77
+          ],
+          "hand_r": [
+            44,
+            81
+          ],
+          "mace_head": [
+            34,
+            95
+          ],
+          "ankle_r": [
+            54,
+            102
+          ],
+          "ankle_l": [
+            85,
+            106
+          ],
+          "shield_top": [
+            86,
+            60
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            11
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            47
+          ],
+          "pelvis": [
+            64,
+            66
+          ],
+          "hand_r": [
+            48,
+            74
+          ],
+          "mace_head": [
+            37,
+            87
+          ],
+          "ankle_r": [
+            56,
+            105
+          ],
+          "ankle_l": [
+            82,
+            107
+          ],
+          "shield_top": [
+            84,
+            55
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      }
+    ],
+    "block": [
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            39,
+            88
+          ],
+          "ankle_r": [
+            56,
+            103
+          ],
+          "ankle_l": [
+            82,
+            105
+          ],
+          "shield_top": [
+            84,
+            53
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            39,
+            88
+          ],
+          "ankle_r": [
+            56,
+            103
+          ],
+          "ankle_l": [
+            82,
+            105
+          ],
+          "shield_top": [
+            79,
+            38
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": null,
+          "pelvis": null,
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            39,
+            88
+          ],
+          "ankle_r": [
+            56,
+            103
+          ],
+          "ankle_l": [
+            82,
+            105
+          ],
+          "shield_top": [
+            67,
+            44
+          ]
+        },
+        "part_dimensions": {
+          "helmet": null,
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": null,
+          "pelvis": [
+            64,
+            66
+          ],
+          "hand_r": [
+            49,
+            73
+          ],
+          "mace_head": [
+            39,
+            89
+          ],
+          "ankle_r": [
+            56,
+            105
+          ],
+          "ankle_l": [
+            83,
+            107
+          ],
+          "shield_top": [
+            60,
+            41
+          ]
+        },
+        "part_dimensions": {
+          "helmet": null,
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": null,
+          "pelvis": null,
+          "hand_r": [
+            49,
+            73
+          ],
+          "mace_head": [
+            39,
+            88
+          ],
+          "ankle_r": [
+            56,
+            103
+          ],
+          "ankle_l": [
+            82,
+            105
+          ],
+          "shield_top": [
+            66,
+            44
+          ]
+        },
+        "part_dimensions": {
+          "helmet": null,
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      },
+      {
+        "joints": {
+          "neck": [
+            65,
+            46
+          ],
+          "pelvis": [
+            64,
+            65
+          ],
+          "hand_r": [
+            49,
+            72
+          ],
+          "mace_head": [
+            39,
+            88
+          ],
+          "ankle_r": [
+            56,
+            103
+          ],
+          "ankle_l": [
+            82,
+            105
+          ],
+          "shield_top": [
+            84,
+            55
+          ]
+        },
+        "part_dimensions": {
+          "helmet": [
+            12,
+            16
+          ],
+          "mace_head": [
+            10
+          ],
+          "shield_long_axis": [
+            30
+          ]
+        },
+        "observation_note": "Visual measurements from native 2D export, approximate to one logical pixel. Hidden neck/pelvis or covered helmet dimensions left unverified."
+      }
+    ]
+  }
+}

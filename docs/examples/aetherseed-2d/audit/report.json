@@ -1,0 +1,1946 @@
+{
+  "schema_version": 1,
+  "tool": "Pixelwright 2D sequence",
+  "version": "0.6.2",
+  "status": "fail",
+  "technical_status": "fail",
+  "skeleton_required": false,
+  "scope": "frozen_2d_contract_and_independently_supplied_artwork_observations",
+  "human_approval_recorded": false,
+  "contract_sha256": "2c4facee8d5ea7f2c04575e4856b5843dc2612e725d5da74a5144b68fdec6e8e",
+  "reference_sha256": "d3b1ae6c6617c09f07a5d8a6837c5aa76114741df3641d0b351c4e65c646b8e1",
+  "observations_sha256": "a2db8c340163f2582f810ac49b88b5df4d3b391766620aa691e78c9382a36ca3",
+  "states": {
+    "hover": {
+      "source_sha256": "effd1f4fb2e43cce76c4735c853f40535c6a194cb042af8456d3931787cd94d4",
+      "derivation": {
+        "source_size": [
+          1536,
+          1024
+        ],
+        "logical_size": [
+          192,
+          128
+        ],
+        "mode": "project",
+        "original_grid_status": "not_certified_projection_source",
+        "sampling": "nearest_whole_canvas",
+        "native_input_has_no_measurable_within_cell_fidelity": false
+      },
+      "pixel_status": "pass",
+      "frames": [
+        {
+          "frame": 0,
+          "area_ratio": 0.97677793904209,
+          "bad_color_fraction": 0.031203566121842496,
+          "parts": {
+            "core": {
+              "area_ratio": 0.833729216152019,
+              "color_overlap": 0.6577880639638359,
+              "shape_match": 0.8079625292740047,
+              "design_match": 0.10601719197707736,
+              "measurements": {
+                "width": 19.0
+              }
+            },
+            "left_vane": {
+              "area_ratio": 1.3516483516483517,
+              "color_overlap": 0.49271866345037074,
+              "shape_match": 0.6356589147286822,
+              "design_match": 0.12041884816753927,
+              "measurements": {
+                "span": 14.866068747318506
+              }
+            },
+            "right_vane": {
+              "area_ratio": 1.054054054054054,
+              "color_overlap": 0.5103950103950105,
+              "shape_match": 0.7078651685393258,
+              "design_match": 0.09352517985611511,
+              "measurements": {
+                "span": 15.033296378372908
+              }
+            },
+            "tail": {
+              "area_ratio": 1.174757281553398,
+              "color_overlap": 0.6171066356414988,
+              "shape_match": 0.6893939393939394,
+              "design_match": 0.13333333333333333,
+              "measurements": {}
+            }
+          }
+        },
+        {
+          "frame": 1,
+          "area_ratio": 0.9564586357039188,
+          "bad_color_fraction": 0.019726858877086494,
+          "parts": {
+            "core": {
+              "area_ratio": 0.7980997624703088,
+              "color_overlap": 0.7104612034837688,
+              "shape_match": 0.7918660287081339,
+              "design_match": 0.09393063583815028,
+              "measurements": {
+                "width": 18.0
+              }
+            },
+            "left_vane": {
+              "area_ratio": 1.3846153846153846,
+              "color_overlap": 0.4896214896214896,
+              "shape_match": 0.6692307692307692,
+              "design_match": 0.11282051282051282,
+              "measurements": {
+                "span": 16.278820596099706
+              }
+            },
+            "right_vane": {
+              "area_ratio": 1.1081081081081081,
+              "color_overlap": 0.4100197758734344,
+              "shape_match": 0.7613636363636364,
+              "design_match": 0.07692307692307693,
+              "measurements": {
+                "span": 15.132745950421556
+              }
+            },
+            "tail": {
+              "area_ratio": 1.116504854368932,
+              "color_overlap": 0.4908400168847615,
+              "shape_match": 0.7642276422764228,
+              "design_match": 0.1595744680851064,
+              "measurements": {}
+            }
+          }
+        },
+        {
+          "frame": 2,
+          "area_ratio": 0.9637155297532656,
+          "bad_color_fraction": 0.025602409638554216,
+          "parts": {
+            "core": {
+              "area_ratio": 0.8076009501187649,
+              "color_overlap": 0.6592357132876904,
+              "shape_match": 0.789598108747045,
+              "design_match": 0.09182209469153516,
+              "measurements": {
+                "width": 17.0
+              }
+            },
+            "left_vane": {
+              "area_ratio": 1.4285714285714286,
+              "color_overlap": 0.6010989010989011,
+              "shape_match": 0.5942028985507246,
+              "design_match": 0.11282051282051282,
+              "measurements": {
+                "span": 17.46424919657298
+              }
+            },
+            "right_vane": {
+              "area_ratio": 1.2432432432432432,
+              "color_overlap": 0.4092244418331375,
+              "shape_match": 0.7010309278350515,
+              "design_match": 0.09210526315789473,
+              "measurements": {
+                "span": 16.1245154965971
+              }
+            },
+            "tail": {
+              "area_ratio": 0.9902912621359223,
+              "color_overlap": 0.5762421473443746,
+              "shape_match": 0.6532258064516129,
+              "design_match": 0.10326086956521739,
+              "measurements": {}
+            }
+          }
+        },
+        {
+          "frame": 3,
+          "area_ratio": 0.9564586357039188,
+          "bad_color_fraction": 0.02276176024279211,
+          "parts": {
+            "core": {
+              "area_ratio": 0.8099762470308789,
+              "color_overlap": 0.6899297162878497,
+              "shape_match": 0.8004750593824228,
+              "design_match": 0.08547008547008547,
+              "measurements": {
+                "width": 18.0
+              }
+            },
+            "left_vane": {
+              "area_ratio": 1.4175824175824177,
+              "color_overlap": 0.5176761223272851,
+              "shape_match": 0.6417910447761194,
+              "design_match": 0.10552763819095477,
+              "measurements": {
+                "span": 15.811388300841896
+              }
+            },
+            "right_vane": {
+              "area_ratio": 1.135135135135135,
+              "color_overlap": 0.547940797940798,
+              "shape_match": 0.717391304347826,
+              "design_match": 0.09859154929577464,
+              "measurements": {
+                "span": 14.142135623730951
+              }
+            },
+            "tail": {
+              "area_ratio": 1.0194174757281553,
+              "color_overlap": 0.5753120665742025,
+              "shape_match": 0.6910569105691057,
+              "design_match": 0.11602209944751381,
+              "measurements": {}
+            }
+          }
+        },
+        {
+          "frame": 4,
+          "area_ratio": 1.0478955007256894,
+          "bad_color_fraction": 0.023545706371191136,
+          "parts": {
+            "core": {
+              "area_ratio": 0.8646080760095012,
+              "color_overlap": 0.665931455717679,
+              "shape_match": 0.8004587155963303,
+              "design_match": 0.09027777777777778,
+              "measurements": {
+                "width": 19.0
+              }
+            },
+            "left_vane": {
+              "area_ratio": 1.3736263736263736,
+              "color_overlap": 0.5546373626373626,
+              "shape_match": 0.6,
+              "design_match": 0.1134020618556701,
+              "measurements": {
+                "span": 16.1245154965971
+              }
+            },
+            "right_vane": {
+              "area_ratio": 0.9324324324324325,
+              "color_overlap": 0.4490795142969056,
+              "shape_match": 0.6705882352941176,
+              "design_match": 0.07518796992481203,
+              "measurements": {
+                "span": 13.0
+              }
+            },
+            "tail": {
+              "area_ratio": 1.5922330097087378,
+              "color_overlap": 0.5602652143026284,
+              "shape_match": 0.5647058823529412,
+              "design_match": 0.12236286919831224,
+              "measurements": {}
+            }
+          }
+        },
+        {
+          "frame": 5,
+          "area_ratio": 0.988388969521045,
+          "bad_color_fraction": 0.022026431718061675,
+          "parts": {
+            "core": {
+              "area_ratio": 0.8076009501187649,
+              "color_overlap": 0.6945298309347492,
+              "shape_match": 0.7971360381861575,
+              "design_match": 0.10144927536231885,
+              "measurements": {
+                "width": 18.0
+              }
+            },
+            "left_vane": {
+              "area_ratio": 1.3846153846153846,
+              "color_overlap": 0.5213675213675214,
+              "shape_match": 0.6074074074074074,
+              "design_match": 0.10714285714285714,
+              "measurements": {
+                "span": 14.7648230602334
+              }
+            },
+            "right_vane": {
+              "area_ratio": 1.162162162162162,
+              "color_overlap": 0.5609679446888749,
+              "shape_match": 0.6842105263157895,
+              "design_match": 0.08108108108108109,
+              "measurements": {
+                "span": 13.601470508735444
+              }
+            },
+            "tail": {
+              "area_ratio": 1.2524271844660195,
+              "color_overlap": 0.5448182433958004,
+              "shape_match": 0.6382978723404256,
+              "design_match": 0.14285714285714285,
+              "measurements": {}
+            }
+          }
+        }
+      ],
+      "motion": {
+        "landmarks": {
+          "eye": {
+            "travel": 7.0710678118654755,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  8.333333333333334,
+                  -33.333333333333336
+                ],
+                "speed": 34.35921354681384
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  0.0,
+                  -25.0
+                ],
+                "speed": 25.0
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  0.0,
+                  16.666666666666668
+                ],
+                "speed": 16.666666666666668
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  41.66666666666667
+                ],
+                "speed": 42.49182927993988
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  8.333333333333334,
+                  -33.333333333333336
+                ],
+                "speed": 34.35921354681384
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  33.333333333333336
+                ],
+                "speed": 34.35921354681384
+              }
+            ],
+            "accelerations": [
+              98.20927516479829,
+              347.2222222222223,
+              219.60261528947083,
+              640.2461428675616,
+              572.653559113564,
+              572.653559113564
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "left_tip": {
+            "travel": 12.165525060596439,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  25.0,
+                  -75.0
+                ],
+                "speed": 79.05694150420949
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  -25.0
+                ],
+                "speed": 26.352313834736496
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  -16.666666666666668,
+                  41.66666666666667
+                ],
+                "speed": 44.87637339278754
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  0.0,
+                  41.66666666666667
+                ],
+                "speed": 41.66666666666667
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  -41.66666666666667
+                ],
+                "speed": 44.87637339278754
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -16.666666666666668,
+                  58.333333333333336
+                ],
+                "speed": 60.66758241067099
+              }
+            ],
+            "accelerations": [
+              500.7710104811096,
+              559.8790102985105,
+              138.8888888888889,
+              708.1971546656647,
+              878.4104611578832,
+              1164.1010148777925
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "right_tip": {
+            "travel": 10.0,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  0.0,
+                  -50.0
+                ],
+                "speed": 50.0
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  8.333333333333334
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  16.666666666666668
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  58.333333333333336
+                ],
+                "speed": 58.92556509887896
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  8.333333333333334,
+                  -58.333333333333336
+                ],
+                "speed": 58.92556509887896
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  25.0
+                ],
+                "speed": 26.352313834736496
+              }
+            ],
+            "accelerations": [
+              505.5631867555916,
+              219.6026152894708,
+              347.2222222222223,
+              982.0927516479827,
+              708.1971546656647,
+              628.8461901484317
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "tail_tip": {
+            "travel": 18.788294228055936,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  50.0,
+                  -33.333333333333336
+                ],
+                "speed": 60.092521257733154
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  91.66666666666667,
+                  -33.333333333333336
+                ],
+                "speed": 97.53916592266356
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  -33.333333333333336,
+                  8.333333333333334
+                ],
+                "speed": 34.35921354681384
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  -75.0,
+                  50.0
+                ],
+                "speed": 90.13878188659973
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  0.0,
+                  -33.333333333333336
+                ],
+                "speed": 33.333333333333336
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -33.333333333333336,
+                  41.66666666666667
+                ],
+                "speed": 53.35936864527374
+              }
+            ],
+            "accelerations": [
+              347.2222222222223,
+              1098.013076447354,
+              491.0463758239913,
+              934.2794477134522,
+              683.9484584580629,
+              934.2794477134522
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "left_root": {
+            "travel": 7.615773105863909,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  8.333333333333334,
+                  -25.0
+                ],
+                "speed": 26.352313834736496
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  -25.0
+                ],
+                "speed": 30.046260628866577
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  -16.666666666666668,
+                  8.333333333333334
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  50.0
+                ],
+                "speed": 50.68968775248516
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  -25.0
+                ],
+                "speed": 30.046260628866577
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -16.666666666666668,
+                  16.666666666666668
+                ],
+                "speed": 23.570226039551585
+              }
+            ],
+            "accelerations": [
+              69.44444444444446,
+              392.8371006591931,
+              354.0985773328323,
+              658.8078458684124,
+              444.6614053772812,
+              404.92721491981257
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "core_left": {
+            "travel": 7.615773105863909,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  8.333333333333334,
+                  -25.0
+                ],
+                "speed": 26.352313834736496
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  -25.0
+                ],
+                "speed": 30.046260628866577
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  -16.666666666666668,
+                  8.333333333333334
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  50.0
+                ],
+                "speed": 50.68968775248516
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  -25.0
+                ],
+                "speed": 30.046260628866577
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -16.666666666666668,
+                  16.666666666666668
+                ],
+                "speed": 23.570226039551585
+              }
+            ],
+            "accelerations": [
+              69.44444444444446,
+              392.8371006591931,
+              354.0985773328323,
+              658.8078458684124,
+              444.6614053772812,
+              404.92721491981257
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "right_root": {
+            "travel": 8.246211251235321,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  0.0,
+                  -33.333333333333336
+                ],
+                "speed": 33.333333333333336
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  8.333333333333334,
+                  -16.666666666666668
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  16.666666666666668
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  50.0
+                ],
+                "speed": 50.68968775248516
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  -50.0
+                ],
+                "speed": 52.70462766947299
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  33.333333333333336
+                ],
+                "speed": 34.35921354681384
+              }
+            ],
+            "accelerations": [
+              155.28249843748543,
+              310.56499687497086,
+              277.77777777777777,
+              858.980338670346,
+              725.0212853410105,
+              559.8790102985105
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "core_right": {
+            "travel": 8.246211251235321,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.12,
+                "velocity": [
+                  0.0,
+                  -33.333333333333336
+                ],
+                "speed": 33.333333333333336
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.12,
+                "velocity": [
+                  8.333333333333334,
+                  -16.666666666666668
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  16.666666666666668
+                ],
+                "speed": 18.63389981249825
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  50.0
+                ],
+                "speed": 50.68968775248516
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.12,
+                "velocity": [
+                  16.666666666666668,
+                  -50.0
+                ],
+                "speed": 52.70462766947299
+              },
+              {
+                "from": 5,
+                "to": 0,
+                "seconds": 0.12,
+                "velocity": [
+                  -8.333333333333334,
+                  33.333333333333336
+                ],
+                "speed": 34.35921354681384
+              }
+            ],
+            "accelerations": [
+              155.28249843748543,
+              310.56499687497086,
+              277.77777777777777,
+              858.980338670346,
+              725.0212853410105,
+              559.8790102985105
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          }
+        },
+        "contacts": []
+      },
+      "art_review": {
+        "status": "changes_needed",
+        "reviewer": "Codex artwork inspection; no user approval",
+        "observations": [
+          "The teal core, cream eye, copper vanes and violet tail remain recognizable across all six frames.",
+          "The tail jumps between left and right silhouettes; the high pose to following pose and the loop need timing review.",
+          "Core facet patterns and the eye placement change across poses. Vane and tail visible areas need redraw or justified occlusion review.",
+          "The exported 64-cell art is a fixed projection of a nongrid raw image. Uniform output cells do not prove raw pixel quality."
+        ]
+      },
+      "outputs": {
+        "native": "hover/native.png",
+        "rendered": "hover/rendered.png",
+        "grid": "hover/pixel-audit/sheet/grid_overlay.png",
+        "observations": "hover/observation-overlay.png",
+        "gif": "hover/pixel-audit/animations/hover.gif"
+      },
+      "status": "fail"
+    }
+  },
+  "issues": [
+    {
+      "code": "BASELINE_SHIFT",
+      "severity": "info",
+      "detail": "Lowest visible row varies across the sequence: [46, 49, 53, 54]. Intentional for jumps or bobbing; otherwise the sprite may jitter.",
+      "animation": "hover",
+      "state": "hover"
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.833729216152019,
+        "color_overlap": 0.6577880639638359,
+        "shape_match": 0.8079625292740047,
+        "design_match": 0.10601719197707736,
+        "measurements": {
+          "width": 19.0
+        }
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.833729216152019,
+        "color_overlap": 0.6577880639638359,
+        "shape_match": 0.8079625292740047,
+        "design_match": 0.10601719197707736,
+        "measurements": {
+          "width": 19.0
+        }
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3516483516483517,
+        "color_overlap": 0.49271866345037074,
+        "shape_match": 0.6356589147286822,
+        "design_match": 0.12041884816753927,
+        "measurements": {
+          "span": 14.866068747318506
+        }
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3516483516483517,
+        "color_overlap": 0.49271866345037074,
+        "shape_match": 0.6356589147286822,
+        "design_match": 0.12041884816753927,
+        "measurements": {
+          "span": 14.866068747318506
+        }
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3516483516483517,
+        "color_overlap": 0.49271866345037074,
+        "shape_match": 0.6356589147286822,
+        "design_match": 0.12041884816753927,
+        "measurements": {
+          "span": 14.866068747318506
+        }
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.054054054054054,
+        "color_overlap": 0.5103950103950105,
+        "shape_match": 0.7078651685393258,
+        "design_match": 0.09352517985611511,
+        "measurements": {
+          "span": 15.033296378372908
+        }
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.054054054054054,
+        "color_overlap": 0.5103950103950105,
+        "shape_match": 0.7078651685393258,
+        "design_match": 0.09352517985611511,
+        "measurements": {
+          "span": 15.033296378372908
+        }
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.174757281553398,
+        "color_overlap": 0.6171066356414988,
+        "shape_match": 0.6893939393939394,
+        "design_match": 0.13333333333333333,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.174757281553398,
+        "color_overlap": 0.6171066356414988,
+        "shape_match": 0.6893939393939394,
+        "design_match": 0.13333333333333333,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 0
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.7980997624703088,
+        "color_overlap": 0.7104612034837688,
+        "shape_match": 0.7918660287081339,
+        "design_match": 0.09393063583815028,
+        "measurements": {
+          "width": 18.0
+        }
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.7980997624703088,
+        "color_overlap": 0.7104612034837688,
+        "shape_match": 0.7918660287081339,
+        "design_match": 0.09393063583815028,
+        "measurements": {
+          "width": 18.0
+        }
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3846153846153846,
+        "color_overlap": 0.4896214896214896,
+        "shape_match": 0.6692307692307692,
+        "design_match": 0.11282051282051282,
+        "measurements": {
+          "span": 16.278820596099706
+        }
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3846153846153846,
+        "color_overlap": 0.4896214896214896,
+        "shape_match": 0.6692307692307692,
+        "design_match": 0.11282051282051282,
+        "measurements": {
+          "span": 16.278820596099706
+        }
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3846153846153846,
+        "color_overlap": 0.4896214896214896,
+        "shape_match": 0.6692307692307692,
+        "design_match": 0.11282051282051282,
+        "measurements": {
+          "span": 16.278820596099706
+        }
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.1081081081081081,
+        "color_overlap": 0.4100197758734344,
+        "shape_match": 0.7613636363636364,
+        "design_match": 0.07692307692307693,
+        "measurements": {
+          "span": 15.132745950421556
+        }
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.1081081081081081,
+        "color_overlap": 0.4100197758734344,
+        "shape_match": 0.7613636363636364,
+        "design_match": 0.07692307692307693,
+        "measurements": {
+          "span": 15.132745950421556
+        }
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.116504854368932,
+        "color_overlap": 0.4908400168847615,
+        "shape_match": 0.7642276422764228,
+        "design_match": 0.1595744680851064,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.116504854368932,
+        "color_overlap": 0.4908400168847615,
+        "shape_match": 0.7642276422764228,
+        "design_match": 0.1595744680851064,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 1
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8076009501187649,
+        "color_overlap": 0.6592357132876904,
+        "shape_match": 0.789598108747045,
+        "design_match": 0.09182209469153516,
+        "measurements": {
+          "width": 17.0
+        }
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8076009501187649,
+        "color_overlap": 0.6592357132876904,
+        "shape_match": 0.789598108747045,
+        "design_match": 0.09182209469153516,
+        "measurements": {
+          "width": 17.0
+        }
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "core",
+      "measurement": "width",
+      "ratio": 0.85,
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.4285714285714286,
+        "color_overlap": 0.6010989010989011,
+        "shape_match": 0.5942028985507246,
+        "design_match": 0.11282051282051282,
+        "measurements": {
+          "span": 17.46424919657298
+        }
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.4285714285714286,
+        "color_overlap": 0.6010989010989011,
+        "shape_match": 0.5942028985507246,
+        "design_match": 0.11282051282051282,
+        "measurements": {
+          "span": 17.46424919657298
+        }
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.4285714285714286,
+        "color_overlap": 0.6010989010989011,
+        "shape_match": 0.5942028985507246,
+        "design_match": 0.11282051282051282,
+        "measurements": {
+          "span": 17.46424919657298
+        }
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.2432432432432432,
+        "color_overlap": 0.4092244418331375,
+        "shape_match": 0.7010309278350515,
+        "design_match": 0.09210526315789473,
+        "measurements": {
+          "span": 16.1245154965971
+        }
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.2432432432432432,
+        "color_overlap": 0.4092244418331375,
+        "shape_match": 0.7010309278350515,
+        "design_match": 0.09210526315789473,
+        "measurements": {
+          "span": 16.1245154965971
+        }
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 0.9902912621359223,
+        "color_overlap": 0.5762421473443746,
+        "shape_match": 0.6532258064516129,
+        "design_match": 0.10326086956521739,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 0.9902912621359223,
+        "color_overlap": 0.5762421473443746,
+        "shape_match": 0.6532258064516129,
+        "design_match": 0.10326086956521739,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_RATIO_CHANGED",
+      "severity": "fail",
+      "detail": "Relative part proportions changed.",
+      "ratio": "left_to_core",
+      "reference": 0.8139410298049853,
+      "measured": 1.0273087762689987,
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_RATIO_CHANGED",
+      "severity": "fail",
+      "detail": "Relative part proportions changed.",
+      "ratio": "right_to_core",
+      "reference": 0.7566372975210778,
+      "measured": 0.9485009115645352,
+      "state": "hover",
+      "frame": 2
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8099762470308789,
+        "color_overlap": 0.6899297162878497,
+        "shape_match": 0.8004750593824228,
+        "design_match": 0.08547008547008547,
+        "measurements": {
+          "width": 18.0
+        }
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8099762470308789,
+        "color_overlap": 0.6899297162878497,
+        "shape_match": 0.8004750593824228,
+        "design_match": 0.08547008547008547,
+        "measurements": {
+          "width": 18.0
+        }
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.4175824175824177,
+        "color_overlap": 0.5176761223272851,
+        "shape_match": 0.6417910447761194,
+        "design_match": 0.10552763819095477,
+        "measurements": {
+          "span": 15.811388300841896
+        }
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.4175824175824177,
+        "color_overlap": 0.5176761223272851,
+        "shape_match": 0.6417910447761194,
+        "design_match": 0.10552763819095477,
+        "measurements": {
+          "span": 15.811388300841896
+        }
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.4175824175824177,
+        "color_overlap": 0.5176761223272851,
+        "shape_match": 0.6417910447761194,
+        "design_match": 0.10552763819095477,
+        "measurements": {
+          "span": 15.811388300841896
+        }
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.135135135135135,
+        "color_overlap": 0.547940797940798,
+        "shape_match": 0.717391304347826,
+        "design_match": 0.09859154929577464,
+        "measurements": {
+          "span": 14.142135623730951
+        }
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.135135135135135,
+        "color_overlap": 0.547940797940798,
+        "shape_match": 0.717391304347826,
+        "design_match": 0.09859154929577464,
+        "measurements": {
+          "span": 14.142135623730951
+        }
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.0194174757281553,
+        "color_overlap": 0.5753120665742025,
+        "shape_match": 0.6910569105691057,
+        "design_match": 0.11602209944751381,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.0194174757281553,
+        "color_overlap": 0.5753120665742025,
+        "shape_match": 0.6910569105691057,
+        "design_match": 0.11602209944751381,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 3
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8646080760095012,
+        "color_overlap": 0.665931455717679,
+        "shape_match": 0.8004587155963303,
+        "design_match": 0.09027777777777778,
+        "measurements": {
+          "width": 19.0
+        }
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8646080760095012,
+        "color_overlap": 0.665931455717679,
+        "shape_match": 0.8004587155963303,
+        "design_match": 0.09027777777777778,
+        "measurements": {
+          "width": 19.0
+        }
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3736263736263736,
+        "color_overlap": 0.5546373626373626,
+        "shape_match": 0.6,
+        "design_match": 0.1134020618556701,
+        "measurements": {
+          "span": 16.1245154965971
+        }
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3736263736263736,
+        "color_overlap": 0.5546373626373626,
+        "shape_match": 0.6,
+        "design_match": 0.1134020618556701,
+        "measurements": {
+          "span": 16.1245154965971
+        }
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3736263736263736,
+        "color_overlap": 0.5546373626373626,
+        "shape_match": 0.6,
+        "design_match": 0.1134020618556701,
+        "measurements": {
+          "span": 16.1245154965971
+        }
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 0.9324324324324325,
+        "color_overlap": 0.4490795142969056,
+        "shape_match": 0.6705882352941176,
+        "design_match": 0.07518796992481203,
+        "measurements": {
+          "span": 13.0
+        }
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 0.9324324324324325,
+        "color_overlap": 0.4490795142969056,
+        "shape_match": 0.6705882352941176,
+        "design_match": 0.07518796992481203,
+        "measurements": {
+          "span": 13.0
+        }
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.5922330097087378,
+        "color_overlap": 0.5602652143026284,
+        "shape_match": 0.5647058823529412,
+        "design_match": 0.12236286919831224,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.5922330097087378,
+        "color_overlap": 0.5602652143026284,
+        "shape_match": 0.5647058823529412,
+        "design_match": 0.12236286919831224,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.5922330097087378,
+        "color_overlap": 0.5602652143026284,
+        "shape_match": 0.5647058823529412,
+        "design_match": 0.12236286919831224,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 4
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8076009501187649,
+        "color_overlap": 0.6945298309347492,
+        "shape_match": 0.7971360381861575,
+        "design_match": 0.10144927536231885,
+        "measurements": {
+          "width": 18.0
+        }
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "core",
+      "metrics": {
+        "area_ratio": 0.8076009501187649,
+        "color_overlap": 0.6945298309347492,
+        "shape_match": 0.7971360381861575,
+        "design_match": 0.10144927536231885,
+        "measurements": {
+          "width": 18.0
+        }
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3846153846153846,
+        "color_overlap": 0.5213675213675214,
+        "shape_match": 0.6074074074074074,
+        "design_match": 0.10714285714285714,
+        "measurements": {
+          "span": 14.7648230602334
+        }
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3846153846153846,
+        "color_overlap": 0.5213675213675214,
+        "shape_match": 0.6074074074074074,
+        "design_match": 0.10714285714285714,
+        "measurements": {
+          "span": 14.7648230602334
+        }
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "left_vane",
+      "metrics": {
+        "area_ratio": 1.3846153846153846,
+        "color_overlap": 0.5213675213675214,
+        "shape_match": 0.6074074074074074,
+        "design_match": 0.10714285714285714,
+        "measurements": {
+          "span": 14.7648230602334
+        }
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.162162162162162,
+        "color_overlap": 0.5609679446888749,
+        "shape_match": 0.6842105263157895,
+        "design_match": 0.08108108108108109,
+        "measurements": {
+          "span": 13.601470508735444
+        }
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "right_vane",
+      "metrics": {
+        "area_ratio": 1.162162162162162,
+        "color_overlap": 0.5609679446888749,
+        "shape_match": 0.6842105263157895,
+        "design_match": 0.08108108108108109,
+        "measurements": {
+          "span": 13.601470508735444
+        }
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.2524271844660195,
+        "color_overlap": 0.5448182433958004,
+        "shape_match": 0.6382978723404256,
+        "design_match": 0.14285714285714285,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "tail",
+      "metrics": {
+        "area_ratio": 1.2524271844660195,
+        "color_overlap": 0.5448182433958004,
+        "shape_match": 0.6382978723404256,
+        "design_match": 0.14285714285714285,
+        "measurements": {}
+      },
+      "state": "hover",
+      "frame": 5
+    },
+    {
+      "code": "MOTION_SPEED_EXCEEDED",
+      "severity": "fail",
+      "detail": "Time-aware landmark speed exceeds the contract.",
+      "state": "hover",
+      "landmark": "eye",
+      "frame": 0,
+      "next_frame": 1,
+      "speed": 34.35921354681384,
+      "loop_boundary": false
+    },
+    {
+      "code": "MOTION_SPEED_EXCEEDED",
+      "severity": "fail",
+      "detail": "Time-aware landmark speed exceeds the contract.",
+      "state": "hover",
+      "landmark": "eye",
+      "frame": 3,
+      "next_frame": 4,
+      "speed": 42.49182927993988,
+      "loop_boundary": false
+    },
+    {
+      "code": "MOTION_SPEED_EXCEEDED",
+      "severity": "fail",
+      "detail": "Time-aware landmark speed exceeds the contract.",
+      "state": "hover",
+      "landmark": "eye",
+      "frame": 4,
+      "next_frame": 5,
+      "speed": 34.35921354681384,
+      "loop_boundary": false
+    },
+    {
+      "code": "MOTION_SPEED_EXCEEDED",
+      "severity": "fail",
+      "detail": "Time-aware landmark speed exceeds the contract.",
+      "state": "hover",
+      "landmark": "eye",
+      "frame": 5,
+      "next_frame": 0,
+      "speed": 34.35921354681384,
+      "loop_boundary": true
+    },
+    {
+      "code": "MOTION_SPEED_EXCEEDED",
+      "severity": "fail",
+      "detail": "Time-aware landmark speed exceeds the contract.",
+      "state": "hover",
+      "landmark": "left_tip",
+      "frame": 0,
+      "next_frame": 1,
+      "speed": 79.05694150420949,
+      "loop_boundary": false
+    },
+    {
+      "code": "MOTION_SPEED_EXCEEDED",
+      "severity": "fail",
+      "detail": "Time-aware landmark speed exceeds the contract.",
+      "state": "hover",
+      "landmark": "tail_tip",
+      "frame": 1,
+      "next_frame": 2,
+      "speed": 97.53916592266356,
+      "loop_boundary": false
+    },
+    {
+      "code": "MOTION_SPEED_EXCEEDED",
+      "severity": "fail",
+      "detail": "Time-aware landmark speed exceeds the contract.",
+      "state": "hover",
+      "landmark": "tail_tip",
+      "frame": 3,
+      "next_frame": 4,
+      "speed": 90.13878188659973,
+      "loop_boundary": false
+    },
+    {
+      "code": "ART_CHANGES_NEEDED",
+      "severity": "review",
+      "detail": "Review identity, contours, timing, contact and intended movement separately.",
+      "state": "hover"
+    }
+  ],
+  "issue_counts": {
+    "fail": 65,
+    "review": 1,
+    "info": 1
+  },
+  "limitations": [
+    "Named part masks and features are supplied observations, not automatic semantic recognition.",
+    "Part area, rotation-only shape/pattern and color checks do not prove identity or natural movement.",
+    "Foreshortening, occlusion, flexible parts and pose-dependent shading require a recorded visual review.",
+    "Projection is a declared derivative; a compliant exported PNG does not certify the raw generator's pixel grid."
+  ]
+}

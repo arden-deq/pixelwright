@@ -1,0 +1,2847 @@
+{
+  "schema_version": 1,
+  "tool": "Pixelwright 2D sequence",
+  "version": "0.6.2",
+  "status": "fail",
+  "technical_status": "fail",
+  "skeleton_required": false,
+  "scope": "frozen_2d_contract_and_independently_supplied_artwork_observations",
+  "human_approval_recorded": false,
+  "contract_sha256": "3ccb59a911eb510350434fa145a5a8d09d3ba2ff0c3698957649112ca8458401",
+  "reference_sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+  "observations_sha256": "3366856a626de7836bcb73396afc0a22d8fcb3591996e785ec0fe93eb489aa76",
+  "states": {
+    "walk": {
+      "source_sha256": "dc0fe8307bfc78651c3903cca656b4156553eae7b4f8e69b1f021dfc6b57888c",
+      "derivation": {
+        "source_size": [
+          1774,
+          887
+        ],
+        "logical_size": [
+          512,
+          256
+        ],
+        "mode": "project",
+        "original_grid_status": "not_certified_projection_source",
+        "sampling": "nearest_whole_canvas",
+        "native_input_has_no_measurable_within_cell_fidelity": false
+      },
+      "pixel_status": "pass",
+      "frames": [
+        {
+          "frame": 0,
+          "area_ratio": 1.208902772354549,
+          "bad_color_fraction": 0.01065891472868217,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.4883720930232558,
+              "color_overlap": 0.7497274709302325,
+              "shape_match": 0.671875,
+              "design_match": 0.08951406649616368,
+              "measurements": {
+                "height": 21.587033144922902,
+                "width": 13.038404810405298
+              }
+            },
+            "shield": {
+              "area_ratio": 1.2593406593406593,
+              "color_overlap": 0.8333237443185088,
+              "shape_match": 0.7909407665505227,
+              "design_match": 0.14222222222222222,
+              "measurements": {
+                "height": 35.22782990761707
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.358695652173913,
+              "color_overlap": 0.7414782608695653,
+              "shape_match": 0.736,
+              "design_match": 0.09090909090909091,
+              "measurements": {
+                "span": 12.041594578792296
+              }
+            },
+            "character": {
+              "area_ratio": 1.1628664495114007,
+              "color_overlap": 0.8148720943317609,
+              "shape_match": 0.6321179844326096,
+              "design_match": 0.03885267275097783,
+              "measurements": {
+                "near_shin": 18.24828759089466
+              }
+            }
+          }
+        },
+        {
+          "frame": 1,
+          "area_ratio": 1.2323311206559937,
+          "bad_color_fraction": 0.011723700887198986,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.430232558139535,
+              "color_overlap": 0.7912176214785404,
+              "shape_match": 0.6991869918699187,
+              "design_match": 0.11170212765957446,
+              "measurements": {
+                "height": 21.587033144922902,
+                "width": 13.152946437965905
+              }
+            },
+            "shield": {
+              "area_ratio": 1.3296703296703296,
+              "color_overlap": 0.8279901916265553,
+              "shape_match": 0.7491749174917491,
+              "design_match": 0.13132400430570507,
+              "measurements": {
+                "height": 35.6931365951495
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.358695652173913,
+              "color_overlap": 0.8234782608695652,
+              "shape_match": 0.736,
+              "design_match": 0.13612565445026178,
+              "measurements": {
+                "span": 12.36931687685298
+              }
+            },
+            "character": {
+              "area_ratio": 1.1834961997828448,
+              "color_overlap": 0.8084157626831625,
+              "shape_match": 0.5874208860759493,
+              "design_match": 0.04051948051948052,
+              "measurements": {
+                "near_shin": 17.0
+              }
+            }
+          }
+        },
+        {
+          "frame": 2,
+          "area_ratio": 1.190550566185084,
+          "bad_color_fraction": 0.011807149885208265,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.3953488372093024,
+              "color_overlap": 0.8464147286821706,
+              "shape_match": 0.7166666666666667,
+              "design_match": 0.14127423822714683,
+              "measurements": {
+                "height": 20.396078054371138,
+                "width": 13.341664064126334
+              }
+            },
+            "shield": {
+              "area_ratio": 1.298901098901099,
+              "color_overlap": 0.8170729439764972,
+              "shape_match": 0.7698815566835872,
+              "design_match": 0.14966740576496673,
+              "measurements": {
+                "height": 36.49657518178932
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.434782608695652,
+              "color_overlap": 0.6429512516469038,
+              "shape_match": 0.696969696969697,
+              "design_match": 0.08737864077669903,
+              "measurements": {
+                "span": 12.041594578792296
+              }
+            },
+            "character": {
+              "area_ratio": 1.1324647122692726,
+              "color_overlap": 0.8146185260716445,
+              "shape_match": 0.625466611364579,
+              "design_match": 0.061621621621621624,
+              "measurements": {
+                "near_shin": 17.029386365926403
+              }
+            }
+          }
+        },
+        {
+          "frame": 3,
+          "area_ratio": 1.1862553689964856,
+          "bad_color_fraction": 0.008887425938117182,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.4127906976744187,
+              "color_overlap": 0.7397119341563786,
+              "shape_match": 0.7078189300411523,
+              "design_match": 0.12162162162162163,
+              "measurements": {
+                "height": 21.840329667841555,
+                "width": 13.341664064126334
+              }
+            },
+            "shield": {
+              "area_ratio": 1.2967032967032968,
+              "color_overlap": 0.84643322778916,
+              "shape_match": 0.7681895093062606,
+              "design_match": 0.17004504504504506,
+              "measurements": {
+                "height": 36.345563690772494
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.358695652173913,
+              "color_overlap": 0.666,
+              "shape_match": 0.736,
+              "design_match": 0.14814814814814814,
+              "measurements": {
+                "span": 12.165525060596439
+              }
+            },
+            "character": {
+              "area_ratio": 1.1292073832790446,
+              "color_overlap": 0.802147540299006,
+              "shape_match": 0.5688,
+              "design_match": 0.05572005383580081,
+              "measurements": {
+                "near_shin": 17.0
+              }
+            }
+          }
+        },
+        {
+          "frame": 4,
+          "area_ratio": 1.2241311987504881,
+          "bad_color_fraction": 0.007017543859649123,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.3430232558139534,
+              "color_overlap": 0.7613258834189067,
+              "shape_match": 0.7296137339055794,
+              "design_match": 0.10714285714285714,
+              "measurements": {
+                "height": 21.587033144922902,
+                "width": 14.317821063276353
+              }
+            },
+            "shield": {
+              "area_ratio": 1.2461538461538462,
+              "color_overlap": 0.827106227106227,
+              "shape_match": 0.7940140845070423,
+              "design_match": 0.16705069124423963,
+              "measurements": {
+                "height": 35.6931365951495
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.3804347826086956,
+              "color_overlap": 0.7137966449845943,
+              "shape_match": 0.7244094488188977,
+              "design_match": 0.08955223880597014,
+              "measurements": {
+                "span": 12.041594578792296
+              }
+            },
+            "character": {
+              "area_ratio": 1.1997828447339849,
+              "color_overlap": 0.8116978888774252,
+              "shape_match": 0.642480745845156,
+              "design_match": 0.056308654848800835,
+              "measurements": {
+                "near_shin": 15.811388300841896
+              }
+            }
+          }
+        },
+        {
+          "frame": 5,
+          "area_ratio": 1.1940648184303007,
+          "bad_color_fraction": 0.01079136690647482,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.4069767441860466,
+              "color_overlap": 0.7296271381895061,
+              "shape_match": 0.7107438016528925,
+              "design_match": 0.09523809523809523,
+              "measurements": {
+                "height": 20.615528128088304,
+                "width": 13.152946437965905
+              }
+            },
+            "shield": {
+              "area_ratio": 1.3142857142857143,
+              "color_overlap": 0.831820353559484,
+              "shape_match": 0.7529215358931552,
+              "design_match": 0.14977973568281938,
+              "measurements": {
+                "height": 37.36308338453881
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.423913043478261,
+              "color_overlap": 0.7295054762694988,
+              "shape_match": 0.7022900763358778,
+              "design_match": 0.10396039603960396,
+              "measurements": {
+                "span": 12.041594578792296
+              }
+            },
+            "character": {
+              "area_ratio": 1.1330076004343106,
+              "color_overlap": 0.8110928674327971,
+              "shape_match": 0.6631310988544761,
+              "design_match": 0.05536146197258801,
+              "measurements": {
+                "near_shin": 15.132745950421556
+              }
+            }
+          }
+        },
+        {
+          "frame": 6,
+          "area_ratio": 1.1792268645060524,
+          "bad_color_fraction": 0.010927152317880795,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.3546511627906976,
+              "color_overlap": 0.7956133346641382,
+              "shape_match": 0.7381974248927039,
+              "design_match": 0.09510869565217392,
+              "measurements": {
+                "height": 20.8806130178211,
+                "width": 13.152946437965905
+              }
+            },
+            "shield": {
+              "area_ratio": 1.2901098901098902,
+              "color_overlap": 0.7978808244566337,
+              "shape_match": 0.7721088435374149,
+              "design_match": 0.1301969365426696,
+              "measurements": {
+                "height": 35.510561809129406
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.4021739130434783,
+              "color_overlap": 0.7229524772497472,
+              "shape_match": 0.7131782945736435,
+              "design_match": 0.08866995073891626,
+              "measurements": {
+                "span": 12.041594578792296
+              }
+            },
+            "character": {
+              "area_ratio": 1.1243213897937026,
+              "color_overlap": 0.8012258629719863,
+              "shape_match": 0.5996718621821165,
+              "design_match": 0.054746494066882416,
+              "measurements": {
+                "near_shin": 15.231546211727817
+              }
+            }
+          }
+        },
+        {
+          "frame": 7,
+          "area_ratio": 1.2096837172979304,
+          "bad_color_fraction": 0.010006455777921239,
+          "parts": {
+            "helmet": {
+              "area_ratio": 1.3895348837209303,
+              "color_overlap": 0.8150724919723655,
+              "shape_match": 0.7196652719665272,
+              "design_match": 0.11684782608695653,
+              "measurements": {
+                "height": 20.615528128088304,
+                "width": 13.341664064126334
+              }
+            },
+            "shield": {
+              "area_ratio": 1.2901098901098902,
+              "color_overlap": 0.7962820824831046,
+              "shape_match": 0.7670068027210885,
+              "design_match": 0.1301969365426696,
+              "measurements": {
+                "height": 35.90264614203248
+              }
+            },
+            "mace_head": {
+              "area_ratio": 1.3695652173913044,
+              "color_overlap": 0.7505175983436853,
+              "shape_match": 0.7301587301587301,
+              "design_match": 0.12953367875647667,
+              "measurements": {
+                "span": 12.165525060596439
+              }
+            },
+            "character": {
+              "area_ratio": 1.1650380021715527,
+              "color_overlap": 0.8042420157999176,
+              "shape_match": 0.6568342334856668,
+              "design_match": 0.04701864985552929,
+              "measurements": {
+                "near_shin": 16.278820596099706
+              }
+            }
+          }
+        }
+      ],
+      "motion": {
+        "landmarks": {
+          "pelvis": {
+            "travel": 4.123105625617661,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  36.36363636363637,
+                  9.090909090909092
+                ],
+                "speed": 37.48277841470601
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  -27.272727272727273,
+                  0.0
+                ],
+                "speed": 27.272727272727273
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  27.272727272727273,
+                  0.0
+                ],
+                "speed": 27.272727272727273
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  -36.36363636363637,
+                  0.0
+                ],
+                "speed": 36.36363636363637
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  -9.090909090909092
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  9.090909090909092
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  -9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              }
+            ],
+            "accelerations": [
+              584.3857695756591,
+              495.86776859504135,
+              578.5123966942149,
+              413.2231404958678,
+              116.87715391513184,
+              165.28925619834712,
+              184.7990064049413,
+              445.0549427383888
+            ],
+            "coordinate_system": "observed_2d_frame",
+            "relative_to": null
+          },
+          "chest": {
+            "travel": 3.0,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  18.181818181818183,
+                  0.0
+                ],
+                "speed": 18.181818181818183
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  0.0
+                ],
+                "speed": 0.0
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  -18.181818181818183,
+                  0.0
+                ],
+                "speed": 18.181818181818183
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  -18.181818181818183,
+                  0.0
+                ],
+                "speed": 18.181818181818183
+              }
+            ],
+            "accelerations": [
+              165.28925619834712,
+              82.64462809917356,
+              247.93388429752068,
+              247.93388429752068,
+              165.28925619834712,
+              165.28925619834712,
+              247.93388429752068,
+              330.57851239669424
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "head": {
+            "travel": 2.23606797749979,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  -9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  0.0
+                ],
+                "speed": 0.0
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  0.0
+                ],
+                "speed": 0.0
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  0.0
+                ],
+                "speed": 0.0
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  -18.181818181818183,
+                  9.090909090909092
+                ],
+                "speed": 20.327890704543545
+              }
+            ],
+            "accelerations": [
+              82.64462809917356,
+              82.64462809917356,
+              82.64462809917356,
+              165.28925619834712,
+              82.64462809917356,
+              0.0,
+              184.7990064049413,
+              297.9794442532223
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "near_ball": {
+            "travel": 17.029386365926403,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  81.81818181818181,
+                  -9.090909090909092
+                ],
+                "speed": 82.32168307397652
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  -63.63636363636363,
+                  0.0
+                ],
+                "speed": 63.63636363636363
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  45.45454545454545,
+                  0.0
+                ],
+                "speed": 45.45454545454545
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  -109.0909090909091,
+                  -36.36363636363637
+                ],
+                "speed": 114.9919149152138
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  100.0,
+                  27.272727272727273
+                ],
+                "speed": 103.65231137264891
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  54.54545454545455,
+                  -18.181818181818183
+                ],
+                "speed": 57.4959574576069
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  -100.0,
+                  9.090909090909092
+                ],
+                "speed": 100.41237288352055
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  27.272727272727273
+                ],
+                "speed": 28.74797872880345
+              }
+            ],
+            "accelerations": [
+              1324.894177014991,
+              991.7355371900827,
+              1443.3263798820647,
+              1986.9116165572411,
+              584.3857695756591,
+              1426.6674794737248,
+              842.8131427426091,
+              890.1098854767775
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "far_ball": {
+            "travel": 11.704699910719626,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  36.36363636363637,
+                  -9.090909090909092
+                ],
+                "speed": 37.48277841470601
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  -18.181818181818183,
+                  -45.45454545454545
+                ],
+                "speed": 48.95604370122277
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  -36.36363636363637,
+                  45.45454545454545
+                ],
+                "speed": 58.210220340298626
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  27.272727272727273,
+                  18.181818181818183
+                ],
+                "speed": 32.77773886785445
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  63.63636363636363,
+                  -45.45454545454545
+                ],
+                "speed": 78.2029569731148
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  -100.0,
+                  36.36363636363637
+                ],
+                "speed": 106.40636282472387
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  18.181818181818183,
+                  -9.090909090909092
+                ],
+                "speed": 20.327890704543545
+              }
+            ],
+            "accelerations": [
+              595.9588885064445,
+              842.8131427426091,
+              629.4027360218106,
+              666.302293247814,
+              1663.1910576444716,
+              1022.2575931283455,
+              184.7990064049413,
+              165.28925619834712
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "near_heel": {
+            "travel": 18.027756377319946,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  63.63636363636363,
+                  -9.090909090909092
+                ],
+                "speed": 64.2824346533225
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  -45.45454545454545,
+                  0.0
+                ],
+                "speed": 45.45454545454545
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  45.45454545454545,
+                  0.0
+                ],
+                "speed": 45.45454545454545
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  -136.36363636363637,
+                  -18.181818181818183
+                ],
+                "speed": 137.57041773110507
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  127.27272727272727,
+                  9.090909090909092
+                ],
+                "speed": 127.59698952380181
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  27.272727272727273,
+                  -63.63636363636363
+                ],
+                "speed": 69.23430096239916
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  -72.72727272727273,
+                  63.63636363636363
+                ],
+                "speed": 96.63768920667863
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  18.181818181818183
+                ],
+                "speed": 20.327890704543545
+              }
+            ],
+            "accelerations": [
+              995.1731056853137,
+              826.4462809917355,
+              1661.1364663009736,
+              2409.4842540683057,
+              1124.0884717963177,
+              1471.4457698152771,
+              710.9359724828618,
+              706.1160120097131
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "far_heel": {
+            "travel": 16.1245154965971,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  36.36363636363637,
+                  -72.72727272727273
+                ],
+                "speed": 81.31156281817418
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  -36.36363636363637,
+                  -45.45454545454545
+                ],
+                "speed": 58.210220340298626
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  -27.272727272727273,
+                  90.9090909090909
+                ],
+                "speed": 94.91187735373227
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  54.54545454545455,
+                  27.272727272727273
+                ],
+                "speed": 60.98367211363063
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  27.272727272727273,
+                  -109.0909090909091
+                ],
+                "speed": 112.44833524411801
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  -54.54545454545455,
+                  127.27272727272727
+                ],
+                "speed": 138.46860192479832
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  -18.181818181818183,
+                  0.0
+                ],
+                "speed": 18.181818181818183
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  18.181818181818183,
+                  -18.181818181818183
+                ],
+                "speed": 25.712973861329004
+              }
+            ],
+            "accelerations": [
+              706.1160120097135,
+              1242.4211882952818,
+              942.2937397513538,
+              1264.2197141139136,
+              2273.8539656524968,
+              1203.323948641408,
+              369.5980128098826,
+              522.6905223418809
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "shield_top": {
+            "travel": 2.23606797749979,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  -9.090909090909092
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  0.0
+                ],
+                "speed": 0.0
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  -9.090909090909092
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  -18.181818181818183,
+                  0.0
+                ],
+                "speed": 18.181818181818183
+              }
+            ],
+            "accelerations": [
+              116.87715391513184,
+              184.7990064049413,
+              116.87715391513184,
+              82.64462809917356,
+              184.7990064049413,
+              184.7990064049413,
+              247.93388429752068,
+              247.93388429752068
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "mace_center": {
+            "travel": 4.123105625617661,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  -36.36363636363637,
+                  9.090909090909092
+                ],
+                "speed": 37.48277841470601
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  18.181818181818183,
+                  -18.181818181818183
+                ],
+                "speed": 25.712973861329004
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  -9.090909090909092
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  18.181818181818183,
+                  0.0
+                ],
+                "speed": 18.181818181818183
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  -18.181818181818183,
+                  0.0
+                ],
+                "speed": 18.181818181818183
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  18.181818181818183,
+                  9.090909090909092
+                ],
+                "speed": 20.327890704543545
+              }
+            ],
+            "accelerations": [
+              554.3970192148239,
+              350.63146174539554,
+              184.7990064049413,
+              184.7990064049413,
+              330.57851239669424,
+              247.93388429752068,
+              116.87715391513184,
+              495.86776859504135
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          },
+          "mace_grip": {
+            "travel": 2.23606797749979,
+            "transitions": [
+              {
+                "from": 0,
+                "to": 1,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  -9.090909090909092
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 3,
+                "to": 4,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  0.0
+                ],
+                "speed": 9.090909090909092
+              },
+              {
+                "from": 5,
+                "to": 6,
+                "seconds": 0.11,
+                "velocity": [
+                  -9.090909090909092,
+                  -9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              },
+              {
+                "from": 6,
+                "to": 7,
+                "seconds": 0.11,
+                "velocity": [
+                  9.090909090909092,
+                  9.090909090909092
+                ],
+                "speed": 12.856486930664502
+              },
+              {
+                "from": 7,
+                "to": 0,
+                "seconds": 0.11,
+                "velocity": [
+                  0.0,
+                  9.090909090909092
+                ],
+                "speed": 9.090909090909092
+              }
+            ],
+            "accelerations": [
+              116.87715391513184,
+              116.87715391513184,
+              165.28925619834712,
+              165.28925619834712,
+              184.7990064049413,
+              233.75430783026368,
+              82.64462809917356,
+              116.87715391513184
+            ],
+            "coordinate_system": "observed_2d_relative_to_landmark",
+            "relative_to": "pelvis"
+          }
+        },
+        "contacts": [
+          {
+            "landmark": "near_ball",
+            "frames": [
+              0,
+              1,
+              2
+            ],
+            "drift": 14.0,
+            "coordinate_system": "observed_2d_plus_declared_root_offset"
+          },
+          {
+            "landmark": "far_ball",
+            "frames": [
+              4,
+              5,
+              6
+            ],
+            "drift": 15.297058540778355,
+            "coordinate_system": "observed_2d_plus_declared_root_offset"
+          }
+        ]
+      },
+      "art_review": {
+        "status": "changes_needed",
+        "reviewer": "Codex assistant visual review; no human approval",
+        "observations": [
+          "The third generation corrected the exaggerated overall sprite scale: shared frame area/palette checks pass. Each pose is freshly generated from the selected knight plus an authored 2D placement diagram; no 3D render or pasted-part animation was used.",
+          "The bright near greave still stays forward in both nominal contact poses 0 and 4. The far leg lifts but does not make the required opposite forward landing; this is not a completed alternating walk.",
+          "Near boot screen positions change irregularly rather than moving four cells right during the intended plant. Far contact frames also show drift and an airborne boot. Quantify these actual observations using the frozen root restoration, not fitted root offsets.",
+          "The belt changes little vertically and does not clearly descend on both loading poses. Arm/shield motion and cloth are visible but do not establish believable support or physical center of mass.",
+          "The last-to-first feature displacement is checked, but that alone cannot validate a cycle whose stance exchange is absent. Helmet and shield have enlarged visible silhouettes versus the selected design. Pixel-grid PASS applies to the projected derivative only.",
+          "The legs overlap and change foreshortening, so the far shin cannot be measured reliably. Leave it unverified instead of inventing hidden anatomy."
+        ]
+      },
+      "outputs": {
+        "native": "walk/native.png",
+        "rendered": "walk/rendered.png",
+        "grid": "walk/pixel-audit/sheet/grid_overlay.png",
+        "observations": "walk/observation-overlay.png",
+        "gif": "walk/pixel-audit/animations/walk.gif"
+      },
+      "status": "fail"
+    }
+  },
+  "issues": [
+    {
+      "code": "BASELINE_SHIFT",
+      "severity": "info",
+      "detail": "Lowest visible row varies across the sequence: [111, 112, 114]. Intentional for jumps or bobbing; otherwise the sprite may jitter.",
+      "animation": "walk",
+      "state": "walk"
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.4883720930232558,
+        "color_overlap": 0.7497274709302325,
+        "shape_match": 0.671875,
+        "design_match": 0.08951406649616368,
+        "measurements": {
+          "height": 21.587033144922902,
+          "width": 13.038404810405298
+        }
+      },
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.4883720930232558,
+        "color_overlap": 0.7497274709302325,
+        "shape_match": 0.671875,
+        "design_match": 0.08951406649616368,
+        "measurements": {
+          "height": 21.587033144922902,
+          "width": 13.038404810405298
+        }
+      },
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.326080904785879,
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.1853095282186634,
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2593406593406593,
+        "color_overlap": 0.8333237443185088,
+        "shape_match": 0.7909407665505227,
+        "design_match": 0.14222222222222222,
+        "measurements": {
+          "height": 35.22782990761707
+        }
+      },
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2593406593406593,
+        "color_overlap": 0.8333237443185088,
+        "shape_match": 0.7909407665505227,
+        "design_match": 0.14222222222222222,
+        "measurements": {
+          "height": 35.22782990761707
+        }
+      },
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.1340239691886147,
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.358695652173913,
+        "color_overlap": 0.7414782608695653,
+        "shape_match": 0.736,
+        "design_match": 0.09090909090909091,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.358695652173913,
+        "color_overlap": 0.7414782608695653,
+        "shape_match": 0.736,
+        "design_match": 0.09090909090909091,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1628664495114007,
+        "color_overlap": 0.8148720943317609,
+        "shape_match": 0.6321179844326096,
+        "design_match": 0.03885267275097783,
+        "measurements": {
+          "near_shin": 18.24828759089466
+        }
+      },
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "character",
+      "measurement": "near_shin",
+      "ratio": 1.205880786651699,
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.430232558139535,
+        "color_overlap": 0.7912176214785404,
+        "shape_match": 0.6991869918699187,
+        "design_match": 0.11170212765957446,
+        "measurements": {
+          "height": 21.587033144922902,
+          "width": 13.152946437965905
+        }
+      },
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.430232558139535,
+        "color_overlap": 0.7912176214785404,
+        "shape_match": 0.6991869918699187,
+        "design_match": 0.11170212765957446,
+        "measurements": {
+          "height": 21.587033144922902,
+          "width": 13.152946437965905
+        }
+      },
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.326080904785879,
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.195722403451446,
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.3296703296703296,
+        "color_overlap": 0.8279901916265553,
+        "shape_match": 0.7491749174917491,
+        "design_match": 0.13132400430570507,
+        "measurements": {
+          "height": 35.6931365951495
+        }
+      },
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.3296703296703296,
+        "color_overlap": 0.8279901916265553,
+        "shape_match": 0.7491749174917491,
+        "design_match": 0.13132400430570507,
+        "measurements": {
+          "height": 35.6931365951495
+        }
+      },
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.1490027214441272,
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.358695652173913,
+        "color_overlap": 0.8234782608695652,
+        "shape_match": 0.736,
+        "design_match": 0.13612565445026178,
+        "measurements": {
+          "span": 12.36931687685298
+        }
+      },
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.358695652173913,
+        "color_overlap": 0.8234782608695652,
+        "shape_match": 0.736,
+        "design_match": 0.13612565445026178,
+        "measurements": {
+          "span": 12.36931687685298
+        }
+      },
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1834961997828448,
+        "color_overlap": 0.8084157626831625,
+        "shape_match": 0.5874208860759493,
+        "design_match": 0.04051948051948052,
+        "measurements": {
+          "near_shin": 17.0
+        }
+      },
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3953488372093024,
+        "color_overlap": 0.8464147286821706,
+        "shape_match": 0.7166666666666667,
+        "design_match": 0.14127423822714683,
+        "measurements": {
+          "height": 20.396078054371138,
+          "width": 13.341664064126334
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3953488372093024,
+        "color_overlap": 0.8464147286821706,
+        "shape_match": 0.7166666666666667,
+        "design_match": 0.14127423822714683,
+        "measurements": {
+          "height": 20.396078054371138,
+          "width": 13.341664064126334
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.2529211151364306,
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.2128785512842122,
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.298901098901099,
+        "color_overlap": 0.8170729439764972,
+        "shape_match": 0.7698815566835872,
+        "design_match": 0.14966740576496673,
+        "measurements": {
+          "height": 36.49657518178932
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.298901098901099,
+        "color_overlap": 0.8170729439764972,
+        "shape_match": 0.7698815566835872,
+        "design_match": 0.14966740576496673,
+        "measurements": {
+          "height": 36.49657518178932
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.1748663246637958,
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.434782608695652,
+        "color_overlap": 0.6429512516469038,
+        "shape_match": 0.696969696969697,
+        "design_match": 0.08737864077669903,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.434782608695652,
+        "color_overlap": 0.6429512516469038,
+        "shape_match": 0.696969696969697,
+        "design_match": 0.08737864077669903,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.434782608695652,
+        "color_overlap": 0.6429512516469038,
+        "shape_match": 0.696969696969697,
+        "design_match": 0.08737864077669903,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1324647122692726,
+        "color_overlap": 0.8146185260716445,
+        "shape_match": 0.625466611364579,
+        "design_match": 0.061621621621621624,
+        "measurements": {
+          "near_shin": 17.029386365926403
+        }
+      },
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.4127906976744187,
+        "color_overlap": 0.7397119341563786,
+        "shape_match": 0.7078189300411523,
+        "design_match": 0.12162162162162163,
+        "measurements": {
+          "height": 21.840329667841555,
+          "width": 13.341664064126334
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.4127906976744187,
+        "color_overlap": 0.7397119341563786,
+        "shape_match": 0.7078189300411523,
+        "design_match": 0.12162162162162163,
+        "measurements": {
+          "height": 21.840329667841555,
+          "width": 13.341664064126334
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.3416407864998738,
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.2128785512842122,
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2967032967032968,
+        "color_overlap": 0.84643322778916,
+        "shape_match": 0.7681895093062606,
+        "design_match": 0.17004504504504506,
+        "measurements": {
+          "height": 36.345563690772494
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2967032967032968,
+        "color_overlap": 0.84643322778916,
+        "shape_match": 0.7681895093062606,
+        "design_match": 0.17004504504504506,
+        "measurements": {
+          "height": 36.345563690772494
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.1700050927660295,
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.358695652173913,
+        "color_overlap": 0.666,
+        "shape_match": 0.736,
+        "design_match": 0.14814814814814814,
+        "measurements": {
+          "span": 12.165525060596439
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_COLOR_CHANGED",
+      "severity": "fail",
+      "detail": "Observed part color distribution changed.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.358695652173913,
+        "color_overlap": 0.666,
+        "shape_match": 0.736,
+        "design_match": 0.14814814814814814,
+        "measurements": {
+          "span": 12.165525060596439
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.358695652173913,
+        "color_overlap": 0.666,
+        "shape_match": 0.736,
+        "design_match": 0.14814814814814814,
+        "measurements": {
+          "span": 12.165525060596439
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1292073832790446,
+        "color_overlap": 0.802147540299006,
+        "shape_match": 0.5688,
+        "design_match": 0.05572005383580081,
+        "measurements": {
+          "near_shin": 17.0
+        }
+      },
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3430232558139534,
+        "color_overlap": 0.7613258834189067,
+        "shape_match": 0.7296137339055794,
+        "design_match": 0.10714285714285714,
+        "measurements": {
+          "height": 21.587033144922902,
+          "width": 14.317821063276353
+        }
+      },
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3430232558139534,
+        "color_overlap": 0.7613258834189067,
+        "shape_match": 0.7296137339055794,
+        "design_match": 0.10714285714285714,
+        "measurements": {
+          "height": 21.587033144922902,
+          "width": 14.317821063276353
+        }
+      },
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.326080904785879,
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.3016200966614866,
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2461538461538462,
+        "color_overlap": 0.827106227106227,
+        "shape_match": 0.7940140845070423,
+        "design_match": 0.16705069124423963,
+        "measurements": {
+          "height": 35.6931365951495
+        }
+      },
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.1490027214441272,
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.3804347826086956,
+        "color_overlap": 0.7137966449845943,
+        "shape_match": 0.7244094488188977,
+        "design_match": 0.08955223880597014,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.3804347826086956,
+        "color_overlap": 0.7137966449845943,
+        "shape_match": 0.7244094488188977,
+        "design_match": 0.08955223880597014,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1997828447339849,
+        "color_overlap": 0.8116978888774252,
+        "shape_match": 0.642480745845156,
+        "design_match": 0.056308654848800835,
+        "measurements": {
+          "near_shin": 15.811388300841896
+        }
+      },
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.4069767441860466,
+        "color_overlap": 0.7296271381895061,
+        "shape_match": 0.7107438016528925,
+        "design_match": 0.09523809523809523,
+        "measurements": {
+          "height": 20.615528128088304,
+          "width": 13.152946437965905
+        }
+      },
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.4069767441860466,
+        "color_overlap": 0.7296271381895061,
+        "shape_match": 0.7107438016528925,
+        "design_match": 0.09523809523809523,
+        "measurements": {
+          "height": 20.615528128088304,
+          "width": 13.152946437965905
+        }
+      },
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.2664018260037613,
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.195722403451446,
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.3142857142857143,
+        "color_overlap": 0.831820353559484,
+        "shape_match": 0.7529215358931552,
+        "design_match": 0.14977973568281938,
+        "measurements": {
+          "height": 37.36308338453881
+        }
+      },
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.3142857142857143,
+        "color_overlap": 0.831820353559484,
+        "shape_match": 0.7529215358931552,
+        "design_match": 0.14977973568281938,
+        "measurements": {
+          "height": 37.36308338453881
+        }
+      },
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.2027602106622632,
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.423913043478261,
+        "color_overlap": 0.7295054762694988,
+        "shape_match": 0.7022900763358778,
+        "design_match": 0.10396039603960396,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.423913043478261,
+        "color_overlap": 0.7295054762694988,
+        "shape_match": 0.7022900763358778,
+        "design_match": 0.10396039603960396,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1330076004343106,
+        "color_overlap": 0.8110928674327971,
+        "shape_match": 0.6631310988544761,
+        "design_match": 0.05536146197258801,
+        "measurements": {
+          "near_shin": 15.132745950421556
+        }
+      },
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3546511627906976,
+        "color_overlap": 0.7956133346641382,
+        "shape_match": 0.7381974248927039,
+        "design_match": 0.09510869565217392,
+        "measurements": {
+          "height": 20.8806130178211,
+          "width": 13.152946437965905
+        }
+      },
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3546511627906976,
+        "color_overlap": 0.7956133346641382,
+        "shape_match": 0.7381974248927039,
+        "design_match": 0.09510869565217392,
+        "measurements": {
+          "height": 20.8806130178211,
+          "width": 13.152946437965905
+        }
+      },
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.2826858613346936,
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.195722403451446,
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2901098901098902,
+        "color_overlap": 0.7978808244566337,
+        "shape_match": 0.7721088435374149,
+        "design_match": 0.1301969365426696,
+        "measurements": {
+          "height": 35.510561809129406
+        }
+      },
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2901098901098902,
+        "color_overlap": 0.7978808244566337,
+        "shape_match": 0.7721088435374149,
+        "design_match": 0.1301969365426696,
+        "measurements": {
+          "height": 35.510561809129406
+        }
+      },
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.143125431129645,
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.4021739130434783,
+        "color_overlap": 0.7229524772497472,
+        "shape_match": 0.7131782945736435,
+        "design_match": 0.08866995073891626,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.4021739130434783,
+        "color_overlap": 0.7229524772497472,
+        "shape_match": 0.7131782945736435,
+        "design_match": 0.08866995073891626,
+        "measurements": {
+          "span": 12.041594578792296
+        }
+      },
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1243213897937026,
+        "color_overlap": 0.8012258629719863,
+        "shape_match": 0.5996718621821165,
+        "design_match": 0.054746494066882416,
+        "measurements": {
+          "near_shin": 15.231546211727817
+        }
+      },
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "MEASUREMENT_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Mark both visible endpoints, or leave unobserved.",
+      "part": "character",
+      "measurement": "far_shin",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3895348837209303,
+        "color_overlap": 0.8150724919723655,
+        "shape_match": 0.7196652719665272,
+        "design_match": 0.11684782608695653,
+        "measurements": {
+          "height": 20.615528128088304,
+          "width": 13.341664064126334
+        }
+      },
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "helmet",
+      "metrics": {
+        "area_ratio": 1.3895348837209303,
+        "color_overlap": 0.8150724919723655,
+        "shape_match": 0.7196652719665272,
+        "design_match": 0.11684782608695653,
+        "measurements": {
+          "height": 20.615528128088304,
+          "width": 13.341664064126334
+        }
+      },
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "height",
+      "ratio": 1.2664018260037613,
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "helmet",
+      "measurement": "width",
+      "ratio": 1.2128785512842122,
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2901098901098902,
+        "color_overlap": 0.7962820824831046,
+        "shape_match": 0.7670068027210885,
+        "design_match": 0.1301969365426696,
+        "measurements": {
+          "height": 35.90264614203248
+        }
+      },
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "shield",
+      "metrics": {
+        "area_ratio": 1.2901098901098902,
+        "color_overlap": 0.7962820824831046,
+        "shape_match": 0.7670068027210885,
+        "design_match": 0.1301969365426696,
+        "measurements": {
+          "height": 35.90264614203248
+        }
+      },
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_PROPORTION_CHANGED",
+      "severity": "fail",
+      "detail": "Observed endpoint distance changed beyond its tolerance.",
+      "part": "shield",
+      "measurement": "height",
+      "ratio": 1.1557470723894512,
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_SIZE_CHANGED",
+      "severity": "fail",
+      "detail": "Observed visible area changed beyond the frozen tolerance.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.3695652173913044,
+        "color_overlap": 0.7505175983436853,
+        "shape_match": 0.7301587301587301,
+        "design_match": 0.12953367875647667,
+        "measurements": {
+          "span": 12.165525060596439
+        }
+      },
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "mace_head",
+      "metrics": {
+        "area_ratio": 1.3695652173913044,
+        "color_overlap": 0.7505175983436853,
+        "shape_match": 0.7301587301587301,
+        "design_match": 0.12953367875647667,
+        "measurements": {
+          "span": 12.165525060596439
+        }
+      },
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_DESIGN_CHANGED",
+      "severity": "fail",
+      "detail": "Part pixel pattern changed under a rotation-only comparison.",
+      "part": "character",
+      "metrics": {
+        "area_ratio": 1.1650380021715527,
+        "color_overlap": 0.8042420157999176,
+        "shape_match": 0.6568342334856668,
+        "design_match": 0.04701864985552929,
+        "measurements": {
+          "near_shin": 16.278820596099706
+        }
+      },
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "REQUIRED_MOTION_MISSING",
+      "severity": "fail",
+      "detail": "This feature did not move through its required range.",
+      "state": "walk",
+      "landmark": "near_ball",
+      "measured": 17.029386365926403
+    },
+    {
+      "code": "REQUIRED_MOTION_MISSING",
+      "severity": "fail",
+      "detail": "This feature did not move through its required range.",
+      "state": "walk",
+      "landmark": "far_ball",
+      "measured": 11.704699910719626
+    },
+    {
+      "code": "REQUIRED_MOTION_MISSING",
+      "severity": "fail",
+      "detail": "This feature did not move through its required range.",
+      "state": "walk",
+      "landmark": "far_heel",
+      "measured": 16.1245154965971
+    },
+    {
+      "code": "CONTACT_SLIDING",
+      "severity": "fail",
+      "detail": "Contact point slides in the declared movement coordinate system.",
+      "state": "walk",
+      "landmark": "near_ball",
+      "drift": 14.0
+    },
+    {
+      "code": "CONTACT_SLIDING",
+      "severity": "fail",
+      "detail": "Contact point slides in the declared movement coordinate system.",
+      "state": "walk",
+      "landmark": "far_ball",
+      "drift": 15.297058540778355
+    },
+    {
+      "code": "CONTACT_GROUND_MISMATCH",
+      "severity": "fail",
+      "detail": "Contact point leaves the declared ground height.",
+      "state": "walk",
+      "landmark": "far_ball"
+    },
+    {
+      "code": "ART_CHANGES_NEEDED",
+      "severity": "review",
+      "detail": "Review identity, contours, timing, contact and intended movement separately.",
+      "state": "walk"
+    }
+  ],
+  "issue_counts": {
+    "fail": 88,
+    "review": 17,
+    "info": 1
+  },
+  "limitations": [
+    "Named part masks and features are supplied observations, not automatic semantic recognition.",
+    "Part area, rotation-only shape/pattern and color checks do not prove identity or natural movement.",
+    "Foreshortening, occlusion, flexible parts and pose-dependent shading require a recorded visual review.",
+    "Projection is a declared derivative; a compliant exported PNG does not certify the raw generator's pixel grid."
+  ]
+}

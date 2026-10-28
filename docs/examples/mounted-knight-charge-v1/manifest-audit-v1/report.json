@@ -1,0 +1,603 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.2",
+  "schema_version": 1,
+  "acceptance_mode": "sprite_gen_atlas",
+  "status": "fail",
+  "scope": "decoded PNG palette, declared frame rectangles, safety margins and visible silhouette size",
+  "contract": {
+    "palette": {
+      "value": 32,
+      "source": "request.fit.palette_size",
+      "other_declarations": []
+    },
+    "margin_x": {
+      "value": 12,
+      "source": "manifest.cell.safe_margin_x",
+      "other_declarations": [
+        {
+          "source": "request.cell.safe_margin_x",
+          "value": 12
+        }
+      ]
+    },
+    "margin_y": {
+      "value": 12,
+      "source": "manifest.cell.safe_margin_y",
+      "other_declarations": [
+        {
+          "source": "request.cell.safe_margin_y",
+          "value": 12
+        }
+      ]
+    },
+    "size": {
+      "reference": "per_state_median_of_nonempty_frames",
+      "minimum_frames": 3,
+      "dimension_tolerance": 0.1,
+      "visible_area_tolerance": 0.25,
+      "outlier_severity": "review",
+      "scope": "visible_silhouette_not_body_part_scale"
+    },
+    "visibility": "alpha > 0; all coordinates and areas use source PNG pixels"
+  },
+  "provenance": {
+    "sheet": {
+      "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/mounted-knight-charge-v1/run/sprite-sheet-alpha.png",
+      "sha256": "d2b05c8e1765c4943400b1e3c812e0ee8b0583a581587846b330be6c3a8f62b9"
+    },
+    "manifest": {
+      "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/mounted-knight-charge-v1/run/manifest.json",
+      "sha256": "f7c5a47a311518a7c73e773907647582225b85d4bf685a75077f0f986ef34378"
+    },
+    "request": {
+      "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/mounted-knight-charge-v1/run/sprite-request.json",
+      "sha256": "3652a2c62d26d38e0c50389074cafe9d24765206de7ebdc13fb8707e99b46372"
+    },
+    "inputs_unchanged": true,
+    "decoded_rgba_sha256": "8641095a9315482d35e04cb74474215ca7e1e511835f2592f2c94339964bfb9a"
+  },
+  "checks": {
+    "palette": "fail",
+    "margins": "fail",
+    "size_consistency": "review",
+    "layout": "pass"
+  },
+  "palette": {
+    "visible_rgb_colors": 62,
+    "max_colors": 32,
+    "colors": [
+      "#040100",
+      "#0A0504",
+      "#0C0502",
+      "#0D0808",
+      "#110401",
+      "#160B08",
+      "#160E0C",
+      "#171111",
+      "#180904",
+      "#1A181A",
+      "#1B0E0C",
+      "#232124",
+      "#241716",
+      "#270A04",
+      "#2A1209",
+      "#2D0C04",
+      "#2F2E32",
+      "#312824",
+      "#351B0D",
+      "#393637",
+      "#3A0A06",
+      "#3B1F17",
+      "#3C2622",
+      "#3E1D0C",
+      "#3E2D2F",
+      "#3F2F27",
+      "#403D3C",
+      "#41180B",
+      "#450807",
+      "#454447",
+      "#46220F",
+      "#474145",
+      "#51453A",
+      "#573612",
+      "#574F4A",
+      "#585755",
+      "#5E3F1A",
+      "#5E585F",
+      "#5F3E14",
+      "#5F451E",
+      "#681C0B",
+      "#71311A",
+      "#7E7B85",
+      "#816A61",
+      "#8C4824",
+      "#988F92",
+      "#991C12",
+      "#A54D21",
+      "#A77E67",
+      "#ABA29E",
+      "#B6B5BC",
+      "#B81715",
+      "#BA5B28",
+      "#C0845E",
+      "#D6B69A",
+      "#DB9D52",
+      "#E58F31",
+      "#E5D2C3",
+      "#E9E6E0",
+      "#F8A647",
+      "#FBA536",
+      "#FCB850"
+    ],
+    "colors_truncated": false
+  },
+  "sheet_size": [
+    2048,
+    192
+  ],
+  "frames": [
+    {
+      "state": "charge",
+      "frame": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 14400,
+      "bbox": [
+        36,
+        0,
+        247,
+        179
+      ],
+      "visible_rgb_colors": 55,
+      "bbox_size": [
+        212,
+        180
+      ],
+      "margins": {
+        "left": 36,
+        "top": 0,
+        "right": 8,
+        "bottom": 12
+      },
+      "size_ratios": {
+        "width": 0.9814814814814815,
+        "height": 1.0,
+        "visible_pixels": 1.0215664018161181
+      },
+      "size_status": "pass",
+      "status": "fail"
+    },
+    {
+      "state": "charge",
+      "frame": 1,
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 13756,
+      "bbox": [
+        24,
+        2,
+        237,
+        177
+      ],
+      "visible_rgb_colors": 57,
+      "bbox_size": [
+        214,
+        176
+      ],
+      "margins": {
+        "left": 24,
+        "top": 2,
+        "right": 18,
+        "bottom": 14
+      },
+      "size_ratios": {
+        "width": 0.9907407407407407,
+        "height": 0.9777777777777777,
+        "visible_pixels": 0.9758796821793416
+      },
+      "size_status": "pass",
+      "status": "fail"
+    },
+    {
+      "state": "charge",
+      "frame": 2,
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 13924,
+      "bbox": [
+        22,
+        2,
+        235,
+        175
+      ],
+      "visible_rgb_colors": 56,
+      "bbox_size": [
+        214,
+        174
+      ],
+      "margins": {
+        "left": 22,
+        "top": 2,
+        "right": 20,
+        "bottom": 16
+      },
+      "size_ratios": {
+        "width": 0.9907407407407407,
+        "height": 0.9666666666666667,
+        "visible_pixels": 0.9877979568671964
+      },
+      "size_status": "pass",
+      "status": "fail"
+    },
+    {
+      "state": "charge",
+      "frame": 3,
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 13136,
+      "bbox": [
+        24,
+        14,
+        243,
+        173
+      ],
+      "visible_rgb_colors": 57,
+      "bbox_size": [
+        220,
+        160
+      ],
+      "margins": {
+        "left": 24,
+        "top": 14,
+        "right": 12,
+        "bottom": 18
+      },
+      "size_ratios": {
+        "width": 1.0185185185185186,
+        "height": 0.8888888888888888,
+        "visible_pixels": 0.9318955732122588
+      },
+      "size_status": "review",
+      "status": "review"
+    },
+    {
+      "state": "charge",
+      "frame": 4,
+      "rect": {
+        "x": 1024,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 14384,
+      "bbox": [
+        22,
+        0,
+        239,
+        179
+      ],
+      "visible_rgb_colors": 58,
+      "bbox_size": [
+        218,
+        180
+      ],
+      "margins": {
+        "left": 22,
+        "top": 0,
+        "right": 16,
+        "bottom": 12
+      },
+      "size_ratios": {
+        "width": 1.0092592592592593,
+        "height": 1.0,
+        "visible_pixels": 1.0204313280363224
+      },
+      "size_status": "pass",
+      "status": "fail"
+    },
+    {
+      "state": "charge",
+      "frame": 5,
+      "rect": {
+        "x": 1280,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 14216,
+      "bbox": [
+        18,
+        0,
+        237,
+        179
+      ],
+      "visible_rgb_colors": 59,
+      "bbox_size": [
+        220,
+        180
+      ],
+      "margins": {
+        "left": 18,
+        "top": 0,
+        "right": 18,
+        "bottom": 12
+      },
+      "size_ratios": {
+        "width": 1.0185185185185186,
+        "height": 1.0,
+        "visible_pixels": 1.0085130533484676
+      },
+      "size_status": "pass",
+      "status": "fail"
+    },
+    {
+      "state": "charge",
+      "frame": 6,
+      "rect": {
+        "x": 1536,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 13976,
+      "bbox": [
+        18,
+        0,
+        237,
+        179
+      ],
+      "visible_rgb_colors": 57,
+      "bbox_size": [
+        220,
+        180
+      ],
+      "margins": {
+        "left": 18,
+        "top": 0,
+        "right": 18,
+        "bottom": 12
+      },
+      "size_ratios": {
+        "width": 1.0185185185185186,
+        "height": 1.0,
+        "visible_pixels": 0.9914869466515324
+      },
+      "size_status": "pass",
+      "status": "fail"
+    },
+    {
+      "state": "charge",
+      "frame": 7,
+      "rect": {
+        "x": 1792,
+        "y": 0,
+        "w": 256,
+        "h": 192
+      },
+      "visible_pixels": 14420,
+      "bbox": [
+        30,
+        0,
+        219,
+        179
+      ],
+      "visible_rgb_colors": 53,
+      "bbox_size": [
+        190,
+        180
+      ],
+      "margins": {
+        "left": 30,
+        "top": 0,
+        "right": 36,
+        "bottom": 12
+      },
+      "size_ratios": {
+        "width": 0.8796296296296297,
+        "height": 1.0,
+        "visible_pixels": 1.0229852440408627
+      },
+      "size_status": "review",
+      "status": "fail"
+    }
+  ],
+  "states": [
+    {
+      "state": "charge",
+      "frames": 8,
+      "nonempty_frames": 8,
+      "median": {
+        "width": 216.0,
+        "height": 180.0,
+        "visible_pixels": 14096.0
+      },
+      "status": "review"
+    }
+  ],
+  "issues": [
+    {
+      "code": "PALETTE_OVER_BUDGET",
+      "severity": "fail",
+      "detail": "The PNG has 62 visible RGB colors; the shared budget is 32."
+    },
+    {
+      "code": "EDGE_MARGIN_VIOLATION",
+      "severity": "fail",
+      "detail": "Visible artwork enters the declared safe margin.",
+      "sides": [
+        "right",
+        "top"
+      ],
+      "observed_margins": {
+        "left": 36,
+        "top": 0,
+        "right": 8,
+        "bottom": 12
+      },
+      "state": "charge",
+      "frame": 0
+    },
+    {
+      "code": "EDGE_MARGIN_VIOLATION",
+      "severity": "fail",
+      "detail": "Visible artwork enters the declared safe margin.",
+      "sides": [
+        "top"
+      ],
+      "observed_margins": {
+        "left": 24,
+        "top": 2,
+        "right": 18,
+        "bottom": 14
+      },
+      "state": "charge",
+      "frame": 1
+    },
+    {
+      "code": "EDGE_MARGIN_VIOLATION",
+      "severity": "fail",
+      "detail": "Visible artwork enters the declared safe margin.",
+      "sides": [
+        "top"
+      ],
+      "observed_margins": {
+        "left": 22,
+        "top": 2,
+        "right": 20,
+        "bottom": 16
+      },
+      "state": "charge",
+      "frame": 2
+    },
+    {
+      "code": "EDGE_MARGIN_VIOLATION",
+      "severity": "fail",
+      "detail": "Visible artwork enters the declared safe margin.",
+      "sides": [
+        "top"
+      ],
+      "observed_margins": {
+        "left": 22,
+        "top": 0,
+        "right": 16,
+        "bottom": 12
+      },
+      "state": "charge",
+      "frame": 4
+    },
+    {
+      "code": "EDGE_MARGIN_VIOLATION",
+      "severity": "fail",
+      "detail": "Visible artwork enters the declared safe margin.",
+      "sides": [
+        "top"
+      ],
+      "observed_margins": {
+        "left": 18,
+        "top": 0,
+        "right": 18,
+        "bottom": 12
+      },
+      "state": "charge",
+      "frame": 5
+    },
+    {
+      "code": "EDGE_MARGIN_VIOLATION",
+      "severity": "fail",
+      "detail": "Visible artwork enters the declared safe margin.",
+      "sides": [
+        "top"
+      ],
+      "observed_margins": {
+        "left": 18,
+        "top": 0,
+        "right": 18,
+        "bottom": 12
+      },
+      "state": "charge",
+      "frame": 6
+    },
+    {
+      "code": "EDGE_MARGIN_VIOLATION",
+      "severity": "fail",
+      "detail": "Visible artwork enters the declared safe margin.",
+      "sides": [
+        "top"
+      ],
+      "observed_margins": {
+        "left": 30,
+        "top": 0,
+        "right": 36,
+        "bottom": 12
+      },
+      "state": "charge",
+      "frame": 7
+    },
+    {
+      "code": "FRAME_SIZE_OUTLIER",
+      "severity": "review",
+      "detail": "Visible extent or area differs from the state's median. Pose, occlusion or clipping may explain it; inspect the artwork.",
+      "state": "charge",
+      "frame": 3,
+      "metrics": [
+        "height"
+      ],
+      "ratios": {
+        "width": 1.0185185185185186,
+        "height": 0.8888888888888888,
+        "visible_pixels": 0.9318955732122588
+      }
+    },
+    {
+      "code": "FRAME_SIZE_OUTLIER",
+      "severity": "review",
+      "detail": "Visible extent or area differs from the state's median. Pose, occlusion or clipping may explain it; inspect the artwork.",
+      "state": "charge",
+      "frame": 7,
+      "metrics": [
+        "width"
+      ],
+      "ratios": {
+        "width": 0.8796296296296297,
+        "height": 1.0,
+        "visible_pixels": 1.0229852440408627
+      }
+    }
+  ],
+  "issue_counts": {
+    "fail": 8,
+    "review": 2,
+    "info": 0
+  },
+  "pixel_grid_status": "not_checked",
+  "artistic_status": "not_reviewed",
+  "motion_status": "not_checked",
+  "limitations": [
+    "Visible bounds and area vary with pose, occlusion and equipment; outliers require review.",
+    "A stable silhouette does not prove constant body-part dimensions or natural motion.",
+    "Frames are compared within each state; a uniformly mis-scaled state needs an external design reference.",
+    "No logical pixel grid is inferred; use the separate strict profile audit for dot fidelity."
+  ],
+  "outputs": {
+    "report": "report.json",
+    "layout_overlay": "layout_overlay.png",
+    "frames": "frames.png"
+  }
+}

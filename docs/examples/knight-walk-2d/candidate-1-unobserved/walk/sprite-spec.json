@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "name": "Crimson heraldic knight — planted eight-frame walk",
+  "frame_size": "128x128",
+  "frame_count": 8,
+  "layout": {
+    "columns": 4,
+    "rows": 2
+  },
+  "edge_margin": 4,
+  "scale": 4,
+  "animations": {
+    "walk": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "loop": true,
+      "durations_ms": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ]
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "design_sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+  "method": "Codex visual annotation of selected native 2D design; depth offsets authored to disambiguate limbs",
+  "joints": {
+    "pelvis": {
+      "xy": [
+        64,
+        65
+      ],
+      "depth_offset_m": 0
+    },
+    "neck": {
+      "xy": [
+        66,
+        46
+      ],
+      "depth_offset_m": 0
+    },
+    "crown": {
+      "xy": [
+        66,
+        30
+      ],
+      "depth_offset_m": 0
+    },
+    "shoulder_r": {
+      "xy": [
+        55,
+        49
+      ],
+      "depth_offset_m": 0.1
+    },
+    "elbow_r": {
+      "xy": [
+        53,
+        61
+      ],
+      "depth_offset_m": 0.06
+    },
+    "hand_r": {
+      "xy": [
+        50,
+        72
+      ],
+      "depth_offset_m": -0.02
+    },
+    "mace_head": {
+      "xy": [
+        39,
+        88
+      ],
+      "depth_offset_m": -0.05
+    },
+    "shoulder_l": {
+      "xy": [
+        75,
+        47
+      ],
+      "depth_offset_m": -0.1
+    },
+    "elbow_l": {
+      "xy": [
+        79,
+        57
+      ],
+      "depth_offset_m": -0.16
+    },
+    "hand_l": {
+      "xy": [
+        83,
+        64
+      ],
+      "depth_offset_m": -0.24
+    },
+    "shield_top": {
+      "xy": [
+        84,
+        53
+      ],
+      "depth_offset_m": -0.24
+    },
+    "hip_r": {
+      "xy": [
+        60,
+        66
+      ],
+      "depth_offset_m": 0.08
+    },
+    "knee_r": {
+      "xy": [
+        58,
+        86
+      ],
+      "depth_offset_m": 0
+    },
+    "ankle_r": {
+      "xy": [
+        56,
+        103
+      ],
+      "depth_offset_m": 0.08
+    },
+    "toe_r": {
+      "xy": [
+        50,
+        107
+      ],
+      "depth_offset_m": -0.02
+    },
+    "hip_l": {
+      "xy": [
+        70,
+        66
+      ],
+      "depth_offset_m": -0.08
+    },
+    "knee_l": {
+      "xy": [
+        76,
+        86
+      ],
+      "depth_offset_m": -0.12
+    },
+    "ankle_l": {
+      "xy": [
+        80,
+        105
+      ],
+      "depth_offset_m": -0.06
+    },
+    "toe_l": {
+      "xy": [
+        82,
+        110
+      ],
+      "depth_offset_m": -0.16
+    }
+  },
+  "part_dimensions": {
+    "helmet": [
+      11,
+      15
+    ],
+    "mace_head": [
+      10
+    ],
+    "shield_long_axis": [
+      30
+    ]
+  }
+}

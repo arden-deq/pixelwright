@@ -1,0 +1,627 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.0",
+  "schema_version": 1,
+  "status": "pass",
+  "scope": "technical_checks_only_not_artistic_quality",
+  "artistic_status": "not_reviewed",
+  "preview_scale": 4,
+  "inputs": {
+    "spec": {
+      "path": "spec.json",
+      "sha256": "a5a661cd76a8139b5de44b42a6403dc26ccc8d846bf9ea7b5b779e56f799e3d4"
+    },
+    "sheet": {
+      "path": "sprite-sheet.png",
+      "sha256": "b1339774747db72f115b6bf064de528c6428301e880ee1e3583f34217cf445c8"
+    },
+    "profile": {
+      "path": "profile.json",
+      "sha256": "36894dc90e651d7e61aa4910f4240f86d3f340b8f3f90e523c45e7f3021efcbe"
+    }
+  },
+  "name": "2D knight design animated with a bare 3D skeleton",
+  "contract": {
+    "schema_version": 1,
+    "name": "3D knight sheet pixel contract",
+    "logical_size": "768x384",
+    "scale": 4,
+    "max_colors": 24,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#050202FF",
+      "#070503FF",
+      "#0D0207FF",
+      "#110507FF",
+      "#120906FF",
+      "#23150EFF",
+      "#39271CFF",
+      "#443730FF",
+      "#4C0D0DFF",
+      "#56524FFF",
+      "#6F0911FF",
+      "#6F6559FF",
+      "#7C0A14FF",
+      "#8A3925FF",
+      "#8C8981FF",
+      "#940F18FF",
+      "#9D6530FF",
+      "#A8181DFF",
+      "#B11B21FF",
+      "#BB7F3CFF",
+      "#CF9449FF",
+      "#D3AA6AFF",
+      "#E3B464FF",
+      "#EDDCAFFF"
+    ]
+  },
+  "layout": {
+    "frame_size": [
+      128,
+      128
+    ],
+    "columns": 6,
+    "rows": 3,
+    "margin": 0,
+    "spacing": 0,
+    "frame_count": 18,
+    "edge_margin": 0,
+    "sheet_logical_size": [
+      768,
+      384
+    ],
+    "order": "row_major",
+    "gutter": "alpha_zero",
+    "frame_origins": [
+      [
+        0,
+        0
+      ],
+      [
+        128,
+        0
+      ],
+      [
+        256,
+        0
+      ],
+      [
+        384,
+        0
+      ],
+      [
+        512,
+        0
+      ],
+      [
+        640,
+        0
+      ],
+      [
+        0,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        256,
+        128
+      ],
+      [
+        384,
+        128
+      ],
+      [
+        512,
+        128
+      ],
+      [
+        640,
+        128
+      ],
+      [
+        0,
+        256
+      ],
+      [
+        128,
+        256
+      ],
+      [
+        256,
+        256
+      ],
+      [
+        384,
+        256
+      ],
+      [
+        512,
+        256
+      ],
+      [
+        640,
+        256
+      ]
+    ]
+  },
+  "sheet_audit": {
+    "status": "pass",
+    "report": "sheet/report.json",
+    "outputs": {
+      "report": "sheet/report.json",
+      "overlay": "sheet/grid_overlay.png",
+      "grid_lines": "sheet/grid_lines.png",
+      "logical_preview": "sheet/logical_preview.png",
+      "violation_mask": "sheet/violation_mask.png",
+      "correction_prompt": "sheet/correction_prompt.txt"
+    }
+  },
+  "checks": {
+    "frames": "checked",
+    "animations": "checked",
+    "rig": "not_declared"
+  },
+  "frames": [
+    {
+      "index": 0,
+      "slot": [
+        0,
+        0
+      ],
+      "origin": [
+        0,
+        0
+      ],
+      "visible_cells": 2596,
+      "bbox": [
+        32,
+        24,
+        94,
+        110
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 1,
+      "slot": [
+        1,
+        0
+      ],
+      "origin": [
+        128,
+        0
+      ],
+      "visible_cells": 2524,
+      "bbox": [
+        32,
+        24,
+        94,
+        110
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 2,
+      "slot": [
+        2,
+        0
+      ],
+      "origin": [
+        256,
+        0
+      ],
+      "visible_cells": 2634,
+      "bbox": [
+        32,
+        24,
+        94,
+        112
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 3,
+      "slot": [
+        3,
+        0
+      ],
+      "origin": [
+        384,
+        0
+      ],
+      "visible_cells": 2559,
+      "bbox": [
+        31,
+        24,
+        94,
+        111
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 4,
+      "slot": [
+        4,
+        0
+      ],
+      "origin": [
+        512,
+        0
+      ],
+      "visible_cells": 2529,
+      "bbox": [
+        32,
+        24,
+        94,
+        111
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 5,
+      "slot": [
+        5,
+        0
+      ],
+      "origin": [
+        640,
+        0
+      ],
+      "visible_cells": 2608,
+      "bbox": [
+        31,
+        24,
+        94,
+        110
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 6,
+      "slot": [
+        0,
+        1
+      ],
+      "origin": [
+        0,
+        128
+      ],
+      "visible_cells": 2580,
+      "bbox": [
+        32,
+        24,
+        94,
+        111
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 7,
+      "slot": [
+        1,
+        1
+      ],
+      "origin": [
+        128,
+        128
+      ],
+      "visible_cells": 2581,
+      "bbox": [
+        41,
+        8,
+        92,
+        113
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 8,
+      "slot": [
+        2,
+        1
+      ],
+      "origin": [
+        256,
+        128
+      ],
+      "visible_cells": 2662,
+      "bbox": [
+        42,
+        15,
+        94,
+        113
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 9,
+      "slot": [
+        3,
+        1
+      ],
+      "origin": [
+        384,
+        128
+      ],
+      "visible_cells": 2825,
+      "bbox": [
+        17,
+        25,
+        94,
+        112
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 10,
+      "slot": [
+        4,
+        1
+      ],
+      "origin": [
+        512,
+        128
+      ],
+      "visible_cells": 2403,
+      "bbox": [
+        27,
+        40,
+        95,
+        110
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 11,
+      "slot": [
+        5,
+        1
+      ],
+      "origin": [
+        640,
+        128
+      ],
+      "visible_cells": 2608,
+      "bbox": [
+        30,
+        24,
+        94,
+        111
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 12,
+      "slot": [
+        0,
+        2
+      ],
+      "origin": [
+        0,
+        256
+      ],
+      "visible_cells": 2549,
+      "bbox": [
+        33,
+        24,
+        94,
+        112
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 13,
+      "slot": [
+        1,
+        2
+      ],
+      "origin": [
+        128,
+        256
+      ],
+      "visible_cells": 2378,
+      "bbox": [
+        33,
+        24,
+        88,
+        112
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 14,
+      "slot": [
+        2,
+        2
+      ],
+      "origin": [
+        256,
+        256
+      ],
+      "visible_cells": 2118,
+      "bbox": [
+        32,
+        26,
+        86,
+        112
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 15,
+      "slot": [
+        3,
+        2
+      ],
+      "origin": [
+        384,
+        256
+      ],
+      "visible_cells": 2268,
+      "bbox": [
+        33,
+        27,
+        88,
+        112
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 16,
+      "slot": [
+        4,
+        2
+      ],
+      "origin": [
+        512,
+        256
+      ],
+      "visible_cells": 2142,
+      "bbox": [
+        32,
+        25,
+        86,
+        112
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 17,
+      "slot": [
+        5,
+        2
+      ],
+      "origin": [
+        640,
+        256
+      ],
+      "visible_cells": 2571,
+      "bbox": [
+        33,
+        24,
+        94,
+        112
+      ],
+      "status": "pass"
+    }
+  ],
+  "animations": [
+    {
+      "id": "walk",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "loop": true,
+      "durations_ms": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "total_ms": 720,
+      "baseline_rows": [
+        110,
+        111,
+        112
+      ]
+    },
+    {
+      "id": "attack",
+      "frames": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "loop": false,
+      "durations_ms": [
+        180,
+        110,
+        150,
+        70,
+        140,
+        170
+      ],
+      "total_ms": 820,
+      "baseline_rows": [
+        110,
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "id": "block",
+      "frames": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "loop": false,
+      "durations_ms": [
+        180,
+        90,
+        100,
+        100,
+        230,
+        130
+      ],
+      "total_ms": 830,
+      "baseline_rows": [
+        112
+      ]
+    }
+  ],
+  "rig": null,
+  "issues": [
+    {
+      "code": "BASELINE_SHIFT",
+      "severity": "info",
+      "detail": "Lowest visible row varies across the sequence: [110, 111, 112]. Intentional for jumps or bobbing; otherwise the sprite may jitter.",
+      "animation": "walk"
+    },
+    {
+      "code": "BASELINE_SHIFT",
+      "severity": "info",
+      "detail": "Lowest visible row varies across the sequence: [110, 111, 112, 113]. Intentional for jumps or bobbing; otherwise the sprite may jitter.",
+      "animation": "attack"
+    }
+  ],
+  "outputs": {
+    "sprite_report": "sprite_report.json",
+    "layout_overlay": "layout_overlay.png",
+    "animation_previews": {
+      "walk": "animations/walk.gif",
+      "attack": "animations/attack.gif",
+      "block": "animations/block.gif"
+    }
+  },
+  "issue_counts": {
+    "fail": 0,
+    "review": 0,
+    "info": 2
+  },
+  "visual_review_required": [
+    "Watch each animation preview at native and enlarged size",
+    "Check silhouette, timing, weight and contact with the ground",
+    "Confirm the declared skeleton matches the intended anatomy or mechanism",
+    "Review parts listed as hidden, draw order and any colors a part gains while moving"
+  ]
+}

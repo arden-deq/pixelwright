@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reusable, strict project contracts and a batch gate for static PNG assets."""
+"""Strict PNG project contracts, batch gates and external sprite atlas checks."""
 from __future__ import annotations
 
 import argparse
@@ -167,8 +167,18 @@ def run_cli(argv: list[str] | None = None) -> int:
     for p in (inspect, batch):
         p.add_argument("--profile", required=True, type=Path)
         p.add_argument("--out-dir", required=True, type=Path)
+    import pixel_atlas
+    atlas = sub.add_parser("sprite-gen", help="Check a sprite-gen atlas and runtime manifest")
+    pixel_atlas.add_arguments(atlas)
     args = parser.parse_args(argv)
     try:
+        if args.action == "sprite-gen":
+            report = pixel_atlas.check_arguments(args)
+            print(json.dumps({"status": report["status"], "checks": report["checks"],
+                              "upstream": report["upstream"],
+                              "frames": len(report["frames"]), "issue_counts": report["issue_counts"],
+                              "report": str(args.out_dir / "report.json")}, ensure_ascii=False, indent=2))
+            return 0 if report["status"] == "pass" else 2
         profile = load_profile(args.profile)
         require_empty_output(args.out_dir, args.images + [args.profile])
         # Expand no globs implicitly: the shell/user controls the submitted files.

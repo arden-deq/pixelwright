@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "frozen": {
+    "contract.json": "2c4facee8d5ea7f2c04575e4856b5843dc2612e725d5da74a5144b68fdec6e8e",
+    "reference-source.png": "04166aab14b68788b2eac4f6650679d9d3b60baf93aba4df5af4cc8ca59107bc",
+    "reference-native.png": "d3b1ae6c6617c09f07a5d8a6837c5aa76114741df3641d0b351c4e65c646b8e1",
+    "source-spec.json": "404d434941538d4e7b6c3761edccb3af7ca3043bd83e5981f1ee0b4bb923ded3",
+    "prompts/hover.txt": "be46642038c8e276fba5cf5c66cc40f20eec1968fca4725383ca665ef9fd7847"
+  },
+  "states": {
+    "hover": {
+      "sha256": "effd1f4fb2e43cce76c4735c853f40535c6a194cb042af8456d3931787cd94d4",
+      "contract_sha256": "2c4facee8d5ea7f2c04575e4856b5843dc2612e725d5da74a5144b68fdec6e8e",
+      "reference_sha256": "d3b1ae6c6617c09f07a5d8a6837c5aa76114741df3641d0b351c4e65c646b8e1",
+      "prompt_sha256": "be46642038c8e276fba5cf5c66cc40f20eec1968fca4725383ca665ef9fd7847",
+      "producer": {
+        "method": "built-in image_gen; selected 2D reference only; 2026-10-22"
+      },
+      "history": []
+    }
+  }
+}

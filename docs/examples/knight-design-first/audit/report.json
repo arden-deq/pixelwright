@@ -1,0 +1,1140 @@
+{
+  "schema_version": 1,
+  "status": "fail",
+  "pixel_status": "pass",
+  "pose_status": "fail",
+  "artistic_status": "not_reviewed",
+  "scope": "exact_pixel_grid_and_independently_annotated_2d_artwork_not_mesh_silhouette",
+  "rig_check": {
+    "status": "pass",
+    "max_bone_length_error_m": 6.106226635438361e-16,
+    "max_projection_error_cells": 0.0,
+    "issues": []
+  },
+  "source_images": {
+    "walk": {
+      "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/knight-design-first/generation/raw/walk.png",
+      "sha256": "27f0153600f1ead5458862a6350c5f02560d7e38cab60009237782abcd88bf54",
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "attack": {
+      "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/knight-design-first/generation/raw/attack.png",
+      "sha256": "7afb6db7dd3aed443077b8e06c7b469564f82eb3a7016b7c4d1a3426b37faa94",
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    "block": {
+      "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/knight-design-first/generation/raw/block.png",
+      "sha256": "125cfd0399a77d796788b3c39d902961ad96cb1b958af6ffb7851bfe9c28ce1d",
+      "size": [
+        1536,
+        1024
+      ]
+    }
+  },
+  "originals_unchanged": true,
+  "frame_size": [
+    128,
+    128
+  ],
+  "scale": 4,
+  "shared_palette_colors": 24,
+  "palette_source": {
+    "path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/knight-design-first/generation/references/palette.json",
+    "sha256": "6f72173815fa54ae3273bfcacea25217fc6e5a7feddc50e8baefacec695798e9"
+  },
+  "resampling": "one_registered_lattice_no_individual_frame_fit",
+  "animations": {
+    "walk": {
+      "status": "fail",
+      "frames": [
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 3.288741977900616,
+            "pelvis": 3.1330215124071117,
+            "hand_r": 3.7078812341737897,
+            "mace_head": 5.094378378648514,
+            "ankle_r": 2.6783308725016717,
+            "ankle_l": 0.6888025985272361,
+            "shield_top": 3.1167458018637726
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "mace_head",
+              "error_cells": 5.094378378648514
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 0,
+          "description": "right foot contact; left foot behind",
+          "pixel_detail": {
+            "color_singleton_cells": 691,
+            "visible_cells": 2596,
+            "color_singleton_fraction": 0.26617873651771956
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 3.7220833389556813,
+            "pelvis": 3.585234215798394,
+            "hand_r": 4.201741112025178,
+            "mace_head": 5.790539712635686,
+            "ankle_r": 1.0728030382078635,
+            "ankle_l": 2.2736647839749313,
+            "shield_top": 3.5702678637332603
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "mace_head",
+              "error_cells": 5.790539712635686
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 1,
+          "description": "weight over right foot; left foot passes",
+          "pixel_detail": {
+            "color_singleton_cells": 661,
+            "visible_cells": 2524,
+            "color_singleton_fraction": 0.26188589540412044
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 2.8612472578399912,
+            "pelvis": 2.6808088090158435,
+            "hand_r": 3.103961087876977,
+            "mace_head": 3.737807959948718,
+            "ankle_r": 0.8180360826758463,
+            "ankle_l": 6.382629790130814,
+            "shield_top": 2.4378796828838314
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "ankle_l",
+              "error_cells": 6.382629790130814
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 2,
+          "description": "left leg reaching forward",
+          "pixel_detail": {
+            "color_singleton_cells": 705,
+            "visible_cells": 2634,
+            "color_singleton_fraction": 0.26765375854214124
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 3.288741977900616,
+            "pelvis": 3.1330215124071117,
+            "hand_r": 3.6733927747574144,
+            "mace_head": 4.031329556433983,
+            "ankle_r": 5.0574581769509575,
+            "ankle_l": 5.069049155199533,
+            "shield_top": 2.653593974420181
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "ankle_r",
+              "error_cells": 5.0574581769509575
+            },
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "ankle_l",
+              "error_cells": 5.069049155199533
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 3,
+          "description": "left foot contact; right foot behind",
+          "pixel_detail": {
+            "color_singleton_cells": 641,
+            "visible_cells": 2559,
+            "color_singleton_fraction": 0.2504884720593982
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 3.7220833389556813,
+            "pelvis": 3.585234215798394,
+            "hand_r": 4.407503621159426,
+            "mace_head": 5.305609614384738,
+            "ankle_r": 2.222532157222141,
+            "ankle_l": 3.279603769987702,
+            "shield_top": 3.3412701865951857
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "mace_head",
+              "error_cells": 5.305609614384738
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 4,
+          "description": "weight over left foot; right foot passes",
+          "pixel_detail": {
+            "color_singleton_cells": 611,
+            "visible_cells": 2529,
+            "color_singleton_fraction": 0.24159746935547646
+          }
+        },
+        {
+          "status": "pass",
+          "joint_error_cells": {
+            "neck": 2.8612472578399912,
+            "pelvis": 2.6808088090158435,
+            "hand_r": 2.5387315912282724,
+            "mace_head": 3.6660341607208764,
+            "ankle_r": 3.314906750900176,
+            "ankle_l": 1.012589457891833,
+            "shield_top": 2.669060260250036
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 5,
+          "description": "right leg reaching forward",
+          "pixel_detail": {
+            "color_singleton_cells": 618,
+            "visible_cells": 2608,
+            "color_singleton_fraction": 0.23696319018404907
+          }
+        }
+      ]
+    },
+    "attack": {
+      "status": "fail",
+      "frames": [
+        {
+          "status": "pass",
+          "joint_error_cells": {
+            "neck": 1.796054115235364,
+            "pelvis": 1.4919150059081545,
+            "hand_r": 1.796054115235364,
+            "mace_head": 0.4919150059081403,
+            "ankle_r": 1.0797089969778155,
+            "ankle_l": 1.1093382917968102,
+            "shield_top": 1.4919150059081474
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 0,
+          "description": "ready stance",
+          "pixel_detail": {
+            "color_singleton_cells": 679,
+            "visible_cells": 2580,
+            "color_singleton_fraction": 0.2631782945736434
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 1.8095083170311885,
+            "pelvis": 1.5080849940918455,
+            "hand_r": 5.5096082089121365,
+            "mace_head": 4.624013122658191,
+            "ankle_r": 1.1295865592978953,
+            "ankle_l": 3.169017648390327,
+            "shield_top": 0.9260372213330164
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "hand_r",
+              "error_cells": 5.5096082089121365
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 1,
+          "description": "raise mace overhead",
+          "pixel_detail": {
+            "color_singleton_cells": 646,
+            "visible_cells": 2581,
+            "color_singleton_fraction": 0.25029058504455637
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 1.1216730188523414,
+            "pelvis": 1.121673018852335,
+            "hand_r": 2.671697495936222,
+            "mace_head": 6.441007805761715,
+            "ankle_r": 1.1295865592978953,
+            "ankle_l": 5.580319233435229,
+            "shield_top": 2.6032667300001617
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "mace_head",
+              "error_cells": 6.441007805761715
+            },
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "ankle_l",
+              "error_cells": 5.580319233435229
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 2,
+          "description": "wind up with the mace high behind and above the head",
+          "pixel_detail": {
+            "color_singleton_cells": 604,
+            "visible_cells": 2662,
+            "color_singleton_fraction": 0.22689706987227648
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 1.0144006574214384,
+            "pelvis": 1.1703193875548124,
+            "hand_r": 3.967890772596289,
+            "mace_head": 7.875606293610004,
+            "ankle_r": 0.4451982501096993,
+            "ankle_l": 3.169017648390327,
+            "shield_top": 2.9208598773047423
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                14
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.3999999999999999
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "mace_head",
+              "error_cells": 7.875606293610004
+            },
+            {
+              "code": "ARTWORK_PART_SIZE_CHANGED",
+              "severity": "fail",
+              "part": "mace_head",
+              "relative_error": 0.3999999999999999
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 3,
+          "description": "foreshortened forward swing in the same three-quarter camera; do not turn into a side view",
+          "pixel_detail": {
+            "color_singleton_cells": 697,
+            "visible_cells": 2825,
+            "color_singleton_fraction": 0.24672566371681415
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 7.103084227518008,
+            "pelvis": 6.032339976367396,
+            "hand_r": 8.994268543430978,
+            "mace_head": 7.644689552097482,
+            "ankle_r": 1.7664759179946437,
+            "ankle_l": 4.268222939361629,
+            "shield_top": 1.7477644207949377
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                11
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.10000000000000009
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "neck",
+              "error_cells": 7.103084227518008
+            },
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "pelvis",
+              "error_cells": 6.032339976367396
+            },
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "hand_r",
+              "error_cells": 8.994268543430978
+            },
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "mace_head",
+              "error_cells": 7.644689552097482
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 4,
+          "description": "low impact and crouch",
+          "pixel_detail": {
+            "color_singleton_cells": 628,
+            "visible_cells": 2403,
+            "color_singleton_fraction": 0.26133999167707034
+          }
+        },
+        {
+          "status": "pass",
+          "joint_error_cells": {
+            "neck": 2.221616869710671,
+            "pelvis": 1.9838300118162948,
+            "hand_r": 1.991101411242133,
+            "mace_head": 1.092724991843712,
+            "ankle_r": 1.840152187113358,
+            "ankle_l": 2.647686328110532,
+            "shield_top": 0.9125678301471689
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 5,
+          "description": "recover to ready",
+          "pixel_detail": {
+            "color_singleton_cells": 654,
+            "visible_cells": 2608,
+            "color_singleton_fraction": 0.25076687116564417
+          }
+        }
+      ]
+    },
+    "block": {
+      "status": "fail",
+      "frames": [
+        {
+          "status": "pass",
+          "joint_error_cells": {
+            "neck": 1.0,
+            "pelvis": 0.0,
+            "hand_r": 1.0,
+            "mace_head": 0.0,
+            "ankle_r": 0.0,
+            "ankle_l": 2.0,
+            "shield_top": 0.0
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 0,
+          "description": "ready stance",
+          "pixel_detail": {
+            "color_singleton_cells": 628,
+            "visible_cells": 2549,
+            "color_singleton_fraction": 0.24637112593173793
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 1.644425758708424,
+            "pelvis": 1.305425630169637,
+            "hand_r": 1.237241801889275,
+            "mace_head": 1.0794780274420737,
+            "ankle_r": 0.0,
+            "ankle_l": 2.0,
+            "shield_top": 13.349509305964805
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "shield_top",
+              "error_cells": 13.349509305964805
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 1,
+          "description": "raise the shield",
+          "pixel_detail": {
+            "color_singleton_cells": 609,
+            "visible_cells": 2378,
+            "color_singleton_fraction": 0.25609756097560976
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "hand_r": 2.2074681833973013,
+            "mace_head": 2.2097899323939196,
+            "ankle_r": 0.0,
+            "ankle_l": 2.0,
+            "shield_top": 5.038147765709561
+          },
+          "part_dimensions": {
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "MISSING_ARTWORK_JOINT",
+              "severity": "review",
+              "joint": "neck"
+            },
+            {
+              "code": "MISSING_ARTWORK_JOINT",
+              "severity": "review",
+              "joint": "pelvis"
+            },
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "shield_top",
+              "error_cells": 5.038147765709561
+            },
+            {
+              "code": "MISSING_ARTWORK_DIMENSION",
+              "severity": "review",
+              "part": "helmet"
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 2,
+          "description": "full guard covering the chest",
+          "pixel_detail": {
+            "color_singleton_cells": 516,
+            "visible_cells": 2118,
+            "color_singleton_fraction": 0.24362606232294617
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "pelvis": 2.35680876329333,
+            "hand_r": 1.9607189752258116,
+            "mace_head": 1.9633325404548136,
+            "ankle_r": 2.0,
+            "ankle_l": 3.605551275463989,
+            "shield_top": 10.376577659360773
+          },
+          "part_dimensions": {
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "MISSING_ARTWORK_JOINT",
+              "severity": "review",
+              "joint": "neck"
+            },
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "shield_top",
+              "error_cells": 10.376577659360773
+            },
+            {
+              "code": "MISSING_ARTWORK_DIMENSION",
+              "severity": "review",
+              "part": "helmet"
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 3,
+          "description": "absorb impact behind shield",
+          "pixel_detail": {
+            "color_singleton_cells": 625,
+            "visible_cells": 2268,
+            "color_singleton_fraction": 0.27557319223985893
+          }
+        },
+        {
+          "status": "review",
+          "joint_error_cells": {
+            "hand_r": 1.5014433220706147,
+            "mace_head": 2.3586650293257025,
+            "ankle_r": 0.0,
+            "ankle_l": 2.0,
+            "shield_top": 4.627979859374405
+          },
+          "part_dimensions": {
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "MISSING_ARTWORK_JOINT",
+              "severity": "review",
+              "joint": "neck"
+            },
+            {
+              "code": "MISSING_ARTWORK_JOINT",
+              "severity": "review",
+              "joint": "pelvis"
+            },
+            {
+              "code": "MISSING_ARTWORK_DIMENSION",
+              "severity": "review",
+              "part": "helmet"
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 4,
+          "description": "hold full guard",
+          "pixel_detail": {
+            "color_singleton_cells": 494,
+            "visible_cells": 2142,
+            "color_singleton_fraction": 0.23062558356676005
+          }
+        },
+        {
+          "status": "fail",
+          "joint_error_cells": {
+            "neck": 1.2475786933951187,
+            "pelvis": 0.7459575029540702,
+            "hand_r": 1.2475786933951187,
+            "mace_head": 0.7459575029540702,
+            "ankle_r": 0.0,
+            "ankle_l": 2.0,
+            "shield_top": 8.813225769230518
+          },
+          "part_dimensions": {
+            "helmet": {
+              "observed": [
+                12,
+                16
+              ],
+              "reference": [
+                11,
+                15
+              ],
+              "relative_error": 0.09090909090909083
+            },
+            "mace_head": {
+              "observed": [
+                10
+              ],
+              "reference": [
+                10
+              ],
+              "relative_error": 0.0
+            },
+            "shield_long_axis": {
+              "observed": [
+                30
+              ],
+              "reference": [
+                30
+              ],
+              "relative_error": 0.0
+            }
+          },
+          "issues": [
+            {
+              "code": "ARTWORK_POSE_DRIFT",
+              "severity": "fail",
+              "joint": "shield_top",
+              "error_cells": 8.813225769230518
+            }
+          ],
+          "scope": "manual_artwork_landmarks_and_dimensions_not_automatic_semantic_segmentation",
+          "frame": 5,
+          "description": "lower shield toward ready",
+          "pixel_detail": {
+            "color_singleton_cells": 657,
+            "visible_cells": 2571,
+            "color_singleton_fraction": 0.2555425904317386
+          }
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Artwork joints and part dimensions require independent manual annotations.",
+    "A valid 3D skeleton does not certify that the generated artwork follows it.",
+    "Cloth, contour quality, identity and occlusion require a separate artistic review."
+  ]
+}

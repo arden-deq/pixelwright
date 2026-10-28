@@ -2,6 +2,19 @@
 
 Read this when an asset has several frames: a sprite sheet or atlas, an animation cycle, or a character or object whose parts move between frames.
 
+For the default **selected-design generation and independent 2D observation**
+workflow, use [sequences.md](sequences.md). It checks appearance and timed motion
+of arbitrary named parts, including imaginary objects, without a skeleton.
+This document covers the lower-level authored atlas and optional declared rig.
+
+## Optional generative animation with a 3D skeleton
+
+Select or create the 2D character design **before** creating motion guides. Preserve that design as the shared identity reference. Annotate its joints, equipment attachment points and stable part measurements; record the annotation method. Fit a bare 3D skeleton to those proportions and freeze one camera, world scale and motion set. Bone projections and depth describe pose and overlap; they do not define the character's drawn contours, costume, materials or shading. Supply no appearance mesh unless the user requested 3D-to-2D style transfer.
+
+Inspect the generated 2D frames independently. Compare observed artwork joints and stable part dimensions with the selected design and intended poses, accounting for genuine foreshortening. Do not derive observations by copying the guide joints or assigning visible pixels to their nearest bone. A world-length PASS is evidence about the skeleton only. Without independent artwork observations, pose status stays REVIEW. Record visual identity, overlap, contour quality and timing separately. Keep failed attempts and redraw the reported defect; do not fit each output frame or relax its gates after generation.
+
+The source checkout's `tools/knight_design_first.py` recipe freezes the selected 2D identity before posing. Its HTTP generator validates identity and guide hashes before a request; image references must remain the selected design sheet followed by the bare skeleton. `--force` archives replaced motion PNGs and provenance under `generated/history/`, and cannot overwrite the selected design. Keep the chosen design's actual proportions and costume in prompts. Independent measurements must be finite numeric arrays; use missing values or `null` for occluded, unmeasurable parts and remeasure after regeneration.
+
 ## Freeze the sheet contract
 
 Agree on the frame size in logical cells, the integer scale, the palette, the grid of frame slots, and the animations before drawing. Frames are equal rectangles numbered row-major from the top-left slot. The sheet's logical size follows from the layout:

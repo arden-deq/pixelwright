@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "changes_needed",
+  "reviewer": "Codex visual review, not human approval",
+  "identity_authority": "generation/references/design-native.png",
+  "reviewed_artifacts": [
+    "generation/references/design.png",
+    "audit/sprite-sheet.png",
+    "audit/rig-overlay.png",
+    "audit/walk.gif",
+    "audit/attack.gif",
+    "audit/block.gif",
+    "pixel-detail.png",
+    "grid-detail.png"
+  ],
+  "observations": [
+    "The 2D concept was generated before any skeleton input. Armor, red tabard, gold emblem, round helmet and equipment carry into the state sheets.",
+    "Pixel contours and shared material ramps are readable; cloth and plume are redrawn rather than copied from a 3D mesh.",
+    "Walk foot placement drifts from the frozen pose guide; some mace positions also exceed the limit.",
+    "Attack frame 3 (zero-based) enlarges the mace head from 10 to about 14 native cells; frame 4 crouches more deeply than its skeleton.",
+    "Block shield heights drift in frames 1, 3 and 5. Some neck/pelvis/helmet measurements are occluded and remain unverified.",
+    "Body proportions look more consistent than the discarded mesh-first sample, but this is not proof of invariant semantic limb dimensions."
+  ],
+  "measurement_limitations": "Manual observations are approximate to one native cell. Near-threshold numeric failures need closer review; limits were not changed to accept them.",
+  "next_redraw": [
+    "Keep the selected 2D design; redraw walk foot contacts and mace grip at the frozen joint positions.",
+    "Redraw attack 3 with a foreshortened arm and a 10-cell mace head; redraw attack 4 with a shallower brace.",
+    "Lower the shield in block 1/3/5 to its skeleton control and manually inspect obscured anatomy."
+  ],
+  "frame_status_counts": {
+    "walk": {
+      "fail": 5,
+      "pass": 1
+    },
+    "attack": {
+      "pass": 2,
+      "fail": 4
+    },
+    "block": {
+      "pass": 1,
+      "fail": 4,
+      "review": 1
+    }
+  },
+  "production_accepted": false,
+  "human_approved": false
+}

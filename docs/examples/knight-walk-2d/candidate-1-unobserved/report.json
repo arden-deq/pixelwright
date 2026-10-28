@@ -1,0 +1,1521 @@
+{
+  "schema_version": 1,
+  "tool": "Pixelwright 2D sequence",
+  "version": "0.6.2",
+  "status": "fail",
+  "technical_status": "fail",
+  "skeleton_required": false,
+  "scope": "frozen_2d_contract_and_independently_supplied_artwork_observations",
+  "human_approval_recorded": false,
+  "contract_sha256": "3bf9e32a83537cc8f6cb9e8b9118b8ef730de5ec5a28408730a7613e80dae00e",
+  "reference_sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+  "observations_sha256": null,
+  "states": {
+    "walk": {
+      "source_sha256": "b36725905f4c74f97502dfd397431cdffe22233307aaa34fba59aba8dc5a4ce0",
+      "derivation": {
+        "source_size": [
+          1774,
+          887
+        ],
+        "logical_size": [
+          512,
+          256
+        ],
+        "mode": "project",
+        "original_grid_status": "not_certified_projection_source",
+        "sampling": "nearest_whole_canvas",
+        "native_input_has_no_measurable_within_cell_fidelity": false
+      },
+      "pixel_status": "pass",
+      "frames": [
+        {
+          "frame": 0,
+          "area_ratio": 1.7001171417415073,
+          "bad_color_fraction": 0.011713367018833257,
+          "parts": {}
+        },
+        {
+          "frame": 1,
+          "area_ratio": 1.7567356501366653,
+          "bad_color_fraction": 0.012891753723049567,
+          "parts": {}
+        },
+        {
+          "frame": 2,
+          "area_ratio": 1.7415072237407263,
+          "bad_color_fraction": 0.013228699551569507,
+          "parts": {}
+        },
+        {
+          "frame": 3,
+          "area_ratio": 1.7661069894572432,
+          "bad_color_fraction": 0.013486623922175547,
+          "parts": {}
+        },
+        {
+          "frame": 4,
+          "area_ratio": 1.7090980085903944,
+          "bad_color_fraction": 0.012794151245145076,
+          "parts": {}
+        },
+        {
+          "frame": 5,
+          "area_ratio": 1.7618117922686451,
+          "bad_color_fraction": 0.014627659574468085,
+          "parts": {}
+        },
+        {
+          "frame": 6,
+          "area_ratio": 1.7426786411557986,
+          "bad_color_fraction": 0.01434012995742774,
+          "parts": {}
+        },
+        {
+          "frame": 7,
+          "area_ratio": 1.7731354939476767,
+          "bad_color_fraction": 0.01519489099317331,
+          "parts": {}
+        }
+      ],
+      "motion": {
+        "landmarks": {},
+        "contacts": []
+      },
+      "art_review": {
+        "status": "not_reviewed",
+        "reviewer": "",
+        "observations": []
+      },
+      "outputs": {
+        "native": "walk/native.png",
+        "rendered": "walk/rendered.png",
+        "grid": "walk/pixel-audit/sheet/grid_overlay.png",
+        "observations": "walk/observation-overlay.png",
+        "gif": "walk/pixel-audit/animations/walk.gif"
+      },
+      "status": "fail"
+    }
+  },
+  "issues": [
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "reference": true
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "reference": true
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "reference": true
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "reference": true
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "reference": true
+    },
+    {
+      "code": "OBSERVATION_METHOD_MISSING",
+      "severity": "review",
+      "detail": "Record how actual artwork was independently observed."
+    },
+    {
+      "code": "BASELINE_SHIFT",
+      "severity": "info",
+      "detail": "Lowest visible row varies across the sequence: [115, 116, 120, 121]. Intentional for jumps or bobbing; otherwise the sprite may jitter.",
+      "animation": "walk",
+      "state": "walk"
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7001171417415073,
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7567356501366653,
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7415072237407263,
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7661069894572432,
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7090980085903944,
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7618117922686451,
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7426786411557986,
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "helmet",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "shield",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "mace_head",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "PART_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe the actual artwork part; no anatomy is inferred.",
+      "part": "character",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "pelvis",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "chest",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "head",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_ball",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_ball",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "near_heel",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "far_heel",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "shield_top",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_center",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "LANDMARK_NOT_OBSERVED",
+      "severity": "review",
+      "detail": "Observe this feature in the actual artwork.",
+      "landmark": "mace_grip",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shield_to_helmet",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "mace_to_helmet",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "RATIO_UNVERIFIED",
+      "severity": "review",
+      "detail": "A required part measurement is unobserved.",
+      "ratio": "shin_balance",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "FRAME_SCALE_CHANGED",
+      "severity": "fail",
+      "detail": "Visible frame area differs from the fixed design scale.",
+      "area_ratio": 1.7731354939476767,
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "pelvis"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "chest"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "head"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "near_ball"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "far_ball"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "near_heel"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "far_heel"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "shield_top"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "mace_center"
+    },
+    {
+      "code": "MOTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "All frames need this observed feature; missing frames are not interpolated.",
+      "state": "walk",
+      "landmark": "mace_grip"
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 0
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 1
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 2
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 3
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 4
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 5
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 6
+    },
+    {
+      "code": "CONNECTION_UNVERIFIED",
+      "severity": "review",
+      "detail": "Connection endpoints are unobserved.",
+      "state": "walk",
+      "frame": 7
+    },
+    {
+      "code": "CONTACT_UNVERIFIED",
+      "severity": "review",
+      "detail": "Contact is unobserved in a required frame.",
+      "state": "walk",
+      "landmark": "near_ball"
+    },
+    {
+      "code": "CONTACT_UNVERIFIED",
+      "severity": "review",
+      "detail": "Contact is unobserved in a required frame.",
+      "state": "walk",
+      "landmark": "far_ball"
+    },
+    {
+      "code": "ART_NOT_REVIEWED",
+      "severity": "review",
+      "detail": "Review identity, contours, timing, contact and intended movement separately.",
+      "state": "walk"
+    }
+  ],
+  "issue_counts": {
+    "fail": 8,
+    "review": 172,
+    "info": 1
+  },
+  "limitations": [
+    "Named part masks and features are supplied observations, not automatic semantic recognition.",
+    "Part area, rotation-only shape/pattern and color checks do not prove identity or natural movement.",
+    "Foreshortening, occlusion, flexible parts and pose-dependent shading require a recorded visual review.",
+    "Projection is a declared derivative; a compliant exported PNG does not certify the raw generator's pixel grid."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "frozen": {
+    "contract.json": "3bf9e32a83537cc8f6cb9e8b9118b8ef730de5ec5a28408730a7613e80dae00e",
+    "reference-source.png": "73f57324d8f20e7ea831139097d4d716d6a068d52f9d157009b02f2b2c7f5a41",
+    "reference-native.png": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+    "source-spec.json": "446fe507f2f63b5e2157d649f6cc0fbc90a5af145ddeaa6f841c8d251c8c5e70",
+    "prompts/walk.txt": "3d9be9df5b8f683b06635072c6267048904c82b7e07acd2db900cecd5747371d"
+  },
+  "states": {
+    "walk": {
+      "sha256": "b36725905f4c74f97502dfd397431cdffe22233307aaa34fba59aba8dc5a4ce0",
+      "contract_sha256": "3bf9e32a83537cc8f6cb9e8b9118b8ef730de5ec5a28408730a7613e80dae00e",
+      "reference_sha256": "2b4a91e82933cb886fffa20fc31e8a5b3ca51828441b5b02b6e81b3318bcccf4",
+      "prompt_sha256": "3d9be9df5b8f683b06635072c6267048904c82b7e07acd2db900cecd5747371d",
+      "producer": {
+        "method": "Codex built-in image_gen; exact frozen walk prompt; selected 2D design only; model undisclosed"
+      },
+      "history": []
+    }
+  }
+}

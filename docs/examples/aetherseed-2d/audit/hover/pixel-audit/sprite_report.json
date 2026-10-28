@@ -1,0 +1,354 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.2",
+  "schema_version": 1,
+  "status": "pass",
+  "scope": "technical_checks_only_not_artistic_quality",
+  "artistic_status": "not_reviewed",
+  "preview_scale": 4,
+  "inputs": {
+    "spec": {
+      "path": "sprite-spec.json",
+      "sha256": "b066fa4cc3df5bc2d7aa458401b3984d0171de2cbfe83d4778ad6ebd1c7331af"
+    },
+    "sheet": {
+      "path": "rendered.png",
+      "sha256": "78906ecfd6d462c5b57855355ef446383a671988cf1ec61a4df6ef5f5d05efbf"
+    },
+    "profile": {
+      "path": "profile.json",
+      "sha256": "93b97173cff66afd6e4d6434626ce572bbfd99621476b063b148e0e54ad3cf22"
+    }
+  },
+  "name": "Aetherseed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Aetherseed",
+    "logical_size": "192x128",
+    "scale": 4,
+    "max_colors": 24,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#001149FF",
+      "#00154DFF",
+      "#001850FF",
+      "#015887FF",
+      "#01608EFF",
+      "#016D99FF",
+      "#027CA7FF",
+      "#03164CFF",
+      "#0591B6FF",
+      "#08416CFF",
+      "#0FB9CEFF",
+      "#10184CFF",
+      "#20DFE2FF",
+      "#461D86FF",
+      "#48EFE1FF",
+      "#5695B5FF",
+      "#723963FF",
+      "#82F9E0FF",
+      "#9C5682FF",
+      "#A6572FFF",
+      "#D9813CFF",
+      "#E2F9D3FF",
+      "#E79D63FF",
+      "#EFE19DFF"
+    ]
+  },
+  "layout": {
+    "frame_size": [
+      64,
+      64
+    ],
+    "columns": 3,
+    "rows": 2,
+    "margin": 0,
+    "spacing": 0,
+    "frame_count": 6,
+    "edge_margin": 2,
+    "sheet_logical_size": [
+      192,
+      128
+    ],
+    "order": "row_major",
+    "gutter": "alpha_zero",
+    "frame_origins": [
+      [
+        0,
+        0
+      ],
+      [
+        64,
+        0
+      ],
+      [
+        128,
+        0
+      ],
+      [
+        0,
+        64
+      ],
+      [
+        64,
+        64
+      ],
+      [
+        128,
+        64
+      ]
+    ]
+  },
+  "sheet_audit": {
+    "status": "pass",
+    "report": "sheet/report.json",
+    "outputs": {
+      "report": "sheet/report.json",
+      "overlay": "sheet/grid_overlay.png",
+      "grid_lines": "sheet/grid_lines.png",
+      "logical_preview": "sheet/logical_preview.png",
+      "violation_mask": "sheet/violation_mask.png",
+      "correction_prompt": "sheet/correction_prompt.txt"
+    }
+  },
+  "checks": {
+    "frames": "checked",
+    "animations": "checked",
+    "rig": "not_declared"
+  },
+  "frames": [
+    {
+      "index": 0,
+      "slot": [
+        0,
+        0
+      ],
+      "origin": [
+        0,
+        0
+      ],
+      "visible_cells": 673,
+      "bbox": [
+        11,
+        15,
+        49,
+        54
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 1,
+      "slot": [
+        1,
+        0
+      ],
+      "origin": [
+        64,
+        0
+      ],
+      "visible_cells": 659,
+      "bbox": [
+        13,
+        11,
+        50,
+        49
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 2,
+      "slot": [
+        2,
+        0
+      ],
+      "origin": [
+        128,
+        0
+      ],
+      "visible_cells": 664,
+      "bbox": [
+        14,
+        9,
+        51,
+        46
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 3,
+      "slot": [
+        0,
+        1
+      ],
+      "origin": [
+        0,
+        64
+      ],
+      "visible_cells": 659,
+      "bbox": [
+        12,
+        10,
+        50,
+        46
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 4,
+      "slot": [
+        1,
+        1
+      ],
+      "origin": [
+        64,
+        64
+      ],
+      "visible_cells": 722,
+      "bbox": [
+        11,
+        14,
+        49,
+        53
+      ],
+      "status": "pass"
+    },
+    {
+      "index": 5,
+      "slot": [
+        2,
+        1
+      ],
+      "origin": [
+        128,
+        64
+      ],
+      "visible_cells": 681,
+      "bbox": [
+        13,
+        10,
+        51,
+        49
+      ],
+      "status": "pass"
+    }
+  ],
+  "animations": [
+    {
+      "id": "hover",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "loop": true,
+      "durations_ms": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "total_ms": 720,
+      "baseline_rows": [
+        46,
+        49,
+        53,
+        54
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 6,
+          "requested_durations_ms": [
+            120,
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "requested_total_ms": 720,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            120,
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "quantized": false,
+          "actual_frame_count": 6,
+          "actual_durations_ms": [
+            120,
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "actual_total_ms": 720,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
+    }
+  ],
+  "rig": null,
+  "issues": [
+    {
+      "code": "BASELINE_SHIFT",
+      "severity": "info",
+      "detail": "Lowest visible row varies across the sequence: [46, 49, 53, 54]. Intentional for jumps or bobbing; otherwise the sprite may jitter.",
+      "animation": "hover"
+    }
+  ],
+  "outputs": {
+    "sprite_report": "sprite_report.json",
+    "layout_overlay": "layout_overlay.png",
+    "animation_previews": {
+      "hover": "animations/hover.gif"
+    }
+  },
+  "issue_counts": {
+    "fail": 0,
+    "review": 0,
+    "info": 1
+  },
+  "visual_review_required": [
+    "Watch each animation preview at native and enlarged size",
+    "Check silhouette, timing, weight and contact with the ground",
+    "Confirm the declared skeleton matches the intended anatomy or mechanism",
+    "Review parts listed as hidden, draw order and any colors a part gains while moving"
+  ]
+}

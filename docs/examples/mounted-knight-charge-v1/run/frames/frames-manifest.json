@@ -1,0 +1,207 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "engine_revision": "75166b1fe869",
+  "extract_args": {},
+  "run_dir": "/Users/namjungduck/git/Pixelwright/review/docs/examples/mounted-knight-charge-v1/run",
+  "cell": {
+    "shape": "rect",
+    "width": 256,
+    "height": 192,
+    "safe_margin_x": 12,
+    "safe_margin_y": 12
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "auto",
+    "score": 213.77,
+    "min_subject_distance": 205.22,
+    "background": {
+      "mode": "transparent",
+      "opaque_border_fraction": 0.0,
+      "subject_pixels": 8619
+    },
+    "candidates": [
+      {
+        "name": "magenta",
+        "hex": "#FF00FF",
+        "score": 208.43,
+        "min_subject_distance": 204.56,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "green",
+        "hex": "#00FF00",
+        "score": 213.77,
+        "min_subject_distance": 205.22,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "cyan",
+        "hex": "#00FFFF",
+        "score": 209.13,
+        "min_subject_distance": 202.67,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "blue",
+        "hex": "#004DFF",
+        "score": 180.53,
+        "min_subject_distance": 175.35,
+        "clears_erase_radius": true
+      }
+    ],
+    "selection_reason": "highest 1st-percentile subject distance among the 4 candidate(s) clearing the 96 erase radius"
+  },
+  "rows": [
+    {
+      "state": "charge",
+      "frames": 8,
+      "method": "components",
+      "files": [
+        "frames/charge/frame-0.png",
+        "frames/charge/frame-1.png",
+        "frames/charge/frame-2.png",
+        "frames/charge/frame-3.png",
+        "frames/charge/frame-4.png",
+        "frames/charge/frame-5.png",
+        "frames/charge/frame-6.png",
+        "frames/charge/frame-7.png"
+      ],
+      "frame_records": [
+        {
+          "index": 0,
+          "nontransparent_pixels": 14400,
+          "bbox": [
+            36,
+            0,
+            248,
+            180
+          ],
+          "edge_pixels": 16,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 1,
+          "nontransparent_pixels": 13756,
+          "bbox": [
+            24,
+            2,
+            238,
+            178
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 2,
+          "nontransparent_pixels": 13924,
+          "bbox": [
+            22,
+            2,
+            236,
+            176
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 3,
+          "nontransparent_pixels": 13136,
+          "bbox": [
+            24,
+            14,
+            244,
+            174
+          ],
+          "edge_pixels": 0,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 4,
+          "nontransparent_pixels": 14384,
+          "bbox": [
+            22,
+            0,
+            240,
+            180
+          ],
+          "edge_pixels": 24,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 5,
+          "nontransparent_pixels": 14216,
+          "bbox": [
+            18,
+            0,
+            238,
+            180
+          ],
+          "edge_pixels": 24,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 6,
+          "nontransparent_pixels": 13976,
+          "bbox": [
+            18,
+            0,
+            238,
+            180
+          ],
+          "edge_pixels": 20,
+          "chroma_adjacent_pixels": 0
+        },
+        {
+          "index": 7,
+          "nontransparent_pixels": 14420,
+          "bbox": [
+            30,
+            0,
+            220,
+            180
+          ],
+          "edge_pixels": 28,
+          "chroma_adjacent_pixels": 0
+        }
+      ],
+      "ok": true,
+      "engine_revision": "75166b1fe869",
+      "plain_files": [
+        "frames/charge/frame-0.plain.png",
+        "frames/charge/frame-1.plain.png",
+        "frames/charge/frame-2.plain.png",
+        "frames/charge/frame-3.plain.png",
+        "frames/charge/frame-4.plain.png",
+        "frames/charge/frame-5.plain.png",
+        "frames/charge/frame-6.plain.png",
+        "frames/charge/frame-7.plain.png"
+      ],
+      "orig_files": [
+        "frames/charge/orig/frame-0.png",
+        "frames/charge/orig/frame-1.png",
+        "frames/charge/orig/frame-2.png",
+        "frames/charge/orig/frame-3.png",
+        "frames/charge/orig/frame-4.png",
+        "frames/charge/orig/frame-5.png",
+        "frames/charge/orig/frame-6.png",
+        "frames/charge/orig/frame-7.png"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "charge: pitch disagreement — detect 1.00x1.00 (uniformity 137.1) vs runlen 2.35x2.35 (40.1); detect kept. large gap usually means the raw was drawn finer than the cell contract — reroll with a block-count hint",
+    "charge: native logical exceeds the physical cap 128x90 — capped frames (reroll candidates): 0:321x272, 1:323x267, 2:323x264, 3:333x242, 4:330x272, 5:332x272, 6:331x272, 7:287x272",
+    "palette: rebuilt+pinned (32 colors → palette.lock.json)",
+    "charge: frame 07 has 28 non-transparent edge pixels",
+    "pixel unfake: pitch=1.0 scale=2x logical<=128x96 palette=32"
+  ]
+}

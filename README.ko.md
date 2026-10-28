@@ -2,41 +2,26 @@
 
 ![기사·물약·방패 아이콘으로 소개하는 Pixelwright 배너](docs/images/pixelwright-header.png)
 
-헤더: 2048×1024 · 4×4 px 셀 · 32색 · 131,072셀 PASS · [검사 보고서](docs/examples/header/report.json) · [격자 미리보기](docs/examples/header/grid_overlay.png) · [제작 기록](docs/examples/header/)
-
 [English](README.md) · [한국어](README.ko.md) · 버전 0.6.2 · [Apache License 2.0](LICENSE)
 
-**선언한 격자 위에서 정적 PNG 픽셀아트를 만들고, 모든 셀을 검사합니다.**
+**정적 PNG 픽셀아트의 격자·색상·투명도를 검수합니다.**
 
-Pixelwright는 GPT 계열 호스트와 Claude에서 함께 쓰는 AI 스킬입니다. 캐릭터·아이템·UI 아이콘의 일정한 도트 크기, 격자 안에 온전히 들어가는 정사각형 셀, 셀 내부의 정확한 단일 RGBA 색상을 생성하고 검사합니다. 두 생태계에서 동일한 `SKILL.md`와 Python 도구를 사용하며, 실행 호스트에는 파일 접근과 Python 실행 기능이 필요합니다.
+Pixelwright는 실제 이미지의 픽셀을 선언한 품질 프로필과 비교하고, JSON 판정과 시각적 검사 자료를 만듭니다. 캐릭터·아이템·UI 아이콘을 검수하거나 여러 에셋에 같은 기준을 적용할 수 있습니다. Python 도구와 함께 GPT 계열 호스트·Claude에서 사용할 수 있는 공통 AI 스킬을 제공합니다.
 
-팔레트와 논리 픽셀 행렬을 먼저 만든 뒤 정수 배율로 확대하고, 내보낸 PNG를 검사합니다. 이름 있는 색상과 명암 램프를 여러 에셋에서 재사용하거나, 이미 유효한 격자에서 색상을 팔레트에 맞춰 변환할 수 있습니다. 애니메이션은 프레임을 하나의 스프라이트 시트에 배치하고 골격을 선언해, 몸과 사물의 각 부위가 움직이는 동안 일관되게 유지되는지 검사합니다. 기존 이미지에는 검사 전에 의도한 격자 규격을 선언합니다. 기본 결과에는 원본 이미지와 실제 격자 QA 미리보기를 함께 보여 주어 사용자도 셀을 눈으로 확인할 수 있습니다.
+현재 핵심 기능은 정적 PNG 검수입니다. 생성·보정·팔레트 편집·레이어·애니메이션은 [개발 중 기능](#개발-중-기능)으로 소개합니다.
 
-## 같은 기사, 두 가지 격자 규격
+## 핵심 기능: 픽셀아트 검수
 
-![방패와 둔기를 든 풀 플레이트 기사의 4×4·8×8 도트 비교: 원본 이미지, 격자 확대, 공통 32색 팔레트, 실제 QA 결과](docs/images/knight-conditions.ko.png)
+| 검사 | 확인하는 내용 |
+| --- | --- |
+| 이미지 크기·격자 | 논리 캔버스에 동일한 정수 배율을 곱한 크기인지, 원점 `(0, 0)`에서 격자가 맞는지 확인합니다. |
+| 정사각형 셀 | 선언한 셀 내부의 모든 샘플이 정확히 같은 RGBA 값인지 검사합니다. |
+| 팔레트 | 실제 가시 RGB 색상 수와 선택적으로 지정한 RGBA 팔레트를 검사합니다. |
+| 투명도 | 알파 정책과 완전히 투명한 픽셀의 숨은 RGB 처리 규칙을 확인합니다. |
+| 검사 근거 | JSON 보고서, 원본·프로필 해시, 격자 미리보기, 전체 불균일 셀 마스크를 남깁니다. |
+| 일괄 검사·CI | 여러 PNG에 같은 프로필을 적용하고 통과·검사 실패·실행 오류를 종료 코드로 구분합니다. |
 
-Pixelwright 개발 과정에서 실제로 만들고 눈으로 확인한 결과입니다. 풀 플레이트 아머를 착용하고 방패와 플랜지 메이스를 든 전신 기사를 두 규격으로 제작했습니다. 두 PNG 모두 **1024×1536**이며, 동일한 **32색 RGBA 팔레트**(가시 색상 31개 + 투명색 1개)를 사용하고 같은 엄격한 품질 기준을 통과했습니다. 도트 크기를 바꾸면 논리 캔버스와 표현할 수 있는 디테일이 달라지지만, 온전한 정사각형 셀과 정확한 단색 채움은 유지됩니다.
-
-| 버전 | 작화 원본 → 출력 PNG | 도트 1칸 | 단색 셀 | 투명색 포함 색상 수 | 검사 |
-| --- | --- | --- | ---: | ---: | --- |
-| 세밀한 도트 | [256×384](docs/examples/knight/4px/native.png) → [1024×1536](docs/examples/knight/4px/rendered.png) | 4×4 px | 98,304 / 98,304 | 32 | [PASS 보고서](docs/examples/knight/4px/report.json) |
-| 큰 도트 | [128×192](docs/examples/knight/8px/native.png) → [1024×1536](docs/examples/knight/8px/rendered.png) | 8×8 px | 24,576 / 24,576 | 32 | [PASS 보고서](docs/examples/knight/8px/report.json) |
-
-두 검사 모두 **불균일 셀 0개, 반투명 픽셀 0개, 지정 팔레트 밖의 색상 0개**입니다. 투명 셀을 포함해 각 셀 안의 모든 RGBA 값이 정확히 같습니다. 독립적인 픽셀 비교로 출력이 작화 원본을 최근접 이웃 방식으로 정확히 확대한 결과인지도 확인했습니다. [4 px 검증 기록](docs/examples/knight/4px/verification.json) · [8 px 검증 기록](docs/examples/knight/8px/verification.json).
-
-자료 화면에는 원본 이미지와 격자 부분 확대를 함께 배치해 도트 하나하나를 확인할 수 있게 했습니다. 실제 PNG의 도트 크기와 화면 표시용 확대 배율을 각각 표기했습니다. 격자선과 바둑판 배경은 별도 진단 미리보기에만 적용하며, 원본 PNG는 투명 배경과 32색 팔레트를 유지합니다. 이미지 전체를 확인하려면 [4 px 전체 격자](docs/examples/knight/4px/grid_overlay.png) 또는 [8 px 전체 격자](docs/examples/knight/8px/grid_overlay.png)를 열어 봅니다.
-
-생성형 모델의 초기 이미지는 미검증 원본으로 보존하고, Pixelwright의 격자 투영·팔레트 제한 논리 행렬·정수 배율 렌더링으로 검사 대상 결과를 만들었습니다. 이 두 규격의 실제 통과 결과는 도트 크기와 논리 해상도가 달라져도 기술적 품질 기준을 일관되게 충족한다는 근거입니다. 미적 품질은 별도로 눈으로 검수합니다.
-
-[기사 예제 폴더](docs/examples/knight/)에는 편집 가능한 `artwork.json` 행렬, 작화 원본·출력 PNG, 선언한 프로필, 실제 검사 보고서, 독립 검증 기록이 있습니다. 아래 안내에 따라 의존성을 설치한 뒤 동봉한 도구로 두 버전을 재현할 수 있습니다.
-
-```sh
-python pixelwright/scripts/pixel_build.py --spec docs/examples/knight/4px/artwork.json --out-dir runs/knight-4px-build-v1
-python pixelwright/scripts/pixelwright.py inspect runs/knight-4px-build-v1/rendered.png --profile docs/examples/knight/4px/profile.json --out-dir runs/knight-4px-audit-v1
-python pixelwright/scripts/pixel_build.py --spec docs/examples/knight/8px/artwork.json --out-dir runs/knight-8px-build-v1
-python pixelwright/scripts/pixelwright.py inspect runs/knight-8px-build-v1/rendered.png --profile docs/examples/knight/8px/profile.json --out-dir runs/knight-8px-audit-v1
-```
+검사는 입력 원본을 보존합니다. 검사 전에 의도한 격자를 선언해야 합니다. 기술적 PASS는 그 규칙의 통과를 뜻하며, 실루엣·가독성·미적 품질은 별도로 검토합니다. 입력은 RGBA8로 읽을 수 있는 정적 PNG입니다. 형식 제한과 출력물은 [품질 규격](pixelwright/references/quality-contract.md)에 정리되어 있습니다.
 
 ## 바로 시작하기
 
@@ -60,140 +45,33 @@ source .venv/bin/activate
 .\.venv\Scripts\Activate.ps1
 ```
 
-동봉한 랜턴을 만들고 저장된 PNG를 검사합니다.
+의존성을 설치하고 동봉한 기사 PNG를 검사합니다.
 
 ```sh
 python -m pip install -r pixelwright/requirements.txt
-python pixelwright/scripts/pixel_build.py --spec pixelwright/examples/lantern.json --out-dir runs/lantern-build-v1
-python pixelwright/scripts/pixelwright.py inspect runs/lantern-build-v1/rendered.png --profile pixelwright/examples/item-profile.json --out-dir runs/lantern-audit-v1
+python pixelwright/scripts/pixelwright.py inspect docs/examples/knight/4px/rendered.png --profile docs/examples/knight/4px/profile.json --out-dir runs/knight-4px-audit-v1
 ```
 
-예제는 16×16 논리 캔버스를 8배 확대해 128×128 PNG를 만듭니다. `rendered.png`, `report.json`, `grid_overlay.png`를 함께 확인합니다. 출력 폴더는 비어 있거나 존재하지 않아야 합니다. 명령을 반복할 때는 새로운 실행 폴더 이름을 사용합니다.
+이미 존재하는 **1024×1536 PNG**를 **256×384 논리 캔버스·4배 배율**, 가시 색상 31개와 투명색 조건으로 검사합니다. 이미지를 새로 생성하거나 보정하지 않습니다. 출력 폴더의 `report.json`과 `grid_overlay.png`를 원본 PNG와 함께 확인합니다. 출력 폴더는 새 폴더이거나 비어 있어야 하며, 재실행할 때는 다른 이름을 사용합니다.
 
-## 팔레트 재사용·추출·색상 변환
+## 검수 예시: 같은 기사, 두 가지 격자
 
-버전 0.5.0은 이름 있는 색상과 명암 램프를 담는 재사용 JSON 팔레트 라이브러리를 추가합니다. 작화 명세의 인라인 `palette` 대신 `palette_file`을 지정하면 여러 논리 행렬에서 같은 색상 토큰을 쓸 수 있습니다. [팔레트 예제](pixelwright/examples/palette-demo/)에는 라이브러리를 참조하는 작화와 16×16·8배 프로필이 있습니다.
+![같은 기사의 4×4·8×8 도트 검사: 격자 확대, 공통 팔레트, 실제 QA 결과](docs/images/knight-conditions.ko.png)
 
-위의 랜턴 시작 예제를 만든 뒤, 저장소 루트에서 실행합니다.
+두 PNG 모두 **1024×1536**이며 **투명색 포함 32개 RGBA 색상**을 사용합니다. 저장된 이미지에서 실제로 측정한 결과입니다.
 
-```sh
-python pixelwright/scripts/pixel_palette.py extract runs/lantern-build-v1/rendered.png --max-colors 16 --name lantern-observed --out-dir runs/palette-extract-v1
-python pixelwright/scripts/pixel_palette.py ramp --start '#283040' --end '#C8D8E8' --steps 5 --name metal5 --palette pixelwright/examples/palette-demo/palette.json --out-dir runs/palette-ramp-v1
-python pixelwright/scripts/pixel_palette.py remap runs/lantern-build-v1/rendered.png --palette pixelwright/examples/palette-demo/palette.json --profile pixelwright/examples/palette-demo/profile.json --out-dir runs/palette-remap-v1
-python pixelwright/scripts/pixel_build.py --spec pixelwright/examples/palette-demo/artwork.json --out-dir runs/palette-demo-build-v1
-python pixelwright/scripts/pixelwright.py inspect runs/palette-demo-build-v1/rendered.png --profile pixelwright/examples/palette-demo/profile.json --out-dir runs/palette-demo-audit-v1
-```
+| 예제 | 논리 캔버스 | 셀 크기 | 단색 셀 | 판정 |
+| --- | --- | --- | ---: | --- |
+| [세밀한 도트](docs/examples/knight/4px/rendered.png) | 256×384 | 4×4 px | 98,304 / 98,304 | [PASS 보고서](docs/examples/knight/4px/report.json) |
+| [큰 도트](docs/examples/knight/8px/rendered.png) | 128×192 | 8×8 px | 24,576 / 24,576 | [PASS 보고서](docs/examples/knight/8px/report.json) |
 
-추출은 실제로 관측한 RGBA 색상을 빈도순으로 선택하고 잘린 색상 목록을 알리며, 원본 격자의 PASS를 판정하지 않습니다. 램프 생성은 알파가 같은 양 끝 색상을 서로 다른 명암 단계로 보간합니다. 색상 변환은 선언한 격자와 알파를 유지하고 같은 알파를 가진 가장 가까운 목표 색상을 고릅니다. 기하나 셀 내부 단색 규칙이 잘못된 원본은 변환하지 않습니다. 변환 PNG가 원래 프로필과 선택한 팔레트를 모두 통과할 때만 승인된 `native.png`와 `rendered.png`를 내보냅니다.
+두 검사 모두 불균일 셀·반투명 픽셀·지정 팔레트 밖의 샘플이 0개입니다. 별도의 [4 px](docs/examples/knight/4px/verification.json)·[8 px](docs/examples/knight/8px/verification.json) 기록에서도 작화 원본의 정확한 최근접 이웃 확대인지 확인했습니다.
 
-`palette_report.json`, 원본·최종 QA, `comparison.png`, 논리 셀 단위 변경 마스크 `changed_cells.png`를 확인합니다. 기술 검사를 통과해도 색상 차이가 합쳐지면서 중요한 디테일을 잃을 수 있습니다. 각 명령은 새 출력 폴더를 사용하고 원본 파일을 보존합니다. 스키마, 선택적 램프 변환, 알파 조건과 출처 해시는 [팔레트 안내](pixelwright/references/palettes.md)에 있습니다.
+[4 px 전체 격자](docs/examples/knight/4px/grid_overlay.png)와 [8 px 전체 격자](docs/examples/knight/8px/grid_overlay.png)에서 모든 셀을 볼 수 있습니다. 격자선은 별도 진단 이미지이며, 정확한 색상 측정은 원본 PNG의 보고서를 기준으로 합니다. [예제 폴더](docs/examples/knight/)에 프로필·원본·파생 이미지·검증 기록을 보존했습니다. 이 결과는 검사한 기술 규격의 통과이며, 미적 품질의 자동 승인을 뜻하지 않습니다.
 
-## 성문을 지키는 기사
+## 품질 프로필 선언
 
-![성문과 벽걸이 랜턴, 붉은 방패를 든 갑옷 기사, 멀리 보이는 성탑을 함께 표현한 장면](docs/examples/castle-guard/rendered.png)
-
-**1280×896 PNG · 320×224 논리 셀 · 4×4 px 정사각형 셀 · 32색 · 71,680셀 모두 PASS.** [QA 보고서](docs/examples/castle-guard/report.json) · [전체 정사각형 격자](docs/examples/castle-guard/grid_overlay.png) · [셀 확대](docs/examples/castle-guard/grid-detail.png).
-
-성문·랜턴·멀리 보이는 성·기사를 같은 팔레트와 광원으로 표현했습니다. [편집 가능한 장면 예제](docs/examples/castle-guard/)는 재사용 팔레트 라이브러리를 참조하는 하나의 논리 행렬로 렌더링합니다. 논리 해상도 PNG, 선언한 프로필, 보존한 생성 원본과 독립 검증 자료를 포함합니다. 격자 투영·팔레트 재매핑·논리 셀 단위 워드마크 편집으로 최종 검사본을 만들었으며, 미적 검수는 별도로 기록했습니다.
-
-## 복잡한 요청: 필요할 때 레이어로 작업
-
-복잡한 요청에서는 독립적으로 수정할 수 있는 배경·아이템·UI·문구를 레이어로 나눌 수 있습니다. 캐릭터의 손과 장비처럼 접점이나 포즈가 중요한 요소는 보통 함께 제작합니다. 단순한 아이콘은 하나의 작화로 만들면 됩니다.
-
-먼저 전체 구도, 공통 배율과 RGBA 팔레트, 광원, 앞뒤 순서를 정합니다. `pixel_layers.py`는 JSON 레이어 목록을 관리하고, 모든 입력 PNG를 검사한 뒤 논리 해상도에서 합성하고 한 번 확대해 최종 PNG를 다시 검사합니다. 팔레트는 작품 전체에서 공유합니다. 각 레이어에 별도의 색상 예산을 주면 합성본의 색상 수를 제한할 수 없습니다.
-
-[네 레이어 합성 튜토리얼](pixelwright/examples/layered-scene/)은 배경, 방패·둔기를 함께 든 기사, 아이템, 제목으로 구성됩니다. 320×224 논리 캔버스를 4배 확대해 1280×896 PNG를 만들며, 셀은 4×4 px이고 32개 RGBA 값으로 이루어진 공통 팔레트를 사용합니다. 실제 [레이어별 결과](docs/examples/layered-scene/layers.json), [최종 보고서](docs/examples/layered-scene/final-report.json), [최종 격자 미리보기](docs/examples/layered-scene/grid_overlay.png)를 확인할 수 있습니다.
-
-**네 레이어 모두 PASS, 최종 71,680셀 모두 PASS**입니다. 불균일 셀·반투명 픽셀·공통 팔레트 밖의 샘플은 각각 0개이며, 불투명 최종 PNG에는 가시 RGB 31색을 사용했습니다. 합성 작업을 보여 주는 이 예제는 기존에 검증한 기사와 논리 격자에서 직접 만든 간단한 배경·아이템·문구로 구성했습니다.
-
-```sh
-# 레이아웃을 확인한 뒤 모든 레이어와 합성 결과를 검사합니다.
-python pixelwright/scripts/pixel_layers.py list --manifest pixelwright/examples/layered-scene/scene.json
-python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/examples/layered-scene/scene.json --out-dir runs/layers-scene-v1
-
-# 제목을 옮기고 원본 옆에 새 레이어 목록을 저장합니다.
-python pixelwright/scripts/pixel_layers.py edit --manifest pixelwright/examples/layered-scene/scene.json --layer title --position 16,28 --out pixelwright/examples/layered-scene/scene-title-v2.json
-python pixelwright/scripts/pixel_layers.py compose --manifest pixelwright/examples/layered-scene/scene-title-v2.json --out-dir runs/layers-scene-v2
-```
-
-`edit`는 `--visible true|false`로 표시 여부를, `--index`로 아래에서 위로 쌓이는 순서의 0부터 시작하는 위치를 바꿀 수 있습니다. 새 목록 파일을 만들며 원본 PNG를 보존합니다. 배치 좌표는 논리 셀 단위 정수이고 레이어 전체가 캔버스 안에 들어와야 합니다. 숨긴 레이어도 검사합니다. 경로는 목록 파일의 폴더를 기준으로 하며 그 폴더 밖을 참조할 수 없습니다.
-
-합성마다 `layers.json`, `layers/0000/qa/` 아래의 레이어별 보고서·격자 미리보기, `final/` 아래의 최종 검사 결과를 만듭니다. **모든 레이어와 최종 PNG가 PASS일 때만** 출력 루트에 승인된 `native.png`와 `rendered.png`를 내보냅니다. 최종 검사에서 실패한 후보는 진단용 `candidate/`에 남기며, 입력 레이어가 실패하면 합성하지 않습니다. 종료 코드는 모두 PASS이면 `0`, QA FAIL/REVIEW이면 `2`, 목록·입력·실행 오류이면 `1`입니다.
-
-이 모드는 레이어의 이진 투명도, 명시적인 공통 팔레트와 가시 RGB 예산, 투명 픽셀까지 정확한 RGBA를 요구합니다. 불투명 셀을 덮어쓰는 방식으로 합성하며 반투명 혼합·크기 변경·회전·잘라내기를 하지 않습니다. 불투명 최종 캔버스 위에 투명 배경의 전경 레이어를 올릴 수 있습니다. 기술 검사 후에는 각 레이어와 완성 장면의 접점·가림·광원·가독성을 눈으로 검수합니다. QA 격자는 작화와 별도 산출물로 유지합니다. 자세한 형식은 [레이어 작업·목록 문서](pixelwright/references/layers.md)에 있습니다.
-
-## 3D 골격을 이용한 이미지 생성
-
-실제 Blender 골격과 38개 갑옷·장비 메시를 먼저 만들고, 고정 직교 카메라의 구도를 이미지 생성에 전달하는 [3D 제작 경로](docs/SPRITE_3D_ko.md)를 추가했습니다. 공통 기준 캐릭터를 사용해 동작별 6프레임 시트를 생성하고, 프레임별 크기 보정 없이 검사합니다. 소스 체크아웃에서 사용하는 선택적 개발 도구입니다.
-
-| 걷기 | 공격 | 막기 |
-| --- | --- | --- |
-| ![3D 가이드로 생성한 걷기](docs/examples/knight-3d/walk.gif) | ![3D 가이드로 생성한 공격](docs/examples/knight-3d/attack.gif) | ![3D 가이드로 생성한 막기](docs/examples/knight-3d/block.gif) |
-
-실제 생성 결과는 **128×128 논리 프레임, 공통 19색, 18프레임의 픽셀·3D 투영 검사 PASS**입니다. [Blender 파일·시트·격자 미리보기·생성 출처·별도 시각 검토](docs/examples/knight-3d/)를 함께 제공합니다. 투영 영역 검사는 생성된 그림의 의미론적 부위 길이를 증명하는 검사가 아니므로 시각 검토를 별도로 수행합니다.
-
-## 2D 스프라이트 시트와 골격 검사
-
-README의 기사를 이 스킬로 움직였습니다. 각 애니메이션의 0번 프레임은 헤더의 기사 그림과 같고, 모든 프레임이 원래 32색만 사용하며, 세 시트 모두 엄격한 격자 검사와 리그 검사를 통과했습니다. [기사 리그 제작 기록](docs/examples/knight-animation/)을 참고합니다.
-
-| 메이스 휘두르기 | 방패로 막기 | 걷기 |
-| --- | --- | --- |
-| ![메이스를 머리 위로 들어 내려치는 기사](docs/examples/knight-animation/swing/animations/swing.gif) | ![방패를 몸 앞으로 들어 막는 기사](docs/examples/knight-animation/block/animations/block.gif) | ![메이스를 흔들며 제자리에서 걷는 기사](docs/examples/knight-animation/walk/animations/walk.gif) |
-
-같은 애니메이션에 선언한 골격을 겹치고(왼쪽) 모든 도트를 부위별 색상으로 칠한 모습(오른쪽)입니다.
-
-![골격과 부위 색상을 적용한 메이스 휘두르기](docs/examples/knight-animation/swing/animations/swing.rig.gif)
-
-![골격과 부위 색상을 적용한 방패 막기](docs/examples/knight-animation/block/animations/block.rig.gif)
-
-![골격과 부위 색상을 적용한 걷기](docs/examples/knight-animation/walk/animations/walk.rig.gif)
-
-버전 0.6.0은 여러 프레임 에셋을 위한 `pixel_sprite.py`를 추가합니다. 스프라이트 명세에는 프레임 크기, 여백·간격을 포함한 슬롯 격자, 이름 있는 애니메이션을 선언하며, 프로필의 논리 크기는 이 배치에서 계산한 시트 크기와 같아야 합니다. 검사기는 먼저 시트 전체에 엄격한 격자 검사를 수행한 뒤, 프레임 사이 여백과 빈 슬롯이 투명한지, 선택적 가장자리 여백을 지키는지 확인하고 프레임별 내용 범위를 기록합니다.
-
-움직임을 검사하려면 **리그**를 선언합니다. 이름 있는 관절의 프레임별 좌표와, 보이는 모든 도트를 부위에 배정하는 부위 맵을 함께 기록하며, 부위는 뒤에서 앞 순서로 나열합니다. Pixelwright는 해부 구조를 추정하지 않습니다. 선언한 골격을 모든 프레임 위에 그리고, 각 부위를 그 부위가 가장 잘 보이는 기준 프레임과 비교합니다.
-
-| 움직임 | 대표 부위 | 일관되게 유지해야 하는 것 |
-| --- | --- | --- |
-| `fixed` | 레버 받침, 상자 본체 | 모든 프레임에서 같은 도트 |
-| `rigid` | 머리, 손잡이공, 서랍 | 회전축 관절의 이동량만큼 옮긴 정확한 복사본, 선택적으로 한 축 방향만 이동 |
-| `bone` | 팔다리, 몸통, 레버 손잡이 | 뼈대를 따라 옮긴 기준 도트의 위치, 이탈 거리, 도트 수, 뼈 길이 |
-| `free` | 망토, 머리카락, 효과 | 존재 여부, 크기, 색상 |
-
-모든 부위는 부모 부위와 맞닿아야 하고, 관절은 해당 부위의 도트 위에 있어야 하며, 고정 관절은 움직이지 않아야 합니다. 프레임 사이 관절 이동 거리에 상한을 둘 수도 있습니다. 도트는 앞에 그려지는 부위가 덮은 칸에서만 사라질 수 있으므로, 팔이 뒤에 그려진 몸통 속으로 사라지는 오류를 잡아냅니다.
-
-![각 프레임의 도트(위)와 부위 맵(아래)에 선언한 골격을 겹친 리그 미리보기](docs/examples/sprites/walk/rig_overlay.png)
-
-[걷기 예제](docs/examples/sprites/)는 8프레임·8부위·관절 9개로 구성되며, 부위·프레임 비교 64건이 모두 PASS입니다. [같은 시트 픽셀을 4번 프레임에서 앞팔이 앞으로 흔들리는 골격으로 검사](docs/examples/sprites/walk-arm-lag/)하면 이 기능이 겨냥하는 실패가 드러납니다. 팔 도트가 뒤에 남아 있어 `PART_OFF_SKELETON`, `PART_DRIFT`, `JOINT_OFF_PART`가 실패합니다. [레버 예제](docs/examples/sprites/)는 고정 받침, 고정 축에 걸린 손잡이, 단단한 손잡이공으로 사물의 움직이는 부분을 다룹니다.
-
-```sh
-python pixelwright/scripts/pixel_sprite.py build --spec pixelwright/examples/sprite-walk/spec.json --out-dir runs/walk-build-v1
-python pixelwright/scripts/pixel_sprite.py check --spec pixelwright/examples/sprite-walk/spec.json --sheet runs/walk-build-v1/rendered.png --profile pixelwright/examples/sprite-walk/profile.json --out-dir runs/walk-check-v1
-```
-
-검사마다 `sprite_report.json`, `sheet/` 아래의 시트 검사 결과, `layout_overlay.png`, `rig_overlay.png`, 그리고 애니메이션별 GIF 미리보기와 골격·부위 색상을 함께 보여 주는 `.rig.gif`를 만듭니다(`--preview-scale`로 크기 지정). 종료 코드는 모두 PASS이면 `0`, FAIL/REVIEW이면 `2`, 명세 오류·실행 오류이면 `1`입니다. 실제로 흔한 실수 11가지를 주입한 시험에서 9가지를 검출했습니다. 한 칸 두꺼워진 팔다리와, 대부분 가려진 얇은 손잡이의 두 칸 이동은 기본 허용치 안에 들었습니다. [스프라이트 참조 문서](pixelwright/references/sprites.md)와 [v0.6.0 검증 기록](docs/VALIDATION_v060_ko.md)을 참고합니다.
-
-## AI 스킬로 사용하기
-
-스크립트·참조 문서·예제를 포함한 **`pixelwright/` 폴더 전체**를 스킬 경로에 넣습니다.
-
-| 호스트 | 개인 설치 | 프로젝트 설치 | 명시적 호출 |
-| --- | --- | --- | --- |
-| Codex | `~/.agents/skills/pixelwright/` | `<repo>/.agents/skills/pixelwright/` | `$pixelwright` |
-| Claude Code | `~/.claude/skills/pixelwright/` | `<repo>/.claude/skills/pixelwright/` | `/pixelwright` |
-
-로컬 설치 경로와 호출 방식은 [OpenAI 공식 스킬 문서](https://learn.chatgpt.com/docs/build-skills), [Claude Code 공식 스킬 문서](https://code.claude.com/docs/en/skills)를 따릅니다. Windows를 포함해 `~`는 사용자 홈 폴더를 뜻합니다.
-
-사용자 스킬 업로드를 지원하는 Claude 환경에서는 아래 명령으로 설치 ZIP을 만든 뒤 호스트의 스킬 화면에서 업로드합니다. 코드 실행과 파일 생성을 활성화하고 Python 의존성이 사용 가능한지 확인합니다. 다른 ChatGPT 환경이나 API 기반 호스트에는 해당 환경의 스킬 로더와 실행 도구가 필요합니다. Pixelwright에는 공급자별 생성 API 어댑터가 포함되지 않습니다. [플랫폼 호환성 안내](docs/COMPATIBILITY_ko.md)와 [Claude 공식 사용자 스킬 문서](https://support.claude.com/en/articles/12512180-use-skills-in-claude)를 참고합니다.
-
-스킬을 호출한 뒤 다음과 같이 요청할 수 있습니다.
-
-> 24×24 물약 아이템을 8배 확대해서 만들어 줘. 가시 색상은 최대 10개, 투명도는 이진 값으로 해 줘. 내보낸 PNG를 Pixelwright로 검사하고, 원본과 격자 미리보기를 함께 보여 줘. 실제 PASS/FAIL 보고서도 포함해 줘.
-
-PNG 접근과 검사기의 성공적인 실행이 없으면 결과는 **미검증**입니다. 스킬을 로드하거나 모델에 “픽셀아트”를 요청하는 것만으로 규격 준수를 확인할 수 없습니다. 이 저장소의 검증에서는 실제 Claude 계정 설치·업로드까지 수행하지 않았습니다.
-
-## 품질 규격 선언하기
-
-재사용 가능한 JSON 프로필로 여러 에셋에 동일한 기술 규칙을 적용합니다.
+의도한 규칙을 `profile.json`으로 저장합니다.
 
 ```json
 {
@@ -207,31 +85,51 @@ PNG 접근과 검사기의 성공적인 실행이 없으면 결과는 **미검�
 }
 ```
 
-이를 `profile.json`으로 저장합니다. 이 규격은 원점 `(0, 0)`, 8×8 셀, 192×192 PNG를 요구합니다. 가로·세로에 동일한 양의 정수 배율을 적용하며 엄격한 프로필은 배율 2 이상을 요구합니다. 생성·검사 전에 규격을 확정합니다. 검사기는 이미지를 통과시키기 위해 다른 격자를 추정하거나 크기를 바꾸지 않습니다.
+**192×192 PNG·8×8 px 셀**, 가시 RGB 10색 이하, 알파 0 또는 255를 요구하는 프로필입니다. 엄격한 프로필의 배율은 2 이상이어야 합니다. `transparent_rgb: "exact"`는 숨은 RGB까지 비교합니다. 알파가 0인 픽셀의 RGB를 정규화하려면 `"visible"`을 명시합니다. 선택 항목 `allowed_palette`로 전체 RGBA 값을 제한할 수 있습니다. 같은 색의 인접 셀이 모여 불규칙한 형태를 이루는 것은 허용됩니다.
 
-`transparent_rgb: "exact"`는 알파가 0인 부분의 숨은 RGB 값도 비교합니다. 숨은 차이를 정규화할 때만 `"visible"`을 명시적으로 선택합니다. 선택 필드 `allowed_palette`로 전체 RGBA 값을 제한할 수 있습니다. `alpha: "any"`는 셀 내부가 균일한 반투명을 허용합니다. 같은 색의 인접 도트가 큰 비정형 모양을 이루어도 됩니다. 정사각형 규칙은 개별 격자 셀에 적용합니다.
-
-모든 필드, 허용 PNG 형식, 산출물, 종료 코드는 [품질 규격 문서](pixelwright/references/quality-contract.md)에 있습니다. 논리 행렬 형식은 [생성 안내](pixelwright/references/creation.md)를 참고합니다.
-
-## 검사·일괄 검사·보정
-
-이미지 하나를 검사하거나 여러 이미지에 같은 프로필을 적용합니다.
+한 이미지 또는 여러 이미지를 같은 프로필로 검사합니다.
 
 ```sh
 python pixelwright/scripts/pixelwright.py inspect input.png --profile profile.json --out-dir runs/audit-v1
 python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile profile.json --out-dir runs/batch-v1
 ```
 
-프로필 명령은 모두 PASS이면 `0`, FAIL/REVIEW이면 `2`, 입력·실행 오류이면 `1`로 종료합니다. CI의 적합성 판정에도 이 인터페이스를 사용합니다. 미리보기와 함께 JSON 상태, 정확한 위반 개수를 확인합니다.
+| 종료 코드 | 의미 |
+| --- | --- |
+| `0` | 선언한 기술 검사 모두 PASS |
+| `2` | 하나 이상의 검사 결과가 FAIL 또는 REVIEW |
+| `1` | 입력·프로필·실행 오류 |
 
-명시적인 보정은 원본에서 관측한 색상을 선언한 격자에 투영해 새로운 후보를 만듭니다. 이 과정에는 정보 손실이 있을 수 있습니다.
+격자 크기가 맞지 않으면 셀 색상 통과 판정을 진행하지 않습니다. 상태·정확한 위반 수·미리보기를 함께 확인합니다. 단일 검사에는 `report.json`과 격자 진단 이미지가, 일괄 검사에는 `batch.json`과 번호별 출력 폴더가 생성됩니다. 출력물별 설명은 [품질 규격](pixelwright/references/quality-contract.md)에 있습니다.
 
-```sh
-python pixelwright/scripts/pixel_qa.py fix input.png --logical-size 24x24 --render-size 192x192 --out-dir runs/repair-v1
-python pixelwright/scripts/pixelwright.py inspect runs/repair-v1/fixed_upscaled.png --profile profile.json --out-dir runs/repair-audit-v1
-```
+## AI 스킬로 사용하기
 
-보정본을 채택하기 전에 `comparison.png`, `fix_review.json`, 원본·보정본 보고서를 확인합니다. 원본 기하는 선언한 격자에 이미 맞아야 합니다. 보정은 원본 파일을 보존하지만 디테일을 제거할 수 있습니다. 보정 파일은 원래 프로필로 다시 검사합니다.
+스크립트·참조 문서·예제를 포함한 **`pixelwright/` 폴더 전체**를 설치합니다.
+
+| 호스트 | 개인 스킬 경로 | 호출 |
+| --- | --- | --- |
+| Codex | `~/.agents/skills/pixelwright/` | `$pixelwright` |
+| Claude Code | `~/.claude/skills/pixelwright/` | `/pixelwright` |
+
+호스트에서 원본 PNG에 접근하고, 의존성을 설치한 Python을 실행할 수 있어야 합니다. 스킬을 불러온 뒤 다음과 같이 요청할 수 있습니다.
+
+> 이 PNG를 24×24 논리 픽셀·8배 배율, 가시 색상 10개 이하, 이진 투명도로 검사해 줘. 원본과 격자 미리보기, 실제 PASS/FAIL 보고서를 보여 줘.
+
+원본 파일과 성공한 검사 실행이 없으면 **미검증**입니다. 설치와 실행 조건은 [SKILL.md](pixelwright/SKILL.md)와 [플랫폼 호환성 안내](docs/COMPATIBILITY_ko.md)를 참고합니다.
+
+## 개발 중 기능
+
+다음 기능은 현재 개발 중입니다. README에는 개요만 소개하며, 구현 내용·실험·제약은 각 문서에서 확인할 수 있습니다.
+
+| 기능 | 개발 방향 | 상세 |
+| --- | --- | --- |
+| 픽셀아트 생성·격자 보정 | 논리 캔버스 렌더링과 재검사가 필요한 파생 보정 후보 생성 | [생성](pixelwright/references/creation.md) · [보정](pixelwright/references/quality-contract.md#artifacts-and-coordinates) |
+| 팔레트 편집 | 팔레트 재사용·추출·명암 램프·색상 변환 | [팔레트](pixelwright/references/palettes.md) |
+| 레이어 합성 | 공통 격자로 합성하고 레이어별·최종 결과를 검사 | [레이어](pixelwright/references/layers.md) |
+| 외부 스프라이트 시트 검증 | sprite-gen PNG·manifest의 팔레트·여백·외곽 크기 일관성 검사 | [시트 규격](pixelwright/references/external-atlases.md) · [검증 기록](docs/VALIDATION_external_atlases_ko.md) |
+| 애니메이션·동작 검증 | 선택한 2D 시안·관찰 부위·프레임 일관성·선택적 3D 자세 가이드 | [2D 경로](docs/SPRITE_2D_ko.md) · [3D 경로](docs/SPRITE_3D_ko.md) · [진행 상황](docs/SPRITE_REQUIREMENTS_AND_STATUS_ko.md) |
+
+시트 연동은 [sprite-gen](https://github.com/aldegad/sprite-gen)의 출력 규격을 따릅니다. [패키지 출처 선언](pixelwright/upstream-integrations.json)에 원본 저장소·라이선스·확인한 버전/커밋, `data_format` 관계와 `runtime_required: false`를 기록합니다. 개발 기능의 구현이 생성 작화의 완성도나 자연스러운 움직임의 승인을 뜻하지는 않습니다. 기존 v0.6.2 배포 파일은 그대로이며, 현재 소스에서 빌드한 패키지에는 개발 도구가 포함될 수 있습니다.
 
 ## 검증과 패키징
 
@@ -239,21 +137,10 @@ python pixelwright/scripts/pixelwright.py inspect runs/repair-v1/fixed_upscaled.
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
 python tools/package_skill.py --verify dist/pixelwright-v0.6.2.zip
-python tools/verify_release.py --archive dist/pixelwright-v0.6.2.zip --out-dir runs/release-check-v1
 ```
 
-패키징은 최상위 `pixelwright/` 폴더 하나를 포함하는 설치 ZIP과 테스트·문서를 포함하는 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사하고, 릴리스 검증기는 설치 패키지를 풀어 실제로 실행합니다. 빌드 결과는 로컬 `dist/`에 생성합니다.
+패키징은 설치 ZIP과 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사합니다. 정사각형 격자 진단의 [검증 기록](docs/VALIDATION_v051_ko.md)과 구현 근거를 담은 [설계 문서](docs/DESIGN_ko.md)도 확인할 수 있습니다.
 
-`verify_release.py`는 패키지 안의 Python 코드를 실행하므로 검토한 Pixelwright 소스에서 만든 신뢰할 수 있는 ZIP에만 사용합니다. 해시 목록이 일치한다는 것은 내부 무결성을 확인할 뿐 배포자의 신원을 증명하지 않습니다.
+## 라이선스와 보안
 
-[v0.6.2 검증 기록](docs/VALIDATION_v062_ko.md)은 655.35초를 넘는 GIF hold와 프레임 경계·실제 저장 시간 보존을 다룹니다. [v0.6.1 기록](docs/VALIDATION_v061_ko.md)은 스프라이트 출력 롤백·부위 연결·가림 회귀, 명시적인 GIF 시간, 유한한 3D 리그 계약과 anchor 정렬을 다룹니다. [v0.6.0 기록](docs/VALIDATION_v060_ko.md)은 최초 스프라이트·애니메이션·부위 리그와 설치 예제를 검증합니다. 이전 기록에는 [정사각형 격자 미리보기](docs/VALIDATION_v051_ko.md), [팔레트](docs/VALIDATION_v050_ko.md), [레이어 합성](docs/VALIDATION_v040_ko.md)을 남겨 둡니다.
-
-## 지원 범위·라이선스·보안
-
-버전 0.6.2는 **정적 PNG 캐릭터·아이템·UI 아이콘, 재사용 팔레트, 선택적 레이어 장면, 골격을 선언한 스프라이트 시트 애니메이션**을 지원합니다. 기술적 PASS는 검사한 파일의 격자, 셀 내부의 정확한 단색, 선언한 프로필 제약을 확인합니다. 색상 변환은 선택한 목표 색상도 확인하며, 팔레트 추출과 램프 생성은 작화의 PASS를 판정하지 않습니다. 레이어 합성은 레이어별 검사와 최종 검사를 모두 통과해야 합니다. 미적 품질이나 다른 앱의 확대 표시 방식까지 보장하지는 않습니다. 실루엣·가독성·팔레트·재질 디테일은 별도로 검수합니다. 리그 검사는 선언한 부위의 도트가 선언한 골격과 일관되는지 확인하며, 해부 구조를 추정하거나 타이밍·무게감·매력을 판정하지 않습니다. 애니메이션 PNG 입력은 계속 지원하지 않습니다.
-
-Pixelwright에는 **Apache License 2.0**을 적용합니다. [LICENSE](LICENSE)와 [NOTICE](NOTICE)를 확인합니다.
-
-지원 버전과 취약점 신고 방법은 [SECURITY.md](SECURITY.md)에 있습니다. 저장소에는 [CI](.github/workflows/ci.yml), [CodeQL](.github/workflows/codeql.yml), [의존성 업데이트 설정](.github/dependabot.yml)이 포함됩니다. 이 설정들은 유지 관리를 돕는 장치이며 독립 보안 감사가 완료되었다는 뜻은 아닙니다.
-
-AI 작업 절차는 [`pixelwright/SKILL.md`](pixelwright/SKILL.md), 플랫폼 실행 조건은 [호환성 안내](docs/COMPATIBILITY_ko.md), 구현 판단 근거는 [설계 문서](docs/DESIGN_ko.md)에서 확인할 수 있습니다.
+Pixelwright에는 **Apache License 2.0**을 적용합니다. [LICENSE](LICENSE), [NOTICE](NOTICE), [SECURITY.md](SECURITY.md)를 확인합니다. 저장소에는 [CI](.github/workflows/ci.yml), [CodeQL](.github/workflows/codeql.yml), [의존성 업데이트 설정](.github/dependabot.yml)이 포함됩니다.

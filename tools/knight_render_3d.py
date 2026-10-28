@@ -102,13 +102,16 @@ def shield_mesh(armature, center, mat, inset=1.0, y_offset=0.0):
     return bind(obj, armature, "shield", mat)
 
 
-def create_scene():
+def create_scene(config=None, skeleton_only=False):
+    config = config or rig.contract()
+    camera_spec = config["camera"]
+    bones = config["bones"]
     bpy.ops.object.select_all(action="SELECT"); bpy.ops.object.delete(use_global=False)
     scene = bpy.context.scene
     scene.unit_settings.system = "METRIC"
     scene.render.engine = "BLENDER_WORKBENCH"
-    scene.render.resolution_x = rig.FRAME_SIZE[0] * rig.GUIDE_SCALE
-    scene.render.resolution_y = rig.FRAME_SIZE[1] * rig.GUIDE_SCALE
+    scene.render.resolution_x = config["frame_size"][0] * config["guide_scale"]
+    scene.render.resolution_y = config["frame_size"][1] * config["guide_scale"]
     scene.render.resolution_percentage = 100
     scene.render.image_settings.file_format = "PNG"
     scene.render.image_settings.color_mode = "RGBA"
@@ -122,31 +125,34 @@ def create_scene():
     scene.display.render_aa = "16"
     scene.view_settings.view_transform = "Standard"
     camera_data = bpy.data.cameras.new("Fixed orthographic camera")
-    camera_data.type = "ORTHO"; camera_data.ortho_scale = rig.CAMERA["ortho_scale"]
-    camera_data.clip_start = rig.CAMERA["clip_start"]; camera_data.clip_end = rig.CAMERA["clip_end"]
+    camera_data.type = "ORTHO"; camera_data.ortho_scale = camera_spec["ortho_scale"]
+    camera_data.clip_start = camera_spec["clip_start"]; camera_data.clip_end = camera_spec["clip_end"]
     camera = bpy.data.objects.new("Fixed orthographic camera", camera_data)
     scene.collection.objects.link(camera); scene.camera = camera
-    camera.location = rig.CAMERA["position"]
-    camera.rotation_euler = (Vector(rig.CAMERA["target"]) - camera.location).to_track_quat("-Z", "Y").to_euler()
+    camera.location = camera_spec["position"]
+    camera.rotation_euler = (Vector(camera_spec["target"]) - camera.location).to_track_quat("-Z", "Y").to_euler()
     armature_data = bpy.data.armatures.new("Knight metric skeleton")
     armature = bpy.data.objects.new("Knight metric skeleton", armature_data)
     scene.collection.objects.link(armature); bpy.context.view_layer.objects.active = armature
     armature.select_set(True); bpy.ops.object.mode_set(mode="EDIT")
-    rest = rig.pose()
-    for name, (a, b) in rig.BONES.items():
+    rest = {n: np.asarray(v) for n, v in config["animations"]["block"]["frames"][0]["joints_world"].items()}
+    for name, (a, b) in bones.items():
         bone = armature_data.edit_bones.new(name)
         # A newly allocated edit bone has zero length: assigning its matrix at
         # that point loses its orientation in Blender. Establish endpoints first.
         bone.head = tuple(rest[a]); bone.tail = tuple(rest[b])
         bone.align_roll(bone_matrix(rest, a, b).col[2].xyz)
-    for name, parent in rig.PARENTS.items():
+    for name, parent in config["parents"].items():
         armature_data.edit_bones[name].parent = armature_data.edit_bones[parent]
     bpy.ops.object.mode_set(mode="OBJECT"); armature.select_set(False); armature.show_in_front = True
-    for name, (a, b) in rig.BONES.items():
+    for name, (a, b) in bones.items():
         bone = armature_data.bones[name]
         if max((bone.head_local - Vector(rest[a])).length,
                (bone.tail_local - Vector(rest[b])).length) > 1e-5:
             raise ValueError(f"Rest armature does not match world-space bone {name}")
+    scene.render.fps = 30
+    if skeleton_only:
+        return scene, armature
     steel = material("Cool steel", (.43, .52, .62)); dark = material("Dark steel", (.075, .10, .145))
     red = material("Oxblood lacquer", (.43, .025, .05)); brass = material("Brass", (.64, .43, .15))
     brown = material("Leather", (.17, .075, .025)); black = material("Visor slit", (.008, .009, .016))
@@ -188,10 +194,10 @@ def create_scene():
     return scene, armature
 
 
-def set_pose(armature, joints, frame):
+def set_pose(armature, joints, frame, bones=None):
     bpy.context.scene.frame_set(frame)
     max_error = 0.0
-    for name, (a, b) in rig.BONES.items():
+    for name, (a, b) in (bones or rig.BONES).items():
         bone = armature.pose.bones[name]
         bone.rotation_mode = "QUATERNION"
         bone.matrix = bone_matrix(joints, a, b)
@@ -290,15 +296,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out-dir", required=True, type=Path)
     parser.add_argument("--no-render", action="store_true", help="Save and verify the rig without rendering previews")
+    parser.add_argument("--skeleton-contract", type=Path,
+                        help="Export a design-first contract as a bare armature with zero appearance meshes")
     args = parser.parse_args(arguments)
     root = args.out_dir.resolve()
     if root.exists() and any(root.iterdir()):
         raise ValueError("Use an empty output directory; existing guides must not be overwritten")
     root.mkdir(parents=True, exist_ok=True)
-    contract = rig.contract(); check = rig.validate_contract(contract)
+    contract = json.loads(args.skeleton_contract.read_text(encoding="utf-8")) if args.skeleton_contract else rig.contract()
+    check = rig.validate_contract(contract)
     if check["status"] != "pass":
         raise ValueError(check)
-    scene, armature = create_scene()
+    scene, armature = create_scene(contract, skeleton_only=bool(args.skeleton_contract))
     timeline, projection_error, armature_error = 1, 0.0, 0.0
     rest_edges = mesh_edge_lengths(scene)
     mesh_edge_error = 0.0
@@ -310,7 +319,7 @@ def main():
         scene.timeline_markers.new(state, frame=timeline)
         for frame in animation["frames"]:
             joints = {name: np.array(value) for name, value in frame["joints_world"].items()}
-            armature_error = max(armature_error, set_pose(armature, joints, timeline))
+            armature_error = max(armature_error, set_pose(armature, joints, timeline, contract["bones"]))
             for name, edges in mesh_edge_lengths(scene).items():
                 mesh_edge_error = max(mesh_edge_error, float(np.max(np.abs(edges - rest_edges[name]))))
             if mesh_edge_error > 1e-5:
@@ -319,10 +328,10 @@ def main():
             for name, xyz in joints.items():
                 projected = world_to_camera_view(scene, scene.camera, Vector(xyz))
                 expected = frame["joints_image"][name]
-                actual = np.array((projected.x * rig.FRAME_SIZE[0], (1 - projected.y) * rig.FRAME_SIZE[1]))
+                actual = np.array((projected.x * contract["frame_size"][0], (1 - projected.y) * contract["frame_size"][1]))
                 projection_error = max(projection_error, float(np.linalg.norm(actual - expected)))
             stem = f"frame_{frame['index']:02d}"
-            if not args.no_render:
+            if not args.no_render and not args.skeleton_contract:
                 scene.render.filepath = str(directory / (stem + ".png"))
                 bpy.ops.render.render(write_still=True)
                 size = (scene.render.resolution_x, scene.render.resolution_y)
@@ -346,8 +355,9 @@ def main():
     scene["pixelwright_camera_locked"] = True
     scene["pixelwright_units"] = "metres"
     bpy.ops.wm.save_as_mainfile(filepath=str(root / "knight-rig.blend"))
-    contract["part_colors"] = {name: list(PART_COLORS[i + 1]) for i, name in enumerate(PART_NAMES)}
-    contract["mesh_contract"] = mesh_dimensions
+    if not args.skeleton_contract:
+        contract["part_colors"] = {name: list(PART_COLORS[i + 1]) for i, name in enumerate(PART_NAMES)}
+        contract["mesh_contract"] = mesh_dimensions
     (root / "rig.json").write_text(json.dumps(contract, indent=2) + "\n", encoding="utf-8", newline="\n")
     check.update({"blender_version": bpy.app.version_string, "max_blender_projection_error_cells": projection_error,
                   "max_armature_joint_error_m": armature_error, "max_mesh_edge_error_m": mesh_edge_error,

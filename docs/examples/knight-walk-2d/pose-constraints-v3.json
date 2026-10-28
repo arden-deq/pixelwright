@@ -1,0 +1,125 @@
+{
+  "role": "AUTHORED motion constraints only, not observations, not knight artwork. Orange near leg, cyan far leg. New leftward intention chosen before third generation; numeric acceptance thresholds unchanged.",
+  "frames": [
+    {
+      "frame": 0,
+      "pelvis": [
+        65,
+        65
+      ],
+      "near_ankle": [
+        50,
+        106
+      ],
+      "far_ankle": [
+        66,
+        103
+      ]
+    },
+    {
+      "frame": 1,
+      "pelvis": [
+        64,
+        67
+      ],
+      "near_ankle": [
+        54,
+        106
+      ],
+      "far_ankle": [
+        70,
+        99
+      ]
+    },
+    {
+      "frame": 2,
+      "pelvis": [
+        64,
+        65
+      ],
+      "near_ankle": [
+        58,
+        106
+      ],
+      "far_ankle": [
+        64,
+        97
+      ]
+    },
+    {
+      "frame": 3,
+      "pelvis": [
+        65,
+        63
+      ],
+      "near_ankle": [
+        62,
+        104
+      ],
+      "far_ankle": [
+        54,
+        99
+      ]
+    },
+    {
+      "frame": 4,
+      "pelvis": [
+        65,
+        65
+      ],
+      "near_ankle": [
+        66,
+        106
+      ],
+      "far_ankle": [
+        50,
+        103
+      ]
+    },
+    {
+      "frame": 5,
+      "pelvis": [
+        66,
+        67
+      ],
+      "near_ankle": [
+        70,
+        102
+      ],
+      "far_ankle": [
+        54,
+        103
+      ]
+    },
+    {
+      "frame": 6,
+      "pelvis": [
+        66,
+        65
+      ],
+      "near_ankle": [
+        64,
+        100
+      ],
+      "far_ankle": [
+        58,
+        103
+      ]
+    },
+    {
+      "frame": 7,
+      "pelvis": [
+        65,
+        63
+      ],
+      "near_ankle": [
+        54,
+        102
+      ],
+      "far_ankle": [
+        62,
+        101
+      ]
+    }
+  ]
+}

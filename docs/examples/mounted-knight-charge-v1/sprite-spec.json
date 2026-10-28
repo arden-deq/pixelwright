@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "Mounted knight charge, unchanged sprite-gen atlas",
+  "frame_size": "128x96",
+  "layout": {"columns": 8, "rows": 1},
+  "edge_margin": 6,
+  "scale": 2,
+  "animations": {
+    "charge": {"frames": [0, 1, 2, 3, 4, 5, 6, 7], "loop": true, "frame_ms": 100}
+  },
+  "frames": [{}, {}, {}, {}, {}, {}, {}, {}]
+}

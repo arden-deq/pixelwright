@@ -1,0 +1,271 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.2",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 768,
+    "height": 512
+  },
+  "logical_size": {
+    "width": 192,
+    "height": 128
+  },
+  "cell_size": {
+    "width": 4,
+    "height": 4
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "78906ecfd6d462c5b57855355ef446383a671988cf1ec61a4df6ef5f5d05efbf",
+    "decoded_rgba_sha256": "a4863e540b09d908c9c5ff38ca31476edd4d10d3865e5f363438d7fedc973169",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "source_path": "rendered.png",
+    "source_sha256_after_audit": "78906ecfd6d462c5b57855355ef446383a671988cf1ec61a4df6ef5f5d05efbf",
+    "profile_path": "profile.json",
+    "profile_sha256": "93b97173cff66afd6e4d6434626ce572bbfd99621476b063b148e0e54ad3cf22"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 24,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 24576,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 24576,
+    "visible_rgb_colors_source": 24,
+    "visible_rgb_colors_logical_preview": 24,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 816,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 192,
+    "height": 128
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 161,
+      "y": 10
+    },
+    {
+      "x": 161,
+      "y": 11
+    },
+    {
+      "x": 162,
+      "y": 11
+    },
+    {
+      "x": 95,
+      "y": 12
+    },
+    {
+      "x": 161,
+      "y": 12
+    },
+    {
+      "x": 162,
+      "y": 12
+    },
+    {
+      "x": 163,
+      "y": 12
+    },
+    {
+      "x": 95,
+      "y": 13
+    },
+    {
+      "x": 164,
+      "y": 13
+    },
+    {
+      "x": 95,
+      "y": 14
+    },
+    {
+      "x": 96,
+      "y": 14
+    },
+    {
+      "x": 98,
+      "y": 14
+    },
+    {
+      "x": 161,
+      "y": 14
+    },
+    {
+      "x": 162,
+      "y": 14
+    },
+    {
+      "x": 163,
+      "y": 14
+    },
+    {
+      "x": 165,
+      "y": 14
+    },
+    {
+      "x": 98,
+      "y": 15
+    },
+    {
+      "x": 99,
+      "y": 15
+    },
+    {
+      "x": 100,
+      "y": 15
+    },
+    {
+      "x": 149,
+      "y": 15
+    },
+    {
+      "x": 158,
+      "y": 15
+    },
+    {
+      "x": 160,
+      "y": 15
+    },
+    {
+      "x": 161,
+      "y": 15
+    },
+    {
+      "x": 166,
+      "y": 15
+    },
+    {
+      "x": 167,
+      "y": 15
+    },
+    {
+      "x": 30,
+      "y": 16
+    },
+    {
+      "x": 97,
+      "y": 16
+    },
+    {
+      "x": 99,
+      "y": 16
+    },
+    {
+      "x": 100,
+      "y": 16
+    },
+    {
+      "x": 148,
+      "y": 16
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "816 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 768,
+      "height": 512
+    },
+    "logical_size": {
+      "width": 192,
+      "height": 128
+    },
+    "expected_render_size": {
+      "width": 768,
+      "height": 512
+    },
+    "scale_x": 4.0,
+    "scale_y": 4.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 4,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Aetherseed",
+    "logical_size": "192x128",
+    "scale": 4,
+    "max_colors": 24,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#001149FF",
+      "#00154DFF",
+      "#001850FF",
+      "#015887FF",
+      "#01608EFF",
+      "#016D99FF",
+      "#027CA7FF",
+      "#03164CFF",
+      "#0591B6FF",
+      "#08416CFF",
+      "#0FB9CEFF",
+      "#10184CFF",
+      "#20DFE2FF",
+      "#461D86FF",
+      "#48EFE1FF",
+      "#5695B5FF",
+      "#723963FF",
+      "#82F9E0FF",
+      "#9C5682FF",
+      "#A6572FFF",
+      "#D9813CFF",
+      "#E2F9D3FF",
+      "#E79D63FF",
+      "#EFE19DFF"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 4,
+      "y": 4
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_sprite_sheet"
+}

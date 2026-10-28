@@ -1,0 +1,27 @@
+{
+  "cell": {
+    "shape": "rectangle",
+    "width": 256,
+    "height": 192,
+    "safe_margin_x": 12,
+    "safe_margin_y": 12
+  },
+  "body_plan": ["the horse=quadruped", "the rider=biped"],
+  "states": {
+    "charge": {
+      "frames": 8,
+      "fps": 10,
+      "loop": true,
+      "action": "A continuous rightward cavalry charge shown in place, one complete eight-pose transverse gallop cycle of the same chestnut horse carrying the same armored knight. The horse truly articulates all four legs; hind propulsion, flight with gathered legs, foreleg reach, foreleg landing and load, hind leg recovery, a second brief suspension, then hind contact must be legible. Spread the successive gallop phases evenly across all eight drawings, with no duplicate first/last pose. Keep near and far legs distinguishable, physically credible knees and hocks, and a consistent horse barrel, head, rider, saddle and equipment size. The rider leans forward with a couched lance and follows the saddle's small rise and fall; seat, stirrups, reins and hand grips stay connected. The lance remains directed right and the shield stays attached. In flight all hooves lift from the shared ground plane; during stance the contacting hoof moves left relative to the in-place torso. Preserve the identity reference's camera, style, pixel density, proportions and colors exactly. One connected horse-and-rider per frame, eight separate non-touching subjects total, no motion trails, dust, scenery or shadows."
+    }
+  },
+  "style": "Follow the attached horse-and-rider reference exactly: identity, proportions, pixel block density, palette, outlines and materials.",
+  "fit": {
+    "pixel_unfake": true,
+    "logical_height": 96,
+    "palette_size": 32,
+    "align_x": "centroid",
+    "align_y": "bottom",
+    "ground_frames": false
+  }
+}

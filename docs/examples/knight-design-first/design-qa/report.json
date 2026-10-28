@@ -1,0 +1,270 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.6.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 384,
+    "height": 384
+  },
+  "logical_size": {
+    "width": 128,
+    "height": 128
+  },
+  "cell_size": {
+    "width": 3,
+    "height": 3
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "73f57324d8f20e7ea831139097d4d716d6a068d52f9d157009b02f2b2c7f5a41",
+    "decoded_rgba_sha256": "c380118c7a4415b6fcaea671a5aba8c9e94a58a3d6b64008ee5a09aa790df9ca",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "profile_sha256": "4ff3b2e1a253b9a408f7f9dc30a6e67473f922bdbe7c9bc0898002def727aac6",
+    "source_path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/knight-design-first/design.png",
+    "profile_path": "/Users/namjungduck/git/Pixelwright/review/docs/examples/knight-design-first/design-profile.json"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 24,
+    "strict_alpha": true,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 16384,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 16384,
+    "visible_rgb_colors_source": 24,
+    "visible_rgb_colors_logical_preview": 24,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 702,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 128,
+    "height": 128
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 68,
+      "y": 24
+    },
+    {
+      "x": 69,
+      "y": 24
+    },
+    {
+      "x": 70,
+      "y": 24
+    },
+    {
+      "x": 66,
+      "y": 25
+    },
+    {
+      "x": 67,
+      "y": 25
+    },
+    {
+      "x": 68,
+      "y": 25
+    },
+    {
+      "x": 69,
+      "y": 25
+    },
+    {
+      "x": 71,
+      "y": 25
+    },
+    {
+      "x": 66,
+      "y": 26
+    },
+    {
+      "x": 67,
+      "y": 27
+    },
+    {
+      "x": 70,
+      "y": 27
+    },
+    {
+      "x": 74,
+      "y": 27
+    },
+    {
+      "x": 66,
+      "y": 28
+    },
+    {
+      "x": 69,
+      "y": 28
+    },
+    {
+      "x": 74,
+      "y": 28
+    },
+    {
+      "x": 66,
+      "y": 29
+    },
+    {
+      "x": 69,
+      "y": 29
+    },
+    {
+      "x": 74,
+      "y": 29
+    },
+    {
+      "x": 63,
+      "y": 30
+    },
+    {
+      "x": 64,
+      "y": 30
+    },
+    {
+      "x": 72,
+      "y": 30
+    },
+    {
+      "x": 75,
+      "y": 30
+    },
+    {
+      "x": 76,
+      "y": 30
+    },
+    {
+      "x": 62,
+      "y": 31
+    },
+    {
+      "x": 63,
+      "y": 31
+    },
+    {
+      "x": 70,
+      "y": 31
+    },
+    {
+      "x": 74,
+      "y": 31
+    },
+    {
+      "x": 75,
+      "y": 31
+    },
+    {
+      "x": 76,
+      "y": 31
+    },
+    {
+      "x": 62,
+      "y": 32
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "702 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 384,
+      "height": 384
+    },
+    "logical_size": {
+      "width": 128,
+      "height": 128
+    },
+    "expected_render_size": {
+      "width": 384,
+      "height": 384
+    },
+    "scale_x": 3.0,
+    "scale_y": 3.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 3,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "Selected 2D design pixel contract",
+    "logical_size": "128x128",
+    "scale": 3,
+    "max_colors": 24,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#050202FF",
+      "#070503FF",
+      "#0D0207FF",
+      "#110507FF",
+      "#120906FF",
+      "#23150EFF",
+      "#39271CFF",
+      "#443730FF",
+      "#4C0D0DFF",
+      "#56524FFF",
+      "#6F0911FF",
+      "#6F6559FF",
+      "#7C0A14FF",
+      "#8A3925FF",
+      "#8C8981FF",
+      "#940F18FF",
+      "#9D6530FF",
+      "#A8181DFF",
+      "#B11B21FF",
+      "#BB7F3CFF",
+      "#CF9449FF",
+      "#D3AA6AFF",
+      "#E3B464FF",
+      "#EDDCAFFF"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 3,
+      "y": 3
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_profile"
+}

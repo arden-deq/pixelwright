@@ -1,0 +1,213 @@
+{
+  "recorded_at_utc": "2026-10-21T23:06:29.020903+00:00",
+  "artifact_integrity_status": "pass",
+  "art_quality_status": "fail",
+  "human_approved": false,
+  "source": {
+    "size": [
+      1774,
+      887
+    ],
+    "sha256": "dc0fe8307bfc78651c3903cca656b4156553eae7b4f8e69b1f021dfc6b57888c",
+    "raw_grid_certified": false
+  },
+  "derivative": {
+    "frame_size": [
+      128,
+      128
+    ],
+    "sheet_native": [
+      512,
+      256
+    ],
+    "sheet_rendered": [
+      2048,
+      1024
+    ],
+    "cell_scale": 4,
+    "visible_colors": 24,
+    "binary_alpha": true,
+    "canonical_transparent_rgba": true,
+    "whole_canvas_nearest_projection": true,
+    "per_frame_fitting": false,
+    "pixel_status": "pass"
+  },
+  "gif": {
+    "path": "audit/walk/pixel-audit/animations/walk.gif",
+    "size": [
+      512,
+      512
+    ],
+    "frames": 8,
+    "durations_ms": [
+      110,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110
+    ],
+    "total_ms": 880,
+    "loop": true,
+    "all_frames_exactly_match_flat_background_preview": true,
+    "background_rgb": [
+      48,
+      52,
+      62
+    ],
+    "sha256": "aec1e0cc1c9345b3bdab72fe364c38544c9db35fcf1cd41f837b182b5b284eb0",
+    "native_frame_sha256": [
+      "c47f4bd696c4c50a0358645a226fbd2c53aae88cb4044bce749010bfef826da9",
+      "b2334133fc5a81d1f6cc710e8502563f277e97d76904c870b12fcda249178e42",
+      "0aa6de9997358035e3efea2514da17044dcc75e322970c7d814a056861e76aae",
+      "10ab1179bf1862d50b6965b9a34faf4088f8a7291d4ebfba79e5c060e79045e9",
+      "2effcee0a5d77f25051dac062f23274b63e586cc7a67b1d5d27368987e5c6553",
+      "10620d554bc74b8fe5e775c0f229de13bca75d6ad63579e9f3d3e3f7d18ee4b0",
+      "a309a48f676a6091d0fa889c18f198fcd6058d225e6e2965b15ad3b61accb6e8",
+      "57ccdff443a0f68bb2caf5eb26a771959bdea6eb5f206e05477adca72a1ed1c8"
+    ]
+  },
+  "contact": [
+    {
+      "landmark": "near_ball",
+      "frames": [
+        0,
+        1,
+        2
+      ],
+      "drift": 14.0,
+      "coordinate_system": "observed_2d_plus_declared_root_offset",
+      "limit": 2,
+      "status": "fail"
+    },
+    {
+      "landmark": "far_ball",
+      "frames": [
+        4,
+        5,
+        6
+      ],
+      "drift": 15.297058540778355,
+      "coordinate_system": "observed_2d_plus_declared_root_offset",
+      "limit": 2,
+      "status": "fail"
+    }
+  ],
+  "pelvis": {
+    "actual_xy": [
+      [
+        63,
+        64
+      ],
+      [
+        67,
+        65
+      ],
+      [
+        64,
+        65
+      ],
+      [
+        67,
+        65
+      ],
+      [
+        63,
+        65
+      ],
+      [
+        64,
+        65
+      ],
+      [
+        64,
+        64
+      ],
+      [
+        64,
+        65
+      ]
+    ],
+    "observed_vertical_range_cells": 1,
+    "target_vertical_range_cells": [
+      2,
+      4
+    ],
+    "first_loading_delta_y": 1,
+    "second_loading_delta_y": 0,
+    "weight_transfer_status": "changes_needed",
+    "physical_center_of_mass_measured": false
+  },
+  "loop_boundary": {
+    "timed_feature_speed_status": "pass",
+    "all_adjacent_and_wrap_speed_acceleration_violations": 0,
+    "features": [
+      {
+        "feature": "pelvis",
+        "speed_cells_per_second": 12.856486930664502,
+        "limit": 45
+      },
+      {
+        "feature": "chest",
+        "speed_cells_per_second": 18.181818181818183,
+        "limit": 40
+      },
+      {
+        "feature": "head",
+        "speed_cells_per_second": 20.327890704543545,
+        "limit": 40
+      },
+      {
+        "feature": "near_ball",
+        "speed_cells_per_second": 28.74797872880345,
+        "limit": 160
+      },
+      {
+        "feature": "far_ball",
+        "speed_cells_per_second": 20.327890704543545,
+        "limit": 160
+      },
+      {
+        "feature": "near_heel",
+        "speed_cells_per_second": 20.327890704543545,
+        "limit": 160
+      },
+      {
+        "feature": "far_heel",
+        "speed_cells_per_second": 25.712973861329004,
+        "limit": 160
+      },
+      {
+        "feature": "shield_top",
+        "speed_cells_per_second": 18.181818181818183,
+        "limit": 65
+      },
+      {
+        "feature": "mace_center",
+        "speed_cells_per_second": 20.327890704543545,
+        "limit": 90
+      },
+      {
+        "feature": "mace_grip",
+        "speed_cells_per_second": 9.090909090909092,
+        "limit": 65
+      }
+    ],
+    "natural_cycle_accepted": false,
+    "reason": "Numeric continuity does not prove alternating support, physical contact or consistent identity."
+  },
+  "helmet_visible_height_range_cells": [
+    20.396078054371138,
+    21.840329667841555
+  ],
+  "observation_uncertainty_native_cells": 1,
+  "same_acceptance_thresholds_across_candidates": true,
+  "issue_counts": {
+    "fail": 88,
+    "review": 17,
+    "info": 1
+  },
+  "scope": "Verifies saved PNG/GIF and reproduces known failing artwork findings. Does not certify the generated walk as improved/natural."
+}

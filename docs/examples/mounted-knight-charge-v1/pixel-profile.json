@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "name": "Mounted knight charge, unchanged sprite-gen atlas",
+  "logical_size": "1024x96",
+  "scale": 2,
+  "max_colors": 32,
+  "alpha": "binary",
+  "transparent_rgb": "exact"
+}

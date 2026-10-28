@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "/Users/namjungduck/git/Pixelwright/review/docs/examples/mounted-knight-charge-v1/run",
+  "states": [
+    "charge"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "charge",
+      "source": "frames",
+      "expected_frames": 8,
+      "found_frames": 8,
+      "natural_pose_count": 8,
+      "frame_files": [
+        "frames/charge/frame-0.png",
+        "frames/charge/frame-1.png",
+        "frames/charge/frame-2.png",
+        "frames/charge/frame-3.png",
+        "frames/charge/frame-4.png",
+        "frames/charge/frame-5.png",
+        "frames/charge/frame-6.png",
+        "frames/charge/frame-7.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9491355261428654,
+          "mean": 0.9716170146093912
+        },
+        "dhash_similarity": {
+          "min": 0.765625,
+          "mean": 0.8582589285714286
+        },
+        "motion_presence": 0.06377770346419818,
+        "centroid_sigma": {
+          "x": 2.1155371874583846,
+          "y": 2.6646504082914153
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "charge: pitch disagreement — detect 1.00x1.00 (uniformity 137.1) vs runlen 2.35x2.35 (40.1); detect kept. large gap usually means the raw was drawn finer than the cell contract — reroll with a block-count hint",
+        "charge: native logical exceeds the physical cap 128x90 — capped frames (reroll candidates): 0:321x272, 1:323x267, 2:323x264, 3:333x242, 4:330x272, 5:332x272, 6:331x272, 7:287x272",
+        "charge: frame 07 has 28 non-transparent edge pixels"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "charge: pitch disagreement — detect 1.00x1.00 (uniformity 137.1) vs runlen 2.35x2.35 (40.1); detect kept. large gap usually means the raw was drawn finer than the cell contract — reroll with a block-count hint",
+    "charge: native logical exceeds the physical cap 128x90 — capped frames (reroll candidates): 0:321x272, 1:323x267, 2:323x264, 3:333x242, 4:330x272, 5:332x272, 6:331x272, 7:287x272",
+    "charge: frame 07 has 28 non-transparent edge pixels"
+  ]
+}

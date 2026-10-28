@@ -1,0 +1,827 @@
+{
+  "hover": {
+    "prompt": "Create new 2D pixel artwork for Aetherseed: An invented floating crystal seed with two articulated crescent vanes and a violet tuft. No real-world anatomy.\nThe attached selected 2D design is the authority for identity, proportions, colors and details. No 3D model, skeleton, mesh or real-world anatomy is required. Use the object's own visible parts.\nState: hover. A smooth six-frame floating idle cycle with individually articulated copper vanes and a lagging tail. Preserve all part sizes and the selected design.\nOne transparent PNG sheet, 3 columns by 2 rows, row-major. Every slot is the same 64x64 logical canvas and the SAME camera and pixel scale. Do not fit, zoom or recenter individual poses. No labels, grid lines, shadows on a backdrop or extra objects. Keep unused final slots transparent. Make stepped pixel contours and deliberate color clusters.\nShared visible RGBA palette: #001149FF, #00154DFF, #001850FF, #015887FF, #01608EFF, #016D99FF, #027CA7FF, #03164CFF, #0591B6FF, #08416CFF, #0FB9CEFF, #10184CFF, #20DFE2FF, #461D86FF, #48EFE1FF, #5695B5FF, #723963FF, #82F9E0FF, #9C5682FF, #A6572FFF, #D9813CFF, #E2F9D3FF, #E79D63FF, #EFE19DFF.\nPreserve each part's size, characteristic shape, markings and attachment; redraw convincing motion, including weight, contact, anticipation and recovery where relevant.\nPart core: Teal faceted teardrop core with the same single cream square eye and dark outline.\nPart left_vane: The copper-gold crescent on screen left, with its small round attachment hub.\nPart right_vane: The copper-gold crescent on screen right, with its attachment.\nPart tail: The short violet two-lobed tuft and its small copper collar below the core.\nFrame 0 (120 ms): Neutral middle height; left crescent slightly lowered, right crescent slightly raised, tuft hangs left.\nFrame 1 (120 ms): Rise one logical cell; both crescents rotate gently upward at their hubs; tuft lags below.\nFrame 2 (120 ms): Highest point two logical cells up; crescents at their upper sweep; tuft curls gently right.\nFrame 3 (120 ms): Return to middle height; crescents begin a downward sweep; tuft follows with a short delay.\nFrame 4 (120 ms): Lowest point two logical cells down; crescents at their lower sweep; tuft bends gently left.\nFrame 5 (120 ms): Rise toward middle height; crescents recover toward frame zero and tuft trails, ready for seamless wrap.\nThe last frame must continue naturally into the first, without a duplicated endpoint.\n",
+    "findings": [
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "core",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "left_vane",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "right_vane",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "tail",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "eye",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_tip",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_tip",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "tail_tip",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_root",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_left",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_root",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_right",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "left_to_core",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "right_to_core",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "core",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "left_vane",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "right_vane",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "tail",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "eye",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_tip",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_tip",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "tail_tip",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_root",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_left",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_root",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_right",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "left_to_core",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "right_to_core",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "core",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "left_vane",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "right_vane",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "tail",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "eye",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_tip",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_tip",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "tail_tip",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_root",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_left",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_root",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_right",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "left_to_core",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "right_to_core",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "core",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "left_vane",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "right_vane",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "tail",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "eye",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_tip",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_tip",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "tail_tip",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_root",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_left",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_root",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_right",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "left_to_core",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "right_to_core",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "core",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "left_vane",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "right_vane",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "tail",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "eye",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_tip",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_tip",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "tail_tip",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_root",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_left",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_root",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_right",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "left_to_core",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "right_to_core",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "core",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "left_vane",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "right_vane",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "PART_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe the actual artwork part; no anatomy is inferred.",
+        "part": "tail",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "eye",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_tip",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_tip",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "tail_tip",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "left_root",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_left",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "right_root",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "LANDMARK_NOT_OBSERVED",
+        "severity": "review",
+        "detail": "Observe this feature in the actual artwork.",
+        "landmark": "core_right",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "left_to_core",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "RATIO_UNVERIFIED",
+        "severity": "review",
+        "detail": "A required part measurement is unobserved.",
+        "ratio": "right_to_core",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "eye"
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "left_tip"
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "right_tip"
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "tail_tip"
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "left_root"
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "core_left"
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "right_root"
+      },
+      {
+        "code": "MOTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "All frames need this observed feature; missing frames are not interpolated.",
+        "state": "hover",
+        "landmark": "core_right"
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 0
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 1
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 2
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 3
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 4
+      },
+      {
+        "code": "CONNECTION_UNVERIFIED",
+        "severity": "review",
+        "detail": "Connection endpoints are unobserved.",
+        "state": "hover",
+        "frame": 5
+      },
+      {
+        "code": "ART_NOT_REVIEWED",
+        "severity": "review",
+        "detail": "Review identity, contours, timing, contact and intended movement separately.",
+        "state": "hover"
+      }
+    ],
+    "raw_sha256": "effd1f4fb2e43cce76c4735c853f40535c6a194cb042af8456d3931787cd94d4",
+    "new_observations_required_after_replacement": true
+  }
+}
