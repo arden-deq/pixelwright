@@ -5,102 +5,102 @@
       192,
       128
     ],
-    "sha256": "cba0a6962abfc7b25be7bcc13dd9eba5cb0e79d4cc882fef65bc76eddfb31a77"
+    "sha256": "2fbd8628796ab1e956b10d75c5916e8b2cb6070afa9154f33a1f0db8f2ca6fd8"
   },
   "knight": {
     "status": "pass",
     "size": [
-      48,
-      96
+      32,
+      64
     ],
-    "sha256": "6996de535066fdd8a67a6af651cb96c3aa4f149c44af9f27a62a297fe795be1b"
+    "sha256": "43ef42217353f97d9bc2ea25a7e7a250df8333dbc261f302bf57b7da9cef0941"
   },
   "princess": {
     "status": "pass",
     "size": [
-      48,
-      96
+      32,
+      64
     ],
-    "sha256": "e7e25581635a0e802511050ad78922fdfa3c3d6133a42ea8868419afb4e498cc"
+    "sha256": "6bcc4d89d2ecd57994beacbe8d10d21abbf78da352871cdf9882d0809a5f5de2"
   },
   "demon-king": {
     "status": "pass",
     "size": [
-      48,
-      96
+      32,
+      64
     ],
-    "sha256": "f3cb028564a226f9b4f47cc74a12df922672e3a77a8cff6295a720c7d709549e"
+    "sha256": "f6436e246896066d6d5d514b647c76fddd9f05bbff6d2166c40470a8aeb241df"
   },
   "shadow": {
     "status": "pass",
     "size": [
-      40,
-      8
+      28,
+      6
     ],
-    "sha256": "c94a43459ac2b5f15b6f51b37e89707a03a06395ef49a8519c76037ffd06a8d5"
+    "sha256": "51196ddbf7ca7b0a97ae04579351ea329477777a32fe5dfb94884d1b09d44f03"
   },
   "stone0": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "8270413a9aae0b87340a65bdc9d37eb056c683cd5102db36df543c9db77acda5"
+    "sha256": "7a8fc9ab4c2c30fb62f56630957e013cafe4c20e52aa300a98d40264072dfd0a"
   },
   "stone1": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "e827f3d70c61e1f8cc5660a9cd3acf1ed2814a1d09e41e97e00f200b564095ec"
+    "sha256": "cefaf1f498dd985a851a81112fb38df5164832fb6c32d8659b2b725b265e51e8"
   },
   "stone2": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "6fb90fcb03092f90b21bf763a0e58596653c0bac9d77051635d6dba9bfe20d47"
+    "sha256": "b0032bd98ad958b6e965aadef45976b4d6c4e57d34e6e5cfd90447ad2f946d2a"
   },
   "stone3": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "c3fdd0be990573156d635ab3c8b57c6a51c59f65285811490c94c8e85064d55a"
+    "sha256": "d4e092ae8dc86e44c4dca5fa0748c961e2a9936514722423491dd09478f52db1"
   },
   "moss0": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "a4b4d81d29e6af70501d25b6d3c1e999abc4277c4aebd2f7cdde1df49c71e017"
+    "sha256": "0beba3ccac79900048319b2623c2a34caebd85c9d7f84680a0c6052ed5d23d3e"
   },
   "moss1": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "c205c3de76ed8dd29d79574ca805d232b9662796dc2568d9dc86fb35d6d994be"
+    "sha256": "9e873e4d041ea9310ac2dc49ba6c03537017c753eb192b3e26202e6bd8d6fd7e"
   },
   "moss2": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "e6fc75d1c641b2bbae4491f451c8231760a998e237c46a3028ff90acbcd5ba13"
+    "sha256": "f32363a0917bb4abf09ea1344be1fc9d95e3a9a8c89c19e19be068df7735dfc5"
   },
   "moss3": {
     "status": "pass",
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "sha256": "46cea51c32273475df4bcb8d7345b778be4d64c9f6c828f995102a584d2db1a3"
+    "sha256": "16458c80176e5c8be333c89db2c599e78b8a30e4a547685cd120a8619437f7f7"
   }
 }

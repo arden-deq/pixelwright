@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "moss3",
-  "logical_size": "16x16",
+  "logical_size": "32x32",
   "scale": 4,
   "max_colors": 64,
   "alpha": "binary",

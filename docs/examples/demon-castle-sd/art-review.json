@@ -1,5 +1,44 @@
 {
-  "status": "not_reviewed",
-  "scope": "New native-cell redraw; prior projection-based approval withdrawn",
-  "contract": "design-contract.json"
+  "status": "accepted",
+  "reviewer": "Codex inspection of saved native PNGs, nearest-neighbor previews and actual Chromium captures",
+  "scope": "New native32x64 static SD field example; expression legibility and common style. Prior projected artwork approval withdrawn.",
+  "reviewed_views": [
+    "characters-native.png",
+    "characters-6x.png",
+    "faces-6x.png",
+    "../../images/game-sd-assets-native.png",
+    "../../images/game-sd-scene-preview.png",
+    "runtime-field.png",
+    "game-client-shot.png"
+  ],
+  "observations": [
+    "All three characters are drawn directly on32x64 cells, exactly1x2 of the32px tiles. The head occupies about half the visible height; the body and limbs are short.",
+    "Each pair of eyes remains separated with dark contours, small white highlights and distinct blue or red iris cells at native resolution.",
+    "The princess has a continuous U-shaped smile. The knight has a short calm smile with a raised corner. The demon king has angled eyebrows and an asymmetric smirk. Native and enlarged crops were inspected; expressions are not inferred from grid PASS.",
+    "The knight grips the short sword under its crossguard and the shield beside the forearm. Crowns and horns connect to the character silhouettes.",
+    "Gold, crimson, steel and violet clusters use the same upper-left light and one-native-pixel stepped contours. No anti-aliased edge is introduced by authoring or export.",
+    "The castle uses the same contours and palette as the characters. Quiet large masonry slabs and sparse grass leave the facial features legible in the map.",
+    "Contact shadows sit at the shared foot anchor. The actual browser screenshot preserves the designed facial cells and has no diagnostic highlights."
+  ],
+  "limitations": [
+    "This is a deliberately simplified static SD field illustration; a walking cycle is not included.",
+    "Expression preservation is tested as pixel identity. The artistic approval is a separate visual judgment and does not certify a general automatic art-quality detector."
+  ],
+  "technical_evidence": [
+    "design-contract.json",
+    "native-authoring.json",
+    "asset-summary.json",
+    "face-preservation.json",
+    "runtime-verification.json",
+    "composition-verification.json",
+    "game-client-verification.json"
+  ],
+  "reviewed_bytes": {
+    "characters-native.png": "e8ea1717002213029e434a6b796e2c42dd0d89dfade67ea3ded7d2a35ceaa786",
+    "characters-6x.png": "a361fa990ed07ccf925cb0826b8f92ae3832cbe86535c727c01b9621d254d88b",
+    "faces-6x.png": "a0d0a96b6cbc46f3183e10e83092838c7a7911a798b6b3aea2b71d1ffd99e8d8",
+    "../../images/game-sd-scene-preview.png": "3305429aa1ea43f17cac21dc66d9f57a53c404ff2f795e8fcdcbb3461d02ff05",
+    "runtime-field.png": "5aa0a81c4fa68ca24401887c993eb389eb32c2cc39d344b07217035916b6724a",
+    "game-client-shot.png": "922c37f4848fed641ef9417f4794bc91c9d958b88b2930803a934ceb176447ed"
+  }
 }

@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 64,
-    "height": 64
+    "width": 128,
+    "height": 128
   },
   "logical_size": {
-    "width": 16,
-    "height": 16
+    "width": 32,
+    "height": 32
   },
   "cell_size": {
     "width": 4,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "4ffb216a718697f7280135f9fcbae43cc672fc0051c1853ed3c41b4f02079c62",
-    "decoded_rgba_sha256": "6f4e8a1a93ddecdee6b6082aaa8777eb5159d24531202af2fa2eb0027639e7e8",
+    "source_sha256": "f870fcb37067bec4c06984023588ebe1bfb127a6fec33a90d291e9c3de86b11d",
+    "decoded_rgba_sha256": "0d1d7e4360ab867262774ff77424f31598c47c11fdd460170866fb759584e64c",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "15280d952c1a4cdd396a2134ee05e9429467d779de761d1407fccd5d4ed4a788",
+    "profile_sha256": "f2bfc6b82ac4eb1146ba252c17cb1caafa40a2a19f2b35cb01a2578646f49f55",
     "source_path": "docs/examples/demon-castle-sd/stone0-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/stone0-profile.json"
   },
@@ -38,14 +38,14 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 256,
+    "uniform_rgba_cells": 1024,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 256,
-    "visible_rgb_colors_source": 5,
-    "visible_rgb_colors_logical_preview": 5,
+    "total_logical_cells": 1024,
+    "visible_rgb_colors_source": 3,
+    "visible_rgb_colors_logical_preview": 3,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 0,
     "outside_palette_source_pixels": 0
@@ -57,8 +57,8 @@
     "file": "stone0-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 16,
-    "height": 16
+    "width": 32,
+    "height": 32
   },
   "possible_isolated_pixels_sample": [],
   "issues": [
@@ -77,16 +77,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 64,
-      "height": 64
+      "width": 128,
+      "height": 128
     },
     "logical_size": {
-      "width": 16,
-      "height": 16
+      "width": 32,
+      "height": 32
     },
     "expected_render_size": {
-      "width": 64,
-      "height": 64
+      "width": 128,
+      "height": 128
     },
     "scale_x": 4.0,
     "scale_y": 4.0,
@@ -100,7 +100,7 @@
   "contract": {
     "schema_version": 1,
     "name": "stone0",
-    "logical_size": "16x16",
+    "logical_size": "32x32",
     "scale": 4,
     "max_colors": 64,
     "alpha": "binary",

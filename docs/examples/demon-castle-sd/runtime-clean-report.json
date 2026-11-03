@@ -33,7 +33,7 @@
   "status": "pass",
   "provenance": {
     "source_path": "docs/examples/demon-castle-sd/runtime-clean.png",
-    "source_sha256": "d9a1292a89cf74394615044bbcf17a36a3bd58e6799cee459ef148ee010c16fa",
-    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+    "source_sha256": "fbb63e69838c519b52c1b108793421e4d8da6552f1d8f8e932dc7fdcfb8f8558",
+    "contract_sha256": "fad806311aff010f79fa72942e02cf4289b5e35ea92b394ef11d07bba3d8c229"
   }
 }

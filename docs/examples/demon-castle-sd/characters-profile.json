@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "name": "characters",
-  "logical_size": "160x104",
-  "scale": 4,
+  "logical_size": "112x72",
+  "scale": 6,
   "max_colors": 64,
   "alpha": "opaque",
   "transparent_rgb": "exact",

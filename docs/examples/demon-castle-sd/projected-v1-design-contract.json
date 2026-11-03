@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "name": "SD redraw — frozen before generation",
+  "character_logical_size": "48x96",
+  "character_aspect_ratio": "1:2",
+  "anatomy": "two heads tall, enlarged face and short limbs",
+  "castle_logical_size": "192x128",
+  "scene_logical_size": "384x288",
+  "tile_logical_size": "16x16",
+  "render_scale": 4,
+  "source_profile_scale": 16,
+  "max_colors": 64,
+  "palette_file": "../../../pixelwright/examples/demon-castle/palette.json",
+  "alpha": "binary",
+  "transparent_rgb": "exact",
+  "lighting": "upper-left",
+  "perspective": "three-quarter RPG field",
+  "art_acceptance": [
+    "Eyes and mouth separate at 1x; distinct helmet/crown/horns",
+    "Two-head silhouette rather than merely a tall thin canvas",
+    "Hands and held equipment have clear contact and boundaries",
+    "Consistent face scale and dark selective outline",
+    "Terrain has deliberate clusters and coherent detail level",
+    "Only clean art in the main README scene; diagnostic overlays in a labeled section"
+  ]
+}

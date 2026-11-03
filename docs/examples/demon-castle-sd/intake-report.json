@@ -10,7 +10,7 @@
     {
       "code": "CATEGORY_SIZE",
       "severity": "fail",
-      "detail": "character assets must be 48x96; this one is 96x192."
+      "detail": "character assets must be 32x64; this one is 64x128."
     },
     {
       "code": "COARSE_PIXELS",
@@ -25,16 +25,16 @@
   ],
   "asset": {
     "size": [
-      96,
-      192
+      64,
+      128
     ],
-    "visible_colors": 39,
+    "visible_colors": 20,
     "effective_pixel_size": {
       "x": 2,
       "y": 2,
       "size": 2,
-      "column_edges": 39,
-      "row_edges": 66,
+      "column_edges": 31,
+      "row_edges": 62,
       "measurable": true,
       "conclusive": true
     },
@@ -43,19 +43,19 @@
   "references": [
     {
       "path": "pixelwright/examples/demon-castle-sd/build/stone0.png",
-      "sha256": "8270413a9aae0b87340a65bdc9d37eb056c683cd5102db36df543c9db77acda5",
+      "sha256": "7a8fc9ab4c2c30fb62f56630957e013cafe4c20e52aa300a98d40264072dfd0a",
       "metrics": {
         "size": [
-          16,
-          16
+          32,
+          32
         ],
-        "visible_colors": 5,
+        "visible_colors": 3,
         "effective_pixel_size": {
           "x": 1,
           "y": 1,
           "size": 1,
-          "column_edges": 8,
-          "row_edges": 12,
+          "column_edges": 14,
+          "row_edges": 8,
           "measurable": true,
           "conclusive": true
         },
@@ -64,19 +64,19 @@
     },
     {
       "path": "pixelwright/examples/demon-castle-sd/build/castle.png",
-      "sha256": "cba0a6962abfc7b25be7bcc13dd9eba5cb0e79d4cc882fef65bc76eddfb31a77",
+      "sha256": "2fbd8628796ab1e956b10d75c5916e8b2cb6070afa9154f33a1f0db8f2ca6fd8",
       "metrics": {
         "size": [
           192,
           128
         ],
-        "visible_colors": 48,
+        "visible_colors": 22,
         "effective_pixel_size": {
           "x": 1,
           "y": 1,
           "size": 1,
-          "column_edges": 133,
-          "row_edges": 112,
+          "column_edges": 176,
+          "row_edges": 118,
           "measurable": true,
           "conclusive": true
         },
@@ -85,19 +85,19 @@
     },
     {
       "path": "pixelwright/examples/demon-castle-sd/build/knight.png",
-      "sha256": "6996de535066fdd8a67a6af651cb96c3aa4f149c44af9f27a62a297fe795be1b",
+      "sha256": "43ef42217353f97d9bc2ea25a7e7a250df8333dbc261f302bf57b7da9cef0941",
       "metrics": {
         "size": [
-          48,
-          96
+          32,
+          64
         ],
-        "visible_colors": 39,
+        "visible_colors": 20,
         "effective_pixel_size": {
           "x": 1,
           "y": 1,
           "size": 1,
-          "column_edges": 39,
-          "row_edges": 66,
+          "column_edges": 31,
+          "row_edges": 62,
           "measurable": true,
           "conclusive": true
         },
@@ -106,19 +106,19 @@
     },
     {
       "path": "pixelwright/examples/demon-castle-sd/build/princess.png",
-      "sha256": "e7e25581635a0e802511050ad78922fdfa3c3d6133a42ea8868419afb4e498cc",
+      "sha256": "6bcc4d89d2ecd57994beacbe8d10d21abbf78da352871cdf9882d0809a5f5de2",
       "metrics": {
         "size": [
-          48,
-          96
+          32,
+          64
         ],
-        "visible_colors": 24,
+        "visible_colors": 17,
         "effective_pixel_size": {
           "x": 1,
           "y": 1,
           "size": 1,
-          "column_edges": 39,
-          "row_edges": 70,
+          "column_edges": 31,
+          "row_edges": 61,
           "measurable": true,
           "conclusive": true
         },
@@ -127,19 +127,19 @@
     },
     {
       "path": "pixelwright/examples/demon-castle-sd/build/demon-king.png",
-      "sha256": "f3cb028564a226f9b4f47cc74a12df922672e3a77a8cff6295a720c7d709549e",
+      "sha256": "f6436e246896066d6d5d514b647c76fddd9f05bbff6d2166c40470a8aeb241df",
       "metrics": {
         "size": [
-          48,
-          96
+          32,
+          64
         ],
-        "visible_colors": 27,
+        "visible_colors": 18,
         "effective_pixel_size": {
           "x": 1,
           "y": 1,
           "size": 1,
-          "column_edges": 45,
-          "row_edges": 64,
+          "column_edges": 31,
+          "row_edges": 62,
           "measurable": true,
           "conclusive": true
         },
@@ -161,7 +161,7 @@
   },
   "provenance": {
     "source_path": "docs/examples/demon-castle-sd/knight-2x-rejected.png",
-    "source_sha256": "71f68cd26cc0c73dde1879a64af5d6816ab5b1ac64e18f4d8529e1182bf5d19f",
-    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+    "source_sha256": "ffaf0aa88a06b7702f6010c7ae69ee3a4c70de264a18527093190b57ee013135",
+    "contract_sha256": "fad806311aff010f79fa72942e02cf4289b5e35ea92b394ef11d07bba3d8c229"
   }
 }

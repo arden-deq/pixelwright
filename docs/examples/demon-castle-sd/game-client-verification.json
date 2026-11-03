@@ -1,0 +1,24 @@
+{
+  "status": "pass",
+  "client": "develop-web-game/scripts/web_game_playwright_client.js (unchanged local copy)",
+  "client_sha256": "e95c3bcbdc0d15eb08fd3a6021283ec32f715b51f1e5847d3db20df526be5996",
+  "actions": "idle1 frame to establish manual time, right12 frames, idle4 frames",
+  "initial_player": [
+    184,
+    264
+  ],
+  "expected_player": [
+    196,
+    264
+  ],
+  "actual_player": {
+    "x": 196,
+    "y": 264
+  },
+  "console_errors": [],
+  "screenshot": "game-client-shot.png",
+  "state": "game-client-state.json",
+  "screenshot_review": "accepted: saved capture opened; map, moved knight, NPCs and preserved expressions visible",
+  "note": "An initial trial without the idle bootstrap allowed a real-time frame before manual stepping; the verified run locks manual time before key input.",
+  "screenshot_sha256": "922c37f4848fed641ef9417f4794bc91c9d958b88b2930803a934ceb176447ed"
+}

@@ -9,25 +9,25 @@
   "issues": [],
   "metrics": {
     "size": [
-      16,
-      16
+      32,
+      32
     ],
     "visible_colors": 3,
     "effective_pixel_size": {
       "x": 1,
       "y": 1,
       "size": 1,
-      "column_edges": 5,
-      "row_edges": 4,
+      "column_edges": 14,
+      "row_edges": 12,
       "measurable": true,
-      "conclusive": false
+      "conclusive": true
     },
     "dither_pixels": 0
   },
   "provenance": {
     "source_path": "pixelwright/examples/demon-castle-sd/build/moss2.png",
-    "source_sha256": "e6fc75d1c641b2bbae4491f451c8231760a998e237c46a3028ff90acbcd5ba13",
+    "source_sha256": "f32363a0917bb4abf09ea1344be1fc9d95e3a9a8c89c19e19be068df7735dfc5",
     "contract_path": "pixelwright/examples/demon-castle-sd/game.json",
-    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+    "contract_sha256": "fad806311aff010f79fa72942e02cf4289b5e35ea92b394ef11d07bba3d8c229"
   }
 }

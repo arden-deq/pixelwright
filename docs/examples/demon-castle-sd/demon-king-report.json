@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 192,
-    "height": 384
+    "width": 128,
+    "height": 256
   },
   "logical_size": {
-    "width": 48,
-    "height": 96
+    "width": 32,
+    "height": 64
   },
   "cell_size": {
     "width": 4,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "2c5f7472ff857505b56a090203c174e90c34d3b7a2aa69f95fa6d8724dd023b0",
-    "decoded_rgba_sha256": "a1f6c437ac73a03fc0d08ffad494b8eac4df7588b352ba3a33ab46313e252c0f",
+    "source_sha256": "e1bdcdbc0994505eefe4402b0b9518122ca9a61024cb2de472fa7db0f750222b",
+    "decoded_rgba_sha256": "b8f3e559254f4c1f7bb69573cb04b9d9998146e7fe06780090ecc0586834c74a",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "8b216c1c72f8032b0c1fd0abda6b1c8332a379d48e3242079edf4b9bf8e03b6b",
+    "profile_sha256": "1be2aafdae92b951967a984ef195ed2b765ae07c38e51c37fe94f522af17c10d",
     "source_path": "docs/examples/demon-castle-sd/demon-king-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/demon-king-profile.json"
   },
@@ -38,16 +38,16 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 4608,
+    "uniform_rgba_cells": 2048,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 4608,
-    "visible_rgb_colors_source": 27,
-    "visible_rgb_colors_logical_preview": 27,
+    "total_logical_cells": 2048,
+    "visible_rgb_colors_source": 18,
+    "visible_rgb_colors_logical_preview": 18,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 32,
+    "possible_color_isolated_logical_pixels": 12,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -57,136 +57,64 @@
     "file": "demon-king-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 48,
-    "height": 96
+    "width": 32,
+    "height": 64
   },
   "possible_isolated_pixels_sample": [
     {
-      "x": 21,
-      "y": 44
+      "x": 19,
+      "y": 7
     },
     {
-      "x": 26,
-      "y": 44
+      "x": 5,
+      "y": 15
     },
     {
-      "x": 26,
-      "y": 45
+      "x": 25,
+      "y": 15
     },
     {
-      "x": 32,
-      "y": 47
+      "x": 12,
+      "y": 16
     },
     {
-      "x": 9,
-      "y": 49
-    },
-    {
-      "x": 18,
-      "y": 51
-    },
-    {
-      "x": 23,
-      "y": 53
-    },
-    {
-      "x": 15,
-      "y": 55
-    },
-    {
-      "x": 8,
-      "y": 56
-    },
-    {
-      "x": 16,
-      "y": 59
-    },
-    {
-      "x": 27,
-      "y": 59
-    },
-    {
-      "x": 23,
-      "y": 61
-    },
-    {
-      "x": 36,
-      "y": 66
-    },
-    {
-      "x": 18,
-      "y": 67
-    },
-    {
-      "x": 22,
-      "y": 67
-    },
-    {
-      "x": 23,
-      "y": 67
-    },
-    {
-      "x": 26,
-      "y": 67
-    },
-    {
-      "x": 22,
-      "y": 68
-    },
-    {
-      "x": 23,
-      "y": 68
+      "x": 20,
+      "y": 16
     },
     {
       "x": 7,
-      "y": 73
+      "y": 21
     },
     {
-      "x": 17,
-      "y": 75
-    },
-    {
-      "x": 30,
-      "y": 75
-    },
-    {
-      "x": 11,
-      "y": 78
-    },
-    {
-      "x": 34,
-      "y": 78
+      "x": 22,
+      "y": 31
     },
     {
       "x": 9,
-      "y": 79
-    },
-    {
-      "x": 36,
-      "y": 79
+      "y": 34
     },
     {
       "x": 23,
-      "y": 80
+      "y": 34
     },
     {
-      "x": 23,
-      "y": 82
+      "x": 28,
+      "y": 45
     },
     {
-      "x": 31,
-      "y": 84
+      "x": 22,
+      "y": 46
     },
     {
-      "x": 31,
-      "y": 85
+      "x": 16,
+      "y": 55
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "32 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "12 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     }
   ],
   "visual_review_required": [
@@ -198,16 +126,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 192,
-      "height": 384
+      "width": 128,
+      "height": 256
     },
     "logical_size": {
-      "width": 48,
-      "height": 96
+      "width": 32,
+      "height": 64
     },
     "expected_render_size": {
-      "width": 192,
-      "height": 384
+      "width": 128,
+      "height": 256
     },
     "scale_x": 4.0,
     "scale_y": 4.0,
@@ -221,7 +149,7 @@
   "contract": {
     "schema_version": 1,
     "name": "demon-king",
-    "logical_size": "48x96",
+    "logical_size": "32x64",
     "scale": 4,
     "max_colors": 64,
     "alpha": "binary",

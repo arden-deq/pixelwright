@@ -20,26 +20,26 @@
     "stone3"
   ],
   "initial_player": {
-    "x": 188,
-    "y": 270
+    "x": 184,
+    "y": 264
   },
   "moved_player": {
-    "x": 208,
-    "y": 270
+    "x": 204,
+    "y": 264
   },
   "movement_delta": [
     20,
     0
   ],
   "wall_stop": {
-    "x": 188,
-    "y": 146
+    "x": 184,
+    "y": 141
   },
   "npc_stop": {
-    "x": 266,
-    "y": 224
+    "x": 280,
+    "y": 208
   },
-  "boundary_x": 312,
+  "boundary_x": 320,
   "depth_order": [
     "castle",
     "demon-king",
@@ -54,11 +54,5 @@
   ],
   "fractional_downscaling": "refused",
   "console_errors": [],
-  "fault_capture": "runtime-injected-errors.png",
-  "bundled_game_client": {
-    "script": "develop-web-game/scripts/web_game_playwright_client.js (unchanged local copy)",
-    "actions": "right 12 frames, idle 4 frames",
-    "console_errors": [],
-    "screenshot_reviewed": true
-  }
+  "fault_capture": "runtime-injected-errors.png"
 }

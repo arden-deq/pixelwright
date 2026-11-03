@@ -12,13 +12,13 @@
       192,
       128
     ],
-    "visible_colors": 48,
+    "visible_colors": 22,
     "effective_pixel_size": {
       "x": 1,
       "y": 1,
       "size": 1,
-      "column_edges": 133,
-      "row_edges": 112,
+      "column_edges": 176,
+      "row_edges": 118,
       "measurable": true,
       "conclusive": true
     },
@@ -26,8 +26,8 @@
   },
   "provenance": {
     "source_path": "pixelwright/examples/demon-castle-sd/build/castle.png",
-    "source_sha256": "cba0a6962abfc7b25be7bcc13dd9eba5cb0e79d4cc882fef65bc76eddfb31a77",
+    "source_sha256": "2fbd8628796ab1e956b10d75c5916e8b2cb6070afa9154f33a1f0db8f2ca6fd8",
     "contract_path": "pixelwright/examples/demon-castle-sd/game.json",
-    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+    "contract_sha256": "fad806311aff010f79fa72942e02cf4289b5e35ea92b394ef11d07bba3d8c229"
   }
 }

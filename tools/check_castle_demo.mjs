@@ -48,16 +48,16 @@ try {
   assert.deepEqual((await state()).player, initial.player);
   await key('ArrowUp', 160);
   const wall = await state();
-  assert.equal(wall.player.y, sd ? 146 : 150);
+  assert.equal(wall.player.y, sd ? 141 : 150);
   await page.keyboard.press('r');
-  await key('ArrowRight', sd ? 78 : 54); await key('ArrowUp', 90);
+  await key('ArrowRight', sd ? 96 : 54); await key('ArrowUp', 90);
   const npc = await state();
-  assert.equal(npc.player.x, sd ? 266 : 235); assert.equal(npc.player.y, sd ? 224 : 200);
+  assert.equal(npc.player.x, sd ? 280 : 235); assert.equal(npc.player.y, sd ? 208 : 200);
   await page.keyboard.press('r');
   await key('ArrowRight', 400);
-  assert.equal((await state()).player.x, 312);
+  assert.equal((await state()).player.x, sd ? 320 : 312);
   await page.keyboard.press('r');
-  await key('ArrowLeft', sd ? 102 : 53); await key('ArrowUp', sd ? 46 : 24);
+  await key('ArrowLeft', sd ? 100 : 53); await key('ArrowUp', sd ? 56 : 24);
   const behind = await state();
   assert.ok(behind.draw_order.indexOf('knight') < behind.draw_order.indexOf('princess'));
   await capture('runtime-depth.png');
@@ -81,7 +81,7 @@ try {
   assert.deepEqual(errors, []);
   const record = { status: 'pass', base: initial.base, assets_loaded: initial.assets.sort(),
     initial_player: initial.player, moved_player: moved.player, movement_delta: [20, 0],
-    wall_stop: wall.player, npc_stop: npc.player, boundary_x: 312,
+    wall_stop: wall.player, npc_stop: npc.player, boundary_x: sd ? 320 : 312,
     depth_order: behind.draw_order, reset: 'pass', fullscreen: 'pass',
     integer_scales: [4, 3], fractional_downscaling: 'refused',
     console_errors: errors, fault_capture: 'runtime-injected-errors.png' };

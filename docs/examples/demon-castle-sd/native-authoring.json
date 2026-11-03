@@ -1,0 +1,106 @@
+{
+  "workflow": "native_cell_authoring",
+  "contract_sha256": "f53ea5f8b2286e287cd622575107275ca4420093e2ecbde0fc317b73a8ef1896",
+  "contract_fixed_before_authoring_commit": "8e39a33",
+  "authoring_script": "tools/author_sd_castle_cells.py",
+  "authoring_script_sha256": "5d4c21b502c03850d97fa15924b8067ed994e2473f51bda9060452d4f001bf5a",
+  "palette_sha256": "f8b393259d6ac52d0416b9ed31c0e73278d28a5e5fdaac5d4e9161c75b18f9b1",
+  "raster_inputs": [],
+  "downsampling_operations": 0,
+  "palette_remapping_operations": 0,
+  "historical_concept_role": "Costume and palette reference only; original generated PNGs are preserved but are not production inputs.",
+  "face_design_sha256": "7cbd8bb62f720b86c7d7a8d9b4ba2ac69f58643d245b10495de5b7fd16bee0dc",
+  "assets": {
+    "knight": {
+      "size": [
+        32,
+        64
+      ],
+      "cells_sha256": "2e106e1be602867f58f5227fdac6044a56b63df566fe23ea4aa18efd79dce9a3"
+    },
+    "princess": {
+      "size": [
+        32,
+        64
+      ],
+      "cells_sha256": "9ef07f34cdabad275567d0ad452f4d6b9ffa78762de18e4d83d7697fa5351119"
+    },
+    "demon-king": {
+      "size": [
+        32,
+        64
+      ],
+      "cells_sha256": "e2ee522598f601fb86702cd39239085ec3017b143388af3df6b6e4826251c57d"
+    },
+    "castle": {
+      "size": [
+        192,
+        128
+      ],
+      "cells_sha256": "2a2982c1d8f62e61e85c5f4f218f902eec5bc384588b5d096e1b561b575883af"
+    },
+    "stone0": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "a713500f64098c0f5b9d3ae1d25ad98f4d5c56a46b5d48be52bd4e588bd8f476"
+    },
+    "moss0": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "164da81ae5c8fbe558e305d4576bbe16d8f6e702f7328df28bdc4e35fc05f527"
+    },
+    "stone1": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "740d4a0c326307784bad1f83ea735ad54991dfd445e6b4697aee7384acad1698"
+    },
+    "moss1": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "0b5747ebf81ab129551568db8ae50daba61f535aaee54bd160b656947ccbcd44"
+    },
+    "stone2": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "7095c8c3f067b0faf086059d9d5c7ce49aefd1ed4920ac3b5d00601c202ee0e6"
+    },
+    "moss2": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "d1159c0454125dd6a0c4a10f54cc2542f15d81073ba8bfe400ea989c6b4296f5"
+    },
+    "stone3": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "137b0e65b06f65130877ffb03bae2c7b427a9c04acb9b5bdf855c17665695785"
+    },
+    "moss3": {
+      "size": [
+        32,
+        32
+      ],
+      "cells_sha256": "305a2668271f555cdac591c0d3f93c8cb798806797f855899fcf1352076b9ac3"
+    },
+    "shadow": {
+      "size": [
+        28,
+        6
+      ],
+      "cells_sha256": "f2bd6468a809b99e646f8602cea3d6f3b73289826984cb3a6479896325258d75"
+    }
+  }
+}

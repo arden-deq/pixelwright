@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 64,
-    "height": 64
+    "width": 128,
+    "height": 128
   },
   "logical_size": {
-    "width": 16,
-    "height": 16
+    "width": 32,
+    "height": 32
   },
   "cell_size": {
     "width": 4,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "dfac537592a967ff126d97b9172edd8ecaee0742fdace3bc77ba55bbc062cb72",
-    "decoded_rgba_sha256": "f4c3f62d828b5db0d198bd0f3b24f842fb9532f33c50cd1653929fd18bd83951",
+    "source_sha256": "9e6529fd17b89e8d40930213ccc493b2e662486bfbfe77f31ba6c6ebe9562166",
+    "decoded_rgba_sha256": "a4accdc83ea023a887495339d3d1a96643ec7b045c80631fdffd6b30d759d7c1",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "0d9e47a335092d49458f059b3d0f2fdf8d01faf7f53e0c57d7f090db62d64856",
+    "profile_sha256": "34013df3ddda7c25b9d4bf72900c64ebadf90eae7f71101193529ba412287a84",
     "source_path": "docs/examples/demon-castle-sd/stone1-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/stone1-profile.json"
   },
@@ -38,16 +38,16 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 256,
+    "uniform_rgba_cells": 1024,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 256,
-    "visible_rgb_colors_source": 5,
-    "visible_rgb_colors_logical_preview": 5,
+    "total_logical_cells": 1024,
+    "visible_rgb_colors_source": 3,
+    "visible_rgb_colors_logical_preview": 3,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 1,
+    "possible_color_isolated_logical_pixels": 0,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -57,21 +57,11 @@
     "file": "stone1-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 16,
-    "height": 16
+    "width": 32,
+    "height": 32
   },
-  "possible_isolated_pixels_sample": [
-    {
-      "x": 4,
-      "y": 6
-    }
-  ],
+  "possible_isolated_pixels_sample": [],
   "issues": [
-    {
-      "code": "COLOR_ISOLATION_CANDIDATES",
-      "severity": "info",
-      "detail": "1 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
-    },
     {
       "code": "OPAQUE_BACKGROUND",
       "severity": "info",
@@ -87,16 +77,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 64,
-      "height": 64
+      "width": 128,
+      "height": 128
     },
     "logical_size": {
-      "width": 16,
-      "height": 16
+      "width": 32,
+      "height": 32
     },
     "expected_render_size": {
-      "width": 64,
-      "height": 64
+      "width": 128,
+      "height": 128
     },
     "scale_x": 4.0,
     "scale_y": 4.0,
@@ -110,7 +100,7 @@
   "contract": {
     "schema_version": 1,
     "name": "stone1",
-    "logical_size": "16x16",
+    "logical_size": "32x32",
     "scale": 4,
     "max_colors": 64,
     "alpha": "binary",

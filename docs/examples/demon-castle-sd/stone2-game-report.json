@@ -9,16 +9,16 @@
   "issues": [],
   "metrics": {
     "size": [
-      16,
-      16
+      32,
+      32
     ],
-    "visible_colors": 7,
+    "visible_colors": 4,
     "effective_pixel_size": {
       "x": 1,
       "y": 1,
       "size": 1,
-      "column_edges": 11,
-      "row_edges": 14,
+      "column_edges": 16,
+      "row_edges": 10,
       "measurable": true,
       "conclusive": true
     },
@@ -26,8 +26,8 @@
   },
   "provenance": {
     "source_path": "pixelwright/examples/demon-castle-sd/build/stone2.png",
-    "source_sha256": "6fb90fcb03092f90b21bf763a0e58596653c0bac9d77051635d6dba9bfe20d47",
+    "source_sha256": "b0032bd98ad958b6e965aadef45976b4d6c4e57d34e6e5cfd90447ad2f946d2a",
     "contract_path": "pixelwright/examples/demon-castle-sd/game.json",
-    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+    "contract_sha256": "fad806311aff010f79fa72942e02cf4289b5e35ea92b394ef11d07bba3d8c229"
   }
 }

@@ -19,8 +19,8 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "28cc1f6e3c4bdf5690a51e602bfe2b59ed6362e04614cd1a43211f2f6a7b23f6",
-    "decoded_rgba_sha256": "0eec44f1d93bbe8ce218787004756f3b0b5c5f2369651efb3d4df74ae7d4ae85",
+    "source_sha256": "3305429aa1ea43f17cac21dc66d9f57a53c404ff2f795e8fcdcbb3461d02ff05",
+    "decoded_rgba_sha256": "73401948394b6cc7a28d0d617a5cb48871e965c323ae1f40bc603f97b388dd01",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
     "profile_sha256": "998d904cdca140b220b610ff2ec543f2c6c6c1f00ec00af9512225c91ecff635",
@@ -44,10 +44,10 @@
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
     "total_logical_cells": 110592,
-    "visible_rgb_colors_source": 58,
-    "visible_rgb_colors_logical_preview": 58,
+    "visible_rgb_colors_source": 42,
+    "visible_rgb_colors_logical_preview": 42,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 1154,
+    "possible_color_isolated_logical_pixels": 195,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -62,131 +62,131 @@
   },
   "possible_isolated_pixels_sample": [
     {
-      "x": 114,
+      "x": 226,
       "y": 2
-    },
-    {
-      "x": 130,
-      "y": 2
-    },
-    {
-      "x": 242,
-      "y": 2
-    },
-    {
-      "x": 322,
-      "y": 2
-    },
-    {
-      "x": 8,
-      "y": 4
-    },
-    {
-      "x": 56,
-      "y": 4
-    },
-    {
-      "x": 72,
-      "y": 4
-    },
-    {
-      "x": 88,
-      "y": 4
-    },
-    {
-      "x": 104,
-      "y": 4
-    },
-    {
-      "x": 296,
-      "y": 4
-    },
-    {
-      "x": 21,
-      "y": 9
-    },
-    {
-      "x": 37,
-      "y": 9
-    },
-    {
-      "x": 197,
-      "y": 9
-    },
-    {
-      "x": 213,
-      "y": 9
-    },
-    {
-      "x": 277,
-      "y": 9
-    },
-    {
-      "x": 357,
-      "y": 9
-    },
-    {
-      "x": 373,
-      "y": 9
-    },
-    {
-      "x": 34,
-      "y": 18
-    },
-    {
-      "x": 194,
-      "y": 18
     },
     {
       "x": 258,
-      "y": 18
+      "y": 2
     },
     {
-      "x": 290,
-      "y": 18
+      "x": 226,
+      "y": 3
     },
     {
-      "x": 354,
-      "y": 18
+      "x": 258,
+      "y": 3
     },
     {
-      "x": 136,
-      "y": 20
+      "x": 126,
+      "y": 12
     },
     {
-      "x": 168,
-      "y": 20
+      "x": 258,
+      "y": 12
     },
     {
-      "x": 184,
-      "y": 20
+      "x": 305,
+      "y": 12
     },
     {
-      "x": 232,
-      "y": 20
+      "x": 337,
+      "y": 12
     },
     {
-      "x": 280,
-      "y": 20
+      "x": 369,
+      "y": 12
     },
     {
-      "x": 312,
-      "y": 20
+      "x": 39,
+      "y": 13
     },
     {
-      "x": 328,
-      "y": 20
+      "x": 71,
+      "y": 13
     },
     {
-      "x": 376,
-      "y": 20
+      "x": 305,
+      "y": 13
+    },
+    {
+      "x": 337,
+      "y": 13
+    },
+    {
+      "x": 369,
+      "y": 13
+    },
+    {
+      "x": 39,
+      "y": 14
+    },
+    {
+      "x": 71,
+      "y": 14
+    },
+    {
+      "x": 12,
+      "y": 24
+    },
+    {
+      "x": 108,
+      "y": 24
+    },
+    {
+      "x": 140,
+      "y": 24
+    },
+    {
+      "x": 172,
+      "y": 24
+    },
+    {
+      "x": 204,
+      "y": 24
+    },
+    {
+      "x": 12,
+      "y": 25
+    },
+    {
+      "x": 108,
+      "y": 25
+    },
+    {
+      "x": 140,
+      "y": 25
+    },
+    {
+      "x": 121,
+      "y": 29
+    },
+    {
+      "x": 131,
+      "y": 29
+    },
+    {
+      "x": 253,
+      "y": 29
+    },
+    {
+      "x": 263,
+      "y": 29
+    },
+    {
+      "x": 120,
+      "y": 32
+    },
+    {
+      "x": 252,
+      "y": 32
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "1154 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "195 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     },
     {
       "code": "OPAQUE_BACKGROUND",

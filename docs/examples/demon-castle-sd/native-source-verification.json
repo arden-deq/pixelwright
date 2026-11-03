@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "source_matrices_equal_native_pngs": 13,
+  "native_to_4x_exact_repetition": 13,
+  "report_source_hashes_verified": 42,
+  "original_generated_concepts_preserved": 4,
+  "art_review_hashes_match": true,
+  "readme_links_exist": true,
+  "authoring_raster_inputs": 0,
+  "downsampling_operations": 0,
+  "palette_remapping_operations": 0
+}

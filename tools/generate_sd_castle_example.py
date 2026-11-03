@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Build the SD field from preserved candidates and editable indexed cells.
+"""Build and audit the frozen native-cell SD kit.
 
-Raw candidates are audited without modification. --import-generated explicitly
-creates derived artwork: alpha-bounds framing, representative-cell projection,
-binary alpha, then the shared palette. Normal builds use only committed cells.
+Source matrices are authored at final game resolution. No generated raster input,
+projection, resampling downwards or automatic palette mapping is supported.
 """
 import argparse
 import hashlib
 import json
-import math
 import shutil
 import subprocess
 import sys
@@ -23,10 +21,13 @@ ROOT = Path(__file__).resolve().parents[1]
 KIT = ROOT / 'pixelwright/examples/demon-castle-sd'
 DOCS = ROOT / 'docs/examples/demon-castle-sd'
 IMAGES = ROOT / 'docs/images'
-ASSETS = {'castle': (192, 128, 'building'),
-          'knight': (48, 96, 'character'), 'princess': (48, 96, 'character'),
-          'demon-king': (48, 96, 'boss'), 'shadow': (40, 8, 'shadow')}
-ASSETS.update({f'{kind}{i}': (16, 16, 'tile') for kind in ('stone', 'moss') for i in range(4)})
+CONTRACT = json.loads((DOCS / 'design-contract.json').read_text())
+ASSETS = {'castle': (*CONTRACT['castle_logical_size'], 'building'),
+          **{name: (*CONTRACT['character_logical_size'], 'boss' if name == 'demon-king' else 'character')
+             for name in ('knight', 'princess', 'demon-king')},
+          'shadow': (*CONTRACT['shadow_logical_size'], 'shadow')}
+ASSETS.update({f'{kind}{i}': (*CONTRACT['tile_logical_size'], 'tile')
+               for kind in ('stone', 'moss') for i in range(4)})
 
 
 def write(path, value):
@@ -65,111 +66,6 @@ def profile(size, scale, palette, name, alpha='binary'):
             'allowed_palette': list(palette['colors'].values())}
 
 
-def indexed(name, image, palette):
-    array = np.asarray(image.convert('RGBA'))
-    lookup = {tuple(bytes.fromhex(color[1:])): key for key, color in palette['colors'].items()}
-    rows = [[lookup[tuple(pixel)] for pixel in row] for row in array]
-    spec = {'schema_version': 1, 'scale': 4, 'palette_file': 'palette.json', 'rows': rows}
-    # Keep one native row per line, so the matrix stays practical to edit.
-    header = json.dumps({key: value for key, value in spec.items() if key != 'rows'}, indent=2)[:-2]
-    text = header + ',\n  "rows": [\n' + ',\n'.join('    ' + json.dumps(row) for row in rows) + '\n  ]\n}\n'
-    (KIT / f'{name}.json').write_text(text, encoding='utf-8')
-
-
-def import_generated(work, palette):
-    records = {}
-    for name in ('knight', 'princess', 'demon-king', 'castle'):
-        width, height, _ = ASSETS[name]
-        original = DOCS / f'{name}-generated.png'
-        original_hash = hashlib.sha256(original.read_bytes()).hexdigest()
-        source_scale = 8 if name == 'castle' else 16
-        source_profile = DOCS / f'{name}-source-profile.json'
-        write(source_profile, profile((width, height), source_scale, palette, f'{name}: unmodified image-tool candidate'))
-        original_audit = work / f'{name}-original'
-        run('pixelwright.py', 'inspect', original, '--profile', source_profile, '--out-dir', original_audit, expected=(0, 2))
-        portable_report(original_audit / 'report.json', DOCS / f'{name}-source-report.json')
-        shutil.copyfile(original_audit / 'grid_overlay.png', DOCS / f'{name}-source-grid_overlay.png')
-        with Image.open(original) as image:
-            raw = image.convert('RGBA')
-        # Framing discards only the alpha<128 fringe and empty surrounding space.
-        # Raw bytes remain intact; the alpha threshold is part of the derived path.
-        solid = Image.fromarray(np.where(np.asarray(raw)[:, :, 3] >= 128, 255, 0).astype('uint8'))
-        bbox = solid.getbbox()
-        if bbox is None:
-            raise ValueError(f'{name}: empty candidate at alpha threshold 128')
-        cropped = raw.crop(bbox)
-        # Horns and the broad cape need the boss's full width, so they must not
-        # shrink its face relative to the two human sprites. Canvas stays 48x96.
-        inner = ((width - 2 if name == 'demon-king' else width - 8), height - 12) if name != 'castle' else (width - 8, height - 6)
-        scale = max(2, math.ceil(max(cropped.width / inner[0], cropped.height / inner[1])))
-        framed = Image.new('RGBA', (width * scale, height * scale))
-        x = (framed.width - cropped.width) // 2
-        baseline = height - (2 if name == 'castle' else 4)
-        y = baseline * scale - cropped.height
-        framed.paste(cropped, (x, y))
-        framed_path = work / f'{name}-framed.png'
-        framed.save(framed_path)
-        projected = work / f'{name}-projected'
-        run('pixel_qa.py', 'fix', framed_path, '--logical-size', f'{width}x{height}',
-            '--render-size', f'{framed.width}x{framed.height}', '--hard-alpha', '--out-dir', projected, expected=(0, 2))
-        for source, suffix in (('fix_review.json', 'projection-review.json'),
-                               ('post_report.json', 'projection-report.json')):
-            portable_report(projected / source, DOCS / f'{name}-{suffix}')
-        shutil.copyfile(projected / 'comparison.png', DOCS / f'{name}-projection-comparison.png')
-        projection_profile = work / f'{name}-projection-profile.json'
-        write(projection_profile, profile((width, height), scale, palette, f'{name}: derived shared-palette asset'))
-        remapped = work / f'{name}-remapped'
-        run('pixel_palette.py', 'remap', projected / 'fixed_upscaled.png', '--palette', KIT / 'palette.json',
-            '--profile', projection_profile, '--out-dir', remapped)
-        with Image.open(remapped / 'native.png') as native:
-            indexed(name, native, palette)
-        assert hashlib.sha256(original.read_bytes()).hexdigest() == original_hash
-        records[name] = {'original_sha256': original_hash, 'original_size': list(raw.size),
-                         'original_status': json.loads((original_audit / 'report.json').read_text())['status'],
-                         'derived_crop_ltrb': list(bbox), 'derived_paste_xy': [x, y],
-                         'derived_canvas': list(framed.size), 'projection_scale': scale,
-                         'logical_size': [width, height], 'alpha_threshold': 128,
-                         'method': 'Explicit framing, representative-cell projection, binary alpha, shared-palette remap; raw candidate is not certified.'}
-    write(DOCS / 'generation.json', {'tool': 'built-in image_gen', 'separate_generations': True,
-                                   'originals_preserved': True, 'assets': records})
-
-
-def create_terrain(palette):
-    colors = palette['colors']
-    for variant in range(4):
-        stone = Image.new('RGBA', (16, 16), colors['stone1'])
-        pen = ImageDraw.Draw(stone)
-        # Two staggered slabs, quiet mortar and large material clusters.
-        for y, shift in ((0, variant % 2 * 4), (8, 8 + variant % 2 * 4)):
-            pen.line((0, y, 15, y), fill=colors['stone0'])
-            px = shift % 16
-            pen.line((px, y, px, y + 7), fill=colors['stone0'])
-            pen.line((px + 2, y + 1, min(15, px + 9), y + 1), fill=colors['stone3'])
-            pen.line((0, y + 7, 15, y + 7), fill=colors['ink3'])
-            pen.rectangle((2 + variant, y + 3, 6 + variant, y + 5), fill=colors['stone2'])
-        crack = [(10, 3), (10, 4), (11, 5)] if variant % 2 == 0 else [(4, 11), (5, 12), (5, 13)]
-        for p in crack:
-            pen.point(p, fill=colors['stone0'])
-        if variant >= 2:
-            pen.line((12, 13, 14, 12), fill=colors['moss1'])
-            pen.point((13, 11), fill=colors['moss2'])
-        indexed(f'stone{variant}', stone, palette)
-        moss = Image.new('RGBA', (16, 16), colors['moss0'])
-        pen = ImageDraw.Draw(moss)
-        for j in range((2, 3, 1, 0)[variant]):
-            x = (j * 7 + variant * 3) % 13 + 1
-            y = (j * 5 + variant * 7) % 12 + 2
-            pen.line((x - 1, y + 1, x + 2, y + 1), fill=colors['moss1'])
-            pen.line((x, y, x, y - 1), fill=colors['moss1'])
-            pen.point((x + 1, y), fill=colors['moss2'] if j == 0 else colors['moss1'])
-        indexed(f'moss{variant}', moss, palette)
-    shadow = Image.new('RGBA', (40, 8))
-    pen = ImageDraw.Draw(shadow)
-    pen.ellipse((0, 0, 39, 7), fill=colors['stone0'])
-    pen.ellipse((5, 1, 34, 6), fill=colors['ink2'])
-    indexed('shadow', shadow, palette)
-
-
 def inspect(path, size, scale, palette, name, work, alpha='binary'):
     profile_path = DOCS / f'{name}-profile.json'
     write(profile_path, profile(size, scale, palette, name, alpha))
@@ -182,7 +78,7 @@ def inspect(path, size, scale, palette, name, work, alpha='binary'):
 def verify_intake(work):
     enlarged = DOCS / 'knight-2x-rejected.png'
     with Image.open(KIT / 'build/knight.png') as knight:
-        knight.resize((96, 192), Image.Resampling.NEAREST).save(enlarged)
+        knight.resize((64, 128), Image.Resampling.NEAREST).save(enlarged)
     output = work / 'bad-intake'
     run('pixel_game.py', 'intake', enlarged, '--category', 'character', '--contract', KIT / 'game.json',
         '--out-dir', output, expected=(2,))
@@ -204,7 +100,8 @@ def build(work, palette):
         shutil.copyfile(output / 'native.png', native)
         shutil.copyfile(output / 'rendered.png', DOCS / f'{name}-4x.png')
         loaded[name] = Image.open(native).convert('RGBA')
-        pivots[name] = [width // 2, 126 if name == 'castle' else 4 if name == 'shadow' else 92 if height == 96 else 16]
+        assert loaded[name].size == (width, height), f'{name}: source differs from the frozen native size'
+        pivots[name] = [width // 2, 126 if name == 'castle' else 3 if name == 'shadow' else 62 if category in ('character', 'boss') else 32]
         inspect(DOCS / f'{name}-4x.png', (width, height), 4, palette, name, work)
         output = work / f'{name}-game'
         run('pixel_game.py', 'asset', native, '--category', category, '--contract', KIT / 'game.json', '--out-dir', output)
@@ -212,23 +109,23 @@ def build(work, palette):
         evidence[name] = {'status': 'pass', 'size': [width, height],
                           'sha256': hashlib.sha256(native.read_bytes()).hexdigest()}
     rng = np.random.default_rng(347)
-    rows = [[f'{"stone" if 4 <= x < 20 and y >= 6 else "moss"}{int(rng.integers(4))}'
-             for x in range(24)] for y in range(18)]
-    layout = {'schema_version': 1, 'base': [384, 288], 'tile_size': 16, 'tiles': rows,
-              'pivots': pivots, 'objects': [{'asset': 'castle', 'x': 192, 'y': 140},
-                                         {'asset': 'princess', 'x': 112, 'y': 232},
-                                         {'asset': 'demon-king', 'x': 266, 'y': 216},
-                                         {'asset': 'knight', 'x': 188, 'y': 270}],
-              'walk_bounds': {'left': 72, 'right': 312, 'top': 136, 'bottom': 278},
-              'collision': [{'x': 105, 'y': 101, 'width': 174, 'height': 40}]}
+    columns, row_count = CONTRACT['map_tiles']
+    tile = CONTRACT['tile_logical_size'][0]
+    rows = [[f'{"stone" if 2 <= x < 10 and y >= 3 else "moss"}{int(rng.integers(4))}'
+             for x in range(columns)] for y in range(row_count)]
+    plan = CONTRACT['layout']
+    layout = {'schema_version': 1, 'base': CONTRACT['scene_logical_size'], 'tile_size': tile, 'tiles': rows,
+              'pivots': pivots, 'objects': [{'asset': name, 'x': plan[name][0], 'y': plan[name][1]}
+                                         for name in ('castle', 'princess', 'demon-king', 'knight')],
+              'walk_bounds': plan['walk_bounds'], 'collision': [plan['castle_collision']]}
     write(KIT / 'field.json', layout)
     scene = Image.new('RGBA', tuple(layout['base']))
     for y, row in enumerate(rows):
         for x, name in enumerate(row):
-            scene.alpha_composite(loaded[name], (x * 16, y * 16))
+            scene.alpha_composite(loaded[name], (x * tile, y * tile))
     for obj in sorted(layout['objects'], key=lambda o: o['y']):
         if obj['asset'] != 'castle':
-            scene.alpha_composite(loaded['shadow'], (obj['x'] - 20, obj['y'] - 4))
+            scene.alpha_composite(loaded['shadow'], (obj['x'] - 14, obj['y'] - 3))
         px, py = pivots[obj['asset']]
         scene.alpha_composite(loaded[obj['asset']], (obj['x'] - px, obj['y'] - py))
     scene.save(DOCS / 'scene-native.png')
@@ -236,29 +133,76 @@ def build(work, palette):
         path = IMAGES / f'game-sd-scene-{suffix}.png'
         scene.resize((384 * scale, 288 * scale), Image.Resampling.NEAREST).save(path)
         inspect(path, (384, 288), scale, palette, f'scene-{suffix}', work, alpha='opaque')
-    board = Image.new('RGBA', (384, 160), palette['colors']['ink1'])
+    board = Image.new('RGBA', (384, 208), palette['colors']['stone0'])
     pen = ImageDraw.Draw(board)
     pen.fontmode = '1'
-    for name, x in (('knight', 8), ('princess', 62), ('demon-king', 116)):
-        board.alpha_composite(loaded[name], (x, 42))
-        pen.text((x, 20), name.split('-')[0].upper(), fill=palette['colors']['ivory4'])
-    board.alpha_composite(loaded['castle'], (184, 22))
-    pen.text((184, 4), 'CASTLE', fill=palette['colors']['ivory4'])
+    for name, x, label in (('knight', 4, 'K'), ('princess', 40, 'P'), ('demon-king', 76, 'D')):
+        board.alpha_composite(loaded[name], (x, 52))
+        pen.text((x + 12, 40), label, fill=palette['colors']['ivory4'])
+    for label, y in (('K: KNIGHT', 4), ('P: PRINCESS', 16), ('D: DEMON KING', 28)):
+        pen.text((4, y), label, fill=palette['colors']['ivory4'])
+    board.alpha_composite(loaded['castle'], (180, 14))
+    pen.text((180, 2), 'CASTLE 192x128', fill=palette['colors']['ivory4'])
+    pen.text((4, 152), 'NATIVE 32x32 TERRAIN', fill=palette['colors']['ivory4'])
+    for i, name in enumerate([f'{kind}{v}' for kind in ('stone', 'moss') for v in range(4)]):
+        board.alpha_composite(loaded[name], (4 + i * 34, 168))
+    board.alpha_composite(loaded['shadow'], (330, 180))
     board.save(IMAGES / 'game-sd-assets-native.png')
-    board.resize((768, 320), Image.Resampling.NEAREST).save(IMAGES / 'game-sd-assets-preview.png')
-    strip = Image.new('RGBA', (160, 104), palette['colors']['stone0'])
-    for name, x in (('knight', 4), ('princess', 56), ('demon-king', 108)):
+    board.resize((768, 416), Image.Resampling.NEAREST).save(IMAGES / 'game-sd-assets-preview.png')
+    strip = Image.new('RGBA', (112, 72), palette['colors']['stone0'])
+    for name, x in (('knight', 4), ('princess', 40), ('demon-king', 76)):
         strip.alpha_composite(loaded[name], (x, 4))
     strip.save(DOCS / 'characters-native.png')
-    strip.resize((320, 208), Image.Resampling.NEAREST).save(DOCS / 'characters-2x.png')
-    inspect(DOCS / 'characters-2x.png', (160, 104), 2, palette, 'characters-2x', work, alpha='opaque')
-    strip.resize((480, 312), Image.Resampling.NEAREST).save(DOCS / 'characters-3x.png')
-    inspect(DOCS / 'characters-3x.png', (160, 104), 3, palette, 'characters-3x', work, alpha='opaque')
-    strip.resize((640, 416), Image.Resampling.NEAREST).save(DOCS / 'characters-4x.png')
-    inspect(DOCS / 'characters-4x.png', (160, 104), 4, palette, 'characters', work, alpha='opaque')
+    for scale in CONTRACT['character_preview_scales']:
+        path = DOCS / f'characters-{scale}x.png'
+        strip.resize((112 * scale, 72 * scale), Image.Resampling.NEAREST).save(path)
+        inspect(path, (112, 72), scale, palette, 'characters' if scale == 6 else f'characters-{scale}x', work, alpha='opaque')
+    faces = Image.new('RGBA', (80, 26), palette['colors']['stone0'])
+    for name, x in (('knight', 4), ('princess', 30), ('demon-king', 56)):
+        faces.alpha_composite(loaded[name].crop((6, 16, 26, 34)), (x, 4))
+    faces.save(DOCS / 'faces-native.png')
+    faces.resize((240, 78), Image.Resampling.NEAREST).save(DOCS / 'faces-3x.png')
+    inspect(DOCS / 'faces-3x.png', (80, 26), 3, palette, 'faces-3x', work, alpha='opaque')
+    faces.resize((480, 156), Image.Resampling.NEAREST).save(DOCS / 'faces-6x.png')
+    inspect(DOCS / 'faces-6x.png', (80, 26), 6, palette, 'faces', work, alpha='opaque')
+    verify_faces(loaded, scene)
     write(DOCS / 'asset-summary.json', evidence)
     verify_intake(work)
     print(json.dumps({'assets': len(ASSETS), 'status': 'pass', 'scene': [384, 288]}))
+
+
+def verify_faces(loaded, scene, browser=None):
+    design = json.loads((DOCS / 'face-design.json').read_text())
+    colors = json.loads((KIT / 'palette.json').read_text())['colors']
+    records = {}
+    for name, face in design['characters'].items():
+        native = np.asarray(loaded[name])
+        for feature in (*face['eyes'], face['mouth']):
+            x, y = feature['xy']
+            for dy, row in enumerate(feature['rows']):
+                for dx, token in enumerate(row):
+                    if token != '.':
+                        expected = tuple(bytes.fromhex(colors[feature['tokens'][token]][1:]))
+                        assert tuple(native[y + dy, x + dx]) == expected, f'{name}: expression cells changed'
+        x, y = CONTRACT['layout'][name]
+        origin = (x - 16, y - 62)
+        crop = native[16:34, 6:26]
+        composed = np.asarray(scene)[origin[1] + 16:origin[1] + 34, origin[0] + 6:origin[0] + 26]
+        opaque = crop[:, :, 3] == 255
+        assert np.array_equal(crop[opaque], composed[opaque]), f'{name}: face obscured in scene'
+        item = {'native_face_size': [20, 18], 'expression_cells_match_design': True,
+                'opaque_native_face_cells_preserved': True,
+                'face_rgba_sha256': hashlib.sha256(crop.tobytes()).hexdigest(),
+                'composed_face_rgba_sha256': hashlib.sha256(composed.tobytes()).hexdigest()}
+        if browser is not None:
+            sx, sy = (origin[0] + 6) * 3, (origin[1] + 16) * 3
+            captured = np.asarray(browser)[sy:sy + 54, sx:sx + 60]
+            assert np.array_equal(captured, composed.repeat(3, axis=0).repeat(3, axis=1)), f'{name}: runtime face changed'
+            item['runtime_face_matches_composition_3x'] = True
+        records[name] = item
+    write(DOCS / 'face-preservation.json', {'status': 'pass',
+          'scope': 'Exact preservation of authored expression cells; not an automated aesthetic judgment',
+          'downsampling_operations': 0, 'palette_remapping_operations': 0, 'characters': records})
 
 
 def verify_runtime(work, palette):
@@ -267,6 +211,10 @@ def verify_runtime(work, palette):
         actual = np.asarray(browser.convert('RGBA'))
         if not np.array_equal(actual, expected):
             raise ValueError('Browser field differs from the independent composition')
+    loaded = {name: Image.open(KIT / f'build/{name}.png').convert('RGBA')
+              for name in ('knight', 'princess', 'demon-king')}
+    verify_faces(loaded, Image.open(DOCS / 'scene-native.png').convert('RGBA'),
+                 Image.open(DOCS / 'runtime-field.png').convert('RGBA'))
     for name, expected_code in (('clean', 0), ('injected-errors', 2)):
         output = work / f'runtime-{name}'
         run('pixel_game.py', 'screen', DOCS / f'runtime-{name}.png', '--contract', KIT / 'game.json',
@@ -282,9 +230,7 @@ def verify_runtime(work, palette):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    modes = parser.add_mutually_exclusive_group()
-    modes.add_argument('--import-generated', action='store_true')
-    modes.add_argument('--verify-runtime', action='store_true')
+    parser.add_argument('--verify-runtime', action='store_true')
     args = parser.parse_args()
     (ROOT / '.work').mkdir(exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix='sd-castle-', dir=ROOT / '.work'))
@@ -292,9 +238,12 @@ def main():
     if args.verify_runtime:
         verify_runtime(work, palette)
         return
-    if args.import_generated:
-        import_generated(work, palette)
-        create_terrain(palette)
+    provenance = json.loads((DOCS / 'native-authoring.json').read_text())
+    assert provenance['contract_sha256'] == hashlib.sha256((DOCS / 'design-contract.json').read_bytes()).hexdigest()
+    assert provenance['palette_sha256'] == hashlib.sha256((KIT / 'palette.json').read_bytes()).hexdigest()
+    for name, asset in provenance['assets'].items():
+        assert asset['cells_sha256'] == hashlib.sha256((KIT / f'{name}.json').read_bytes()).hexdigest(), name
+    write(DOCS / 'generation.json', {**provenance, 'historical_concepts': 'generated-concepts.json'})
     build(work, palette)
 
 

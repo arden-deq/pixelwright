@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "characters-2x",
-  "logical_size": "160x104",
+  "logical_size": "112x72",
   "scale": 2,
   "max_colors": 64,
   "alpha": "opaque",

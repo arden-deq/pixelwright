@@ -32,7 +32,7 @@ function blocked(x, y) {
   if (layout.collision.some(r => x + 5 > r.x && x - 5 < r.x + r.width &&
       y + 2 > r.y && y - 5 < r.y + r.height)) return true;
   return objects.some(o => o !== player && o.asset !== 'castle' &&
-    Math.abs(x - o.x) < 20 && Math.abs(y - o.y) < 8);
+    Math.abs(x - o.x) < layout.tile_size / 2 && Math.abs(y - o.y) < 8);
 }
 
 function update(dt) {
@@ -59,7 +59,8 @@ function draw() {
   // Sort by foot position, so sprites can walk behind or in front of each other.
   for (const object of [...objects].sort((a, b) => a.y - b.y)) {
     if (object.asset !== 'castle') {
-      pen.drawImage(assets.shadow, object.x - 20, object.y - 4);
+      const [sx, sy] = layout.pivots.shadow;
+      pen.drawImage(assets.shadow, object.x - sx, object.y - sy);
     }
     const [px, py] = layout.pivots[object.asset];
     pen.drawImage(assets[object.asset], object.x - px, object.y - py);

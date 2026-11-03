@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 192,
-    "height": 384
+    "width": 128,
+    "height": 256
   },
   "logical_size": {
-    "width": 48,
-    "height": 96
+    "width": 32,
+    "height": 64
   },
   "cell_size": {
     "width": 4,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "0a6b3db35af9580e7acaf3de5deeb92a719db1c25dbca342c4a8847a20d53bbd",
-    "decoded_rgba_sha256": "57801308acecb65faae42f247f263e85c3217d08bdf67705b44a056aa204b4fc",
+    "source_sha256": "b8060e8d054dfabce3d26f0166ce8e3b2a554e0163cc1aaf76c48a3da89364fc",
+    "decoded_rgba_sha256": "36391430e7f62a078720b2b1513c9caef440989f832ee18c11f60cb4dfd17224",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "5b9ac7c41f82d0e493ae92cef28691e8a3ab29b917132f5ecb96f2ffea1d51cf",
+    "profile_sha256": "ef126a0b611f302ad6672624870bf7587953dfb8507a0ed01421849aea9986e9",
     "source_path": "docs/examples/demon-castle-sd/knight-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/knight-profile.json"
   },
@@ -38,16 +38,16 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 4608,
+    "uniform_rgba_cells": 2048,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 4608,
-    "visible_rgb_colors_source": 39,
-    "visible_rgb_colors_logical_preview": 39,
+    "total_logical_cells": 2048,
+    "visible_rgb_colors_source": 20,
+    "visible_rgb_colors_logical_preview": 20,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 90,
+    "possible_color_isolated_logical_pixels": 12,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -57,136 +57,64 @@
     "file": "knight-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 48,
-    "height": 96
+    "width": 32,
+    "height": 64
   },
   "possible_isolated_pixels_sample": [
     {
-      "x": 25,
-      "y": 34
+      "x": 7,
+      "y": 6
+    },
+    {
+      "x": 6,
+      "y": 8
+    },
+    {
+      "x": 24,
+      "y": 28
     },
     {
       "x": 22,
-      "y": 37
-    },
-    {
-      "x": 20,
-      "y": 38
-    },
-    {
-      "x": 12,
-      "y": 42
-    },
-    {
-      "x": 12,
-      "y": 44
-    },
-    {
-      "x": 27,
-      "y": 44
-    },
-    {
-      "x": 30,
-      "y": 44
-    },
-    {
-      "x": 10,
-      "y": 45
-    },
-    {
-      "x": 32,
-      "y": 45
-    },
-    {
-      "x": 23,
-      "y": 48
-    },
-    {
-      "x": 35,
-      "y": 49
-    },
-    {
-      "x": 34,
-      "y": 50
-    },
-    {
-      "x": 34,
-      "y": 51
-    },
-    {
-      "x": 36,
-      "y": 51
-    },
-    {
-      "x": 8,
-      "y": 52
-    },
-    {
-      "x": 10,
-      "y": 52
-    },
-    {
-      "x": 15,
-      "y": 52
-    },
-    {
-      "x": 29,
-      "y": 52
-    },
-    {
-      "x": 34,
-      "y": 52
-    },
-    {
-      "x": 38,
-      "y": 53
-    },
-    {
-      "x": 33,
-      "y": 54
-    },
-    {
-      "x": 9,
-      "y": 57
-    },
-    {
-      "x": 16,
-      "y": 57
-    },
-    {
-      "x": 11,
-      "y": 63
+      "y": 31
     },
     {
       "x": 19,
-      "y": 63
+      "y": 34
     },
     {
-      "x": 20,
-      "y": 63
+      "x": 13,
+      "y": 35
     },
     {
-      "x": 26,
-      "y": 64
+      "x": 12,
+      "y": 36
     },
     {
-      "x": 30,
-      "y": 64
+      "x": 15,
+      "y": 36
     },
     {
       "x": 16,
-      "y": 65
+      "y": 37
     },
     {
-      "x": 18,
-      "y": 67
+      "x": 22,
+      "y": 41
+    },
+    {
+      "x": 4,
+      "y": 44
+    },
+    {
+      "x": 4,
+      "y": 59
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "90 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "12 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     }
   ],
   "visual_review_required": [
@@ -198,16 +126,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 192,
-      "height": 384
+      "width": 128,
+      "height": 256
     },
     "logical_size": {
-      "width": 48,
-      "height": 96
+      "width": 32,
+      "height": 64
     },
     "expected_render_size": {
-      "width": 192,
-      "height": 384
+      "width": 128,
+      "height": 256
     },
     "scale_x": 4.0,
     "scale_y": 4.0,
@@ -221,7 +149,7 @@
   "contract": {
     "schema_version": 1,
     "name": "knight",
-    "logical_size": "48x96",
+    "logical_size": "32x64",
     "scale": 4,
     "max_colors": 64,
     "alpha": "binary",

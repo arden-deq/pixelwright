@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 320,
-    "height": 208
+    "width": 224,
+    "height": 144
   },
   "logical_size": {
-    "width": 160,
-    "height": 104
+    "width": 112,
+    "height": 72
   },
   "cell_size": {
     "width": 2,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "03e8390ab4f5d9ef4629ee0060275ae6ed49a19c9bd0f92e057b93e81845228c",
-    "decoded_rgba_sha256": "413ae0b6851cf064dbf9f5088ad9d8c798c1b2697c9ec26516e4d6e53edfd6ad",
+    "source_sha256": "fb0355263e1265d303705da05b204970f6e19d97053ac9a794c82cbee837b7f8",
+    "decoded_rgba_sha256": "7488f1fc4a809436b1512a2526c09e202b6828d150678e29a94c197d81b061a8",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "ba98f64710dfe33907e23ade005b86300e64d60889053f81653e79bbf9a317c7",
+    "profile_sha256": "300a6c858d8a6394ff0b453aa9632896b3306523ebafd26d05bd256c561b0fde",
     "source_path": "docs/examples/demon-castle-sd/characters-2x.png",
     "profile_path": "docs/examples/demon-castle-sd/characters-2x-profile.json"
   },
@@ -38,16 +38,16 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 16640,
+    "uniform_rgba_cells": 8064,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 16640,
-    "visible_rgb_colors_source": 51,
-    "visible_rgb_colors_logical_preview": 51,
+    "total_logical_cells": 8064,
+    "visible_rgb_colors_source": 31,
+    "visible_rgb_colors_logical_preview": 31,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 159,
+    "possible_color_isolated_logical_pixels": 40,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -57,136 +57,136 @@
     "file": "characters-2x-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 160,
-    "height": 104
+    "width": 112,
+    "height": 72
   },
   "possible_isolated_pixels_sample": [
     {
-      "x": 80,
-      "y": 29
+      "x": 55,
+      "y": 5
     },
     {
-      "x": 72,
-      "y": 32
+      "x": 11,
+      "y": 10
     },
     {
-      "x": 79,
-      "y": 32
+      "x": 95,
+      "y": 11
     },
     {
-      "x": 79,
-      "y": 33
+      "x": 10,
+      "y": 12
     },
     {
-      "x": 29,
-      "y": 38
-    },
-    {
-      "x": 74,
-      "y": 39
-    },
-    {
-      "x": 85,
-      "y": 39
-    },
-    {
-      "x": 26,
-      "y": 41
-    },
-    {
-      "x": 24,
-      "y": 42
-    },
-    {
-      "x": 37,
-      "y": 43
-    },
-    {
-      "x": 16,
-      "y": 46
-    },
-    {
-      "x": 16,
-      "y": 48
-    },
-    {
-      "x": 31,
-      "y": 48
-    },
-    {
-      "x": 34,
-      "y": 48
-    },
-    {
-      "x": 82,
-      "y": 48
-    },
-    {
-      "x": 129,
-      "y": 48
-    },
-    {
-      "x": 134,
-      "y": 48
-    },
-    {
-      "x": 14,
-      "y": 49
-    },
-    {
-      "x": 36,
-      "y": 49
-    },
-    {
-      "x": 134,
-      "y": 49
-    },
-    {
-      "x": 82,
-      "y": 50
-    },
-    {
-      "x": 84,
-      "y": 50
-    },
-    {
-      "x": 140,
-      "y": 51
-    },
-    {
-      "x": 27,
-      "y": 52
-    },
-    {
-      "x": 39,
-      "y": 53
-    },
-    {
-      "x": 117,
-      "y": 53
-    },
-    {
-      "x": 38,
-      "y": 54
-    },
-    {
-      "x": 70,
-      "y": 54
-    },
-    {
-      "x": 72,
-      "y": 54
+      "x": 46,
+      "y": 14
     },
     {
       "x": 81,
-      "y": 54
+      "y": 19
+    },
+    {
+      "x": 101,
+      "y": 19
+    },
+    {
+      "x": 88,
+      "y": 20
+    },
+    {
+      "x": 96,
+      "y": 20
+    },
+    {
+      "x": 83,
+      "y": 25
+    },
+    {
+      "x": 48,
+      "y": 31
+    },
+    {
+      "x": 28,
+      "y": 32
+    },
+    {
+      "x": 46,
+      "y": 33
+    },
+    {
+      "x": 45,
+      "y": 34
+    },
+    {
+      "x": 26,
+      "y": 35
+    },
+    {
+      "x": 47,
+      "y": 35
+    },
+    {
+      "x": 62,
+      "y": 35
+    },
+    {
+      "x": 98,
+      "y": 35
+    },
+    {
+      "x": 48,
+      "y": 36
+    },
+    {
+      "x": 23,
+      "y": 38
+    },
+    {
+      "x": 85,
+      "y": 38
+    },
+    {
+      "x": 99,
+      "y": 38
+    },
+    {
+      "x": 17,
+      "y": 39
+    },
+    {
+      "x": 53,
+      "y": 39
+    },
+    {
+      "x": 16,
+      "y": 40
+    },
+    {
+      "x": 19,
+      "y": 40
+    },
+    {
+      "x": 20,
+      "y": 41
+    },
+    {
+      "x": 56,
+      "y": 41
+    },
+    {
+      "x": 26,
+      "y": 45
+    },
+    {
+      "x": 8,
+      "y": 48
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "159 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "40 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     },
     {
       "code": "OPAQUE_BACKGROUND",
@@ -203,16 +203,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 320,
-      "height": 208
+      "width": 224,
+      "height": 144
     },
     "logical_size": {
-      "width": 160,
-      "height": 104
+      "width": 112,
+      "height": 72
     },
     "expected_render_size": {
-      "width": 320,
-      "height": 208
+      "width": 224,
+      "height": 144
     },
     "scale_x": 2.0,
     "scale_y": 2.0,
@@ -226,7 +226,7 @@
   "contract": {
     "schema_version": 1,
     "name": "characters-2x",
-    "logical_size": "160x104",
+    "logical_size": "112x72",
     "scale": 2,
     "max_colors": 64,
     "alpha": "opaque",

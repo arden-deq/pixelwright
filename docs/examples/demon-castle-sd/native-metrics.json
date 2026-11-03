@@ -4,272 +4,298 @@
       192,
       128
     ],
-    "visible_bbox_ltrb": [
-      30,
-      14,
-      162,
+    "visible_bbox": [
+      9,
+      1,
+      184,
       126
     ],
     "visible_size": [
-      132,
-      112
+      175,
+      125
     ],
-    "visible_colors": 48,
-    "alpha_component_sizes_8_connected": [
-      11301
+    "opaque_pixels": 16556,
+    "visible_colors": 22,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      16556
     ],
-    "sha256": "cba0a6962abfc7b25be7bcc13dd9eba5cb0e79d4cc882fef65bc76eddfb31a77"
-  },
-  "knight": {
-    "canvas": [
-      48,
-      96
-    ],
-    "visible_bbox_ltrb": [
-      5,
-      27,
-      43,
-      92
-    ],
-    "visible_size": [
-      38,
-      65
-    ],
-    "visible_colors": 39,
-    "alpha_component_sizes_8_connected": [
-      1819
-    ],
-    "sha256": "6996de535066fdd8a67a6af651cb96c3aa4f149c44af9f27a62a297fe795be1b"
-  },
-  "princess": {
-    "canvas": [
-      48,
-      96
-    ],
-    "visible_bbox_ltrb": [
-      5,
-      23,
-      43,
-      92
-    ],
-    "visible_size": [
-      38,
-      69
-    ],
-    "visible_colors": 24,
-    "alpha_component_sizes_8_connected": [
-      2031
-    ],
-    "sha256": "e7e25581635a0e802511050ad78922fdfa3c3d6133a42ea8868419afb4e498cc"
+    "sha256": "2fbd8628796ab1e956b10d75c5916e8b2cb6070afa9154f33a1f0db8f2ca6fd8"
   },
   "demon-king": {
     "canvas": [
-      48,
-      96
+      32,
+      64
     ],
-    "visible_bbox_ltrb": [
-      2,
-      29,
-      46,
-      92
+    "visible_bbox": [
+      0,
+      1,
+      32,
+      62
     ],
     "visible_size": [
-      44,
-      63
+      32,
+      61
     ],
-    "visible_colors": 27,
-    "alpha_component_sizes_8_connected": [
-      2156
+    "opaque_pixels": 1493,
+    "visible_colors": 18,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1493
     ],
-    "sha256": "f3cb028564a226f9b4f47cc74a12df922672e3a77a8cff6295a720c7d709549e"
+    "sha256": "f6436e246896066d6d5d514b647c76fddd9f05bbff6d2166c40470a8aeb241df"
   },
-  "shadow": {
+  "knight": {
     "canvas": [
-      40,
-      8
+      32,
+      64
     ],
-    "visible_bbox_ltrb": [
+    "visible_bbox": [
+      1,
       0,
-      0,
-      40,
-      8
+      32,
+      62
     ],
     "visible_size": [
-      40,
-      8
+      31,
+      62
     ],
-    "visible_colors": 2,
-    "alpha_component_sizes_8_connected": [
-      256
+    "opaque_pixels": 1446,
+    "visible_colors": 20,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1446
     ],
-    "sha256": "c94a43459ac2b5f15b6f51b37e89707a03a06395ef49a8519c76037ffd06a8d5"
-  },
-  "stone0": {
-    "canvas": [
-      16,
-      16
-    ],
-    "visible_bbox_ltrb": [
-      0,
-      0,
-      16,
-      16
-    ],
-    "visible_size": [
-      16,
-      16
-    ],
-    "visible_colors": 5,
-    "alpha_component_sizes_8_connected": [
-      256
-    ],
-    "sha256": "8270413a9aae0b87340a65bdc9d37eb056c683cd5102db36df543c9db77acda5"
-  },
-  "stone1": {
-    "canvas": [
-      16,
-      16
-    ],
-    "visible_bbox_ltrb": [
-      0,
-      0,
-      16,
-      16
-    ],
-    "visible_size": [
-      16,
-      16
-    ],
-    "visible_colors": 5,
-    "alpha_component_sizes_8_connected": [
-      256
-    ],
-    "sha256": "e827f3d70c61e1f8cc5660a9cd3acf1ed2814a1d09e41e97e00f200b564095ec"
-  },
-  "stone2": {
-    "canvas": [
-      16,
-      16
-    ],
-    "visible_bbox_ltrb": [
-      0,
-      0,
-      16,
-      16
-    ],
-    "visible_size": [
-      16,
-      16
-    ],
-    "visible_colors": 7,
-    "alpha_component_sizes_8_connected": [
-      256
-    ],
-    "sha256": "6fb90fcb03092f90b21bf763a0e58596653c0bac9d77051635d6dba9bfe20d47"
-  },
-  "stone3": {
-    "canvas": [
-      16,
-      16
-    ],
-    "visible_bbox_ltrb": [
-      0,
-      0,
-      16,
-      16
-    ],
-    "visible_size": [
-      16,
-      16
-    ],
-    "visible_colors": 7,
-    "alpha_component_sizes_8_connected": [
-      256
-    ],
-    "sha256": "c3fdd0be990573156d635ab3c8b57c6a51c59f65285811490c94c8e85064d55a"
+    "sha256": "43ef42217353f97d9bc2ea25a7e7a250df8333dbc261f302bf57b7da9cef0941"
   },
   "moss0": {
     "canvas": [
-      16,
-      16
+      32,
+      32
     ],
-    "visible_bbox_ltrb": [
+    "visible_bbox": [
       0,
       0,
-      16,
-      16
+      32,
+      32
     ],
     "visible_size": [
-      16,
-      16
+      32,
+      32
     ],
+    "opaque_pixels": 1024,
     "visible_colors": 3,
-    "alpha_component_sizes_8_connected": [
-      256
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
     ],
-    "sha256": "a4b4d81d29e6af70501d25b6d3c1e999abc4277c4aebd2f7cdde1df49c71e017"
+    "sha256": "0beba3ccac79900048319b2623c2a34caebd85c9d7f84680a0c6052ed5d23d3e"
   },
   "moss1": {
     "canvas": [
-      16,
-      16
+      32,
+      32
     ],
-    "visible_bbox_ltrb": [
+    "visible_bbox": [
       0,
       0,
-      16,
-      16
+      32,
+      32
     ],
     "visible_size": [
-      16,
-      16
+      32,
+      32
     ],
+    "opaque_pixels": 1024,
     "visible_colors": 3,
-    "alpha_component_sizes_8_connected": [
-      256
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
     ],
-    "sha256": "c205c3de76ed8dd29d79574ca805d232b9662796dc2568d9dc86fb35d6d994be"
+    "sha256": "9e873e4d041ea9310ac2dc49ba6c03537017c753eb192b3e26202e6bd8d6fd7e"
   },
   "moss2": {
     "canvas": [
-      16,
-      16
+      32,
+      32
     ],
-    "visible_bbox_ltrb": [
+    "visible_bbox": [
       0,
       0,
-      16,
-      16
+      32,
+      32
     ],
     "visible_size": [
-      16,
-      16
+      32,
+      32
     ],
+    "opaque_pixels": 1024,
     "visible_colors": 3,
-    "alpha_component_sizes_8_connected": [
-      256
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
     ],
-    "sha256": "e6fc75d1c641b2bbae4491f451c8231760a998e237c46a3028ff90acbcd5ba13"
+    "sha256": "f32363a0917bb4abf09ea1344be1fc9d95e3a9a8c89c19e19be068df7735dfc5"
   },
   "moss3": {
     "canvas": [
-      16,
-      16
+      32,
+      32
     ],
-    "visible_bbox_ltrb": [
+    "visible_bbox": [
       0,
       0,
-      16,
-      16
+      32,
+      32
     ],
     "visible_size": [
-      16,
-      16
+      32,
+      32
     ],
-    "visible_colors": 1,
-    "alpha_component_sizes_8_connected": [
-      256
+    "opaque_pixels": 1024,
+    "visible_colors": 3,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
     ],
-    "sha256": "46cea51c32273475df4bcb8d7345b778be4d64c9f6c828f995102a584d2db1a3"
+    "sha256": "16458c80176e5c8be333c89db2c599e78b8a30e4a547685cd120a8619437f7f7"
+  },
+  "princess": {
+    "canvas": [
+      32,
+      64
+    ],
+    "visible_bbox": [
+      1,
+      0,
+      31,
+      62
+    ],
+    "visible_size": [
+      30,
+      62
+    ],
+    "opaque_pixels": 1459,
+    "visible_colors": 17,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1459
+    ],
+    "sha256": "6bcc4d89d2ecd57994beacbe8d10d21abbf78da352871cdf9882d0809a5f5de2"
+  },
+  "shadow": {
+    "canvas": [
+      28,
+      6
+    ],
+    "visible_bbox": [
+      0,
+      0,
+      28,
+      6
+    ],
+    "visible_size": [
+      28,
+      6
+    ],
+    "opaque_pixels": 136,
+    "visible_colors": 3,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      136
+    ],
+    "sha256": "51196ddbf7ca7b0a97ae04579351ea329477777a32fe5dfb94884d1b09d44f03"
+  },
+  "stone0": {
+    "canvas": [
+      32,
+      32
+    ],
+    "visible_bbox": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "visible_size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 1024,
+    "visible_colors": 3,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
+    ],
+    "sha256": "7a8fc9ab4c2c30fb62f56630957e013cafe4c20e52aa300a98d40264072dfd0a"
+  },
+  "stone1": {
+    "canvas": [
+      32,
+      32
+    ],
+    "visible_bbox": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "visible_size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 1024,
+    "visible_colors": 3,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
+    ],
+    "sha256": "cefaf1f498dd985a851a81112fb38df5164832fb6c32d8659b2b725b265e51e8"
+  },
+  "stone2": {
+    "canvas": [
+      32,
+      32
+    ],
+    "visible_bbox": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "visible_size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 1024,
+    "visible_colors": 4,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
+    ],
+    "sha256": "b0032bd98ad958b6e965aadef45976b4d6c4e57d34e6e5cfd90447ad2f946d2a"
+  },
+  "stone3": {
+    "canvas": [
+      32,
+      32
+    ],
+    "visible_bbox": [
+      0,
+      0,
+      32,
+      32
+    ],
+    "visible_size": [
+      32,
+      32
+    ],
+    "opaque_pixels": 1024,
+    "visible_colors": 3,
+    "partial_alpha": 0,
+    "alpha_components_8": [
+      1024
+    ],
+    "sha256": "d4e092ae8dc86e44c4dca5fa0748c961e2a9936514722423491dd09478f52db1"
   }
 }
