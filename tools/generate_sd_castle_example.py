@@ -133,6 +133,10 @@ def build(work, palette):
         path = IMAGES / f'game-sd-scene-{suffix}.png'
         scene.resize((384 * scale, 288 * scale), Image.Resampling.NEAREST).save(path)
         inspect(path, (384, 288), scale, palette, f'scene-{suffix}', work, alpha='opaque')
+    # New README URLs distinguish this redraw from cached projected artwork.
+    shutil.copyfile(DOCS / 'scene-native.png', DOCS / 'field-native.png')
+    shutil.copyfile(IMAGES / 'game-sd-scene-preview.png', IMAGES / 'game-native-field-preview.png')
+    shutil.copyfile(IMAGES / 'game-sd-scene-6x.png', IMAGES / 'game-native-field-6x.png')
     board = Image.new('RGBA', (384, 208), palette['colors']['stone0'])
     pen = ImageDraw.Draw(board)
     pen.fontmode = '1'

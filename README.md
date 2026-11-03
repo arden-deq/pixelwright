@@ -107,11 +107,11 @@ Geometry failures stop cell-color acceptance. Inspect the status, exact violatio
 New in 0.7.0. A profile checks one PNG; a **game contract** (`game.json`) declares the shared grid, palette, sizes and style brief for a whole game. Technical checks and visual art review have separate results.
 
 <picture>
-  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/scene-native.png">
-  <img src="docs/images/game-sd-scene-preview.png" alt="Clean 384x288 SD RPG Maker field: a two-head knight, princess and demon king outside their castle">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/field-native.png">
+  <img src="docs/images/game-native-field-preview.png" alt="Clean 384x288 SD RPG Maker field: a two-head knight, princess and demon king outside their castle">
 </picture>
 
-[Full-size PNG: 2304×1728, 6×](docs/images/game-sd-scene-6x.png). Wide screens use a 2× preview and narrower screens use 1×; all exports preserve the same native dots.
+[Full-size PNG: 2304×1728, 6×](docs/images/game-native-field-6x.png). Wide screens use a 2× preview and narrower screens use 1×; all exports preserve the same native dots.
 
 The [production sizes and layout were fixed before drawing](docs/examples/demon-castle-sd/design-contract.json): **32×32 tiles, 32×64 characters (1×2 tiles), a 192×128 castle (6×4 tiles), and a 384×288 map (12×9 tiles)**. Every asset is authored directly as native indexed cells using one 64-color palette plus transparency. Eyes, highlights, eyebrows and mouths are designed at their final game resolution. [Editable sources and validation record](docs/examples/demon-castle-sd/) document the native workflow.
 

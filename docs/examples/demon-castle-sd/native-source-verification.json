@@ -8,5 +8,6 @@
   "readme_links_exist": true,
   "authoring_raster_inputs": 0,
   "downsampling_operations": 0,
-  "palette_remapping_operations": 0
+  "palette_remapping_operations": 0,
+  "readme_aliases_byte_identical_to_audited_artifacts": 3
 }

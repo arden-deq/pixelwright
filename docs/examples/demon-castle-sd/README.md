@@ -28,9 +28,9 @@
 
 ## 독립 에셋과 맵 합성
 
-![13개 독립 PNG를 합성한 필드, 2배](../../images/game-sd-scene-preview.png)
+![13개 독립 PNG를 합성한 필드, 2배](../../images/game-native-field-preview.png)
 
-[맵 논리 원본](scene-native.png) · [2304×1728, 6배 PNG](../../images/game-sd-scene-6x.png) · [실제 맵 검사 격자](scene-preview-grid_overlay.png) · [독립 에셋 보드](../../images/game-sd-assets-preview.png).
+[맵 논리 원본](scene-native.png) · [2304×1728, 6배 PNG](../../images/game-native-field-6x.png) · [실제 맵 검사 격자](scene-preview-grid_overlay.png) · [독립 에셋 보드](../../images/game-sd-assets-preview.png).
 
 기사·공주·마왕·성·바닥 8종·그림자를 각자의 PNG로 빌드하고, 사전에 정한 정수 좌표와 발 기준점으로 합성한다. 게임은 캐릭터 발 위치로 앞뒤 가림을 정렬한다. 건물·NPC·경계 충돌과 정수 확대를 지원한다. 방향키는 정적인 기사의 위치를 옮기며 걷기 프레임은 포함하지 않는다.
 

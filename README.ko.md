@@ -107,11 +107,11 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 0.7.0에서 추가했습니다. 프로필은 PNG 한 장을 검사하고, **게임 계약**(`game.json`)은 게임 전체의 공통 격자·팔레트·크기·스타일 브리프를 선언합니다. 기술 검사와 미술 검수는 각각 판정합니다.
 
 <picture>
-  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/scene-native.png">
-  <img src="docs/images/game-sd-scene-preview.png" alt="깨끗한 384×288 SD RPG Maker 필드: 마왕성 앞의 2등신 기사·공주·마왕">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/field-native.png">
+  <img src="docs/images/game-native-field-preview.png" alt="깨끗한 384×288 SD RPG Maker 필드: 마왕성 앞의 2등신 기사·공주·마왕">
 </picture>
 
-[확대용 PNG: 2304×1728, 6배](docs/images/game-sd-scene-6x.png). 넓은 창은 2배, 좁은 창은 1배 미리보기이며 모든 내보내기는 같은 논리 도트를 유지합니다.
+[확대용 PNG: 2304×1728, 6배](docs/images/game-native-field-6x.png). 넓은 창은 2배, 좁은 창은 1배 미리보기이며 모든 내보내기는 같은 논리 도트를 유지합니다.
 
 [그리기 전에 최종 규격과 배치를 고정](docs/examples/demon-castle-sd/design-contract.json)했습니다. **타일 32×32, 캐릭터 32×64(1×2타일), 성 192×128(6×4타일), 맵 384×288(12×9타일)**입니다. 모든 에셋을 64색과 투명색을 공유하는 최종 논리 셀에서 직접 작성합니다. 눈동자·하이라이트·눈썹·입도 실제 게임 해상도에서 설계했습니다. [편집 가능한 원본과 검증 기록](docs/examples/demon-castle-sd/)에 제작 과정을 남깁니다.
 
