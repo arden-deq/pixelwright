@@ -74,6 +74,7 @@ class ContractTests(GameCase):
             shutil.copytree(EXAMPLE, folder)
         document = json.loads(CONTRACT.read_text(encoding="utf-8"))
         document.update(changes)
+        document = {key: value for key, value in document.items() if value is not None}
         path = folder / f"{name.replace(' ', '-')}.json"
         path.write_text(json.dumps(document), encoding="utf-8")
         return path
@@ -96,7 +97,11 @@ class ContractTests(GameCase):
                  "bad enum": {"style": {"outline": {"mode": "thick"}}},
                  "both palettes": {"allowed_palette": ["#000000"]},
                  "palette outside": {"palette_file": "../lantern.json"},
-                 "translucent bars": {"letterbox": "#00000080"}}
+                 "translucent bars": {"letterbox": "#00000080"},
+                 "palette entry": {"palette_file": None, "allowed_palette": ["#000000", 5]},
+                 "outline string": {"style": {"outline": {"mode": "dark", "colors": "ink"}}},
+                 "font outside": {"font": {"size_px": 8, "file": "../../fonts/x.png"}},
+                 "references string": {"style": {"references": "build/hero.png"}}}
         for name, change in cases.items():
             with self.subTest(name), self.assertRaises(ValueError):
                 game.load_contract(self.write(name, **change))
@@ -142,8 +147,43 @@ class AssetTests(GameCase):
         report = self.asset(canvas)
         self.assertNotIn("COARSE_PIXELS", codes(report))
         self.assertIn("COARSE_REGION", codes(report))
-        self.assertTrue(all(box["x"] >= 24 for box in next(i for i in report["issues"]
-                                                             if i["code"] == "COARSE_REGION")["windows"]))
+        boxes = next(i for i in report["issues"] if i["code"] == "COARSE_REGION")["windows"]
+        # The flagged region holds the enlarged tile and stops short of the 1x hero (columns 0-11).
+        self.assertTrue(all(box["x"] >= 12 and box["x"] + box["width"] == 64 for box in boxes), boxes)
+
+    def test_coarse_detection_does_not_depend_on_position(self):
+        icon = self.tile.crop((0, 0, 8, 8)).resize((16, 16), Image.Resampling.NEAREST)
+        for at in ((96, 96), (100, 100), (96, 100), (5, 199), (367, 3)):
+            with self.subTest(at=at):
+                base = self.scene()
+                base.alpha_composite(icon, at)
+                report = self.screen(self.present(base))
+                self.assertIn("COARSE_REGION", codes(report))
+                box = next(i for i in report["issues"] if i["code"] == "COARSE_REGION")["windows"][0]
+                self.assertLessEqual((box["x"], box["y"]), at)
+
+    def test_stretched_and_plain_patterns(self):
+        wide = self.asset(self.hero.resize((24, 17), Image.Resampling.NEAREST))
+        self.assertIn("COARSE_PIXELS", codes(wide))
+        self.assertEqual(wide["metrics"]["effective_pixel_size"]["x"], 2)
+        self.assertEqual(wide["metrics"]["effective_pixel_size"]["y"], 1)
+        # Plain 1x art with few edges can sit on a coarse lattice: review, never a hard failure.
+        checks = Image.new("RGBA", (16, 16), (0x4F, 0xA3, 0x4A, 255))
+        for y in range(0, 16, 4):
+            for x in range(0, 16, 4):
+                if (x + y) // 4 % 2:
+                    checks.paste((0x2F, 0x6B, 0x3A, 255), (x, y, x + 4, y + 4))
+        report = self.asset(checks, "tile")
+        self.assertEqual(report["status"], "review")
+        self.assertEqual(codes(report), {"COARSE_PIXELS"})
+
+    def test_large_assets_follow_their_category(self):
+        wide = Image.new("RGBA", (768, 216), (0x4F, 0xA3, 0x4A, 255))
+        wide.paste((0x2F, 0x6B, 0x3A, 255), (0, 200, 768, 216))
+        self.assertEqual(codes(self.asset(wide)), {"ASSET_LARGER_THAN_SCREEN"})
+        self.assertEqual(self.asset(wide)["status"], "review")
+        self.contract["document"]["categories"]["background"] = {"size": "768x216"}
+        self.assertEqual(self.asset(wide, "background")["status"], "pass")
 
     def test_palette_alpha_size_and_category_rules(self):
         recolored = self.hero.copy()
@@ -159,6 +199,11 @@ class AssetTests(GameCase):
             self.asset(self.hero, "boss")
 
     def test_dithering_and_outline_style_rules(self):
+        patch = self.tile.copy()
+        for y in range(6, 9):
+            for x in range(4, 8):
+                patch.putpixel((x, y), (0x9B, 0xD4, 0x5F, 255) if (x + y) % 2 else (0x2F, 0x6B, 0x3A, 255))
+        self.assertNotIn("DITHERING_FOUND", codes(self.asset(patch)))
         dithered = self.tile.copy()
         light, dark = (0x9B, 0xD4, 0x5F, 255), (0x2F, 0x6B, 0x3A, 255)
         for y in range(6, 10):
@@ -189,6 +234,14 @@ class AssetTests(GameCase):
         report = game.intake(tinted, [EXAMPLE / "build" / "hero.png"], self.contract, "character", self.root / "intake2")
         self.assertEqual(report["status"], "review")
         self.assertEqual(codes(report), {"COLORS_NOT_IN_REFERENCES"})
+        # A plain reference whose few edges only suggest larger dots cannot fail a 1x asset.
+        stone = self.root / "stone.png"
+        plain = Image.new("RGBA", (16, 16), (0x4F, 0xA3, 0x4A, 255))
+        plain.paste((0x6C, 0x7A, 0x89, 255), (5, 5, 11, 11))
+        plain.save(stone)
+        report = game.intake(EXAMPLE / "build" / "hero.png", [stone], self.contract, "character", self.root / "intake3")
+        self.assertEqual(report["status"], "review")
+        self.assertEqual(next(i for i in report["issues"] if i["code"] == "PIXEL_SIZE_DIFFERS")["severity"], "review")
 
 
 class ScreenTests(GameCase):
@@ -227,6 +280,8 @@ class ScreenTests(GameCase):
         self.assertIn("CELL_NOT_UNIFORM", codes(self.screen(image, scale=5, offset=(41, 10))))
         with self.assertRaisesRegex(ValueError, "outside the screenshot"):
             self.screen(image, scale=6)
+        with self.assertRaisesRegex(ValueError, "at least 1"):
+            self.screen(image, scale=0)
         self.assertIn("WINDOW_SMALLER_THAN_BASE", codes(self.screen(Image.new("RGBA", (300, 200), (0, 0, 0, 255)))))
 
     def test_cli_exit_codes_and_outputs(self):

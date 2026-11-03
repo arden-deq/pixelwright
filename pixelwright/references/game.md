@@ -30,7 +30,7 @@ Before drawing anything for a game, collect these decisions from the user or the
 | Effects | `effects.blending` | `opaque` (palette colors only) or `palette_alpha` (translucency reviewed on screen) |
 | Engine | `engine` | `unity`, `godot`, `phaser`, `pixi`, `web`, `love`, `gamemaker`, `other` |
 
-Unknown fields and values fail validation. Paths are relative to the contract and stay inside its directory. The bundled [`examples/game/game.json`](../examples/game/game.json) declares all of them.
+Unknown fields and values fail validation. Paths (`palette_file`, `style.references`, `font.file`) are relative to the contract and stay inside its directory. The bundled [`examples/game/game.json`](../examples/game/game.json) declares all of them.
 
 ```sh
 python scripts/pixel_game.py brief --contract game.json
@@ -47,16 +47,17 @@ python scripts/pixel_game.py asset tiles/*.png --contract game.json --out-dir ti
 
 | Code | Severity | Meaning |
 | --- | --- | --- |
-| `COARSE_PIXELS` | fail (review with fewer than 3 color edges per axis) | Every color edge lies on a k-pixel lattice: the asset is drawn with k×k dots, usually an enlarged export |
-| `COARSE_REGION` | review | Windows of the asset contain only dots larger than one pixel; part of it may be enlarged, or the pattern is coarse by design |
+| `COARSE_PIXELS` | fail with at least 8 color edges per axis; review with 3 to 7 | Every column edge keeps a spacing of w and every row edge a spacing of h, with w or h above 1: the asset is drawn with w×h dots, usually an enlarged or stretched export |
+| `COARSE_REGION` | review | Part of the asset shows only dots larger than one pixel; it may be enlarged, or coarse by design |
 | `COLOR_OUTSIDE_PALETTE`, `TOO_MANY_COLORS` | fail | Colors beyond the game palette or budget |
 | `PARTIAL_ALPHA`, `NON_OPAQUE_ALPHA` | fail | Transparency outside the contract |
-| `CATEGORY_SIZE`, `ASSET_LARGER_THAN_SCREEN`, `EMPTY_ASSET` | fail | Size rules |
-| `DITHERING_FOUND` | review | Two or more 3×3 two-color checkerboards while the style declares no dithering |
+| `CATEGORY_SIZE`, `EMPTY_ASSET` | fail | Size rules |
+| `ASSET_LARGER_THAN_SCREEN` | review | Checked without a category and larger than the base resolution; check backgrounds and tilesets under a category whose size allows them |
+| `DITHERING_FOUND` | review | At least 16 pixels form 3×3 two-color checkerboards while the style declares no dithering |
 | `OUTLINE_INCOMPLETE` | review | Less than 90% of silhouette pixels use the declared outline colors |
 | `OUTLINE_TOO_THICK` | review | More than half of a declared 1-pixel outline is two pixels deep |
 
-Effective pixel size is the largest k for which all column and row color edges are congruent modulo k; transparent pixels count as one background. A plain 1× asset whose details all happen to be two pixels wide also measures 2, so few edges give REVIEW rather than FAIL. Outline checks treat the image border as covered, so tiles and cropped art have no silhouette there. Light direction, shading quality and mood are not measured. `asset_overlay.png` marks off-palette pixels red, coarse windows orange and dither windows blue.
+Dot width is the largest spacing that every column color edge keeps, and dot height the same for rows; transparent pixels count as one background. Measuring the axes separately also catches stretched, non-square dots. Plain 1× art can sit on a coarse lattice too: a tile of 4×4 checks or a flat square with a 2-pixel outline has only a few edges, all 4 or 2 apart. That is why fewer than 8 edges per axis give REVIEW, never FAIL, and fewer than 3 are not measured. `COARSE_REGION` tests every window position (tile size, at least 8), so an enlarged element is found wherever it sits; the report gives the bounding box of each flagged region. Outline checks treat the image border as covered, so tiles and cropped art have no silhouette there. Light direction, shading quality and mood are not measured. `asset_overlay.png` marks off-palette pixels red, coarse windows orange and dither windows blue.
 
 ## Compare a new asset with the game
 
@@ -64,7 +65,7 @@ Effective pixel size is the largest k for which all column and row color edges a
 python scripts/pixel_game.py intake new_enemy.png --category character --contract game.json --out-dir intake-v1
 ```
 
-The new asset is placed beside the contract's reference assets (or `--reference` files) at 1× on a neutral background, and the whole row is enlarged by one whole number into `side_by_side.png`. Look at it: sizes, outline weight and detail density should read as one game. The report adds `PIXEL_SIZE_DIFFERS` (fail) when the measured pixel sizes differ, `COLORS_NOT_IN_REFERENCES` (review) for palette colors no reference uses, and `OUTLINE_WIDTH_DIFFERS` (review) when outline depth differs by more than 40 points from the references.
+The new asset is placed beside the contract's reference assets (or `--reference` files) at 1× on a neutral background, and the whole row is enlarged by one whole number into `side_by_side.png`. Look at it: sizes, outline weight and detail density should read as one game. The report adds `PIXEL_SIZE_DIFFERS` when the measured dot sizes differ (fail when both measurements have at least 8 edges per axis, otherwise review), `COLORS_NOT_IN_REFERENCES` (review) for palette colors no reference uses, and `OUTLINE_WIDTH_DIFFERS` (review) when outline depth differs by more than 40 points from the references.
 
 ## Check a screenshot
 

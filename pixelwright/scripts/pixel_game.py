@@ -60,10 +60,14 @@ ENUMS = {
     "blending": ("opaque", "palette_alpha"),
     "engine": ("unity", "godot", "phaser", "pixi", "web", "love", "gamemaker", "other"),
 }
-# Fewer distinct color edges than this per axis are too little evidence to call
-# an asset coarse rather than simply plain.
+# Fewer distinct color edges than MIN_EDGES per axis are too little evidence to
+# measure dot size at all. Plain 1x art (4x4 checks, a flat square with a 2-pixel
+# outline) can still sit on a coarse lattice with a few edges, so only FAIL_EDGES
+# or more per axis turn a coarse measurement into a failure.
 MIN_EDGES = 3
-DITHER_MIN_WINDOWS = 2
+FAIL_EDGES = 8
+MAX_DOT = 8
+DITHER_MIN_PIXELS = 16
 OUTLINE_MIN_COVERAGE = 0.9
 OUTLINE_MAX_DOUBLED = 0.5
 NEUTRAL = (58, 63, 74, 255)
@@ -156,7 +160,7 @@ def load_contract(path: str | Path) -> dict[str, Any]:
         values = doc["allowed_palette"]
         if not isinstance(values, list) or not 1 <= len(values) <= 256:
             raise ValueError("allowed_palette must list 1..256 colors")
-        tokens = {value.upper(): pw.parse_rgba(value) for value in values}
+        tokens = {"#%02X%02X%02X%02X" % rgba: rgba for rgba in map(pw.parse_rgba, values)}
     categories = doc.get("categories", {})
     if not isinstance(categories, dict) or len(categories) > 64:
         raise ValueError("categories must be an object with at most 64 entries")
@@ -186,19 +190,24 @@ def load_contract(path: str | Path) -> dict[str, Any]:
         _enum(outline.get("mode"), "style.outline.mode", "outline")
         if "width" in outline:
             _int(outline["width"], "style.outline.width", 1, 4)
+        if not isinstance(outline.get("colors", []), list):
+            raise ValueError("style.outline.colors must be a list of palette tokens or colors")
         for value in outline.get("colors", []):
             if isinstance(value, str) and value in tokens:
                 outline_colors.append(tokens[value])
             else:
                 outline_colors.append(pw.parse_rgba(value))
+    if not isinstance(style.get("references", []), list):
+        raise ValueError("style.references must be a list of paths")
     references = []
     for value in style.get("references", []):
         references.append(_inside(root, value, "style.references"))
     if "font" in doc:
         _keys(doc["font"], FONT_KEYS, "font")
-        for key in ("name", "file"):
-            if key in doc["font"]:
-                _text(doc["font"][key], f"font.{key}", 256)
+        if "name" in doc["font"]:
+            _text(doc["font"]["name"], "font.name", 256)
+        if "file" in doc["font"]:
+            _inside(root, doc["font"]["file"], "font.file")
         for key in ("size_px", "line_height_px"):
             if key in doc["font"]:
                 _int(doc["font"][key], f"font.{key}", 1, 256)
@@ -232,32 +241,87 @@ def _hex(value: int) -> str:
     return "#" + "".join(f"{b:02X}" for b in np.array([value], dtype=np.uint32).view(np.uint8))
 
 
-def effective_pixel_size(packed: np.ndarray) -> dict[str, Any]:
-    """Largest k for which every color edge falls on one k-spaced lattice on both axes.
+def _period(edges: np.ndarray) -> int | None:
+    return int(np.gcd.reduce(np.diff(edges))) if len(edges) >= 2 else None
 
-    An image drawn with k-wide pixels has edges only every k columns and rows
-    (with some offset), so k > 1 means its dots are larger than one game pixel.
+
+def effective_pixel_size(packed: np.ndarray) -> dict[str, Any]:
+    """Dot width and height: the largest spacing that every column and row color edge keeps.
+
+    An image drawn with k-wide pixels has edges only every k columns (with some
+    offset), so a width or height above 1 means dots larger than one game pixel.
+    The axes are measured separately so stretched, non-square dots also show.
     """
     cols = np.flatnonzero((packed[:, 1:] != packed[:, :-1]).any(axis=0)) + 1
     rows = np.flatnonzero((packed[1:, :] != packed[:-1, :]).any(axis=1)) + 1
-    periods = [int(np.gcd.reduce(np.diff(edges))) for edges in (cols, rows) if len(edges) >= 2]
-    size = math.gcd(*periods) if periods else None
-    return {"size": size, "column_edges": int(len(cols)), "row_edges": int(len(rows)),
-            "conclusive": len(cols) >= MIN_EDGES and len(rows) >= MIN_EDGES}
+    width, height = _period(cols) or 1, _period(rows) or 1
+    few = min(len(cols), len(rows))
+    return {"x": width, "y": height, "size": max(width, height), "column_edges": int(len(cols)),
+            "row_edges": int(len(rows)), "measurable": few >= MIN_EDGES, "conclusive": few >= FAIL_EDGES}
+
+
+def _window_sums(values: np.ndarray, length: int, axis: int) -> np.ndarray:
+    """Sums of every run of `length` consecutive entries along one axis."""
+    padded = np.cumsum(np.insert(values.astype(np.int32), 0, 0, axis=axis), axis=axis)
+    upper = [slice(None)] * values.ndim
+    lower = [slice(None)] * values.ndim
+    upper[axis], lower[axis] = slice(length, None), slice(None, -length)
+    return padded[tuple(upper)] - padded[tuple(lower)]
+
+
+def _axis_dots(edges: np.ndarray, span: int, length: int) -> tuple[np.ndarray, np.ndarray]:
+    """For every window: edge count along one axis, and the largest dot size those edges keep.
+
+    `edges[i, j]` marks a change between positions j and j+1 in line i; a window
+    covers `span` lines and `length` positions. Every window position is tested,
+    so an enlarged element is found wherever it sits.
+    """
+    seen = _window_sums(edges, span, 0) > 0
+    if length < 2:
+        shape = (seen.shape[0], seen.shape[1] + 1)
+        return np.zeros(shape, dtype=np.int32), np.ones(shape, dtype=np.int32)
+    position = np.arange(1, seen.shape[1] + 1)
+    total = _window_sums(seen, length - 1, 1)
+    dots = np.ones_like(total)
+    for k in range(2, MAX_DOT + 1):
+        used = sum((_window_sums(seen & (position % k == r), length - 1, 1) > 0).astype(np.int32)
+                   for r in range(k))
+        dots = np.where(used == 1, k, dots)
+    return total, dots
 
 
 def coarse_windows(packed: np.ndarray, window: int) -> list[dict[str, int]]:
-    """Windows whose own edges show dots larger than one pixel."""
+    """Regions where every window position shows dots larger than one pixel."""
     h, w = packed.shape
-    step = max(1, window // 2)
-    found = []
-    for y in range(0, max(1, h - window + 1), step):
-        for x in range(0, max(1, w - window + 1), step):
-            measured = effective_pixel_size(packed[y:y + window, x:x + window])
-            if measured["conclusive"] and measured["size"] and measured["size"] > 1:
-                found.append({"x": x, "y": y, "width": min(window, w - x), "height": min(window, h - y),
-                              "pixel_size": measured["size"]})
-    return found
+    nh, nw = min(window, h), min(window, w)
+    col_total, col_dots = _axis_dots(packed[:, 1:] != packed[:, :-1], nh, nw)
+    row_total, row_dots = _axis_dots((packed[1:, :] != packed[:-1, :]).T, nw, nh)
+    row_total, row_dots = row_total.T, row_dots.T
+    hit = (col_total >= MIN_EDGES) & (row_total >= MIN_EDGES) & ((col_dots > 1) | (row_dots > 1))
+    covered = np.zeros((h, w), dtype=bool)
+    dots = np.zeros((h, w), dtype=np.int32)
+    for y, x in np.argwhere(hit):
+        covered[y:y + nh, x:x + nw] = True
+        size = max(col_dots[y, x], row_dots[y, x])
+        dots[y:y + nh, x:x + nw] = np.maximum(dots[y:y + nh, x:x + nw], size)
+    boxes = []
+    for y, x in np.argwhere(covered):
+        if not covered[y, x]:
+            continue
+        stack, ys, xs = [(y, x)], [], []
+        covered[y, x] = False
+        while stack:
+            cy, cx = stack.pop()
+            ys.append(cy)
+            xs.append(cx)
+            for ny, nx in ((cy - 1, cx), (cy + 1, cx), (cy, cx - 1), (cy, cx + 1)):
+                if 0 <= ny < h and 0 <= nx < w and covered[ny, nx]:
+                    covered[ny, nx] = False
+                    stack.append((ny, nx))
+        x0, y0, x1, y1 = min(xs), min(ys), max(xs), max(ys)
+        boxes.append({"x": int(x0), "y": int(y0), "width": int(x1 - x0 + 1), "height": int(y1 - y0 + 1),
+                      "pixel_size": int(dots[y0:y1 + 1, x0:x1 + 1].max())})
+    return boxes
 
 
 def dither_windows(packed: np.ndarray, opaque: np.ndarray) -> np.ndarray:
@@ -314,9 +378,11 @@ def measure_asset(image: Image.Image, contract: dict, category: str | None) -> t
     opaque = alpha > 0
     issues, metrics = [], {"size": [w, h]}
     bw, bh = contract["base"]
-    if w > bw or h > bh:
-        issues.append(_issue("ASSET_LARGER_THAN_SCREEN", "fail",
-                             f"Asset is {w}x{h}; the base resolution is {bw}x{bh}. At 1x it cannot fit on screen."))
+    if (w > bw or h > bh) and category is None:
+        issues.append(_issue("ASSET_LARGER_THAN_SCREEN", "review",
+                             f"Asset is {w}x{h}; the base resolution is {bw}x{bh}. At 1x it cannot fit on screen. "
+                             "Check it under a category whose size allows it (a background or tileset), "
+                             "or check that it was not exported enlarged."))
     if category is not None:
         rules = doc.get("categories", {})
         if category not in rules:
@@ -352,12 +418,16 @@ def measure_asset(image: Image.Image, contract: dict, category: str | None) -> t
     whole = effective_pixel_size(canonical)
     metrics["effective_pixel_size"] = whole
     coarse = []
-    if whole["size"] and whole["size"] > 1:
-        severity = "fail" if whole["conclusive"] else "review"
-        issues.append(_issue("COARSE_PIXELS", severity,
-                             f"Every color edge lies on a {whole['size']}-pixel lattice: the asset is drawn with "
-                             f"{whole['size']}x{whole['size']} dots, not 1x game pixels. Redraw at 1x; do not "
-                             "shrink it with interpolation."))
+    if whole["measurable"] and whole["size"] > 1:
+        dots = f"{whole['x']}x{whole['y']}"
+        if whole["conclusive"]:
+            issues.append(_issue("COARSE_PIXELS", "fail",
+                                 f"Every color edge keeps a {dots} spacing: the asset is drawn with {dots} dots, "
+                                 "not 1x game pixels. Redraw at 1x; do not shrink it with interpolation."))
+        else:
+            issues.append(_issue("COARSE_PIXELS", "review",
+                                 f"The few color edges all keep a {dots} spacing. The asset may be enlarged, or its "
+                                 "details may simply be that wide; check it beside 1x assets."))
     else:
         coarse = coarse_windows(canonical, max(8, doc.get("tile_size", 16)))
         if coarse:
@@ -366,10 +436,13 @@ def measure_asset(image: Image.Image, contract: dict, category: str | None) -> t
                                  "of the asset was enlarged.", windows=coarse[:50]))
     style = doc.get("style", {})
     dithers = dither_windows(canonical, opaque)
-    metrics["dither_windows"] = int(len(dithers))
-    if style.get("dithering") == "none" and len(dithers) >= DITHER_MIN_WINDOWS:
+    dithered = np.zeros_like(opaque)
+    for y, x in dithers:
+        dithered[y:y + 3, x:x + 3] = True
+    metrics["dither_pixels"] = int(dithered.sum())
+    if style.get("dithering") == "none" and dithered.sum() >= DITHER_MIN_PIXELS:
         issues.append(_issue("DITHERING_FOUND", "review",
-                             f"{len(dithers)} 3x3 checkerboards found; the style declares no dithering.",
+                             f"{int(dithered.sum())} pixels form two-color checkerboards; the style declares no dithering.",
                              sample=[{"x": int(x), "y": int(y)} for y, x in dithers[:20]]))
     outline = style.get("outline", {})
     if outline.get("mode") in ("dark", "colored") and contract["outline_colors"] and opaque.any():
@@ -448,7 +521,7 @@ def measure_screen(image: Image.Image, contract: dict, scale: int | None = None,
     base = contract["base"]
     fit = viewport((w, h), base)
     if scale is not None or offset is not None:
-        scale = scale or fit["scale"]
+        scale = fit["scale"] if scale is None else scale
         if scale < 1:
             raise ValueError("Scale must be at least 1")
         offset = offset if offset is not None else ((w - base[0] * scale) // 2, (h - base[1] * scale) // 2)
@@ -529,11 +602,19 @@ def intake(source: Path, references: list[Path], contract: dict, category: str |
     new_report, masks = measure_asset(new, contract, category)
     ref_reports = [measure_asset(ref, contract, None)[0] for ref in refs]
     issues = list(new_report["issues"])
-    new_size = new_report["metrics"]["effective_pixel_size"]["size"] or 1
-    ref_sizes = [r["metrics"]["effective_pixel_size"]["size"] or 1 for r in ref_reports]
-    if any(size != new_size for size in ref_sizes):
-        issues.append(_issue("PIXEL_SIZE_DIFFERS", "fail",
-                             f"The new asset's dots measure {new_size} pixel(s); the references measure {ref_sizes}."))
+    def dots(metrics):
+        measured = metrics["effective_pixel_size"]
+        return (measured["x"], measured["y"]), measured["conclusive"]
+
+    new_dots, new_sure = dots(new_report["metrics"])
+    ref_dots = [dots(r["metrics"]) for r in ref_reports]
+    differing = [(size, sure) for size, sure in ref_dots if size != new_dots]
+    if differing:
+        # Only two clear measurements prove a mismatch; a plain asset with few edges only suggests one.
+        severity = "fail" if new_sure and any(sure for _, sure in differing) else "review"
+        issues.append(_issue("PIXEL_SIZE_DIFFERS", severity,
+                             f"The new asset's dots measure {new_dots[0]}x{new_dots[1]}; the references measure "
+                             f"{', '.join(f'{x}x{y}' for (x, y), _ in ref_dots)}."))
     ref_colors = set()
     for ref in refs:
         arr = np.asarray(ref, dtype=np.uint8)
@@ -734,7 +815,7 @@ def run_cli(argv: list[str] | None = None) -> int:
         print(json.dumps({"status": report["status"], "viewport": report["viewport"],
                           "issues": [i["code"] for i in report["issues"]]}, indent=2))
         return 0 if report["status"] == "pass" else 2
-    except (ValueError, OSError, json.JSONDecodeError) as exc:
+    except (ValueError, OSError, MemoryError) as exc:
         print(f"Pixelwright error: {exc}", file=sys.stderr)
         return 1
 
