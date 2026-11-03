@@ -252,6 +252,8 @@ def build(work, palette):
     strip.save(DOCS / 'characters-native.png')
     strip.resize((320, 208), Image.Resampling.NEAREST).save(DOCS / 'characters-2x.png')
     inspect(DOCS / 'characters-2x.png', (160, 104), 2, palette, 'characters-2x', work, alpha='opaque')
+    strip.resize((480, 312), Image.Resampling.NEAREST).save(DOCS / 'characters-3x.png')
+    inspect(DOCS / 'characters-3x.png', (160, 104), 3, palette, 'characters-3x', work, alpha='opaque')
     strip.resize((640, 416), Image.Resampling.NEAREST).save(DOCS / 'characters-4x.png')
     inspect(DOCS / 'characters-4x.png', (160, 104), 4, palette, 'characters', work, alpha='opaque')
     write(DOCS / 'asset-summary.json', evidence)
@@ -271,7 +273,6 @@ def verify_runtime(work, palette):
             '--out-dir', output, expected=(expected_code,))
         portable_report(output / 'report.json', DOCS / f'runtime-{name}-report.json')
         shutil.copyfile(output / 'screen_overlay.png', DOCS / f'runtime-{name}-overlay.png')
-    shutil.copyfile(DOCS / 'runtime-field.png', IMAGES / 'game-sd-scene-3x.png')
     write(DOCS / 'composition-verification.json', {'status': 'pass', 'browser_matches_independent_composition': True,
           'native_size': [384, 288], 'capture_size': [1152, 864], 'scale': 3,
           'capture_sha256': hashlib.sha256((DOCS / 'runtime-field.png').read_bytes()).hexdigest()})

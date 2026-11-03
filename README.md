@@ -117,11 +117,12 @@ This example was redrawn from scratch with **48×96, 1:2 character canvases and 
 
 <picture>
   <source media="(max-width: 479px)" srcset="docs/examples/demon-castle-sd/characters-native.png">
-  <source media="(max-width: 767px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
+  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/characters-3x.png">
   <img src="docs/examples/demon-castle-sd/characters-4x.png" alt="4x close-up of the SD knight, princess and demon king: readable eyes, mouths, crowns and equipment">
 </picture>
 
-The character close-up uses the same native pixels at 4× (2× or 1× on smaller windows). [Independent castle and character board](docs/images/game-sd-assets-preview.png) · [Actual checker grid for the close-up](docs/examples/demon-castle-sd/characters-grid_overlay.png).
+The character close-up uses the same native pixels at 4× (3×, 2× or 1× on smaller windows). [Independent castle and character board](docs/images/game-sd-assets-preview.png) · [Actual checker grid for the close-up](docs/examples/demon-castle-sd/characters-grid_overlay.png).
 
 Thirteen independent 1× PNGs compose the **384×288 field**: three characters, a 192×128 castle, eight 16×16 terrain variants and a separate contact shadow. The final 4× assets and 2× field preview are also audited as enlarged PNGs. [Visual review](docs/examples/demon-castle-sd/art-review.json) evaluates readability and coherence separately from technical PASS.
 

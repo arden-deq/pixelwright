@@ -70,7 +70,7 @@ try {
   await step(0);
   assert.equal((await state()).viewport.scale, 3);
   await capture('runtime-field.png');
-  await fs.copyFile(path.join(docs, 'runtime-field.png'), path.join(root, sd ? 'docs/images/game-sd-scene-3x.png' : 'docs/images/game-scene.png'));
+  if (!sd) await fs.copyFile(path.join(docs, 'runtime-field.png'), path.join(root, 'docs/images/game-scene.png'));
   await page.setViewportSize({ width: 240, height: 160 });
   await step(0); assert.equal((await state()).viewport.scale, 0);
   await page.setViewportSize({ width: 1664, height: sd ? 1280 : 1088 });

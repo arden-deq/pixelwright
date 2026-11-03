@@ -117,11 +117,12 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 
 <picture>
   <source media="(max-width: 479px)" srcset="docs/examples/demon-castle-sd/characters-native.png">
-  <source media="(max-width: 767px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
+  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/characters-3x.png">
   <img src="docs/examples/demon-castle-sd/characters-4x.png" alt="눈·입·왕관·장비를 볼 수 있는 SD 기사·공주·마왕의 4배 확대">
 </picture>
 
-캐릭터 확대는 같은 논리 도트를 4배로 표시합니다(작은 창에서는 2배 또는 1배). [독립 성·캐릭터 비교 보드](docs/images/game-sd-assets-preview.png) · [확대본의 실제 검사 격자](docs/examples/demon-castle-sd/characters-grid_overlay.png).
+캐릭터 확대는 같은 논리 도트를 4배로 표시합니다(작은 창에서는 3배·2배·1배). [독립 성·캐릭터 비교 보드](docs/images/game-sd-assets-preview.png) · [확대본의 실제 검사 격자](docs/examples/demon-castle-sd/characters-grid_overlay.png).
 
 **384×288 필드**는 독립 1× PNG 13개를 합성합니다. 캐릭터 3종, 192×128 성, 16×16 바닥 변형 8종, 별도의 접촉 그림자로 구성됩니다. 최종 에셋의 4배 PNG와 필드의 2배 미리보기도 별도로 검사합니다. [미술 검수](docs/examples/demon-castle-sd/art-review.json)는 가독성과 조화를 기술 PASS와 구분해서 기록합니다.
 
