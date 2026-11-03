@@ -1,0 +1,12 @@
+{
+  "changed_source_pixels": 1305789,
+  "changed_source_pixel_fraction": 0.535679,
+  "changed_visible_source_pixels": 985784,
+  "original_status": "fail",
+  "original_source_sha256": "99cacd6e8515269af47321b2fe5f7627e3814f88e6b48a38f5cb66fb15896670",
+  "fixed_source_sha256": "f3237c4c9f2e240089c922746351a1f41ffc2983d7285c36cca9c25b1ca8b172",
+  "post_projection_technical_status": "pass",
+  "post_projection_grid_score": 100.0,
+  "post_projection_visible_logical_colors": 820,
+  "disclaimer": "Grid compliance after projection is expected by construction, NOT independent proof of sprite or art quality. Review comparison.png before using."
+}

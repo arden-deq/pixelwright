@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "scale": 4,
+  "palette_file": "palette.json",
+  "rows": [
+    ["stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0"],
+    ["stone0", "stone1", "stone3", "stone3", "stone3", "stone3", "stone3", "stone3", "stone3", "stone3", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1"],
+    ["stone0", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1"],
+    ["stone0", "stone1", "stone1", "stone1", "stone2", "stone2", "stone2", "stone2", "stone2", "stone1", "stone0", "stone1", "stone1", "stone1", "stone1", "stone1"],
+    ["stone0", "stone1", "stone1", "stone1", "stone2", "stone2", "stone2", "stone2", "stone2", "stone1", "stone0", "stone1", "stone1", "stone1", "stone1", "stone1"],
+    ["stone0", "stone1", "stone1", "stone1", "stone2", "stone2", "stone2", "stone2", "stone2", "stone1", "stone1", "stone0", "stone1", "stone1", "stone1", "stone1"],
+    ["stone0", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1"],
+    ["ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3"],
+    ["stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0", "stone0"],
+    ["stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone0", "stone1", "stone3", "stone3", "stone3", "stone3", "stone3", "stone3"],
+    ["stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone0", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1"],
+    ["stone1", "stone1", "stone1", "stone1", "stone2", "stone2", "stone2", "stone2", "stone2", "stone1", "stone1", "stone1", "stone1", "moss2", "stone1", "stone1"],
+    ["stone1", "stone1", "stone1", "stone1", "stone2", "stone2", "stone2", "stone2", "stone2", "stone1", "stone1", "stone1", "stone1", "moss1", "moss1", "stone1"],
+    ["stone1", "stone1", "stone1", "stone1", "stone2", "stone2", "stone2", "stone2", "stone2", "stone1", "stone1", "stone1", "moss1", "stone1", "stone1", "stone1"],
+    ["stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone0", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1", "stone1"],
+    ["ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3", "ink3"]
+  ]
+}

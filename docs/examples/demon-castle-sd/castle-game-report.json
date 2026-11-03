@@ -1,0 +1,33 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_asset",
+  "status": "pass",
+  "artistic_status": "not_reviewed",
+  "category": "building",
+  "issues": [],
+  "metrics": {
+    "size": [
+      192,
+      128
+    ],
+    "visible_colors": 48,
+    "effective_pixel_size": {
+      "x": 1,
+      "y": 1,
+      "size": 1,
+      "column_edges": 133,
+      "row_edges": 112,
+      "measurable": true,
+      "conclusive": true
+    },
+    "dither_pixels": 0
+  },
+  "provenance": {
+    "source_path": "pixelwright/examples/demon-castle-sd/build/castle.png",
+    "source_sha256": "cba0a6962abfc7b25be7bcc13dd9eba5cb0e79d4cc882fef65bc76eddfb31a77",
+    "contract_path": "pixelwright/examples/demon-castle-sd/game.json",
+    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+  }
+}

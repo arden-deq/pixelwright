@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "name": "Demon Castle shared field palette: 64 opaque colors plus transparency",
+  "colors": {
+    "transparent": "#00000000",
+    "ink0": "#10101CFF",
+    "ink1": "#1B172BFF",
+    "ink2": "#282139FF",
+    "ink3": "#372C4AFF",
+    "stone0": "#343047FF",
+    "stone1": "#47405BFF",
+    "stone2": "#5B5274FF",
+    "stone3": "#71698BFF",
+    "stone4": "#8B82A1FF",
+    "stone5": "#B0A5B8FF",
+    "steel0": "#242E46FF",
+    "steel1": "#35465FFF",
+    "steel2": "#536C86FF",
+    "steel3": "#7896AAFF",
+    "steel4": "#AEC4CAFF",
+    "steel5": "#E1EBDFFF",
+    "crimson0": "#3C172DFF",
+    "crimson1": "#641C37FF",
+    "crimson2": "#952D48FF",
+    "crimson3": "#C3484CFF",
+    "crimson4": "#EA775DFF",
+    "gold0": "#49322BFF",
+    "gold1": "#6D4C32FF",
+    "gold2": "#9E7240FF",
+    "gold3": "#CEA252FF",
+    "gold4": "#EDCE7BFF",
+    "gold5": "#FFF0B0FF",
+    "skin0": "#5C3441FF",
+    "skin1": "#92515AFF",
+    "skin2": "#C17D71FF",
+    "skin3": "#E3AD8CFF",
+    "skin4": "#F8D4ABFF",
+    "ivory0": "#565169FF",
+    "ivory1": "#80788EFF",
+    "ivory2": "#AAA1ABFF",
+    "ivory3": "#D5C8BDFF",
+    "ivory4": "#FAEDD7FF",
+    "violet0": "#231C3BFF",
+    "violet1": "#352755FF",
+    "violet2": "#52376FFF",
+    "violet3": "#754A93FF",
+    "violet4": "#A276AEFF",
+    "violet5": "#D1A2CFFF",
+    "ember0": "#681E31FF",
+    "ember1": "#A43135FF",
+    "ember2": "#DC5535FF",
+    "ember3": "#FF9248FF",
+    "ember4": "#FFD575FF",
+    "blue0": "#1F2B50FF",
+    "blue1": "#2C4173FF",
+    "blue2": "#44629AFF",
+    "blue3": "#6D8ABBFF",
+    "blue4": "#A0BADCFF",
+    "moss0": "#263B3DFF",
+    "moss1": "#354A51FF",
+    "moss2": "#57706EFF",
+    "moss3": "#778878FF",
+    "roof0": "#443143FF",
+    "roof1": "#7A4552FF",
+    "roof2": "#A26469FF",
+    "roof3": "#62599BFF",
+    "roof4": "#8A83BDFF",
+    "roof5": "#B9B0C9FF",
+    "roof6": "#FFF4CBFF"
+  },
+  "ramps": {
+    "ink": [
+      "ink0",
+      "ink1",
+      "ink2",
+      "ink3"
+    ],
+    "stone": [
+      "stone0",
+      "stone1",
+      "stone2",
+      "stone3",
+      "stone4",
+      "stone5"
+    ],
+    "steel": [
+      "steel0",
+      "steel1",
+      "steel2",
+      "steel3",
+      "steel4",
+      "steel5"
+    ],
+    "crimson": [
+      "crimson0",
+      "crimson1",
+      "crimson2",
+      "crimson3",
+      "crimson4"
+    ],
+    "gold": [
+      "gold0",
+      "gold1",
+      "gold2",
+      "gold3",
+      "gold4",
+      "gold5"
+    ],
+    "skin": [
+      "skin0",
+      "skin1",
+      "skin2",
+      "skin3",
+      "skin4"
+    ],
+    "ivory": [
+      "ivory0",
+      "ivory1",
+      "ivory2",
+      "ivory3",
+      "ivory4"
+    ],
+    "violet": [
+      "violet0",
+      "violet1",
+      "violet2",
+      "violet3",
+      "violet4",
+      "violet5"
+    ],
+    "ember": [
+      "ember0",
+      "ember1",
+      "ember2",
+      "ember3",
+      "ember4"
+    ],
+    "blue": [
+      "blue0",
+      "blue1",
+      "blue2",
+      "blue3",
+      "blue4"
+    ],
+    "moss": [
+      "moss0",
+      "moss1",
+      "moss2",
+      "moss3"
+    ],
+    "roof": [
+      "roof0",
+      "roof1",
+      "roof2",
+      "roof3",
+      "roof4",
+      "roof5",
+      "roof6"
+    ]
+  }
+}

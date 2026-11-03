@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "name": "SD Demon Castle — readable two-head RPG field",
+  "base_resolution": "384x288",
+  "tile_size": 16,
+  "palette_file": "palette.json",
+  "max_colors": 64,
+  "alpha": "binary",
+  "letterbox": "#10101C",
+  "categories": {
+    "tile": {
+      "size": "16x16",
+      "outline": false
+    },
+    "building": {
+      "size": "192x128",
+      "outline": false,
+      "notes": "Independent castle object. Footprint determines collision; roofs may overlap the map."
+    },
+    "character": {
+      "size": "48x96",
+      "notes": "1:2 canvas, two-head SD anatomy, large readable face, common y=92 foot baseline."
+    },
+    "boss": {
+      "size": "48x96",
+      "notes": "Same two-head anatomy and native pixel size as the human characters; horns identify the demon king."
+    },
+    "shadow": {
+      "size": "40x8",
+      "outline": false,
+      "notes": "Shared binary-alpha ground contact shadow, composed as an independent native PNG."
+    }
+  },
+  "style": {
+    "genre": "RPG Maker-style top-down dark-fantasy field map",
+    "perspective": "three-quarter",
+    "light_direction": "upper-left",
+    "shading": "cel",
+    "outline": {
+      "mode": "selective",
+      "width": 1,
+      "colors": [
+        "ink0",
+        "ink1",
+        "ink2"
+      ]
+    },
+    "dithering": "none",
+    "anti_aliasing": "none",
+    "mood": "Readable warm 16-bit SD characters in a violet demon-castle courtyard.",
+    "notes": "Large faces, short limbs, broad deliberate clusters, upper-left light, coherent contact shadows. Static field sprites; arrows translate objects without walking animation.",
+    "references": [
+      "build/stone0.png",
+      "build/castle.png",
+      "build/knight.png",
+      "build/princess.png",
+      "build/demon-king.png"
+    ]
+  },
+  "font": {
+    "name": "project bitmap font",
+    "size_px": 8,
+    "line_height_px": 12
+  },
+  "animation": {
+    "fps": 8
+  },
+  "rotation": {
+    "mode": "prerendered",
+    "directions": 4
+  },
+  "effects": {
+    "blending": "opaque"
+  },
+  "engine": "web"
+}
