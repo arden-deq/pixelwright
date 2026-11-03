@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "name": "SD Demon Castle — readable two-head RPG field",
+  "name": "Native-cell SD Demon Castle — one by two tile characters",
   "base_resolution": "384x288",
-  "tile_size": 16,
+  "tile_size": 32,
   "palette_file": "palette.json",
   "max_colors": 64,
   "alpha": "binary",
   "letterbox": "#10101C",
   "categories": {
     "tile": {
-      "size": "16x16",
+      "size": "32x32",
       "outline": false
     },
     "building": {
@@ -18,15 +18,15 @@
       "notes": "Independent castle object. Footprint determines collision; roofs may overlap the map."
     },
     "character": {
-      "size": "48x96",
-      "notes": "1:2 canvas, two-head SD anatomy, large readable face, common y=92 foot baseline."
+      "size": "32x64",
+      "notes": "Authored at native32x64: exactly1x2 tiles, two-head anatomy,20x18 face and y62 foot baseline."
     },
     "boss": {
-      "size": "48x96",
-      "notes": "Same two-head anatomy and native pixel size as the human characters; horns identify the demon king."
+      "size": "32x64",
+      "notes": "Authored at native32x64: exactly1x2 tiles, two-head anatomy,20x18 face and y62 foot baseline."
     },
     "shadow": {
-      "size": "40x8",
+      "size": "28x6",
       "outline": false,
       "notes": "Shared binary-alpha ground contact shadow, composed as an independent native PNG."
     }
@@ -48,7 +48,7 @@
     "dithering": "none",
     "anti_aliasing": "none",
     "mood": "Readable warm 16-bit SD characters in a violet demon-castle courtyard.",
-    "notes": "Large faces, short limbs, broad deliberate clusters, upper-left light, coherent contact shadows. Static field sprites; arrows translate objects without walking animation.",
+    "notes": "Every asset authored at final native cell resolution. No raster reduction or palette conversion. Static field sprites; arrows translate fixed poses.",
     "references": [
       "build/stone0.png",
       "build/castle.png",
