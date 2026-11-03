@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "scale": 8,
+  "palette_file": "palette.json",
+  "rows": [
+    ["transparent", "transparent", "transparent", "transparent", "ink", "ink", "ink", "ink", "transparent", "transparent", "transparent", "transparent"],
+    ["transparent", "transparent", "transparent", "ink", "steel_light", "steel_light", "steel_light", "steel_light", "ink", "transparent", "transparent", "transparent"],
+    ["transparent", "transparent", "ink", "steel_light", "steel_light", "steel_light", "steel", "steel", "steel", "ink", "transparent", "transparent"],
+    ["transparent", "transparent", "ink", "steel_light", "ink", "ink", "ink", "ink", "steel", "ink", "transparent", "transparent"],
+    ["transparent", "transparent", "ink", "steel_light", "steel", "steel", "steel", "steel", "steel", "ink", "transparent", "transparent"],
+    ["transparent", "transparent", "transparent", "ink", "ink", "ink", "ink", "ink", "ink", "transparent", "transparent", "transparent"],
+    ["transparent", "transparent", "ink", "steel_light", "steel_light", "steel", "steel", "steel", "steel", "ink", "transparent", "transparent"],
+    ["transparent", "ink", "steel_light", "ink", "steel_light", "steel", "steel", "steel", "ink", "steel", "ink", "transparent"],
+    ["transparent", "ink", "steel", "ink", "cloth", "cloth", "cloth", "cloth", "ink", "steel", "ink", "transparent"],
+    ["transparent", "ink", "skin", "ink", "steel_light", "steel", "steel", "steel", "ink", "skin", "ink", "transparent"],
+    ["transparent", "ink", "ink", "ink", "steel_light", "steel", "steel", "steel", "ink", "ink", "ink", "transparent"],
+    ["transparent", "transparent", "ink", "steel", "steel", "ink", "ink", "steel", "steel", "ink", "transparent", "transparent"],
+    ["transparent", "transparent", "ink", "steel", "ink", "transparent", "transparent", "ink", "steel", "ink", "transparent", "transparent"],
+    ["transparent", "transparent", "ink", "steel", "ink", "transparent", "transparent", "ink", "steel", "ink", "transparent", "transparent"],
+    ["transparent", "transparent", "ink", "steel_light", "ink", "transparent", "transparent", "ink", "steel_light", "ink", "transparent", "transparent"],
+    ["transparent", "ink", "dirt_dark", "dirt", "ink", "transparent", "transparent", "ink", "dirt_dark", "dirt", "ink", "transparent"],
+    ["transparent", "ink", "ink", "ink", "ink", "transparent", "transparent", "ink", "ink", "ink", "ink", "transparent"]
+  ]
+}
