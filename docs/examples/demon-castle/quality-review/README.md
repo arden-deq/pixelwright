@@ -45,9 +45,23 @@
 
 기존 브라우저 원본 캡처와 검사기 원본 오버레이는 보존했다. 새 미리보기·확대 파일은 최근접 정수 배율로만 내보냈으며, [내보내기 크기와 해시](../readme-exports.json), [2배 격자 검사](../readme-preview-report.json), [6배 격자 검사](../readme-6x-report.json)를 남겼다.
 
+푸시한 브랜치의 실제 GitHub 페이지에서도 확인했다. 아래 측정은 모두 DPR 1인 Chromium에서 수행했다. 필드 외에 에셋 비교 그림과 화면 진단 그림도 각 창에서 선택된 PNG의 원래 크기 그대로 표시되었다.
+
+| 브라우저 창 | 선택된 필드 PNG | 실제 CSS 표시 | 논리 도트 하나의 CSS 폭 |
+| --- | --- | --- | --- |
+| 1280×900 | 768×512 | 768×512 | 2픽셀 |
+| 1000×900 | 384×256 | 384×256 | 1픽셀 |
+| 640×900 | 384×256 | 384×256 | 1픽셀 |
+
+![수정 후 실제 GitHub 표시 — 1280픽셀 창](github-readme-field-after-1280.png)
+
+[1000픽셀 창 캡처](github-readme-field-after-1000.png) · [640픽셀 창 캡처](github-readme-field-after-640.png) · [DOM 크기·소스·픽셀 비교 기록](github-rendering.json)
+
+각 필드 캡처의 그림 영역은 내보낸 PNG와 RGBA 픽셀 단위로 일치하며 52색을 유지한다. DOM의 소수점 위치를 정수 영역으로 캡처하면서 생긴 흰색 한 줄은 비교 영역 밖에 있다. 캡처를 자르거나 보정하지 않고, 그 여백과 정확히 일치하는 영역의 좌표를 기록했다. 이는 비정수 축소로 인한 흐림이 해결된 증거이며 캐릭터의 원래 미술 디테일이 개선되었다는 뜻은 아니다.
+
 ## 재현
 
-저장소 루트에서 서버를 실행하고, `output/playwright/asset-quality-review/`를 작업 경로로 `playwright_cli.sh --session=castle-review`를 사용했다. 독립 에셋 검수 페이지를 열어 스냅샷으로 버튼 참조를 확인한 뒤 밝은/어두운 배경·성·타일 보기를 전환하고 캡처했다. GitHub 페이지에서는 원본 이미지 크기, DOM 표시 크기, DPR, 보간 설정을 `eval`로 읽었다. 계정 로그인이나 외부 페이지 수정은 하지 않았다.
+저장소 루트에서 `python -m http.server 8000`을 실행하고 [독립 에셋 검수 페이지](http://localhost:8000/docs/examples/demon-castle/quality-review/inspect.html)를 연다. [검수 페이지 소스](inspect.html)도 함께 보존했다. `output/playwright/asset-quality-review/`를 작업 경로로 `playwright_cli.sh --session=castle-review`를 사용하여 스냅샷으로 버튼 참조를 확인한 뒤 밝은/어두운 배경·성·타일 보기를 전환하고 캡처했다. GitHub 페이지에서는 원본 이미지 크기, DOM 표시 크기, DPR, 보간 설정을 `eval`로 읽었다. 계정 로그인이나 외부 페이지 수정은 하지 않았다.
 
 README 내보내기는 다음 명령으로 재현한다.
 
