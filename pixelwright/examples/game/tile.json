@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "scale": 8,
+  "palette_file": "palette.json",
+  "rows": [
+    ["grass", "grass", "grass_light", "grass", "grass", "grass", "grass", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass_light", "grass", "grass"],
+    ["grass", "grass_dark", "grass", "grass", "grass_light", "grass", "grass_dark", "grass", "grass", "grass", "grass_light", "grass", "grass_dark", "grass", "grass", "grass"],
+    ["grass_dark", "grass_dark", "grass", "grass_dark", "grass_dark", "grass_dark", "grass", "grass_dark", "grass_dark", "grass_dark", "grass", "grass_dark", "grass_dark", "grass", "grass_dark", "grass_dark"],
+    ["dirt", "grass_dark", "dirt", "grass_dark", "dirt", "dirt", "grass_dark", "dirt", "dirt", "grass_dark", "dirt", "dirt", "dirt", "grass_dark", "dirt", "dirt_dark"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt"],
+    ["dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt"],
+    ["dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt"],
+    ["dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark"],
+    ["dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt"],
+    ["dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt", "dirt_dark", "dirt", "dirt", "dirt", "dirt"]
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "name": "Moss Keep (example)",
+  "base_resolution": "384x216",
+  "tile_size": 16,
+  "palette_file": "palette.json",
+  "max_colors": 16,
+  "alpha": "binary",
+  "letterbox": "#000000",
+  "categories": {
+    "tile": {
+      "size": "16x16"
+    },
+    "character": {
+      "min_size": "8x12",
+      "max_size": "24x32",
+      "notes": "player and enemies stand 1 to 2 tiles tall"
+    },
+    "item": {
+      "max_size": "16x16"
+    },
+    "ui_icon": {
+      "size": "12x12"
+    }
+  },
+  "style": {
+    "genre": "side-scrolling action platformer",
+    "perspective": "side",
+    "light_direction": "upper-left",
+    "shading": "cel",
+    "outline": {
+      "mode": "dark",
+      "width": 1,
+      "colors": [
+        "ink"
+      ]
+    },
+    "dithering": "none",
+    "anti_aliasing": "none",
+    "mood": "bright, mossy ruins; readable silhouettes over detail",
+    "notes": "Characters read at 1x against the tiles; at most three shades per material.",
+    "references": [
+      "build/tile.png",
+      "build/hero.png"
+    ]
+  },
+  "font": {
+    "name": "project bitmap font",
+    "size_px": 8,
+    "line_height_px": 10
+  },
+  "animation": {
+    "fps": 12
+  },
+  "rotation": {
+    "mode": "prerendered",
+    "directions": 8
+  },
+  "effects": {
+    "blending": "opaque"
+  },
+  "engine": "godot"
+}

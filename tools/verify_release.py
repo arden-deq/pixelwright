@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Execute a trusted Pixelwright ZIP's builder, palettes, sprites, and strict gate.
+"""Execute a trusted Pixelwright ZIP's builder, palettes, sprites, game checks, and strict gate.
 
 Only use archives built from reviewed source. Manifest hashes check consistency,
 not authenticity; this tool executes the extracted Python scripts.
@@ -311,6 +311,42 @@ def verify_sprite_workflow(skill, out):
             "sprite_broken_joint_status": report["status"]}
 
 
+def verify_game_workflow(skill, out):
+    """Check the installed example game's 1x assets, then an enlarged copy and a shifted screenshot."""
+    tool = skill / "scripts" / "pixel_game.py"
+    example = skill / "examples" / "game"
+    contract = example / "game.json"
+    results = {}
+    for name, category in (("tile", "tile"), ("hero", "character")):
+        run(tool, ["asset", example / "build" / f"{name}.png", "--category", category, "--contract", contract,
+                   "--out-dir", out / f"game-{name}"], 0)
+        results[name] = read_json(out / f"game-{name}" / "report.json")["status"]
+    with Image.open(example / "build" / "hero.png") as hero:
+        hero = hero.convert("RGBA")
+    enlarged = out / "game-hero-2x.png"
+    hero.resize((hero.width * 2, hero.height * 2), Image.Resampling.NEAREST).save(enlarged)
+    run(tool, ["asset", enlarged, "--contract", contract, "--out-dir", out / "game-hero-2x"], 2)
+    coarse = read_json(out / "game-hero-2x" / "report.json")
+    if "COARSE_PIXELS" not in {issue["code"] for issue in coarse["issues"]}:
+        raise ValueError("An enlarged game asset must report COARSE_PIXELS")
+    base = Image.new("RGBA", (384, 216), (155, 212, 95, 255))
+    base.alpha_composite(hero, (60, 160))
+    screen = Image.new("RGBA", (2000, 1100), (0, 0, 0, 255))
+    screen.paste(base.resize((1920, 1080), Image.Resampling.NEAREST), (40, 10))
+    screen.save(out / "game-screen.png")
+    run(tool, ["screen", out / "game-screen.png", "--contract", contract, "--out-dir", out / "game-screen"], 0)
+    big = hero.resize((hero.width * 5, hero.height * 5), Image.Resampling.NEAREST)
+    screen.alpha_composite(big, (40 + 200 * 5 + 2, 10 + 100 * 5))
+    screen.save(out / "game-screen-shifted.png")
+    run(tool, ["screen", out / "game-screen-shifted.png", "--contract", contract,
+               "--out-dir", out / "game-screen-shifted"], 2)
+    shifted = read_json(out / "game-screen-shifted" / "report.json")
+    if "CELL_NOT_UNIFORM" not in {issue["code"] for issue in shifted["issues"]}:
+        raise ValueError("A sprite drawn between game pixels must break screen cells")
+    return {"game_assets_status": results, "game_enlarged_asset_status": coarse["status"],
+            "game_screen_status": "pass", "game_shifted_screen_status": shifted["status"]}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, required=True)
@@ -362,6 +398,7 @@ def main():
             raise ValueError("Installed scene contains a rejected layer")
         grid_summary = verify_grid_intervals(layer_output / "final" / "grid_lines.png", (320, 224), 4)
         sprite_summary = verify_sprite_workflow(skill, out)
+        game_summary = verify_game_workflow(skill, out)
         original_layer = scene.parent / "layers" / "title.png"
         original_layer_hash = hashlib.sha256(original_layer.read_bytes()).hexdigest()
         broken_input = out / "broken-layer-input"
@@ -393,7 +430,8 @@ def main():
                    "layered_status": layer_summary["status"], "layer_count": len(layer_summary["results"]),
                    "layered_uniform_cells": json.loads((layer_output / "final/report.json").read_text(encoding="utf-8"))["metrics"]["uniform_rgba_cells"],
                    "hidden_damaged_layer_status": rejected["status"], "rejected_final_status": rejected["final"]["status"],
-                   "original_layer_unchanged": True, **palette_summary, **grid_summary, **sprite_summary}
+                   "original_layer_unchanged": True, **palette_summary, **grid_summary, **sprite_summary,
+                   **game_summary}
         (out / "release-check.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(summary, indent=2))
         return 0

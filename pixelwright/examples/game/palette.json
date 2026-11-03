@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "name": "Moss Keep palette (example)",
+  "colors": {
+    "transparent": "#00000000",
+    "ink": "#1B1F2AFF",
+    "grass_dark": "#2F6B3AFF",
+    "grass": "#4FA34AFF",
+    "grass_light": "#9BD45FFF",
+    "dirt_dark": "#5A3A28FF",
+    "dirt": "#8A5A3AFF",
+    "skin": "#F2C49BFF",
+    "steel": "#6C7A89FF",
+    "steel_light": "#B8C4CFFF",
+    "cloth": "#A23E3EFF"
+  },
+  "ramps": {
+    "grass": [
+      "grass_dark",
+      "grass",
+      "grass_light"
+    ],
+    "steel": [
+      "ink",
+      "steel",
+      "steel_light"
+    ],
+    "dirt": [
+      "dirt_dark",
+      "dirt"
+    ]
+  }
+}

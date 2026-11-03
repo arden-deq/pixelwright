@@ -1,6 +1,6 @@
 ---
 name: pixelwright
-description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, palette extraction and remapping, pixel-grid repairs, optional layer composition, and sprite sheets or animations whose body and object parts must move consistently with a declared skeleton.
+description: Create and audit static PNG pixel art with declared square cells and exact single-color RGBA blocks. Use for sprites, items, UI icons, palette extraction and remapping, pixel-grid repairs, optional layer composition, sprite sheets or animations whose body and object parts must move consistently with a declared skeleton, and game art that must share one base resolution, pixel size and style, including checks of 1x assets and game screenshots.
 ---
 
 # Pixelwright
@@ -12,6 +12,8 @@ Create reproducible pixel art and verify its technical contract. The guarantee c
 Use the user's existing logical dimensions, integer scale, palette and alpha policy. Logical size is the number of intended dots, not the enlarged PNG size. If missing, ask for a consequential choice or propose a stated default appropriate to the asset (for example, a 16×16 item at 8×). Freeze it before generating; never change the grid to make an existing image pass. A neighboring same-color cluster may span many cells and need not itself be square.
 
 The strict rule is `rendered = logical × S`, with the same positive integer `S` on both axes and origin `(0,0)`. Every physical sample in each `S×S` cell must have exactly the same RGBA8 value. Profile acceptance requires `S≥2`. At 1×, within-cell consistency is tautological; do not treat it as evidence of enlarged block fidelity.
+
+When the art is for a game, settle the game contract first (see below); every asset follows it.
 
 Default to exact RGBA, including hidden RGB under alpha zero. Use the explicit `visible` policy only when invisible RGB should be canonicalized; disclose that weaker byte-level scope. Binary alpha is a useful game-asset default; uniform translucent cells are allowed by an `any` contract. Do not remove intentional translucency or dither without considering the user's design.
 
@@ -33,6 +35,35 @@ Design on the logical grid, iterate the matrix, and use nearest-neighbor integer
 When several assets share named colors or shading ramps, read [palettes.md](references/palettes.md). The builder can reference a reusable palette library with `palette_file` instead of an inline palette.
 
 If a generative image tool is available and better fits the requested artwork, use it according to the host's tool rules. Treat its result as an unverified design candidate. Audit the original exported PNG and preserve it. A prompt saying “pixel art” cannot enforce this contract. A candidate needing projection becomes a new derived asset; generation-tool edits and deterministic repairs follow their respective host permissions.
+
+### Make assets for a game
+
+Read [game.md](references/game.md) whenever art is meant for a game, and [engines.md](references/engines.md) when writing game code or import settings. Before drawing, gather the game's style decisions into a game contract: base resolution and tile size, palette and color budget, alpha, letterbox color, size per asset category, perspective, light direction, shading, outline mode, width and colors, dithering, anti-aliasing, mood, reference assets, font size, animation rate, rotation policy, effect blending and engine. Use what the user or the existing game already decided, ask about choices that change the result, and propose stated defaults for the rest. Print the brief and follow it for every asset and every image-generation prompt:
+
+```sh
+python scripts/pixel_game.py brief --contract game.json
+```
+
+Hold every game to these rules:
+
+- One base resolution, enlarged only by a whole number for the window; the rest of the window is the letterbox color.
+- Every asset is drawn and delivered at 1×: one image pixel is one game pixel. Sprites, tiles, effects, UI and fonts never use another scale. The builder's `native.png` is the engine asset; `rendered.png` is for review only.
+- Textures use nearest-neighbor filtering, no mipmaps and no lossy compression.
+- The camera and all sprites sit on whole pixel positions.
+- No runtime rotation: pre-drawn rotations, 90° turns and flips only.
+- Bitmap fonts at their native size, without anti-aliasing.
+- Particles and effects use the same grid and palette.
+- Before adding an asset, compare it beside existing assets at 1×.
+
+Check assets, compare new ones with the references, and check lossless screenshots from the running game:
+
+```sh
+python scripts/pixel_game.py asset hero.png --category character --contract game.json --out-dir asset-check-v1
+python scripts/pixel_game.py intake new_enemy.png --category character --contract game.json --out-dir intake-v1
+python scripts/pixel_game.py screen capture.png --contract game.json --out-dir screen-check-v1
+```
+
+`COARSE_PIXELS` means the asset's dots are larger than one game pixel; redraw it at 1× rather than shrinking it with interpolation. Screen failures name runtime causes (sub-pixel positions, rotation, filtering, fractional scale, blended effects); fix the engine setting or the drawing code, then capture again. The bundled example is `examples/game/`.
 
 ### Extract or apply a palette
 
@@ -85,4 +116,4 @@ Explain the overlay briefly: cyan lines mark every declared cell boundary, red-f
 
 For a sprite sheet, also show each animation preview and, when a rig exists, its `.rig.gif` (art under the skeleton beside the part colors) or `rig_overlay.png`, and name the frames that failed. Overlays and GIF previews are diagnostics, not deliverable artwork.
 
-Provide native and enlarged PNGs when creating, the declared contract, technical status with the report path, and any unresolved visual findings. Record artistic review separately as accepted, changes needed, or not reviewed, with actual observations (silhouette, palette, stepped contours, important details). Hashes identify the audited bytes; subsequent edits or interpolated scaling require a new audit. A technically compliant image can still be poor art.
+For game assets, deliver the 1× PNG as the engine asset with its `pixel_game.py asset` report and `side_by_side.png`, and say that enlarged images are for review only. Provide native and enlarged PNGs when creating, the declared contract, technical status with the report path, and any unresolved visual findings. Record artistic review separately as accepted, changes needed, or not reviewed, with actual observations (silhouette, palette, stepped contours, important details). Hashes identify the audited bytes; subsequent edits or interpolated scaling require a new audit. A technically compliant image can still be poor art.
