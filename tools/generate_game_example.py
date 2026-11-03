@@ -210,14 +210,14 @@ def main() -> int:
             raise ValueError(f"{name} rows differ in width")
     colors = {token: value for token, value in PALETTE.values()}
     palette = {"schema_version": 1, "name": "Hollow Glen palette (example)", "colors": colors, "ramps": RAMPS}
-    (out / "palette.json").write_text(json.dumps(palette, indent=2) + "\n", encoding="utf-8")
+    (out / "palette.json").write_text(json.dumps(palette, indent=2) + "\n", encoding="utf-8", newline="\n")
     for name, rows in ASSETS.items():
         spec = {"schema_version": 1, "scale": 8, "palette_file": "palette.json",
                 "rows": [[PALETTE[cell][0] for cell in row] for row in rows]}
         text = json.dumps(spec, indent=2)
         text = re.sub(r"\[\s+(\"[^\]]*?)\s+\]",
                       lambda m: "[" + ", ".join(part.strip() for part in m.group(1).split(",")) + "]", text)
-        (out / f"{name}.json").write_text(text + "\n", encoding="utf-8")
+        (out / f"{name}.json").write_text(text + "\n", encoding="utf-8", newline="\n")
     return 0
 
 
