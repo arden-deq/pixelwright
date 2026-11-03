@@ -1,0 +1,214 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_screen",
+  "artistic_status": "not_reviewed",
+  "issues": [
+    {
+      "code": "CELL_NOT_UNIFORM",
+      "severity": "fail",
+      "detail": "453 of 98304 game pixels are not one color across their 4x4 screen block. Usual causes: positions or camera off whole pixels, runtime rotation or non-integer scaling, linear filtering or mipmaps, or lossy capture.",
+      "sample": [
+        {
+          "x": 305,
+          "y": 177
+        },
+        {
+          "x": 309,
+          "y": 177
+        },
+        {
+          "x": 304,
+          "y": 178
+        },
+        {
+          "x": 305,
+          "y": 178
+        },
+        {
+          "x": 308,
+          "y": 178
+        },
+        {
+          "x": 309,
+          "y": 178
+        },
+        {
+          "x": 310,
+          "y": 178
+        },
+        {
+          "x": 304,
+          "y": 179
+        },
+        {
+          "x": 305,
+          "y": 179
+        },
+        {
+          "x": 306,
+          "y": 179
+        },
+        {
+          "x": 307,
+          "y": 179
+        },
+        {
+          "x": 309,
+          "y": 179
+        },
+        {
+          "x": 310,
+          "y": 179
+        },
+        {
+          "x": 312,
+          "y": 179
+        },
+        {
+          "x": 304,
+          "y": 180
+        },
+        {
+          "x": 306,
+          "y": 180
+        },
+        {
+          "x": 307,
+          "y": 180
+        },
+        {
+          "x": 308,
+          "y": 180
+        },
+        {
+          "x": 311,
+          "y": 180
+        },
+        {
+          "x": 312,
+          "y": 180
+        }
+      ]
+    },
+    {
+      "code": "COLOR_OUTSIDE_PALETTE",
+      "severity": "fail",
+      "detail": "96 game pixels show colors outside the palette (#9A98A3FF, #A3A0ADFF, #ADA9BAFF); translucent or additive effects, tinting or color grading mix new colors.",
+      "sample": [
+        {
+          "x": 266,
+          "y": 215
+        },
+        {
+          "x": 267,
+          "y": 215
+        },
+        {
+          "x": 268,
+          "y": 215
+        },
+        {
+          "x": 269,
+          "y": 215
+        },
+        {
+          "x": 270,
+          "y": 215
+        },
+        {
+          "x": 271,
+          "y": 215
+        },
+        {
+          "x": 272,
+          "y": 215
+        },
+        {
+          "x": 273,
+          "y": 215
+        },
+        {
+          "x": 274,
+          "y": 215
+        },
+        {
+          "x": 275,
+          "y": 215
+        },
+        {
+          "x": 276,
+          "y": 215
+        },
+        {
+          "x": 277,
+          "y": 215
+        },
+        {
+          "x": 266,
+          "y": 216
+        },
+        {
+          "x": 267,
+          "y": 216
+        },
+        {
+          "x": 268,
+          "y": 216
+        },
+        {
+          "x": 269,
+          "y": 216
+        },
+        {
+          "x": 270,
+          "y": 216
+        },
+        {
+          "x": 271,
+          "y": 216
+        },
+        {
+          "x": 272,
+          "y": 216
+        },
+        {
+          "x": 273,
+          "y": 216
+        }
+      ]
+    }
+  ],
+  "viewport": {
+    "window": [
+      1664,
+      1088
+    ],
+    "scale": 4,
+    "fits": true,
+    "viewport": [
+      64,
+      32,
+      1536,
+      1024
+    ],
+    "bars": {
+      "left": 64,
+      "right": 64,
+      "top": 32,
+      "bottom": 32
+    }
+  },
+  "metrics": {
+    "scale": 4,
+    "nonuniform_cells": 453,
+    "cells": 98304
+  },
+  "status": "fail",
+  "provenance": {
+    "source_path": "docs/examples/demon-castle/runtime-injected-errors.png",
+    "source_sha256": "a2b1eb51a9090dc6d09fb407b82e0ef6aea153beb01f4a62d7d62fdd32739088",
+    "contract_sha256": "78b6b23b6783e807d6110a61a1c4d968885af51ff8219235df6870f8d81db8e9"
+  }
+}

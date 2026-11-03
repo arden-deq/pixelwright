@@ -1,0 +1,33 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_asset",
+  "status": "pass",
+  "artistic_status": "not_reviewed",
+  "category": "character",
+  "issues": [],
+  "metrics": {
+    "size": [
+      32,
+      48
+    ],
+    "visible_colors": 28,
+    "effective_pixel_size": {
+      "x": 1,
+      "y": 1,
+      "size": 1,
+      "column_edges": 19,
+      "row_edges": 40,
+      "measurable": true,
+      "conclusive": true
+    },
+    "dither_pixels": 0
+  },
+  "provenance": {
+    "source_path": "pixelwright/examples/demon-castle/build/princess.png",
+    "source_sha256": "ce5b85affdca028222b6fd145b2b032502ae5cb22fff9ad6caf5131da9fc19e3",
+    "contract_path": "pixelwright/examples/demon-castle/game.json",
+    "contract_sha256": "78b6b23b6783e807d6110a61a1c4d968885af51ff8219235df6870f8d81db8e9"
+  }
+}

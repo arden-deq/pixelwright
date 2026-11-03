@@ -1,0 +1,33 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_asset",
+  "status": "pass",
+  "artistic_status": "not_reviewed",
+  "category": "boss",
+  "issues": [],
+  "metrics": {
+    "size": [
+      64,
+      64
+    ],
+    "visible_colors": 31,
+    "effective_pixel_size": {
+      "x": 1,
+      "y": 1,
+      "size": 1,
+      "column_edges": 40,
+      "row_edges": 58,
+      "measurable": true,
+      "conclusive": true
+    },
+    "dither_pixels": 0
+  },
+  "provenance": {
+    "source_path": "pixelwright/examples/demon-castle/build/demon-king.png",
+    "source_sha256": "c226d08410c1541109a1bfa99000e64e9a50a2292f0f92079b2b55e46cfe8285",
+    "contract_path": "pixelwright/examples/demon-castle/game.json",
+    "contract_sha256": "78b6b23b6783e807d6110a61a1c4d968885af51ff8219235df6870f8d81db8e9"
+  }
+}

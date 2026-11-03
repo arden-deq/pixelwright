@@ -30,7 +30,7 @@ Before drawing anything for a game, collect these decisions from the user or the
 | Effects | `effects.blending` | `opaque` (palette colors only) or `palette_alpha` (translucency reviewed on screen) |
 | Engine | `engine` | `unity`, `godot`, `phaser`, `pixi`, `web`, `love`, `gamemaker`, `other` |
 
-Unknown fields and values fail validation. Paths (`palette_file`, `style.references`, `font.file`) are relative to the contract and stay inside its directory. The bundled [`examples/game/game.json`](../examples/game/game.json), an RPG Maker 2000-style map kit, declares all of them; `tools/generate_game_example.py` in the source repository regenerates its art.
+Unknown fields and values fail validation. Paths (`palette_file`, `style.references`, `font.file`) are relative to the contract and stay inside its directory. The bundled [`examples/demon-castle/game.json`](../examples/demon-castle/game.json) declares all of them for an RPG Maker-style field: independent castle, knight, princess, demon king and ground tiles on one shared grid. Its [browser demo](../examples/demon-castle/README.md) composes the native PNGs at runtime. `tools/generate_castle_example.py` in the source repository rebuilds the indexed art. The smaller [`examples/game/game.json`](../examples/game/game.json) remains a regression fixture.
 
 ```sh
 python scripts/pixel_game.py brief --contract game.json

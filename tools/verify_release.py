@@ -348,8 +348,20 @@ def verify_game_workflow(skill, out):
     shifted = read_json(out / "game-screen-shifted" / "report.json")
     if "CELL_NOT_UNIFORM" not in {issue["code"] for issue in shifted["issues"]}:
         raise ValueError("A sprite drawn between game pixels must break screen cells")
+    field = skill / "examples" / "demon-castle"
+    field_results = {}
+    for name, category in (("stone", "tile"), ("moss", "tile"), ("castle", "building"),
+                           ("knight", "character"), ("princess", "character"), ("demon-king", "boss")):
+        target = out / f"castle-{name}"
+        run(tool, ["asset", field / "build" / f"{name}.png", "--category", category,
+                   "--contract", field / "game.json", "--out-dir", target], 0)
+        field_results[name] = read_json(target / "report.json")["status"]
+    for name in ("index.html", "field.js", "field.json", "README.md"):
+        if not (field / name).is_file():
+            raise ValueError(f"Installed field demo is missing {name}")
     return {"game_assets_status": results, "game_enlarged_asset_status": coarse["status"],
-            "game_screen_status": "pass", "game_shifted_screen_status": shifted["status"]}
+            "game_screen_status": "pass", "game_shifted_screen_status": shifted["status"],
+            "castle_assets_status": field_results, "castle_demo_packaged": True}
 
 
 def main():

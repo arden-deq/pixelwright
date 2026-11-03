@@ -1,0 +1,16 @@
+{
+  "status": "pass",
+  "browser_matches_independent_composition": true,
+  "native_size": [
+    384,
+    256
+  ],
+  "capture_size": [
+    1152,
+    768
+  ],
+  "scale": 3,
+  "visible_colors": 52,
+  "native_sha256": "13de8db0b649784133a2aaa93e17fd7e57390ca72e3352a34a02db73c8ef6337",
+  "capture_sha256": "7defff72b4846ed3f6169859abc8ece946fe98bec58c4efcb9fc7367d83bcbd5"
+}

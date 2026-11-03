@@ -1,0 +1,33 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_asset",
+  "status": "pass",
+  "artistic_status": "not_reviewed",
+  "category": "character",
+  "issues": [],
+  "metrics": {
+    "size": [
+      32,
+      48
+    ],
+    "visible_colors": 31,
+    "effective_pixel_size": {
+      "x": 1,
+      "y": 1,
+      "size": 1,
+      "column_edges": 22,
+      "row_edges": 42,
+      "measurable": true,
+      "conclusive": true
+    },
+    "dither_pixels": 0
+  },
+  "provenance": {
+    "source_path": "pixelwright/examples/demon-castle/build/knight.png",
+    "source_sha256": "e84ee21fc7524115998580aa4a3d0330139a06428e477754ceb65d4a8920a6fa",
+    "contract_path": "pixelwright/examples/demon-castle/game.json",
+    "contract_sha256": "78b6b23b6783e807d6110a61a1c4d968885af51ff8219235df6870f8d81db8e9"
+  }
+}

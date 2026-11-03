@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "name": "Demon Castle — RPG Maker field example",
+  "base_resolution": "384x256",
+  "tile_size": 16,
+  "palette_file": "palette.json",
+  "max_colors": 64,
+  "alpha": "binary",
+  "letterbox": "#10101C",
+  "categories": {
+    "tile": {
+      "size": "16x16",
+      "outline": false
+    },
+    "building": {
+      "size": "192x128",
+      "outline": false,
+      "notes": "Independent castle object. Footprint determines collision; roofs may overlap the map."
+    },
+    "character": {
+      "size": "32x48",
+      "notes": "Knight and princess use the same canvas and foot baseline."
+    },
+    "boss": {
+      "size": "64x64",
+      "notes": "Larger anatomy, the same native 1x pixel size."
+    }
+  },
+  "style": {
+    "genre": "RPG Maker-style top-down dark-fantasy field map",
+    "perspective": "three-quarter",
+    "light_direction": "upper-left",
+    "shading": "cel",
+    "outline": {
+      "mode": "selective",
+      "width": 1,
+      "colors": [
+        "ink0",
+        "ink1",
+        "ink2"
+      ]
+    },
+    "dithering": "none",
+    "anti_aliasing": "none",
+    "mood": "A readable, richly crafted 16-bit courtyard outside the demon king castle.",
+    "notes": "All tiles, architecture and characters are independent 1x PNGs. Selective dark contours, restrained material ramps and one common palette. No filtered scaling or translucent effects. Lighting, contour craft and atmosphere require visual review.",
+    "references": [
+      "build/stone.png",
+      "build/castle.png",
+      "build/knight.png",
+      "build/princess.png",
+      "build/demon-king.png"
+    ]
+  },
+  "font": {
+    "name": "project bitmap font",
+    "size_px": 8,
+    "line_height_px": 12
+  },
+  "animation": {
+    "fps": 8
+  },
+  "rotation": {
+    "mode": "prerendered",
+    "directions": 4
+  },
+  "effects": {
+    "blending": "opaque"
+  },
+  "engine": "web"
+}

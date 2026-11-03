@@ -106,32 +106,40 @@ Geometry failures stop cell-color acceptance. Inspect the status, exact violatio
 
 New in 0.7.0. A profile checks one PNG; a **game contract** (`game.json`) fixes what every asset and screen of one game shares, so art made by different people or by an AI stays consistent.
 
-![A 320x240 RPG Maker-style map from the bundled example: grass and flower chips, a dirt path, a pond, trees and the hero](docs/images/game-scene.png)
+![Running 384x256 RPG Maker-style field: a knight, princess and demon king outside the demon castle, shown at 3x](docs/images/game-scene.png)
 
-The bundled example is a small map in the style of classic RPG Maker 2000 games. It uses 16×16 map chips, a 24×32 hero, 26 colors plus transparency and a 320×240 screen, shown here at 3×. Every asset is a hand-placed 1× PNG that passes its own contract. The contract fixes:
+The bundled example is an RPG Maker-style **field map**: a knight, princess and demon king in a castle courtyard. The image above is an actual browser capture of six independent assets composed on a 384×256 canvas, shown at 3×. Tiles are 16×16, human sprites 32×48, the boss 64×64 and the castle 192×128. All six native 1× PNGs pass the same contract, with a shared palette of 64 colors plus transparency.
 
-- **Screen:** one base resolution (320×240 in the example), enlarged only by whole numbers, with letterbox bars filling the rest of the window.
+The castle and three characters were generated separately, then projected onto their declared native grids and mapped to the shared palette. The two ground tiles are indexed artwork. [Source images, prompts and separate raw/derived audit results](docs/examples/demon-castle/) document that process.
+
+![Independent castle, knight, princess, demon king, stone and moss assets, all at the same pixel size](docs/images/game-assets.png)
+
+Run `python -m http.server 8000` from the repository root and open the [field demo](http://localhost:8000/pixelwright/examples/demon-castle/). Arrow keys move the knight; **R** resets and **F** toggles fullscreen. The [browser verification record](docs/examples/demon-castle/runtime-verification.json) covers asset loading, movement, collision, depth ordering and integer scaling. The clean runtime screenshot also [passes the game screen check](docs/examples/demon-castle/runtime-clean-report.json).
+
+The contract fixes:
+
+- **Screen:** one base resolution (384×256 in the example), enlarged only by whole numbers, with letterbox bars filling the rest of the window.
 - **Pixel size:** every sprite, tile, effect, UI element and font drawn at 1×, so one image pixel is one game pixel.
 - **Colors and sizes:** the palette and its ramps, the color budget, transparency, and a size range per kind of asset (chips and terrain can opt out of the outline rule).
 - **Style:** perspective, light direction, shading, outline mode and color, dithering, anti-aliasing, mood and approved reference assets.
 - **Runtime:** font size, animation rate, rotation policy, effect blending and engine.
 
-`brief` turns the contract into the rules to follow before drawing, for artists, for an AI, and for image-generation prompts. The bundled [example game](pixelwright/examples/game/) declares every field.
+`brief` turns the contract into the rules to follow before drawing, for artists, for an AI, and for image-generation prompts. The bundled [example game](pixelwright/examples/demon-castle/) declares every field.
 
 ```sh
-python pixelwright/scripts/pixel_game.py brief --contract pixelwright/examples/game/game.json
-python pixelwright/scripts/pixel_game.py asset hero.png --category character --contract game.json --out-dir runs/hero-v1
-python pixelwright/scripts/pixel_game.py intake new_enemy.png --category character --contract game.json --out-dir runs/intake-v1
-python pixelwright/scripts/pixel_game.py screen capture.png --contract game.json --out-dir runs/screen-v1
+python pixelwright/scripts/pixel_game.py brief --contract pixelwright/examples/demon-castle/game.json
+python pixelwright/scripts/pixel_game.py asset pixelwright/examples/demon-castle/build/knight.png --category character --contract pixelwright/examples/demon-castle/game.json --out-dir runs/knight-v1
+python pixelwright/scripts/pixel_game.py intake new_enemy.png --category character --contract pixelwright/examples/demon-castle/game.json --out-dir runs/intake-v1
+python pixelwright/scripts/pixel_game.py screen capture.png --contract pixelwright/examples/demon-castle/game.json --out-dir runs/screen-v1
 ```
 
-**Before adding an asset**, `intake` places it beside the game's reference assets at 1× and enlarges the row by one whole number. Below, the example's grass chip, tree and hero are followed by the same hero exported at 2×. The check fails it with `COARSE_PIXELS` (its dots measure 2×2), `PIXEL_SIZE_DIFFERS` and `CATEGORY_SIZE`.
+**Before adding an asset**, `intake` places it beside the game's reference assets at 1× and enlarges the row by one whole number. Below, the stone tile, castle, knight, princess and demon king are followed by the knight exported at 2×. The check fails it with `COARSE_PIXELS` (its dots measure 2×2), `PIXEL_SIZE_DIFFERS` and `CATEGORY_SIZE`.
 
-![Grass chip, tree and hero at 1x beside the hero exported at 2x, enlarged together](docs/images/game-intake.png)
+![Stone, castle and three characters at 1x beside a rejected knight exported at 2x](docs/images/game-intake.png)
 
-**In the running game**, `screen` checks a lossless screenshot against the base-resolution grid. In the capture below, the map is shown at 4× in a 1440×1000 window. A second hero is drawn 2 screen pixels off the grid (red: game pixels that are not one color), and a translucent sparkle mixes colors outside the palette (magenta).
+**In the running game**, `screen` checks a lossless screenshot against the base-resolution grid. The demo's `?fault=1` mode deliberately adds errors: a second knight drawn 2 screen pixels off the grid and a 50%-transparent effect. This real 1664×1088 browser capture uses 4× scaling. The checker finds **453 nonuniform game pixels** (red) and **96 pixels outside the palette** (magenta); see the [negative audit](docs/examples/demon-castle/runtime-injected-errors-report.json).
 
-![Screen check of the map at base resolution: an off-grid hero in red and a blended effect in magenta](docs/images/game-screen-check.png)
+![Screen check of the castle field: deliberately off-grid knight in red and blended effect in magenta](docs/images/game-screen-check.png)
 
 | What the game got wrong | Code |
 | --- | --- |
@@ -159,7 +167,7 @@ The host needs access to the original PNG and a Python environment with the depe
 
 For a game, start with the style:
 
-> We're making a 320×240 top-down RPG in the RPG Maker 2000 style, with 16×16 chips, 24×32 characters and a 1-pixel dark outline. Set up the game contract, show me the brief, then draw a 1× slime enemy and check it beside our hero and grass.
+> We're making a 384×256 RPG Maker-style field, with 16×16 tiles, 32×48 characters, 64×64 bosses and selective 1-pixel dark contours. Use the demon-castle game's shared palette and references. Show me the brief, then inspect a new 1× enemy beside the knight, princess and demon king.
 
 Without the original file and a successful checker run, the result remains **unverified**. See [SKILL.md](pixelwright/SKILL.md) and the [platform compatibility guide](docs/COMPATIBILITY_ko.md) for installation and execution details.
 
