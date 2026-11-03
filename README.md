@@ -106,13 +106,23 @@ Geometry failures stop cell-color acceptance. Inspect the status, exact violatio
 
 New in 0.7.0. A profile checks one PNG; a **game contract** (`game.json`) fixes what every asset and screen of one game shares, so art made by different people or by an AI stays consistent.
 
-![Running 384x256 RPG Maker-style field: a knight, princess and demon king outside the demon castle, shown at 3x](docs/images/game-scene.png)
+<picture>
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle/scene-native.png">
+  <img src="docs/images/game-scene-preview.png" alt="Running 384x256 RPG Maker-style field: knight, princess and demon king outside the castle; integer-scale preview">
+</picture>
 
-The bundled example is an RPG Maker-style **field map**: a knight, princess and demon king in a castle courtyard. The image above is an actual browser capture of six independent assets composed on a 384×256 canvas, shown at 3×. Tiles are 16×16, human sprites 32×48, the boss 64×64 and the castle 192×128. All six native 1× PNGs pass the same contract, with a shared palette of 64 colors plus transparency.
+[Full-size PNG: 2304×1536, 6×](docs/images/game-scene-6x.png). The preview uses 2× pixels on wide screens and 1× on narrower screens; these are nearest-neighbor exports of the same native artwork.
+
+The bundled example is an RPG Maker-style **field map**: a knight, princess and demon king in a castle courtyard. Six independent assets are composed on a 384×256 canvas and checked against an actual browser capture. Tiles are 16×16, human sprites 32×48, the boss 64×64 and the castle 192×128. All six native 1× PNGs pass the same technical contract, with a shared palette of 64 colors plus transparency.
 
 The castle and three characters were generated separately, then projected onto their declared native grids and mapped to the shared palette. The two ground tiles are indexed artwork. [Source images, prompts and separate raw/derived audit results](docs/examples/demon-castle/) document that process.
 
-![Independent castle, knight, princess, demon king, stone and moss assets, all at the same pixel size](docs/images/game-assets.png)
+<picture>
+  <source media="(max-width: 1279px)" srcset="docs/images/game-assets-native.png">
+  <img src="docs/images/game-assets-preview.png" alt="Independent castle, knight, princess, demon king, stone and moss assets, all at the same pixel size">
+</picture>
+
+The [browser visual review](docs/examples/demon-castle/quality-review/README.md) found uneven detail density between the terrain and generated objects, lost facial detail in the small characters and a detached pixel on the boss. Technical PASS does not establish uniform artistic quality; these assets need further art refinement.
 
 Run `python -m http.server 8000` from the repository root and open the [field demo](http://localhost:8000/pixelwright/examples/demon-castle/). Arrow keys move the knight; **R** resets and **F** toggles fullscreen. The [browser verification record](docs/examples/demon-castle/runtime-verification.json) covers asset loading, movement, collision, depth ordering and integer scaling. The clean runtime screenshot also [passes the game screen check](docs/examples/demon-castle/runtime-clean-report.json).
 
@@ -139,7 +149,12 @@ python pixelwright/scripts/pixel_game.py screen capture.png --contract pixelwrig
 
 **In the running game**, `screen` checks a lossless screenshot against the base-resolution grid. The demo's `?fault=1` mode deliberately adds errors: a second knight drawn 2 screen pixels off the grid and a 50%-transparent effect. This real 1664×1088 browser capture uses 4× scaling. The checker finds **453 nonuniform game pixels** (red) and **96 pixels outside the palette** (magenta); see the [negative audit](docs/examples/demon-castle/runtime-injected-errors-report.json).
 
-![Screen check of the castle field: deliberately off-grid knight in red and blended effect in magenta](docs/images/game-screen-check.png)
+<picture>
+  <source media="(max-width: 1279px)" srcset="docs/images/game-screen-check-native.png">
+  <img src="docs/images/game-screen-check-preview.png" alt="Screen check of the castle field: deliberately off-grid knight in red and blended effect in magenta">
+</picture>
+
+[Original checker overlay](docs/images/game-screen-check.png).
 
 | What the game got wrong | Code |
 | --- | --- |

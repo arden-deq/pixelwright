@@ -1,0 +1,74 @@
+{
+  "method": "nearest-neighbor integer exports; native detail unchanged",
+  "exports": {
+    "game-scene": {
+      "native": {
+        "path": "docs/examples/demon-castle/scene-native.png",
+        "scale": 1,
+        "size": [
+          384,
+          256
+        ],
+        "sha256": "13de8db0b649784133a2aaa93e17fd7e57390ca72e3352a34a02db73c8ef6337"
+      },
+      "preview": {
+        "path": "docs/images/game-scene-preview.png",
+        "scale": 2,
+        "size": [
+          768,
+          512
+        ],
+        "sha256": "4bafc85b2bbdc810ead36b645d10210896428229270d42205f8e710da29e6b1f"
+      },
+      "6x": {
+        "path": "docs/images/game-scene-6x.png",
+        "scale": 6,
+        "size": [
+          2304,
+          1536
+        ],
+        "sha256": "ebb80d50a14930c42507a26ea282b9d7cfad8f96a4389ce8300c0d3c44a0fdc4"
+      }
+    },
+    "game-assets": {
+      "native": {
+        "path": "docs/images/game-assets-native.png",
+        "scale": 1,
+        "size": [
+          384,
+          160
+        ],
+        "sha256": "e215151a5820f50264186ad5cb123da3d7a43238212798692003b7849a1086fc"
+      },
+      "preview": {
+        "path": "docs/images/game-assets-preview.png",
+        "scale": 2,
+        "size": [
+          768,
+          320
+        ],
+        "sha256": "8ece9a18e72b85179b5a38bff5b7d141ef8fe05e5d1b2ed626f1560d9d274c66"
+      }
+    },
+    "game-screen-check": {
+      "native": {
+        "path": "docs/images/game-screen-check-native.png",
+        "scale": 1,
+        "size": [
+          384,
+          256
+        ],
+        "sha256": "7f7fa0b2db0b33857442f6a91c17b0b7ff8d4d5f53c3b5d6c908fd8ef37fdd56"
+      },
+      "preview": {
+        "path": "docs/images/game-screen-check-preview.png",
+        "scale": 2,
+        "size": [
+          768,
+          512
+        ],
+        "sha256": "e948601b42cde76d246f1ea7482ec2f5a0b357f047940b0f3eec53fd532bd6c8"
+      }
+    }
+  }
+}
