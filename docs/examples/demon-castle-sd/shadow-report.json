@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 160,
-    "height": 32
+    "width": 112,
+    "height": 24
   },
   "logical_size": {
-    "width": 40,
-    "height": 8
+    "width": 28,
+    "height": 6
   },
   "cell_size": {
     "width": 4,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "9507f2ad6f8ed96c09fd58b460e0bbba5d69bd03ab7766239a664251fb02ff3a",
-    "decoded_rgba_sha256": "b01c8183b6cb41a22aa5e448f99f565ec23a060c4c7d4c83a043d7c56a27ba5c",
+    "source_sha256": "e8d604fa1e06c05a038c4f1970c2093a2bd52f23eb066f526a753448cf20c715",
+    "decoded_rgba_sha256": "3127445bce6c572ee53506eba2b93ce5e97d203af8e26dda6a93afcb80110d79",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "e7020e0d294bd54d1b18bfff894f09dc2c1a06ac3b883bfb20b4c4d4a09b80a5",
+    "profile_sha256": "2bb966c8897aa145a52b63a825437ccd85f5fde1ac179412ceeb0ae8e919ae0e",
     "source_path": "docs/examples/demon-castle-sd/shadow-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/shadow-profile.json"
   },
@@ -38,14 +38,14 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 320,
+    "uniform_rgba_cells": 168,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 320,
-    "visible_rgb_colors_source": 2,
-    "visible_rgb_colors_logical_preview": 2,
+    "total_logical_cells": 168,
+    "visible_rgb_colors_source": 3,
+    "visible_rgb_colors_logical_preview": 3,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 0,
     "outside_palette_source_pixels": 0
@@ -57,8 +57,8 @@
     "file": "shadow-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 40,
-    "height": 8
+    "width": 28,
+    "height": 6
   },
   "possible_isolated_pixels_sample": [],
   "issues": [],
@@ -71,16 +71,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 160,
-      "height": 32
+      "width": 112,
+      "height": 24
     },
     "logical_size": {
-      "width": 40,
-      "height": 8
+      "width": 28,
+      "height": 6
     },
     "expected_render_size": {
-      "width": 160,
-      "height": 32
+      "width": 112,
+      "height": 24
     },
     "scale_x": 4.0,
     "scale_y": 4.0,
@@ -94,7 +94,7 @@
   "contract": {
     "schema_version": 1,
     "name": "shadow",
-    "logical_size": "40x8",
+    "logical_size": "28x6",
     "scale": 4,
     "max_colors": 64,
     "alpha": "binary",

@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "coordinate_space": "final native32x64 character cells",
+  "characters": {
+    "knight": {
+      "face_xywh": [
+        6,
+        16,
+        20,
+        18
+      ],
+      "eyes": [
+        {
+          "xy": [
+            9,
+            20
+          ],
+          "rows": [
+            ".kk.",
+            "kwwk",
+            "kwdk",
+            "kbbk",
+            "kbbk",
+            ".kk."
+          ],
+          "tokens": {
+            "k": "ink0",
+            "w": "ivory4",
+            "d": "ink0",
+            "b": "blue2"
+          }
+        },
+        {
+          "xy": [
+            19,
+            20
+          ],
+          "rows": [
+            ".kk.",
+            "kwwk",
+            "kwdk",
+            "kbbk",
+            "kbbk",
+            ".kk."
+          ],
+          "tokens": {
+            "k": "ink0",
+            "w": "ivory4",
+            "d": "ink0",
+            "b": "blue2"
+          }
+        }
+      ],
+      "mouth": {
+        "xy": [
+          14,
+          28
+        ],
+        "rows": [
+          "....m",
+          "mmmmm",
+          "....."
+        ],
+        "tokens": {
+          "m": "skin0"
+        }
+      },
+      "expression": "focused, calm small smile"
+    },
+    "princess": {
+      "face_xywh": [
+        6,
+        16,
+        20,
+        18
+      ],
+      "eyes": [
+        {
+          "xy": [
+            9,
+            20
+          ],
+          "rows": [
+            ".kk.",
+            "kwwk",
+            "kwdk",
+            "kbbk",
+            "kbbk",
+            ".kk."
+          ],
+          "tokens": {
+            "k": "ink0",
+            "w": "ivory4",
+            "d": "ink0",
+            "b": "blue2"
+          }
+        },
+        {
+          "xy": [
+            19,
+            20
+          ],
+          "rows": [
+            ".kk.",
+            "kwwk",
+            "kwdk",
+            "kbbk",
+            "kbbk",
+            ".kk."
+          ],
+          "tokens": {
+            "k": "ink0",
+            "w": "ivory4",
+            "d": "ink0",
+            "b": "blue2"
+          }
+        }
+      ],
+      "mouth": {
+        "xy": [
+          14,
+          28
+        ],
+        "rows": [
+          "m...m",
+          "m...m",
+          ".mmm."
+        ],
+        "tokens": {
+          "m": "skin0"
+        }
+      },
+      "expression": "open U-shaped smile"
+    },
+    "demon-king": {
+      "face_xywh": [
+        6,
+        16,
+        20,
+        18
+      ],
+      "eyes": [
+        {
+          "xy": [
+            9,
+            20
+          ],
+          "rows": [
+            ".kk.",
+            "kwwk",
+            "kwdk",
+            "kbbk",
+            "kbbk",
+            ".kk."
+          ],
+          "tokens": {
+            "k": "ink0",
+            "w": "ivory4",
+            "d": "ink0",
+            "b": "ember2"
+          }
+        },
+        {
+          "xy": [
+            19,
+            20
+          ],
+          "rows": [
+            ".kk.",
+            "kwwk",
+            "kwdk",
+            "kbbk",
+            "kbbk",
+            ".kk."
+          ],
+          "tokens": {
+            "k": "ink0",
+            "w": "ivory4",
+            "d": "ink0",
+            "b": "ember2"
+          }
+        }
+      ],
+      "mouth": {
+        "xy": [
+          14,
+          28
+        ],
+        "rows": [
+          "....m",
+          "..mm.",
+          "mm..."
+        ],
+        "tokens": {
+          "m": "crimson0"
+        }
+      },
+      "expression": "angled eyebrows, asymmetric confident smirk"
+    }
+  }
+}

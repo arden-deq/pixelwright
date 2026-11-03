@@ -1,0 +1,125 @@
+{
+  "tool": "built-in image_gen",
+  "separate_generations": true,
+  "originals_preserved": true,
+  "assets": {
+    "knight": {
+      "original_sha256": "e4c6e946b2078ddbab834dccc0dd46f7b7c1a21b786b09b72b340554a9c80759",
+      "original_size": [
+        1024,
+        1536
+      ],
+      "original_status": "fail",
+      "derived_crop_ltrb": [
+        82,
+        21,
+        971,
+        1523
+      ],
+      "derived_paste_xy": [
+        107,
+        614
+      ],
+      "derived_canvas": [
+        1104,
+        2208
+      ],
+      "projection_scale": 23,
+      "logical_size": [
+        48,
+        96
+      ],
+      "alpha_threshold": 128,
+      "method": "Explicit framing, representative-cell projection, binary alpha, shared-palette remap; raw candidate is not certified."
+    },
+    "princess": {
+      "original_sha256": "770bc1996f761bb886a41d777b5b0880cf3f5aa62f4e1c49fb22df4337f15f59",
+      "original_size": [
+        1024,
+        1536
+      ],
+      "original_status": "fail",
+      "derived_crop_ltrb": [
+        92,
+        57,
+        922,
+        1512
+      ],
+      "derived_paste_xy": [
+        89,
+        477
+      ],
+      "derived_canvas": [
+        1008,
+        2016
+      ],
+      "projection_scale": 21,
+      "logical_size": [
+        48,
+        96
+      ],
+      "alpha_threshold": 128,
+      "method": "Explicit framing, representative-cell projection, binary alpha, shared-palette remap; raw candidate is not certified."
+    },
+    "demon-king": {
+      "original_sha256": "7508141abb0991c4088884ee4c25e83dbf7fcc10e06a20f03dfbbd9c95604412",
+      "original_size": [
+        1024,
+        1536
+      ],
+      "original_status": "fail",
+      "derived_crop_ltrb": [
+        14,
+        124,
+        1003,
+        1511
+      ],
+      "derived_paste_xy": [
+        33,
+        637
+      ],
+      "derived_canvas": [
+        1056,
+        2112
+      ],
+      "projection_scale": 22,
+      "logical_size": [
+        48,
+        96
+      ],
+      "alpha_threshold": 128,
+      "method": "Explicit framing, representative-cell projection, binary alpha, shared-palette remap; raw candidate is not certified."
+    },
+    "castle": {
+      "original_sha256": "b501f7bb10e24b11b2c3d5788fccc6831c3c1b93ffe08d8f7e2852c263ab5268",
+      "original_size": [
+        1536,
+        1024
+      ],
+      "original_status": "fail",
+      "derived_crop_ltrb": [
+        171,
+        12,
+        1365,
+        1017
+      ],
+      "derived_paste_xy": [
+        267,
+        129
+      ],
+      "derived_canvas": [
+        1728,
+        1152
+      ],
+      "projection_scale": 9,
+      "logical_size": [
+        192,
+        128
+      ],
+      "alpha_threshold": 128,
+      "method": "Explicit framing, representative-cell projection, binary alpha, shared-palette remap; raw candidate is not certified."
+    }
+  },
+  "status": "historical_concepts_only",
+  "production_role": "Not a source of the new native-cell assets."
+}

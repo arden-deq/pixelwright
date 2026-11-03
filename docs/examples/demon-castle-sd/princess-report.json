@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 192,
-    "height": 384
+    "width": 128,
+    "height": 256
   },
   "logical_size": {
-    "width": 48,
-    "height": 96
+    "width": 32,
+    "height": 64
   },
   "cell_size": {
     "width": 4,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "113a743a1ef885b8cddc3132b03870797e9c6ddfb7b81a0e25b95fb4247601b4",
-    "decoded_rgba_sha256": "d16b2c13c2b78279f9b281fbf448fecd000acee2d33f76787d2affcc47eb1f26",
+    "source_sha256": "a1655f6d9c282c0e441bf9fe705dd44b1dd43393e5e7386a2da75f51e479ce2a",
+    "decoded_rgba_sha256": "cf59bc43239135009105dac1e7db7b8db1dcd6a0c11455c457740ad9927e92cc",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "bf9109ab4d01bd1392b33088b4fc41b8420bd8bcfcc994c2eadf8bce36a4c9ad",
+    "profile_sha256": "45f9013fe7721b3b824493d8b92c48245264a81260f81ee6768bf32dea0a6097",
     "source_path": "docs/examples/demon-castle-sd/princess-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/princess-profile.json"
   },
@@ -38,16 +38,16 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 4608,
+    "uniform_rgba_cells": 2048,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 4608,
-    "visible_rgb_colors_source": 24,
-    "visible_rgb_colors_logical_preview": 24,
+    "total_logical_cells": 2048,
+    "visible_rgb_colors_source": 17,
+    "visible_rgb_colors_logical_preview": 17,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 36,
+    "possible_color_isolated_logical_pixels": 16,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -57,136 +57,80 @@
     "file": "princess-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 48,
-    "height": 96
+    "width": 32,
+    "height": 64
   },
   "possible_isolated_pixels_sample": [
     {
-      "x": 24,
-      "y": 25
+      "x": 15,
+      "y": 1
     },
     {
-      "x": 16,
-      "y": 28
+      "x": 6,
+      "y": 10
     },
     {
-      "x": 23,
-      "y": 28
+      "x": 8,
+      "y": 27
     },
     {
-      "x": 23,
+      "x": 6,
       "y": 29
     },
     {
-      "x": 18,
+      "x": 5,
+      "y": 30
+    },
+    {
+      "x": 7,
+      "y": 31
+    },
+    {
+      "x": 22,
+      "y": 31
+    },
+    {
+      "x": 8,
+      "y": 32
+    },
+    {
+      "x": 13,
       "y": 35
-    },
-    {
-      "x": 29,
-      "y": 35
-    },
-    {
-      "x": 26,
-      "y": 44
-    },
-    {
-      "x": 26,
-      "y": 46
-    },
-    {
-      "x": 28,
-      "y": 46
-    },
-    {
-      "x": 14,
-      "y": 50
     },
     {
       "x": 16,
-      "y": 50
+      "y": 37
+    },
+    {
+      "x": 24,
+      "y": 48
     },
     {
       "x": 25,
       "y": 50
     },
     {
-      "x": 32,
-      "y": 50
+      "x": 26,
+      "y": 52
     },
     {
-      "x": 38,
-      "y": 53
-    },
-    {
-      "x": 25,
-      "y": 55
-    },
-    {
-      "x": 28,
-      "y": 55
-    },
-    {
-      "x": 12,
-      "y": 56
-    },
-    {
-      "x": 31,
-      "y": 56
+      "x": 27,
+      "y": 54
     },
     {
       "x": 23,
       "y": 57
     },
     {
-      "x": 21,
-      "y": 63
-    },
-    {
-      "x": 13,
-      "y": 64
-    },
-    {
       "x": 26,
-      "y": 64
-    },
-    {
-      "x": 32,
-      "y": 65
-    },
-    {
-      "x": 33,
-      "y": 65
-    },
-    {
-      "x": 16,
-      "y": 66
-    },
-    {
-      "x": 20,
-      "y": 66
-    },
-    {
-      "x": 20,
-      "y": 67
-    },
-    {
-      "x": 12,
-      "y": 69
-    },
-    {
-      "x": 31,
-      "y": 70
-    },
-    {
-      "x": 24,
-      "y": 72
+      "y": 58
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "36 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "16 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     }
   ],
   "visual_review_required": [
@@ -198,16 +142,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 192,
-      "height": 384
+      "width": 128,
+      "height": 256
     },
     "logical_size": {
-      "width": 48,
-      "height": 96
+      "width": 32,
+      "height": 64
     },
     "expected_render_size": {
-      "width": 192,
-      "height": 384
+      "width": 128,
+      "height": 256
     },
     "scale_x": 4.0,
     "scale_y": 4.0,
@@ -221,7 +165,7 @@
   "contract": {
     "schema_version": 1,
     "name": "princess",
-    "logical_size": "48x96",
+    "logical_size": "32x64",
     "scale": 4,
     "max_colors": 64,
     "alpha": "binary",

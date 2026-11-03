@@ -107,24 +107,31 @@ Geometry failures stop cell-color acceptance. Inspect the status, exact violatio
 New in 0.7.0. A profile checks one PNG; a **game contract** (`game.json`) declares the shared grid, palette, sizes and style brief for a whole game. Technical checks and visual art review have separate results.
 
 <picture>
-  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/scene-native.png">
-  <img src="docs/images/game-sd-scene-preview.png" alt="Clean 384x288 SD RPG Maker field: a two-head knight, princess and demon king outside their castle">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/field-native.png">
+  <img src="docs/images/game-native-field-preview.png" alt="Clean 384x288 SD RPG Maker field: a two-head knight, princess and demon king outside their castle">
 </picture>
 
-[Full-size PNG: 2304×1728, 6×](docs/images/game-sd-scene-6x.png). Wide screens use a 2× preview and narrower screens use 1×; all exports preserve the same native dots.
+[Full-size PNG: 2304×1728, 6×](docs/images/game-native-field-6x.png). Wide screens use a 2× preview and narrower screens use 1×; all exports preserve the same native dots.
 
-This example was redrawn from scratch with **48×96, 1:2 character canvases and two-head SD proportions**. Large faces, short limbs and broad pixel clusters keep eyes, mouths, crowns and equipment readable. The knight, princess, demon king and castle were generated separately, then converted to editable native cells using one 64-color palette plus transparency. The [source images, prompts and separate source/derived audits](docs/examples/demon-castle-sd/) preserve that process.
+The [production sizes and layout were fixed before drawing](docs/examples/demon-castle-sd/design-contract.json): **32×32 tiles, 32×64 characters (1×2 tiles), a 192×128 castle (6×4 tiles), and a 384×288 map (12×9 tiles)**. Every asset is authored directly as native indexed cells using one 64-color palette plus transparency. Eyes, highlights, eyebrows and mouths are designed at their final game resolution. [Editable sources and validation record](docs/examples/demon-castle-sd/) document the native workflow.
 
 <picture>
-  <source media="(max-width: 479px)" srcset="docs/examples/demon-castle-sd/characters-native.png">
-  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
-  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/characters-3x.png">
-  <img src="docs/examples/demon-castle-sd/characters-4x.png" alt="4x close-up of the SD knight, princess and demon king: readable eyes, mouths, crowns and equipment">
+  <source media="(max-width: 479px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
+  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/characters-3x.png">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/characters-4x.png">
+  <img src="docs/examples/demon-castle-sd/characters-6x.png" alt="Native-cell SD knight, princess and demon king at 6x: distinct expressions designed at 32x64">
 </picture>
 
-The character close-up uses the same native pixels at 4× (3×, 2× or 1× on smaller windows). [Independent castle and character board](docs/images/game-sd-assets-preview.png) · [Actual checker grid for the close-up](docs/examples/demon-castle-sd/characters-grid_overlay.png).
+The character close-up enlarges the same native cells by 6× (4×, 3× or 2× in smaller windows). [Independent assets](docs/images/game-sd-assets-preview.png) · [Actual checker grid](docs/examples/demon-castle-sd/characters-grid_overlay.png).
 
-Thirteen independent 1× PNGs compose the **384×288 field**: three characters, a 192×128 castle, eight 16×16 terrain variants and a separate contact shadow. The final 4× assets and 2× field preview are also audited as enlarged PNGs. [Visual review](docs/examples/demon-castle-sd/art-review.json) evaluates readability and coherence separately from technical PASS.
+<picture>
+  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/faces-3x.png">
+  <img src="docs/examples/demon-castle-sd/faces-6x.png" alt="Authored facial cells: the knight's calm smile, princess's continuous U-shaped smile and demon king's smirk">
+</picture>
+
+These face crops preserve the authored **20×18 facial regions, 4×6 eyes and 5×3 mouth layouts**. The [expression preservation check](docs/examples/demon-castle-sd/face-preservation.json) compares authored cells, native PNGs, the composed map and actual browser pixels. It does not score artistic quality. This production path uses no high-resolution raster reduction or automatic palette remapping; the previous generated concepts remain historical references.
+
+Thirteen independent 1× PNGs compose the **384×288 field**: three characters, a 192×128 castle, eight 32×32 terrain variants and a 28×6 contact shadow. The final 4× assets, 6× character close-up and 2× field preview are also audited as enlarged PNGs. [Visual review](docs/examples/demon-castle-sd/art-review.json) evaluates readability and coherence separately from technical PASS.
 
 Run `python -m http.server 8000` from the repository root and open the [SD field demo](http://localhost:8000/pixelwright/examples/demon-castle-sd/). Arrow keys translate the static knight sprite; **R** resets and **F** toggles fullscreen. This is a composition example without walking animation frames. The [browser verification](docs/examples/demon-castle-sd/runtime-verification.json) covers asset loading, movement, collision, depth ordering and integer scaling. The actual browser image [matches the independent native composition](docs/examples/demon-castle-sd/composition-verification.json) and [passes the screen check](docs/examples/demon-castle-sd/runtime-clean-report.json).
 
@@ -182,7 +189,7 @@ The host needs access to the original PNG and a Python environment with the depe
 
 For a game, start with the style:
 
-> We're making a 384×288 SD RPG Maker-style field, with 16×16 tiles, 48×96 two-head characters and selective 1-pixel dark contours. Use the SD demon-castle game's shared palette and references. Show me the brief, then inspect a new 1× enemy beside the knight, princess and demon king.
+> We're making a 384×288 SD RPG Maker-style field, with 32×32 tiles, 32×64 two-head characters and selective 1-pixel dark contours. Fix the final sizes before drawing and design expressions in native cells. Use the SD demon-castle game's shared palette and references. Show me the brief, then inspect a new 1× enemy beside the knight, princess and demon king.
 
 Without the original file and a successful checker run, the result remains **unverified**. See [SKILL.md](pixelwright/SKILL.md) and the [platform compatibility guide](docs/COMPATIBILITY_ko.md) for installation and execution details.
 

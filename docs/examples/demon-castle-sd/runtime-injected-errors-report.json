@@ -8,94 +8,94 @@
     {
       "code": "CELL_NOT_UNIFORM",
       "severity": "fail",
-      "detail": "1051 of 110592 game pixels are not one color across their 4x4 screen block. Usual causes: positions or camera off whole pixels, runtime rotation or non-integer scaling, linear filtering or mipmaps, or lossy capture.",
+      "detail": "754 of 110592 game pixels are not one color across their 4x4 screen block. Usual causes: positions or camera off whole pixels, runtime rotation or non-integer scaling, linear filtering or mipmaps, or lossy capture.",
       "sample": [
         {
+          "x": 311,
+          "y": 173
+        },
+        {
+          "x": 314,
+          "y": 173
+        },
+        {
+          "x": 309,
+          "y": 174
+        },
+        {
+          "x": 311,
+          "y": 174
+        },
+        {
+          "x": 314,
+          "y": 174
+        },
+        {
+          "x": 316,
+          "y": 174
+        },
+        {
+          "x": 309,
+          "y": 175
+        },
+        {
+          "x": 310,
+          "y": 175
+        },
+        {
+          "x": 315,
+          "y": 175
+        },
+        {
+          "x": 316,
+          "y": 175
+        },
+        {
+          "x": 318,
+          "y": 175
+        },
+        {
+          "x": 298,
+          "y": 176
+        },
+        {
+          "x": 309,
+          "y": 176
+        },
+        {
+          "x": 315,
+          "y": 176
+        },
+        {
           "x": 317,
-          "y": 200
-        },
-        {
-          "x": 325,
-          "y": 200
-        },
-        {
-          "x": 316,
-          "y": 201
+          "y": 176
         },
         {
           "x": 318,
-          "y": 201
+          "y": 176
         },
         {
-          "x": 324,
-          "y": 201
+          "x": 319,
+          "y": 176
         },
         {
-          "x": 326,
-          "y": 201
+          "x": 297,
+          "y": 177
         },
         {
-          "x": 315,
-          "y": 202
+          "x": 298,
+          "y": 177
         },
         {
-          "x": 316,
-          "y": 202
-        },
-        {
-          "x": 325,
-          "y": 202
-        },
-        {
-          "x": 328,
-          "y": 202
-        },
-        {
-          "x": 314,
-          "y": 203
-        },
-        {
-          "x": 315,
-          "y": 203
-        },
-        {
-          "x": 322,
-          "y": 203
-        },
-        {
-          "x": 327,
-          "y": 203
-        },
-        {
-          "x": 329,
-          "y": 203
-        },
-        {
-          "x": 314,
-          "y": 204
-        },
-        {
-          "x": 315,
-          "y": 204
-        },
-        {
-          "x": 318,
-          "y": 204
-        },
-        {
-          "x": 321,
-          "y": 204
-        },
-        {
-          "x": 327,
-          "y": 204
+          "x": 308,
+          "y": 177
         }
       ]
     },
     {
       "code": "COLOR_OUTSIDE_PALETTE",
       "severity": "fail",
-      "detail": "96 game pixels show colors outside the palette (#8D8B95FF, #94909CFF, #9A98A3FF, #9AA5A8FF, #A3A0ADFF, #ADA9BAFF); translucent or additive effects, tinting or color grading mix new colors.",
+      "detail": "96 game pixels show colors outside the palette (#A3A0ADFF); translucent or additive effects, tinting or color grading mix new colors.",
       "sample": [
         {
           "x": 266,
@@ -202,13 +202,13 @@
   },
   "metrics": {
     "scale": 4,
-    "nonuniform_cells": 1051,
+    "nonuniform_cells": 754,
     "cells": 110592
   },
   "status": "fail",
   "provenance": {
     "source_path": "docs/examples/demon-castle-sd/runtime-injected-errors.png",
-    "source_sha256": "d0df3139ecbf24ee0b759970f1e3bef29978c19a8fb782decfe871213cbfd06c",
-    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+    "source_sha256": "7889cc3e70b6792c689a67177a290fac9a15c3b27f72bc29938877c281538616",
+    "contract_sha256": "fad806311aff010f79fa72942e02cf4289b5e35ea92b394ef11d07bba3d8c229"
   }
 }

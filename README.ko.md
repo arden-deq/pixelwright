@@ -107,24 +107,31 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 0.7.0에서 추가했습니다. 프로필은 PNG 한 장을 검사하고, **게임 계약**(`game.json`)은 게임 전체의 공통 격자·팔레트·크기·스타일 브리프를 선언합니다. 기술 검사와 미술 검수는 각각 판정합니다.
 
 <picture>
-  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/scene-native.png">
-  <img src="docs/images/game-sd-scene-preview.png" alt="깨끗한 384×288 SD RPG Maker 필드: 마왕성 앞의 2등신 기사·공주·마왕">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/field-native.png">
+  <img src="docs/images/game-native-field-preview.png" alt="깨끗한 384×288 SD RPG Maker 필드: 마왕성 앞의 2등신 기사·공주·마왕">
 </picture>
 
-[확대용 PNG: 2304×1728, 6배](docs/images/game-sd-scene-6x.png). 넓은 창은 2배, 좁은 창은 1배 미리보기이며 모든 내보내기는 같은 논리 도트를 유지합니다.
+[확대용 PNG: 2304×1728, 6배](docs/images/game-native-field-6x.png). 넓은 창은 2배, 좁은 창은 1배 미리보기이며 모든 내보내기는 같은 논리 도트를 유지합니다.
 
-**가로:세로 1:2인 48×96 캐릭터 캔버스와 2등신 SD 비율**로 처음부터 다시 만들었습니다. 큰 얼굴·짧은 팔다리·넓은 픽셀 덩어리로 눈·입·왕관·장비가 읽히도록 설계했습니다. 기사·공주·마왕·성을 각각 실제 이미지 생성으로 제작한 뒤, 64색과 투명색을 공유하는 편집 가능한 논리 셀로 변환했습니다. [생성 원본·프롬프트·원본과 파생 에셋의 개별 검사 기록](docs/examples/demon-castle-sd/)을 보존합니다.
+[그리기 전에 최종 규격과 배치를 고정](docs/examples/demon-castle-sd/design-contract.json)했습니다. **타일 32×32, 캐릭터 32×64(1×2타일), 성 192×128(6×4타일), 맵 384×288(12×9타일)**입니다. 모든 에셋을 64색과 투명색을 공유하는 최종 논리 셀에서 직접 작성합니다. 눈동자·하이라이트·눈썹·입도 실제 게임 해상도에서 설계했습니다. [편집 가능한 원본과 검증 기록](docs/examples/demon-castle-sd/)에 제작 과정을 남깁니다.
 
 <picture>
-  <source media="(max-width: 479px)" srcset="docs/examples/demon-castle-sd/characters-native.png">
-  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
-  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/characters-3x.png">
-  <img src="docs/examples/demon-castle-sd/characters-4x.png" alt="눈·입·왕관·장비를 볼 수 있는 SD 기사·공주·마왕의 4배 확대">
+  <source media="(max-width: 479px)" srcset="docs/examples/demon-castle-sd/characters-2x.png">
+  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/characters-3x.png">
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle-sd/characters-4x.png">
+  <img src="docs/examples/demon-castle-sd/characters-6x.png" alt="최종 32×64 셀에서 표정을 설계한 SD 기사·공주·마왕의 6배 확대">
 </picture>
 
-캐릭터 확대는 같은 논리 도트를 4배로 표시합니다(작은 창에서는 3배·2배·1배). [독립 성·캐릭터 비교 보드](docs/images/game-sd-assets-preview.png) · [확대본의 실제 검사 격자](docs/examples/demon-castle-sd/characters-grid_overlay.png).
+캐릭터 확대는 같은 논리 셀을 6배로 표시합니다(작은 창에서는 4배·3배·2배). [독립 에셋 비교 보드](docs/images/game-sd-assets-preview.png) · [확대본의 실제 검사 격자](docs/examples/demon-castle-sd/characters-grid_overlay.png).
 
-**384×288 필드**는 독립 1× PNG 13개를 합성합니다. 캐릭터 3종, 192×128 성, 16×16 바닥 변형 8종, 별도의 접촉 그림자로 구성됩니다. 최종 에셋의 4배 PNG와 필드의 2배 미리보기도 별도로 검사합니다. [미술 검수](docs/examples/demon-castle-sd/art-review.json)는 가독성과 조화를 기술 PASS와 구분해서 기록합니다.
+<picture>
+  <source media="(max-width: 959px)" srcset="docs/examples/demon-castle-sd/faces-3x.png">
+  <img src="docs/examples/demon-castle-sd/faces-6x.png" alt="직접 작성한 얼굴 도트: 기사의 잔잔한 미소, 공주의 연결된 U자 미소, 마왕의 자신 있는 웃음">
+</picture>
+
+얼굴 비교는 작성한 **20×18 얼굴 영역·4×6 눈·5×3 입 배치**를 그대로 보여줍니다. [표정 보존 검사](docs/examples/demon-castle-sd/face-preservation.json)는 설계 셀·1× PNG·합성 맵·실제 브라우저 픽셀을 대조하며, 미술의 완성도를 점수화하지 않습니다. 이번 제작에는 고해상도 그림의 축소나 자동 팔레트 치환을 사용하지 않습니다. 이전 이미지 생성 시안은 과거 참고 자료로 보존합니다.
+
+**384×288 필드**는 독립 1× PNG 13개를 합성합니다. 캐릭터 3종, 192×128 성, 32×32 바닥 변형 8종, 28×6 접촉 그림자로 구성됩니다. 최종 에셋의 4배 PNG·캐릭터의 6배 확대·필드의 2배 미리보기도 별도로 검사합니다. [미술 검수](docs/examples/demon-castle-sd/art-review.json)는 가독성과 조화를 기술 PASS와 구분해서 기록합니다.
 
 저장소 루트에서 `python -m http.server 8000`을 실행하고 [SD 필드 데모](http://localhost:8000/pixelwright/examples/demon-castle-sd/)를 엽니다. 방향키는 정적 기사의 위치를 옮기고 **R**은 초기화, **F**는 전체 화면 전환입니다. 걷기 애니메이션 프레임은 없는 합성 예제입니다. [브라우저 검증](docs/examples/demon-castle-sd/runtime-verification.json)은 로딩·이동·충돌·앞뒤 가림·정수 배율을 확인합니다. 실제 실행 화면은 [독립 논리 합성과 일치](docs/examples/demon-castle-sd/composition-verification.json)하고 [화면 검사도 통과](docs/examples/demon-castle-sd/runtime-clean-report.json)합니다.
 
@@ -182,7 +189,7 @@ python pixelwright/scripts/pixel_game.py screen capture.png --contract pixelwrig
 
 게임이라면 스타일부터 정합니다.
 
-> 384×288 SD RPG Maker풍 필드야. 타일은 16×16, 캐릭터와 보스는 48×96의 2등신이고, 외곽선은 선택적으로 넣는 어두운 1픽셀이야. 마왕성 예제의 공통 팔레트와 기준 에셋을 써 줘. 브리프를 보여 준 다음, 새 1× 적을 기사·공주·마왕 옆에 놓고 검사해 줘.
+> 384×288 SD RPG Maker풍 필드야. 타일은 32×32, 캐릭터와 보스는 32×64의 2등신이고, 외곽선은 선택적으로 넣는 어두운 1픽셀이야. 그리기 전에 최종 규격을 고정하고 표정은 논리 셀에서 설계해 줘. 마왕성 예제의 공통 팔레트와 기준 에셋을 써 줘. 브리프를 보여 준 다음, 새 1× 적을 기사·공주·마왕 옆에 놓고 검사해 줘.
 
 원본 파일과 성공한 검사 실행이 없으면 **미검증**입니다. 설치와 실행 조건은 [SKILL.md](pixelwright/SKILL.md)와 [플랫폼 호환성 안내](docs/COMPATIBILITY_ko.md)를 참고합니다.
 

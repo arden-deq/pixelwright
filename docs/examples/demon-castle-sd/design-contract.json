@@ -1,26 +1,142 @@
 {
   "schema_version": 1,
-  "name": "SD redraw — frozen before generation",
-  "character_logical_size": "48x96",
-  "character_aspect_ratio": "1:2",
-  "anatomy": "two heads tall, enlarged face and short limbs",
-  "castle_logical_size": "192x128",
-  "scene_logical_size": "384x288",
-  "tile_logical_size": "16x16",
-  "render_scale": 4,
-  "source_profile_scale": 16,
+  "name": "Native-cell SD field — contract fixed before authoring",
+  "frozen_at_utc": "2026-11-03T07:31:49.827163+00:00",
+  "workflow": "Author shapes and expression cells at final native resolution; no generated-raster projection, downsampling or automatic palette remap. Existing generated concepts are design references only.",
+  "tile_logical_size": [
+    32,
+    32
+  ],
+  "scene_logical_size": [
+    384,
+    288
+  ],
+  "map_tiles": [
+    12,
+    9
+  ],
+  "character_logical_size": [
+    32,
+    64
+  ],
+  "character_tiles": [
+    1,
+    2
+  ],
+  "character_foot_baseline_y": 62,
+  "anatomy": "two heads tall; head approximately32px and short body approximately28px",
+  "face_design": {
+    "bounds_xywh": [
+      6,
+      16,
+      20,
+      18
+    ],
+    "eye_size": [
+      4,
+      6
+    ],
+    "mouth_size": [
+      5,
+      3
+    ],
+    "expressions": {
+      "knight": "focused, calm small smile",
+      "princess": "open U-shaped smile",
+      "demon-king": "angled eyebrows, asymmetric confident smirk"
+    },
+    "minimum_eye_mouth_gap": 2,
+    "important_colors": [
+      "ink0",
+      "ivory4",
+      "blue2",
+      "ember2",
+      "skin0",
+      "skin4"
+    ],
+    "acceptance": "Read eyes, highlights, eyebrows and continuous mouth at 1x; inspect saved native sprite, enlarged cells and actual map. Exact grid PASS alone is insufficient."
+  },
+  "castle_logical_size": [
+    192,
+    128
+  ],
+  "castle_tiles": [
+    6,
+    4
+  ],
+  "shadow_logical_size": [
+    28,
+    6
+  ],
+  "asset_names": [
+    "castle",
+    "knight",
+    "princess",
+    "demon-king",
+    "stone0",
+    "stone1",
+    "stone2",
+    "stone3",
+    "moss0",
+    "moss1",
+    "moss2",
+    "moss3",
+    "shadow"
+  ],
+  "palette_file": "../../../pixelwright/examples/demon-castle-sd/palette.json",
   "max_colors": 64,
-  "palette_file": "../../../pixelwright/examples/demon-castle/palette.json",
   "alpha": "binary",
   "transparent_rgb": "exact",
-  "lighting": "upper-left",
-  "perspective": "three-quarter RPG field",
+  "asset_export_scale": 4,
+  "character_preview_scales": [
+    2,
+    3,
+    4,
+    6
+  ],
+  "field_export_scales": [
+    2,
+    3,
+    6
+  ],
+  "light_direction": "upper-left",
+  "style": "16-bit RPG field; stepped one-native-pixel contours, deliberate clusters, no anti-alias or dithering",
+  "layout": {
+    "castle": [
+      192,
+      136
+    ],
+    "princess": [
+      104,
+      216
+    ],
+    "demon-king": [
+      280,
+      200
+    ],
+    "knight": [
+      184,
+      264
+    ],
+    "walk_bounds": {
+      "left": 64,
+      "right": 320,
+      "top": 136,
+      "bottom": 272
+    },
+    "castle_collision": {
+      "x": 104,
+      "y": 104,
+      "width": 176,
+      "height": 32
+    }
+  },
   "art_acceptance": [
-    "Eyes and mouth separate at 1x; distinct helmet/crown/horns",
-    "Two-head silhouette rather than merely a tall thin canvas",
-    "Hands and held equipment have clear contact and boundaries",
-    "Consistent face scale and dark selective outline",
-    "Terrain has deliberate clusters and coherent detail level",
-    "Only clean art in the main README scene; diagnostic overlays in a labeled section"
+    "Readable different expressions at native size",
+    "Continuous smile and separated eyes/highlights",
+    "Clear hand-to-sword/shield contact",
+    "Coherent one-native-pixel contours and shared material palette",
+    "Foot positions and composition anchors match frozen layout",
+    "No diagnostics in representative game artwork"
   ]
 }

@@ -1,0 +1,41 @@
+{
+  "status": "superseded_changes_needed",
+  "reviewer": "Codex visual inspection of saved PNGs and real Chromium captures",
+  "scope": "Static two-head SD field example; artistic judgment separate from technical reports",
+  "reviewed_views": [
+    "characters-native.png",
+    "characters-4x.png",
+    "../../images/game-sd-scene-preview.png",
+    "runtime-field.png"
+  ],
+  "observations": [
+    "Large heads and short limbs replace the previous tall character proportions. All three keep the frozen 48x96 canvas.",
+    "Eyes and small mouths are separated on the native faces. The knight's helmet, sword and shield; the princess's crown, hair and dress; and the demon king's horns and armor remain distinguishable in the composed field.",
+    "All three share the y=92 foot baseline. Visible heights are 65, 69 and 63 pixels; the crown and plume explain some silhouette differences. The boss uses more canvas width to keep its face comparable in size.",
+    "Each character has one 8-connected alpha component. No detached opaque speck like the old boss is present; this is supporting evidence, not an automatic aesthetic score.",
+    "Upper-left highlights, dark stepped contours, gold/crimson accents and cool shadows connect the independently generated characters and new castle.",
+    "Four stone and four sparse moss variants vary the ground. A separate binary-alpha shadow anchors each character to the paving without introducing blended colors.",
+    "The normal field contains no checker highlights. Failure overlays are separate, explicitly labeled evidence."
+  ],
+  "limitations": [
+    "Fine source shading and some eye highlights are simplified by the recorded projection and palette mapping; raw-generation acceptance is not claimed.",
+    "This review covers static readability and composition. The moving object uses a fixed pose and has no walk cycle."
+  ],
+  "technical_evidence": [
+    "asset-summary.json",
+    "native-metrics.json",
+    "characters-report.json",
+    "scene-preview-report.json",
+    "runtime-verification.json",
+    "composition-verification.json"
+  ],
+  "reviewed_bytes": {
+    "docs/examples/demon-castle-sd/asset-summary.json": "52f58eb1c10968703b80c10bd73bbe7549e2e0e720128748eecbdf1c922f16ac",
+    "docs/examples/demon-castle-sd/characters-4x.png": "881cafc4839a3875c03ab1ae213b84700410975947821c5290fdbb8e3401d160",
+    "docs/images/game-sd-scene-preview.png": "28cc1f6e3c4bdf5690a51e602bfe2b59ed6362e04614cd1a43211f2f6a7b23f6",
+    "docs/examples/demon-castle-sd/runtime-field.png": "b68d35ea64bba5d9d2be554d2aff2ee66124c6807fceacecf00a13c5e86c9c6c"
+  },
+  "reason": "User review identified damaged expressions. Prior art approval withdrawn; technical grid compliance did not establish expression fidelity.",
+  "source_commit": "4d95126ba244497e28709ba76ec08565ba5bc66e",
+  "contract": "projected-v1-design-contract.json"
+}

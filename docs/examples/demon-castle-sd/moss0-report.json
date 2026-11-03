@@ -5,12 +5,12 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 64,
-    "height": 64
+    "width": 128,
+    "height": 128
   },
   "logical_size": {
-    "width": 16,
-    "height": 16
+    "width": 32,
+    "height": 32
   },
   "cell_size": {
     "width": 4,
@@ -19,11 +19,11 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "39ea36e0029c6781fb42d9ec3fc33c77d43a3c6095977ba1c958184d76107b3f",
-    "decoded_rgba_sha256": "26a3381252e8484b400847969a4ce4fce5eb75cd9e307f64265125e7f447148b",
+    "source_sha256": "7367fcb3170a5b7ad1cd3705e86313cc46294ec70d8e17225abd878df6b711a2",
+    "decoded_rgba_sha256": "a60d9d9ef6c33312e44946c8b3f5630e4a0ee1349f1b816b7fdc77413e5bc3ba",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "b3e662b0ec5e3569e1dd6e9b8b1110a1fd1063fa7a0459e34847a23c9fd61086",
+    "profile_sha256": "6f5b943e88b7b1a84f8b1ccee28d229fdad6e3b824e9e5ca6888c48c05789711",
     "source_path": "docs/examples/demon-castle-sd/moss0-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/moss0-profile.json"
   },
@@ -38,16 +38,16 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 256,
+    "uniform_rgba_cells": 1024,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 256,
+    "total_logical_cells": 1024,
     "visible_rgb_colors_source": 3,
     "visible_rgb_colors_logical_preview": 3,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 1,
+    "possible_color_isolated_logical_pixels": 2,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -57,20 +57,24 @@
     "file": "moss0-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 16,
-    "height": 16
+    "width": 32,
+    "height": 32
   },
   "possible_isolated_pixels_sample": [
     {
       "x": 2,
       "y": 2
+    },
+    {
+      "x": 2,
+      "y": 3
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "1 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "2 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     },
     {
       "code": "OPAQUE_BACKGROUND",
@@ -87,16 +91,16 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 64,
-      "height": 64
+      "width": 128,
+      "height": 128
     },
     "logical_size": {
-      "width": 16,
-      "height": 16
+      "width": 32,
+      "height": 32
     },
     "expected_render_size": {
-      "width": 64,
-      "height": 64
+      "width": 128,
+      "height": 128
     },
     "scale_x": 4.0,
     "scale_y": 4.0,
@@ -110,7 +114,7 @@
   "contract": {
     "schema_version": 1,
     "name": "moss0",
-    "logical_size": "16x16",
+    "logical_size": "32x32",
     "scale": 4,
     "max_colors": 64,
     "alpha": "binary",

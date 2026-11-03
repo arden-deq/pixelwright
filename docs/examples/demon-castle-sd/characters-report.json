@@ -5,26 +5,26 @@
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
   "input_size": {
-    "width": 640,
-    "height": 416
+    "width": 672,
+    "height": 432
   },
   "logical_size": {
-    "width": 160,
-    "height": 104
+    "width": 112,
+    "height": 72
   },
   "cell_size": {
-    "width": 4,
-    "height": 4
+    "width": 6,
+    "height": 6
   },
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "881cafc4839a3875c03ab1ae213b84700410975947821c5290fdbb8e3401d160",
-    "decoded_rgba_sha256": "02736b6b0f15f5ca98f3aaf69feb93baa56a325479fa415f95c94b089a7a85d2",
+    "source_sha256": "a361fa990ed07ccf925cb0826b8f92ae3832cbe86535c727c01b9621d254d88b",
+    "decoded_rgba_sha256": "a4a473cd132d4a9fd14ead94da7000f59162f90db36be544c9b0574b0ec038d6",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "f47e47daa93a74aeff0a0ad8f96530a090579a96349cb5223bf882b50d61f2a9",
-    "source_path": "docs/examples/demon-castle-sd/characters-4x.png",
+    "profile_sha256": "3409a487b8a9aa26e76178fafc911dfcb63f76450973e598a2807330eb4717cb",
+    "source_path": "docs/examples/demon-castle-sd/characters-6x.png",
     "profile_path": "docs/examples/demon-castle-sd/characters-profile.json"
   },
   "settings": {
@@ -38,16 +38,16 @@
     "grid_score": 100.0,
     "grid_measurable": true,
     "square_cell_geometry": true,
-    "uniform_rgba_cells": 16640,
+    "uniform_rgba_cells": 8064,
     "nonuniform_rgba_cells": 0,
     "uniform_rgba_cell_fraction": 1.0,
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
-    "total_logical_cells": 16640,
-    "visible_rgb_colors_source": 51,
-    "visible_rgb_colors_logical_preview": 51,
+    "total_logical_cells": 8064,
+    "visible_rgb_colors_source": 31,
+    "visible_rgb_colors_logical_preview": 31,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 159,
+    "possible_color_isolated_logical_pixels": 40,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -57,136 +57,136 @@
     "file": "characters-violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
-    "width": 160,
-    "height": 104
+    "width": 112,
+    "height": 72
   },
   "possible_isolated_pixels_sample": [
     {
-      "x": 80,
-      "y": 29
+      "x": 55,
+      "y": 5
     },
     {
-      "x": 72,
-      "y": 32
+      "x": 11,
+      "y": 10
     },
     {
-      "x": 79,
-      "y": 32
+      "x": 95,
+      "y": 11
     },
     {
-      "x": 79,
-      "y": 33
+      "x": 10,
+      "y": 12
     },
     {
-      "x": 29,
-      "y": 38
-    },
-    {
-      "x": 74,
-      "y": 39
-    },
-    {
-      "x": 85,
-      "y": 39
-    },
-    {
-      "x": 26,
-      "y": 41
-    },
-    {
-      "x": 24,
-      "y": 42
-    },
-    {
-      "x": 37,
-      "y": 43
-    },
-    {
-      "x": 16,
-      "y": 46
-    },
-    {
-      "x": 16,
-      "y": 48
-    },
-    {
-      "x": 31,
-      "y": 48
-    },
-    {
-      "x": 34,
-      "y": 48
-    },
-    {
-      "x": 82,
-      "y": 48
-    },
-    {
-      "x": 129,
-      "y": 48
-    },
-    {
-      "x": 134,
-      "y": 48
-    },
-    {
-      "x": 14,
-      "y": 49
-    },
-    {
-      "x": 36,
-      "y": 49
-    },
-    {
-      "x": 134,
-      "y": 49
-    },
-    {
-      "x": 82,
-      "y": 50
-    },
-    {
-      "x": 84,
-      "y": 50
-    },
-    {
-      "x": 140,
-      "y": 51
-    },
-    {
-      "x": 27,
-      "y": 52
-    },
-    {
-      "x": 39,
-      "y": 53
-    },
-    {
-      "x": 117,
-      "y": 53
-    },
-    {
-      "x": 38,
-      "y": 54
-    },
-    {
-      "x": 70,
-      "y": 54
-    },
-    {
-      "x": 72,
-      "y": 54
+      "x": 46,
+      "y": 14
     },
     {
       "x": 81,
-      "y": 54
+      "y": 19
+    },
+    {
+      "x": 101,
+      "y": 19
+    },
+    {
+      "x": 88,
+      "y": 20
+    },
+    {
+      "x": 96,
+      "y": 20
+    },
+    {
+      "x": 83,
+      "y": 25
+    },
+    {
+      "x": 48,
+      "y": 31
+    },
+    {
+      "x": 28,
+      "y": 32
+    },
+    {
+      "x": 46,
+      "y": 33
+    },
+    {
+      "x": 45,
+      "y": 34
+    },
+    {
+      "x": 26,
+      "y": 35
+    },
+    {
+      "x": 47,
+      "y": 35
+    },
+    {
+      "x": 62,
+      "y": 35
+    },
+    {
+      "x": 98,
+      "y": 35
+    },
+    {
+      "x": 48,
+      "y": 36
+    },
+    {
+      "x": 23,
+      "y": 38
+    },
+    {
+      "x": 85,
+      "y": 38
+    },
+    {
+      "x": 99,
+      "y": 38
+    },
+    {
+      "x": 17,
+      "y": 39
+    },
+    {
+      "x": 53,
+      "y": 39
+    },
+    {
+      "x": 16,
+      "y": 40
+    },
+    {
+      "x": 19,
+      "y": 40
+    },
+    {
+      "x": 20,
+      "y": 41
+    },
+    {
+      "x": 56,
+      "y": 41
+    },
+    {
+      "x": 26,
+      "y": 45
+    },
+    {
+      "x": 8,
+      "y": 48
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "159 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "40 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     },
     {
       "code": "OPAQUE_BACKGROUND",
@@ -203,22 +203,22 @@
   "geometry": {
     "status": "pass",
     "rendered_size": {
-      "width": 640,
-      "height": 416
+      "width": 672,
+      "height": 432
     },
     "logical_size": {
-      "width": 160,
-      "height": 104
+      "width": 112,
+      "height": 72
     },
     "expected_render_size": {
-      "width": 640,
-      "height": 416
+      "width": 672,
+      "height": 432
     },
-    "scale_x": 4.0,
-    "scale_y": 4.0,
+    "scale_x": 6.0,
+    "scale_y": 6.0,
     "exact_integer_division": true,
     "square_logical_pixel": true,
-    "integer_scale": 4,
+    "integer_scale": 6,
     "issues": []
   },
   "outside_palette_sample": [],
@@ -226,8 +226,8 @@
   "contract": {
     "schema_version": 1,
     "name": "characters",
-    "logical_size": "160x104",
-    "scale": 4,
+    "logical_size": "112x72",
+    "scale": 6,
     "max_colors": 64,
     "alpha": "opaque",
     "transparent_rgb": "exact",
@@ -306,8 +306,8 @@
       "y": 1
     },
     "spacing_px": {
-      "x": 4,
-      "y": 4
+      "x": 6,
+      "y": 6
     },
     "outer_boundary": "right/bottom lie outside the half-open source canvas"
   },

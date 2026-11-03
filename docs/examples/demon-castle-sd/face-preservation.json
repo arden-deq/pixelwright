@@ -1,0 +1,41 @@
+{
+  "status": "pass",
+  "scope": "Exact preservation of authored expression cells; not an automated aesthetic judgment",
+  "downsampling_operations": 0,
+  "palette_remapping_operations": 0,
+  "characters": {
+    "knight": {
+      "native_face_size": [
+        20,
+        18
+      ],
+      "expression_cells_match_design": true,
+      "opaque_native_face_cells_preserved": true,
+      "face_rgba_sha256": "f086a6a808198068d5f00aa249e0b064d10069c11b82896cb33388c22a5f6c45",
+      "composed_face_rgba_sha256": "a7e1579b56ec2322083e8eb47831243be3cd52bd734deb370de948fdf67c9661",
+      "runtime_face_matches_composition_3x": true
+    },
+    "princess": {
+      "native_face_size": [
+        20,
+        18
+      ],
+      "expression_cells_match_design": true,
+      "opaque_native_face_cells_preserved": true,
+      "face_rgba_sha256": "3599d445edb6032ae2c685f47ba588d9d8d31f1e6c180fbee66784b7e9ac642b",
+      "composed_face_rgba_sha256": "3599d445edb6032ae2c685f47ba588d9d8d31f1e6c180fbee66784b7e9ac642b",
+      "runtime_face_matches_composition_3x": true
+    },
+    "demon-king": {
+      "native_face_size": [
+        20,
+        18
+      ],
+      "expression_cells_match_design": true,
+      "opaque_native_face_cells_preserved": true,
+      "face_rgba_sha256": "373c57780ccd0afe9f4713b2db42ca80890f6962a569c33237466886edc2bfeb",
+      "composed_face_rgba_sha256": "373c57780ccd0afe9f4713b2db42ca80890f6962a569c33237466886edc2bfeb",
+      "runtime_face_matches_composition_3x": true
+    }
+  }
+}

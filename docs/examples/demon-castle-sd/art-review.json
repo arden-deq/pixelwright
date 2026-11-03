@@ -1,38 +1,44 @@
 {
   "status": "accepted",
-  "reviewer": "Codex visual inspection of saved PNGs and real Chromium captures",
-  "scope": "Static two-head SD field example; artistic judgment separate from technical reports",
+  "reviewer": "Codex inspection of saved native PNGs, nearest-neighbor previews and actual Chromium captures",
+  "scope": "New native32x64 static SD field example; expression legibility and common style. Prior projected artwork approval withdrawn.",
   "reviewed_views": [
     "characters-native.png",
-    "characters-4x.png",
+    "characters-6x.png",
+    "faces-6x.png",
+    "../../images/game-sd-assets-native.png",
     "../../images/game-sd-scene-preview.png",
-    "runtime-field.png"
+    "runtime-field.png",
+    "game-client-shot.png"
   ],
   "observations": [
-    "Large heads and short limbs replace the previous tall character proportions. All three keep the frozen 48x96 canvas.",
-    "Eyes and small mouths are separated on the native faces. The knight's helmet, sword and shield; the princess's crown, hair and dress; and the demon king's horns and armor remain distinguishable in the composed field.",
-    "All three share the y=92 foot baseline. Visible heights are 65, 69 and 63 pixels; the crown and plume explain some silhouette differences. The boss uses more canvas width to keep its face comparable in size.",
-    "Each character has one 8-connected alpha component. No detached opaque speck like the old boss is present; this is supporting evidence, not an automatic aesthetic score.",
-    "Upper-left highlights, dark stepped contours, gold/crimson accents and cool shadows connect the independently generated characters and new castle.",
-    "Four stone and four sparse moss variants vary the ground. A separate binary-alpha shadow anchors each character to the paving without introducing blended colors.",
-    "The normal field contains no checker highlights. Failure overlays are separate, explicitly labeled evidence."
+    "All three characters are drawn directly on32x64 cells, exactly1x2 of the32px tiles. The head occupies about half the visible height; the body and limbs are short.",
+    "Each pair of eyes remains separated with dark contours, small white highlights and distinct blue or red iris cells at native resolution.",
+    "The princess has a continuous U-shaped smile. The knight has a short calm smile with a raised corner. The demon king has angled eyebrows and an asymmetric smirk. Native and enlarged crops were inspected; expressions are not inferred from grid PASS.",
+    "The knight grips the short sword under its crossguard and the shield beside the forearm. Crowns and horns connect to the character silhouettes.",
+    "Gold, crimson, steel and violet clusters use the same upper-left light and one-native-pixel stepped contours. No anti-aliased edge is introduced by authoring or export.",
+    "The castle uses the same contours and palette as the characters. Quiet large masonry slabs and sparse grass leave the facial features legible in the map.",
+    "Contact shadows sit at the shared foot anchor. The actual browser screenshot preserves the designed facial cells and has no diagnostic highlights."
   ],
   "limitations": [
-    "Fine source shading and some eye highlights are simplified by the recorded projection and palette mapping; raw-generation acceptance is not claimed.",
-    "This review covers static readability and composition. The moving object uses a fixed pose and has no walk cycle."
+    "This is a deliberately simplified static SD field illustration; a walking cycle is not included.",
+    "Expression preservation is tested as pixel identity. The artistic approval is a separate visual judgment and does not certify a general automatic art-quality detector."
   ],
   "technical_evidence": [
+    "design-contract.json",
+    "native-authoring.json",
     "asset-summary.json",
-    "native-metrics.json",
-    "characters-report.json",
-    "scene-preview-report.json",
+    "face-preservation.json",
     "runtime-verification.json",
-    "composition-verification.json"
+    "composition-verification.json",
+    "game-client-verification.json"
   ],
   "reviewed_bytes": {
-    "docs/examples/demon-castle-sd/asset-summary.json": "52f58eb1c10968703b80c10bd73bbe7549e2e0e720128748eecbdf1c922f16ac",
-    "docs/examples/demon-castle-sd/characters-4x.png": "881cafc4839a3875c03ab1ae213b84700410975947821c5290fdbb8e3401d160",
-    "docs/images/game-sd-scene-preview.png": "28cc1f6e3c4bdf5690a51e602bfe2b59ed6362e04614cd1a43211f2f6a7b23f6",
-    "docs/examples/demon-castle-sd/runtime-field.png": "b68d35ea64bba5d9d2be554d2aff2ee66124c6807fceacecf00a13c5e86c9c6c"
+    "characters-native.png": "e8ea1717002213029e434a6b796e2c42dd0d89dfade67ea3ded7d2a35ceaa786",
+    "characters-6x.png": "a361fa990ed07ccf925cb0826b8f92ae3832cbe86535c727c01b9621d254d88b",
+    "faces-6x.png": "a0d0a96b6cbc46f3183e10e83092838c7a7911a798b6b3aea2b71d1ffd99e8d8",
+    "../../images/game-sd-scene-preview.png": "3305429aa1ea43f17cac21dc66d9f57a53c404ff2f795e8fcdcbb3461d02ff05",
+    "runtime-field.png": "5aa0a81c4fa68ca24401887c993eb389eb32c2cc39d344b07217035916b6724a",
+    "game-client-shot.png": "922c37f4848fed641ef9417f4794bc91c9d958b88b2930803a934ceb176447ed"
   }
 }

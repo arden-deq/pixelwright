@@ -19,8 +19,8 @@
   "strict_grid": true,
   "acceptance": "exact",
   "provenance": {
-    "source_sha256": "5eaaa71fc59690e9f16121a4282e30c9d836db200e64358cbd683779af3c4c81",
-    "decoded_rgba_sha256": "c7751146728b119ed973a604b352b24d6d37f4f49253fe2106537d2bfb6e028a",
+    "source_sha256": "1df1aa769128ecd2887d0f2404ce08ec201ffe4a4e282da02675facb9b695908",
+    "decoded_rgba_sha256": "21a52aa098dfee19dbc8b4fc2977678bc650c431a8b1b5ee9ceb61778c70dcf1",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
     "profile_sha256": "257e890580f6daa32e6d1c884831e4629dc6b6131cbb5610673ab68b6d1e1a41",
@@ -44,10 +44,10 @@
     "off_grid_source_pixels": 0,
     "off_grid_logical_cells": 0,
     "total_logical_cells": 24576,
-    "visible_rgb_colors_source": 48,
-    "visible_rgb_colors_logical_preview": 48,
+    "visible_rgb_colors_source": 22,
+    "visible_rgb_colors_logical_preview": 22,
     "partial_alpha_source_pixels": 0,
-    "possible_color_isolated_logical_pixels": 619,
+    "possible_color_isolated_logical_pixels": 37,
     "outside_palette_source_pixels": 0
   },
   "worst_cells": [],
@@ -62,131 +62,131 @@
   },
   "possible_isolated_pixels_sample": [
     {
-      "x": 140,
-      "y": 15
+      "x": 30,
+      "y": 2
     },
     {
-      "x": 50,
-      "y": 16
+      "x": 162,
+      "y": 2
     },
     {
-      "x": 142,
-      "y": 16
-    },
-    {
-      "x": 50,
-      "y": 17
-    },
-    {
-      "x": 51,
-      "y": 17
-    },
-    {
-      "x": 140,
-      "y": 18
-    },
-    {
-      "x": 140,
+      "x": 25,
       "y": 19
     },
     {
-      "x": 46,
-      "y": 20
+      "x": 35,
+      "y": 19
     },
     {
-      "x": 49,
-      "y": 20
+      "x": 157,
+      "y": 19
     },
     {
-      "x": 138,
-      "y": 20
+      "x": 167,
+      "y": 19
     },
     {
-      "x": 139,
-      "y": 20
+      "x": 24,
+      "y": 22
     },
     {
-      "x": 47,
-      "y": 23
+      "x": 156,
+      "y": 22
     },
     {
-      "x": 50,
+      "x": 23,
       "y": 24
     },
     {
-      "x": 54,
+      "x": 37,
       "y": 24
     },
     {
-      "x": 54,
-      "y": 25
+      "x": 155,
+      "y": 24
     },
     {
-      "x": 138,
-      "y": 25
+      "x": 169,
+      "y": 24
     },
     {
-      "x": 141,
-      "y": 25
-    },
-    {
-      "x": 46,
+      "x": 38,
       "y": 26
     },
     {
-      "x": 48,
+      "x": 170,
       "y": 26
     },
     {
-      "x": 54,
-      "y": 26
-    },
-    {
-      "x": 137,
-      "y": 27
-    },
-    {
-      "x": 46,
-      "y": 28
-    },
-    {
-      "x": 51,
-      "y": 28
-    },
-    {
-      "x": 141,
-      "y": 28
-    },
-    {
-      "x": 138,
+      "x": 39,
       "y": 29
     },
     {
-      "x": 46,
-      "y": 30
+      "x": 171,
+      "y": 29
     },
     {
-      "x": 92,
-      "y": 30
+      "x": 40,
+      "y": 31
     },
     {
-      "x": 138,
-      "y": 30
+      "x": 172,
+      "y": 31
     },
     {
-      "x": 45,
-      "y": 32
+      "x": 41,
+      "y": 34
     },
     {
-      "x": 55,
-      "y": 32
+      "x": 173,
+      "y": 34
+    },
+    {
+      "x": 126,
+      "y": 45
+    },
+    {
+      "x": 32,
+      "y": 47
+    },
+    {
+      "x": 109,
+      "y": 47
+    },
+    {
+      "x": 164,
+      "y": 47
+    },
+    {
+      "x": 111,
+      "y": 48
+    },
+    {
+      "x": 13,
+      "y": 49
+    },
+    {
+      "x": 145,
+      "y": 49
+    },
+    {
+      "x": 116,
+      "y": 51
+    },
+    {
+      "x": 118,
+      "y": 52
+    },
+    {
+      "x": 95,
+      "y": 59
     }
   ],
   "issues": [
     {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
-      "detail": "619 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+      "detail": "37 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     }
   ],
   "visual_review_required": [
