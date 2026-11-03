@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "scale": 8,
+  "palette_file": "palette.json",
+  "rows": [
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_light", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_dark", "grass_light", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass_dark", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_dark", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass_light", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_dark", "grass_light"],
+    ["grass", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass_dark", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_light", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_dark", "grass_light", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass_dark", "grass_light", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_light", "grass", "grass"],
+    ["grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass", "grass_dark", "grass_light", "grass"]
+  ]
+}

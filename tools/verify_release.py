@@ -317,26 +317,31 @@ def verify_game_workflow(skill, out):
     example = skill / "examples" / "game"
     contract = example / "game.json"
     results = {}
-    for name, category in (("tile", "tile"), ("hero", "character")):
+    for name, category in (("grass", "tile"), ("tree", "object"), ("pond", "terrain"), ("hero", "character")):
         run(tool, ["asset", example / "build" / f"{name}.png", "--category", category, "--contract", contract,
                    "--out-dir", out / f"game-{name}"], 0)
         results[name] = read_json(out / f"game-{name}" / "report.json")["status"]
-    with Image.open(example / "build" / "hero.png") as hero:
-        hero = hero.convert("RGBA")
+    with Image.open(example / "build" / "hero.png") as hero, Image.open(example / "build" / "grass.png") as grass:
+        hero, grass = hero.convert("RGBA"), grass.convert("RGBA")
     enlarged = out / "game-hero-2x.png"
     hero.resize((hero.width * 2, hero.height * 2), Image.Resampling.NEAREST).save(enlarged)
     run(tool, ["asset", enlarged, "--contract", contract, "--out-dir", out / "game-hero-2x"], 2)
     coarse = read_json(out / "game-hero-2x" / "report.json")
     if "COARSE_PIXELS" not in {issue["code"] for issue in coarse["issues"]}:
         raise ValueError("An enlarged game asset must report COARSE_PIXELS")
-    base = Image.new("RGBA", (384, 216), (155, 212, 95, 255))
-    base.alpha_composite(hero, (60, 160))
-    screen = Image.new("RGBA", (2000, 1100), (0, 0, 0, 255))
-    screen.paste(base.resize((1920, 1080), Image.Resampling.NEAREST), (40, 10))
+    base_w, base_h = map(int, read_json(contract)["base_resolution"].split("x"))
+    base = Image.new("RGBA", (base_w, base_h))
+    for y in range(0, base_h, 16):
+        for x in range(0, base_w, 16):
+            base.alpha_composite(grass, (x, y))
+    base.alpha_composite(hero, (100, 100))
+    scale = 4
+    screen = Image.new("RGBA", (base_w * scale + 40, base_h * scale + 20), (0, 0, 0, 255))
+    screen.paste(base.resize((base_w * scale, base_h * scale), Image.Resampling.NEAREST), (20, 10))
     screen.save(out / "game-screen.png")
     run(tool, ["screen", out / "game-screen.png", "--contract", contract, "--out-dir", out / "game-screen"], 0)
-    big = hero.resize((hero.width * 5, hero.height * 5), Image.Resampling.NEAREST)
-    screen.alpha_composite(big, (40 + 200 * 5 + 2, 10 + 100 * 5))
+    big = hero.resize((hero.width * scale, hero.height * scale), Image.Resampling.NEAREST)
+    screen.alpha_composite(big, (20 + 200 * scale + 2, 10 + 100 * scale))
     screen.save(out / "game-screen-shifted.png")
     run(tool, ["screen", out / "game-screen-shifted.png", "--contract", contract,
                "--out-dir", out / "game-screen-shifted"], 2)

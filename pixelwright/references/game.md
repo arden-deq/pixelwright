@@ -4,7 +4,7 @@ Read this when assets are made for a game, or when a game's screen should be che
 
 ## Why one contract
 
-A pixel-art game looks consistent when everything uses one pixel size. The game renders at one base resolution, for example 384×216, and the whole screen is enlarged by one whole number with bars filling the rest of the window. Every sprite, tile, effect, UI element and font is drawn at 1×: one image pixel is one game pixel. An enlarged `rendered.png` from the builder is a review image and is never imported into an engine. Dropping 4×, 6× and 8× renders into one scene mixes pixel sizes (mixels), which no single-asset audit can see.
+A pixel-art game looks consistent when everything uses one pixel size. The game renders at one base resolution, for example 320×240, and the whole screen is enlarged by one whole number with bars filling the rest of the window. Every sprite, tile, effect, UI element and font is drawn at 1×: one image pixel is one game pixel. An enlarged `rendered.png` from the builder is a review image and is never imported into an engine. Dropping 4×, 6× and 8× renders into one scene mixes pixel sizes (mixels), which no single-asset audit can see.
 
 ## Gather the style first
 
@@ -12,16 +12,16 @@ Before drawing anything for a game, collect these decisions from the user or the
 
 | Decision | Field | Example |
 | --- | --- | --- |
-| Base resolution and tile size | `base_resolution`, `tile_size` | `384x216`, `16` |
-| Palette and color budget | `palette_file` or `allowed_palette`, `max_colors` | 11 named colors with ramps, at most 16 per asset |
+| Base resolution and tile size | `base_resolution`, `tile_size` | `320x240`, `16` |
+| Palette and color budget | `palette_file` or `allowed_palette`, `max_colors` | 26 named colors plus transparency, with ramps; at most 16 per asset |
 | Transparency | `alpha` | `binary` |
 | Bars around the scaled screen | `letterbox` | `#000000` |
-| Sizes per kind of asset | `categories` | character 8×12 to 24×32, tile 16×16 |
+| Sizes per kind of asset | `categories` | character 24×32, tile 16×16; `"outline": false` exempts map chips and terrain from the outline rule |
 | Genre, mood, notes | `style.genre`, `style.mood`, `style.notes` | side-scrolling platformer |
 | Camera view | `style.perspective` | `side`, `top-down`, `three-quarter`, `isometric`, `front`, `other` |
 | Light | `style.light_direction` | `upper-left`, `upper-right`, `top`, `left`, `right`, `front`, `none` |
 | Shading | `style.shading` | `flat`, `cel`, `soft`, `other` |
-| Outline | `style.outline` | `{"mode": "dark", "width": 1, "colors": ["ink"]}`; modes `none`, `dark`, `colored`, `selective` |
+| Outline | `style.outline` | `{"mode": "dark", "width": 1, "colors": ["outline"]}`; modes `none`, `dark`, `colored`, `selective` |
 | Dithering, anti-aliasing | `style.dithering`, `style.anti_aliasing` | `none`/`limited`/`allowed`; `none`/`manual` |
 | Assets that set the look | `style.references` | an approved tile and character, 1× PNGs |
 | Text | `font` | `{"name": "...", "size_px": 8, "line_height_px": 10}` |
@@ -30,7 +30,7 @@ Before drawing anything for a game, collect these decisions from the user or the
 | Effects | `effects.blending` | `opaque` (palette colors only) or `palette_alpha` (translucency reviewed on screen) |
 | Engine | `engine` | `unity`, `godot`, `phaser`, `pixi`, `web`, `love`, `gamemaker`, `other` |
 
-Unknown fields and values fail validation. Paths (`palette_file`, `style.references`, `font.file`) are relative to the contract and stay inside its directory. The bundled [`examples/game/game.json`](../examples/game/game.json) declares all of them.
+Unknown fields and values fail validation. Paths (`palette_file`, `style.references`, `font.file`) are relative to the contract and stay inside its directory. The bundled [`examples/game/game.json`](../examples/game/game.json), an RPG Maker 2000-style map kit, declares all of them; `tools/generate_game_example.py` in the source repository regenerates its art.
 
 ```sh
 python scripts/pixel_game.py brief --contract game.json
@@ -57,7 +57,7 @@ python scripts/pixel_game.py asset tiles/*.png --contract game.json --out-dir ti
 | `OUTLINE_INCOMPLETE` | review | Less than 90% of silhouette pixels use the declared outline colors |
 | `OUTLINE_TOO_THICK` | review | More than half of a declared 1-pixel outline is two pixels deep |
 
-Dot width is the largest spacing that every column color edge keeps, and dot height the same for rows; transparent pixels count as one background. Measuring the axes separately also catches stretched, non-square dots. Plain 1× art can sit on a coarse lattice too: a tile of 4×4 checks or a flat square with a 2-pixel outline has only a few edges, all 4 or 2 apart. That is why fewer than 8 edges per axis give REVIEW, never FAIL, and fewer than 3 are not measured. `COARSE_REGION` tests every window position (tile size, at least 8), so an enlarged element is found wherever it sits; the report gives the bounding box of each flagged region. Outline checks treat the image border as covered, so tiles and cropped art have no silhouette there. Light direction, shading quality and mood are not measured. `asset_overlay.png` marks off-palette pixels red, coarse windows orange and dither windows blue.
+Dot width is the largest spacing that every column color edge keeps, and dot height the same for rows; transparent pixels count as one background. Measuring the axes separately also catches stretched, non-square dots. Plain 1× art can sit on a coarse lattice too: a tile of 4×4 checks or a flat square with a 2-pixel outline has only a few edges, all 4 or 2 apart. That is why fewer than 8 edges per axis give REVIEW, never FAIL, and fewer than 3 are not measured. `COARSE_REGION` tests every window position (tile size, at least 8), so an enlarged element is found wherever it sits; the report gives the bounding box of each flagged region. A window counts only when its dots are wider and taller than one pixel, because sparse 1× content often lines up on one axis by chance; an element stretched in one direction only is caught by the whole-asset measurement, not inside a screenshot. Outline checks treat the image border as covered, so tiles and cropped art have no silhouette there. Light direction, shading quality and mood are not measured. `asset_overlay.png` marks off-palette pixels red, coarse windows orange and dither windows blue.
 
 ## Compare a new asset with the game
 

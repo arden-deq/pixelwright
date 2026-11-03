@@ -2,13 +2,13 @@
 
 ![Pixelwright banner with a knight, potion, and shield icon](docs/images/pixelwright-header.png)
 
-[English](README.md) · [한국어](README.ko.md) · Version 0.6.2 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · Version 0.7.0 · [Apache License 2.0](LICENSE)
 
 **Audit the grid, colors, and transparency of static PNG pixel art.**
 
 Pixelwright checks actual image pixels against a declared quality profile and produces a JSON verdict and visual diagnostics. Use it to review characters, items, and UI icons, or to apply the same acceptance rules to a batch of assets. Its Python tools also work through the shared AI skill for GPT-powered hosts and Claude.
 
-Static PNG inspection is the main feature. Generation, repair, palette editing, layers, and animation workflows are currently presented as [features in development](#features-in-development).
+Static PNG inspection is the main feature. [Game contracts](#game-contracts-one-pixel-size-for-a-whole-game) keep a whole game on one pixel size and style, from 1× assets to screenshots of the running game. Generation, repair, palette editing, layers, and animation workflows are currently presented as [features in development](#features-in-development).
 
 ## Main feature: pixel-art inspection
 
@@ -102,6 +102,48 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 
 Geometry failures stop cell-color acceptance. Inspect the status, exact violation counts, and previews together. Each single-image audit writes `report.json` and grid diagnostics; a batch adds `batch.json` and separate numbered directories. Full artifact descriptions are in the [quality contract](pixelwright/references/quality-contract.md).
 
+## Game contracts: one pixel size for a whole game
+
+New in 0.7.0. A profile checks one PNG; a **game contract** (`game.json`) fixes what every asset and screen of one game shares, so art made by different people or by an AI stays consistent.
+
+![A 320x240 RPG Maker-style map from the bundled example: grass and flower chips, a dirt path, a pond, trees and the hero](docs/images/game-scene.png)
+
+The bundled example is a small map in the style of classic RPG Maker 2000 games. It uses 16×16 map chips, a 24×32 hero, 26 colors plus transparency and a 320×240 screen, shown here at 3×. Every asset is a hand-placed 1× PNG that passes its own contract. The contract fixes:
+
+- **Screen:** one base resolution (320×240 in the example), enlarged only by whole numbers, with letterbox bars filling the rest of the window.
+- **Pixel size:** every sprite, tile, effect, UI element and font drawn at 1×, so one image pixel is one game pixel.
+- **Colors and sizes:** the palette and its ramps, the color budget, transparency, and a size range per kind of asset (chips and terrain can opt out of the outline rule).
+- **Style:** perspective, light direction, shading, outline mode and color, dithering, anti-aliasing, mood and approved reference assets.
+- **Runtime:** font size, animation rate, rotation policy, effect blending and engine.
+
+`brief` turns the contract into the rules to follow before drawing, for artists, for an AI, and for image-generation prompts. The bundled [example game](pixelwright/examples/game/) declares every field.
+
+```sh
+python pixelwright/scripts/pixel_game.py brief --contract pixelwright/examples/game/game.json
+python pixelwright/scripts/pixel_game.py asset hero.png --category character --contract game.json --out-dir runs/hero-v1
+python pixelwright/scripts/pixel_game.py intake new_enemy.png --category character --contract game.json --out-dir runs/intake-v1
+python pixelwright/scripts/pixel_game.py screen capture.png --contract game.json --out-dir runs/screen-v1
+```
+
+**Before adding an asset**, `intake` places it beside the game's reference assets at 1× and enlarges the row by one whole number. Below, the example's grass chip, tree and hero are followed by the same hero exported at 2×. The check fails it with `COARSE_PIXELS` (its dots measure 2×2), `PIXEL_SIZE_DIFFERS` and `CATEGORY_SIZE`.
+
+![Grass chip, tree and hero at 1x beside the hero exported at 2x, enlarged together](docs/images/game-intake.png)
+
+**In the running game**, `screen` checks a lossless screenshot against the base-resolution grid. In the capture below, the map is shown at 4× in a 1440×1000 window. A second hero is drawn 2 screen pixels off the grid (red: game pixels that are not one color), and a translucent sparkle mixes colors outside the palette (magenta).
+
+![Screen check of the map at base resolution: an off-grid hero in red and a blended effect in magenta](docs/images/game-screen-check.png)
+
+| What the game got wrong | Code |
+| --- | --- |
+| An asset exported enlarged, or stretched in one direction | `COARSE_PIXELS` |
+| Part of an asset, or a sprite, font or UI element on screen, drawn at 2× or more | `COARSE_REGION` (review) |
+| Sub-pixel positions or camera, runtime rotation, linear filtering, mipmaps, fractional scaling | `CELL_NOT_UNIFORM` |
+| Translucent or additive effects, tinting, color grading | `COLOR_OUTSIDE_PALETTE` |
+| Bars that are not the letterbox color | `LETTERBOX_NOT_UNIFORM` |
+| Colors, transparency, category size, dithering or outline against the style | `COLOR_OUTSIDE_PALETTE`, `PARTIAL_ALPHA`, `CATEGORY_SIZE`, `DITHERING_FOUND`, `OUTLINE_*` |
+
+`viewport` prints the whole-number scale and bars for any window size. The [game contract reference](pixelwright/references/game.md) lists every field and code. [Engine settings](pixelwright/references/engines.md) covers Unity, Godot 4, Phaser 3, PixiJS, web canvas, LÖVE and GameMaker. Dot size is measured from color edges, so plain 1× art with only a few edges is reported for review rather than failed. Light, shading quality and mood are not measured; judge them from the side-by-side image.
+
 ## Use as an AI skill
 
 Install the **entire `pixelwright/` folder**, including scripts, references, and examples:
@@ -115,6 +157,10 @@ The host needs access to the original PNG and a Python environment with the depe
 
 > Inspect this PNG as 24×24 logical pixels at 8× scale, with at most 10 visible colors and binary transparency. Show the original, grid overlay, and actual PASS/FAIL report.
 
+For a game, start with the style:
+
+> We're making a 320×240 top-down RPG in the RPG Maker 2000 style, with 16×16 chips, 24×32 characters and a 1-pixel dark outline. Set up the game contract, show me the brief, then draw a 1× slime enemy and check it beside our hero and grass.
+
 Without the original file and a successful checker run, the result remains **unverified**. See [SKILL.md](pixelwright/SKILL.md) and the [platform compatibility guide](docs/COMPATIBILITY_ko.md) for installation and execution details.
 
 ## Features in development
@@ -126,21 +172,20 @@ The following workflows remain in development. This README introduces them brief
 | Pixel-art generation and grid repair | Logical-canvas rendering and derived correction candidates that require reinspection. | [Creation](pixelwright/references/creation.md) · [Repair](pixelwright/references/quality-contract.md#artifacts-and-coordinates) |
 | Palette editing | Reusable palettes, extraction, shading ramps, and remapping. | [Palettes](pixelwright/references/palettes.md) |
 | Layer composition | Shared-grid composition with per-layer and final checks. | [Layers](pixelwright/references/layers.md) |
-| Game contracts | One base resolution, 1× assets, game-wide style brief, asset intake beside references, and screenshot checks for sub-pixel motion, filtering, rotation and blended effects. | [Game contracts](pixelwright/references/game.md) · [Engine settings](pixelwright/references/engines.md) |
 | External sprite-sheet validation | Palette, margin, and silhouette-size checks from sprite-gen PNGs and manifests. | [Atlas contract](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/pixelwright/references/external-atlases.md) · [Validation record](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/docs/VALIDATION_external_atlases_ko.md) |
 | Animation and motion validation | Selected 2D designs, observed parts, frame consistency, and optional 3D pose guides. | [2D workflow](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/docs/SPRITE_2D_ko.md) · [3D workflow](docs/SPRITE_3D_ko.md) · [Progress](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/docs/SPRITE_REQUIREMENTS_AND_STATUS_ko.md) |
 
-The sprite-sheet integration follows [sprite-gen](https://github.com/aldegad/sprite-gen)'s output contract. The [upstream declaration on the development branch](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/pixelwright/upstream-integrations.json) records its repository, license, tested version/commit, and `data_format` relationship with `runtime_required: false`. These development features do not imply production acceptance of generated artwork or natural motion. The sprite-sheet and 2D motion work is tracked on the development branch. Published v0.6.2 archives remain unchanged.
+The sprite-sheet integration follows [sprite-gen](https://github.com/aldegad/sprite-gen)'s output contract. The [upstream declaration on the development branch](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/pixelwright/upstream-integrations.json) records its repository, license, tested version/commit, and `data_format` relationship with `runtime_required: false`. These development features do not imply production acceptance of generated artwork or natural motion. The sprite-sheet and 2D motion work is tracked on the development branch; the v0.7.0 archive contains only what is on `main`.
 
 ## Validation and packaging
 
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.6.2.zip
+python tools/package_skill.py --verify dist/pixelwright-v0.7.0.zip
 ```
 
-Packaging produces an installation ZIP and a development-kit ZIP. The package verifier checks archive layout and SHA-256 coverage. The [validation records](docs/VALIDATION_v051_ko.md) document square-grid diagnostics; the [design notes](docs/DESIGN_ko.md) explain the implementation.
+Packaging produces an installation ZIP and a development-kit ZIP. The package verifier checks archive layout and SHA-256 coverage. The [v0.7.0 validation record](docs/VALIDATION_v070_ko.md) covers this release, earlier [validation records](docs/VALIDATION_v051_ko.md) document square-grid diagnostics, and the [design notes](docs/DESIGN_ko.md) explain the implementation.
 
 ## License and security
 
