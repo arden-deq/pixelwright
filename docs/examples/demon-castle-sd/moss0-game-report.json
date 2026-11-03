@@ -1,0 +1,33 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_asset",
+  "status": "pass",
+  "artistic_status": "not_reviewed",
+  "category": "tile",
+  "issues": [],
+  "metrics": {
+    "size": [
+      16,
+      16
+    ],
+    "visible_colors": 3,
+    "effective_pixel_size": {
+      "x": 1,
+      "y": 1,
+      "size": 1,
+      "column_edges": 9,
+      "row_edges": 8,
+      "measurable": true,
+      "conclusive": true
+    },
+    "dither_pixels": 0
+  },
+  "provenance": {
+    "source_path": "pixelwright/examples/demon-castle-sd/build/moss0.png",
+    "source_sha256": "a4b4d81d29e6af70501d25b6d3c1e999abc4277c4aebd2f7cdde1df49c71e017",
+    "contract_path": "pixelwright/examples/demon-castle-sd/game.json",
+    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+  }
+}

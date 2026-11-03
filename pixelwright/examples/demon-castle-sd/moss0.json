@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "scale": 4,
+  "palette_file": "palette.json",
+  "rows": [
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss1", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss1", "moss2", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss1", "moss1", "moss1", "moss1", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss1", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss1", "moss1", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss1", "moss1", "moss1", "moss1", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"],
+    ["moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0", "moss0"]
+  ]
+}

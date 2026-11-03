@@ -1,0 +1,64 @@
+{
+  "status": "pass",
+  "base": [
+    384,
+    288
+  ],
+  "assets_loaded": [
+    "castle",
+    "demon-king",
+    "knight",
+    "moss0",
+    "moss1",
+    "moss2",
+    "moss3",
+    "princess",
+    "shadow",
+    "stone0",
+    "stone1",
+    "stone2",
+    "stone3"
+  ],
+  "initial_player": {
+    "x": 188,
+    "y": 270
+  },
+  "moved_player": {
+    "x": 208,
+    "y": 270
+  },
+  "movement_delta": [
+    20,
+    0
+  ],
+  "wall_stop": {
+    "x": 188,
+    "y": 146
+  },
+  "npc_stop": {
+    "x": 266,
+    "y": 224
+  },
+  "boundary_x": 312,
+  "depth_order": [
+    "castle",
+    "demon-king",
+    "knight",
+    "princess"
+  ],
+  "reset": "pass",
+  "fullscreen": "pass",
+  "integer_scales": [
+    4,
+    3
+  ],
+  "fractional_downscaling": "refused",
+  "console_errors": [],
+  "fault_capture": "runtime-injected-errors.png",
+  "bundled_game_client": {
+    "script": "develop-web-game/scripts/web_game_playwright_client.js (unchanged local copy)",
+    "actions": "right 12 frames, idle 4 frames",
+    "console_errors": [],
+    "screenshot_reviewed": true
+  }
+}

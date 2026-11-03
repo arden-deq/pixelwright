@@ -1,0 +1,167 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_intake",
+  "status": "fail",
+  "artistic_status": "not_reviewed",
+  "category": "character",
+  "issues": [
+    {
+      "code": "CATEGORY_SIZE",
+      "severity": "fail",
+      "detail": "character assets must be 48x96; this one is 96x192."
+    },
+    {
+      "code": "COARSE_PIXELS",
+      "severity": "fail",
+      "detail": "Every color edge keeps a 2x2 spacing: the asset is drawn with 2x2 dots, not 1x game pixels. Redraw at 1x; do not shrink it with interpolation."
+    },
+    {
+      "code": "PIXEL_SIZE_DIFFERS",
+      "severity": "fail",
+      "detail": "The new asset's dots measure 2x2; the references measure 1x1, 1x1, 1x1, 1x1, 1x1."
+    }
+  ],
+  "asset": {
+    "size": [
+      96,
+      192
+    ],
+    "visible_colors": 39,
+    "effective_pixel_size": {
+      "x": 2,
+      "y": 2,
+      "size": 2,
+      "column_edges": 39,
+      "row_edges": 66,
+      "measurable": true,
+      "conclusive": true
+    },
+    "dither_pixels": 0
+  },
+  "references": [
+    {
+      "path": "pixelwright/examples/demon-castle-sd/build/stone0.png",
+      "sha256": "8270413a9aae0b87340a65bdc9d37eb056c683cd5102db36df543c9db77acda5",
+      "metrics": {
+        "size": [
+          16,
+          16
+        ],
+        "visible_colors": 5,
+        "effective_pixel_size": {
+          "x": 1,
+          "y": 1,
+          "size": 1,
+          "column_edges": 8,
+          "row_edges": 12,
+          "measurable": true,
+          "conclusive": true
+        },
+        "dither_pixels": 0
+      }
+    },
+    {
+      "path": "pixelwright/examples/demon-castle-sd/build/castle.png",
+      "sha256": "cba0a6962abfc7b25be7bcc13dd9eba5cb0e79d4cc882fef65bc76eddfb31a77",
+      "metrics": {
+        "size": [
+          192,
+          128
+        ],
+        "visible_colors": 48,
+        "effective_pixel_size": {
+          "x": 1,
+          "y": 1,
+          "size": 1,
+          "column_edges": 133,
+          "row_edges": 112,
+          "measurable": true,
+          "conclusive": true
+        },
+        "dither_pixels": 0
+      }
+    },
+    {
+      "path": "pixelwright/examples/demon-castle-sd/build/knight.png",
+      "sha256": "6996de535066fdd8a67a6af651cb96c3aa4f149c44af9f27a62a297fe795be1b",
+      "metrics": {
+        "size": [
+          48,
+          96
+        ],
+        "visible_colors": 39,
+        "effective_pixel_size": {
+          "x": 1,
+          "y": 1,
+          "size": 1,
+          "column_edges": 39,
+          "row_edges": 66,
+          "measurable": true,
+          "conclusive": true
+        },
+        "dither_pixels": 0
+      }
+    },
+    {
+      "path": "pixelwright/examples/demon-castle-sd/build/princess.png",
+      "sha256": "e7e25581635a0e802511050ad78922fdfa3c3d6133a42ea8868419afb4e498cc",
+      "metrics": {
+        "size": [
+          48,
+          96
+        ],
+        "visible_colors": 24,
+        "effective_pixel_size": {
+          "x": 1,
+          "y": 1,
+          "size": 1,
+          "column_edges": 39,
+          "row_edges": 70,
+          "measurable": true,
+          "conclusive": true
+        },
+        "dither_pixels": 0
+      }
+    },
+    {
+      "path": "pixelwright/examples/demon-castle-sd/build/demon-king.png",
+      "sha256": "f3cb028564a226f9b4f47cc74a12df922672e3a77a8cff6295a720c7d709549e",
+      "metrics": {
+        "size": [
+          48,
+          96
+        ],
+        "visible_colors": 27,
+        "effective_pixel_size": {
+          "x": 1,
+          "y": 1,
+          "size": 1,
+          "column_edges": 45,
+          "row_edges": 64,
+          "measurable": true,
+          "conclusive": true
+        },
+        "dither_pixels": 0
+      }
+    }
+  ],
+  "side_by_side": {
+    "order": [
+      "pixelwright/examples/demon-castle-sd/build/stone0.png",
+      "pixelwright/examples/demon-castle-sd/build/castle.png",
+      "pixelwright/examples/demon-castle-sd/build/knight.png",
+      "pixelwright/examples/demon-castle-sd/build/princess.png",
+      "pixelwright/examples/demon-castle-sd/build/demon-king.png",
+      "docs/examples/demon-castle-sd/knight-2x-rejected.png"
+    ],
+    "scale": 1,
+    "gap": 4
+  },
+  "provenance": {
+    "source_path": "docs/examples/demon-castle-sd/knight-2x-rejected.png",
+    "source_sha256": "71f68cd26cc0c73dde1879a64af5d6816ab5b1ac64e18f4d8529e1182bf5d19f",
+    "contract_sha256": "dd515d5d21e0a0efff3af5c21fd4b1d7c6a60a65adb010af21c259930af67cd5"
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 768,
+    "height": 576
+  },
+  "logical_size": {
+    "width": 384,
+    "height": 288
+  },
+  "cell_size": {
+    "width": 2,
+    "height": 2
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "28cc1f6e3c4bdf5690a51e602bfe2b59ed6362e04614cd1a43211f2f6a7b23f6",
+    "decoded_rgba_sha256": "0eec44f1d93bbe8ce218787004756f3b0b5c5f2369651efb3d4df74ae7d4ae85",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact",
+    "profile_sha256": "998d904cdca140b220b610ff2ec543f2c6c6c1f00ec00af9512225c91ecff635",
+    "source_path": "docs/images/game-sd-scene-preview.png",
+    "profile_path": "docs/examples/demon-castle-sd/scene-preview-profile.json"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": 64,
+    "strict_alpha": false,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 110592,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 110592,
+    "visible_rgb_colors_source": 58,
+    "visible_rgb_colors_logical_preview": 58,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 1154,
+    "outside_palette_source_pixels": 0
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "scene-preview-violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 384,
+    "height": 288
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 114,
+      "y": 2
+    },
+    {
+      "x": 130,
+      "y": 2
+    },
+    {
+      "x": 242,
+      "y": 2
+    },
+    {
+      "x": 322,
+      "y": 2
+    },
+    {
+      "x": 8,
+      "y": 4
+    },
+    {
+      "x": 56,
+      "y": 4
+    },
+    {
+      "x": 72,
+      "y": 4
+    },
+    {
+      "x": 88,
+      "y": 4
+    },
+    {
+      "x": 104,
+      "y": 4
+    },
+    {
+      "x": 296,
+      "y": 4
+    },
+    {
+      "x": 21,
+      "y": 9
+    },
+    {
+      "x": 37,
+      "y": 9
+    },
+    {
+      "x": 197,
+      "y": 9
+    },
+    {
+      "x": 213,
+      "y": 9
+    },
+    {
+      "x": 277,
+      "y": 9
+    },
+    {
+      "x": 357,
+      "y": 9
+    },
+    {
+      "x": 373,
+      "y": 9
+    },
+    {
+      "x": 34,
+      "y": 18
+    },
+    {
+      "x": 194,
+      "y": 18
+    },
+    {
+      "x": 258,
+      "y": 18
+    },
+    {
+      "x": 290,
+      "y": 18
+    },
+    {
+      "x": 354,
+      "y": 18
+    },
+    {
+      "x": 136,
+      "y": 20
+    },
+    {
+      "x": 168,
+      "y": 20
+    },
+    {
+      "x": 184,
+      "y": 20
+    },
+    {
+      "x": 232,
+      "y": 20
+    },
+    {
+      "x": 280,
+      "y": 20
+    },
+    {
+      "x": 312,
+      "y": 20
+    },
+    {
+      "x": 328,
+      "y": 20
+    },
+    {
+      "x": 376,
+      "y": 20
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "1154 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    },
+    {
+      "code": "OPAQUE_BACKGROUND",
+      "severity": "info",
+      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ],
+  "geometry": {
+    "status": "pass",
+    "rendered_size": {
+      "width": 768,
+      "height": 576
+    },
+    "logical_size": {
+      "width": 384,
+      "height": 288
+    },
+    "expected_render_size": {
+      "width": 768,
+      "height": 576
+    },
+    "scale_x": 2.0,
+    "scale_y": 2.0,
+    "exact_integer_division": true,
+    "square_logical_pixel": true,
+    "integer_scale": 2,
+    "issues": []
+  },
+  "outside_palette_sample": [],
+  "artistic_status": "not_reviewed",
+  "contract": {
+    "schema_version": 1,
+    "name": "scene-preview",
+    "logical_size": "384x288",
+    "scale": 2,
+    "max_colors": 64,
+    "alpha": "opaque",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#10101CFF",
+      "#1B172BFF",
+      "#282139FF",
+      "#372C4AFF",
+      "#343047FF",
+      "#47405BFF",
+      "#5B5274FF",
+      "#71698BFF",
+      "#8B82A1FF",
+      "#B0A5B8FF",
+      "#242E46FF",
+      "#35465FFF",
+      "#536C86FF",
+      "#7896AAFF",
+      "#AEC4CAFF",
+      "#E1EBDFFF",
+      "#3C172DFF",
+      "#641C37FF",
+      "#952D48FF",
+      "#C3484CFF",
+      "#EA775DFF",
+      "#49322BFF",
+      "#6D4C32FF",
+      "#9E7240FF",
+      "#CEA252FF",
+      "#EDCE7BFF",
+      "#FFF0B0FF",
+      "#5C3441FF",
+      "#92515AFF",
+      "#C17D71FF",
+      "#E3AD8CFF",
+      "#F8D4ABFF",
+      "#565169FF",
+      "#80788EFF",
+      "#AAA1ABFF",
+      "#D5C8BDFF",
+      "#FAEDD7FF",
+      "#231C3BFF",
+      "#352755FF",
+      "#52376FFF",
+      "#754A93FF",
+      "#A276AEFF",
+      "#D1A2CFFF",
+      "#681E31FF",
+      "#A43135FF",
+      "#DC5535FF",
+      "#FF9248FF",
+      "#FFD575FF",
+      "#1F2B50FF",
+      "#2C4173FF",
+      "#44629AFF",
+      "#6D8ABBFF",
+      "#A0BADCFF",
+      "#263B3DFF",
+      "#354A51FF",
+      "#57706EFF",
+      "#778878FF",
+      "#443143FF",
+      "#7A4552FF",
+      "#A26469FF",
+      "#62599BFF",
+      "#8A83BDFF",
+      "#B9B0C9FF",
+      "#FFF4CBFF"
+    ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 2,
+      "y": 2
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
+  },
+  "acceptance_mode": "strict_profile"
+}

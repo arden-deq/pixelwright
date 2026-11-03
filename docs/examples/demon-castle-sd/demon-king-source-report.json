@@ -1,0 +1,153 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "status": "fail",
+  "scope": "geometry_check_only",
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "7508141abb0991c4088884ee4c25e83dbf7fcc10e06a20f03dfbbd9c95604412",
+    "decoded_rgba_sha256": "c06e9b4674fcabdc090e7f692ed2902b18488cb25c615d0fa2a08da68b89cec5",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "profile_sha256": "ef857db26648d277ff02d566e961e95b5ad23b24a15450b2ddac1ae02c2b2eae",
+    "source_path": "docs/examples/demon-castle-sd/demon-king-generated.png",
+    "profile_path": "docs/examples/demon-castle-sd/demon-king-source-profile.json"
+  },
+  "geometry": {
+    "status": "fail",
+    "rendered_size": {
+      "width": 1024,
+      "height": 1536
+    },
+    "logical_size": {
+      "width": 48,
+      "height": 96
+    },
+    "expected_render_size": {
+      "width": 768,
+      "height": 1536
+    },
+    "scale_x": 21.33333333,
+    "scale_y": 16.0,
+    "exact_integer_division": false,
+    "square_logical_pixel": false,
+    "integer_scale": null,
+    "issues": [
+      {
+        "code": "RENDER_SIZE_MISMATCH",
+        "severity": "fail",
+        "detail": "Expected 768x1536 px, got 1024x1536 px."
+      },
+      {
+        "code": "NON_INTEGER_PIXEL_SCALE",
+        "severity": "fail",
+        "detail": "Logical 48x96 requires integer-sized pixel cells, but the displayed scale is 21.33333x16.00000. There can be no exact square-pixel grid on these dimensions."
+      }
+    ]
+  },
+  "input_size": {
+    "width": 1024,
+    "height": 1536
+  },
+  "logical_size": {
+    "width": 48,
+    "height": 96
+  },
+  "metrics": {
+    "grid_measurable": false,
+    "grid_score": null,
+    "uniform_rgba_cells": null,
+    "nonuniform_rgba_cells": null
+  },
+  "issues": [
+    {
+      "code": "RENDER_SIZE_MISMATCH",
+      "severity": "fail",
+      "detail": "Expected 768x1536 px, got 1024x1536 px."
+    },
+    {
+      "code": "NON_INTEGER_PIXEL_SCALE",
+      "severity": "fail",
+      "detail": "Logical 48x96 requires integer-sized pixel cells, but the displayed scale is 21.33333x16.00000. There can be no exact square-pixel grid on these dimensions."
+    }
+  ],
+  "note": "No resampling performed; grid lines show proposed boundaries only.",
+  "contract": {
+    "schema_version": 1,
+    "name": "demon-king: unmodified image-tool candidate",
+    "logical_size": "48x96",
+    "scale": 16,
+    "max_colors": 64,
+    "alpha": "binary",
+    "transparent_rgb": "exact",
+    "allowed_palette": [
+      "#00000000",
+      "#10101CFF",
+      "#1B172BFF",
+      "#282139FF",
+      "#372C4AFF",
+      "#343047FF",
+      "#47405BFF",
+      "#5B5274FF",
+      "#71698BFF",
+      "#8B82A1FF",
+      "#B0A5B8FF",
+      "#242E46FF",
+      "#35465FFF",
+      "#536C86FF",
+      "#7896AAFF",
+      "#AEC4CAFF",
+      "#E1EBDFFF",
+      "#3C172DFF",
+      "#641C37FF",
+      "#952D48FF",
+      "#C3484CFF",
+      "#EA775DFF",
+      "#49322BFF",
+      "#6D4C32FF",
+      "#9E7240FF",
+      "#CEA252FF",
+      "#EDCE7BFF",
+      "#FFF0B0FF",
+      "#5C3441FF",
+      "#92515AFF",
+      "#C17D71FF",
+      "#E3AD8CFF",
+      "#F8D4ABFF",
+      "#565169FF",
+      "#80788EFF",
+      "#AAA1ABFF",
+      "#D5C8BDFF",
+      "#FAEDD7FF",
+      "#231C3BFF",
+      "#352755FF",
+      "#52376FFF",
+      "#754A93FF",
+      "#A276AEFF",
+      "#D1A2CFFF",
+      "#681E31FF",
+      "#A43135FF",
+      "#DC5535FF",
+      "#FF9248FF",
+      "#FFD575FF",
+      "#1F2B50FF",
+      "#2C4173FF",
+      "#44629AFF",
+      "#6D8ABBFF",
+      "#A0BADCFF",
+      "#263B3DFF",
+      "#354A51FF",
+      "#57706EFF",
+      "#778878FF",
+      "#443143FF",
+      "#7A4552FF",
+      "#A26469FF",
+      "#62599BFF",
+      "#8A83BDFF",
+      "#B9B0C9FF",
+      "#FFF4CBFF"
+    ]
+  },
+  "artistic_status": "not_reviewed",
+  "acceptance_mode": "strict_profile"
+}

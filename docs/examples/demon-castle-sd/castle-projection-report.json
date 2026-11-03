@@ -1,0 +1,194 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "scope": "technical_checks_only_not_artistic_quality",
+  "status": "pass",
+  "input_size": {
+    "width": 1728,
+    "height": 1152
+  },
+  "logical_size": {
+    "width": 192,
+    "height": 128
+  },
+  "cell_size": {
+    "width": 9,
+    "height": 9
+  },
+  "strict_grid": true,
+  "acceptance": "exact",
+  "provenance": {
+    "source_sha256": "04ea7c4b402edb476ed7bc7eaef636eca1e16f893488868de1632b3a43885436",
+    "decoded_rgba_sha256": "08188ed1adb2b6e1bd8894d6974cc1c609a4b6a77e1a97d76448748fecd85be6",
+    "sample_scope": "decoded_rgba8_without_exif_or_color_management",
+    "transparent_rgb": "exact"
+  },
+  "settings": {
+    "difference_tolerance_per_channel": 0,
+    "minimum_grid_score": 100.0,
+    "maximum_source_rgb_colors": null,
+    "strict_alpha": false,
+    "transparent_rgb": "exact"
+  },
+  "metrics": {
+    "grid_score": 100.0,
+    "grid_measurable": true,
+    "square_cell_geometry": true,
+    "uniform_rgba_cells": 24576,
+    "nonuniform_rgba_cells": 0,
+    "uniform_rgba_cell_fraction": 1.0,
+    "off_grid_source_pixels": 0,
+    "off_grid_logical_cells": 0,
+    "total_logical_cells": 24576,
+    "visible_rgb_colors_source": 4670,
+    "visible_rgb_colors_logical_preview": 4670,
+    "partial_alpha_source_pixels": 0,
+    "possible_color_isolated_logical_pixels": 8203
+  },
+  "worst_cells": [],
+  "nonuniform_rgba_cell_samples": [],
+  "nonuniform_rgba_cell_samples_truncated": false,
+  "violation_mask": {
+    "file": "castle-projection-violation_mask.png",
+    "coordinate_space": "logical_grid",
+    "encoding": "0=uniform,255=nonuniform",
+    "width": 192,
+    "height": 128
+  },
+  "possible_isolated_pixels_sample": [
+    {
+      "x": 49,
+      "y": 14
+    },
+    {
+      "x": 50,
+      "y": 14
+    },
+    {
+      "x": 141,
+      "y": 14
+    },
+    {
+      "x": 142,
+      "y": 14
+    },
+    {
+      "x": 51,
+      "y": 15
+    },
+    {
+      "x": 140,
+      "y": 15
+    },
+    {
+      "x": 141,
+      "y": 15
+    },
+    {
+      "x": 142,
+      "y": 15
+    },
+    {
+      "x": 49,
+      "y": 16
+    },
+    {
+      "x": 50,
+      "y": 16
+    },
+    {
+      "x": 51,
+      "y": 16
+    },
+    {
+      "x": 52,
+      "y": 16
+    },
+    {
+      "x": 139,
+      "y": 16
+    },
+    {
+      "x": 140,
+      "y": 16
+    },
+    {
+      "x": 141,
+      "y": 16
+    },
+    {
+      "x": 142,
+      "y": 16
+    },
+    {
+      "x": 143,
+      "y": 16
+    },
+    {
+      "x": 49,
+      "y": 17
+    },
+    {
+      "x": 50,
+      "y": 17
+    },
+    {
+      "x": 51,
+      "y": 17
+    },
+    {
+      "x": 139,
+      "y": 17
+    },
+    {
+      "x": 140,
+      "y": 17
+    },
+    {
+      "x": 141,
+      "y": 17
+    },
+    {
+      "x": 142,
+      "y": 17
+    },
+    {
+      "x": 143,
+      "y": 17
+    },
+    {
+      "x": 48,
+      "y": 18
+    },
+    {
+      "x": 49,
+      "y": 18
+    },
+    {
+      "x": 50,
+      "y": 18
+    },
+    {
+      "x": 51,
+      "y": 18
+    },
+    {
+      "x": 139,
+      "y": 18
+    }
+  ],
+  "issues": [
+    {
+      "code": "COLOR_ISOLATION_CANDIDATES",
+      "severity": "info",
+      "detail": "8203 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
+    }
+  ],
+  "visual_review_required": [
+    "Recognizable silhouette at logical resolution",
+    "Intentional pixel clusters, shading, and outline design",
+    "Anatomy, props, anatomy of motion, and style consistency",
+    "Check if any grid projection loses important facial or object detail"
+  ]
+}
