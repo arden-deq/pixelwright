@@ -1,6 +1,6 @@
 # 게임 계약 검증 기록
 
-검증일: **2026-11-03**. Linux 컨테이너에서 Python 3.12.3·3.14.6(Pillow 12.3.0)과 Python 3.12.3(Pillow 13.0.0)으로 단위 테스트 258개가 모두 통과했습니다. 그중 게임 계약 테스트는 19개입니다. 패키지 검증과 설치 ZIP 실행 검증도 통과했습니다. Windows는 CI 결과를 따로 확인해야 합니다.
+검증일: **2026-11-03**. Linux 컨테이너에서 Python 3.12.3·3.14.6(Pillow 12.3.0)과 Python 3.12.3(Pillow 13.0.0)으로 단위 테스트 259개가 모두 통과했습니다. 그중 게임 계약 테스트는 20개입니다. 패키지 검증과 설치 ZIP 실행 검증도 통과했습니다. Windows는 CI 결과를 따로 확인해야 합니다.
 
 ## 무엇을 더했나
 
@@ -12,28 +12,30 @@
   - `screen`: 무손실 게임 스크린샷을 검사합니다.
 - [`references/game.md`](../pixelwright/references/game.md), [`references/engines.md`](../pixelwright/references/engines.md): 계약 항목과 판정 코드, 엔진별 설정(Unity, Godot 4, Phaser 3, PixiJS, 웹 캔버스, LÖVE, GameMaker)을 설명합니다. 엔진 설정 이름은 버전마다 다를 수 있어 사용하는 버전에서 확인하라고 적었습니다.
 - `SKILL.md`: 게임용 작업이면 스타일 결정을 먼저 모아 계약을 만들고, 브리프를 모든 에셋과 생성 프롬프트에 따르도록 했습니다. 게임에 넣을 때의 규칙 8가지를 넣었습니다.
-- [`examples/game/`](../pixelwright/examples/game/): 384×216, 16×16 타일, 11색 팔레트의 예제 계약과 1× 타일·캐릭터(행렬 원본과 빌드 결과)입니다.
+- [`examples/game/`](../pixelwright/examples/game/): 쯔꾸르(RPG Maker 2000) 스타일 예제입니다. 320×240 화면, 16×16 맵칩(풀·꽃·흙길·물), 32×32 나무, 80×64 연못, 24×32 주인공, 26색과 투명색 팔레트로 되어 있습니다. 모든 에셋은 한 점씩 찍은 행렬 원본과 1× 빌드 결과가 있고, [`tools/generate_game_example.py`](../tools/generate_game_example.py)가 원본을 다시 만듭니다. 맵칩과 지형은 범주의 `"outline": false`로 외곽선 규칙에서 빠집니다.
 
 ## 확인한 판정
 
-예제의 타일과 캐릭터를 바탕으로 한 가지씩 바꿔 검사했습니다. 화면은 384×216을 5배로 키워 2000×1100 창에 가운데 놓았습니다(좌우 40, 위아래 10 여백).
+예제의 맵칩·나무·주인공을 바탕으로 한 가지씩 바꿔 검사했습니다. 화면은 320×240을 4배로 키워 1700×1000 창에 가운데 놓았습니다(좌우 210, 위아래 20 여백).
 
 | 바꾼 것 | 결과 | 코드 |
 | --- | --- | --- |
-| 예제 타일·캐릭터 그대로 | PASS | 실효 픽셀 크기 1, 외곽선 100% |
+| 예제 에셋 7개를 각 범주로 | PASS | 점 크기 1×1. 주인공 외곽선 100%, 나무 97% |
 | 캐릭터를 2배로 키운 PNG | FAIL | `COARSE_PIXELS` (2×2), 기준 에셋과 비교 시 `PIXEL_SIZE_DIFFERS` |
 | 캐릭터를 가로로만 2배 늘린 PNG | FAIL | `COARSE_PIXELS` (2×1) |
 | 4×4 체크무늬 1× 타일(경계 3개) | REVIEW | `COARSE_PIXELS` 검토. 일부러 큰 무늬인지 사람이 판단 |
-| 768×216 배경 | 범주 없이 REVIEW, `background` 범주로 PASS | `ASSET_LARGER_THAN_SCREEN` |
-| 1× 캐릭터 옆에 2배 타일을 붙인 PNG | REVIEW | `COARSE_REGION` (2배 부분만 표시) |
+| 640×240 배경 | 범주 없이 REVIEW, `background` 범주로 PASS | `ASSET_LARGER_THAN_SCREEN` |
+| 1× 주인공 옆에 2배 나뭇잎 조각을 붙인 PNG | REVIEW | `COARSE_REGION` (2배 부분만 표시) |
+| 연못을 범주 없이 / `terrain` 범주로 | REVIEW / PASS | `OUTLINE_INCOMPLETE` / 외곽선 규칙 제외 |
 | 팔레트 밖 색, 반투명 픽셀, 종류별 크기 위반 | FAIL | `COLOR_OUTSIDE_PALETTE`, `PARTIAL_ALPHA`, `CATEGORY_SIZE` |
 | 3×3 체커 디더링, 외곽선 제거, 2칸 외곽선 | REVIEW | `DITHERING_FOUND`, `OUTLINE_INCOMPLETE`, `OUTLINE_TOO_THICK` |
-| 깨끗한 화면 | PASS | 뷰포트 `[40, 10, 1920, 1080]` 자동 계산 |
+| 깨끗한 화면 | PASS | 뷰포트 `[210, 20, 1280, 960]` 자동 계산 |
 | 캐릭터를 화면 픽셀 2개만큼 밀어 그림(소수점 좌표) | FAIL | `CELL_NOT_UNIFORM` |
 | 선형 필터로 확대 | FAIL | `CELL_NOT_UNIFORM` |
 | 확대 후 캐릭터를 17° 회전 | FAIL | `CELL_NOT_UNIFORM` |
 | 화면 안에 2배 캐릭터 | REVIEW | `COARSE_REGION` |
 | 2배 아이콘(16×16)을 정렬되지 않은 위치나 화면 가장자리에 둠 | REVIEW | `COARSE_REGION` (모든 위치를 검사) |
+| 예제 맵(연못·나무·흙길) 위 주인공 위치를 바꿔 가며 만든 깨끗한 화면 216개 | 모두 PASS | 오탐 없음 |
 | 반투명 흰색 이펙트 | FAIL | `COLOR_OUTSIDE_PALETTE` (이펙트 혼합 `opaque`) |
 | 여백을 검정 대신 어두운 회색으로 | FAIL | `LETTERBOX_NOT_UNIFORM` |
 

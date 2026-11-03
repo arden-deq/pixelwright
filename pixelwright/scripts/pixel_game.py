@@ -38,7 +38,7 @@ import pixel_palette as palettes
 import pixel_qa as qa
 import pixelwright as pw
 
-VERSION = "0.6.2"
+VERSION = "0.7.0"
 MAX_CONTRACT_BYTES = 1024 * 1024
 CONTRACT_KEYS = {"schema_version", "name", "base_resolution", "tile_size", "palette_file", "allowed_palette",
                  "max_colors", "alpha", "letterbox", "categories", "style", "font", "animation", "rotation",
@@ -46,7 +46,7 @@ CONTRACT_KEYS = {"schema_version", "name", "base_resolution", "tile_size", "pale
 STYLE_KEYS = {"genre", "perspective", "light_direction", "shading", "outline", "dithering", "anti_aliasing",
               "mood", "notes", "references"}
 OUTLINE_KEYS = {"mode", "width", "colors"}
-CATEGORY_KEYS = {"size", "min_size", "max_size", "notes"}
+CATEGORY_KEYS = {"size", "min_size", "max_size", "outline", "notes"}
 FONT_KEYS = {"name", "file", "size_px", "line_height_px"}
 ENUMS = {
     "alpha": ("binary", "opaque", "any"),
@@ -175,6 +175,8 @@ def load_contract(path: str | Path) -> dict[str, Any]:
             raise ValueError(f"Category {name!r} uses size or min/max sizes, not both")
         if "notes" in rule:
             _text(rule["notes"], f"{name}.notes")
+        if "outline" in rule and type(rule["outline"]) is not bool:
+            raise ValueError(f"{name}.outline must be true or false")
     style = doc.get("style", {})
     _keys(style, STYLE_KEYS, "style")
     for key in ("genre", "mood", "notes"):
@@ -297,7 +299,9 @@ def coarse_windows(packed: np.ndarray, window: int) -> list[dict[str, int]]:
     col_total, col_dots = _axis_dots(packed[:, 1:] != packed[:, :-1], nh, nw)
     row_total, row_dots = _axis_dots((packed[1:, :] != packed[:-1, :]).T, nw, nh)
     row_total, row_dots = row_total.T, row_dots.T
-    hit = (col_total >= MIN_EDGES) & (row_total >= MIN_EDGES) & ((col_dots > 1) | (row_dots > 1))
+    # Both axes must be coarse: sparse 1x content (sky, a sprite's edge, a ground line) often lines up on
+    # one axis by chance. Stretched, non-square art is caught by the whole-asset measurement instead.
+    hit = (col_total >= MIN_EDGES) & (row_total >= MIN_EDGES) & (col_dots > 1) & (row_dots > 1)
     covered = np.zeros((h, w), dtype=bool)
     dots = np.zeros((h, w), dtype=np.int32)
     for y, x in np.argwhere(hit):
@@ -445,7 +449,8 @@ def measure_asset(image: Image.Image, contract: dict, category: str | None) -> t
                              f"{int(dithered.sum())} pixels form two-color checkerboards; the style declares no dithering.",
                              sample=[{"x": int(x), "y": int(y)} for y, x in dithers[:20]]))
     outline = style.get("outline", {})
-    if outline.get("mode") in ("dark", "colored") and contract["outline_colors"] and opaque.any():
+    outlined = category is None or doc["categories"][category].get("outline", True)
+    if outlined and outline.get("mode") in ("dark", "colored") and contract["outline_colors"] and opaque.any():
         measured = outline_metrics(canonical, opaque, _pack_colors(contract["outline_colors"]))
         metrics["outline"] = measured
         if measured["outline_coverage"] is not None and measured["outline_coverage"] < OUTLINE_MIN_COVERAGE:
@@ -713,6 +718,8 @@ def brief(contract: dict) -> str:
             else:
                 size = f"at least {rule['min_size']}" if "min_size" in rule else f"up to {rule.get('max_size', 'any size')}"
             note = f" ({rule['notes']})" if "notes" in rule else ""
+            if rule.get("outline") is False:
+                note += "; no outline"
             lines.append(f"- {name}: {size}{note}")
     lines += ["", "## Text, motion and effects", ""]
     if "font" in doc:

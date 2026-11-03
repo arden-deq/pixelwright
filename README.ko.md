@@ -2,13 +2,13 @@
 
 ![기사·물약·방패 아이콘으로 소개하는 Pixelwright 배너](docs/images/pixelwright-header.png)
 
-[English](README.md) · [한국어](README.ko.md) · 버전 0.6.2 · [Apache License 2.0](LICENSE)
+[English](README.md) · [한국어](README.ko.md) · 버전 0.7.0 · [Apache License 2.0](LICENSE)
 
 **정적 PNG 픽셀아트의 격자·색상·투명도를 검수합니다.**
 
 Pixelwright는 실제 이미지의 픽셀을 선언한 품질 프로필과 비교하고, JSON 판정과 시각적 검사 자료를 만듭니다. 캐릭터·아이템·UI 아이콘을 검수하거나 여러 에셋에 같은 기준을 적용할 수 있습니다. Python 도구와 함께 GPT 계열 호스트·Claude에서 사용할 수 있는 공통 AI 스킬을 제공합니다.
 
-현재 핵심 기능은 정적 PNG 검수입니다. 생성·보정·팔레트 편집·레이어·애니메이션은 [개발 중 기능](#개발-중-기능)으로 소개합니다.
+현재 핵심 기능은 정적 PNG 검수입니다. [게임 계약](#게임-계약-게임-전체를-하나의-픽셀-크기로)은 1× 에셋부터 실행 중인 게임 화면까지 게임 전체를 하나의 픽셀 크기와 스타일로 맞춥니다. 생성·보정·팔레트 편집·레이어·애니메이션은 [개발 중 기능](#개발-중-기능)으로 소개합니다.
 
 ## 핵심 기능: 픽셀아트 검수
 
@@ -102,6 +102,48 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 
 격자 크기가 맞지 않으면 셀 색상 통과 판정을 진행하지 않습니다. 상태·정확한 위반 수·미리보기를 함께 확인합니다. 단일 검사에는 `report.json`과 격자 진단 이미지가, 일괄 검사에는 `batch.json`과 번호별 출력 폴더가 생성됩니다. 출력물별 설명은 [품질 규격](pixelwright/references/quality-contract.md)에 있습니다.
 
+## 게임 계약: 게임 전체를 하나의 픽셀 크기로
+
+0.7.0에서 추가했습니다. 프로필은 PNG 한 장을 검사하고, **게임 계약**(`game.json`)은 한 게임의 모든 에셋과 화면이 공유할 기준을 정합니다. 여러 사람이나 AI가 만든 그림도 이 기준으로 일관성을 유지합니다.
+
+![예제의 320×240 쯔꾸르 스타일 맵: 풀·꽃 타일, 흙길, 연못, 나무, 주인공](docs/images/game-scene.png)
+
+들어 있는 예제는 쯔꾸르(RPG Maker 2000) 스타일의 작은 맵입니다. 16×16 맵칩, 24×32 주인공, 26색과 투명색, 320×240 화면을 쓰며, 위 그림은 3배로 보여 줍니다. 모든 에셋은 한 점씩 찍은 1× PNG이고, 자기 계약 검사를 통과합니다. 계약에는 다음을 담습니다.
+
+- **화면:** 기본 해상도 하나(예제는 320×240). 정수 배율로만 키우고, 남는 창 공간은 여백 색으로 채웁니다.
+- **픽셀 크기:** 스프라이트, 타일, 이펙트, UI, 폰트를 모두 1×로 그립니다. 이미지 픽셀 하나가 게임 픽셀 하나입니다.
+- **색과 크기:** 팔레트와 명암 단계, 색 수, 투명도, 에셋 종류별 크기 범위(맵칩·지형은 외곽선 규칙에서 뺄 수 있음)
+- **스타일:** 시점, 광원 방향, 음영, 외곽선 방식과 색, 디더링, 안티앨리어싱, 분위기, 기준 에셋
+- **실행:** 폰트 크기, 애니메이션 속도, 회전 방식, 이펙트 혼합, 엔진
+
+`brief`는 이 계약을 그리기 전에 따를 규칙으로 바꿔 줍니다. 그림을 그리는 사람, AI, 이미지 생성 프롬프트가 같은 규칙을 씁니다. 모든 항목을 채운 [예제 게임](pixelwright/examples/game/)이 들어 있습니다.
+
+```sh
+python pixelwright/scripts/pixel_game.py brief --contract pixelwright/examples/game/game.json
+python pixelwright/scripts/pixel_game.py asset hero.png --category character --contract game.json --out-dir runs/hero-v1
+python pixelwright/scripts/pixel_game.py intake new_enemy.png --category character --contract game.json --out-dir runs/intake-v1
+python pixelwright/scripts/pixel_game.py screen capture.png --contract game.json --out-dir runs/screen-v1
+```
+
+**에셋을 추가하기 전에** `intake`가 새 에셋을 게임의 기준 에셋 옆에 1×로 놓고, 그 줄 전체를 같은 정수 배율로 키웁니다. 아래는 예제의 풀 맵칩·나무·주인공 옆에 같은 주인공을 2배로 내보낸 파일을 놓은 결과입니다. 점 크기가 2×2로 측정되어 `COARSE_PIXELS`, `PIXEL_SIZE_DIFFERS`, `CATEGORY_SIZE`로 실패합니다.
+
+![1× 풀 맵칩·나무·주인공 옆에 2배로 내보낸 주인공을 놓고 함께 확대한 비교](docs/images/game-intake.png)
+
+**실행 중인 게임에서는** `screen`이 무손실 스크린샷을 기본 해상도 격자로 검사합니다. 아래 화면은 같은 맵을 1440×1000 창에 4배로 띄운 것입니다. 두 번째 주인공이 격자에서 화면 픽셀 2개만큼 어긋나 그려졌고(빨강: 한 색이 아닌 게임 픽셀), 반투명 반짝이 이펙트가 팔레트 밖 색을 만들었습니다(자홍).
+
+![기본 해상도로 본 화면 검사: 격자에서 어긋난 캐릭터는 빨강, 혼합된 이펙트는 자홍](docs/images/game-screen-check.png)
+
+| 게임에서 잘못된 것 | 코드 |
+| --- | --- |
+| 확대해서 내보내거나 한 방향으로 늘린 에셋 | `COARSE_PIXELS` |
+| 에셋 일부, 또는 화면 안의 스프라이트·폰트·UI를 2배 이상으로 그림 | `COARSE_REGION` (검토) |
+| 소수점 좌표·카메라, 실행 중 회전, 선형 필터, 밉맵, 비정수 배율 | `CELL_NOT_UNIFORM` |
+| 반투명·가산 이펙트, 틴트, 색 보정 | `COLOR_OUTSIDE_PALETTE` |
+| 여백 색이 아닌 여백 | `LETTERBOX_NOT_UNIFORM` |
+| 스타일과 다른 색·투명도·종류별 크기·디더링·외곽선 | `COLOR_OUTSIDE_PALETTE`, `PARTIAL_ALPHA`, `CATEGORY_SIZE`, `DITHERING_FOUND`, `OUTLINE_*` |
+
+`viewport`는 창 크기별 정수 배율과 여백을 알려 줍니다. 항목과 코드 전체는 [게임 계약 문서](pixelwright/references/game.md)에 있고, Unity·Godot 4·Phaser 3·PixiJS·웹 캔버스·LÖVE·GameMaker 설정은 [엔진 설정](pixelwright/references/engines.md)에 있습니다. 점 크기는 색 경계로 측정하므로, 경계가 적은 단순한 1× 그림은 실패가 아니라 검토로 보고합니다. 광원, 음영의 질, 분위기는 측정하지 않으니 나란히 놓은 비교 그림을 보고 판단합니다.
+
 ## AI 스킬로 사용하기
 
 스크립트·참조 문서·예제를 포함한 **`pixelwright/` 폴더 전체**를 설치합니다.
@@ -115,6 +157,10 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 
 > 이 PNG를 24×24 논리 픽셀·8배 배율, 가시 색상 10개 이하, 이진 투명도로 검사해 줘. 원본과 격자 미리보기, 실제 PASS/FAIL 보고서를 보여 줘.
 
+게임이라면 스타일부터 정합니다.
+
+> 320×240 쯔꾸르(RPG Maker 2000) 스타일 탑다운 RPG야. 맵칩은 16×16, 캐릭터는 24×32, 외곽선은 1픽셀 어두운 색이야. 게임 계약을 만들고 브리프를 보여 준 다음, 1× 슬라임 적을 그려서 우리 주인공과 풀 옆에 놓고 검사해 줘.
+
 원본 파일과 성공한 검사 실행이 없으면 **미검증**입니다. 설치와 실행 조건은 [SKILL.md](pixelwright/SKILL.md)와 [플랫폼 호환성 안내](docs/COMPATIBILITY_ko.md)를 참고합니다.
 
 ## 개발 중 기능
@@ -126,21 +172,20 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 | 픽셀아트 생성·격자 보정 | 논리 캔버스 렌더링과 재검사가 필요한 파생 보정 후보 생성 | [생성](pixelwright/references/creation.md) · [보정](pixelwright/references/quality-contract.md#artifacts-and-coordinates) |
 | 팔레트 편집 | 팔레트 재사용·추출·명암 램프·색상 변환 | [팔레트](pixelwright/references/palettes.md) |
 | 레이어 합성 | 공통 격자로 합성하고 레이어별·최종 결과를 검사 | [레이어](pixelwright/references/layers.md) |
-| 게임 계약 | 하나의 기본 해상도와 1× 에셋, 게임 전체 스타일 브리프, 기준 에셋과 나란히 놓는 수용 검사, 소수점 위치·필터링·회전·혼합 이펙트를 잡는 스크린샷 검사 | [게임 계약](pixelwright/references/game.md) · [엔진 설정](pixelwright/references/engines.md) |
 | 외부 스프라이트 시트 검증 | sprite-gen PNG·manifest의 팔레트·여백·외곽 크기 일관성 검사 | [시트 규격](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/pixelwright/references/external-atlases.md) · [검증 기록](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/docs/VALIDATION_external_atlases_ko.md) |
 | 애니메이션·동작 검증 | 선택한 2D 시안·관찰 부위·프레임 일관성·선택적 3D 자세 가이드 | [2D 경로](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/docs/SPRITE_2D_ko.md) · [3D 경로](docs/SPRITE_3D_ko.md) · [진행 상황](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/docs/SPRITE_REQUIREMENTS_AND_STATUS_ko.md) |
 
-시트 연동은 [sprite-gen](https://github.com/aldegad/sprite-gen)의 출력 규격을 따릅니다. [개발 브랜치의 패키지 출처 선언](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/pixelwright/upstream-integrations.json)에 원본 저장소·라이선스·확인한 버전/커밋, `data_format` 관계와 `runtime_required: false`를 기록합니다. 개발 기능의 구현이 생성 작화의 완성도나 자연스러운 움직임의 승인을 뜻하지는 않습니다. 시트·2D 동작 관련 구현은 개발 브랜치에서 진행하며, 기존 v0.6.2 배포 파일은 그대로입니다.
+시트 연동은 [sprite-gen](https://github.com/aldegad/sprite-gen)의 출력 규격을 따릅니다. [개발 브랜치의 패키지 출처 선언](https://github.com/arden-deq/pixelwright/blob/codex/design-first-sprites/pixelwright/upstream-integrations.json)에 원본 저장소·라이선스·확인한 버전/커밋, `data_format` 관계와 `runtime_required: false`를 기록합니다. 개발 기능의 구현이 생성 작화의 완성도나 자연스러운 움직임의 승인을 뜻하지는 않습니다. 시트·2D 동작 관련 구현은 개발 브랜치에서 진행하며, v0.7.0 배포 파일에는 `main`에 있는 기능만 들어 있습니다.
 
 ## 검증과 패키징
 
 ```sh
 python -m unittest discover -s pixelwright/tests -v
 python tools/package_skill.py --out-dir dist
-python tools/package_skill.py --verify dist/pixelwright-v0.6.2.zip
+python tools/package_skill.py --verify dist/pixelwright-v0.7.0.zip
 ```
 
-패키징은 설치 ZIP과 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사합니다. 정사각형 격자 진단의 [검증 기록](docs/VALIDATION_v051_ko.md)과 구현 근거를 담은 [설계 문서](docs/DESIGN_ko.md)도 확인할 수 있습니다.
+패키징은 설치 ZIP과 개발 키트 ZIP을 만듭니다. 패키지 검증기는 ZIP 구조와 SHA-256 목록을 검사합니다. 이번 릴리스는 [v0.7.0 검증 기록](docs/VALIDATION_v070_ko.md)에, 정사각형 격자 진단은 [이전 검증 기록](docs/VALIDATION_v051_ko.md)에 있습니다. 이 밖에 구현 근거를 담은 [설계 문서](docs/DESIGN_ko.md)도 확인할 수 있습니다.
 
 ## 라이선스와 보안
 

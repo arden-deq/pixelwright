@@ -31,7 +31,7 @@ import pixel_build as builder
 import pixel_qa as qa
 import pixelwright as project
 
-VERSION = "0.6.2"
+VERSION = "0.7.0"
 MAX_SPEC_BYTES = 8 * 1024 * 1024
 MAX_FRAMES = 1024
 MAX_PARTS = 64

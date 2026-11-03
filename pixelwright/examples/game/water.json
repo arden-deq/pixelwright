@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "scale": 8,
+  "palette_file": "palette.json",
+  "rows": [
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water_light", "water_light", "water_light", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water_dark", "water_dark", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water_light", "water_light", "water_light", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water_dark", "water_dark", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water_light", "water_light", "water_light", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water_dark", "water_dark", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water_light", "water_light", "water_light", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water_dark", "water_dark", "water", "water", "water", "water", "water", "water", "water", "water_light", "water_light", "water_light", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water_dark", "water_dark"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water_light", "water_light", "water_light", "water", "water", "water", "water", "water", "water"],
+    ["water", "water", "water", "water", "water", "water", "water", "water", "water", "water_dark", "water_dark", "water", "water", "water", "water", "water"]
+  ]
+}

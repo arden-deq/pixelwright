@@ -1,33 +1,73 @@
 {
   "schema_version": 1,
-  "name": "Moss Keep palette (example)",
+  "name": "Hollow Glen palette (example)",
   "colors": {
     "transparent": "#00000000",
-    "ink": "#1B1F2AFF",
-    "grass_dark": "#2F6B3AFF",
-    "grass": "#4FA34AFF",
-    "grass_light": "#9BD45FFF",
-    "dirt_dark": "#5A3A28FF",
-    "dirt": "#8A5A3AFF",
-    "skin": "#F2C49BFF",
-    "steel": "#6C7A89FF",
-    "steel_light": "#B8C4CFFF",
-    "cloth": "#A23E3EFF"
+    "outline": "#2B1B24FF",
+    "hair_dark": "#6B3420FF",
+    "hair": "#A8552AFF",
+    "hair_light": "#DD8A44FF",
+    "skin": "#F8D3A8FF",
+    "skin_shade": "#D99B70FF",
+    "cloth_dark": "#23417AFF",
+    "cloth": "#3C6CC0FF",
+    "cloth_light": "#79A6E6FF",
+    "leather_dark": "#4A2A18FF",
+    "leather": "#7E4C2AFF",
+    "red": "#B8383AFF",
+    "white": "#F4F1E4FF",
+    "grass_dark": "#3D7A2EFF",
+    "grass": "#5EA83AFF",
+    "grass_light": "#8ED04EFF",
+    "dirt_dark": "#9A6A3CFF",
+    "dirt": "#C4925AFF",
+    "dirt_light": "#E2BC80FF",
+    "water_dark": "#2A5AA6FF",
+    "water": "#4A8AD8FF",
+    "water_light": "#9CCEF2FF",
+    "leaf_dark": "#1E5A2AFF",
+    "leaf": "#2E8A3AFF",
+    "leaf_light": "#5AB84AFF",
+    "yellow": "#F2D24AFF"
   },
   "ramps": {
+    "hair": [
+      "hair_dark",
+      "hair",
+      "hair_light"
+    ],
+    "skin": [
+      "skin_shade",
+      "skin"
+    ],
+    "cloth": [
+      "cloth_dark",
+      "cloth",
+      "cloth_light"
+    ],
     "grass": [
       "grass_dark",
       "grass",
       "grass_light"
     ],
-    "steel": [
-      "ink",
-      "steel",
-      "steel_light"
-    ],
     "dirt": [
       "dirt_dark",
-      "dirt"
+      "dirt",
+      "dirt_light"
+    ],
+    "water": [
+      "water_dark",
+      "water",
+      "water_light"
+    ],
+    "leaf": [
+      "leaf_dark",
+      "leaf",
+      "leaf_light"
+    ],
+    "leather": [
+      "leather_dark",
+      "leather"
     ]
   }
 }

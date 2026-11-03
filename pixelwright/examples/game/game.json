@@ -1,63 +1,35 @@
 {
   "schema_version": 1,
-  "name": "Moss Keep (example)",
-  "base_resolution": "384x216",
+  "name": "Hollow Glen (example)",
+  "base_resolution": "320x240",
   "tile_size": 16,
   "palette_file": "palette.json",
   "max_colors": 16,
   "alpha": "binary",
   "letterbox": "#000000",
   "categories": {
-    "tile": {
-      "size": "16x16"
-    },
-    "character": {
-      "min_size": "8x12",
-      "max_size": "24x32",
-      "notes": "player and enemies stand 1 to 2 tiles tall"
-    },
-    "item": {
-      "max_size": "16x16"
-    },
-    "ui_icon": {
-      "size": "12x12"
-    }
+    "tile": {"size": "16x16", "outline": false, "notes": "map chips; they tile seamlessly"},
+    "terrain": {"max_size": "160x120", "outline": false, "notes": "ponds, cliffs and other map pieces larger than one chip"},
+    "object": {"min_size": "16x16", "max_size": "48x64", "notes": "trees, signs and props that stand on the map"},
+    "character": {"size": "24x32", "notes": "one charset cell; feet on the bottom row, about 16 pixels wide"},
+    "item": {"max_size": "16x16"},
+    "ui_icon": {"size": "12x12"}
   },
   "style": {
-    "genre": "side-scrolling action platformer",
-    "perspective": "side",
+    "genre": "top-down fantasy JRPG in the style of classic RPG Maker 2000/2003 maps",
+    "perspective": "top-down",
     "light_direction": "upper-left",
     "shading": "cel",
-    "outline": {
-      "mode": "dark",
-      "width": 1,
-      "colors": [
-        "ink"
-      ]
-    },
+    "outline": {"mode": "dark", "width": 1, "colors": ["outline"]},
     "dithering": "none",
     "anti_aliasing": "none",
-    "mood": "bright, mossy ruins; readable silhouettes over detail",
-    "notes": "Characters read at 1x against the tiles; at most three shades per material.",
-    "references": [
-      "build/tile.png",
-      "build/hero.png"
-    ]
+    "mood": "bright, friendly countryside; chibi characters with big heads and readable faces",
+    "notes": "Characters face the camera with heads about half their height. Tiles carry soft texture without outlines; characters and props have a 1-pixel dark outline. At most three shades per material.",
+    "references": ["build/grass.png", "build/tree.png", "build/hero.png"]
   },
-  "font": {
-    "name": "project bitmap font",
-    "size_px": 8,
-    "line_height_px": 10
-  },
-  "animation": {
-    "fps": 12
-  },
-  "rotation": {
-    "mode": "prerendered",
-    "directions": 8
-  },
-  "effects": {
-    "blending": "opaque"
-  },
-  "engine": "godot"
+  "font": {"name": "project 12 px bitmap font", "size_px": 12, "line_height_px": 16},
+  "animation": {"fps": 8},
+  "rotation": {"mode": "prerendered", "directions": 4},
+  "effects": {"blending": "opaque"},
+  "engine": "other"
 }
