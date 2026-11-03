@@ -1,0 +1,32 @@
+{
+  "castle": {
+    "status": "pass",
+    "issues": [],
+    "input_sha256": "e58892060653d159775ac8905a3ffde5fabea8693172cfeee2dabbfe89ace07c"
+  },
+  "knight": {
+    "status": "pass",
+    "issues": [],
+    "input_sha256": "e84ee21fc7524115998580aa4a3d0330139a06428e477754ceb65d4a8920a6fa"
+  },
+  "princess": {
+    "status": "pass",
+    "issues": [],
+    "input_sha256": "ce5b85affdca028222b6fd145b2b032502ae5cb22fff9ad6caf5131da9fc19e3"
+  },
+  "demon-king": {
+    "status": "pass",
+    "issues": [],
+    "input_sha256": "c226d08410c1541109a1bfa99000e64e9a50a2292f0f92079b2b55e46cfe8285"
+  },
+  "stone": {
+    "status": "pass",
+    "issues": [],
+    "input_sha256": "68a0f8850ea0aa46722bfed5e9d50ef001021d10cf041a19e31ebba1a4ea3010"
+  },
+  "moss": {
+    "status": "pass",
+    "issues": [],
+    "input_sha256": "3ec1c14f2b444e3bf37f1d1ccd684af1c97555f8e9a37db403550cf098fca09b"
+  }
+}

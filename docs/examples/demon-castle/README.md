@@ -2,6 +2,8 @@
 
 마왕성·기사·공주·마왕을 각각 생성하고, 석재·이끼 타일과 함께 실제 웹 캔버스에서 합성한 예제다. README의 그림은 실행 중인 브라우저에서 캡처했다. 고정 계약은 [game.json](../../../pixelwright/examples/demon-castle/game.json), 실행 코드는 [예제 폴더](../../../pixelwright/examples/demon-castle/)에 있다.
 
+후속 [Playwright 시각 재검수](quality-review/README.md)에서는 **기술 PASS와 별개로 미술 품질의 균일함은 개선 필요**로 판정했다. 타일의 디테일 밀도, 인간 캐릭터의 작은 부위 표현, 마왕의 잔점과 지면 접촉 표현을 구체적으로 기록했다. README의 비정수 축소 문제도 확인해 정수 미리보기와 6배 확대 파일을 분리했다.
+
 ![실제 브라우저 필드 화면](runtime-field.png)
 
 ## 고정 규격과 개별 에셋

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<title>Pixelwright asset quality review</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; color: #f3eeee; background: #171820; font: 16px/1.5 system-ui,sans-serif; }
+  h1 { margin: 0 0 4px; font-size: 24px; } h2 { font-size: 18px; }
+  p { margin: 4px 0 16px; color: #babcc9; }
+  button { padding: 9px 16px; margin: 0 8px 16px 0; border: 1px solid #888; color: inherit; background: #303347; font: inherit; cursor:pointer; }
+  .row { display:flex; gap:24px; align-items: end; }
+  figure { margin: 0; background: #22232f; padding: 12px; border: 1px solid #575967; }
+  figcaption { margin-bottom: 12px; } img,canvas { display:block; image-rendering:pixelated; }
+  .well { display:flex; align-items:end; justify-content:center; background: repeating-conic-gradient(#2c2c3a 0 25%,#393947 0 50%) 0/16px 16px; }
+  body.light .well { background: #dedad1; }
+  #characters .well { height: 512px; }
+  #knight,#princess { width:256px; height:384px; }
+  #demon-king { width:512px; height:512px; }
+  .label { min-width:200px; }
+  [hidden] { display:none!important; }
+  #castle { width:1152px; height:768px; }
+  #terrain .well { width:256px; height:256px; }
+  #stone,#moss { width:256px; height:256px; }
+  canvas { border:1px solid #7b7b8a; }
+</style>
+<h1>독립 PNG 시각 검수</h1>
+<p>동일 그룹 안에서는 같은 픽셀 배율. 이미지 리샘플링과 에셋 파일 수정 없음.</p>
+<nav>
+  <button data-panel="characters">캐릭터 8배</button>
+  <button data-panel="architecture">성 6배</button>
+  <button data-panel="terrain">바닥 타일·반복</button>
+  <button id="background">밝은 배경 / 어두운 배경</button>
+</nav>
+<section id="characters">
+  <p>같은 바닥선에 캔버스 정렬 · 기사/공주 32×48 · 마왕 64×64 · 모두 8배</p>
+  <div class="row">
+    <figure><figcaption>KNIGHT — 32×48</figcaption><div class="well"><img id="knight" alt="기사"></div></figure>
+    <figure><figcaption>PRINCESS — 32×48</figcaption><div class="well"><img id="princess" alt="공주"></div></figure>
+    <figure><figcaption>DEMON KING — 64×64</figcaption><div class="well"><img id="demon-king" alt="마왕"></div></figure>
+  </div>
+</section>
+<section id="architecture" hidden>
+  <p>성 192×128 · 6배 · 알파와 재질 클러스터 확인</p>
+  <figure><figcaption>CASTLE — 192×128</figcaption><div class="well"><img id="castle" alt="마왕성"></div></figure>
+</section>
+<section id="terrain" hidden>
+  <p>단일 타일은 16배 · 반복 영역은 3배 · 반복 간격과 경계 확인</p>
+  <div class="row">
+    <figure><figcaption>STONE — 16×16 at 16×</figcaption><div class="well"><img id="stone" alt="석재 타일"></div></figure>
+    <figure><figcaption>MOSS — 16×16 at 16×</figcaption><div class="well"><img id="moss" alt="이끼 타일"></div></figure>
+  </div>
+  <h2>각 타일 8×4 반복 — 모두 3배</h2>
+  <div class="row"><canvas id="stone-repeat" width="384" height="192"></canvas><canvas id="moss-repeat" width="384" height="192"></canvas></div>
+</section>
+<script type="module">
+  document.querySelectorAll('[data-panel]').forEach(button => button.onclick = () => {
+    document.querySelectorAll('section').forEach(section => section.hidden = section.id !== button.dataset.panel);
+  });
+  document.querySelector('#background').onclick = () => document.body.classList.toggle('light');
+  await Promise.all([...document.querySelectorAll('img')].map(async img => {
+    img.src = `../../../../pixelwright/examples/demon-castle/build/${img.id}.png`;
+    await img.decode();
+    img.dataset.loaded = `${img.naturalWidth}x${img.naturalHeight}`;
+    if (!['stone','moss'].includes(img.id)) return;
+    const ctx = document.querySelector(`#${img.id}-repeat`).getContext('2d');
+    ctx.imageSmoothingEnabled=false;
+    for(let y=0;y<4;y++) for(let x=0;x<8;x++) ctx.drawImage(img,x*48,y*48,48,48);
+  }));
+  document.body.dataset.ready = 'true';
+</script>
+</html>

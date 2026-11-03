@@ -142,6 +142,44 @@ def tiles(palette):
     artwork('moss', moss, palette)
 
 
+def export_readme_previews(work):
+    """Keep GitHub previews small enough to avoid fractional desktop downscaling."""
+    images = ROOT / 'docs/images'
+    exports = {}
+    for name, source, source_scale, size in (
+        ('game-scene', DOCS / 'scene-native.png', 1, (384, 256)),
+        ('game-assets', images / 'game-assets.png', 3, (384, 160)),
+        ('game-screen-check', images / 'game-screen-check.png', 4, (384, 256)),
+    ):
+        with Image.open(source) as image:
+            if image.size != (size[0] * source_scale, size[1] * source_scale):
+                raise ValueError(f'Unexpected source dimensions: {source}')
+            native = image.convert('RGBA').resize(size, Image.Resampling.NEAREST)
+        outputs = {}
+        for label, scale in (('native', 1), ('preview', 2), ('6x', 6)):
+            if label == '6x' and name != 'game-scene':
+                continue
+            path = source if name == 'game-scene' and scale == 1 else images / f'{name}-{label}.png'
+            if path != source:
+                native.resize((size[0] * scale, size[1] * scale), Image.Resampling.NEAREST).save(path)
+            outputs[label] = {'path': str(path.relative_to(ROOT)), 'scale': scale,
+                              'size': [size[0] * scale, size[1] * scale],
+                              'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+            if name == 'game-scene' and scale > 1:
+                profile = json.loads((DOCS / 'scene-profile.json').read_text())
+                profile.update(name=f'Demon Castle README at {scale}x', scale=scale)
+                profile_path = DOCS / f'readme-{label}-profile.json'
+                write(profile_path, profile)
+                out = work / f'readme-{label}'
+                run('pixelwright.py', 'inspect', path, '--profile', profile_path, '--out-dir', out)
+                copy_report(out / 'report.json', DOCS / f'readme-{label}-report.json')
+                if scale == 2:
+                    shutil.copyfile(out / 'grid_overlay.png', DOCS / 'readme-preview-grid_overlay.png')
+        exports[name] = outputs
+    write(DOCS / 'readme-exports.json', {'method': 'nearest-neighbor integer exports; native detail unchanged',
+                                      'exports': exports})
+
+
 def verify_runtime(work):
     """Audit real browser captures, including the deliberately broken variant."""
     for name, expected, codes in (
@@ -176,6 +214,7 @@ def verify_runtime(work):
               'native_sha256': hashlib.sha256((DOCS / 'scene-native.png').read_bytes()).hexdigest(),
               'capture_sha256': hashlib.sha256(capture.read_bytes()).hexdigest()}
     write(DOCS / 'composition-verification.json', record)
+    export_readme_previews(work)
     print(json.dumps(record))
 
 
@@ -184,9 +223,14 @@ def main():
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument('--import-generated', action='store_true')
     modes.add_argument('--verify-runtime', action='store_true', help='audit captures from check_castle_demo.mjs')
+    modes.add_argument('--export-readme', action='store_true', help='export integer README previews and a 6x scene')
     args = parser.parse_args()
     (ROOT / '.work').mkdir(exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix='castle-', dir=ROOT / '.work'))
+    if args.export_readme:
+        export_readme_previews(work)
+        print('README previews and 6x scene exported and audited')
+        return
     if args.verify_runtime:
         verify_runtime(work)
         return
@@ -267,6 +311,7 @@ def main():
     shutil.copyfile(work / 'bad-intake/side_by_side.png', ROOT / 'docs/images/game-intake.png')
     copy_report(work / 'bad-intake/report.json', DOCS / 'intake-report.json')
     write(DOCS / 'asset-summary.json', evidence)
+    export_readme_previews(work)
     print(json.dumps({'assets': evidence, 'scene_grid': 'pass', 'intake_negative': 'fail as expected'}, ensure_ascii=False))
 
 

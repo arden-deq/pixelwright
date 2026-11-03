@@ -1,0 +1,235 @@
+{
+  "tested_at": "2026-11-03",
+  "status": "pass",
+  "browser": "Playwright CLI, headed Chromium, DPR 1",
+  "page": "https://github.com/arden-deq/pixelwright/tree/codex/readme-pixel-quality",
+  "source_commit": "8995f7c949c951444f7d0e46875d526a53eea349",
+  "scope": "Actual GitHub picture source selection, native and CSS dimensions, and exact field image rendering. Does not certify artistic quality.",
+  "viewports": [
+    {
+      "viewport": [
+        640,
+        900
+      ],
+      "dpr": 1,
+      "images": [
+        {
+          "alt": "Running 384x256 RPG Maker-style field: knight, princess and demon king outside the castle; integer-scale preview",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/examples/demon-castle/scene-native.png",
+          "natural": [
+            384,
+            256
+          ],
+          "rect": {
+            "x": 49,
+            "y": 525.1875,
+            "width": 384,
+            "height": 256
+          },
+          "imageRendering": "auto",
+          "complete": true
+        },
+        {
+          "alt": "Independent castle, knight, princess, demon king, stone and moss assets, all at the same pixel size",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/images/game-assets-native.png",
+          "natural": [
+            384,
+            160
+          ],
+          "rect": {
+            "x": 49,
+            "y": 1147.1875,
+            "width": 384,
+            "height": 160
+          },
+          "imageRendering": "auto",
+          "complete": true
+        },
+        {
+          "alt": "Screen check of the castle field: deliberately off-grid knight in red and blended effect in magenta",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/images/game-screen-check-native.png",
+          "natural": [
+            384,
+            256
+          ],
+          "rect": {
+            "x": 49,
+            "y": 2605,
+            "width": 384,
+            "height": 256
+          },
+          "imageRendering": "auto",
+          "complete": true
+        }
+      ],
+      "screenshot": {
+        "path": "github-readme-field-after-640.png",
+        "size": [
+          384,
+          257
+        ],
+        "sha256": "b918c97060f59ae327975ad745303cae4fca38d82450d1d79d0c16b554fa8005",
+        "reference": "docs/examples/demon-castle/scene-native.png",
+        "exact_image_region_xywh": [
+          0,
+          0,
+          384,
+          256
+        ],
+        "matches_reference_rgba": true,
+        "margin": "One white row from fractional DOM screenshot bounds; screenshot retained without cropping.",
+        "image_region_colors": 52
+      }
+    },
+    {
+      "viewport": [
+        1000,
+        900
+      ],
+      "dpr": 1,
+      "images": [
+        {
+          "alt": "Running 384x256 RPG Maker-style field: knight, princess and demon king outside the castle; integer-scale preview",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/examples/demon-castle/scene-native.png",
+          "natural": [
+            384,
+            256
+          ],
+          "rect": {
+            "x": 49,
+            "y": 56.625,
+            "width": 384,
+            "height": 256
+          },
+          "imageRendering": "auto",
+          "complete": true
+        },
+        {
+          "alt": "Independent castle, knight, princess, demon king, stone and moss assets, all at the same pixel size",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/images/game-assets-native.png",
+          "natural": [
+            384,
+            160
+          ],
+          "rect": {
+            "x": 49,
+            "y": 630.625,
+            "width": 384,
+            "height": 160
+          },
+          "imageRendering": "auto",
+          "complete": true
+        },
+        {
+          "alt": "Screen check of the castle field: deliberately off-grid knight in red and blended effect in magenta",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/images/game-screen-check-native.png",
+          "natural": [
+            384,
+            256
+          ],
+          "rect": {
+            "x": 49,
+            "y": 1968.4375,
+            "width": 384,
+            "height": 256
+          },
+          "imageRendering": "auto",
+          "complete": true
+        }
+      ],
+      "screenshot": {
+        "path": "github-readme-field-after-1000.png",
+        "size": [
+          384,
+          257
+        ],
+        "sha256": "68724aec19a6d027c00058b8348efb28c4502315332314a7885d3ddd281fde92",
+        "reference": "docs/examples/demon-castle/scene-native.png",
+        "exact_image_region_xywh": [
+          0,
+          1,
+          384,
+          256
+        ],
+        "matches_reference_rgba": true,
+        "margin": "One white row from fractional DOM screenshot bounds; screenshot retained without cropping.",
+        "image_region_colors": 52
+      }
+    },
+    {
+      "viewport": [
+        1280,
+        900
+      ],
+      "dpr": 1,
+      "images": [
+        {
+          "alt": "Running 384x256 RPG Maker-style field: knight, princess and demon king outside the castle; integer-scale preview",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/images/game-scene-preview.png",
+          "natural": [
+            768,
+            512
+          ],
+          "rect": {
+            "x": 65,
+            "y": 193.515625,
+            "width": 768,
+            "height": 512
+          },
+          "imageRendering": "auto",
+          "complete": true
+        },
+        {
+          "alt": "Independent castle, knight, princess, demon king, stone and moss assets, all at the same pixel size",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/images/game-assets-preview.png",
+          "natural": [
+            768,
+            320
+          ],
+          "rect": {
+            "x": 65,
+            "y": 975.515625,
+            "width": 768,
+            "height": 320
+          },
+          "imageRendering": "auto",
+          "complete": true
+        },
+        {
+          "alt": "Screen check of the castle field: deliberately off-grid knight in red and blended effect in magenta",
+          "currentSrc": "https://github.com/arden-deq/pixelwright/raw/codex/readme-pixel-quality/docs/images/game-screen-check-preview.png",
+          "natural": [
+            768,
+            512
+          ],
+          "rect": {
+            "x": 65,
+            "y": 2305.328125,
+            "width": 768,
+            "height": 512
+          },
+          "imageRendering": "auto",
+          "complete": true
+        }
+      ],
+      "screenshot": {
+        "path": "github-readme-field-after-1280.png",
+        "size": [
+          768,
+          513
+        ],
+        "sha256": "08b49f756b8f6b83a222d786ab5e1461dae16e919805ec615a3a6001e90e9273",
+        "reference": "docs/images/game-scene-preview.png",
+        "exact_image_region_xywh": [
+          0,
+          1,
+          768,
+          512
+        ],
+        "matches_reference_rgba": true,
+        "margin": "One white row from fractional DOM screenshot bounds; screenshot retained without cropping.",
+        "image_region_colors": 52
+      }
+    }
+  ]
+}

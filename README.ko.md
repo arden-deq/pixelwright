@@ -106,13 +106,23 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 
 0.7.0에서 추가했습니다. 프로필은 PNG 한 장을 검사하고, **게임 계약**(`game.json`)은 한 게임의 모든 에셋과 화면이 공유할 기준을 정합니다. 여러 사람이나 AI가 만든 그림도 이 기준으로 일관성을 유지합니다.
 
-![384×256 RPG Maker풍 필드 실행 화면: 마왕성 앞의 기사·공주·마왕, 3배 표시](docs/images/game-scene.png)
+<picture>
+  <source media="(max-width: 1279px)" srcset="docs/examples/demon-castle/scene-native.png">
+  <img src="docs/images/game-scene-preview.png" alt="384×256 RPG Maker풍 필드 실행 화면: 마왕성 앞의 기사·공주·마왕, 정수 배율 미리보기">
+</picture>
 
-예제는 기사·공주·마왕이 마왕성 앞뜰에 있는 **RPG Maker풍 필드 맵**입니다. 위 그림은 독립 에셋 6개를 384×256 캔버스에 합성한 실제 브라우저 화면을 3배로 캡처한 것입니다. 타일은 16×16, 인간 캐릭터는 32×48, 보스는 64×64, 성은 192×128입니다. 게임에 넣는 1× PNG 6개 모두 64색과 투명색을 공유하고 같은 계약 검사를 통과합니다.
+[확대용 PNG: 2304×1536, 6배](docs/images/game-scene-6x.png). 넓은 화면에서는 2배, 좁은 화면에서는 1배 미리보기를 사용합니다. 모두 같은 논리 원본을 최근접 정수 배율로 내보낸 파일입니다.
+
+예제는 기사·공주·마왕이 마왕성 앞뜰에 있는 **RPG Maker풍 필드 맵**입니다. 독립 에셋 6개를 384×256 캔버스에 합성하고 실제 브라우저 캡처와 대조했습니다. 타일은 16×16, 인간 캐릭터는 32×48, 보스는 64×64, 성은 192×128입니다. 게임에 넣는 1× PNG 6개 모두 64색과 투명색을 공유하고 같은 기술 계약 검사를 통과합니다.
 
 성과 캐릭터 3종은 이미지 생성으로 각각 제작한 뒤, 선언한 논리 격자와 공통 팔레트에 맞춘 파생 에셋으로 내보냈습니다. 바닥 2종은 인덱스 픽셀로 제작했습니다. [생성 원본·프롬프트·원본과 파생 에셋의 개별 검사 기록](docs/examples/demon-castle/)을 함께 제공합니다.
 
-![같은 픽셀 크기로 나란히 놓은 독립 에셋: 성·기사·공주·마왕·석재·이끼](docs/images/game-assets.png)
+<picture>
+  <source media="(max-width: 1279px)" srcset="docs/images/game-assets-native.png">
+  <img src="docs/images/game-assets-preview.png" alt="같은 픽셀 크기로 나란히 놓은 독립 에셋: 성·기사·공주·마왕·석재·이끼">
+</picture>
+
+[브라우저 시각 검수](docs/examples/demon-castle/quality-review/README.md)에서는 바닥과 생성 오브젝트의 디테일 밀도 차이, 작은 캐릭터의 얼굴 표현 손실, 마왕의 고립 픽셀을 확인했습니다. 기술 PASS가 미술 품질의 균일함을 뜻하지 않으며, 에셋의 미술적 개선은 더 필요합니다.
 
 저장소 루트에서 `python -m http.server 8000`을 실행하고 [필드 데모](http://localhost:8000/pixelwright/examples/demon-castle/)를 열면 됩니다. 방향키로 기사를 움직이고 **R**로 초기화, **F**로 전체 화면을 전환합니다. [브라우저 검증 기록](docs/examples/demon-castle/runtime-verification.json)은 에셋 로딩·이동·충돌·앞뒤 가림·정수 배율을 확인합니다. 정상 실행 스크린샷은 [게임 화면 검사도 통과](docs/examples/demon-castle/runtime-clean-report.json)합니다.
 
@@ -139,7 +149,12 @@ python pixelwright/scripts/pixel_game.py screen capture.png --contract pixelwrig
 
 **실행 중인 게임에서는** `screen`이 무손실 스크린샷을 기본 해상도 격자로 검사합니다. 데모의 `?fault=1` 모드는 오류 검출을 보여 주기 위해 두 번째 기사를 격자에서 화면 픽셀 2개만큼 어긋나게 그리고, 투명도 50% 이펙트를 추가합니다. 이 실제 브라우저 캡처는 1664×1088 창에서 4배로 표시한 화면입니다. 검사기가 **불균일한 게임 픽셀 453개**(빨강)와 **팔레트 밖 픽셀 96개**(자홍)를 검출합니다. [실패 검사 기록](docs/examples/demon-castle/runtime-injected-errors-report.json)을 함께 제공합니다.
 
-![마왕성 필드 검사: 의도적으로 격자에서 어긋난 기사는 빨강, 혼합된 이펙트는 자홍](docs/images/game-screen-check.png)
+<picture>
+  <source media="(max-width: 1279px)" srcset="docs/images/game-screen-check-native.png">
+  <img src="docs/images/game-screen-check-preview.png" alt="마왕성 필드 검사: 의도적으로 격자에서 어긋난 기사는 빨강, 혼합된 이펙트는 자홍">
+</picture>
+
+[검사기 원본 오버레이](docs/images/game-screen-check.png).
 
 | 게임에서 잘못된 것 | 코드 |
 | --- | --- |
