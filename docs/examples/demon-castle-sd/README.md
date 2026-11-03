@@ -69,6 +69,6 @@ python tools/generate_sd_castle_example.py --verify-runtime
 
 첨부 사진의 빨간 복제 기사는 격자를 어긴 영역을 검사기가 표시한 것이다. 회색 사각형은 반투명 혼합 오류를 검출하려고 넣은 효과다. 정상 대표 화면과 구분해 [의도적 실패 오버레이](runtime-injected-errors-overlay.png)로 제공한다. `?fault=1`에서만 재현된다.
 
-## README 실제 표시
+## README 표시 규격
 
-창 너비에 따라 캐릭터는 6·4·3·2배, 얼굴은 6·3배 PNG를 선택한다. [GitHub 표시 기록](github-rendering.json)은 실제 브라우저에서 확인한 창 너비·선택 파일·표시 크기와 캡처를 기록한다. 기술적인 셀 검사와 GitHub에서의 표시 검사는 각각 수행한다.
+창 너비에 따라 캐릭터는 6·4·3·2배, 얼굴은 6·3배 PNG를 선택하도록 구성했다. 각 파일은 최종 논리 원본을 정수 배율로 확대한 결과다. 이번 재제작의 최종 승인에는 PNG·셀 행렬·표정 보존에 대한 파일 검사를 사용하며, 추가 Playwright 검수는 수행하지 않는다. [표시 검사 범위 기록](github-rendering.json).

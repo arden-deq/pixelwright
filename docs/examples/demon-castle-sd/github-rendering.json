@@ -1,4 +1,4 @@
 {
-  "status": "not_reviewed",
-  "scope": "New native-cell README; actual GitHub check follows the branch push. Prior projection-based rendering measurements are superseded."
+  "status": "excluded_from_acceptance",
+  "scope": "The user requested that Playwright review stop. Additional browser review is not a delivery requirement; no further Playwright audit will be performed. Earlier projection-based rendering measurements are superseded. Native PNG, cell matrix and expression-preservation checks are recorded separately."
 }
