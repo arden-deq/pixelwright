@@ -1,0 +1,39 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_screen",
+  "artistic_status": "not_reviewed",
+  "issues": [],
+  "viewport": {
+    "window": [
+      1664,
+      1088
+    ],
+    "scale": 4,
+    "fits": true,
+    "viewport": [
+      64,
+      32,
+      1536,
+      1024
+    ],
+    "bars": {
+      "left": 64,
+      "right": 64,
+      "top": 32,
+      "bottom": 32
+    }
+  },
+  "metrics": {
+    "scale": 4,
+    "nonuniform_cells": 0,
+    "cells": 98304
+  },
+  "status": "pass",
+  "provenance": {
+    "source_path": "docs/examples/demon-castle/runtime-clean.png",
+    "source_sha256": "17e0c9c3dd9511b100dec112a7f81b0f2553f83e541ebfc57a288f1931edb8ab",
+    "contract_sha256": "78b6b23b6783e807d6110a61a1c4d968885af51ff8219235df6870f8d81db8e9"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "status": "pass",
+  "base": [
+    384,
+    256
+  ],
+  "assets_loaded": [
+    "castle",
+    "demon-king",
+    "knight",
+    "moss",
+    "princess",
+    "stone"
+  ],
+  "initial_player": {
+    "x": 181,
+    "y": 229
+  },
+  "moved_player": {
+    "x": 201,
+    "y": 229
+  },
+  "movement_delta": [
+    20,
+    0
+  ],
+  "wall_stop": {
+    "x": 181,
+    "y": 150
+  },
+  "npc_stop": {
+    "x": 235,
+    "y": 200
+  },
+  "boundary_x": 312,
+  "depth_order": [
+    "castle",
+    "demon-king",
+    "knight",
+    "princess"
+  ],
+  "reset": "pass",
+  "fullscreen": "pass",
+  "integer_scales": [
+    4,
+    3
+  ],
+  "fractional_downscaling": "refused",
+  "console_errors": [],
+  "fault_capture": "runtime-injected-errors.png"
+}

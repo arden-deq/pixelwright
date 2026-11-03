@@ -1,0 +1,33 @@
+{
+  "tool": "Pixelwright",
+  "version": "0.7.0",
+  "schema_version": 1,
+  "mode": "game_asset",
+  "status": "pass",
+  "artistic_status": "not_reviewed",
+  "category": "tile",
+  "issues": [],
+  "metrics": {
+    "size": [
+      16,
+      16
+    ],
+    "visible_colors": 3,
+    "effective_pixel_size": {
+      "x": 1,
+      "y": 1,
+      "size": 1,
+      "column_edges": 9,
+      "row_edges": 10,
+      "measurable": true,
+      "conclusive": true
+    },
+    "dither_pixels": 0
+  },
+  "provenance": {
+    "source_path": "pixelwright/examples/demon-castle/build/stone.png",
+    "source_sha256": "68a0f8850ea0aa46722bfed5e9d50ef001021d10cf041a19e31ebba1a4ea3010",
+    "contract_path": "pixelwright/examples/demon-castle/game.json",
+    "contract_sha256": "78b6b23b6783e807d6110a61a1c4d968885af51ff8219235df6870f8d81db8e9"
+  }
+}

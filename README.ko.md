@@ -106,32 +106,40 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 
 0.7.0에서 추가했습니다. 프로필은 PNG 한 장을 검사하고, **게임 계약**(`game.json`)은 한 게임의 모든 에셋과 화면이 공유할 기준을 정합니다. 여러 사람이나 AI가 만든 그림도 이 기준으로 일관성을 유지합니다.
 
-![예제의 320×240 쯔꾸르 스타일 맵: 풀·꽃 타일, 흙길, 연못, 나무, 주인공](docs/images/game-scene.png)
+![384×256 RPG Maker풍 필드 실행 화면: 마왕성 앞의 기사·공주·마왕, 3배 표시](docs/images/game-scene.png)
 
-들어 있는 예제는 쯔꾸르(RPG Maker 2000) 스타일의 작은 맵입니다. 16×16 맵칩, 24×32 주인공, 26색과 투명색, 320×240 화면을 쓰며, 위 그림은 3배로 보여 줍니다. 모든 에셋은 한 점씩 찍은 1× PNG이고, 자기 계약 검사를 통과합니다. 계약에는 다음을 담습니다.
+예제는 기사·공주·마왕이 마왕성 앞뜰에 있는 **RPG Maker풍 필드 맵**입니다. 위 그림은 독립 에셋 6개를 384×256 캔버스에 합성한 실제 브라우저 화면을 3배로 캡처한 것입니다. 타일은 16×16, 인간 캐릭터는 32×48, 보스는 64×64, 성은 192×128입니다. 게임에 넣는 1× PNG 6개 모두 64색과 투명색을 공유하고 같은 계약 검사를 통과합니다.
 
-- **화면:** 기본 해상도 하나(예제는 320×240). 정수 배율로만 키우고, 남는 창 공간은 여백 색으로 채웁니다.
+성과 캐릭터 3종은 이미지 생성으로 각각 제작한 뒤, 선언한 논리 격자와 공통 팔레트에 맞춘 파생 에셋으로 내보냈습니다. 바닥 2종은 인덱스 픽셀로 제작했습니다. [생성 원본·프롬프트·원본과 파생 에셋의 개별 검사 기록](docs/examples/demon-castle/)을 함께 제공합니다.
+
+![같은 픽셀 크기로 나란히 놓은 독립 에셋: 성·기사·공주·마왕·석재·이끼](docs/images/game-assets.png)
+
+저장소 루트에서 `python -m http.server 8000`을 실행하고 [필드 데모](http://localhost:8000/pixelwright/examples/demon-castle/)를 열면 됩니다. 방향키로 기사를 움직이고 **R**로 초기화, **F**로 전체 화면을 전환합니다. [브라우저 검증 기록](docs/examples/demon-castle/runtime-verification.json)은 에셋 로딩·이동·충돌·앞뒤 가림·정수 배율을 확인합니다. 정상 실행 스크린샷은 [게임 화면 검사도 통과](docs/examples/demon-castle/runtime-clean-report.json)합니다.
+
+계약에는 다음을 담습니다.
+
+- **화면:** 기본 해상도 하나(예제는 384×256). 정수 배율로만 키우고, 남는 창 공간은 여백 색으로 채웁니다.
 - **픽셀 크기:** 스프라이트, 타일, 이펙트, UI, 폰트를 모두 1×로 그립니다. 이미지 픽셀 하나가 게임 픽셀 하나입니다.
 - **색과 크기:** 팔레트와 명암 단계, 색 수, 투명도, 에셋 종류별 크기 범위(맵칩·지형은 외곽선 규칙에서 뺄 수 있음)
 - **스타일:** 시점, 광원 방향, 음영, 외곽선 방식과 색, 디더링, 안티앨리어싱, 분위기, 기준 에셋
 - **실행:** 폰트 크기, 애니메이션 속도, 회전 방식, 이펙트 혼합, 엔진
 
-`brief`는 이 계약을 그리기 전에 따를 규칙으로 바꿔 줍니다. 그림을 그리는 사람, AI, 이미지 생성 프롬프트가 같은 규칙을 씁니다. 모든 항목을 채운 [예제 게임](pixelwright/examples/game/)이 들어 있습니다.
+`brief`는 이 계약을 그리기 전에 따를 규칙으로 바꿔 줍니다. 그림을 그리는 사람, AI, 이미지 생성 프롬프트가 같은 규칙을 씁니다. 모든 항목을 채운 [예제 게임](pixelwright/examples/demon-castle/)이 들어 있습니다.
 
 ```sh
-python pixelwright/scripts/pixel_game.py brief --contract pixelwright/examples/game/game.json
-python pixelwright/scripts/pixel_game.py asset hero.png --category character --contract game.json --out-dir runs/hero-v1
-python pixelwright/scripts/pixel_game.py intake new_enemy.png --category character --contract game.json --out-dir runs/intake-v1
-python pixelwright/scripts/pixel_game.py screen capture.png --contract game.json --out-dir runs/screen-v1
+python pixelwright/scripts/pixel_game.py brief --contract pixelwright/examples/demon-castle/game.json
+python pixelwright/scripts/pixel_game.py asset pixelwright/examples/demon-castle/build/knight.png --category character --contract pixelwright/examples/demon-castle/game.json --out-dir runs/knight-v1
+python pixelwright/scripts/pixel_game.py intake new_enemy.png --category character --contract pixelwright/examples/demon-castle/game.json --out-dir runs/intake-v1
+python pixelwright/scripts/pixel_game.py screen capture.png --contract pixelwright/examples/demon-castle/game.json --out-dir runs/screen-v1
 ```
 
-**에셋을 추가하기 전에** `intake`가 새 에셋을 게임의 기준 에셋 옆에 1×로 놓고, 그 줄 전체를 같은 정수 배율로 키웁니다. 아래는 예제의 풀 맵칩·나무·주인공 옆에 같은 주인공을 2배로 내보낸 파일을 놓은 결과입니다. 점 크기가 2×2로 측정되어 `COARSE_PIXELS`, `PIXEL_SIZE_DIFFERS`, `CATEGORY_SIZE`로 실패합니다.
+**에셋을 추가하기 전에** `intake`가 새 에셋을 게임의 기준 에셋 옆에 1×로 놓고, 그 줄 전체를 같은 정수 배율로 키웁니다. 아래는 석재 타일·성·기사·공주·마왕 옆에 기사를 2배로 내보낸 파일을 놓은 결과입니다. 점 크기가 2×2로 측정되어 `COARSE_PIXELS`, `PIXEL_SIZE_DIFFERS`, `CATEGORY_SIZE`로 실패합니다.
 
-![1× 풀 맵칩·나무·주인공 옆에 2배로 내보낸 주인공을 놓고 함께 확대한 비교](docs/images/game-intake.png)
+![1× 석재·성·캐릭터 3종 옆에 2배로 내보내 거부된 기사를 놓은 비교](docs/images/game-intake.png)
 
-**실행 중인 게임에서는** `screen`이 무손실 스크린샷을 기본 해상도 격자로 검사합니다. 아래 화면은 같은 맵을 1440×1000 창에 4배로 띄운 것입니다. 두 번째 주인공이 격자에서 화면 픽셀 2개만큼 어긋나 그려졌고(빨강: 한 색이 아닌 게임 픽셀), 반투명 반짝이 이펙트가 팔레트 밖 색을 만들었습니다(자홍).
+**실행 중인 게임에서는** `screen`이 무손실 스크린샷을 기본 해상도 격자로 검사합니다. 데모의 `?fault=1` 모드는 오류 검출을 보여 주기 위해 두 번째 기사를 격자에서 화면 픽셀 2개만큼 어긋나게 그리고, 투명도 50% 이펙트를 추가합니다. 이 실제 브라우저 캡처는 1664×1088 창에서 4배로 표시한 화면입니다. 검사기가 **불균일한 게임 픽셀 453개**(빨강)와 **팔레트 밖 픽셀 96개**(자홍)를 검출합니다. [실패 검사 기록](docs/examples/demon-castle/runtime-injected-errors-report.json)을 함께 제공합니다.
 
-![기본 해상도로 본 화면 검사: 격자에서 어긋난 캐릭터는 빨강, 혼합된 이펙트는 자홍](docs/images/game-screen-check.png)
+![마왕성 필드 검사: 의도적으로 격자에서 어긋난 기사는 빨강, 혼합된 이펙트는 자홍](docs/images/game-screen-check.png)
 
 | 게임에서 잘못된 것 | 코드 |
 | --- | --- |
@@ -159,7 +167,7 @@ python pixelwright/scripts/pixel_game.py screen capture.png --contract game.json
 
 게임이라면 스타일부터 정합니다.
 
-> 320×240 쯔꾸르(RPG Maker 2000) 스타일 탑다운 RPG야. 맵칩은 16×16, 캐릭터는 24×32, 외곽선은 1픽셀 어두운 색이야. 게임 계약을 만들고 브리프를 보여 준 다음, 1× 슬라임 적을 그려서 우리 주인공과 풀 옆에 놓고 검사해 줘.
+> 384×256 RPG Maker풍 필드야. 타일은 16×16, 캐릭터는 32×48, 보스는 64×64, 외곽선은 선택적으로 넣는 어두운 1픽셀이야. 마왕성 예제의 공통 팔레트와 기준 에셋을 써 줘. 브리프를 보여 준 다음, 새 1× 적을 기사·공주·마왕 옆에 놓고 검사해 줘.
 
 원본 파일과 성공한 검사 실행이 없으면 **미검증**입니다. 설치와 실행 조건은 [SKILL.md](pixelwright/SKILL.md)와 [플랫폼 호환성 안내](docs/COMPATIBILITY_ko.md)를 참고합니다.
 

@@ -1,0 +1,87 @@
+{
+  "tool": "built-in image_gen",
+  "assets_generated_separately": true,
+  "originals_preserved": true,
+  "assets": {
+    "castle": {
+      "original_sha256": "744b6237328a0b943b7a85886a64346e56bf54e308ec5ad9e9fbd6fde9a6b0ed",
+      "original_size": [
+        1536,
+        1024
+      ],
+      "declared_native_size": [
+        192,
+        128
+      ],
+      "projection_scale": 8,
+      "derived_input_padding_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "original_status": "fail",
+      "method": "Pixelwright representative-cell projection, hard alpha, shared-palette remap; derived artwork, not raw-generation acceptance"
+    },
+    "knight": {
+      "original_sha256": "047d7ede1a77fadaccc90e1150de44d11db55b0dc7cc8baf9b4e58752fcc0105",
+      "original_size": [
+        1024,
+        1536
+      ],
+      "declared_native_size": [
+        32,
+        48
+      ],
+      "projection_scale": 32,
+      "derived_input_padding_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "original_status": "fail",
+      "method": "Pixelwright representative-cell projection, hard alpha, shared-palette remap; derived artwork, not raw-generation acceptance"
+    },
+    "princess": {
+      "original_sha256": "20ecedf6215a0343c63413c3c0ffe82532905f83f07996c443ad6fe3c71e8549",
+      "original_size": [
+        1024,
+        1536
+      ],
+      "declared_native_size": [
+        32,
+        48
+      ],
+      "projection_scale": 32,
+      "derived_input_padding_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "original_status": "fail",
+      "method": "Pixelwright representative-cell projection, hard alpha, shared-palette remap; derived artwork, not raw-generation acceptance"
+    },
+    "demon-king": {
+      "original_sha256": "68cfa53212ffdee147f349783400706e84bafe860ff64749b34c2def74809caf",
+      "original_size": [
+        1254,
+        1254
+      ],
+      "declared_native_size": [
+        64,
+        64
+      ],
+      "projection_scale": 20,
+      "derived_input_padding_ltrb": [
+        13,
+        13,
+        13,
+        13
+      ],
+      "original_status": "fail",
+      "method": "Pixelwright representative-cell projection, hard alpha, shared-palette remap; derived artwork, not raw-generation acceptance"
+    }
+  }
+}
