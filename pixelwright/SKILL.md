@@ -9,9 +9,17 @@ Create reproducible pixel art and verify its technical contract. The guarantee c
 
 ## Establish the contract
 
-Use the user's existing logical dimensions, integer scale, palette and alpha policy. Logical size is the number of intended dots, not the enlarged PNG size. If missing, ask for a consequential choice or propose a stated default appropriate to the asset (for example, a 16×16 item at 8×). Freeze it before generating; never change the grid to make an existing image pass. A neighboring same-color cluster may span many cells and need not itself be square.
+Before drawing or checking anything, fix these conditions from the user's request or the existing project, and write them into `profile.json`. Ask about a missing choice that changes the result; otherwise propose a stated default appropriate to the asset (for example, a 16×16 item sprite at 8×):
 
-The strict rule is `rendered = logical × S`, with the same positive integer `S` on both axes and origin `(0,0)`. Every physical sample in each `S×S` cell must have exactly the same RGBA8 value. Profile acceptance requires `S≥2`. At 1×, within-cell consistency is tautological; do not treat it as evidence of enlarged block fidelity.
+- `kind`: `sprite` (subject on a transparent background) or `image` (a general picture, opaque by default).
+- `logical_size`: the number of intended dots, not the enlarged PNG size.
+- `scale` (pixels per dot) and/or `image_size` (the whole PNG). Give one or both; when both are given they must agree.
+- `origin` only when the grid starts away from the top-left pixel inside a larger PNG; the margin must then be one solid color.
+- Palette rules: `max_colors` and/or `allowed_palette`, and `alpha`/`transparent_rgb` when the defaults do not fit.
+
+Freeze the profile before generating; never change the grid, origin or palette to make an existing image pass. A neighboring same-color cluster may span many cells and need not itself be square.
+
+The gate builds the grid from the origin: cell `(x,y)` covers `S×S` pixels starting at `(ox+x·S, oy+y·S)`, with the same positive integer `S` on both axes. Every physical sample in each cell must have exactly the same RGBA8 value, the art must really use one-cell dots (art drawn in 2×2-cell blocks fails as coarser than declared), a sprite needs transparency, and every sample of the PNG must satisfy the palette and alpha rules. At `scale: 1` (a 1× game asset) cell uniformity is not measurable, so the profile must declare `max_colors` or `allowed_palette`; do not treat a 1× pass as evidence of enlarged block fidelity.
 
 When the art is for a game, settle the game contract first (see below); every asset follows it.
 
@@ -90,7 +98,7 @@ The checker audits the whole sheet, draws the declared skeleton over every frame
 
 ### Inspect or repair existing art
 
-Read [quality-contract.md](references/quality-contract.md) for profile fields, artifacts, and exit codes. Prefer a reusable profile for final acceptance:
+Read [quality-contract.md](references/quality-contract.md) for profile fields, checks, artifacts, and exit codes. Prefer a reusable profile for final acceptance; it is the only path that checks every declared condition:
 
 ```sh
 python scripts/pixelwright.py inspect input.png --profile profile.json --out-dir audit-v1
@@ -104,15 +112,15 @@ python scripts/pixel_qa.py inspect input.png --logical-size 32x48 --render-size 
 python scripts/pixel_qa.py fix input.png --logical-size 32x48 --render-size 256x384 --out-dir repair-v1
 ```
 
-Inspect `report.json`, `grid_overlay.png`, and the logical-resolution preview. Exact violations fail even if a diagnostic score rounds to 100. Geometry failures are not resized or sampled as if valid. Partial alpha and palette rules follow the stated contract; isolated dots are candidates for review, not automatic defects.
+Read the `checks` rows in the output or `report.json` (image size, margin, cell uniformity, dot size, content, kind, alpha, color budget, allowed palette); each gives the requirement, the measured value and the verdict, and `not_declared` rows name rules the profile left open. Then inspect `grid_overlay.png` and the logical-resolution preview. When cells or size fail, `detected_grid` estimates the dot size and origin the pixels actually use; treat it as a repair hint for redrawing or re-exporting, not as permission to change the contract. Exact violations fail even if a diagnostic score rounds to 100. Geometry failures are not resized or sampled as if valid. Partial alpha and palette rules follow the stated contract; isolated dots are candidates for review, not automatic defects.
 
 Use projection when the user's request authorizes repair and its losses are acceptable. Compare `comparison.png`, `fix_review.json`, and the post-repair report. Re-audit the saved corrected PNG with the original project profile. Never overwrite the source, weaken constraints, auto-approve art from a technical PASS, or loop indefinitely: after two repair attempts, report the remaining defect and propose a targeted redraw.
 
 ## Deliver
 
-By default, show both the clean exported PNG and the checker's actual `grid_overlay.png` inline so the user can inspect the intended cells themselves. Label each preview with logical dimensions, physical cell size and technical status; for multiple assets, pair each clean view with its corresponding grid view. If the host cannot display images, provide direct links to both files. Respect a request for clean artwork only.
+Report the profile's conditions and the `checks` verdicts in a short table. By default, show both the clean exported PNG and the checker's actual `grid_overlay.png` inline so the user can inspect the intended cells themselves. Label each preview with logical dimensions, physical cell size and technical status; for multiple assets, pair each clean view with its corresponding grid view. If the host cannot display images, provide direct links to both files. Respect a request for clean artwork only.
 
-Explain the overlay briefly: cyan lines mark every declared cell boundary, red-filled cells mark exact color violations, and orange lines indicate approximate boundaries when geometry fails. The overlay is a separate diagnostic preview; keep the deliverable artwork unchanged. Use the checker-generated overlay, not a generative redraw. Never sample the axes differently: square cells must also appear square in the preview. For dense grids, include a nearest-neighbor crop enlarged equally on both axes so individual cells remain inspectable; visual inspection complements the full sample-level audit.
+Explain the overlay briefly: cyan lines mark every declared cell boundary from the origin, red-filled cells mark exact color violations, a black X marks cells with colors outside the allowed palette, magenta outlines the grid box inside a margin, and orange lines show the declared grid on an image of the wrong size. The overlay is a separate diagnostic preview; keep the deliverable artwork unchanged. Use the checker-generated overlay, not a generative redraw. Never sample the axes differently: square cells must also appear square in the preview. For dense grids, include a nearest-neighbor crop enlarged equally on both axes so individual cells remain inspectable; visual inspection complements the full sample-level audit.
 
 For a sprite sheet, also show each animation preview and, when a rig exists, its `.rig.gif` (art under the skeleton beside the part colors) or `rig_overlay.png`, and name the frames that failed. Overlays and GIF previews are diagnostics, not deliverable artwork.
 

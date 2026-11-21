@@ -14,9 +14,11 @@ Static PNG inspection is the main feature. [Game contracts](#game-contracts-one-
 
 | Check | What it verifies |
 | --- | --- |
-| Dimensions and grid | The PNG matches the logical canvas multiplied by one integer scale on both axes, with the origin at `(0, 0)`. |
+| Size and grid | The PNG has the declared size; the grid of logical dots × one integer cell size starts at the declared origin (default `(0, 0)`), and any margin outside it is one solid color. |
 | Square cells | Every sample within each declared cell has exactly the same RGBA value. |
-| Palette | The actual visible RGB count stays within the budget; an optional palette constrains exact RGBA values. |
+| Real resolution | The art actually uses one-cell dots; art drawn with 2×2-cell blocks fails instead of passing as a finer grid. |
+| Sprite or image | A sprite must have a transparent background and visible content; an image is opaque unless declared otherwise. |
+| Palette | The actual visible RGB count stays within the budget; an optional palette constrains exact RGBA values of every sample. |
 | Transparency | Alpha follows the declared policy, including how hidden RGB under transparent pixels is handled. |
 | Evidence | A JSON report, source/profile hashes, grid previews, and complete invalid-cell masks record the result. |
 | Batch and CI | Multiple PNGs share one profile, with exit codes for acceptance, QA failures, and execution errors. |
@@ -77,6 +79,7 @@ Save the intended rules as `profile.json`:
 {
   "schema_version": 1,
   "name": "24px game items",
+  "kind": "sprite",
   "logical_size": "24x24",
   "scale": 8,
   "max_colors": 10,
@@ -85,7 +88,7 @@ Save the intended rules as `profile.json`:
 }
 ```
 
-This requires a **192×192 PNG with 8×8 px cells**, at most 10 visible RGB colors, and alpha values of 0 or 255. Strict profiles require a scale of at least 2. `transparent_rgb: "exact"` checks hidden RGB too; choose `"visible"` explicitly to normalize alpha-zero RGB during inspection. Optional `allowed_palette` restricts complete RGBA values. Adjacent cells can share a color and form irregular shapes.
+This requires a **192×192 PNG with 8×8 px cells** drawn as a sprite on a transparent background, at most 10 visible RGB colors, and alpha values of 0 or 255. Declare the size with `scale` (pixels per dot), `image_size` (the whole PNG, for example `"192x192"`), or both; contradicting values are rejected. `origin: [x, y]` with `image_size` moves the grid's top-left corner inside a larger PNG, and the margin must then be one solid color. `kind` is `sprite` (transparent background required) or `image` (a general picture, opaque by default). `scale: 1` checks a 1× asset and then requires `max_colors` or `allowed_palette`, because cell uniformity cannot be measured. `transparent_rgb: "exact"` checks hidden RGB too; choose `"visible"` explicitly to normalize alpha-zero RGB during inspection. Optional `allowed_palette` restricts complete RGBA values. Adjacent cells can share a color and form irregular shapes.
 
 Inspect one image or a batch under the same profile:
 
@@ -100,7 +103,7 @@ python pixelwright/scripts/pixelwright.py batch item-a.png item-b.png --profile 
 | `2` | At least one QA result is FAIL or REVIEW. |
 | `1` | An input, profile, or execution error occurred. |
 
-Geometry failures stop cell-color acceptance. Inspect the status, exact violation counts, and previews together. Each single-image audit writes `report.json` and grid diagnostics; a batch adds `batch.json` and separate numbered directories. Full artifact descriptions are in the [quality contract](pixelwright/references/quality-contract.md).
+`report.json` lists every declared condition under `checks` with what was required, what the PNG has, and the verdict. A size failure stops cell-color acceptance and reports the dot size and origin the pixels appear to use. Inspect the status, exact violation counts, and previews together. Each single-image audit writes `report.json` and grid diagnostics; a batch adds `batch.json` and separate numbered directories. Full artifact descriptions are in the [quality contract](pixelwright/references/quality-contract.md).
 
 ## Game contracts: one pixel size for a whole game
 

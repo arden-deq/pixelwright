@@ -200,8 +200,51 @@ def dominant_color(pixels: np.ndarray) -> np.ndarray:
 
 
 def count_visible_colors(arr: np.ndarray) -> int:
-    visible = arr[arr[:, :, 3] > 0, :3]
-    return int(len(np.unique(visible, axis=0))) if len(visible) else 0
+    visible = arr[arr[:, :, 3] > 0, :3].astype(np.uint32)
+    if not len(visible):
+        return 0
+    # One integer key per RGB triple: sorting integers is far faster than row-wise unique.
+    keys = (visible[:, 0] << 16) | (visible[:, 1] << 8) | visible[:, 2]
+    return int(len(np.unique(keys)))
+
+
+LATTICE_MIN_EDGES = 3
+LATTICE_FAIL_EDGES = 8
+
+
+def packed_colors(arr: np.ndarray) -> np.ndarray:
+    """One uint32 key per RGBA sample; every alpha-zero sample becomes one background key."""
+    rgba = np.ascontiguousarray(arr, dtype=np.uint8)
+    packed = rgba.view(np.uint32)[:, :, 0]
+    return np.where(rgba[:, :, 3] > 0, packed, np.uint32(0))
+
+
+def dot_lattice(arr: np.ndarray) -> dict[str, Any]:
+    """Measure the dot size the art is actually drawn with.
+
+    Every column position where any row changes color is a column edge (rows
+    likewise). Art drawn with k-wide dots has edges only every k positions, so
+    the greatest common divisor of the gaps between edges is the dot width; the
+    first edge modulo that width is the phase. Transparent samples all count as
+    one background, so hidden RGB cannot fake edges.
+    """
+    packed = packed_colors(arr)
+    cols = np.flatnonzero((packed[:, 1:] != packed[:, :-1]).any(axis=0)) + 1
+    rows = np.flatnonzero((packed[1:, :] != packed[:-1, :]).any(axis=1)) + 1
+
+    def period(edges: np.ndarray) -> int:
+        return int(np.gcd.reduce(np.diff(edges))) if len(edges) >= 2 else 1
+
+    kx, ky = period(cols), period(rows)
+    fewest = int(min(len(cols), len(rows)))
+    return {
+        "dot_width": kx, "dot_height": ky,
+        "phase_x": int(cols[0] % kx) if len(cols) else 0,
+        "phase_y": int(rows[0] % ky) if len(rows) else 0,
+        "column_edges": int(len(cols)), "row_edges": int(len(rows)),
+        "measurable": fewest >= LATTICE_MIN_EDGES,
+        "conclusive": fewest >= LATTICE_FAIL_EDGES,
+    }
 
 
 def isolated_color_pixels(arr: np.ndarray, sample_limit: int = 30) -> tuple[int, list[dict[str, int]]]:

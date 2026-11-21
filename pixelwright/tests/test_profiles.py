@@ -97,7 +97,7 @@ class ProfileTests(unittest.TestCase):
         self.assertEqual(marker.read_text(), "keep")
 
     def test_misspelled_or_weak_contract_rejected(self):
-        for change in ({"scale": 1}, {"scale": True}, {"alpha": "guess"}, {"max_colors": 0},
+        for change in ({"scale": 0}, {"scale": True}, {"alpha": "guess"}, {"max_colors": 0},
                        {"schema_version": True}, {"allowd_palette": ["#000000"]},
                        {"allowed_palette": ["#GG0000"]}, {"allowed_palette": ["# 0 0 0"]}):
             with self.subTest(change=change):
