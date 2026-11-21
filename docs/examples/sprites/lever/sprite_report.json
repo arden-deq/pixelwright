@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "status": "pass",
   "scope": "technical_checks_only_not_artistic_quality",
@@ -17,13 +17,21 @@
     },
     "profile": {
       "path": "profile.json",
-      "sha256": "39cf86706144681c1863e48958e84d1816a774cba6c90a369be62aad5558f668"
+      "sha256": "449c470a51af496767166945ed2450c43ebb5974b7299e36184738632dcb414a"
     }
   },
   "name": "Rigged lever switch",
   "contract": {
     "schema_version": 1,
     "name": "Lever sheet",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "18x16",
+      "columns": 5,
+      "rows": 1,
+      "spacing": 1,
+      "edge_margin": 1
+    },
     "logical_size": "94x16",
     "scale": 6,
     "max_colors": 6,
@@ -214,7 +222,115 @@
       "total_ms": 450,
       "baseline_rows": [
         14
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 5,
+          "requested_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "requested_total_ms": 450,
+          "requested_loop": false,
+          "scheduled_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "quantized": false,
+          "actual_frame_count": 5,
+          "actual_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "actual_total_ms": 450,
+          "actual_loop": false,
+          "actual_loop_extension": null,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ],
+          "metadata_verified": true
+        },
+        "rig": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 5,
+          "requested_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "requested_total_ms": 450,
+          "requested_loop": false,
+          "scheduled_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "quantized": false,
+          "actual_frame_count": 5,
+          "actual_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "actual_total_ms": 450,
+          "actual_loop": false,
+          "actual_loop_extension": null,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     },
     {
       "id": "switch_off",
@@ -236,7 +352,115 @@
       "total_ms": 450,
       "baseline_rows": [
         14
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 5,
+          "requested_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "requested_total_ms": 450,
+          "requested_loop": false,
+          "scheduled_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "quantized": false,
+          "actual_frame_count": 5,
+          "actual_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "actual_total_ms": 450,
+          "actual_loop": false,
+          "actual_loop_extension": null,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ],
+          "metadata_verified": true
+        },
+        "rig": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 5,
+          "requested_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "requested_total_ms": 450,
+          "requested_loop": false,
+          "scheduled_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "quantized": false,
+          "actual_frame_count": 5,
+          "actual_durations_ms": [
+            90,
+            90,
+            90,
+            90,
+            90
+          ],
+          "actual_total_ms": 450,
+          "actual_loop": false,
+          "actual_loop_extension": null,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     }
   ],
   "rig": {

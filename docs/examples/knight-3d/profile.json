@@ -1,6 +1,13 @@
 {
   "schema_version": 1,
   "name": "3D knight sheet pixel contract",
+  "kind": "sheet",
+  "sheet": {
+    "frame_size": "128x128",
+    "columns": 6,
+    "rows": 3,
+    "spacing": 0
+  },
   "logical_size": "768x384",
   "scale": 4,
   "max_colors": 31,

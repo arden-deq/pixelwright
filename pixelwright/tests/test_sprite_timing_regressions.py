@@ -43,7 +43,8 @@ class SpriteTimingRegressions(unittest.TestCase):
                     "animations": {"move": animation}, "frames": frames,
                     "rig": {"joints": {"pivot": {}},
                             "parts": {"box": {"token": "x", "motion": "rigid", "pivot": "pivot"}}}}
-        profile = {"schema_version": 1, "logical_size": f"{8 * count}x8", "scale": 2,
+        profile = {"schema_version": 1, "kind": "sheet", "sheet": {"frame_size": "8x8", "columns": count, "rows": 1},
+                   "logical_size": f"{8 * count}x8", "scale": 2,
                    "alpha": "binary", "max_colors": 1, "transparent_rgb": "exact",
                    "allowed_palette": ["#00000000", "#A02030FF"]}
         self.spec = self.root / "spec.json"

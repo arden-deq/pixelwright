@@ -17,7 +17,7 @@ Static PNG inspection is the main feature. [Game contracts](#game-contracts-one-
 | Size and grid | The PNG has the declared size; the grid of logical dots × one integer cell size starts at the declared origin (default `(0, 0)`), and any margin outside it is one solid color. |
 | Square cells | Every sample within each declared cell has exactly the same RGBA value. |
 | Real resolution | The art actually uses one-cell dots; art drawn with 2×2-cell blocks fails instead of passing as a finer grid. |
-| Sprite or image | A sprite must have a transparent background and visible content; an image is opaque unless declared otherwise. |
+| Sprite, sheet or image | A sprite must have a transparent background and visible content; a sheet keeps every dot inside its declared frame slots; an image is opaque unless declared otherwise. |
 | Palette | The actual visible RGB count stays within the budget; an optional palette constrains exact RGBA values of every sample. |
 | Transparency | Alpha follows the declared policy, including how hidden RGB under transparent pixels is handled. |
 | Evidence | A JSON report, source/profile hashes, grid previews, and complete invalid-cell masks record the result. |
@@ -88,7 +88,7 @@ Save the intended rules as `profile.json`:
 }
 ```
 
-This requires a **192×192 PNG with 8×8 px cells** drawn as a sprite on a transparent background, at most 10 visible RGB colors, and alpha values of 0 or 255. Declare the size with `scale` (pixels per dot), `image_size` (the whole PNG, for example `"192x192"`), or both; contradicting values are rejected. `origin: [x, y]` with `image_size` moves the grid's top-left corner inside a larger PNG, and the margin must then be one solid color. `kind` is `sprite` (transparent background required) or `image` (a general picture, opaque by default). `scale: 1` checks a 1× asset and then requires `max_colors` or `allowed_palette`, because cell uniformity cannot be measured. `transparent_rgb: "exact"` checks hidden RGB too; choose `"visible"` explicitly to normalize alpha-zero RGB during inspection. Optional `allowed_palette` restricts complete RGBA values. Adjacent cells can share a color and form irregular shapes.
+This requires a **192×192 PNG with 8×8 px cells** drawn as a sprite on a transparent background, at most 10 visible RGB colors, and alpha values of 0 or 255. Declare the size with `scale` (pixels per dot), `image_size` (the whole PNG, for example `"192x192"`), or both; contradicting values are rejected. `origin: [x, y]` with `image_size` moves the grid's top-left corner inside a larger PNG, and the margin must then be one solid color. `kind` is required: `sprite` (transparent background required), `sheet` (a sprite sheet; add `"sheet": {"frame_size": "24x24", "columns": 4, "rows": 2, "spacing": 1}` and the sheet size follows, with transparent gutters and unused slots and every frame drawn on transparency), or `image` (a general picture, opaque by default). `scale: 1` checks a 1× asset and then requires `max_colors` or `allowed_palette`, because cell uniformity cannot be measured. `transparent_rgb: "exact"` checks hidden RGB too; choose `"visible"` explicitly to normalize alpha-zero RGB during inspection. Optional `allowed_palette` restricts complete RGBA values. Adjacent cells can share a color and form irregular shapes.
 
 Inspect one image or a batch under the same profile:
 

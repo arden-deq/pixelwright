@@ -41,7 +41,9 @@ class SpriteRigRegressions(unittest.TestCase):
         spec = {"schema_version": 1, "frame_size": f"{width}x{height}",
                 "layout": {"columns": 2, "rows": 1, "spacing": 1},
                 "rig": rig, "frames": entries}
-        profile = {"schema_version": 1, "logical_size": f"{2 * width + 1}x{height}", "scale": 2,
+        profile = {"schema_version": 1, "kind": "sheet",
+                   "sheet": {"frame_size": f"{width}x{height}", "columns": 2, "rows": 1, "spacing": 1},
+                   "logical_size": f"{2 * width + 1}x{height}", "scale": 2,
                    "alpha": "binary", "max_colors": 3, "transparent_rgb": "exact",
                    "allowed_palette": ["#00000000"] + ["#" + bytes(c).hex() for c in COLORS.values()]}
         for filename, document in (("spec.json", spec), ("profile.json", profile)):

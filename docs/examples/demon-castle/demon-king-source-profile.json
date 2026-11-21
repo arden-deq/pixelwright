@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "As-requested demon-king source",
+  "kind": "sprite",
   "logical_size": "64x64",
   "scale": 16,
   "max_colors": 64,

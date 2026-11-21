@@ -119,7 +119,9 @@ class SpriteCase(unittest.TestCase):
                     entry["z"] = depths[index]
                 spec["frames"].append(entry)
         spec.update(extra or {})
-        profile = {"schema_version": 1, "logical_size": f"{width}x{height}", "scale": scale,
+        profile = {"schema_version": 1, "kind": "sheet", "sheet": {"frame_size": spec["frame_size"], **spec["layout"],
+                             **{k: spec[k] for k in ("frame_count", "edge_margin") if k in spec}},
+                   "logical_size": f"{width}x{height}", "scale": scale,
                    "max_colors": 4, "alpha": "binary", "transparent_rgb": "exact",
                    "allowed_palette": ["#00000000"] + list(HEX.values())}
         profile.update(profile_extra or {})

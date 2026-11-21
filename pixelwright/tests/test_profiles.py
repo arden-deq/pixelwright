@@ -18,7 +18,7 @@ class ProfileTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
         self.profile = self.root / "profile.json"
-        self.contract = {"schema_version": 1, "logical_size": "2x2", "scale": 3,
+        self.contract = {"schema_version": 1, "kind": "image", "logical_size": "2x2", "scale": 3,
                          "max_colors": 2, "alpha": "binary", "transparent_rgb": "exact"}
         self.profile.write_text(json.dumps(self.contract), encoding="utf-8")
 
@@ -106,7 +106,7 @@ class ProfileTests(unittest.TestCase):
                     pw.load_profile(self.profile)
 
     def test_duplicate_constraints_cannot_silently_override_contract(self):
-        self.profile.write_text('{"schema_version":1,"logical_size":"2x2","scale":3,"scale":4}')
+        self.profile.write_text('{"schema_version":1,"kind":"image","logical_size":"2x2","scale":3,"scale":4}')
         with self.assertRaises(ValueError):
             pw.load_profile(self.profile)
 

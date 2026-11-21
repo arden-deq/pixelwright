@@ -23,7 +23,7 @@
     "decoded_rgba_sha256": "7c8a77cc9dcfe12907371b0a3ad9ce53f46852d4c7a38038ff5a5d43758e4156",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "5de532139d34d0d1a79a5625e33410c6f2d4bf2f69117879d56dce159f3b0bb4",
+    "profile_sha256": "e93ceddedb02aa2a26346a468f2f00ccad723e088599b72bffd255dc2455050f",
     "source_path": "docs/examples/demon-castle-sd/stone2-4x.png",
     "profile_path": "docs/examples/demon-castle-sd/stone2-profile.json"
   },
@@ -32,7 +32,9 @@
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 64,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "image"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -48,26 +50,23 @@
     "visible_rgb_colors_logical_preview": 4,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 0,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 0,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 1024,
+    "transparent_cells": 0
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
   "nonuniform_rgba_cell_samples_truncated": false,
   "violation_mask": {
-    "file": "stone2-violation_mask.png",
+    "file": "violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
     "width": 32,
     "height": 32
   },
   "possible_isolated_pixels_sample": [],
-  "issues": [
-    {
-      "code": "OPAQUE_BACKGROUND",
-      "severity": "info",
-      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
-    }
-  ],
+  "issues": [],
   "visual_review_required": [
     "Recognizable silhouette at logical resolution",
     "Intentional pixel clusters, shading, and outline design",
@@ -80,26 +79,83 @@
       "width": 128,
       "height": 128
     },
+    "expected_image_size": {
+      "width": 128,
+      "height": 128
+    },
     "logical_size": {
       "width": 32,
       "height": 32
     },
-    "expected_render_size": {
-      "width": 128,
-      "height": 128
-    },
-    "scale_x": 4.0,
-    "scale_y": 4.0,
-    "exact_integer_division": true,
-    "square_logical_pixel": true,
     "integer_scale": 4,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_box": [
+      0,
+      0,
+      127,
+      127
+    ],
+    "has_margin": false,
+    "square_logical_pixel": true,
     "issues": []
   },
+  "grid_box": [
+    0,
+    0,
+    127,
+    127
+  ],
+  "colors_used": [
+    {
+      "rgba": "#47405BFF",
+      "samples": 12784
+    },
+    {
+      "rgba": "#343047FF",
+      "samples": 2848
+    },
+    {
+      "rgba": "#5B5274FF",
+      "samples": 672
+    },
+    {
+      "rgba": "#354A51FF",
+      "samples": 80
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 0,
+    "y": 0,
+    "width": 32,
+    "height": 32,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 16,
+    "row_edges": 10,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 32,
+      "height": 32
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "stone2",
+    "kind": "image",
     "logical_size": "32x32",
     "scale": 4,
     "max_colors": 64,
@@ -173,17 +229,92 @@
       "#FFF4CBFF"
     ]
   },
+  "layout": {
+    "logical_size": {
+      "width": 32,
+      "height": 32
+    },
+    "scale": 4,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "image_size": {
+      "width": 128,
+      "height": 128
+    },
+    "grid_box": [
+      0,
+      0,
+      127,
+      127
+    ],
+    "has_margin": false,
+    "cell_rule": "cell (x,y) covers pixels [ox+x*S, ox+(x+1)*S) x [oy+y*S, oy+(y+1)*S)"
+  },
+  "checks": [
+    {
+      "id": "image_size",
+      "status": "pass",
+      "expected": "128x128 px = 32x32 dots x 4 px from origin (0,0)",
+      "actual": "128x128 px"
+    },
+    {
+      "id": "cell_uniformity",
+      "status": "pass",
+      "expected": "each of 1024 cells (4x4 px) is exactly one RGBA value",
+      "actual": "0 of 1024 cells mix colors"
+    },
+    {
+      "id": "dot_size",
+      "status": "pass",
+      "expected": "art drawn with 32x32 dots of 1 cell (edges every 1x1 cells)",
+      "actual": "color edges every 1x1 cells"
+    },
+    {
+      "id": "content",
+      "status": "pass",
+      "expected": "at least one visible cell",
+      "actual": "1024 visible cells"
+    },
+    {
+      "id": "kind",
+      "status": "pass",
+      "expected": "image: general picture",
+      "actual": "0 transparent samples"
+    },
+    {
+      "id": "alpha",
+      "status": "pass",
+      "expected": "alpha 0 or 255 only",
+      "actual": "0 partial, 0 transparent samples"
+    },
+    {
+      "id": "color_budget",
+      "status": "pass",
+      "expected": "at most 64 visible RGB colors",
+      "actual": "4 colors"
+    },
+    {
+      "id": "allowed_palette",
+      "status": "pass",
+      "expected": "every sample is one of 65 declared RGBA colors (transparent_rgb exact)",
+      "actual": "0 samples outside"
+    }
+  ],
+  "acceptance_mode": "strict_profile",
   "grid_preview": {
     "sampled": false,
-    "logical_cell_step": {
-      "x": 1,
-      "y": 1
-    },
+    "magnification": 1,
     "spacing_px": {
       "x": 4,
       "y": 4
     },
-    "outer_boundary": "right/bottom lie outside the half-open source canvas"
-  },
-  "acceptance_mode": "strict_profile"
+    "origin_px": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_lines_drawn": true,
+    "legend": "cyan: declared cell boundaries; red fill: cell with more than one RGBA value; black X in a white box: cell with a color outside allowed_palette; magenta: grid box inside the margin; red square in the margin: pixel that differs from the margin color; amber: frame slot of a sprite sheet (red fill also marks dots in gutters, unused slots or edge margins); orange: declared grid on an image of the wrong size"
+  }
 }

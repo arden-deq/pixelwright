@@ -96,7 +96,7 @@ def import_generated(work, palette):
         run('pixel_qa.py', 'fix', projection_input, '--logical-size', f'{width}x{height}',
             '--render-size', f'{target[0]}x{target[1]}', '--hard-alpha', '--out-dir', projection,
             expected=(0, 2))
-        profile = {'schema_version': 1, 'name': f'{name} derived grid/palette contract',
+        profile = {'schema_version': 1, 'name': f'{name} derived grid/palette contract', 'kind': 'sprite',
                    'logical_size': f'{width}x{height}', 'scale': scale, 'max_colors': 64,
                    'alpha': 'binary', 'transparent_rgb': 'exact',
                    'allowed_palette': list(palette['colors'].values())}
@@ -291,7 +291,7 @@ def main():
     scene.save(DOCS / 'scene-native.png')
     scene.resize((1152, 768), Image.Resampling.NEAREST).save(ROOT / 'docs/images/game-scene.png')
     # A strict enlarged-image audit is separate from the 1x game contract.
-    write(DOCS / 'scene-profile.json', {'schema_version': 1, 'name': 'Demon Castle field at 3x',
+    write(DOCS / 'scene-profile.json', {'schema_version': 1, 'name': 'Demon Castle field at 3x', 'kind': 'image',
           'logical_size': '384x256', 'scale': 3, 'max_colors': 64, 'alpha': 'opaque',
           'transparent_rgb': 'exact', 'allowed_palette': list(palette['colors'].values())})
     run('pixelwright.py', 'inspect', ROOT / 'docs/images/game-scene.png', '--profile', DOCS / 'scene-profile.json',

@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.3.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
@@ -23,7 +23,7 @@
     "decoded_rgba_sha256": "f6c2cea444dd6ea8566a2afd173f28d5c8dd5602d242bfd0ab006b4e6ebb67a4",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "020e8e0af35da8424b71202c43d7a5bc95dfbec9e99ebe64a6023533e61f6aa3",
+    "profile_sha256": "9919676180255ce935ee6e78a3784846577071bcb70a1c972e435dfc0f40782c",
     "source_path": "docs/examples/knight/8px/rendered.png",
     "profile_path": "docs/examples/knight/8px/profile.json"
   },
@@ -32,7 +32,9 @@
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 31,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "sprite"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -48,7 +50,10 @@
     "visible_rgb_colors_logical_preview": 31,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 3482,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 899520,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 10521,
+    "transparent_cells": 14055
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -201,26 +206,195 @@
       "width": 1024,
       "height": 1536
     },
+    "expected_image_size": {
+      "width": 1024,
+      "height": 1536
+    },
     "logical_size": {
       "width": 128,
       "height": 192
     },
-    "expected_render_size": {
-      "width": 1024,
-      "height": 1536
-    },
-    "scale_x": 8.0,
-    "scale_y": 8.0,
-    "exact_integer_division": true,
-    "square_logical_pixel": true,
     "integer_scale": 8,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_box": [
+      0,
+      0,
+      1023,
+      1535
+    ],
+    "has_margin": false,
+    "square_logical_pixel": true,
     "issues": []
   },
+  "grid_box": [
+    0,
+    0,
+    1023,
+    1535
+  ],
+  "colors_used": [
+    {
+      "rgba": "#00000000",
+      "samples": 899520
+    },
+    {
+      "rgba": "#5E646DFF",
+      "samples": 32448
+    },
+    {
+      "rgba": "#491A1FFF",
+      "samples": 30528
+    },
+    {
+      "rgba": "#3D4147FF",
+      "samples": 29824
+    },
+    {
+      "rgba": "#1E1F21FF",
+      "samples": 29248
+    },
+    {
+      "rgba": "#0B0A09FF",
+      "samples": 28160
+    },
+    {
+      "rgba": "#969AA1FF",
+      "samples": 27840
+    },
+    {
+      "rgba": "#191716FF",
+      "samples": 27584
+    },
+    {
+      "rgba": "#50555CFF",
+      "samples": 27584
+    },
+    {
+      "rgba": "#69533AFF",
+      "samples": 27264
+    },
+    {
+      "rgba": "#727983FF",
+      "samples": 27136
+    },
+    {
+      "rgba": "#6B7077FF",
+      "samples": 26752
+    },
+    {
+      "rgba": "#4A4D51FF",
+      "samples": 23872
+    },
+    {
+      "rgba": "#592025FF",
+      "samples": 23808
+    },
+    {
+      "rgba": "#CCC6BAFF",
+      "samples": 23552
+    },
+    {
+      "rgba": "#35211FFF",
+      "samples": 21952
+    },
+    {
+      "rgba": "#24272AFF",
+      "samples": 21632
+    },
+    {
+      "rgba": "#2B2C2EFF",
+      "samples": 21632
+    },
+    {
+      "rgba": "#303438FF",
+      "samples": 20992
+    },
+    {
+      "rgba": "#53342AFF",
+      "samples": 20480
+    },
+    {
+      "rgba": "#8A8987FF",
+      "samples": 20480
+    },
+    {
+      "rgba": "#060606FF",
+      "samples": 19904
+    },
+    {
+      "rgba": "#321216FF",
+      "samples": 19776
+    },
+    {
+      "rgba": "#1B0D0EFF",
+      "samples": 18432
+    },
+    {
+      "rgba": "#EEEBE3FF",
+      "samples": 17600
+    },
+    {
+      "rgba": "#383837FF",
+      "samples": 15936
+    },
+    {
+      "rgba": "#867B66FF",
+      "samples": 15872
+    },
+    {
+      "rgba": "#020202FF",
+      "samples": 15360
+    },
+    {
+      "rgba": "#B5A88EFF",
+      "samples": 13376
+    },
+    {
+      "rgba": "#474541FF",
+      "samples": 10240
+    },
+    {
+      "rgba": "#716759FF",
+      "samples": 9088
+    },
+    {
+      "rgba": "#58544FFF",
+      "samples": 4992
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 3,
+    "y": 2,
+    "width": 123,
+    "height": 188,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 124,
+    "row_edges": 189,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 128,
+      "height": 192
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "Full plate knight: 8px dots, 32 colors including transparency",
+    "kind": "sprite",
     "logical_size": "128x192",
     "scale": 8,
     "max_colors": 31,
@@ -261,5 +435,92 @@
       "#EEEBE3FF"
     ]
   },
-  "acceptance_mode": "strict_profile"
+  "layout": {
+    "logical_size": {
+      "width": 128,
+      "height": 192
+    },
+    "scale": 8,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "image_size": {
+      "width": 1024,
+      "height": 1536
+    },
+    "grid_box": [
+      0,
+      0,
+      1023,
+      1535
+    ],
+    "has_margin": false,
+    "cell_rule": "cell (x,y) covers pixels [ox+x*S, ox+(x+1)*S) x [oy+y*S, oy+(y+1)*S)"
+  },
+  "checks": [
+    {
+      "id": "image_size",
+      "status": "pass",
+      "expected": "1024x1536 px = 128x192 dots x 8 px from origin (0,0)",
+      "actual": "1024x1536 px"
+    },
+    {
+      "id": "cell_uniformity",
+      "status": "pass",
+      "expected": "each of 24576 cells (8x8 px) is exactly one RGBA value",
+      "actual": "0 of 24576 cells mix colors"
+    },
+    {
+      "id": "dot_size",
+      "status": "pass",
+      "expected": "art drawn with 128x192 dots of 1 cell (edges every 1x1 cells)",
+      "actual": "color edges every 1x1 cells"
+    },
+    {
+      "id": "content",
+      "status": "pass",
+      "expected": "at least one visible cell",
+      "actual": "10521 visible cells"
+    },
+    {
+      "id": "kind",
+      "status": "pass",
+      "expected": "sprite: transparent background around the subject",
+      "actual": "14055 transparent cells"
+    },
+    {
+      "id": "alpha",
+      "status": "pass",
+      "expected": "alpha 0 or 255 only",
+      "actual": "0 partial, 899520 transparent samples"
+    },
+    {
+      "id": "color_budget",
+      "status": "pass",
+      "expected": "at most 31 visible RGB colors",
+      "actual": "31 colors"
+    },
+    {
+      "id": "allowed_palette",
+      "status": "pass",
+      "expected": "every sample is one of 32 declared RGBA colors (transparent_rgb exact)",
+      "actual": "0 samples outside"
+    }
+  ],
+  "acceptance_mode": "strict_profile",
+  "grid_preview": {
+    "sampled": false,
+    "magnification": 1,
+    "spacing_px": {
+      "x": 8,
+      "y": 8
+    },
+    "origin_px": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_lines_drawn": true,
+    "legend": "cyan: declared cell boundaries; red fill: cell with more than one RGBA value; black X in a white box: cell with a color outside allowed_palette; magenta: grid box inside the margin; red square in the margin: pixel that differs from the margin color; amber: frame slot of a sprite sheet (red fill also marks dots in gutters, unused slots or edge margins); orange: declared grid on an image of the wrong size"
+  }
 }

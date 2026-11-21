@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "faces",
+  "kind": "image",
   "logical_size": "80x26",
   "scale": 6,
   "max_colors": 64,

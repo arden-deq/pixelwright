@@ -253,7 +253,11 @@ def write_animation(name, kit, poses_dir, out_root, tokens, visible_tokens, pale
     out.mkdir(parents=True)
     (out / "spec.json").write_text(compact(spec), encoding="utf-8", newline="\n")
     width = count * frame_size[0] + (count - 1) * 2
-    profile = {"schema_version": 1, "name": f"Generated knight {name} sheet", "logical_size": f"{width}x{frame_size[1]}",
+    profile = {"schema_version": 1, "name": f"Generated knight {name} sheet",
+               "kind": "sheet",
+               "sheet": {"frame_size": spec["frame_size"], **spec["layout"],
+                         **{key: spec[key] for key in ("frame_count", "edge_margin") if key in spec}},
+               "logical_size": f"{width}x{frame_size[1]}",
                "scale": 2, "max_colors": len(visible_tokens), "alpha": "binary", "transparent_rgb": "exact",
                "allowed_palette": list(tokens.values())}
     (out / "profile.json").write_text(compact(profile), encoding="utf-8", newline="\n")

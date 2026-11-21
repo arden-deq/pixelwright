@@ -46,7 +46,7 @@ class PaletteTests(unittest.TestCase):
 
     def write_profile(self, *, allowed=None, alpha="binary", max_colors=256,
                       logical="2x2", scale=3, transparent_rgb="exact"):
-        document = {"schema_version": 1, "logical_size": logical, "scale": scale,
+        document = {"schema_version": 1, "kind": "image", "logical_size": logical, "scale": scale,
                     "max_colors": max_colors, "alpha": alpha,
                     "transparent_rgb": transparent_rgb}
         if allowed is not None:

@@ -60,15 +60,17 @@ def portable_report(source, target):
     write(target, result)
 
 
-def profile(size, scale, palette, name, alpha='binary'):
-    return {'schema_version': 1, 'name': name, 'logical_size': f'{size[0]}x{size[1]}',
+def profile(size, scale, palette, name, alpha='binary', kind=None):
+    # Opaque pictures are images; everything else here is a sprite unless the caller says otherwise (tiles).
+    kind = kind or ('image' if alpha == 'opaque' else 'sprite')
+    return {'schema_version': 1, 'name': name, 'kind': kind, 'logical_size': f'{size[0]}x{size[1]}',
             'scale': scale, 'max_colors': 64, 'alpha': alpha, 'transparent_rgb': 'exact',
             'allowed_palette': list(palette['colors'].values())}
 
 
-def inspect(path, size, scale, palette, name, work, alpha='binary'):
+def inspect(path, size, scale, palette, name, work, alpha='binary', kind=None):
     profile_path = DOCS / f'{name}-profile.json'
-    write(profile_path, profile(size, scale, palette, name, alpha))
+    write(profile_path, profile(size, scale, palette, name, alpha, kind))
     target = work / name
     run('pixelwright.py', 'inspect', path, '--profile', profile_path, '--out-dir', target)
     portable_report(target / 'report.json', DOCS / f'{name}-report.json')
@@ -102,7 +104,8 @@ def build(work, palette):
         loaded[name] = Image.open(native).convert('RGBA')
         assert loaded[name].size == (width, height), f'{name}: source differs from the frozen native size'
         pivots[name] = [width // 2, 126 if name == 'castle' else 3 if name == 'shadow' else 62 if category in ('character', 'boss') else 32]
-        inspect(DOCS / f'{name}-4x.png', (width, height), 4, palette, name, work)
+        inspect(DOCS / f'{name}-4x.png', (width, height), 4, palette, name, work,
+                kind='image' if category == 'tile' else 'sprite')
         output = work / f'{name}-game'
         run('pixel_game.py', 'asset', native, '--category', category, '--contract', KIT / 'game.json', '--out-dir', output)
         portable_report(output / 'report.json', DOCS / f'{name}-game-report.json')

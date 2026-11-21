@@ -27,7 +27,7 @@
   "exact_native_repeat": true,
   "source_sha256": "888929f4637a46b2c15f8d77a0a630c4cb761f5e429022718e2b5f29d30882db",
   "native_sha256": "2df756f64a08cfb8b5717b51d8575f8ea3e0863970a34d60d04143577eb919a4",
-  "profile_sha256": "aa39ed4f33a08b90aa70b8e218db5bdf0058356236ae34ea131a3b471c04504d",
+  "profile_sha256": "81062154a300512a7fa2731ac266b2ff7a68f0b7f928d78f78b719ac93644ccd",
   "decoded_rgba_sha256": "8a2b48d2f64728b254a3b72a81f092b204f11ae248462fb7af74846c65408665",
   "generated_source_path": "docs/examples/header/generated-source.png",
   "generated_source_sha256": "ddeebaabafcfd402a923bd7e9d2e8e81beef73142b4e3475b674c451dee2b98c",

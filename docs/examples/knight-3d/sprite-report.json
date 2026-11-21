@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "status": "pass",
   "scope": "technical_checks_only_not_artistic_quality",
@@ -17,13 +17,20 @@
     },
     "profile": {
       "path": "profile.json",
-      "sha256": "15b14f8f1b1925aec0767b3f80ad790a19cb21ab26d9a18e05c31f6f93ea8da3"
+      "sha256": "0de174e1bfcfb07ef767123c140361d6b1afa7953effe23018f821b3e719cec2"
     }
   },
   "name": "Knight from metric 3D rig",
   "contract": {
     "schema_version": 1,
     "name": "3D knight sheet pixel contract",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "128x128",
+      "columns": 6,
+      "rows": 3,
+      "spacing": 0
+    },
     "logical_size": "768x384",
     "scale": 4,
     "max_colors": 31,
@@ -532,7 +539,68 @@
         113,
         114,
         115
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 6,
+          "requested_durations_ms": [
+            120,
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "requested_total_ms": 720,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            120,
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "quantized": false,
+          "actual_frame_count": 6,
+          "actual_durations_ms": [
+            120,
+            120,
+            120,
+            120,
+            120,
+            120
+          ],
+          "actual_total_ms": 720,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     },
     {
       "id": "attack",
@@ -557,7 +625,68 @@
       "baseline_rows": [
         113,
         114
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 6,
+          "requested_durations_ms": [
+            180,
+            110,
+            150,
+            70,
+            140,
+            170
+          ],
+          "requested_total_ms": 820,
+          "requested_loop": false,
+          "scheduled_durations_ms": [
+            180,
+            110,
+            150,
+            70,
+            140,
+            170
+          ],
+          "quantized": false,
+          "actual_frame_count": 6,
+          "actual_durations_ms": [
+            180,
+            110,
+            150,
+            70,
+            140,
+            170
+          ],
+          "actual_total_ms": 820,
+          "actual_loop": false,
+          "actual_loop_extension": null,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     },
     {
       "id": "block",
@@ -582,7 +711,68 @@
       "baseline_rows": [
         112,
         113
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 6,
+          "requested_durations_ms": [
+            180,
+            90,
+            100,
+            100,
+            230,
+            130
+          ],
+          "requested_total_ms": 830,
+          "requested_loop": false,
+          "scheduled_durations_ms": [
+            180,
+            90,
+            100,
+            100,
+            230,
+            130
+          ],
+          "quantized": false,
+          "actual_frame_count": 6,
+          "actual_durations_ms": [
+            180,
+            90,
+            100,
+            100,
+            230,
+            130
+          ],
+          "actual_total_ms": 830,
+          "actual_loop": false,
+          "actual_loop_extension": null,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     }
   ],
   "rig": null,

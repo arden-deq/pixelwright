@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Profile gate for static PNG pixel art.
 
-Declare the conditions (dots, pixels per dot or full PNG size, origin, sprite or
-image, alpha, palette). The gate builds the grid from the declared origin and
-checks every sample of the decoded PNG against it: image size, one RGBA value
-per cell, uniform margins, art drawn at the declared dot size, transparency for
-sprites, alpha policy, color budget and allowed palette. Each condition is
+Declare the conditions (kind: sprite, sheet or image; dots; pixels per dot or
+full PNG size; origin; sheet layout; alpha; palette). The gate builds the grid
+from the declared origin and checks every sample of the decoded PNG against it:
+image size, one RGBA value per cell, uniform margins, art drawn at the declared
+dot size, transparency for sprites, frame slots for sheets, alpha policy, color
+budget and allowed palette. Each condition is
 reported as its own check; nothing is resized, rounded or inferred to pass.
 """
 from __future__ import annotations
@@ -25,9 +26,15 @@ from PIL import Image, ImageDraw
 import pixel_qa as qa
 
 VERSION = "0.7.0"
-PROFILE_KEYS = {"schema_version", "name", "kind", "logical_size", "scale", "image_size", "origin",
+PROFILE_KEYS = {"schema_version", "name", "kind", "sheet", "logical_size", "scale", "image_size", "origin",
                 "max_colors", "alpha", "transparent_rgb", "allowed_palette"}
-KINDS = ("sprite", "image")
+KINDS = ("sprite", "sheet", "image")
+KIND_HELP = ("kind is required: sprite (one subject on a transparent background), sheet (a sprite sheet of equal "
+             "frames; also declare sheet), or image (a general picture, opaque by default)")
+SHEET_KEYS = {"frame_size", "columns", "rows", "margin", "spacing", "frame_count", "edge_margin"}
+MAX_SHEET_SLOTS = 1024
+SHEET_CODES = ("GUTTER_NOT_EMPTY", "UNUSED_SLOT_NOT_EMPTY", "EMPTY_FRAME", "FRAME_WITHOUT_TRANSPARENCY",
+               "EDGE_MARGIN_VIOLATION")
 MAX_IMAGE_SIDE = 65535
 # grid_overlay.png is enlarged by a whole number until each cell spans at least this many pixels.
 OVERLAY_MIN_CELL = 4
@@ -36,8 +43,6 @@ OVERLAY_MIN_CELL = 4
 WHOLE_IMAGE_CODES = {"PALETTE_OVER_BUDGET", "PARTIAL_ALPHA", "OPAQUE_BACKGROUND", "NON_OPAQUE_ALPHA",
                      "COLOR_OUTSIDE_ALLOWED_PALETTE", "EMPTY_IMAGE", "SPRITE_WITHOUT_TRANSPARENCY",
                      "COARSER_THAN_DECLARED"}
-CHECK_ORDER = ("image_size", "margin", "cell_uniformity", "dot_size", "content", "kind", "alpha",
-               "color_budget", "allowed_palette")
 
 
 def sha256(path: Path) -> str:
@@ -70,8 +75,59 @@ def parse_image_size(value: Any) -> tuple[int, int]:
 
 
 def default_alpha(kind: str | None) -> str:
-    """A general image is opaque unless declared otherwise; a sprite has a transparent background."""
+    """A general image is opaque unless declared otherwise; sprites and sheets have transparent backgrounds."""
     return "opaque" if kind == "image" else "binary"
+
+
+def _bounded_int(value: Any, name: str, low: int, high: int) -> int:
+    if type(value) is not int or not low <= value <= high:
+        raise ValueError(f"sheet.{name} must be an integer in {low}..{high}")
+    return value
+
+
+def parse_sheet(value: Any) -> dict[str, Any]:
+    """Validate a sprite-sheet layout; sizes are in logical dots, frames numbered row-major.
+
+    width  = 2*margin + columns*frame_width  + (columns-1)*spacing
+    height = 2*margin + rows*frame_height    + (rows-1)*spacing
+    """
+    if not isinstance(value, dict):
+        raise ValueError("sheet must be an object with frame_size, columns and rows")
+    unknown = set(value) - SHEET_KEYS
+    if unknown:
+        raise ValueError(f"Unknown sheet fields: {', '.join(sorted(unknown))}")
+    if not isinstance(value.get("frame_size"), str):
+        raise ValueError("sheet.frame_size must be WIDTHxHEIGHT in dots")
+    try:
+        fw, fh = qa.parse_size(value["frame_size"])
+    except argparse.ArgumentTypeError as exc:
+        raise ValueError(f"sheet.frame_size: {exc}") from exc
+    for key in ("columns", "rows"):
+        if key not in value:
+            raise ValueError(f"sheet.{key} is required")
+    columns = _bounded_int(value["columns"], "columns", 1, 4096)
+    rows = _bounded_int(value["rows"], "rows", 1, 4096)
+    capacity = columns * rows
+    if capacity > MAX_SHEET_SLOTS:
+        raise ValueError(f"A sheet holds at most {MAX_SHEET_SLOTS} frame slots")
+    margin = _bounded_int(value.get("margin", 0), "margin", 0, 4096)
+    spacing = _bounded_int(value.get("spacing", 0), "spacing", 0, 4096)
+    frame_count = _bounded_int(value.get("frame_count", capacity), "frame_count", 1, capacity)
+    edge_margin = _bounded_int(value.get("edge_margin", 0), "edge_margin", 0, max(0, (min(fw, fh) - 1) // 2))
+    width = 2 * margin + columns * fw + (columns - 1) * spacing
+    height = 2 * margin + rows * fh + (rows - 1) * spacing
+    if width > 4096 or height > 4096:
+        raise ValueError(f"The sheet is {width}x{height} dots; each side must be at most 4096")
+    return {"frame_size": (fw, fh), "columns": columns, "rows": rows, "margin": margin, "spacing": spacing,
+            "frame_count": frame_count, "edge_margin": edge_margin, "capacity": capacity,
+            "sheet_size": (width, height)}
+
+
+def sheet_slots(sheet: dict) -> list[tuple[int, int]]:
+    """Top-left logical cell of every frame slot, row-major."""
+    fw, fh = sheet["frame_size"]
+    return [(sheet["margin"] + c * (fw + sheet["spacing"]), sheet["margin"] + r * (fh + sheet["spacing"]))
+            for r in range(sheet["rows"]) for c in range(sheet["columns"])]
 
 
 def alpha_policy(profile: dict) -> str:
@@ -138,8 +194,26 @@ def load_profile(path: Path) -> dict:
     if "name" in profile and not isinstance(profile["name"], str):
         raise ValueError("Profile name must be a string")
     kind = profile.get("kind")
-    if kind is not None and kind not in KINDS:
-        raise ValueError("kind must be sprite (transparent background) or image (general picture)")
+    if kind not in KINDS:
+        raise ValueError(KIND_HELP + (f"; got {kind!r}" if kind is not None else ""))
+    profile = dict(profile)
+    if kind == "sheet":
+        if "sheet" not in profile:
+            raise ValueError("kind sheet requires a sheet object: frame_size, columns, rows "
+                             "(optional margin, spacing, frame_count, edge_margin)")
+        sheet = parse_sheet(profile["sheet"])
+        derived = f"{sheet['sheet_size'][0]}x{sheet['sheet_size'][1]}"
+        if "logical_size" in profile:
+            try:
+                declared = qa.parse_size(profile["logical_size"]) if isinstance(profile["logical_size"], str) else None
+            except argparse.ArgumentTypeError as exc:
+                raise ValueError(str(exc)) from exc
+            if declared != sheet["sheet_size"]:
+                raise ValueError(f"logical_size {profile['logical_size']} differs from the sheet layout's size "
+                                 f"{derived}; omit logical_size or make them agree")
+        profile["logical_size"] = derived
+    elif "sheet" in profile:
+        raise ValueError("sheet is only valid with kind sheet")
     if not isinstance(profile.get("logical_size"), str):
         raise ValueError("Profile logical_size must be WIDTHxHEIGHT in dots")
     if "scale" not in profile and "image_size" not in profile:
@@ -161,6 +235,9 @@ def load_profile(path: Path) -> dict:
         raise ValueError("alpha must be binary, opaque, or any")
     if kind == "sprite" and alpha == "opaque":
         raise ValueError("A sprite needs a transparent background; use alpha binary or any, or kind image")
+    if kind == "sheet" and alpha == "opaque" and (sheet["margin"] or sheet["spacing"]
+                                                  or sheet["frame_count"] < sheet["capacity"]):
+        raise ValueError("An opaque sheet cannot hold transparent margins, spacing or unused slots")
     if profile.get("transparent_rgb", "exact") not in ("exact", "visible"):
         raise ValueError("transparent_rgb must be exact or visible")
     palette = profile.get("allowed_palette")
@@ -176,8 +253,7 @@ def load_profile(path: Path) -> dict:
             "cannot be measured at 1x, so the palette rule is what catches blur and anti-aliasing")
     normalized = dict(profile)
     normalized.setdefault("scale", layout["scale"])
-    if kind is not None:
-        normalized.setdefault("alpha", alpha)
+    normalized.setdefault("alpha", alpha)
     return normalized
 
 
@@ -401,6 +477,83 @@ def _margin_check(arr: np.ndarray, layout: dict) -> tuple[list[dict], dict, np.n
     return [], info, stray
 
 
+def check_sheet(cells: np.ndarray, profile: dict, report: dict) -> np.ndarray:
+    """Apply the declared sheet layout to the logical cells; return a mask of offending cells.
+
+    Margins, spacing and unused slots must be transparent; every used frame needs
+    visible dots and (unless the sheet is opaque) a transparent background; no
+    dot may enter a frame's declared edge margin.
+    """
+    sheet = parse_sheet(profile["sheet"])
+    fw, fh = sheet["frame_size"]
+    edge = sheet["edge_margin"]
+    opaque = alpha_policy(profile) == "opaque"
+    visible = cells[:, :, 3] > 0
+    bad = np.zeros(visible.shape, dtype=bool)
+    inside = np.zeros(visible.shape, dtype=bool)
+    frames, issues = [], []
+    empty, solid, edged, unused = [], [], [], []
+    for index, (x, y) in enumerate(sheet_slots(sheet)):
+        inside[y:y + fh, x:x + fw] = True
+        frame = visible[y:y + fh, x:x + fw]
+        if index >= sheet["frame_count"]:
+            if frame.any():
+                unused.append(index)
+                bad[y:y + fh, x:x + fw] |= frame
+            continue
+        entry = {"index": index, "column": index % sheet["columns"], "row": index // sheet["columns"],
+                 "box": {"x": x, "y": y, "width": fw, "height": fh}, "visible_cells": int(frame.sum())}
+        if frame.any():
+            ys, xs = np.nonzero(frame)
+            entry["content_box"] = {"x": int(xs.min()), "y": int(ys.min()), "width": int(xs.max() - xs.min() + 1),
+                                    "height": int(ys.max() - ys.min() + 1)}
+            entry["touches_frame_edge"] = bool(xs.min() == 0 or ys.min() == 0 or xs.max() == fw - 1
+                                               or ys.max() == fh - 1)
+        else:
+            empty.append(index)
+        if not opaque and frame.all():
+            solid.append(index)
+        if edge:
+            ring = np.ones((fh, fw), dtype=bool)
+            ring[edge:fh - edge, edge:fw - edge] = False
+            if (frame & ring).any():
+                edged.append(index)
+                bad[y:y + fh, x:x + fw] |= frame & ring
+        frames.append(entry)
+    gutter = visible & ~inside
+    bad |= gutter
+    if gutter.any():
+        issues.append({"code": "GUTTER_NOT_EMPTY", "severity": "fail",
+                       "detail": f"{int(gutter.sum())} visible cells lie in the sheet margin or spacing between "
+                                 "frames; they must be transparent."})
+    if unused:
+        issues.append({"code": "UNUSED_SLOT_NOT_EMPTY", "severity": "fail",
+                       "detail": f"Slots {unused[:20]} are beyond frame_count {sheet['frame_count']} but hold dots."})
+    if empty:
+        issues.append({"code": "EMPTY_FRAME", "severity": "review",
+                       "detail": f"Frames {empty[:20]} have no visible dots; draw them or lower frame_count."})
+    if solid:
+        issues.append({"code": "FRAME_WITHOUT_TRANSPARENCY", "severity": "fail",
+                       "detail": f"Frames {solid[:20]} have no transparent cell: the background is painted. "
+                                 "Sheet frames are sprites on alpha 0."})
+    if edged:
+        issues.append({"code": "EDGE_MARGIN_VIOLATION", "severity": "fail",
+                       "detail": f"Frames {edged[:20]} have dots inside the {edge}-cell edge margin; the art is "
+                                 "clipped or bleeds into the next frame."})
+    touching = [f["index"] for f in frames if f.get("touches_frame_edge")]
+    if touching and not edge:
+        issues.append({"code": "FRAME_CONTENT_AT_EDGE", "severity": "info",
+                       "detail": f"Frames {touching[:20]} have dots on the frame edge; check that nothing is cut off, "
+                                 "or declare edge_margin."})
+    report["sheet"] = {"frame_size": {"width": fw, "height": fh}, "columns": sheet["columns"], "rows": sheet["rows"],
+                       "margin": sheet["margin"], "spacing": sheet["spacing"], "frame_count": sheet["frame_count"],
+                       "edge_margin": edge, "frames": frames, "coordinate_space": "logical_grid"}
+    report["metrics"]["sheet_violation_cells"] = int(bad.sum())
+    report["issues"].extend(issues)
+    report["status"] = _status(report["issues"])
+    return bad
+
+
 def build_checks(report: dict, layout: dict, profile: dict, geometry_ok: bool) -> list[dict[str, Any]]:
     """One row per declared condition: what was required, what the PNG has, and the verdict."""
     codes: dict[str, str] = {}
@@ -464,7 +617,18 @@ def build_checks(report: dict, layout: dict, profile: dict, geometry_ok: bool) -
                     "image: general picture" + (", fully opaque" if alpha_policy(profile) == "opaque" else ""),
                     f"{m.get('transparent_source_pixels', 0)} transparent samples")
     else:
-        kind_row = ("not_declared", "declare kind sprite or image", "-")
+        sheet = parse_sheet(profile["sheet"])
+        fw, fh = sheet["frame_size"]
+        expected = (f"sheet: {sheet['columns']}x{sheet['rows']} slots of {fw}x{fh} dots, {sheet['frame_count']} used"
+                    f" (margin {sheet['margin']}, spacing {sheet['spacing']}, edge margin {sheet['edge_margin']}); "
+                    "gutters and unused slots transparent; every used frame drawn on a transparent background")
+        if "sheet" in report:
+            frames = report["sheet"]["frames"]
+            kind_row = (verdict(*SHEET_CODES), expected,
+                        f"{sum(1 for f in frames if f['visible_cells'])} of {len(frames)} frames drawn, "
+                        f"{m.get('sheet_violation_cells', 0)} cells break the layout")
+        else:
+            kind_row = ("not_measured", expected, not_measured)
     checks.append({"id": "kind", "status": kind_row[0], "expected": kind_row[1], "actual": kind_row[2]})
     alpha = alpha_policy(profile)
     alpha_text = {"binary": "alpha 0 or 255 only", "opaque": "alpha 255 only",
@@ -520,7 +684,8 @@ def _draw_grid(draw: ImageDraw.ImageDraw, size: tuple[int, int], layout: dict, m
 def write_artifacts(out_dir: Path, image: Image.Image, layout: dict, report: dict, *,
                     nonuniform: np.ndarray | None = None, logical_pixels: np.ndarray | None = None,
                     off_palette: np.ndarray | None = None,
-                    stray_margin: np.ndarray | None = None) -> dict[str, str]:
+                    stray_margin: np.ndarray | None = None,
+                    sheet_bad: np.ndarray | None = None) -> dict[str, str]:
     geometry_ok = nonuniform is not None
     names = ["report.json", "grid_overlay.png", "grid_lines.png", "correction_prompt.txt"]
     if geometry_ok:
@@ -549,6 +714,11 @@ def write_artifacts(out_dir: Path, image: Image.Image, layout: dict, report: dic
                 draw.rectangle((x0, y0, x1, y1), outline=(255, 255, 255, 255), width=1)
                 draw.line((x0, y0, x1, y1), fill=(0, 0, 0, 255), width=1)
                 draw.line((x0, y1, x1, y0), fill=(0, 0, 0, 255), width=1)
+        if sheet_bad is not None:
+            for y, x in np.argwhere(sheet_bad):
+                box = ((ox + x * scale) * magnify, (oy + y * scale) * magnify,
+                       (ox + (x + 1) * scale) * magnify - 1, (oy + (y + 1) * scale) * magnify - 1)
+                draw.rectangle(box, fill=(255, 35, 45, 150), outline=(255, 75, 60, 245) if step >= 4 else None)
         if stray_margin is not None:
             for y, x in np.argwhere(stray_margin)[:5000]:
                 draw.rectangle((x * magnify - 2, y * magnify - 2, (x + 1) * magnify + 1, (y + 1) * magnify + 1),
@@ -556,6 +726,14 @@ def write_artifacts(out_dir: Path, image: Image.Image, layout: dict, report: dic
     grid_layer = Image.new("RGBA", size, (0, 0, 0, 0))
     lines_drawn = _draw_grid(ImageDraw.Draw(grid_layer), size, layout,
                              magnify, (0, 215, 245, 140) if geometry_ok else (245, 155, 40, 170))
+    if "sheet" in report:
+        frame_draw = ImageDraw.Draw(grid_layer)
+        fw, fh = report["sheet"]["frame_size"]["width"], report["sheet"]["frame_size"]["height"]
+        for frame in report["sheet"]["frames"]:
+            x0 = (ox + frame["box"]["x"] * scale) * magnify
+            y0 = (oy + frame["box"]["y"] * scale) * magnify
+            frame_draw.rectangle((x0, y0, x0 + fw * step - 1, y0 + fh * step - 1),
+                                 outline=(255, 200, 0, 255), width=2 if step >= 6 else 1)
     if layout["has_margin"]:
         gw, gh = layout["grid_px"]
         ImageDraw.Draw(grid_layer).rectangle(
@@ -576,6 +754,7 @@ def write_artifacts(out_dir: Path, image: Image.Image, layout: dict, report: dic
         "legend": "cyan: declared cell boundaries; red fill: cell with more than one RGBA value; "
                   "black X in a white box: cell with a color outside allowed_palette; magenta: grid box inside the margin; "
                   "red square in the margin: pixel that differs from the margin color; "
+                  "amber: frame slot of a sprite sheet (red fill also marks dots in gutters, unused slots or edge margins); "
                   "orange: declared grid on an image of the wrong size",
     }
     if geometry_ok:
@@ -612,6 +791,13 @@ def correction_text(report: dict, layout: dict) -> str:
         lines.append("Keep everything outside the grid box one solid color; no art may cross the grid edge.")
     if "COLOR_OUTSIDE_ALLOWED_PALETTE" in codes:
         lines.append("Use only the declared palette colors: " + ", ".join(report["contract"]["allowed_palette"]) + ".")
+    if codes & {"GUTTER_NOT_EMPTY", "UNUSED_SLOT_NOT_EMPTY", "EDGE_MARGIN_VIOLATION"}:
+        lines.append("Keep every dot inside its frame slot: margins, spacing, unused slots and frame edge margins "
+                     "stay transparent.")
+    if "FRAME_WITHOUT_TRANSPARENCY" in codes:
+        lines.append("Draw each frame's subject on a transparent background (alpha 0).")
+    if "EMPTY_FRAME" in codes:
+        lines.append("Draw every used frame, or lower frame_count to the frames that exist.")
     if "EMPTY_IMAGE" in codes:
         lines.append("The image is empty; draw the subject.")
     hint = report.get("detected_grid")
@@ -629,7 +815,7 @@ def audit_one(image_path: Path, profile: dict, profile_path: Path, out_dir: Path
     alpha = alpha_policy(profile)
     raw = np.asarray(image, dtype=np.uint8)
     arr = qa.normalize_rgba(raw) if policy == "visible" else raw
-    nonuniform = logical_pixels = off_palette = stray_margin = None
+    nonuniform = logical_pixels = off_palette = stray_margin = sheet_bad = None
     if geometry["status"] == "pass":
         ox, oy = layout["origin"]
         gw, gh = layout["grid_px"]
@@ -654,6 +840,9 @@ def audit_one(image_path: Path, profile: dict, profile_path: Path, out_dir: Path
         nonuniform = audit.exact_nonuniform
         logical_pixels = audit.logical_pixels
         enforce_profile(report, image, profile, logical_pixels=logical_pixels, review_few_edges=True)
+        if profile["kind"] == "sheet":
+            cells = qa.normalize_rgba(logical_pixels) if policy == "visible" else logical_pixels
+            sheet_bad = check_sheet(cells, profile, report)
         if profile.get("allowed_palette") is not None:
             allowed = np.array([parse_rgba(v) for v in profile["allowed_palette"]], dtype=np.uint8)
             if policy == "visible":
@@ -691,7 +880,8 @@ def audit_one(image_path: Path, profile: dict, profile_path: Path, out_dir: Path
     report["schema_version"] = 1
     report["acceptance_mode"] = "strict_profile"
     paths = write_artifacts(out_dir, image, layout, report, nonuniform=nonuniform,
-                            logical_pixels=logical_pixels, off_palette=off_palette, stray_margin=stray_margin)
+                            logical_pixels=logical_pixels, off_palette=off_palette, stray_margin=stray_margin,
+                            sheet_bad=sheet_bad)
     return {"input": str(image_path), "status": report["status"],
             "checks": report["checks"],
             "outputs": paths}

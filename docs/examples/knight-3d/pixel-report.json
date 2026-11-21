@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
@@ -26,14 +26,16 @@
     "source_path": "sprite-sheet.png",
     "source_sha256_after_audit": "e16feb124bee7f11d13033e6c508a3e5a4f50b42e7b34da8135bc07c31bcaba6",
     "profile_path": "profile.json",
-    "profile_sha256": "15b14f8f1b1925aec0767b3f80ad790a19cb21ab26d9a18e05c31f6f93ea8da3"
+    "profile_sha256": "0de174e1bfcfb07ef767123c140361d6b1afa7953effe23018f821b3e719cec2"
   },
   "settings": {
     "difference_tolerance_per_channel": 0,
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 31,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "sheet"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -49,7 +51,10 @@
     "visible_rgb_colors_logical_preview": 19,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 3425,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 4130832,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 36735,
+    "transparent_cells": 258177
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -217,11 +222,124 @@
     "integer_scale": 4,
     "issues": []
   },
+  "colors_used": [
+    {
+      "rgba": "#00000000",
+      "samples": 4130832
+    },
+    {
+      "rgba": "#090B12FF",
+      "samples": 148192
+    },
+    {
+      "rgba": "#A4BDC6FF",
+      "samples": 97520
+    },
+    {
+      "rgba": "#7896A4FF",
+      "samples": 61680
+    },
+    {
+      "rgba": "#566D7AFF",
+      "samples": 42976
+    },
+    {
+      "rgba": "#3B4D59FF",
+      "samples": 41808
+    },
+    {
+      "rgba": "#C32F29FF",
+      "samples": 37168
+    },
+    {
+      "rgba": "#FBFCF0FF",
+      "samples": 37072
+    },
+    {
+      "rgba": "#D3E2DCFF",
+      "samples": 34352
+    },
+    {
+      "rgba": "#22323FFF",
+      "samples": 27408
+    },
+    {
+      "rgba": "#442719FF",
+      "samples": 12224
+    },
+    {
+      "rgba": "#5F171CFF",
+      "samples": 11040
+    },
+    {
+      "rgba": "#8E2023FF",
+      "samples": 10992
+    },
+    {
+      "rgba": "#D8AB52FF",
+      "samples": 6272
+    },
+    {
+      "rgba": "#9D6B2CFF",
+      "samples": 4432
+    },
+    {
+      "rgba": "#78482BFF",
+      "samples": 3984
+    },
+    {
+      "rgba": "#AA7850FF",
+      "samples": 3968
+    },
+    {
+      "rgba": "#F3D68AFF",
+      "samples": 3376
+    },
+    {
+      "rgba": "#66411EFF",
+      "samples": 3008
+    },
+    {
+      "rgba": "#E35033FF",
+      "samples": 288
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 38,
+    "y": 35,
+    "width": 690,
+    "height": 335,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 312,
+    "row_edges": 268,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 768,
+      "height": 384
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "3D knight sheet pixel contract",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "128x128",
+      "columns": 6,
+      "rows": 3,
+      "spacing": 0
+    },
     "logical_size": "768x384",
     "scale": 4,
     "max_colors": 31,

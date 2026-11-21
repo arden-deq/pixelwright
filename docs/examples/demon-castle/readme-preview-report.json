@@ -23,7 +23,7 @@
     "decoded_rgba_sha256": "0f8090e7fd2b50ab2f5231a82cbd8b86090876f6e338bcf066dbda7349fc0b8b",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "4eeb9cc5c43ced4c80c0febe1a681ace217c6fcec3e3d78e2f54f84562afa81a",
+    "profile_sha256": "4e76900cf43ad566ed9dd3030edda82a01bb324c7a90229db54426144300058d",
     "source_path": "docs/images/game-scene-preview.png",
     "profile_path": "docs/examples/demon-castle/readme-preview-profile.json"
   },
@@ -32,7 +32,9 @@
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 64,
     "strict_alpha": false,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "opaque",
+    "kind": "image"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -48,7 +50,10 @@
     "visible_rgb_colors_logical_preview": 52,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 4323,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 0,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 98304,
+    "transparent_cells": 0
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -187,11 +192,6 @@
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
       "detail": "4323 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
-    },
-    {
-      "code": "OPAQUE_BACKGROUND",
-      "severity": "info",
-      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
     }
   ],
   "visual_review_required": [
@@ -206,26 +206,275 @@
       "width": 768,
       "height": 512
     },
+    "expected_image_size": {
+      "width": 768,
+      "height": 512
+    },
     "logical_size": {
       "width": 384,
       "height": 256
     },
-    "expected_render_size": {
-      "width": 768,
-      "height": 512
-    },
-    "scale_x": 2.0,
-    "scale_y": 2.0,
-    "exact_integer_division": true,
-    "square_logical_pixel": true,
     "integer_scale": 2,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_box": [
+      0,
+      0,
+      767,
+      511
+    ],
+    "has_margin": false,
+    "square_logical_pixel": true,
     "issues": []
   },
+  "grid_box": [
+    0,
+    0,
+    767,
+    511
+  ],
+  "colors_used": [
+    {
+      "rgba": "#263B3DFF",
+      "samples": 183960
+    },
+    {
+      "rgba": "#47405BFF",
+      "samples": 101000
+    },
+    {
+      "rgba": "#343047FF",
+      "samples": 26700
+    },
+    {
+      "rgba": "#5B5274FF",
+      "samples": 17912
+    },
+    {
+      "rgba": "#354A51FF",
+      "samples": 6036
+    },
+    {
+      "rgba": "#52376FFF",
+      "samples": 5696
+    },
+    {
+      "rgba": "#71698BFF",
+      "samples": 5448
+    },
+    {
+      "rgba": "#352755FF",
+      "samples": 4696
+    },
+    {
+      "rgba": "#641C37FF",
+      "samples": 3800
+    },
+    {
+      "rgba": "#1B172BFF",
+      "samples": 2944
+    },
+    {
+      "rgba": "#372C4AFF",
+      "samples": 2848
+    },
+    {
+      "rgba": "#282139FF",
+      "samples": 2428
+    },
+    {
+      "rgba": "#8B82A1FF",
+      "samples": 2428
+    },
+    {
+      "rgba": "#80788EFF",
+      "samples": 2388
+    },
+    {
+      "rgba": "#57706EFF",
+      "samples": 2284
+    },
+    {
+      "rgba": "#565169FF",
+      "samples": 2180
+    },
+    {
+      "rgba": "#231C3BFF",
+      "samples": 1884
+    },
+    {
+      "rgba": "#3C172DFF",
+      "samples": 1856
+    },
+    {
+      "rgba": "#242E46FF",
+      "samples": 1824
+    },
+    {
+      "rgba": "#754A93FF",
+      "samples": 1564
+    },
+    {
+      "rgba": "#9E7240FF",
+      "samples": 1196
+    },
+    {
+      "rgba": "#AAA1ABFF",
+      "samples": 1156
+    },
+    {
+      "rgba": "#B0A5B8FF",
+      "samples": 980
+    },
+    {
+      "rgba": "#952D48FF",
+      "samples": 952
+    },
+    {
+      "rgba": "#CEA252FF",
+      "samples": 940
+    },
+    {
+      "rgba": "#B9B0C9FF",
+      "samples": 836
+    },
+    {
+      "rgba": "#6D4C32FF",
+      "samples": 792
+    },
+    {
+      "rgba": "#A276AEFF",
+      "samples": 600
+    },
+    {
+      "rgba": "#F8D4ABFF",
+      "samples": 596
+    },
+    {
+      "rgba": "#E3AD8CFF",
+      "samples": 588
+    },
+    {
+      "rgba": "#49322BFF",
+      "samples": 516
+    },
+    {
+      "rgba": "#EDCE7BFF",
+      "samples": 360
+    },
+    {
+      "rgba": "#FAEDD7FF",
+      "samples": 344
+    },
+    {
+      "rgba": "#A43135FF",
+      "samples": 328
+    },
+    {
+      "rgba": "#C17D71FF",
+      "samples": 324
+    },
+    {
+      "rgba": "#DC5535FF",
+      "samples": 280
+    },
+    {
+      "rgba": "#D1A2CFFF",
+      "samples": 272
+    },
+    {
+      "rgba": "#D5C8BDFF",
+      "samples": 248
+    },
+    {
+      "rgba": "#C3484CFF",
+      "samples": 244
+    },
+    {
+      "rgba": "#7A4552FF",
+      "samples": 240
+    },
+    {
+      "rgba": "#681E31FF",
+      "samples": 208
+    },
+    {
+      "rgba": "#92515AFF",
+      "samples": 192
+    },
+    {
+      "rgba": "#5C3441FF",
+      "samples": 188
+    },
+    {
+      "rgba": "#443143FF",
+      "samples": 184
+    },
+    {
+      "rgba": "#FFD575FF",
+      "samples": 176
+    },
+    {
+      "rgba": "#E1EBDFFF",
+      "samples": 164
+    },
+    {
+      "rgba": "#A26469FF",
+      "samples": 148
+    },
+    {
+      "rgba": "#FFF4CBFF",
+      "samples": 116
+    },
+    {
+      "rgba": "#FF9248FF",
+      "samples": 92
+    },
+    {
+      "rgba": "#FFF0B0FF",
+      "samples": 72
+    },
+    {
+      "rgba": "#35465FFF",
+      "samples": 4
+    },
+    {
+      "rgba": "#778878FF",
+      "samples": 4
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 0,
+    "y": 0,
+    "width": 384,
+    "height": 256,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 313,
+    "row_edges": 248,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 384,
+      "height": 256
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "Demon Castle README at 2x",
+    "kind": "image",
     "logical_size": "384x256",
     "scale": 2,
     "max_colors": 64,
@@ -299,17 +548,92 @@
       "#FFF4CBFF"
     ]
   },
+  "layout": {
+    "logical_size": {
+      "width": 384,
+      "height": 256
+    },
+    "scale": 2,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "image_size": {
+      "width": 768,
+      "height": 512
+    },
+    "grid_box": [
+      0,
+      0,
+      767,
+      511
+    ],
+    "has_margin": false,
+    "cell_rule": "cell (x,y) covers pixels [ox+x*S, ox+(x+1)*S) x [oy+y*S, oy+(y+1)*S)"
+  },
+  "checks": [
+    {
+      "id": "image_size",
+      "status": "pass",
+      "expected": "768x512 px = 384x256 dots x 2 px from origin (0,0)",
+      "actual": "768x512 px"
+    },
+    {
+      "id": "cell_uniformity",
+      "status": "pass",
+      "expected": "each of 98304 cells (2x2 px) is exactly one RGBA value",
+      "actual": "0 of 98304 cells mix colors"
+    },
+    {
+      "id": "dot_size",
+      "status": "pass",
+      "expected": "art drawn with 384x256 dots of 1 cell (edges every 1x1 cells)",
+      "actual": "color edges every 1x1 cells"
+    },
+    {
+      "id": "content",
+      "status": "pass",
+      "expected": "at least one visible cell",
+      "actual": "98304 visible cells"
+    },
+    {
+      "id": "kind",
+      "status": "pass",
+      "expected": "image: general picture, fully opaque",
+      "actual": "0 transparent samples"
+    },
+    {
+      "id": "alpha",
+      "status": "pass",
+      "expected": "alpha 255 only",
+      "actual": "0 partial, 0 transparent samples"
+    },
+    {
+      "id": "color_budget",
+      "status": "pass",
+      "expected": "at most 64 visible RGB colors",
+      "actual": "52 colors"
+    },
+    {
+      "id": "allowed_palette",
+      "status": "pass",
+      "expected": "every sample is one of 65 declared RGBA colors (transparent_rgb exact)",
+      "actual": "0 samples outside"
+    }
+  ],
+  "acceptance_mode": "strict_profile",
   "grid_preview": {
     "sampled": false,
-    "logical_cell_step": {
-      "x": 1,
-      "y": 1
-    },
+    "magnification": 2,
     "spacing_px": {
-      "x": 2,
-      "y": 2
+      "x": 4,
+      "y": 4
     },
-    "outer_boundary": "right/bottom lie outside the half-open source canvas"
-  },
-  "acceptance_mode": "strict_profile"
+    "origin_px": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_lines_drawn": true,
+    "legend": "cyan: declared cell boundaries; red fill: cell with more than one RGBA value; black X in a white box: cell with a color outside allowed_palette; magenta: grid box inside the margin; red square in the margin: pixel that differs from the margin color; amber: frame slot of a sprite sheet (red fill also marks dots in gutters, unused slots or edge margins); orange: declared grid on an image of the wrong size"
+  }
 }

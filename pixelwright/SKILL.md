@@ -11,15 +11,16 @@ Create reproducible pixel art and verify its technical contract. The guarantee c
 
 Before drawing or checking anything, fix these conditions from the user's request or the existing project, and write them into `profile.json`. Ask about a missing choice that changes the result; otherwise propose a stated default appropriate to the asset (for example, a 16×16 item sprite at 8×):
 
-- `kind`: `sprite` (subject on a transparent background) or `image` (a general picture, opaque by default).
-- `logical_size`: the number of intended dots, not the enlarged PNG size.
+- `kind` (required): `sprite` (one subject on a transparent background), `sheet` (a sprite sheet: equal frames on a slot grid, each a sprite), or `image` (a general picture, opaque by default).
+- For a `sheet`, the `sheet` layout: `frame_size` in dots, `columns`, `rows`, and optional `margin`, `spacing`, `frame_count` and `edge_margin`. The sheet's `logical_size` follows from it.
+- `logical_size`: the number of intended dots, not the enlarged PNG size (optional for a sheet; it must then equal the computed sheet size).
 - `scale` (pixels per dot) and/or `image_size` (the whole PNG). Give one or both; when both are given they must agree.
 - `origin` only when the grid starts away from the top-left pixel inside a larger PNG; the margin must then be one solid color.
 - Palette rules: `max_colors` and/or `allowed_palette`, and `alpha`/`transparent_rgb` when the defaults do not fit.
 
 Freeze the profile before generating; never change the grid, origin or palette to make an existing image pass. A neighboring same-color cluster may span many cells and need not itself be square.
 
-The gate builds the grid from the origin: cell `(x,y)` covers `S×S` pixels starting at `(ox+x·S, oy+y·S)`, with the same positive integer `S` on both axes. Every physical sample in each cell must have exactly the same RGBA8 value, the art must really use one-cell dots (art drawn in 2×2-cell blocks fails as coarser than declared), a sprite needs transparency, and every sample of the PNG must satisfy the palette and alpha rules. At `scale: 1` (a 1× game asset) cell uniformity is not measurable, so the profile must declare `max_colors` or `allowed_palette`; do not treat a 1× pass as evidence of enlarged block fidelity.
+The gate builds the grid from the origin: cell `(x,y)` covers `S×S` pixels starting at `(ox+x·S, oy+y·S)`, with the same positive integer `S` on both axes. Every physical sample in each cell must have exactly the same RGBA8 value, the art must really use one-cell dots (art drawn in 2×2-cell blocks fails as coarser than declared), a sprite needs transparency, a sheet keeps every dot inside its used frame slots with each frame drawn on transparency, and every sample of the PNG must satisfy the palette and alpha rules. At `scale: 1` (a 1× game asset) cell uniformity is not measurable, so the profile must declare `max_colors` or `allowed_palette`; do not treat a 1× pass as evidence of enlarged block fidelity.
 
 When the art is for a game, settle the game contract first (see below); every asset follows it.
 
@@ -85,7 +86,7 @@ Decide the layout, common grid and RGBA palette, lighting, and drawing order bef
 
 ### Animate frames and check moving parts
 
-For sprite sheets, atlases and animation cycles, read [sprites.md](references/sprites.md). Freeze the frame size, scale, slot layout, palette and animations first; gutters and unused slots stay transparent, and the profile's logical size is the computed sheet size.
+For sprite sheets, atlases and animation cycles, read [sprites.md](references/sprites.md). Freeze the frame size, scale, slot layout, palette and animations first; gutters and unused slots stay transparent. The profile is `kind: "sheet"` with a `sheet` layout identical to the sprite spec's `frame_size`, `layout`, `frame_count` and `edge_margin`; `pixel_sprite.py check` refuses a profile whose layout differs. `pixelwright.py inspect` checks the same slot rules on a sheet that has no sprite spec, such as a generated one.
 
 When parts move, declare a rig instead of hoping the frames agree: list parts back to front, give each a motion (`fixed`, `rigid` with a pivot, `bone` between two joints, or `free`), and write each frame's color rows together with its part map and joint coordinates. Then build and check:
 
@@ -112,7 +113,7 @@ python scripts/pixel_qa.py inspect input.png --logical-size 32x48 --render-size 
 python scripts/pixel_qa.py fix input.png --logical-size 32x48 --render-size 256x384 --out-dir repair-v1
 ```
 
-Read the `checks` rows in the output or `report.json` (image size, margin, cell uniformity, dot size, content, kind, alpha, color budget, allowed palette); each gives the requirement, the measured value and the verdict, and `not_declared` rows name rules the profile left open. Then inspect `grid_overlay.png` and the logical-resolution preview. When cells or size fail, `detected_grid` estimates the dot size and origin the pixels actually use; treat it as a repair hint for redrawing or re-exporting, not as permission to change the contract. Exact violations fail even if a diagnostic score rounds to 100. Geometry failures are not resized or sampled as if valid. Partial alpha and palette rules follow the stated contract; isolated dots are candidates for review, not automatic defects.
+Read the `checks` rows in the output or `report.json` (image size, margin, cell uniformity, dot size, content, kind including the sheet layout, alpha, color budget, allowed palette); each gives the requirement, the measured value and the verdict, and `not_declared` rows name rules the profile left open. Then inspect `grid_overlay.png` and the logical-resolution preview. When cells or size fail, `detected_grid` estimates the dot size and origin the pixels actually use; treat it as a repair hint for redrawing or re-exporting, not as permission to change the contract. Exact violations fail even if a diagnostic score rounds to 100. Geometry failures are not resized or sampled as if valid. Partial alpha and palette rules follow the stated contract; isolated dots are candidates for review, not automatic defects.
 
 Use projection when the user's request authorizes repair and its losses are acceptable. Compare `comparison.png`, `fix_review.json`, and the post-repair report. Re-audit the saved corrected PNG with the original project profile. Never overwrite the source, weaken constraints, auto-approve art from a technical PASS, or loop indefinitely: after two repair attempts, report the remaining defect and propose a targeted redraw.
 

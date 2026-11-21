@@ -23,7 +23,7 @@
     "decoded_rgba_sha256": "dd6c59fa08f27a294da533995025fe0a4862912341d816e82bbfd39d5806f237",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "d14c2bddee38c00e588e63b5f4223853a8632db89f35d677c4c8a10bab7155b2",
+    "profile_sha256": "d52f88aae2a01942dfe6fcb6749bf6c605f50aef1010fbc4e9b69184eb20a22d",
     "source_path": "docs/examples/demon-castle/castle-generated.png",
     "profile_path": "docs/examples/demon-castle/castle-source-profile.json"
   },
@@ -32,7 +32,9 @@
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 64,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "sprite"
   },
   "metrics": {
     "grid_score": 8.4107,
@@ -48,164 +50,167 @@
     "visible_rgb_colors_logical_preview": 9636,
     "partial_alpha_source_pixels": 968694,
     "possible_color_isolated_logical_pixels": 14625,
-    "outside_palette_source_pixels": 1557468
+    "transparent_source_pixels": 604170,
+    "outside_palette_source_pixels": 1557468,
+    "visible_cells": 15104,
+    "transparent_cells": 9472
   },
   "worst_cells": [
     {
-      "logical_x": 56,
-      "logical_y": 65,
+      "logical_x": 38,
+      "logical_y": 0,
       "source_box": [
-        448,
-        520,
-        455,
-        527
+        304,
+        0,
+        311,
+        7
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 64
+      "distinct_visible_rgba_values": 23
     },
     {
-      "logical_x": 80,
-      "logical_y": 75,
+      "logical_x": 43,
+      "logical_y": 0,
       "source_box": [
-        640,
-        600,
-        647,
-        607
+        344,
+        0,
+        351,
+        7
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 62
+      "distinct_visible_rgba_values": 61
     },
     {
-      "logical_x": 78,
-      "logical_y": 75,
+      "logical_x": 151,
+      "logical_y": 18,
       "source_box": [
-        624,
-        600,
-        631,
-        607
+        1208,
+        144,
+        1215,
+        151
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 64
+      "distinct_visible_rgba_values": 59
     },
     {
-      "logical_x": 77,
-      "logical_y": 75,
+      "logical_x": 150,
+      "logical_y": 18,
       "source_box": [
-        616,
-        600,
-        623,
-        607
+        1200,
+        144,
+        1207,
+        151
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 55
+      "distinct_visible_rgba_values": 61
     },
     {
-      "logical_x": 76,
-      "logical_y": 75,
+      "logical_x": 143,
+      "logical_y": 18,
       "source_box": [
-        608,
-        600,
-        615,
-        607
+        1144,
+        144,
+        1151,
+        151
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 48
+      "distinct_visible_rgba_values": 61
     },
     {
-      "logical_x": 75,
-      "logical_y": 75,
+      "logical_x": 142,
+      "logical_y": 18,
       "source_box": [
-        600,
-        600,
-        607,
-        607
+        1136,
+        144,
+        1143,
+        151
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 52
+      "distinct_visible_rgba_values": 61
     },
     {
-      "logical_x": 74,
-      "logical_y": 75,
+      "logical_x": 141,
+      "logical_y": 18,
       "source_box": [
-        592,
-        600,
-        599,
-        607
+        1128,
+        144,
+        1135,
+        151
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 60
+      "distinct_visible_rgba_values": 37
     },
     {
-      "logical_x": 73,
-      "logical_y": 75,
+      "logical_x": 113,
+      "logical_y": 127,
       "source_box": [
-        584,
-        600,
-        591,
-        607
+        904,
+        1016,
+        911,
+        1023
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 55
+      "distinct_visible_rgba_values": 59
     },
     {
-      "logical_x": 72,
-      "logical_y": 75,
+      "logical_x": 133,
+      "logical_y": 57,
       "source_box": [
-        576,
-        600,
-        583,
-        607
+        1064,
+        456,
+        1071,
+        463
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
-      "distinct_visible_rgba_values": 62
+      "distinct_visible_rgba_values": 58
     },
     {
-      "logical_x": 70,
-      "logical_y": 75,
+      "logical_x": 132,
+      "logical_y": 57,
       "source_box": [
-        560,
-        600,
-        567,
-        607
+        1056,
+        456,
+        1063,
+        463
+      ],
+      "mismatch_ratio": 0.98438,
+      "exactly_uniform": false,
+      "distinct_visible_rgba_values": 58
+    },
+    {
+      "logical_x": 115,
+      "logical_y": 57,
+      "source_box": [
+        920,
+        456,
+        927,
+        463
+      ],
+      "mismatch_ratio": 0.98438,
+      "exactly_uniform": false,
+      "distinct_visible_rgba_values": 59
+    },
+    {
+      "logical_x": 114,
+      "logical_y": 57,
+      "source_box": [
+        912,
+        456,
+        919,
+        463
       ],
       "mismatch_ratio": 0.98438,
       "exactly_uniform": false,
       "distinct_visible_rgba_values": 53
-    },
-    {
-      "logical_x": 69,
-      "logical_y": 75,
-      "source_box": [
-        552,
-        600,
-        559,
-        607
-      ],
-      "mismatch_ratio": 0.98438,
-      "exactly_uniform": false,
-      "distinct_visible_rgba_values": 57
-    },
-    {
-      "logical_x": 68,
-      "logical_y": 75,
-      "source_box": [
-        544,
-        600,
-        551,
-        607
-      ],
-      "mismatch_ratio": 0.98438,
-      "exactly_uniform": false,
-      "distinct_visible_rgba_values": 56
     }
   ],
   "nonuniform_rgba_cell_samples": [
@@ -572,24 +577,24 @@
       "detail": "24576 logical cells contain pixels inconsistent with their representative cell color."
     },
     {
-      "code": "PALETTE_OVER_BUDGET",
-      "severity": "fail",
-      "detail": "Source image has 188379 visible RGB colors; budget is 64."
-    },
-    {
-      "code": "PARTIAL_ALPHA",
-      "severity": "fail",
-      "detail": "968694 source pixels have partial alpha (1..254). Intentional translucency is possible."
-    },
-    {
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
       "detail": "14625 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
     },
     {
+      "code": "PARTIAL_ALPHA",
+      "severity": "fail",
+      "detail": "968694 samples have partial alpha (1..254); the profile allows binary alpha."
+    },
+    {
+      "code": "PALETTE_OVER_BUDGET",
+      "severity": "fail",
+      "detail": "The PNG has 188379 visible RGB colors; the budget is 64."
+    },
+    {
       "code": "COLOR_OUTSIDE_ALLOWED_PALETTE",
       "severity": "fail",
-      "detail": "1557468 decoded RGBA samples are outside the declared palette."
+      "detail": "1557468 decoded RGBA samples are outside the declared palette: #01000000, #01010100, #01010000, #00010100, #00010000, #01000100, #00000100, #02010100."
     }
   ],
   "visual_review_required": [
@@ -604,21 +609,1062 @@
       "width": 1536,
       "height": 1024
     },
+    "expected_image_size": {
+      "width": 1536,
+      "height": 1024
+    },
     "logical_size": {
       "width": 192,
       "height": 128
     },
-    "expected_render_size": {
-      "width": 1536,
-      "height": 1024
-    },
-    "scale_x": 8.0,
-    "scale_y": 8.0,
-    "exact_integer_division": true,
-    "square_logical_pixel": true,
     "integer_scale": 8,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_box": [
+      0,
+      0,
+      1535,
+      1023
+    ],
+    "has_margin": false,
+    "square_logical_pixel": true,
     "issues": []
   },
+  "grid_box": [
+    0,
+    0,
+    1535,
+    1023
+  ],
+  "colors_used": [
+    {
+      "rgba": "#00000000",
+      "samples": 15396
+    },
+    {
+      "rgba": "#01000000",
+      "samples": 11358
+    },
+    {
+      "rgba": "#01010100",
+      "samples": 9078
+    },
+    {
+      "rgba": "#01010000",
+      "samples": 6361
+    },
+    {
+      "rgba": "#00010100",
+      "samples": 5419
+    },
+    {
+      "rgba": "#00010000",
+      "samples": 4892
+    },
+    {
+      "rgba": "#01000100",
+      "samples": 3822
+    },
+    {
+      "rgba": "#00000100",
+      "samples": 2912
+    },
+    {
+      "rgba": "#02010100",
+      "samples": 2082
+    },
+    {
+      "rgba": "#03020200",
+      "samples": 1907
+    },
+    {
+      "rgba": "#02010200",
+      "samples": 1579
+    },
+    {
+      "rgba": "#03020300",
+      "samples": 1466
+    },
+    {
+      "rgba": "#04030300",
+      "samples": 1426
+    },
+    {
+      "rgba": "#04030400",
+      "samples": 1422
+    },
+    {
+      "rgba": "#05040500",
+      "samples": 1217
+    },
+    {
+      "rgba": "#05040400",
+      "samples": 1083
+    },
+    {
+      "rgba": "#02020200",
+      "samples": 1051
+    },
+    {
+      "rgba": "#05030300",
+      "samples": 904
+    },
+    {
+      "rgba": "#06050600",
+      "samples": 862
+    },
+    {
+      "rgba": "#06040400",
+      "samples": 812
+    },
+    {
+      "rgba": "#6A1E3EFD",
+      "samples": 797
+    },
+    {
+      "rgba": "#07050500",
+      "samples": 788
+    },
+    {
+      "rgba": "#03010100",
+      "samples": 774
+    },
+    {
+      "rgba": "#04020200",
+      "samples": 772
+    },
+    {
+      "rgba": "#0A080A00",
+      "samples": 724
+    },
+    {
+      "rgba": "#06050500",
+      "samples": 722
+    },
+    {
+      "rgba": "#03010200",
+      "samples": 707
+    },
+    {
+      "rgba": "#6A1E3DFD",
+      "samples": 691
+    },
+    {
+      "rgba": "#04020300",
+      "samples": 679
+    },
+    {
+      "rgba": "#02000000",
+      "samples": 675
+    },
+    {
+      "rgba": "#0B090B00",
+      "samples": 675
+    },
+    {
+      "rgba": "#05030400",
+      "samples": 672
+    },
+    {
+      "rgba": "#07060700",
+      "samples": 654
+    },
+    {
+      "rgba": "#09070900",
+      "samples": 649
+    },
+    {
+      "rgba": "#0D0B0E00",
+      "samples": 638
+    },
+    {
+      "rgba": "#6B1F3EFD",
+      "samples": 633
+    },
+    {
+      "rgba": "#03030300",
+      "samples": 612
+    },
+    {
+      "rgba": "#07060800",
+      "samples": 607
+    },
+    {
+      "rgba": "#08070900",
+      "samples": 601
+    },
+    {
+      "rgba": "#08060800",
+      "samples": 600
+    },
+    {
+      "rgba": "#6B1E3EFD",
+      "samples": 599
+    },
+    {
+      "rgba": "#0E0C0F00",
+      "samples": 592
+    },
+    {
+      "rgba": "#08060600",
+      "samples": 591
+    },
+    {
+      "rgba": "#0C0A0D00",
+      "samples": 587
+    },
+    {
+      "rgba": "#06040500",
+      "samples": 577
+    },
+    {
+      "rgba": "#691E3DFD",
+      "samples": 569
+    },
+    {
+      "rgba": "#05040600",
+      "samples": 561
+    },
+    {
+      "rgba": "#302C4700",
+      "samples": 560
+    },
+    {
+      "rgba": "#06050700",
+      "samples": 554
+    },
+    {
+      "rgba": "#03020100",
+      "samples": 551
+    },
+    {
+      "rgba": "#02000100",
+      "samples": 540
+    },
+    {
+      "rgba": "#0C0A0C00",
+      "samples": 538
+    },
+    {
+      "rgba": "#04030500",
+      "samples": 536
+    },
+    {
+      "rgba": "#02010000",
+      "samples": 534
+    },
+    {
+      "rgba": "#6A1F3EFD",
+      "samples": 530
+    },
+    {
+      "rgba": "#09070700",
+      "samples": 526
+    },
+    {
+      "rgba": "#02020300",
+      "samples": 515
+    },
+    {
+      "rgba": "#01010200",
+      "samples": 513
+    },
+    {
+      "rgba": "#08070800",
+      "samples": 508
+    },
+    {
+      "rgba": "#09080A00",
+      "samples": 503
+    },
+    {
+      "rgba": "#0A080800",
+      "samples": 502
+    },
+    {
+      "rgba": "#03030400",
+      "samples": 498
+    },
+    {
+      "rgba": "#0F0D1000",
+      "samples": 489
+    },
+    {
+      "rgba": "#691D3DFD",
+      "samples": 488
+    },
+    {
+      "rgba": "#0B090C00",
+      "samples": 487
+    },
+    {
+      "rgba": "#433D5D00",
+      "samples": 486
+    },
+    {
+      "rgba": "#0D0A0B00",
+      "samples": 478
+    },
+    {
+      "rgba": "#0D0B0D00",
+      "samples": 476
+    },
+    {
+      "rgba": "#312D4800",
+      "samples": 468
+    },
+    {
+      "rgba": "#07050700",
+      "samples": 465
+    },
+    {
+      "rgba": "#07050600",
+      "samples": 463
+    },
+    {
+      "rgba": "#603770FD",
+      "samples": 459
+    },
+    {
+      "rgba": "#2F2B4600",
+      "samples": 457
+    },
+    {
+      "rgba": "#5F376FFD",
+      "samples": 437
+    },
+    {
+      "rgba": "#03020400",
+      "samples": 434
+    },
+    {
+      "rgba": "#0C090A00",
+      "samples": 434
+    },
+    {
+      "rgba": "#1B182700",
+      "samples": 432
+    },
+    {
+      "rgba": "#1B182800",
+      "samples": 431
+    },
+    {
+      "rgba": "#691E3EFD",
+      "samples": 427
+    },
+    {
+      "rgba": "#1A182700",
+      "samples": 425
+    },
+    {
+      "rgba": "#19172600",
+      "samples": 424
+    },
+    {
+      "rgba": "#332F53FD",
+      "samples": 420
+    },
+    {
+      "rgba": "#322E4900",
+      "samples": 416
+    },
+    {
+      "rgba": "#5F366FFD",
+      "samples": 415
+    },
+    {
+      "rgba": "#0E0B0C00",
+      "samples": 414
+    },
+    {
+      "rgba": "#603870FD",
+      "samples": 411
+    },
+    {
+      "rgba": "#443E5E00",
+      "samples": 410
+    },
+    {
+      "rgba": "#6B1F3FFD",
+      "samples": 410
+    },
+    {
+      "rgba": "#06040600",
+      "samples": 409
+    },
+    {
+      "rgba": "#613871FD",
+      "samples": 408
+    },
+    {
+      "rgba": "#433D5C00",
+      "samples": 407
+    },
+    {
+      "rgba": "#574E76FD",
+      "samples": 407
+    },
+    {
+      "rgba": "#100E1100",
+      "samples": 406
+    },
+    {
+      "rgba": "#0B080900",
+      "samples": 403
+    },
+    {
+      "rgba": "#343054FD",
+      "samples": 403
+    },
+    {
+      "rgba": "#584F77FD",
+      "samples": 403
+    },
+    {
+      "rgba": "#0A090B00",
+      "samples": 402
+    },
+    {
+      "rgba": "#0E0C0E00",
+      "samples": 394
+    },
+    {
+      "rgba": "#18162500",
+      "samples": 393
+    },
+    {
+      "rgba": "#1B192900",
+      "samples": 390
+    },
+    {
+      "rgba": "#39345100",
+      "samples": 390
+    },
+    {
+      "rgba": "#05030500",
+      "samples": 389
+    },
+    {
+      "rgba": "#1F1C2C00",
+      "samples": 389
+    },
+    {
+      "rgba": "#02020100",
+      "samples": 388
+    },
+    {
+      "rgba": "#332F4B00",
+      "samples": 387
+    },
+    {
+      "rgba": "#13111E00",
+      "samples": 386
+    },
+    {
+      "rgba": "#0F0D1100",
+      "samples": 382
+    },
+    {
+      "rgba": "#08060700",
+      "samples": 379
+    },
+    {
+      "rgba": "#38335000",
+      "samples": 379
+    },
+    {
+      "rgba": "#1A172600",
+      "samples": 378
+    },
+    {
+      "rgba": "#6A1F3DFD",
+      "samples": 376
+    },
+    {
+      "rgba": "#322E4A00",
+      "samples": 374
+    },
+    {
+      "rgba": "#292647FD",
+      "samples": 373
+    },
+    {
+      "rgba": "#603871FD",
+      "samples": 372
+    },
+    {
+      "rgba": "#07060600",
+      "samples": 369
+    },
+    {
+      "rgba": "#1C192900",
+      "samples": 369
+    },
+    {
+      "rgba": "#3C375500",
+      "samples": 368
+    },
+    {
+      "rgba": "#2A2748FD",
+      "samples": 368
+    },
+    {
+      "rgba": "#0F0B0C00",
+      "samples": 366
+    },
+    {
+      "rgba": "#613872FD",
+      "samples": 365
+    },
+    {
+      "rgba": "#5A5179FD",
+      "samples": 365
+    },
+    {
+      "rgba": "#18162400",
+      "samples": 364
+    },
+    {
+      "rgba": "#423C5C00",
+      "samples": 364
+    },
+    {
+      "rgba": "#0A080B00",
+      "samples": 363
+    },
+    {
+      "rgba": "#5E366EFD",
+      "samples": 362
+    },
+    {
+      "rgba": "#595078FD",
+      "samples": 362
+    },
+    {
+      "rgba": "#1C192800",
+      "samples": 361
+    },
+    {
+      "rgba": "#02010300",
+      "samples": 360
+    },
+    {
+      "rgba": "#623972FD",
+      "samples": 360
+    },
+    {
+      "rgba": "#312D4900",
+      "samples": 359
+    },
+    {
+      "rgba": "#623872FD",
+      "samples": 358
+    },
+    {
+      "rgba": "#04040400",
+      "samples": 355
+    },
+    {
+      "rgba": "#1B192800",
+      "samples": 354
+    },
+    {
+      "rgba": "#1E1B2A00",
+      "samples": 354
+    },
+    {
+      "rgba": "#322E52FD",
+      "samples": 354
+    },
+    {
+      "rgba": "#6C1F3FFD",
+      "samples": 352
+    },
+    {
+      "rgba": "#04040500",
+      "samples": 351
+    },
+    {
+      "rgba": "#574E77FD",
+      "samples": 351
+    },
+    {
+      "rgba": "#07060900",
+      "samples": 350
+    },
+    {
+      "rgba": "#100E1200",
+      "samples": 350
+    },
+    {
+      "rgba": "#1D1A2900",
+      "samples": 350
+    },
+    {
+      "rgba": "#332F4A00",
+      "samples": 350
+    },
+    {
+      "rgba": "#5B527AFD",
+      "samples": 350
+    },
+    {
+      "rgba": "#16142200",
+      "samples": 349
+    },
+    {
+      "rgba": "#5E376FFD",
+      "samples": 349
+    },
+    {
+      "rgba": "#3E395800",
+      "samples": 347
+    },
+    {
+      "rgba": "#564D75FD",
+      "samples": 347
+    },
+    {
+      "rgba": "#04030200",
+      "samples": 345
+    },
+    {
+      "rgba": "#1D1A2A00",
+      "samples": 345
+    },
+    {
+      "rgba": "#2B2849FD",
+      "samples": 345
+    },
+    {
+      "rgba": "#3A355200",
+      "samples": 344
+    },
+    {
+      "rgba": "#5F3770FD",
+      "samples": 344
+    },
+    {
+      "rgba": "#100C0D00",
+      "samples": 343
+    },
+    {
+      "rgba": "#6A1F3FFD",
+      "samples": 342
+    },
+    {
+      "rgba": "#1C192A00",
+      "samples": 339
+    },
+    {
+      "rgba": "#633973FD",
+      "samples": 339
+    },
+    {
+      "rgba": "#423C5B00",
+      "samples": 336
+    },
+    {
+      "rgba": "#312D50FD",
+      "samples": 336
+    },
+    {
+      "rgba": "#13111F00",
+      "samples": 335
+    },
+    {
+      "rgba": "#353155FD",
+      "samples": 335
+    },
+    {
+      "rgba": "#0A070800",
+      "samples": 334
+    },
+    {
+      "rgba": "#292648FD",
+      "samples": 334
+    },
+    {
+      "rgba": "#09060700",
+      "samples": 333
+    },
+    {
+      "rgba": "#17152300",
+      "samples": 332
+    },
+    {
+      "rgba": "#17152400",
+      "samples": 332
+    },
+    {
+      "rgba": "#3F3A5900",
+      "samples": 332
+    },
+    {
+      "rgba": "#312D51FD",
+      "samples": 331
+    },
+    {
+      "rgba": "#14111400",
+      "samples": 330
+    },
+    {
+      "rgba": "#613972FD",
+      "samples": 330
+    },
+    {
+      "rgba": "#2B2749FD",
+      "samples": 329
+    },
+    {
+      "rgba": "#322E51FD",
+      "samples": 329
+    },
+    {
+      "rgba": "#0F0C0D00",
+      "samples": 328
+    },
+    {
+      "rgba": "#1A172700",
+      "samples": 328
+    },
+    {
+      "rgba": "#2A2749FD",
+      "samples": 328
+    },
+    {
+      "rgba": "#332F52FD",
+      "samples": 328
+    },
+    {
+      "rgba": "#201D2D00",
+      "samples": 327
+    },
+    {
+      "rgba": "#0E0C1000",
+      "samples": 326
+    },
+    {
+      "rgba": "#413B5A00",
+      "samples": 326
+    },
+    {
+      "rgba": "#12101D00",
+      "samples": 325
+    },
+    {
+      "rgba": "#211E2E00",
+      "samples": 325
+    },
+    {
+      "rgba": "#613771FD",
+      "samples": 325
+    },
+    {
+      "rgba": "#0B090900",
+      "samples": 324
+    },
+    {
+      "rgba": "#2A2648FD",
+      "samples": 323
+    },
+    {
+      "rgba": "#01000200",
+      "samples": 322
+    },
+    {
+      "rgba": "#09070800",
+      "samples": 322
+    },
+    {
+      "rgba": "#302C4FFD",
+      "samples": 322
+    },
+    {
+      "rgba": "#37324F00",
+      "samples": 321
+    },
+    {
+      "rgba": "#06050800",
+      "samples": 319
+    },
+    {
+      "rgba": "#1A182800",
+      "samples": 319
+    },
+    {
+      "rgba": "#1E1B2B00",
+      "samples": 319
+    },
+    {
+      "rgba": "#2E231500",
+      "samples": 317
+    },
+    {
+      "rgba": "#1F1C2E00",
+      "samples": 317
+    },
+    {
+      "rgba": "#2E2A4400",
+      "samples": 316
+    },
+    {
+      "rgba": "#34304C00",
+      "samples": 315
+    },
+    {
+      "rgba": "#403B5A00",
+      "samples": 315
+    },
+    {
+      "rgba": "#443E5D00",
+      "samples": 315
+    },
+    {
+      "rgba": "#584F78FD",
+      "samples": 315
+    },
+    {
+      "rgba": "#3A355300",
+      "samples": 314
+    },
+    {
+      "rgba": "#6C1F3EFD",
+      "samples": 314
+    },
+    {
+      "rgba": "#0D0B0F00",
+      "samples": 313
+    },
+    {
+      "rgba": "#3B365400",
+      "samples": 313
+    },
+    {
+      "rgba": "#282546FD",
+      "samples": 313
+    },
+    {
+      "rgba": "#5E366FFD",
+      "samples": 313
+    },
+    {
+      "rgba": "#383459FD",
+      "samples": 312
+    },
+    {
+      "rgba": "#25213200",
+      "samples": 311
+    },
+    {
+      "rgba": "#6B1E3DFD",
+      "samples": 311
+    },
+    {
+      "rgba": "#413C5B00",
+      "samples": 310
+    },
+    {
+      "rgba": "#08070A00",
+      "samples": 309
+    },
+    {
+      "rgba": "#383358FD",
+      "samples": 309
+    },
+    {
+      "rgba": "#2E2B4DFD",
+      "samples": 308
+    },
+    {
+      "rgba": "#613770FD",
+      "samples": 308
+    },
+    {
+      "rgba": "#0A070700",
+      "samples": 307
+    },
+    {
+      "rgba": "#413B5900",
+      "samples": 307
+    },
+    {
+      "rgba": "#2F2B4EFD",
+      "samples": 307
+    },
+    {
+      "rgba": "#24203100",
+      "samples": 305
+    },
+    {
+      "rgba": "#302C4600",
+      "samples": 305
+    },
+    {
+      "rgba": "#5E356EFD",
+      "samples": 305
+    },
+    {
+      "rgba": "#0B0A0C00",
+      "samples": 304
+    },
+    {
+      "rgba": "#2F2C4700",
+      "samples": 304
+    },
+    {
+      "rgba": "#3C375400",
+      "samples": 303
+    },
+    {
+      "rgba": "#2F2B4500",
+      "samples": 302
+    },
+    {
+      "rgba": "#453F5F00",
+      "samples": 302
+    },
+    {
+      "rgba": "#0A080900",
+      "samples": 301
+    },
+    {
+      "rgba": "#15132100",
+      "samples": 301
+    },
+    {
+      "rgba": "#1B192A00",
+      "samples": 301
+    },
+    {
+      "rgba": "#3D385600",
+      "samples": 301
+    },
+    {
+      "rgba": "#6A1D3DFD",
+      "samples": 301
+    },
+    {
+      "rgba": "#2E2A4DFD",
+      "samples": 301
+    },
+    {
+      "rgba": "#100D0E00",
+      "samples": 300
+    },
+    {
+      "rgba": "#564D76FD",
+      "samples": 300
+    },
+    {
+      "rgba": "#0E0A0B00",
+      "samples": 299
+    },
+    {
+      "rgba": "#100E1300",
+      "samples": 299
+    },
+    {
+      "rgba": "#110F1300",
+      "samples": 297
+    },
+    {
+      "rgba": "#343055FD",
+      "samples": 297
+    },
+    {
+      "rgba": "#16142300",
+      "samples": 296
+    },
+    {
+      "rgba": "#19172500",
+      "samples": 296
+    },
+    {
+      "rgba": "#1F1C2D00",
+      "samples": 295
+    },
+    {
+      "rgba": "#201D2E00",
+      "samples": 295
+    },
+    {
+      "rgba": "#120F1200",
+      "samples": 294
+    },
+    {
+      "rgba": "#14121F00",
+      "samples": 294
+    },
+    {
+      "rgba": "#393459FD",
+      "samples": 294
+    },
+    {
+      "rgba": "#0B080800",
+      "samples": 293
+    },
+    {
+      "rgba": "#292646FD",
+      "samples": 293
+    },
+    {
+      "rgba": "#09080900",
+      "samples": 292
+    },
+    {
+      "rgba": "#13101300",
+      "samples": 292
+    },
+    {
+      "rgba": "#19172700",
+      "samples": 292
+    },
+    {
+      "rgba": "#39355AFD",
+      "samples": 292
+    },
+    {
+      "rgba": "#2D221400",
+      "samples": 291
+    },
+    {
+      "rgba": "#18152400",
+      "samples": 291
+    },
+    {
+      "rgba": "#34304D00",
+      "samples": 291
+    },
+    {
+      "rgba": "#3D385700",
+      "samples": 291
+    },
+    {
+      "rgba": "#373358FD",
+      "samples": 291
+    },
+    {
+      "rgba": "#373357FD",
+      "samples": 290
+    },
+    {
+      "rgba": "#0C0A0E00",
+      "samples": 289
+    },
+    {
+      "rgba": "#3F395700",
+      "samples": 289
+    },
+    {
+      "rgba": "#110D0E00",
+      "samples": 288
+    }
+  ],
+  "colors_used_truncated": true,
   "outside_palette_sample": [
     {
       "x": 0,
@@ -701,10 +1747,67 @@
       "y": 0
     }
   ],
+  "outside_palette_colors": [
+    "#01000000",
+    "#01010100",
+    "#01010000",
+    "#00010100",
+    "#00010000",
+    "#01000100",
+    "#00000100",
+    "#02010100",
+    "#03020200",
+    "#02010200",
+    "#03020300",
+    "#04030300",
+    "#04030400",
+    "#05040500",
+    "#05040400",
+    "#02020200",
+    "#05030300",
+    "#06050600",
+    "#06040400",
+    "#6A1E3EFD",
+    "#07050500",
+    "#03010100",
+    "#04020200",
+    "#0A080A00",
+    "#06050500",
+    "#03010200",
+    "#6A1E3DFD",
+    "#04020300",
+    "#02000000",
+    "#0B090B00",
+    "#05030400",
+    "#07060700"
+  ],
+  "content_box": {
+    "x": 11,
+    "y": 0,
+    "width": 174,
+    "height": 128,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 173,
+    "row_edges": 127,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 192,
+      "height": 128
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "As-requested castle source",
+    "kind": "sprite",
     "logical_size": "192x128",
     "scale": 8,
     "max_colors": 64,
@@ -778,17 +1881,96 @@
       "#FFF4CBFF"
     ]
   },
+  "detected_grid": {
+    "found": false,
+    "detail": "No consistent dot lattice: color edges fall on every pixel spacing, as with blur, anti-aliasing, noise or resampling."
+  },
+  "layout": {
+    "logical_size": {
+      "width": 192,
+      "height": 128
+    },
+    "scale": 8,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "image_size": {
+      "width": 1536,
+      "height": 1024
+    },
+    "grid_box": [
+      0,
+      0,
+      1535,
+      1023
+    ],
+    "has_margin": false,
+    "cell_rule": "cell (x,y) covers pixels [ox+x*S, ox+(x+1)*S) x [oy+y*S, oy+(y+1)*S)"
+  },
+  "checks": [
+    {
+      "id": "image_size",
+      "status": "pass",
+      "expected": "1536x1024 px = 192x128 dots x 8 px from origin (0,0)",
+      "actual": "1536x1024 px"
+    },
+    {
+      "id": "cell_uniformity",
+      "status": "fail",
+      "expected": "each of 24576 cells (8x8 px) is exactly one RGBA value",
+      "actual": "24576 of 24576 cells mix colors"
+    },
+    {
+      "id": "dot_size",
+      "status": "pass",
+      "expected": "art drawn with 192x128 dots of 1 cell (edges every 1x1 cells)",
+      "actual": "color edges every 1x1 cells"
+    },
+    {
+      "id": "content",
+      "status": "pass",
+      "expected": "at least one visible cell",
+      "actual": "15104 visible cells"
+    },
+    {
+      "id": "kind",
+      "status": "pass",
+      "expected": "sprite: transparent background around the subject",
+      "actual": "9472 transparent cells"
+    },
+    {
+      "id": "alpha",
+      "status": "fail",
+      "expected": "alpha 0 or 255 only",
+      "actual": "968694 partial, 604170 transparent samples"
+    },
+    {
+      "id": "color_budget",
+      "status": "fail",
+      "expected": "at most 64 visible RGB colors",
+      "actual": "188379 colors"
+    },
+    {
+      "id": "allowed_palette",
+      "status": "fail",
+      "expected": "every sample is one of 65 declared RGBA colors (transparent_rgb exact)",
+      "actual": "1557468 samples outside"
+    }
+  ],
+  "acceptance_mode": "strict_profile",
   "grid_preview": {
     "sampled": false,
-    "logical_cell_step": {
-      "x": 1,
-      "y": 1
-    },
+    "magnification": 1,
     "spacing_px": {
       "x": 8,
       "y": 8
     },
-    "outer_boundary": "right/bottom lie outside the half-open source canvas"
-  },
-  "acceptance_mode": "strict_profile"
+    "origin_px": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_lines_drawn": true,
+    "legend": "cyan: declared cell boundaries; red fill: cell with more than one RGBA value; black X in a white box: cell with a color outside allowed_palette; magenta: grid box inside the margin; red square in the margin: pixel that differs from the margin color; amber: frame slot of a sprite sheet (red fill also marks dots in gutters, unused slots or edge margins); orange: declared grid on an image of the wrong size"
+  }
 }

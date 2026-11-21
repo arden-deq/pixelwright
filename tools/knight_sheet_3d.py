@@ -448,6 +448,9 @@ def process(run, out, palette_path=None):
             "layout": {"columns": 6, "rows": len(sampled), "spacing": 0}, "scale": scale,
             "palette": palette_spec, "frames": frames, "animations": animations}
     profile = {"schema_version": 1, "name": "3D knight sheet pixel contract",
+               "kind": "sheet",
+               "sheet": {"frame_size": spec["frame_size"], **spec["layout"],
+                         **{key: spec[key] for key in ("frame_count", "edge_margin") if key in spec}},
                "logical_size": f"{contact.width}x{contact.height}", "scale": scale,
                "max_colors": settings["pixel_palette_size"], "alpha": "binary", "transparent_rgb": "exact",
                "allowed_palette": list(palette_spec.values())}

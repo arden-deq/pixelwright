@@ -8,17 +8,18 @@ Use UTF-8 JSON. Unknown fields fail validation to catch misspelled constraints.
 | --- | --- |
 | `schema_version` | Required integer `1` |
 | `name` | Optional descriptive string |
-| `kind` | Optional. `sprite`: transparent background required, alpha defaults to `binary`; `image`: a general picture, alpha defaults to `opaque`. Undeclared kinds are reported as `not_declared` |
-| `logical_size` | Required `WIDTHxHEIGHT` in dots, each 1..4096 |
+| `kind` | Required. `sprite`: one subject, transparent background required, alpha defaults to `binary`. `sheet`: a sprite sheet described by `sheet`, alpha defaults to `binary`. `image`: a general picture, alpha defaults to `opaque` |
+| `sheet` | Required with `kind: "sheet"`, forbidden otherwise. `frame_size` (`WIDTHxHEIGHT` in dots), `columns` and `rows` (1..4096, at most 1,024 slots); optional `margin` and `spacing` in dots (default 0), `frame_count` (used slots, row-major, default all) and `edge_margin` (dots that stay transparent inside every frame edge, default 0) |
+| `logical_size` | `WIDTHxHEIGHT` in dots, each 1..4096. Required, except for a sheet, whose size is `2·margin + columns·frame_width + (columns−1)·spacing` by `2·margin + rows·frame_height + (rows−1)·spacing`; a declared value must equal it |
 | `scale` | Integer 1..4096: pixels per dot on both axes. Required unless `image_size` determines it |
 | `image_size` | Optional `WIDTHxHEIGHT` of the whole PNG. Without `scale`, the scale is derived from it (it must divide into square whole-pixel dots); with `scale`, a larger size declares a margin |
 | `origin` | Optional `[x, y]`, default `[0, 0]`: the pixel where the grid's top-left cell starts. Requires `image_size` |
 | `max_colors` | Optional 1..256 visible RGB colors in the actual source, not a sampled preview |
-| `alpha` | `binary`: only 0 or 255; `opaque`: only 255; `any`: intentional translucency allowed. Default follows `kind` (`binary` when undeclared) |
+| `alpha` | `binary`: only 0 or 255; `opaque`: only 255; `any`: intentional translucency allowed. Default follows `kind`. A sprite cannot be opaque; an opaque sheet must have no margin, no spacing and every slot used |
 | `transparent_rgb` | `exact` (default): compare every decoded RGBA channel; `visible`: normalize alpha-zero RGB to zero before comparison |
 | `allowed_palette` | Optional array of 1..256 `#RRGGBB` or `#RRGGBBAA` colors. Every decoded sample must belong, including transparency and margins; include `#00000000` if needed |
 
-The grid is built only from the declaration: cell `(x, y)` covers pixels `[ox+x·S, ox+(x+1)·S) × [oy+y·S, oy+(y+1)·S)`. Audit does not infer a new grid, crop borders, rotate from EXIF, or resize input. Contradicting values (an `image_size` that cannot hold the grid, `origin` without `image_size`, a sprite with `alpha: opaque`) are profile errors. A 1× profile (`scale: 1`) must declare `max_colors` or `allowed_palette`: cell uniformity cannot be measured at 1×, so the palette rule is what catches blur and anti-aliasing. The loaded contract recorded in the report includes the derived `scale`. For sprite sheets, atlases and animations, declare the frame layout in a sprite spec and use `pixel_sprite.py check`; see [sprites.md](sprites.md). Tools other than `pixelwright.py inspect/batch` require a grid that fills the PNG from `(0,0)`.
+The grid is built only from the declaration: cell `(x, y)` covers pixels `[ox+x·S, ox+(x+1)·S) × [oy+y·S, oy+(y+1)·S)`. Audit does not infer a new grid, crop borders, rotate from EXIF, or resize input. Contradicting values (a missing or unknown `kind`, an `image_size` that cannot hold the grid, `origin` without `image_size`, a sprite with `alpha: opaque`, a `logical_size` that differs from the sheet layout) are profile errors. A 1× profile (`scale: 1`) must declare `max_colors` or `allowed_palette`: cell uniformity cannot be measured at 1×, so the palette rule is what catches blur and anti-aliasing. The loaded contract recorded in the report includes the derived `scale`, `alpha` and, for a sheet, `logical_size`. `pixelwright.py inspect` checks a sheet's slot layout on any PNG; animations and part rigs additionally need a sprite spec and `pixel_sprite.py check`, which requires the profile's `sheet` to match the spec; see [sprites.md](sprites.md). Tools other than `pixelwright.py inspect/batch` require a grid that fills the PNG from `(0,0)`.
 
 ## Checks
 
@@ -31,12 +32,12 @@ The grid is built only from the declaration: cell `(x, y)` covers pixels `[ox+x�
 | `cell_uniformity` | Every sample inside each cell is the same RGBA value; one stray sample fails its cell. Not applicable at 1× | `NON_SOLID_GRID_CELLS`, `OFF_GRID_PIXELS` |
 | `dot_size` | The art uses one-cell dots. The gap between color edges on the logical grid is measured per axis; if every edge keeps a spacing of k>1 cells, the art is really k× coarser than declared | `COARSER_THAN_DECLARED`: fail with at least 8 edges per axis, review with 3..7, not measured below 3 |
 | `content` | At least one cell is visible | `EMPTY_IMAGE` |
-| `kind` | Sprite: at least one transparent cell (a painted checkerboard is not transparency). Image: opaque unless `alpha` says otherwise | `SPRITE_WITHOUT_TRANSPARENCY`, `NON_OPAQUE_ALPHA` |
+| `kind` | Sprite: at least one transparent cell (a painted checkerboard is not transparency). Image: opaque unless `alpha` says otherwise. Sheet: no visible dot in the margin or spacing (`GUTTER_NOT_EMPTY`) or in slots beyond `frame_count` (`UNUSED_SLOT_NOT_EMPTY`); every used frame has visible dots (`EMPTY_FRAME`, review) and, unless the sheet is opaque, a transparent cell (`FRAME_WITHOUT_TRANSPARENCY`); no dot inside the edge margin (`EDGE_MARGIN_VIOLATION`). Dots on a frame edge without an edge margin are noted (`FRAME_CONTENT_AT_EDGE`, info) | `SPRITE_WITHOUT_TRANSPARENCY`, `NON_OPAQUE_ALPHA`, sheet codes |
 | `alpha` | Alpha policy over every sample, margins included | `PARTIAL_ALPHA`, `NON_OPAQUE_ALPHA` |
 | `color_budget` | Visible RGB colors over the whole PNG at most `max_colors` | `PALETTE_OVER_BUDGET` |
 | `allowed_palette` | Every RGBA sample of the whole PNG is in the palette | `COLOR_OUTSIDE_ALLOWED_PALETTE` |
 
-When cells or size fail, `detected_grid` estimates the dot size and origin the pixels were actually drawn on, from the spacing and phase of color edges. It is a repair hint, never a reason to change the contract. `colors_used` lists the decoded RGBA values by sample count; `outside_palette_colors` names the offenders; `dot_size` and `content_box` describe the logical grid.
+When cells or size fail, `detected_grid` estimates the dot size and origin the pixels were actually drawn on, from the spacing and phase of color edges. It is a repair hint, never a reason to change the contract. `colors_used` lists the decoded RGBA values by sample count; `outside_palette_colors` names the offenders; `dot_size` and `content_box` describe the logical grid. For a sheet, `sheet.frames` lists each used frame's slot box, visible cells and content box in logical cells; amber outlines in `grid_overlay.png` mark the slots and red fill marks dots outside them.
 
 Input is a static PNG decodable losslessly into RGBA8, including low-bit indexed/grayscale PNG. Animated PNG, non-PNG, and 16-bit channel PNG are rejected instead of silently inspecting a frame or dropping precision. The contract concerns decoded channel values, not gamma-corrected appearance or encoded PNG compression bytes. The source SHA-256 identifies the encoded bytes.
 

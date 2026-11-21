@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.4.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
@@ -23,12 +23,12 @@
     "decoded_rgba_sha256": "9297754040e28c498adaa08e9e037395c063af68d26b1f0be634529bbce3e560",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "source_path": "pixelwright/examples/layered-scene/layers/character.png",
-    "source_path_base": "repository_root",
+    "source_path": "layers/character.png",
+    "source_path_base": "manifest_directory",
     "source_sha256_after_audit": "7bd083f329a85b2600a73c86d89343eee728db057c3a92052ef783226251e083",
-    "profile_path": "docs/examples/layered-scene/layers/0001/profile.json",
-    "profile_path_base": "repository_root",
-    "profile_sha256": "2d92e94be5782c9719c4eb565ee7262516a2852551a96a8c73510a90ad884822",
+    "profile_path": "layers/0001/profile.json",
+    "profile_path_base": "output_directory",
+    "profile_sha256": "8bc4493bc87530d91232de62d8f1a0541b1689269a49dde44a6a27618e76f40e",
     "pinned_sha256": "7bd083f329a85b2600a73c86d89343eee728db057c3a92052ef783226251e083"
   },
   "settings": {
@@ -36,7 +36,9 @@
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 31,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "image"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -52,7 +54,10 @@
     "visible_rgb_colors_logical_preview": 31,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 3482,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 224880,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 10521,
+    "transparent_cells": 14055
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -220,11 +225,166 @@
     "integer_scale": 4,
     "issues": []
   },
+  "colors_used": [
+    {
+      "rgba": "#00000000",
+      "samples": 224880
+    },
+    {
+      "rgba": "#5E646DFF",
+      "samples": 8112
+    },
+    {
+      "rgba": "#491A1FFF",
+      "samples": 7632
+    },
+    {
+      "rgba": "#3D4147FF",
+      "samples": 7456
+    },
+    {
+      "rgba": "#1E1F21FF",
+      "samples": 7312
+    },
+    {
+      "rgba": "#0B0A09FF",
+      "samples": 7040
+    },
+    {
+      "rgba": "#969AA1FF",
+      "samples": 6960
+    },
+    {
+      "rgba": "#191716FF",
+      "samples": 6896
+    },
+    {
+      "rgba": "#50555CFF",
+      "samples": 6896
+    },
+    {
+      "rgba": "#69533AFF",
+      "samples": 6816
+    },
+    {
+      "rgba": "#727983FF",
+      "samples": 6784
+    },
+    {
+      "rgba": "#6B7077FF",
+      "samples": 6688
+    },
+    {
+      "rgba": "#4A4D51FF",
+      "samples": 5968
+    },
+    {
+      "rgba": "#592025FF",
+      "samples": 5952
+    },
+    {
+      "rgba": "#CCC6BAFF",
+      "samples": 5888
+    },
+    {
+      "rgba": "#35211FFF",
+      "samples": 5488
+    },
+    {
+      "rgba": "#24272AFF",
+      "samples": 5408
+    },
+    {
+      "rgba": "#2B2C2EFF",
+      "samples": 5408
+    },
+    {
+      "rgba": "#303438FF",
+      "samples": 5248
+    },
+    {
+      "rgba": "#53342AFF",
+      "samples": 5120
+    },
+    {
+      "rgba": "#8A8987FF",
+      "samples": 5120
+    },
+    {
+      "rgba": "#060606FF",
+      "samples": 4976
+    },
+    {
+      "rgba": "#321216FF",
+      "samples": 4944
+    },
+    {
+      "rgba": "#1B0D0EFF",
+      "samples": 4608
+    },
+    {
+      "rgba": "#EEEBE3FF",
+      "samples": 4400
+    },
+    {
+      "rgba": "#383837FF",
+      "samples": 3984
+    },
+    {
+      "rgba": "#867B66FF",
+      "samples": 3968
+    },
+    {
+      "rgba": "#020202FF",
+      "samples": 3840
+    },
+    {
+      "rgba": "#B5A88EFF",
+      "samples": 3344
+    },
+    {
+      "rgba": "#474541FF",
+      "samples": 2560
+    },
+    {
+      "rgba": "#716759FF",
+      "samples": 2272
+    },
+    {
+      "rgba": "#58544FFF",
+      "samples": 1248
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 3,
+    "y": 2,
+    "width": 123,
+    "height": 188,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 124,
+    "row_edges": 189,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 128,
+      "height": 192
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "Layered knight scene, shared 31 visible colors plus transparency",
+    "kind": "image",
     "logical_size": "128x192",
     "scale": 4,
     "max_colors": 31,
@@ -264,6 +424,18 @@
       "#CCC6BAFF",
       "#EEEBE3FF"
     ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 4,
+      "y": 4
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
   },
   "acceptance_mode": "strict_layer_contract"
 }

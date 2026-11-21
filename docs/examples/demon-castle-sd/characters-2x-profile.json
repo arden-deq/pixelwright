@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "characters-2x",
+  "kind": "image",
   "logical_size": "112x72",
   "scale": 2,
   "max_colors": 64,
