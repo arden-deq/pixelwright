@@ -23,7 +23,7 @@
     "decoded_rgba_sha256": "7488f1fc4a809436b1512a2526c09e202b6828d150678e29a94c197d81b061a8",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "profile_sha256": "300a6c858d8a6394ff0b453aa9632896b3306523ebafd26d05bd256c561b0fde",
+    "profile_sha256": "f8e8e2a1169f0ae986911dac9b929a65a4126407e9f6dc0b8ed2db9e93690dda",
     "source_path": "docs/examples/demon-castle-sd/characters-2x.png",
     "profile_path": "docs/examples/demon-castle-sd/characters-2x-profile.json"
   },
@@ -32,7 +32,9 @@
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 64,
     "strict_alpha": false,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "opaque",
+    "kind": "image"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -48,13 +50,16 @@
     "visible_rgb_colors_logical_preview": 31,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 40,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 0,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 8064,
+    "transparent_cells": 0
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
   "nonuniform_rgba_cell_samples_truncated": false,
   "violation_mask": {
-    "file": "characters-2x-violation_mask.png",
+    "file": "violation_mask.png",
     "coordinate_space": "logical_grid",
     "encoding": "0=uniform,255=nonuniform",
     "width": 112,
@@ -187,11 +192,6 @@
       "code": "COLOR_ISOLATION_CANDIDATES",
       "severity": "info",
       "detail": "40 logical pixels have no immediately adjacent pixel of exactly the same RGBA color. They may be intentional."
-    },
-    {
-      "code": "OPAQUE_BACKGROUND",
-      "severity": "info",
-      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
     }
   ],
   "visual_review_required": [
@@ -206,26 +206,191 @@
       "width": 224,
       "height": 144
     },
+    "expected_image_size": {
+      "width": 224,
+      "height": 144
+    },
     "logical_size": {
       "width": 112,
       "height": 72
     },
-    "expected_render_size": {
-      "width": 224,
-      "height": 144
-    },
-    "scale_x": 2.0,
-    "scale_y": 2.0,
-    "exact_integer_division": true,
-    "square_logical_pixel": true,
     "integer_scale": 2,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_box": [
+      0,
+      0,
+      223,
+      143
+    ],
+    "has_margin": false,
+    "square_logical_pixel": true,
     "issues": []
   },
+  "grid_box": [
+    0,
+    0,
+    223,
+    143
+  ],
+  "colors_used": [
+    {
+      "rgba": "#343047FF",
+      "samples": 14664
+    },
+    {
+      "rgba": "#10101CFF",
+      "samples": 4124
+    },
+    {
+      "rgba": "#CEA252FF",
+      "samples": 1372
+    },
+    {
+      "rgba": "#F8D4ABFF",
+      "samples": 1236
+    },
+    {
+      "rgba": "#952D48FF",
+      "samples": 1192
+    },
+    {
+      "rgba": "#FAEDD7FF",
+      "samples": 996
+    },
+    {
+      "rgba": "#EDCE7BFF",
+      "samples": 936
+    },
+    {
+      "rgba": "#1B172BFF",
+      "samples": 704
+    },
+    {
+      "rgba": "#754A93FF",
+      "samples": 636
+    },
+    {
+      "rgba": "#AEC4CAFF",
+      "samples": 624
+    },
+    {
+      "rgba": "#52376FFF",
+      "samples": 608
+    },
+    {
+      "rgba": "#536C86FF",
+      "samples": 600
+    },
+    {
+      "rgba": "#FFF0B0FF",
+      "samples": 496
+    },
+    {
+      "rgba": "#352755FF",
+      "samples": 488
+    },
+    {
+      "rgba": "#9E7240FF",
+      "samples": 444
+    },
+    {
+      "rgba": "#C3484CFF",
+      "samples": 360
+    },
+    {
+      "rgba": "#35465FFF",
+      "samples": 356
+    },
+    {
+      "rgba": "#641C37FF",
+      "samples": 328
+    },
+    {
+      "rgba": "#49322BFF",
+      "samples": 320
+    },
+    {
+      "rgba": "#D5C8BDFF",
+      "samples": 260
+    },
+    {
+      "rgba": "#7896AAFF",
+      "samples": 252
+    },
+    {
+      "rgba": "#E3AD8CFF",
+      "samples": 248
+    },
+    {
+      "rgba": "#E1EBDFFF",
+      "samples": 248
+    },
+    {
+      "rgba": "#80788EFF",
+      "samples": 188
+    },
+    {
+      "rgba": "#AAA1ABFF",
+      "samples": 184
+    },
+    {
+      "rgba": "#5C3441FF",
+      "samples": 148
+    },
+    {
+      "rgba": "#C17D71FF",
+      "samples": 88
+    },
+    {
+      "rgba": "#44629AFF",
+      "samples": 64
+    },
+    {
+      "rgba": "#6D4C32FF",
+      "samples": 40
+    },
+    {
+      "rgba": "#DC5535FF",
+      "samples": 32
+    },
+    {
+      "rgba": "#3C172DFF",
+      "samples": 20
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 0,
+    "y": 0,
+    "width": 112,
+    "height": 72,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 96,
+    "row_edges": 63,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 112,
+      "height": 72
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "characters-2x",
+    "kind": "image",
     "logical_size": "112x72",
     "scale": 2,
     "max_colors": 64,
@@ -299,17 +464,92 @@
       "#FFF4CBFF"
     ]
   },
+  "layout": {
+    "logical_size": {
+      "width": 112,
+      "height": 72
+    },
+    "scale": 2,
+    "origin": {
+      "x": 0,
+      "y": 0
+    },
+    "image_size": {
+      "width": 224,
+      "height": 144
+    },
+    "grid_box": [
+      0,
+      0,
+      223,
+      143
+    ],
+    "has_margin": false,
+    "cell_rule": "cell (x,y) covers pixels [ox+x*S, ox+(x+1)*S) x [oy+y*S, oy+(y+1)*S)"
+  },
+  "checks": [
+    {
+      "id": "image_size",
+      "status": "pass",
+      "expected": "224x144 px = 112x72 dots x 2 px from origin (0,0)",
+      "actual": "224x144 px"
+    },
+    {
+      "id": "cell_uniformity",
+      "status": "pass",
+      "expected": "each of 8064 cells (2x2 px) is exactly one RGBA value",
+      "actual": "0 of 8064 cells mix colors"
+    },
+    {
+      "id": "dot_size",
+      "status": "pass",
+      "expected": "art drawn with 112x72 dots of 1 cell (edges every 1x1 cells)",
+      "actual": "color edges every 1x1 cells"
+    },
+    {
+      "id": "content",
+      "status": "pass",
+      "expected": "at least one visible cell",
+      "actual": "8064 visible cells"
+    },
+    {
+      "id": "kind",
+      "status": "pass",
+      "expected": "image: general picture, fully opaque",
+      "actual": "0 transparent samples"
+    },
+    {
+      "id": "alpha",
+      "status": "pass",
+      "expected": "alpha 255 only",
+      "actual": "0 partial, 0 transparent samples"
+    },
+    {
+      "id": "color_budget",
+      "status": "pass",
+      "expected": "at most 64 visible RGB colors",
+      "actual": "31 colors"
+    },
+    {
+      "id": "allowed_palette",
+      "status": "pass",
+      "expected": "every sample is one of 65 declared RGBA colors (transparent_rgb exact)",
+      "actual": "0 samples outside"
+    }
+  ],
+  "acceptance_mode": "strict_profile",
   "grid_preview": {
     "sampled": false,
-    "logical_cell_step": {
-      "x": 1,
-      "y": 1
-    },
+    "magnification": 2,
     "spacing_px": {
-      "x": 2,
-      "y": 2
+      "x": 4,
+      "y": 4
     },
-    "outer_boundary": "right/bottom lie outside the half-open source canvas"
-  },
-  "acceptance_mode": "strict_profile"
+    "origin_px": {
+      "x": 0,
+      "y": 0
+    },
+    "grid_lines_drawn": true,
+    "legend": "cyan: declared cell boundaries; red fill: cell with more than one RGBA value; black X in a white box: cell with a color outside allowed_palette; magenta: grid box inside the margin; red square in the margin: pixel that differs from the margin color; amber: frame slot of a sprite sheet (red fill also marks dots in gutters, unused slots or edge margins); orange: declared grid on an image of the wrong size"
+  }
 }

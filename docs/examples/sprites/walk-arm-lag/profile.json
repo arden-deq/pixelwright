@@ -1,6 +1,13 @@
 {
   "schema_version": 1,
   "name": "Walk cycle sheet",
+  "kind": "sheet",
+  "sheet": {
+    "frame_size": "24x32",
+    "columns": 8,
+    "rows": 1,
+    "spacing": 1
+  },
   "logical_size": "199x32",
   "scale": 4,
   "max_colors": 13,

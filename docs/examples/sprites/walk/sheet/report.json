@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
@@ -26,14 +26,16 @@
     "source_path": "rendered.png",
     "source_sha256_after_audit": "86068f03b8f2c5e5cfd65f3a69f4a272c04b7485eaee41a9cad52edfa2fe9f7b",
     "profile_path": "profile.json",
-    "profile_sha256": "2388ee22df1557676fd0082d3adc1a381e42cebf882f56be2200ce1fa0ded6f4"
+    "profile_sha256": "92806a4c698af2d612f7dc07f32d7677fa9ee6e1be60149f2f0968a4ed114342"
   },
   "settings": {
     "difference_tolerance_per_channel": 0,
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 13,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "sheet"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -49,7 +51,10 @@
     "visible_rgb_colors_logical_preview": 11,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 19,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 70688,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 1950,
+    "transparent_cells": 4418
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -173,11 +178,92 @@
     "integer_scale": 4,
     "issues": []
   },
+  "colors_used": [
+    {
+      "rgba": "#00000000",
+      "samples": 70688
+    },
+    {
+      "rgba": "#1E1A2BFF",
+      "samples": 18304
+    },
+    {
+      "rgba": "#F0C090FF",
+      "samples": 2608
+    },
+    {
+      "rgba": "#6B3F22FF",
+      "samples": 2048
+    },
+    {
+      "rgba": "#59606EFF",
+      "samples": 1824
+    },
+    {
+      "rgba": "#3F7CC4FF",
+      "samples": 1424
+    },
+    {
+      "rgba": "#7A4A2CFF",
+      "samples": 1360
+    },
+    {
+      "rgba": "#5A3420FF",
+      "samples": 1200
+    },
+    {
+      "rgba": "#363A45FF",
+      "samples": 992
+    },
+    {
+      "rgba": "#2C5A92FF",
+      "samples": 784
+    },
+    {
+      "rgba": "#C88A60FF",
+      "samples": 384
+    },
+    {
+      "rgba": "#454B57FF",
+      "samples": 272
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 4,
+    "y": 2,
+    "width": 189,
+    "height": 30,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 114,
+    "row_edges": 30,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 199,
+      "height": 32
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "Walk cycle sheet",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "24x32",
+      "columns": 8,
+      "rows": 1,
+      "spacing": 1
+    },
     "logical_size": "199x32",
     "scale": 4,
     "max_colors": 13,

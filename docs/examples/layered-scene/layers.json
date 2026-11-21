@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.4.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "status": "pass",
   "scope": "technical_checks_only_not_artistic_quality",
@@ -12,11 +12,12 @@
   "profile": {
     "path": "profile.json",
     "path_base": "manifest_directory",
-    "sha256": "a3ad88edc154fbf69ec3107dee1a2d17486c60ca979798d832450bb05b7ba1eb"
+    "sha256": "eec95b49e6f0991aa1ed0367dbd560ece73cca0742884c7ac94b32e6427fb015"
   },
   "contract": {
     "schema_version": 1,
     "name": "Layered knight scene, shared 31 visible colors plus transparency",
+    "kind": "image",
     "logical_size": "320x224",
     "scale": 4,
     "max_colors": 31,
@@ -90,7 +91,7 @@
         "correction_prompt": "layers/0000/qa/correction_prompt.txt"
       },
       "source_sha256": "7e4e42198cb84e70ffc03e4352fc64a471b18ed1ffc35e35267bb7ac858fdd18",
-      "report_sha256": "d11c2badd699dda97b9f1961c0335f6f40aed49b33c0a058f60ea879006bc663"
+      "report_sha256": "9a98096ebc70af211225f271f241f4f6c36580b932cf937dfa0e18647fded525"
     },
     {
       "id": "character",
@@ -116,7 +117,7 @@
         "correction_prompt": "layers/0001/qa/correction_prompt.txt"
       },
       "source_sha256": "7bd083f329a85b2600a73c86d89343eee728db057c3a92052ef783226251e083",
-      "report_sha256": "3c3081e7c0de205b6430b6d260069c4869a3829f95ca6f8ed6aec603427395d1"
+      "report_sha256": "56e64867366b18d44afc0d453099e46cc0974fe51b0a749406c44a9968a526ed"
     },
     {
       "id": "item",
@@ -142,7 +143,7 @@
         "correction_prompt": "layers/0002/qa/correction_prompt.txt"
       },
       "source_sha256": "34cfca03ade68ceb2628f40d26ed00bacfbbbb1a69f5c8794f3c453bcbcb6aaf",
-      "report_sha256": "4f9184ee8fe08b66b0ae78c79dfb6cb51171e5a71088dc0f6035d97e318a14b0"
+      "report_sha256": "e2050016b054cc7a7dda396ed0d36a2000fb1bec3b64016e289bb91a9cd8633a"
     },
     {
       "id": "title",
@@ -168,7 +169,7 @@
         "correction_prompt": "layers/0003/qa/correction_prompt.txt"
       },
       "source_sha256": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632",
-      "report_sha256": "11d836c34526a4246beb9a16c4c200722d0776d1d1dcca4f280dda77d4fe18ca"
+      "report_sha256": "7a8546f68ffc19d12b0d90dcfa4ace9e430a66a5cfc092752a7805c9b635674d"
     }
   ],
   "final": {
@@ -182,8 +183,8 @@
       "violation_mask": "final/violation_mask.png",
       "correction_prompt": "final/correction_prompt.txt"
     },
-    "source_sha256": "34ab97c0040fbae925bb8cb5b992fae0ce57eb567a00a76e42ec52fb1cee0aa7",
-    "report_sha256": "16da9c7e9f9bd7ef1b518445450c17e6cf6fd9352ecaafbb42244e656225a635",
+    "source_sha256": "c06937314e860ae1bc8925e096a0e6dc0857b83c280e7137aa546782910f26c0",
+    "report_sha256": "652e8b6fd0aa8488522828af1454da3e4a3ba9dbebbe6506c03be2312037378b",
     "acceptance_mode": "strict_final_contract",
     "accepted": true,
     "artifacts": {
@@ -191,14 +192,14 @@
         "path": "native.png",
         "width": 320,
         "height": 224,
-        "sha256": "f73255f68310b994b47c4f2ab0e2523fd30e6deacbe5a9e4e3f41d99d5712bf1",
+        "sha256": "a9f0f338cce502fe206c188380076c3e54e6073775d02de9476ce3af975496b3",
         "decoded_rgba_sha256": "d8be49b00a5ecdb1de9a62b31f5c39f280e604e430cfd6a9392ec5e06f3a4784"
       },
       "rendered": {
         "path": "rendered.png",
         "width": 1280,
         "height": 896,
-        "sha256": "34ab97c0040fbae925bb8cb5b992fae0ce57eb567a00a76e42ec52fb1cee0aa7",
+        "sha256": "c06937314e860ae1bc8925e096a0e6dc0857b83c280e7137aa546782910f26c0",
         "decoded_rgba_sha256": "d32c903eafb0a6289334dd210c2dd60803aa36f42dff5b5c13397d04afe212e2"
       }
     }
@@ -219,25 +220,11 @@
     "profile": {
       "source_path": "profile.json",
       "source_path_base": "manifest_directory",
-      "sha256_before": "a3ad88edc154fbf69ec3107dee1a2d17486c60ca979798d832450bb05b7ba1eb",
-      "sha256_after": "a3ad88edc154fbf69ec3107dee1a2d17486c60ca979798d832450bb05b7ba1eb",
+      "sha256_before": "eec95b49e6f0991aa1ed0367dbd560ece73cca0742884c7ac94b32e6427fb015",
+      "sha256_after": "eec95b49e6f0991aa1ed0367dbd560ece73cca0742884c7ac94b32e6427fb015",
       "unchanged_during_checks": true,
       "check_count": 3
     }
   },
-  "issues": [],
-  "path_bases": {
-    "manifest_directory": "pixelwright/examples/layered-scene",
-    "output_directory": "docs/examples/layered-scene",
-    "base": "repository_root"
-  },
-  "artistic_review": {
-    "status": "accepted",
-    "scope": "workflow demonstration",
-    "observations": [
-      "Knight and held gear remain one coherent layer.",
-      "Independent lantern and title are readable.",
-      "Background is a deliberately simple, native-authored stage; this fixture demonstrates compositing rather than a new artistic quality claim."
-    ]
-  }
+  "issues": []
 }

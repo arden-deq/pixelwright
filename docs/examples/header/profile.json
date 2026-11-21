@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "Pixelwright README header: 2048x1024, 4px cells, 32 opaque colors",
+  "kind": "image",
   "logical_size": "512x256",
   "scale": 4,
   "max_colors": 32,

@@ -1,6 +1,13 @@
 {
   "schema_version": 1,
   "name": "Knight shield block sheet",
+  "kind": "sheet",
+  "sheet": {
+    "frame_size": "192x240",
+    "columns": 6,
+    "rows": 1,
+    "spacing": 2
+  },
   "logical_size": "1162x240",
   "scale": 2,
   "max_colors": 31,

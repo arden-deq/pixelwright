@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.4.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
@@ -23,12 +23,12 @@
     "decoded_rgba_sha256": "d40ace4684b700e01192d2a8a5d618910a0dcf87488d396379490657e69609e6",
     "sample_scope": "decoded_rgba8_without_exif_or_color_management",
     "transparent_rgb": "exact",
-    "source_path": "pixelwright/examples/layered-scene/layers/title.png",
-    "source_path_base": "repository_root",
+    "source_path": "layers/title.png",
+    "source_path_base": "manifest_directory",
     "source_sha256_after_audit": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632",
-    "profile_path": "docs/examples/layered-scene/layers/0003/profile.json",
-    "profile_path_base": "repository_root",
-    "profile_sha256": "bc579f893856217245c873f8c31770e8279383682ea4cd16f1ac1fc62d1e4498",
+    "profile_path": "layers/0003/profile.json",
+    "profile_path_base": "output_directory",
+    "profile_sha256": "6d51b71a1b5cac17767f74cdf55e8347a905c5cffeaba1af79614b802a9e6a07",
     "pinned_sha256": "a82d31e7d27e82244c2b18a5ac6fc0afc406b0bc55bcc89823b4dd2ddb069632"
   },
   "settings": {
@@ -36,7 +36,9 @@
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 31,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "image"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -52,7 +54,10 @@
     "visible_rgb_colors_logical_preview": 3,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 0,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 0,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 3072,
+    "transparent_cells": 0
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -65,13 +70,7 @@
     "height": 24
   },
   "possible_isolated_pixels_sample": [],
-  "issues": [
-    {
-      "code": "OPAQUE_BACKGROUND",
-      "severity": "info",
-      "detail": "No transparency is present. Foreground/background separation and silhouette checks cannot be inferred reliably."
-    }
-  ],
+  "issues": [],
   "visual_review_required": [
     "Recognizable silhouette at logical resolution",
     "Intentional pixel clusters, shading, and outline design",
@@ -99,11 +98,50 @@
     "integer_scale": 4,
     "issues": []
   },
+  "colors_used": [
+    {
+      "rgba": "#191716FF",
+      "samples": 40000
+    },
+    {
+      "rgba": "#727983FF",
+      "samples": 4800
+    },
+    {
+      "rgba": "#EEEBE3FF",
+      "samples": 4352
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 0,
+    "y": 0,
+    "width": 128,
+    "height": 24,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 59,
+    "row_edges": 18,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 128,
+      "height": 24
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "Layered knight scene, shared 31 visible colors plus transparency",
+    "kind": "image",
     "logical_size": "128x24",
     "scale": 4,
     "max_colors": 31,
@@ -143,6 +181,18 @@
       "#CCC6BAFF",
       "#EEEBE3FF"
     ]
+  },
+  "grid_preview": {
+    "sampled": false,
+    "logical_cell_step": {
+      "x": 1,
+      "y": 1
+    },
+    "spacing_px": {
+      "x": 4,
+      "y": 4
+    },
+    "outer_boundary": "right/bottom lie outside the half-open source canvas"
   },
   "acceptance_mode": "strict_layer_contract"
 }

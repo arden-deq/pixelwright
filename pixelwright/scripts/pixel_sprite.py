@@ -1491,6 +1491,15 @@ def check_sheet(spec_path: str | Path, sheet_path: str | Path, profile_path: str
     sheet = Path(sheet_path).expanduser().resolve(strict=True)
     logical, _ = project.contract_options(profile)
     layout = plan.layout
+    if profile["kind"] != "sheet":
+        raise ValueError("A sprite sheet check needs a profile with kind sheet and its sheet layout")
+    declared = project.parse_sheet(profile["sheet"])
+    spec_layout = {"frame_size": layout.frame_size, "columns": layout.columns, "rows": layout.rows,
+                   "margin": layout.margin, "spacing": layout.spacing, "frame_count": layout.frame_count,
+                   "edge_margin": layout.edge_margin}
+    differs = [key for key, value in spec_layout.items() if declared[key] != value]
+    if differs:
+        raise ValueError(f"Profile sheet differs from the sprite spec layout in: {', '.join(differs)}")
     if logical != layout.sheet_size:
         raise ValueError(f"Profile logical_size {logical[0]}x{logical[1]} differs from the sprite layout's "
                          f"sheet size {layout.sheet_size[0]}x{layout.sheet_size[1]}")

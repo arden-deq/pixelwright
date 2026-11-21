@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "status": "pass",
   "scope": "technical_checks_only_not_artistic_quality",
@@ -17,13 +17,20 @@
     },
     "profile": {
       "path": "profile.json",
-      "sha256": "4e1149e975b671664beac96974de0058a59318aa9da96b3f1a6b2d600da0d55c"
+      "sha256": "1f4e7925285c119549642a024b1000ff646bbbeb5e655b303309b64613efbb62"
     }
   },
   "name": "Knight shield block",
   "contract": {
     "schema_version": 1,
     "name": "Knight shield block sheet",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "192x240",
+      "columns": 6,
+      "rows": 1,
+      "spacing": 2
+    },
     "logical_size": "1162x240",
     "scale": 2,
     "max_colors": 31,
@@ -264,7 +271,127 @@
       "total_ms": 940,
       "baseline_rows": [
         229
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 6,
+          "requested_durations_ms": [
+            240,
+            70,
+            70,
+            110,
+            320,
+            130
+          ],
+          "requested_total_ms": 940,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            240,
+            70,
+            70,
+            110,
+            320,
+            130
+          ],
+          "quantized": false,
+          "actual_frame_count": 6,
+          "actual_durations_ms": [
+            240,
+            70,
+            70,
+            110,
+            320,
+            130
+          ],
+          "actual_total_ms": 940,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ],
+          "metadata_verified": true
+        },
+        "rig": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 6,
+          "requested_durations_ms": [
+            240,
+            70,
+            70,
+            110,
+            320,
+            130
+          ],
+          "requested_total_ms": 940,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            240,
+            70,
+            70,
+            110,
+            320,
+            130
+          ],
+          "quantized": false,
+          "actual_frame_count": 6,
+          "actual_durations_ms": [
+            240,
+            70,
+            70,
+            110,
+            320,
+            130
+          ],
+          "actual_total_ms": 940,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     }
   ],
   "rig": {

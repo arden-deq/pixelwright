@@ -103,7 +103,7 @@ def verify_palette_workflow(skill, out, source, damaged):
     # The same profile audits both source and result. Target palette membership
     # is checked separately so a palette transformation cannot relax source QA.
     profile = out / "palette-profile.json"
-    profile.write_text(json.dumps({"schema_version": 1, "name": "release palette smoke",
+    profile.write_text(json.dumps({"schema_version": 1, "name": "release palette smoke", "kind": "sprite",
                                    "logical_size": "16x16", "scale": 8, "max_colors": 16,
                                    "alpha": "binary", "transparent_rgb": "exact"}, indent=2) + "\n",
                        encoding="utf-8")

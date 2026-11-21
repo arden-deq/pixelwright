@@ -41,6 +41,7 @@ class LayerTests(unittest.TestCase):
         self.manifest_path = self.root / "scene.json"
         self.contract = {
             "schema_version": 1,
+            "kind": "image",
             "logical_size": "4x3",
             "scale": 3,
             "max_colors": 3,

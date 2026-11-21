@@ -40,6 +40,7 @@ The corresponding final profile uses the existing strict profile schema:
 ```json
 {
   "schema_version": 1,
+  "kind": "image",
   "logical_size": "96x64",
   "scale": 8,
   "max_colors": 3,
@@ -63,7 +64,7 @@ The corresponding final profile uses the existing strict profile schema:
 
 Paths resolve from the manifest's directory, not the command's working directory. Use forward slashes; absolute paths, parent traversal, and paths resolving outside that directory are rejected. Manifest and profile files are capped at 1 MiB each. The aggregate declared layer input size is capped at 48,000,000 rendered pixels. Normal per-image PNG limits also apply.
 
-For layer composition, the shared profile must explicitly provide `allowed_palette` and `max_colors`, use `transparent_rgb: "exact"`, and use `alpha: "binary"` or `"opaque"`. Every layer uses this scale, palette, and visible RGB budget with its own logical dimensions and binary alpha. Transparent input RGBA values must be declared in the shared palette and must be uniform inside each cell, including their hidden RGB. The empty final canvas starts at `#00000000`; include this value if the final image will have uncovered space. An opaque final canvas can still have transparent foreground layers. `max_colors` counts visible RGB, so 32 RGBA colors with one transparent entry normally means `max_colors: 31`.
+For layer composition, the shared profile must be `kind` `image` or `sprite` (not `sheet`) and must explicitly provide `allowed_palette` and `max_colors`, use `transparent_rgb: "exact"`, and use `alpha: "binary"` or `"opaque"`. Every layer uses this scale, palette, and visible RGB budget with its own logical dimensions and binary alpha. Transparent input RGBA values must be declared in the shared palette and must be uniform inside each cell, including their hidden RGB. The empty final canvas starts at `#00000000`; include this value if the final image will have uncovered space. An opaque final canvas can still have transparent foreground layers. `max_colors` counts visible RGB, so 32 RGBA colors with one transparent entry normally means `max_colors: 31`.
 
 ## List, edit, and compose
 
@@ -92,7 +93,7 @@ Inspect `layers.json`, every layer's report and grid overlay, and the final audi
 | Output | Meaning |
 | --- | --- |
 | `layers.json` | Aggregate status, input identities and results, final status, report and artifact paths |
-| `layers/0000/profile.json` | Layer contract derived from the shared profile and this layer's dimensions |
+| `layers/0000/profile.json` | Layer contract derived from the shared profile and this layer's dimensions, as `kind: image` with binary alpha |
 | `layers/0000/qa/report.json`, `grid_overlay.png` | Actual input-layer audit; numeric directories follow manifest order |
 | `final/report.json`, `grid_overlay.png` | Actual final candidate audit when all input layers pass |
 | `native.png`, `rendered.png` | Accepted output pair, present only when all audits pass |

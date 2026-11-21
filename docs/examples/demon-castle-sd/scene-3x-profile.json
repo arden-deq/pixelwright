@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "scene-3x",
+  "kind": "image",
   "logical_size": "384x288",
   "scale": 3,
   "max_colors": 64,

@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
@@ -26,14 +26,16 @@
     "source_path": "rendered.png",
     "source_sha256_after_audit": "99c5da9440526a3cbfd2e5c7d70da05ac7f268edbe123b6596d033290ac2abf8",
     "profile_path": "profile.json",
-    "profile_sha256": "39cf86706144681c1863e48958e84d1816a774cba6c90a369be62aad5558f668"
+    "profile_sha256": "449c470a51af496767166945ed2450c43ebb5974b7299e36184738632dcb414a"
   },
   "settings": {
     "difference_tolerance_per_channel": 0,
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 6,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "sheet"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -49,7 +51,10 @@
     "visible_rgb_colors_logical_preview": 6,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 20,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 34704,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 540,
+    "transparent_cells": 964
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -177,11 +182,73 @@
     "integer_scale": 6,
     "issues": []
   },
+  "colors_used": [
+    {
+      "rgba": "#00000000",
+      "samples": 34704
+    },
+    {
+      "rgba": "#1E1A2BFF",
+      "samples": 10584
+    },
+    {
+      "rgba": "#5A4C3EFF",
+      "samples": 3960
+    },
+    {
+      "rgba": "#7A6A58FF",
+      "samples": 1980
+    },
+    {
+      "rgba": "#C8CDD6FF",
+      "samples": 1296
+    },
+    {
+      "rgba": "#A02A34FF",
+      "samples": 900
+    },
+    {
+      "rgba": "#D8404AFF",
+      "samples": 720
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 1,
+    "y": 1,
+    "width": 91,
+    "height": 14,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 60,
+    "row_edges": 14,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 94,
+      "height": 16
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "Lever sheet",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "18x16",
+      "columns": 5,
+      "rows": 1,
+      "spacing": 1,
+      "edge_margin": 1
+    },
     "logical_size": "94x16",
     "scale": 6,
     "max_colors": 6,

@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "status": "pass",
   "scope": "technical_checks_only_not_artistic_quality",
@@ -17,13 +17,20 @@
     },
     "profile": {
       "path": "profile.json",
-      "sha256": "d50c21bab3ddf7104518577d82022e67eabebdbbe5c30a4152c4c0fe6aa177de"
+      "sha256": "f14bac77b4508e3fdc27345b140bdeae8b051c851794d6af4c3613f65fb32f8c"
     }
   },
   "name": "Knight mace swing",
   "contract": {
     "schema_version": 1,
     "name": "Knight mace swing sheet",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "192x240",
+      "columns": 8,
+      "rows": 1,
+      "spacing": 2
+    },
     "logical_size": "1550x240",
     "scale": 2,
     "max_colors": 31,
@@ -314,7 +321,151 @@
       "total_ms": 990,
       "baseline_rows": [
         229
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 8,
+          "requested_durations_ms": [
+            240,
+            90,
+            110,
+            170,
+            50,
+            70,
+            140,
+            120
+          ],
+          "requested_total_ms": 990,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            240,
+            90,
+            110,
+            170,
+            50,
+            70,
+            140,
+            120
+          ],
+          "quantized": false,
+          "actual_frame_count": 8,
+          "actual_durations_ms": [
+            240,
+            90,
+            110,
+            170,
+            50,
+            70,
+            140,
+            120
+          ],
+          "actual_total_ms": 990,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ],
+          "metadata_verified": true
+        },
+        "rig": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 8,
+          "requested_durations_ms": [
+            240,
+            90,
+            110,
+            170,
+            50,
+            70,
+            140,
+            120
+          ],
+          "requested_total_ms": 990,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            240,
+            90,
+            110,
+            170,
+            50,
+            70,
+            140,
+            120
+          ],
+          "quantized": false,
+          "actual_frame_count": 8,
+          "actual_durations_ms": [
+            240,
+            90,
+            110,
+            170,
+            50,
+            70,
+            140,
+            120
+          ],
+          "actual_total_ms": 990,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     }
   ],
   "rig": {

@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "As-requested princess source",
+  "kind": "sprite",
   "logical_size": "32x48",
   "scale": 32,
   "max_colors": 64,

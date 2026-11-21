@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "scope": "technical_checks_only_not_artistic_quality",
   "status": "pass",
@@ -26,14 +26,16 @@
     "source_path": "rendered.png",
     "source_sha256_after_audit": "85f574fe3b22c90513c2f765162d25a72aa075141a82375fd628078ec80e00de",
     "profile_path": "profile.json",
-    "profile_sha256": "4e1149e975b671664beac96974de0058a59318aa9da96b3f1a6b2d600da0d55c"
+    "profile_sha256": "1f4e7925285c119549642a024b1000ff646bbbeb5e655b303309b64613efbb62"
   },
   "settings": {
     "difference_tolerance_per_channel": 0,
     "minimum_grid_score": 100.0,
     "maximum_source_rgb_colors": 31,
     "strict_alpha": true,
-    "transparent_rgb": "exact"
+    "transparent_rgb": "exact",
+    "alpha": "binary",
+    "kind": "sheet"
   },
   "metrics": {
     "grid_score": 100.0,
@@ -49,7 +51,10 @@
     "visible_rgb_colors_logical_preview": 31,
     "partial_alpha_source_pixels": 0,
     "possible_color_isolated_logical_pixels": 19563,
-    "outside_palette_source_pixels": 0
+    "transparent_source_pixels": 873644,
+    "outside_palette_source_pixels": 0,
+    "visible_cells": 60469,
+    "transparent_cells": 218411
   },
   "worst_cells": [],
   "nonuniform_rgba_cell_samples": [],
@@ -217,11 +222,172 @@
     "integer_scale": 2,
     "issues": []
   },
+  "colors_used": [
+    {
+      "rgba": "#00000000",
+      "samples": 873644
+    },
+    {
+      "rgba": "#5E646DFF",
+      "samples": 11768
+    },
+    {
+      "rgba": "#491A1FFF",
+      "samples": 11452
+    },
+    {
+      "rgba": "#3D4147FF",
+      "samples": 10532
+    },
+    {
+      "rgba": "#969AA1FF",
+      "samples": 10276
+    },
+    {
+      "rgba": "#1E1F21FF",
+      "samples": 10192
+    },
+    {
+      "rgba": "#50555CFF",
+      "samples": 10104
+    },
+    {
+      "rgba": "#727983FF",
+      "samples": 9968
+    },
+    {
+      "rgba": "#69533AFF",
+      "samples": 9900
+    },
+    {
+      "rgba": "#0B0A09FF",
+      "samples": 9828
+    },
+    {
+      "rgba": "#6B7077FF",
+      "samples": 9656
+    },
+    {
+      "rgba": "#191716FF",
+      "samples": 9404
+    },
+    {
+      "rgba": "#592025FF",
+      "samples": 8928
+    },
+    {
+      "rgba": "#CCC6BAFF",
+      "samples": 8712
+    },
+    {
+      "rgba": "#4A4D51FF",
+      "samples": 8588
+    },
+    {
+      "rgba": "#2B2C2EFF",
+      "samples": 7652
+    },
+    {
+      "rgba": "#35211FFF",
+      "samples": 7628
+    },
+    {
+      "rgba": "#8A8987FF",
+      "samples": 7560
+    },
+    {
+      "rgba": "#303438FF",
+      "samples": 7520
+    },
+    {
+      "rgba": "#24272AFF",
+      "samples": 7480
+    },
+    {
+      "rgba": "#321216FF",
+      "samples": 7304
+    },
+    {
+      "rgba": "#53342AFF",
+      "samples": 7120
+    },
+    {
+      "rgba": "#060606FF",
+      "samples": 7000
+    },
+    {
+      "rgba": "#1B0D0EFF",
+      "samples": 6624
+    },
+    {
+      "rgba": "#EEEBE3FF",
+      "samples": 6348
+    },
+    {
+      "rgba": "#867B66FF",
+      "samples": 5824
+    },
+    {
+      "rgba": "#383837FF",
+      "samples": 5552
+    },
+    {
+      "rgba": "#020202FF",
+      "samples": 5288
+    },
+    {
+      "rgba": "#B5A88EFF",
+      "samples": 4852
+    },
+    {
+      "rgba": "#474541FF",
+      "samples": 3644
+    },
+    {
+      "rgba": "#716759FF",
+      "samples": 3364
+    },
+    {
+      "rgba": "#58544FFF",
+      "samples": 1808
+    }
+  ],
+  "colors_used_truncated": false,
   "outside_palette_sample": [],
+  "outside_palette_colors": [],
+  "content_box": {
+    "x": 51,
+    "y": 42,
+    "width": 1088,
+    "height": 188,
+    "coordinate_space": "logical_grid"
+  },
+  "dot_size": {
+    "dot_width": 1,
+    "dot_height": 1,
+    "phase_x": 0,
+    "phase_y": 0,
+    "column_edges": 891,
+    "row_edges": 189,
+    "measurable": true,
+    "conclusive": true,
+    "coordinate_space": "logical_grid",
+    "effective_logical_size": {
+      "width": 1162,
+      "height": 240
+    }
+  },
   "artistic_status": "not_reviewed",
   "contract": {
     "schema_version": 1,
     "name": "Knight shield block sheet",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "192x240",
+      "columns": 6,
+      "rows": 1,
+      "spacing": 2
+    },
     "logical_size": "1162x240",
     "scale": 2,
     "max_colors": 31,

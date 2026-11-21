@@ -11,7 +11,21 @@ width  = 2 × margin + columns × frame_width  + (columns − 1) × spacing
 height = 2 × margin + rows    × frame_height + (rows − 1)    × spacing
 ```
 
-Margins, spacing between frames and unused slots must stay fully transparent (alpha 0); the strict profile still decides the exact RGBA values, so include `#00000000` in `allowed_palette` when the sheet has any gutter. Declare the sheet in an ordinary profile whose `logical_size` equals this computed size; the checker refuses a profile that describes a different sheet. An opaque profile is only possible with no margin, no spacing and every slot used.
+Margins, spacing between frames and unused slots must stay fully transparent (alpha 0); the strict profile still decides the exact RGBA values, so include `#00000000` in `allowed_palette` when the sheet has any gutter. Declare the sheet in a profile with `kind: "sheet"` and a `sheet` object holding the same `frame_size`, `columns`, `rows`, `margin`, `spacing`, `frame_count` and `edge_margin` as the spec; `logical_size` may be omitted because it follows from the layout. The checker refuses a profile that describes a different sheet. An opaque profile is only possible with no margin, no spacing and every slot used.
+
+```json
+{
+  "schema_version": 1,
+  "name": "Lever sheet",
+  "kind": "sheet",
+  "sheet": {"frame_size": "18x16", "columns": 5, "rows": 1, "spacing": 1, "edge_margin": 1},
+  "scale": 6,
+  "max_colors": 6,
+  "allowed_palette": ["#00000000", "#1E1A2B", "#5A4C3E", "#7A6A58", "#A02A34", "#C8CDD6", "#D8404A"]
+}
+```
+
+The same profile works with `pixelwright.py inspect` alone, for example on a generated sheet without a spec: it checks the slot rules (transparent margins, spacing and unused slots, a drawn frame on transparency in every used slot, the edge margin) together with the cell, dot-size and palette rules.
 
 ## Sprite spec
 

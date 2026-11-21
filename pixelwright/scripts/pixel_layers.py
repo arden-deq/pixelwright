@@ -109,6 +109,8 @@ def _validate_document(document: dict[str, Any], source: Path,
     profile = project.load_profile(profile_path)
     if qa.sha256_file(profile_path) != profile_digest:
         raise ValueError("Profile bytes changed while loading the shared contract")
+    if profile["kind"] == "sheet":
+        raise ValueError("Layer composition makes one picture; use kind image or sprite, not sheet")
     if profile.get("max_colors") is None:
         raise ValueError("Layer composition requires a shared max_colors budget")
     if profile.get("allowed_palette") is None:
@@ -384,6 +386,8 @@ def compose(manifest_path: str | Path, out_dir: str | Path) -> dict[str, Any]:
             layer_dir = root / "layers" / f"{layer['index']:04d}"
             layer_profile = copy.deepcopy(plan["profile"])
             layer_profile["logical_size"] = f"{layer['logical_size'][0]}x{layer['logical_size'][1]}"
+            # A layer is a partial picture: transparent where other layers show through, never a sprite rule.
+            layer_profile["kind"] = "image"
             layer_profile["alpha"] = "binary"
             layer_profile_path = layer_dir / "profile.json"
             _write_json(layer_profile_path, layer_profile)

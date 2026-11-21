@@ -1,6 +1,6 @@
 {
   "tool": "Pixelwright",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "schema_version": 1,
   "status": "pass",
   "scope": "technical_checks_only_not_artistic_quality",
@@ -17,13 +17,20 @@
     },
     "profile": {
       "path": "profile.json",
-      "sha256": "2388ee22df1557676fd0082d3adc1a381e42cebf882f56be2200ce1fa0ded6f4"
+      "sha256": "92806a4c698af2d612f7dc07f32d7677fa9ee6e1be60149f2f0968a4ed114342"
     }
   },
   "name": "Rigged side-view walk cycle",
   "contract": {
     "schema_version": 1,
     "name": "Walk cycle sheet",
+    "kind": "sheet",
+    "sheet": {
+      "frame_size": "24x32",
+      "columns": 8,
+      "rows": 1,
+      "spacing": 1
+    },
     "logical_size": "199x32",
     "scale": 4,
     "max_colors": 13,
@@ -297,7 +304,151 @@
       "baseline_rows": [
         30,
         31
-      ]
+      ],
+      "preview_timing": {
+        "art": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 8,
+          "requested_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "requested_total_ms": 880,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "quantized": false,
+          "actual_frame_count": 8,
+          "actual_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "actual_total_ms": 880,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ],
+          "metadata_verified": true
+        },
+        "rig": {
+          "format": "GIF",
+          "timing_resolution_ms": 10,
+          "rounding": "nearest_10ms_half_up_minimum_10ms",
+          "requested_frame_count": 8,
+          "requested_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "requested_total_ms": 880,
+          "requested_loop": true,
+          "scheduled_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "quantized": false,
+          "actual_frame_count": 8,
+          "actual_durations_ms": [
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110,
+            110
+          ],
+          "actual_total_ms": 880,
+          "actual_loop": true,
+          "actual_loop_extension": 0,
+          "coalesced_frames": false,
+          "source_frame_positions": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ],
+          "metadata_verified": true
+        }
+      }
     }
   ],
   "rig": {

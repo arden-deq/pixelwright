@@ -220,7 +220,11 @@ def walk_example(out: Path) -> None:
     out.mkdir(parents=True, exist_ok=True)
     write(out / "spec.json", spec)
     colors = sorted(value for value in palette.values() if value != "transparent")
-    write(out / "profile.json", {"schema_version": 1, "name": "Walk cycle sheet", "logical_size": sheet_size(spec),
+    write(out / "profile.json", {"schema_version": 1, "name": "Walk cycle sheet",
+                                 "kind": "sheet",
+                                 "sheet": {"frame_size": spec["frame_size"], **spec["layout"],
+                                           **{key: spec[key] for key in ("frame_count", "edge_margin") if key in spec}},
+                                 "logical_size": sheet_size(spec),
                                  "scale": 4, "max_colors": len(colors), "alpha": "binary",
                                  "transparent_rgb": "exact", "allowed_palette": ["#00000000"] + colors})
 
@@ -249,7 +253,11 @@ def lever_example(out: Path) -> None:
     out.mkdir(parents=True, exist_ok=True)
     write(out / "spec.json", spec)
     colors = sorted(value for value in palette.values() if value != "transparent")
-    write(out / "profile.json", {"schema_version": 1, "name": "Lever sheet", "logical_size": sheet_size(spec),
+    write(out / "profile.json", {"schema_version": 1, "name": "Lever sheet",
+                                 "kind": "sheet",
+                                 "sheet": {"frame_size": spec["frame_size"], **spec["layout"],
+                                           **{key: spec[key] for key in ("frame_count", "edge_margin") if key in spec}},
+                                 "logical_size": sheet_size(spec),
                                  "scale": 6, "max_colors": len(colors), "alpha": "binary",
                                  "transparent_rgb": "exact", "allowed_palette": ["#00000000"] + colors})
 

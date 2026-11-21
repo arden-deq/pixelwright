@@ -1,6 +1,14 @@
 {
   "schema_version": 1,
   "name": "Lever sheet",
+  "kind": "sheet",
+  "sheet": {
+    "frame_size": "18x16",
+    "columns": 5,
+    "rows": 1,
+    "spacing": 1,
+    "edge_margin": 1
+  },
   "logical_size": "94x16",
   "scale": 6,
   "max_colors": 6,

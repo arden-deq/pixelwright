@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "name": "Demon Castle README at 6x",
+  "kind": "image",
   "logical_size": "384x256",
   "scale": 6,
   "max_colors": 64,
